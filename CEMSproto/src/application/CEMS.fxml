@@ -11,13 +11,13 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="271.0" prefWidth="516.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="271.0" prefWidth="516.0" style="-fx-background-color: #FFFFFF;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <AnchorPane prefHeight="248.0" prefWidth="651.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="248.0" prefWidth="651.0" stylesheets="@application.css" BorderPane.alignment="CENTER">
          <children>
             <TextField blendMode="MULTIPLY" layoutX="327.0" layoutY="109.0" promptText="User ID" />
             <PasswordField blendMode="MULTIPLY" layoutX="327.0" layoutY="153.0" promptText="Password" />
-            <Button layoutX="309.0" layoutY="198.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="185.0" style="-fx-background-color: #649DAD; -fx-background-radius: 90;" text="LOGIN" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+            <Button fx:id="LoginBtn" layoutX="309.0" layoutY="198.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="185.0" style="-fx-background-color: #649DAD; -fx-background-radius: 90;" stylesheets="@application.css" text="LOGIN" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
                <font>
                   <Font name="Franklin Gothic Demi" size="16.0" />
                </font>
