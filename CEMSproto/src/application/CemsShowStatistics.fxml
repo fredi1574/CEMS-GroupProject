@@ -10,7 +10,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="489.0" prefWidth="508.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane prefHeight="489.0" prefWidth="508.0" style="-fx-background-color: #FFFFFF;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19">
    <children>
       <ImageView fitHeight="39.0" fitWidth="200.0">
          <image>
@@ -27,7 +28,7 @@
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="31.0">
                      <image>
-                        <Image url="@icons8-new-copy-50.png" />
+                        <Image url="@../../../../Downloads/icons8-new-copy-50.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -42,16 +43,16 @@
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="31.0">
                      <image>
-                        <Image url="@icons8-data-protection-80.png" />
+                        <Image url="@../../../../Downloads/icons8-data-protection-80.png" />
                      </image>
                   </ImageView>
                </graphic>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </Button>
             <Button fx:id="ManageTestsBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="55.0" prefWidth="290.0" style="-fx-background-color: #649DAD;" stylesheets="@application.css" text=" Manage Tests" textFill="WHITE">
                <font>
@@ -60,16 +61,16 @@
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="31.0">
                      <image>
-                        <Image url="@../../bin/application/icons8-documents-50.png" />
+                        <Image url="@../../../../Downloads/icons8-documents-50.png" />
                      </image>
                   </ImageView>
                </graphic>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </Button>
             <Button fx:id="ViewStatisticsBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="343.0" style="-fx-background-color: #649DAD;" stylesheets="@application.css" text=" View Statistics" textFill="WHITE">
                <font>
@@ -78,7 +79,7 @@
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="31.0">
                      <image>
-                        <Image url="@icons8-statistic-64.png" />
+                        <Image url="@../../../../Downloads/icons8-statistic-64.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -91,7 +92,7 @@
                <graphic>
                   <ImageView fx:id="LogoutBtn" fitHeight="50.0" fitWidth="51.0">
                      <image>
-                        <Image url="@icons8-logout-100.png" />
+                        <Image url="@../../../../Downloads/icons8-logout-100.png" />
                      </image>
                   </ImageView>
                </graphic>
