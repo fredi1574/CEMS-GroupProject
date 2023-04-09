@@ -39,7 +39,7 @@
             <Button fx:id="ManageQuestionsBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="52.0" prefWidth="299.0" style="-fx-background-color: #649DAD;" stylesheets="@application.css" text=" Manage Questions" textFill="WHITE">
                <font>
                   <Font name="Trebuchet MS" size="25.0" />
-               </font>
+               </font>S
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
