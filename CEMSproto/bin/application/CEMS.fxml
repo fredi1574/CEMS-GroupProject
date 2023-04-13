@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+ 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -11,7 +11,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
+<?import javafx.event.ActionEvent?>
+<?import javafx.fxml.FXMLLoader?>
+<?import javafx.scene.Parent?>
+<?import javafx.scene.Scene?>
+ 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="271.0" prefWidth="516.0" style="-fx-background-color: #FFFFFF;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <left>
       <AnchorPane prefHeight="248.0" prefWidth="651.0" stylesheets="@application.css" BorderPane.alignment="CENTER">
@@ -57,4 +61,5 @@
          </children>
       </AnchorPane>
    </left>
+ 
 </BorderPane>
