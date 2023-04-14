@@ -20,7 +20,7 @@
       <VBox prefHeight="489.0" prefWidth="319.0" style="-fx-background-color: #649DAD;">
          <children>
             <Pane prefHeight="138.0" prefWidth="220.0" />
-            <Button fx:id="CreateNewTestBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="54.0" prefWidth="274.0" style="-fx-background-color: #649DAD;" stylesheets="@application.css" text=" Create New Test" textFill="WHITE">
+            <Button fx:id="CreateNewTestBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#CreateNewTest" prefHeight="54.0" prefWidth="274.0" style="-fx-background-color: #649DAD;" stylesheets="@application.css" text=" Create New Test" textFill="WHITE">
                <font>
                   <Font name="Trebuchet MS" size="25.0" />
                </font>

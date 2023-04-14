@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ReportController">
+   <children>
+      <Pane prefHeight="66.0" prefWidth="610.0" style="-fx-background-color: #649DAD;">
+         <children>
+            <Label layoutX="272.0" layoutY="9.0" prefHeight="51.0" prefWidth="187.0" text=" Report" textFill="#efefef">
+               <font>
+                  <Font name="System Bold Italic" size="19.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="74.0" fitWidth="168.0" layoutY="-3.0">
+               <image>
+                  <Image url="@images/CEMS-NEW.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <ComboBox fx:id="yearComboBox" layoutX="124.0" layoutY="126.0" prefHeight="26.0" prefWidth="138.0" promptText="         Select Year" />
+      <ComboBox fx:id="semsterComboBox" layoutX="357.0" layoutY="126.0" prefHeight="26.0" prefWidth="138.0" promptText="   Select Semester" />
+      <ComboBox fx:id="subjectComboBox" layoutX="230.0" layoutY="187.0" prefWidth="150.0" promptText="          Select Subject" />
+      <ComboBox fx:id="courseComboBox" layoutX="230.0" layoutY="228.0" prefWidth="150.0" promptText="        Select Course" />
+      <ComboBox fx:id="idComboBox" layoutX="230.0" layoutY="273.0" prefWidth="150.0" promptText="              Test ID" />
+      <Button fx:id="showReports" layoutX="263.0" layoutY="322.0" mnemonicParsing="false" onAction="#showReports" text="Show Report" />
+      <Button fx:id="backToMenu" layoutX="14.0" layoutY="351.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="35.0" prefWidth="43.0" style="-fx-background-color: #FFFF;">
+         <graphic>
+            <ImageView fitHeight="28.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/Back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

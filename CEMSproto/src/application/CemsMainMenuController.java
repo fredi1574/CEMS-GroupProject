@@ -66,10 +66,10 @@ public class CemsMainMenuController   {
 		 
 
         try {
-            Parent StatRoot = FXMLLoader.load(getClass().getResource("Statistics.fxml"));
+            Parent StatRoot = FXMLLoader.load(getClass().getResource("Reports.fxml"));
             Scene statScene = new Scene(StatRoot);
             Stage statStage = new Stage();
-            statStage.setTitle("View Statistics");
+            statStage.setTitle("Statistics");
             statStage.setScene(statScene);
             statStage.show();
           
@@ -86,6 +86,27 @@ public class CemsMainMenuController   {
    	 
 	 }
 
-    
+    public void CreateNewTest(ActionEvent e) {
+        try {
+            Parent StatRoot = FXMLLoader.load(getClass().getResource("CreateTest.fxml"));
+            Scene statScene = new Scene(StatRoot);
+            Stage statStage = new Stage();
+            statStage.setTitle("Create Test");
+            statStage.setScene(statScene);
+            statStage.show();
+
+            Node source = (Node) e.getSource();
+
+            // Get the Stage object that contains the source node
+            Stage stage = (Stage) source.getScene().getWindow();
+
+            // Close the stage
+            stage.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
+    }
   
 }

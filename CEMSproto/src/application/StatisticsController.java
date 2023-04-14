@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class StatisticsController {
 	public void backStat(ActionEvent e) {
 		 try {
-            Parent static_Root = FXMLLoader.load(getClass().getResource("CemsMainMenu.fxml"));
+            Parent static_Root = FXMLLoader.load(getClass().getResource("Reports.fxml"));
             Scene static_Scene = new Scene(static_Root);
             Stage static_Root_Stage = new Stage();
             static_Root_Stage .setTitle("CMES Main Menu");
