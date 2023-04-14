@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
- 
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -11,35 +11,31 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.event.ActionEvent?>
-<?import javafx.fxml.FXMLLoader?>
-<?import javafx.scene.Parent?>
-<?import javafx.scene.Scene?>
- 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="271.0" prefWidth="516.0" style="-fx-background-color: #FFFFFF;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="271.0" prefWidth="516.0" style="-fx-background-color: #FFFFFF;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CEMSLoginController">
    <left>
       <AnchorPane prefHeight="248.0" prefWidth="651.0" stylesheets="@application.css" BorderPane.alignment="CENTER">
          <children>
             <TextField blendMode="MULTIPLY" layoutX="327.0" layoutY="110.0" promptText="User ID" />
             <PasswordField blendMode="MULTIPLY" layoutX="327.0" layoutY="149.0" promptText="Password" />
-            <Button fx:id="LoginBtn" layoutX="309.0" layoutY="206.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="185.0" style="-fx-background-color: #649DAD; -fx-background-radius: 90;" stylesheets="@application.css" text="LOGIN" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+            <Button fx:id="logIN" layoutX="309.0" layoutY="206.0" mnemonicParsing="false" onAction="#logIN" prefHeight="36.0" prefWidth="185.0" style="-fx-background-color: #649DAD; -fx-background-radius: 90;" stylesheets="@application.css" text="LOGIN" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
                <font>
                   <Font name="Franklin Gothic Demi" size="16.0" />
                </font>
             </Button>
             <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="300.0" layoutY="113.0">
                <image>
-                  <Image url="@icons8-user-32.png" />
+                  <Image url="@images/icons8-user-32.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="301.0" layoutY="155.0">
                <image>
-                  <Image url="@icons8-password-key-32.png" />
+                  <Image url="@images/icons8-password-key-32.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="39.0" fitWidth="200.0" layoutX="302.0" layoutY="49.0">
                <image>
-                  <Image url="@Screenshot%202023-04-09%20105855.png" />
+                  <Image url="@images/welcome.png" />
                </image>
             </ImageView>
             <Line endX="100.0" layoutX="402.0" layoutY="88.0" startX="-100.0" />
@@ -53,7 +49,7 @@
                <children>
                   <ImageView fitHeight="109.0" fitWidth="280.0" layoutX="-5.0" layoutY="91.0">
                      <image>
-                        <Image url="@CEMS%20NEW.png" />
+                        <Image url="@images/CEMS-NEW.png" />
                      </image>
                   </ImageView>
                </children>
@@ -61,5 +57,5 @@
          </children>
       </AnchorPane>
    </left>
- 
+
 </BorderPane>

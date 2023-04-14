@@ -10,11 +10,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="489.0" prefWidth="508.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="borderPane" prefHeight="489.0" prefWidth="508.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CemsMainMenuController">
    <children>
       <ImageView fitHeight="39.0" fitWidth="200.0">
          <image>
-            <Image url="@Screenshot%202023-04-09%20105855.png" />
+            <Image url="@images/welcome.png" />
          </image>
       </ImageView>
       <VBox prefHeight="489.0" prefWidth="319.0" style="-fx-background-color: #649DAD;">
@@ -27,7 +27,7 @@
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="31.0">
                      <image>
-                        <Image url="@icons8-new-copy-50.png" />
+                        <Image url="@images/icons8-new-copy-50.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -35,7 +35,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="ManageQuestionsBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="52.0" prefWidth="299.0" style="-fx-background-color: #649DAD;" stylesheets="@application.css" text=" Manage Questions" textFill="WHITE">
+            <Button fx:id="showManage" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showManage" prefHeight="52.0" prefWidth="299.0" style="-fx-background-color: #649DAD;" stylesheets="@application.css" text=" Manage Questions" textFill="WHITE">
                <font>
                   <Font name="Trebuchet MS" size="25.0" />
                </font>S
@@ -48,7 +48,7 @@
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="31.0">
                      <image>
-                        <Image url="@icons8-data-protection-80.png" />
+                        <Image url="@images/icons8-data-protection-80.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -66,19 +66,19 @@
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="31.0">
                      <image>
-                        <Image url="@../../bin/application/icons8-documents-50.png" />
+                        <Image url="@images/icons8-documents-50.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="ViewStatisticsBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="343.0" style="-fx-background-color: #649DAD;" stylesheets="@application.css" text=" View Statistics" textFill="WHITE">
+            <Button fx:id="ViewStatistics" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#ViewStatistics" prefHeight="56.0" prefWidth="343.0" style="-fx-background-color: #649DAD;" stylesheets="@application.css" text=" View Statistics" textFill="WHITE">
                <font>
                   <Font name="Trebuchet MS" size="25.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="31.0">
                      <image>
-                        <Image url="@icons8-statistic-64.png" />
+                        <Image url="@images/icons8-statistic-64.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -87,11 +87,11 @@
                </VBox.margin>
             </Button>
             <Pane prefHeight="88.0" prefWidth="220.0" />
-            <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #649DAD;">
+            <Button fx:id="backTo" mnemonicParsing="false" onAction="#backTo" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #649DAD;">
                <graphic>
                   <ImageView fx:id="LogoutBtn" fitHeight="50.0" fitWidth="51.0">
                      <image>
-                        <Image url="@icons8-logout-100.png" />
+                        <Image url="@images/icons8-logout-100.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -100,12 +100,12 @@
       </VBox>
       <ImageView fitHeight="73.0" fitWidth="187.0" layoutX="321.0" layoutY="416.0">
          <image>
-            <Image url="@CEMS%20NEW.png" />
+            <Image url="@images/CEMS-NEW.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="32.0" fitWidth="187.0" layoutX="320.0" layoutY="23.0">
          <image>
-            <Image url="@Screenshot%202023-04-09%20105855.png" />
+            <Image url="@images/welcome.png" />
          </image>
       </ImageView>
       <Text fill="#4d7885" layoutX="325.0" layoutY="73.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="May" wrappingWidth="55.48748779296875">
