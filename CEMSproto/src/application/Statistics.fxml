@@ -103,11 +103,6 @@
                   <Font name="Trebuchet MS Bold" size="17.0" />
                </font>
             </Label>
-            <TextField layoutX="128.0" layoutY="85.0" prefHeight="25.0" prefWidth="94.0">
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </TextField>
             <TextField layoutX="93.0" layoutY="122.0" prefHeight="24.0" prefWidth="38.0">
                <padding>
                   <Insets left="10.0" />
@@ -135,6 +130,11 @@
                   </DropShadow>
                </effect>
             </Label>
+            <TextField layoutX="128.0" layoutY="84.0" prefHeight="24.0" prefWidth="96.0">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </TextField>
          </children>
       </Pane>
       <ImageView fitHeight="276.0" fitWidth="463.0" layoutX="321.0" layoutY="131.0">

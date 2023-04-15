@@ -10,6 +10,7 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,7 +20,7 @@
 
 <AnchorPane fx:id="logout" prefHeight="533.0" prefWidth="775.0" style="-fx-background-color: #FFFFFF; -fx-text-fill: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.QuestionManagementController">
    <children>
-      <ComboBox id="combPick" fx:id="combox" cache="true" depthTest="DISABLE" layoutX="348.0" layoutY="114.0" prefHeight="26.0" prefWidth="158.0" promptText="Select Course" style="-fx-background-color: #649DAD; -fx-background-radius: 10; -fx-font-weight: bold;">
+      <ComboBox id="combPick" fx:id="combox" cache="true" depthTest="DISABLE" layoutX="348.0" layoutY="114.0" prefHeight="26.0" prefWidth="158.0" promptText="Select Subject" style="-fx-background-color: #649DAD; -fx-background-radius: 10; -fx-font-weight: bold;">
          <effect>
             <DropShadow height="5.0" radius="2.0" width="5.0">
                <color>
@@ -76,7 +77,7 @@
             <Image url="@images/CEMS-NEW-removebg-preview.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="-31.0" layoutY="-3.0" prefHeight="86.0" prefWidth="806.0" style="-fx-background-color: #649DAD #649DAD;">
+      <AnchorPane prefHeight="86.0" prefWidth="806.0" style="-fx-background-color: #649DAD #649DAD;">
          <children>
             <Label layoutX="258.0" layoutY="16.0" prefHeight="54.0" prefWidth="336.0" style="-fx-font-weight: bold;" text=" Questions Managment " textFill="#fafafa" AnchorPane.leftAnchor="258.0" AnchorPane.rightAnchor="209.0">
                <font>
@@ -96,7 +97,10 @@
                   <Font name="Franklin Gothic Demi Cond" size="14.0" />
                </font>
                <effect>
-                  <Lighting bumpInput="$null" diffuseConstant="1.25" specularConstant="0.17" specularExponent="10.82" surfaceScale="2.05">
+                  <Lighting diffuseConstant="1.25" specularConstant="0.17" specularExponent="10.82" surfaceScale="2.05">
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
                      <light>
                         <Light.Distant azimuth="28.49" elevation="127.57" />
                      </light>
