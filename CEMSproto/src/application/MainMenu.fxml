@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="borderPane" prefHeight="489.0" prefWidth="508.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CemsMainMenuController">
+<AnchorPane id="borderPane" prefHeight="489.0" prefWidth="508.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainMenuController">
    <children>
       <ImageView fitHeight="39.0" fitWidth="200.0">
          <image>
@@ -19,7 +19,7 @@
       </ImageView>
       <VBox prefHeight="489.0" prefWidth="319.0" style="-fx-background-color: #649DAD;">
          <children>
-            <Pane prefHeight="138.0" prefWidth="220.0" />
+            <Pane prefHeight="86.0" prefWidth="319.0" />
             <Button fx:id="CreateNewTestBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#CreateNewTest" prefHeight="54.0" prefWidth="274.0" style="-fx-background-color: #649DAD;" stylesheets="@application.css" text=" Create New Test" textFill="WHITE">
                <font>
                   <Font name="Trebuchet MS" size="25.0" />
@@ -28,6 +28,21 @@
                   <ImageView fitHeight="32.0" fitWidth="31.0">
                      <image>
                         <Image url="@images/icons8-new-copy-50.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button id="addAQuestion" fx:id="addQuestion" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="106.0" mnemonicParsing="false" onAction="#addQuestion" prefHeight="54.0" prefWidth="274.0" style="-fx-background-color: #649DAD;" stylesheets="@application.css" text=" Add a Question" textFill="WHITE" textOverrun="CLIP">
+               <font>
+                  <Font name="Trebuchet MS" size="25.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="31.0">
+                     <image>
+                        <Image url="@images/icons8-add-question.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -89,7 +104,7 @@
             <Pane prefHeight="88.0" prefWidth="220.0" />
             <Button fx:id="backTo" mnemonicParsing="false" onAction="#backTo" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #649DAD;">
                <graphic>
-                  <ImageView fx:id="LogoutBtn" fitHeight="50.0" fitWidth="51.0">
+                  <ImageView fx:id="LogoutBtn" fitHeight="50.0" fitWidth="50.0">
                      <image>
                         <Image url="@images/icons8-logout-100.png" />
                      </image>

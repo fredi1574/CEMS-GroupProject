@@ -39,7 +39,7 @@ public class ReportController {
     }
     public void backToMenu(ActionEvent e) {
         try {
-            Parent static_Root = FXMLLoader.load(getClass().getResource("CemsMainMenu.fxml"));
+            Parent static_Root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
             Scene static_Scene = new Scene(static_Root);
             Stage static_Root_Stage = new Stage();
             static_Root_Stage .setTitle("CMES Main Menu");

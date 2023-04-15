@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class CreateTestController {
+public class AddQuestionController {
    public void BackToMenu(ActionEvent e){
        try {
            Parent QuestionManagement_Root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));

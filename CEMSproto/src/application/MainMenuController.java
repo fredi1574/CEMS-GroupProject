@@ -1,23 +1,18 @@
 package application;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class CemsMainMenuController   {
+public class MainMenuController {
 	
 	
 	public void backTo(ActionEvent e) {
 		 try {
-            Parent log_Root = FXMLLoader.load(getClass().getResource("CEMS.fxml"));
+            Parent log_Root = FXMLLoader.load(getClass().getResource("LoginWindow.fxml"));
             Scene log_Root_Scene = new Scene(log_Root);
             Stage  log_Root_Stage = new Stage();
             log_Root_Stage .setTitle("Login Window");
@@ -105,7 +100,6 @@ public class CemsMainMenuController   {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
 
     }
   

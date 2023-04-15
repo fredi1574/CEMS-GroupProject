@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 
 public class LoginWindow extends Application {
 
@@ -13,13 +12,13 @@ public class LoginWindow extends Application {
     public void start(Stage primaryStage) {
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("CEMS.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("LoginWindow.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("Login Window");
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            // Get reference to the LoginBtn in CEMS.fxml
+            // Get reference to the LoginBtn in LoginWindow.fxml
 
         } catch(Exception e) {
             e.printStackTrace();
