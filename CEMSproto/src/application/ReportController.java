@@ -37,28 +37,28 @@ public class ReportController {
         ObservableList<String> subject_options = FXCollections.observableArrayList("SoftWare Engineering", "Math", "...");
         subjectComboBox.setItems(subject_options);
     }
-
-    public void backToMenu(ActionEvent e) {
+    public void backTo(ActionEvent e) {
         try {
-            Parent backToMenu_Root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-            Scene backToMenu_Scene = new Scene(backToMenu_Root);
-            Stage backToMenu_Stage = new Stage();
-            backToMenu_Stage.setTitle("C.E.M.S Test Manager");
-            backToMenu_Stage.setScene(backToMenu_Scene);
-            backToMenu_Stage.show();
+        	 Parent back_Root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+             Scene back_Scene = new Scene(back_Root);
+             Stage back_Stage = new Stage();
+             back_Stage.setTitle("C.E.M.S Test Manager");
+             back_Stage.setScene(back_Scene);
+             back_Stage.show();
 
-            Node source = (Node) e.getSource();
+             Node source = (Node) e.getSource();
 
-            // Get the Stage object that contains the source node
-            Stage stage = (Stage) source.getScene().getWindow();
+             // Get the Stage object that contains the source node
+             Stage stage = (Stage) source.getScene().getWindow();
 
-            // Close the stage
-            stage.close();
+             // Close the stage
+             stage.close();
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+         } catch (Exception ex) {
+             ex.printStackTrace();
+         }
     }
+
 
     public void showReports(ActionEvent e) {
         try {
@@ -79,5 +79,29 @@ public class ReportController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    
     }
+    public void LogOut(ActionEvent e) {
+        try {
+
+            Parent logOut_Root = FXMLLoader.load(getClass().getResource("LoginWindow.fxml"));
+            Scene logOut_Scene = new Scene(logOut_Root);
+            Stage logOut_Stage = new Stage();
+            logOut_Stage.setTitle("C.E.M.S Test Manager");
+            logOut_Stage.setScene(logOut_Scene);
+            logOut_Stage.show();
+
+            Node source = (Node) e.getSource();
+
+            // Get the Stage object that contains the source node
+            Stage stage = (Stage) source.getScene().getWindow();
+
+            // Close the stage
+            stage.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
 }

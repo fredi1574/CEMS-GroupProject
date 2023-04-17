@@ -18,9 +18,9 @@
 
 <AnchorPane prefHeight="533.0" prefWidth="775.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StatisticsController">
    <children>
-      <Button fx:id="backToReport" layoutX="3.0" layoutY="490.0" mnemonicParsing="false" onAction="#backToReport" prefHeight="34.0" prefWidth="54.0" style="-fx-background-color: #FFFFFF;">
+      <Button fx:id="BackToReport" layoutX="3.0" layoutY="490.0" mnemonicParsing="false" onAction="#backToReport" prefHeight="34.0" prefWidth="54.0" style="-fx-background-color: #FFFFFF;">
          <graphic>
-            <ImageView fx:id="backToReport" fitHeight="36.0" fitWidth="38.0" style="-fx-background-color: #FFFFFF;">
+            <ImageView fitHeight="36.0" fitWidth="38.0" style="-fx-background-color: #FFFFFF;">
                <image>
                   <Image url="@images/Back.png" />
                </image>
@@ -72,7 +72,7 @@
             <Font name="Trebuchet MS" size="12.0" />
          </font>
       </Text>
-      <Pane layoutX="80.0" layoutY="121.0" prefHeight="259.0" prefWidth="249.0">
+      <Pane layoutX="21.0" layoutY="129.0" prefHeight="252.0" prefWidth="296.0" style="-fx-background-color: #e4ecdf; -fx-background-radius: 30;">
          <children>
             <Label alignment="BASELINE_CENTER" layoutY="189.0" prefHeight="24.0" prefWidth="87.0" text="Average :">
                <font>
@@ -103,7 +103,7 @@
                   <Font name="Trebuchet MS Bold" size="17.0" />
                </font>
             </Label>
-            <TextField layoutX="93.0" layoutY="122.0" prefHeight="24.0" prefWidth="38.0">
+            <TextField layoutX="93.0" layoutY="122.0" prefHeight="24.0" prefWidth="96.0">
                <padding>
                   <Insets left="10.0" />
                </padding>
@@ -118,7 +118,7 @@
                   <Insets left="10.0" />
                </padding>
             </TextField>
-            <Label layoutX="7.0" layoutY="14.0" prefHeight="54.0" prefWidth="336.0" style="-fx-font-weight: bold;" text="Overall" textFill="#649dad">
+            <Label layoutX="74.0" layoutY="14.0" prefHeight="54.0" prefWidth="96.0" style="-fx-font-weight: bold;" text="Overall" textFill="#649dad">
                <font>
                   <Font name="Trebuchet MS" size="28.0" />
                </font>
@@ -137,7 +137,7 @@
             </TextField>
          </children>
       </Pane>
-      <ImageView fitHeight="276.0" fitWidth="463.0" layoutX="321.0" layoutY="131.0">
+      <ImageView fitHeight="276.0" fitWidth="463.0" layoutX="314.0" layoutY="131.0">
          <image>
             <Image url="@../../bin/application/images/graph.png" />
          </image>

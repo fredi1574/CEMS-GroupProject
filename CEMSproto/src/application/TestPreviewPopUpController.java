@@ -39,5 +39,26 @@ public class TestPreviewPopUpController {
             ex.printStackTrace();
         }
 	}
+	public void BackTo(ActionEvent e) {
+        try {
+            Parent QuestionManagement_Root = FXMLLoader.load(getClass().getResource("CreateTest.fxml"));
+            Scene QuestionManagement_Scene = new Scene(QuestionManagement_Root);
+            Stage QuestionManagement_Stage = new Stage();
+            QuestionManagement_Stage.setTitle("C.E.M.S Create Test");
+            QuestionManagement_Stage.setScene(QuestionManagement_Scene);
+            QuestionManagement_Stage.show();
+
+            Node source = (Node) e.getSource();
+
+            // Get the Stage object that contains the source node
+            Stage stage = (Stage) source.getScene().getWindow();
+
+            // Close the stage
+            stage.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 	
 }

@@ -46,7 +46,7 @@
                </color>
             </DropShadow>
          </effect></Button>
-      <Button alignment="TOP_CENTER" layoutX="511.0" layoutY="114.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="240.0" style="-fx-background-color: #649DAD; -fx-background-radius: 10; -fx-font-weight: bold;" stylesheets="@application2.css" text="Add Question">
+      <Button fx:id="AddQuestion" alignment="TOP_CENTER" layoutX="511.0" layoutY="114.0" mnemonicParsing="false" onAction="#AddQuestion" prefHeight="26.0" prefWidth="240.0" style="-fx-background-color: #649DAD; -fx-background-radius: 10; -fx-font-weight: bold;" stylesheets="@application2.css" text="Add Question">
          <font>
             <Font name="Franklin Gothic Demi" size="13.0" />
          </font>

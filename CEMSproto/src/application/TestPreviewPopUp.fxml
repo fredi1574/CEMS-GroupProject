@@ -20,7 +20,6 @@
 
 <AnchorPane prefHeight="533.0" prefWidth="775.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StatisticsController">
    <children>
-      <Button fx:id="backStat" layoutX="3.0" layoutY="490.0" mnemonicParsing="false" onAction="#backStat" prefHeight="34.0" prefWidth="54.0" style="-fx-background-color: #FFFFFF;" />
       <AnchorPane layoutX="-7.0" layoutY="1.0" prefHeight="86.0" prefWidth="806.0" style="-fx-background-color: #649DAD #649DAD;">
          <children>
             <Label layoutX="337.0" layoutY="16.0" prefHeight="54.0" prefWidth="336.0" style="-fx-font-weight: bold;" text="Preview" textFill="#fafafa">
@@ -299,6 +298,15 @@
                   <Image url="@images/CEMS-NEW-removebg-preview.png" />
                </image>
             </ImageView>
+            <Button fx:id="BackToCreateTest" layoutX="480.0" layoutY="322.0" mnemonicParsing="false" onAction="#BackTo" prefHeight="25.0" prefWidth="26.0" style="-fx-background-color: #E5E4E2;">
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="34.0">
+                     <image>
+                        <Image url="@images/Back.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </Pane>
    </children>

@@ -68,5 +68,26 @@ public class QuestionManagementController {
             ex.printStackTrace();
         }
     }
+    public void AddQuestion(ActionEvent e) {
+        try {
+            Parent back_Root = FXMLLoader.load(getClass().getResource("AddQuestion.fxml"));
+            Scene back_Scene = new Scene(back_Root);
+            Stage back_Stage = new Stage();
+            back_Stage.setTitle("C.E.M.S AddQuestion");
+            back_Stage.setScene(back_Scene);
+            back_Stage.show();
+
+            Node source = (Node) e.getSource();
+
+            // Get the Stage object that contains the source node
+            Stage stage = (Stage) source.getScene().getWindow();
+
+            // Close the stage
+            stage.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
 }
