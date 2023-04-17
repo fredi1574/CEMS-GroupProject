@@ -25,6 +25,8 @@ public class PickQuestionsController {
     TableColumn<Question, String> questionDescription;
     @FXML
     TableColumn<Question, String> author;
+
+    //TODO: add elements to questions table
     ObservableList<Question> questions = FXCollections.observableArrayList(new Question("1", "023564", "<What is the value of x in this equation>", "Roman"),
             new Question("2", "025324", "<What is the value of y in this equation>", "Abed"));
 
