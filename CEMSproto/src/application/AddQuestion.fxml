@@ -6,6 +6,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,6 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane accessibleRole="HYPERLINK" cache="true" prefHeight="668.0" prefWidth="839.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CreateTestController">
     <children>
@@ -36,11 +38,11 @@
             </font>
         </Label>
         <Line endX="-24.099990844726562" endY="-1.52587890625E-5" layoutX="234.0" layoutY="127.0" startX="-100.0" />
-      <ScrollPane layoutY="135.0" prefHeight="450.0" prefWidth="839.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="447.0" prefWidth="835.0" />
-        </content>
-      </ScrollPane>
+        <ScrollPane layoutY="135.0" prefHeight="450.0" prefWidth="839.0">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="447.0" prefWidth="835.0" />
+            </content>
+        </ScrollPane>
         <AnchorPane layoutY="583.0" prefHeight="82.0" prefWidth="839.0" style="-fx-background-color: #649DAD;">
             <children>
                 <ImageView fitHeight="86.0" fitWidth="181.0" layoutY="-2.0">
@@ -48,9 +50,9 @@
                         <Image url="@images/CEMS-NEW.png" />
                     </image>
                 </ImageView>
-              <Button alignment="BASELINE_CENTER" layoutX="717.0" layoutY="11.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="77.0" style="-fx-background-color: #649DAD;" />
-              <Button fx:id="backBtn" layoutX="199.0" layoutY="17.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="46.0" prefWidth="87.0" style="-fx-background-color: #649DAD;" />
-                <ImageView fitHeight="42.0" fitWidth="48.0" layoutX="199.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                <Button alignment="BASELINE_CENTER" layoutX="717.0" layoutY="11.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="77.0" style="-fx-background-color: #649DAD;" />
+                <Button fx:id="backBtn" layoutX="216.0" layoutY="17.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="46.0" prefWidth="48.0" style="-fx-background-color: transparent;" />
+                <ImageView fitHeight="42.0" fitWidth="48.0" layoutX="222.0" layoutY="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@images/Back.png" />
                     </image>
@@ -60,6 +62,8 @@
                         <Image url="@images/save.png" />
                     </image>
                 </ImageView>
+                <Text layoutX="230.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Back" />
+                <Text layoutX="782.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Save" />
             </children>
         </AnchorPane>
         <Label layoutX="28.0" layoutY="144.0" prefHeight="34.0" prefWidth="77.0" text="Question :">
@@ -67,63 +71,66 @@
                 <Font name="System Bold Italic" size="15.0" />
             </font>
         </Label>
-      <ScrollPane layoutX="132.0" layoutY="147.0" prefHeight="163.0" prefWidth="638.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="157.0" prefWidth="627.0">
-               <children>
-                    <TextArea layoutX="-6.0" layoutY="-6.0" prefHeight="170.0" prefWidth="653.0" promptText="Enter your question here..." wrapText="true" />
-               </children>
-            </AnchorPane>
-        </content>
-      </ScrollPane>
+        <ScrollPane layoutX="132.0" layoutY="147.0" prefHeight="163.0" prefWidth="638.0">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="157.0" prefWidth="627.0">
+                    <children>
+                        <TextArea layoutX="-6.0" layoutY="-6.0" prefHeight="170.0" prefWidth="653.0" promptText="Enter your question here..." wrapText="true" />
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
         <Label layoutX="28.0" layoutY="346.0" prefHeight="34.0" prefWidth="77.0" text="Answers :">
             <font>
                 <Font name="System Bold Italic" size="15.0" />
             </font>
         </Label>
-      <VBox layoutX="122.0" layoutY="334.0" prefHeight="248.0" prefWidth="647.0">
-         <children>
-            <HBox alignment="CENTER" fillHeight="false" prefHeight="40.0" prefWidth="647.0">
-               <children>
-                  <RadioButton mnemonicParsing="false">
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                  </RadioButton>
-                  <TextArea prefHeight="20.0" prefWidth="626.0" wrapText="true" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <RadioButton mnemonicParsing="false">
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                  </RadioButton>
-                  <TextArea prefHeight="20.0" prefWidth="626.0" wrapText="true" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <RadioButton mnemonicParsing="false">
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                  </RadioButton>
-                  <TextArea prefHeight="20.0" prefWidth="677.0" wrapText="true" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <RadioButton mnemonicParsing="false">
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                  </RadioButton>
-                  <TextArea prefHeight="20.0" prefWidth="677.0" wrapText="true" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
+        <VBox layoutX="122.0" layoutY="334.0" prefHeight="248.0" prefWidth="647.0">
+            <children>
+                <HBox alignment="CENTER" fillHeight="false" prefHeight="40.0" prefWidth="647.0">
+                    <children>
+                        <RadioButton mnemonicParsing="false">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                            <toggleGroup>
+                                <ToggleGroup fx:id="answers" />
+                            </toggleGroup>
+                        </RadioButton>
+                        <TextArea prefHeight="20.0" prefWidth="626.0" wrapText="true" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <RadioButton mnemonicParsing="false" toggleGroup="$answers">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </RadioButton>
+                        <TextArea prefHeight="20.0" prefWidth="626.0" wrapText="true" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <RadioButton mnemonicParsing="false" toggleGroup="$answers">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </RadioButton>
+                        <TextArea prefHeight="20.0" prefWidth="677.0" wrapText="true" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <RadioButton mnemonicParsing="false" toggleGroup="$answers">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </RadioButton>
+                        <TextArea prefHeight="20.0" prefWidth="677.0" wrapText="true" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
     </children>
 </AnchorPane>

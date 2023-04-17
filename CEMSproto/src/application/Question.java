@@ -14,10 +14,11 @@ public class Question {
         this.questionWrittenBy = questionWrittenBy;
     }
 
-    public String getQuestionNumber (){
+    public String getQuestionNumber() {
         return questionNumber;
     }
-    public String getQuestionId (){
+
+    public String getQuestionId() {
         return questionId;
     }
 

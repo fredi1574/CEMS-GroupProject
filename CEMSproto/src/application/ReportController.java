@@ -26,23 +26,24 @@ public class ReportController {
     @FXML
     public void initialize() {
 
-        ObservableList<String> course_options = FXCollections.observableArrayList( "Algorithms","Databases ","Operating System call");
-        courseComboBox .setItems(course_options);
-        ObservableList<String> year_options = FXCollections.observableArrayList( "2020","2021","2022","2023");
+        ObservableList<String> course_options = FXCollections.observableArrayList("Algorithms", "Databases ", "Operating System call");
+        courseComboBox.setItems(course_options);
+        ObservableList<String> year_options = FXCollections.observableArrayList("2020", "2021", "2022", "2023");
         yearComboBox.setItems(year_options);
-        ObservableList<String> semster_options = FXCollections.observableArrayList( "A","B");
+        ObservableList<String> semster_options = FXCollections.observableArrayList("A", "B");
         semsterComboBox.setItems(semster_options);
-        ObservableList<String> id_options = FXCollections.observableArrayList( "020301","020332");
+        ObservableList<String> id_options = FXCollections.observableArrayList("020301", "020332");
         idComboBox.setItems(id_options);
-        ObservableList<String> subject_options = FXCollections.observableArrayList( "SoftWare Engineering","Math","...");
+        ObservableList<String> subject_options = FXCollections.observableArrayList("SoftWare Engineering", "Math", "...");
         subjectComboBox.setItems(subject_options);
     }
+
     public void backToMenu(ActionEvent e) {
         try {
             Parent static_Root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
             Scene static_Scene = new Scene(static_Root);
             Stage static_Root_Stage = new Stage();
-            static_Root_Stage .setTitle("CMES Main Menu");
+            static_Root_Stage.setTitle("CMES Main Menu");
             static_Root_Stage.setScene(static_Scene);
             static_Root_Stage.show();
 
@@ -58,8 +59,9 @@ public class ReportController {
             ex.printStackTrace();
         }
     }
-    public void showReports (ActionEvent e){
-         try {
+
+    public void showReports(ActionEvent e) {
+        try {
             Parent StatRoot = FXMLLoader.load(getClass().getResource("Statistics.fxml"));
             Scene statScene = new Scene(StatRoot);
             Stage statStage = new Stage();

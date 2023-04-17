@@ -1,106 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane accessibleRole="HYPERLINK" cache="true" prefHeight="668.0" prefWidth="839.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CreateTestController">
-   <children>
-      <ImageView fitHeight="37.0" fitWidth="64.0" layoutX="34.0" layoutY="525.0">
-         <image>
-            <Image url="@images/Back.png" />
-         </image>
-      </ImageView>
-      <AnchorPane prefHeight="86.0" prefWidth="839.0" style="-fx-background-color: #649DAD;">
-         <children>
-            <ImageView fitHeight="86.0" fitWidth="168.0">
-               <image>
-                  <Image url="@images/CEMS-NEW.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="336.0" layoutY="20.0" prefHeight="46.0" prefWidth="168.0" text="Create New Test" textFill="WHITE">
-               <font>
-                  <Font name="System Italic" size="22.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutY="583.0" prefHeight="82.0" prefWidth="839.0" style="-fx-background-color: #649DAD;">
-         <children>
-            <ImageView fitHeight="86.0" fitWidth="181.0" layoutY="-2.0">
-               <image>
-                  <Image url="@images/CEMS-NEW.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <Label layoutX="93.0" layoutY="215.0" prefHeight="33.0" prefWidth="74.0" text="Test ID :">
-         <font>
-            <Font name="System Bold Italic" size="15.0" />
-         </font>
-      </Label>
-      <Line endX="100.0" startX="-100.0" />
-      <Line endX="-24.099990844726562" endY="-1.52587890625E-5" layoutX="254.0" layoutY="239.0" startX="-100.0" />
-      <Label layoutX="93.0" layoutY="260.0" prefHeight="34.0" prefWidth="102.0" text="Test Number :">
-         <font>
-            <Font name="System Bold Italic" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="93.0" layoutY="303.0" prefHeight="34.0" prefWidth="91.0" text="Test Time :">
-         <font>
-            <Font name="System Bold Italic" size="15.0" />
-         </font>
-      </Label>
-      <Line endX="-24.099990844726562" endY="-1.52587890625E-5" layoutX="303.0" layoutY="284.0" startX="-100.0" />
-      <Line endX="-24.099990844726562" endY="-1.52587890625E-5" layoutX="285.0" layoutY="329.0" startX="-100.0" />
-      <TextArea layoutX="84.0" layoutY="397.0" prefHeight="102.0" prefWidth="228.0" />
-      <TextArea layoutX="533.0" layoutY="397.0" prefHeight="102.0" prefWidth="228.0" />
-      <Label layoutX="153.0" layoutY="373.0" text="Teachers Note" />
-      <Label layoutX="611.0" layoutY="373.0" text="Student Note" />
-      <Button alignment="BASELINE_CENTER" layoutX="390.0" layoutY="504.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="58.0" style="-fx-background-color: #ffffff;">
-         <graphic>
-            <ImageView fitHeight="46.0" fitWidth="71.0">
-               <image>
-                  <Image url="@images/save.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Label layoutX="420.0" layoutY="564.0" prefHeight="18.0" prefWidth="39.0" text="Save " />
-      <Button fx:id="pickQuestion" layoutX="635.0" layoutY="247.0" mnemonicParsing="false" onAction="#pickQuestion" text="Pick Questions" />
-      <Button layoutX="644.0" layoutY="303.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="74.0" text="Preview" />
-      <Button fx:id="backBtn" layoutX="19.0" layoutY="517.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="46.0" prefWidth="87.0" style="-fx-background-color: #FFFFFF;">
-         <graphic>
-            <ImageView fitHeight="42.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/Back.png" />
-               </image>
-            </ImageView>
-         </graphic></Button>
-      <MenuButton layoutX="151.0" layoutY="126.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="142.0" text="        Pick Subject">
-         <items>
-            <Menu mnemonicParsing="false" text="Software Engineering">
-              <items>
-                  <MenuItem mnemonicParsing="false" text="Algorithms" />
-                  <MenuItem mnemonicParsing="false" text="Databases" />
-                <MenuItem mnemonicParsing="false" text="Operating system  " />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Math">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Algebra" />
-                  <MenuItem mnemonicParsing="false" text="probability" />
-              </items>
-            </Menu>
-         </items>
-      </MenuButton>
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" accessibleRole="HYPERLINK" cache="true" prefHeight="668.0"
+            prefWidth="839.0" xmlns="http://javafx.com/javafx/19"
+            fx:controller="application.CreateTestController">
+    <children>
+        <AnchorPane prefHeight="86.0" prefWidth="839.0" style="-fx-background-color: #649DAD;">
+            <children>
+                <ImageView fitHeight="86.0" fitWidth="168.0">
+                    <image>
+                        <Image url="@images/CEMS-NEW.png"/>
+                    </image>
+                </ImageView>
+                <Label layoutX="336.0" layoutY="20.0" prefHeight="46.0" prefWidth="168.0" text="Create New Test"
+                       textFill="WHITE">
+                    <font>
+                        <Font name="System Italic" size="22.0"/>
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutY="583.0" prefHeight="82.0" prefWidth="839.0" style="-fx-background-color: #649DAD;">
+            <children>
+                <ImageView fitHeight="86.0" fitWidth="181.0" layoutY="-2.0">
+                    <image>
+                        <Image url="@images/CEMS-NEW.png"/>
+                    </image>
+                </ImageView>
+                <Button fx:id="backBtn" layoutX="197.0" layoutY="16.0" mnemonicParsing="false" onAction="#BackToMenu"
+                        prefHeight="46.0" prefWidth="87.0" style="-fx-background-color: transparent;">
+                    <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/Back.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button alignment="BASELINE_CENTER" layoutX="751.0" layoutY="16.0" mnemonicParsing="false"
+                        prefHeight="46.0" prefWidth="58.0" style="-fx-background-color: transparent;">
+                    <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="48.0">
+                            <image>
+                                <Image url="@images/save.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Label layoutX="770.0" layoutY="57.0" prefHeight="18.0" prefWidth="39.0" text="Save "/>
+                <Label layoutX="227.0" layoutY="57.0" prefHeight="18.0" prefWidth="39.0" text="Back"/>
+            </children>
+        </AnchorPane>
+        <Label layoutX="93.0" layoutY="215.0" prefHeight="33.0" prefWidth="74.0" text="Test ID :">
+            <font>
+                <Font name="System Bold Italic" size="15.0"/>
+            </font>
+        </Label>
+        <Line endX="-24.099990844726562" endY="-1.52587890625E-5" layoutX="254.0" layoutY="239.0" startX="-100.0"/>
+        <Label layoutX="93.0" layoutY="260.0" prefHeight="34.0" prefWidth="102.0" text="Test Number :">
+            <font>
+                <Font name="System Bold Italic" size="15.0"/>
+            </font>
+        </Label>
+        <Line endX="-24.099990844726562" endY="-1.52587890625E-5" layoutX="303.0" layoutY="284.0" startX="-100.0"/>
+        <Label layoutX="93.0" layoutY="303.0" prefHeight="34.0" prefWidth="91.0" text="Test Time :">
+            <font>
+                <Font name="System Bold Italic" size="15.0"/>
+            </font>
+        </Label>
+        <Line endX="-24.099990844726562" endY="-1.52587890625E-5" layoutX="285.0" layoutY="329.0" startX="-100.0"/>
+        <TextArea layoutX="84.0" layoutY="397.0" prefHeight="102.0" prefWidth="228.0"/>
+        <TextArea layoutX="533.0" layoutY="397.0" prefHeight="102.0" prefWidth="228.0"/>
+        <Label layoutX="153.0" layoutY="373.0" text="Teachers Note"/>
+        <Label layoutX="611.0" layoutY="373.0" text="Student Note"/>
+        <Button fx:id="pickQuestion" layoutX="635.0" layoutY="247.0" mnemonicParsing="false" onAction="#pickQuestion"
+                text="Pick Questions"/>
+        <Button layoutX="644.0" layoutY="303.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="74.0"
+                text="Preview"/>
+        <MenuButton layoutX="151.0" layoutY="126.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="142.0"
+                    text="        Pick Subject">
+            <items>
+                <Menu mnemonicParsing="false" text="Software Engineering">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Algorithms"/>
+                        <MenuItem mnemonicParsing="false" text="Databases"/>
+                        <MenuItem mnemonicParsing="false" text="Operating system  "/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Math">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Algebra"/>
+                        <MenuItem mnemonicParsing="false" text="probability"/>
+                    </items>
+                </Menu>
+            </items>
+        </MenuButton>
+    </children>
 </AnchorPane>

@@ -5,7 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
 public class LoginController {
     public void logIN(ActionEvent e) {
 
@@ -14,6 +16,8 @@ public class LoginController {
             Scene mainMenuScene = new Scene(mainMenuRoot);
             Stage mainMenuStage = new Stage();
             // mainMenuStage.setTitle("CEMS Main Menu");
+            mainMenuStage.getIcons().add(new Image("application/images/icons8-title-icon.png"));
+
             mainMenuStage.setScene(mainMenuScene);
             mainMenuStage.show();
 
