@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="533.0" prefWidth="775.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StatisticsController">
+   <children>
+      <Button fx:id="backStat" layoutX="3.0" layoutY="490.0" mnemonicParsing="false" onAction="#backStat" prefHeight="34.0" prefWidth="54.0" style="-fx-background-color: #FFFFFF;" />
+      <AnchorPane layoutX="-7.0" layoutY="1.0" prefHeight="86.0" prefWidth="806.0" style="-fx-background-color: #649DAD #649DAD;">
+         <children>
+            <Label layoutX="337.0" layoutY="16.0" prefHeight="54.0" prefWidth="336.0" style="-fx-font-weight: bold;" text="Preview" textFill="#fafafa">
+               <font>
+                  <Font name="Trebuchet MS" size="28.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Label>
+            <Button fx:id="LogOut" layoutX="712.0" layoutY="48.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: #649DAD; -fx-background-radius: 10;" stylesheets="@application.css" text="Logout">
+               <font>
+                  <Font name="Franklin Gothic Demi Cond" size="14.0" />
+               </font>
+               <effect>
+                  <Lighting diffuseConstant="1.25" specularConstant="0.17" specularExponent="10.82" surfaceScale="2.05">
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant azimuth="28.49" elevation="127.57" />
+                     </light>
+                  </Lighting>
+               </effect>
+            </Button>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+      <ImageView layoutX="712.0" layoutY="25.0">
+         <image>
+            <Image url="@images/icons8-person-16.png" />
+         </image>
+      </ImageView>
+      <Text fill="#3b3131" layoutX="731.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true">
+         <font>
+            <Font name="Trebuchet MS" size="12.0" />
+         </font>
+      </Text>
+      <Pane layoutX="5.0" layoutY="95.0" prefHeight="431.0" prefWidth="790.0" style="-fx-background-color: #E5E4E2;">
+         <children>
+            <Label alignment="BASELINE_CENTER" layoutX="2.0" layoutY="31.0" prefHeight="40.0" prefWidth="99.0" text="Test Time">
+               <font>
+                  <Font name="Trebuchet MS Bold" size="17.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label alignment="BASELINE_CENTER" layoutX="-3.0" layoutY="4.0" prefHeight="27.0" prefWidth="87.0" text="Test ID">
+               <font>
+                  <Font name="Trebuchet MS Bold" size="17.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <TextField layoutX="85.0" layoutY="6.0" prefHeight="24.0" prefWidth="107.0" promptText="Test ID">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </TextField>
+            <TextField layoutX="101.0" layoutY="39.0" prefHeight="24.0" prefWidth="82.0" promptText="Test time">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </TextField>
+            <Pane layoutX="49.0" layoutY="108.0" prefHeight="34.0" prefWidth="170.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #FFFFFF;">
+               <children>
+                  <CheckBox contentDisplay="TOP" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="184.0" text="Answer 1" textFill="GREY">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </Pane>
+            <Pane layoutX="49.0" layoutY="141.0" prefHeight="34.0" prefWidth="170.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #FFFFFF;">
+               <children>
+                  <CheckBox contentDisplay="TOP" layoutX="14.0" layoutY="1.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="184.0" text="Answer 2" textFill="GREY">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </Pane>
+            <Pane layoutX="49.0" layoutY="174.0" prefHeight="34.0" prefWidth="170.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #FFFFFF;">
+               <children>
+                  <CheckBox contentDisplay="TOP" layoutX="14.0" layoutY="4.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="184.0" text="Answer 3" textFill="GREY">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </Pane>
+            <Pane layoutX="49.0" layoutY="207.0" prefHeight="34.0" prefWidth="170.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #FFFFFF;">
+               <children>
+                  <CheckBox contentDisplay="TOP" layoutX="14.0" layoutY="4.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="184.0" text="Answer 4" textFill="GREY">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </Pane>
+            <Pane layoutX="49.0" layoutY="78.0" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: #649DAD #649DAD; -fx-background-color: #649DAD #649DAD;">
+               <children>
+                  <Label alignment="BASELINE_CENTER" layoutX="-14.0" layoutY="1.0" prefHeight="27.0" prefWidth="117.0" text="Question 1">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="17.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </Pane>
+            <ProgressIndicator layoutX="14.0" layoutY="81.0" progress="0.25" />
+            <Label alignment="BASELINE_CENTER" layoutX="461.0" layoutY="43.0" prefHeight="40.0" prefWidth="117.0" text="Comments">
+               <font>
+                  <Font name="Trebuchet MS Bold" size="17.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <TextArea layoutX="480.0" layoutY="77.0" prefHeight="235.0" prefWidth="292.0" promptText="Teacher's comments" />
+            <Pane layoutX="281.0" layoutY="107.0" prefHeight="34.0" prefWidth="170.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #FFFFFF;">
+               <children>
+                  <CheckBox contentDisplay="TOP" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="184.0" text="Answer 1" textFill="GREY">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </Pane>
+            <Pane layoutX="281.0" layoutY="140.0" prefHeight="34.0" prefWidth="170.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #FFFFFF;">
+               <children>
+                  <CheckBox contentDisplay="TOP" layoutX="14.0" layoutY="1.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="184.0" text="Answer 2" textFill="GREY">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </Pane>
+            <Pane layoutX="281.0" layoutY="173.0" prefHeight="34.0" prefWidth="170.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #FFFFFF;">
+               <children>
+                  <CheckBox contentDisplay="TOP" layoutX="14.0" layoutY="4.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="184.0" text="Answer 3" textFill="GREY">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </Pane>
+            <Pane layoutX="281.0" layoutY="206.0" prefHeight="34.0" prefWidth="170.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #FFFFFF;">
+               <children>
+                  <CheckBox contentDisplay="TOP" layoutX="14.0" layoutY="4.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="184.0" text="Answer 4" textFill="GREY">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </Pane>
+            <Pane layoutX="281.0" layoutY="77.0" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: #649DAD #649DAD; -fx-background-color: #649DAD #649DAD;">
+               <children>
+                  <Label alignment="BASELINE_CENTER" layoutX="-14.0" layoutY="1.0" prefHeight="27.0" prefWidth="117.0" text="Question 3">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="17.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </Pane>
+            <ProgressIndicator layoutX="246.0" layoutY="80.0" progress="0.25" />
+            <Pane layoutX="49.0" layoutY="284.0" prefHeight="34.0" prefWidth="170.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #FFFFFF;">
+               <children>
+                  <CheckBox contentDisplay="TOP" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="184.0" text="Answer 1" textFill="GREY">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </Pane>
+            <Pane layoutX="49.0" layoutY="317.0" prefHeight="34.0" prefWidth="170.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #FFFFFF;">
+               <children>
+                  <CheckBox contentDisplay="TOP" layoutX="14.0" layoutY="1.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="184.0" text="Answer 2" textFill="GREY">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </Pane>
+            <Pane layoutX="49.0" layoutY="350.0" prefHeight="34.0" prefWidth="170.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #FFFFFF;">
+               <children>
+                  <CheckBox contentDisplay="TOP" layoutX="14.0" layoutY="4.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="184.0" text="Answer 3" textFill="GREY">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </Pane>
+            <Pane layoutX="49.0" layoutY="383.0" prefHeight="34.0" prefWidth="170.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #FFFFFF;">
+               <children>
+                  <CheckBox contentDisplay="TOP" layoutX="14.0" layoutY="4.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="184.0" text="Answer 4" textFill="GREY">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </Pane>
+            <Pane layoutX="49.0" layoutY="254.0" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: #649DAD #649DAD; -fx-background-color: #649DAD #649DAD;">
+               <children>
+                  <Label alignment="BASELINE_CENTER" layoutX="-14.0" layoutY="1.0" prefHeight="27.0" prefWidth="117.0" text="Question 2">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="17.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </Pane>
+            <ProgressIndicator layoutX="14.0" layoutY="257.0" progress="0.25" />
+            <Pane layoutX="281.0" layoutY="283.0" prefHeight="34.0" prefWidth="170.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #FFFFFF;">
+               <children>
+                  <CheckBox contentDisplay="TOP" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="184.0" text="Answer 1" textFill="GREY">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </Pane>
+            <Pane layoutX="281.0" layoutY="316.0" prefHeight="34.0" prefWidth="170.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #FFFFFF;">
+               <children>
+                  <CheckBox contentDisplay="TOP" layoutX="14.0" layoutY="1.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="184.0" text="Answer 2" textFill="GREY">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </Pane>
+            <Pane layoutX="281.0" layoutY="349.0" prefHeight="34.0" prefWidth="170.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #FFFFFF;">
+               <children>
+                  <CheckBox contentDisplay="TOP" layoutX="14.0" layoutY="4.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="184.0" text="Answer 3" textFill="GREY">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </Pane>
+            <Pane layoutX="281.0" layoutY="382.0" prefHeight="34.0" prefWidth="170.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #FFFFFF;">
+               <children>
+                  <CheckBox contentDisplay="TOP" layoutX="14.0" layoutY="4.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="184.0" text="Answer 4" textFill="GREY">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </Pane>
+            <Pane layoutX="281.0" layoutY="253.0" prefHeight="30.0" prefWidth="170.0" style="-fx-border-color: #649DAD #649DAD; -fx-background-color: #649DAD #649DAD;">
+               <children>
+                  <Label alignment="BASELINE_CENTER" layoutX="-14.0" layoutY="1.0" prefHeight="27.0" prefWidth="117.0" text="Question 4">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="17.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </Pane>
+            <ProgressIndicator layoutX="246.0" layoutY="256.0" progress="0.25" />
+            <ImageView fitHeight="86.0" fitWidth="240.0" layoutX="532.0" layoutY="344.0">
+               <image>
+                  <Image url="@images/CEMS-NEW-removebg-preview.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
