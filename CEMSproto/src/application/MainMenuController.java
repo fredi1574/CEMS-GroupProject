@@ -102,5 +102,25 @@ public class MainMenuController {
             ex.printStackTrace();
         }
     }
-  
+    public void addQuestion(ActionEvent e) {
+        try {
+            Parent addQuestionRoot = FXMLLoader.load(getClass().getResource("AddQuestion.fxml"));
+            Scene addQuestionScene = new Scene(addQuestionRoot);
+            Stage addQuestionStage = new Stage();
+            addQuestionStage.setTitle("Statistics");
+            addQuestionStage.setScene(addQuestionScene);
+            addQuestionStage.show();
+
+            Node source = (Node) e.getSource();
+
+            // Get the Stage object that contains the source node
+            Stage stage = (Stage) source.getScene().getWindow();
+
+            // Close the stage
+            stage.close();
+             } catch (Exception ex) {
+            ex.printStackTrace();
+             }
+
+    }
 }
