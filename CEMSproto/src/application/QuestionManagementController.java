@@ -49,12 +49,12 @@ public class QuestionManagementController {
 
     public void back(ActionEvent e) {
         try {
-            Parent QuestionManagement_Root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-            Scene QuestionManagement_Scene = new Scene(QuestionManagement_Root);
-            Stage QuestionManagement_Stage = new Stage();
-            QuestionManagement_Stage.setTitle("CMES Main Menu");
-            QuestionManagement_Stage.setScene(QuestionManagement_Scene);
-            QuestionManagement_Stage.show();
+            Parent back_Root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+            Scene back_Scene = new Scene(back_Root);
+            Stage back_Stage = new Stage();
+            back_Stage.setTitle("CMES Main Menu");
+            back_Stage.setScene(back_Scene);
+            back_Stage.show();
 
             Node source = (Node) e.getSource();
 

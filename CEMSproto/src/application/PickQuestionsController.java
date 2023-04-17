@@ -40,13 +40,12 @@ public class PickQuestionsController {
     public void backToCreateTest(ActionEvent e) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateTest.fxml"));
-            Parent create_test_Root = loader.load();
-
-            Scene create_Test_Scene = new Scene(create_test_Root);
-            Stage create_test_Stage = new Stage();
-            create_test_Stage.setTitle("Create Test");
-            create_test_Stage.setScene(create_Test_Scene);
-            create_test_Stage.show();
+            Parent backToCreateTest_Root = loader.load();
+            Scene backToCreateTest_Root_Scene = new Scene(backToCreateTest_Root);
+            Stage backToCreateTest_Stage = new Stage();
+            backToCreateTest_Stage.setTitle("Create Test");
+            backToCreateTest_Stage.setScene(backToCreateTest_Root_Scene);
+            backToCreateTest_Stage.show();
 
             Node source = (Node) e.getSource();
 

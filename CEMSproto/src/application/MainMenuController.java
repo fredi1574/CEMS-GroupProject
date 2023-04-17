@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class MainMenuController {
@@ -12,12 +13,12 @@ public class MainMenuController {
 
     public void backTo(ActionEvent e) {
         try {
-            Parent log_Root = FXMLLoader.load(getClass().getResource("LoginWindow.fxml"));
-            Scene log_Root_Scene = new Scene(log_Root);
-            Stage log_Root_Stage = new Stage();
-            log_Root_Stage.setTitle("Login Window");
-            log_Root_Stage.setScene(log_Root_Scene);
-            log_Root_Stage.show();
+            Parent backTo_Root = FXMLLoader.load(getClass().getResource("LoginWindow.fxml"));
+            Scene backTo_Scene = new Scene(backTo_Root);
+            Stage backTo_Stage = new Stage();
+            backTo_Stage.setTitle("Login Window");
+            backTo_Stage.setScene(backTo_Scene);
+            backTo_Stage.show();
 
             Node source = (Node) e.getSource();
 
@@ -32,17 +33,18 @@ public class MainMenuController {
         }
     }
 
-    public void showManage(ActionEvent e) {
+    public void manageQuestions(ActionEvent e) {
 
         // Set the action to move to QuestionManagement.fxml when ManageQuestionBtn is clicked
 
         try {
-            Parent mainMenuRoot = FXMLLoader.load(getClass().getResource("QuestionManagement.fxml"));
-            Scene mainMenuScene = new Scene(mainMenuRoot);
-            Stage mainMenuStage = new Stage();
-            mainMenuStage.setTitle("Question Management");
-            mainMenuStage.setScene(mainMenuScene);
-            mainMenuStage.show();
+            Parent manageQuestions_Root = FXMLLoader.load(getClass().getResource("QuestionManagement.fxml"));
+            Scene manageQuestions_Scene = new Scene(manageQuestions_Root);
+            Stage manageQuestions_Stage = new Stage();
+            manageQuestions_Stage.getIcons().add(new Image("application/images/icons8-title-icon.png"));
+            manageQuestions_Stage.setTitle("Question Management");
+            manageQuestions_Stage.setScene(manageQuestions_Scene);
+            manageQuestions_Stage.show();
 
             Node source = (Node) e.getSource();
 
@@ -62,12 +64,12 @@ public class MainMenuController {
 
 
         try {
-            Parent StatRoot = FXMLLoader.load(getClass().getResource("Reports.fxml"));
-            Scene statScene = new Scene(StatRoot);
-            Stage statStage = new Stage();
-            statStage.setTitle("Statistics");
-            statStage.setScene(statScene);
-            statStage.show();
+            Parent viewStatistics_Root = FXMLLoader.load(getClass().getResource("Reports.fxml"));
+            Scene viewStatistics_Scene = new Scene(viewStatistics_Root);
+            Stage viewStatistics_Stage = new Stage();
+            viewStatistics_Stage.setTitle("Statistics");
+            viewStatistics_Stage.setScene(viewStatistics_Scene);
+            viewStatistics_Stage.show();
 
             Node source = (Node) e.getSource();
 
@@ -84,12 +86,12 @@ public class MainMenuController {
 
     public void CreateNewTest(ActionEvent e) {
         try {
-            Parent StatRoot = FXMLLoader.load(getClass().getResource("CreateTest.fxml"));
-            Scene statScene = new Scene(StatRoot);
-            Stage statStage = new Stage();
-            statStage.setTitle("Create Test");
-            statStage.setScene(statScene);
-            statStage.show();
+            Parent createNewTest_Root = FXMLLoader.load(getClass().getResource("CreateTest.fxml"));
+            Scene createNewTest_Scene = new Scene(createNewTest_Root);
+            Stage createNewTest_Stage = new Stage();
+            createNewTest_Stage.setTitle("Create Test");
+            createNewTest_Stage.setScene(createNewTest_Scene);
+            createNewTest_Stage.show();
 
             Node source = (Node) e.getSource();
 

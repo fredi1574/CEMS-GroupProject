@@ -32,12 +32,12 @@ public class StatisticsController {
     public void LogOut(ActionEvent e) {
         try {
 
-            Parent CMEMS_Root = FXMLLoader.load(getClass().getResource("LoginWindow.fxml"));
-            Scene CMEMS_Scene = new Scene(CMEMS_Root);
-            Stage CMEMS_Stage = new Stage();
-            CMEMS_Stage.setTitle("Login Window");
-            CMEMS_Stage.setScene(CMEMS_Scene);
-            CMEMS_Stage.show();
+            Parent logOut_Root = FXMLLoader.load(getClass().getResource("LoginWindow.fxml"));
+            Scene logOut_Scene = new Scene(logOut_Root);
+            Stage logOut_Stage = new Stage();
+            logOut_Stage.setTitle("Login Window");
+            logOut_Stage.setScene(logOut_Scene);
+            logOut_Stage.show();
 
             Node source = (Node) e.getSource();
 

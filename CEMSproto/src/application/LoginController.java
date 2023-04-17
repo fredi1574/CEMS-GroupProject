@@ -12,14 +12,14 @@ public class LoginController {
     public void logIN(ActionEvent e) {
 
         try {
-            Parent mainMenuRoot = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-            Scene mainMenuScene = new Scene(mainMenuRoot);
-            Stage mainMenuStage = new Stage();
+            Parent login_Root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+            Scene login_Scene = new Scene(login_Root);
+            Stage login_Stage = new Stage();
             // mainMenuStage.setTitle("CEMS Main Menu");
-            mainMenuStage.getIcons().add(new Image("application/images/icons8-title-icon.png"));
+            login_Stage.getIcons().add(new Image("application/images/icons8-title-icon.png"));
 
-            mainMenuStage.setScene(mainMenuScene);
-            mainMenuStage.show();
+            login_Stage.setScene(login_Scene);
+            login_Stage.show();
 
             Node source = (Node) e.getSource();
 

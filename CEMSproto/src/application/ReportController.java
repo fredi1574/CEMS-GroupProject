@@ -40,12 +40,12 @@ public class ReportController {
 
     public void backToMenu(ActionEvent e) {
         try {
-            Parent static_Root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-            Scene static_Scene = new Scene(static_Root);
-            Stage static_Root_Stage = new Stage();
-            static_Root_Stage.setTitle("CMES Main Menu");
-            static_Root_Stage.setScene(static_Scene);
-            static_Root_Stage.show();
+            Parent backToMenu_Root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+            Scene backToMenu_Scene = new Scene(backToMenu_Root);
+            Stage backToMenu_Stage = new Stage();
+            backToMenu_Stage.setTitle("CMES Main Menu");
+            backToMenu_Stage.setScene(backToMenu_Scene);
+            backToMenu_Stage.show();
 
             Node source = (Node) e.getSource();
 
@@ -62,12 +62,12 @@ public class ReportController {
 
     public void showReports(ActionEvent e) {
         try {
-            Parent StatRoot = FXMLLoader.load(getClass().getResource("Statistics.fxml"));
-            Scene statScene = new Scene(StatRoot);
-            Stage statStage = new Stage();
-            statStage.setTitle("Statistics");
-            statStage.setScene(statScene);
-            statStage.show();
+            Parent showReports_root = FXMLLoader.load(getClass().getResource("Statistics.fxml"));
+            Scene showReports_Scene = new Scene(showReports_root);
+            Stage showReports_Stage = new Stage();
+            showReports_Stage.setTitle("Statistics");
+            showReports_Stage.setScene(showReports_Scene);
+            showReports_Stage.show();
 
             Node source = (Node) e.getSource();
 

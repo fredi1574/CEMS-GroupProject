@@ -50,7 +50,7 @@
                         <Insets top="10.0" />
                     </VBox.margin>
                 </Button>
-                <Button fx:id="showManage" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showManage" prefHeight="48.0" prefWidth="278.0" style="-fx-background-color: #649DAD;" styleClass="mainMenuButtons" stylesheets="@application.css" text=" Manage Questions" textFill="WHITE">
+                <Button fx:id="manageQuestions" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#manageQuestions" prefHeight="48.0" prefWidth="278.0" style="-fx-background-color: #649DAD;" styleClass="mainMenuButtons" stylesheets="@application.css" text=" Manage Questions" textFill="WHITE">
                     <font>
                         <Font name="Trebuchet MS" size="25.0" />
                     </font>
