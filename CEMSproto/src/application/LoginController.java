@@ -15,7 +15,7 @@ public class LoginController {
             Parent login_Root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
             Scene login_Scene = new Scene(login_Root);
             Stage login_Stage = new Stage();
-            // mainMenuStage.setTitle("CEMS Main Menu");
+            login_Stage.setTitle("C.E.M.S Test Manager");
             login_Stage.getIcons().add(new Image("application/images/icons8-title-icon.png"));
 
             login_Stage.setScene(login_Scene);

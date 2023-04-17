@@ -16,7 +16,7 @@ public class MainMenuController {
             Parent backTo_Root = FXMLLoader.load(getClass().getResource("LoginWindow.fxml"));
             Scene backTo_Scene = new Scene(backTo_Root);
             Stage backTo_Stage = new Stage();
-            backTo_Stage.setTitle("Login Window");
+            backTo_Stage.setTitle("C.E.M.S Test Manager");
             backTo_Stage.setScene(backTo_Scene);
             backTo_Stage.show();
 
@@ -42,7 +42,7 @@ public class MainMenuController {
             Scene manageQuestions_Scene = new Scene(manageQuestions_Root);
             Stage manageQuestions_Stage = new Stage();
             manageQuestions_Stage.getIcons().add(new Image("application/images/icons8-title-icon.png"));
-            manageQuestions_Stage.setTitle("Question Management");
+            manageQuestions_Stage.setTitle("C.E.M.S Test Manager");
             manageQuestions_Stage.setScene(manageQuestions_Scene);
             manageQuestions_Stage.show();
 
@@ -67,7 +67,7 @@ public class MainMenuController {
             Parent viewStatistics_Root = FXMLLoader.load(getClass().getResource("Reports.fxml"));
             Scene viewStatistics_Scene = new Scene(viewStatistics_Root);
             Stage viewStatistics_Stage = new Stage();
-            viewStatistics_Stage.setTitle("Statistics");
+            viewStatistics_Stage.setTitle("C.E.M.S Test Manager");
             viewStatistics_Stage.setScene(viewStatistics_Scene);
             viewStatistics_Stage.show();
 
@@ -89,7 +89,7 @@ public class MainMenuController {
             Parent createNewTest_Root = FXMLLoader.load(getClass().getResource("CreateTest.fxml"));
             Scene createNewTest_Scene = new Scene(createNewTest_Root);
             Stage createNewTest_Stage = new Stage();
-            createNewTest_Stage.setTitle("Create Test");
+            createNewTest_Stage.setTitle("C.E.M.S Test Manager");
             createNewTest_Stage.setScene(createNewTest_Scene);
             createNewTest_Stage.show();
 
@@ -109,7 +109,7 @@ public class MainMenuController {
             Parent addQuestionRoot = FXMLLoader.load(getClass().getResource("AddQuestion.fxml"));
             Scene addQuestionScene = new Scene(addQuestionRoot);
             Stage addQuestionStage = new Stage();
-            addQuestionStage.setTitle("Statistics");
+            addQuestionStage.setTitle("C.E.M.S Test Manager");
             addQuestionStage.setScene(addQuestionScene);
             addQuestionStage.show();
 

@@ -18,9 +18,9 @@
 
 <AnchorPane prefHeight="533.0" prefWidth="775.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StatisticsController">
    <children>
-      <Button fx:id="backStat" layoutX="3.0" layoutY="490.0" mnemonicParsing="false" onAction="#backStat" prefHeight="34.0" prefWidth="54.0" style="-fx-background-color: #FFFFFF;">
+      <Button fx:id="backToReport" layoutX="3.0" layoutY="490.0" mnemonicParsing="false" onAction="#backToReport" prefHeight="34.0" prefWidth="54.0" style="-fx-background-color: #FFFFFF;">
          <graphic>
-            <ImageView fitHeight="36.0" fitWidth="38.0" style="-fx-background-color: #FFFFFF;">
+            <ImageView fx:id="backToReport" fitHeight="36.0" fitWidth="38.0" style="-fx-background-color: #FFFFFF;">
                <image>
                   <Image url="@images/Back.png" />
                </image>

@@ -57,7 +57,7 @@ public class CreateTestController {
             Parent preview_Root = FXMLLoader.load(getClass().getResource("TestPreviewPopUp.fxml"));
             Scene preview_Scene = new Scene(preview_Root);
             Stage preview_Stage = new Stage();
-            preview_Stage.setTitle("Pick Questions");
+            preview_Stage.setTitle("C.E.M.S Test Manager");
             preview_Stage.setScene(preview_Scene);
             preview_Stage.show();
 

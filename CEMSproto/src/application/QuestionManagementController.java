@@ -52,7 +52,7 @@ public class QuestionManagementController {
             Parent back_Root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
             Scene back_Scene = new Scene(back_Root);
             Stage back_Stage = new Stage();
-            back_Stage.setTitle("CMES Main Menu");
+            back_Stage.setTitle("C.E.M.S Test Manager");
             back_Stage.setScene(back_Scene);
             back_Stage.show();
 

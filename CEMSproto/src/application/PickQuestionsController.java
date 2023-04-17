@@ -43,7 +43,7 @@ public class PickQuestionsController {
             Parent backToCreateTest_Root = loader.load();
             Scene backToCreateTest_Root_Scene = new Scene(backToCreateTest_Root);
             Stage backToCreateTest_Stage = new Stage();
-            backToCreateTest_Stage.setTitle("Create Test");
+            backToCreateTest_Stage.setTitle("C.E.M.S Test Manager");
             backToCreateTest_Stage.setScene(backToCreateTest_Root_Scene);
             backToCreateTest_Stage.show();
 

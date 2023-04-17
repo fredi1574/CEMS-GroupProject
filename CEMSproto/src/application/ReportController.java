@@ -43,7 +43,7 @@ public class ReportController {
             Parent backToMenu_Root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
             Scene backToMenu_Scene = new Scene(backToMenu_Root);
             Stage backToMenu_Stage = new Stage();
-            backToMenu_Stage.setTitle("CMES Main Menu");
+            backToMenu_Stage.setTitle("C.E.M.S Test Manager");
             backToMenu_Stage.setScene(backToMenu_Scene);
             backToMenu_Stage.show();
 
@@ -65,7 +65,7 @@ public class ReportController {
             Parent showReports_root = FXMLLoader.load(getClass().getResource("Statistics.fxml"));
             Scene showReports_Scene = new Scene(showReports_root);
             Stage showReports_Stage = new Stage();
-            showReports_Stage.setTitle("Statistics");
+            showReports_Stage.setTitle("C.E.M.S Test Manager");
             showReports_Stage.setScene(showReports_Scene);
             showReports_Stage.show();
 

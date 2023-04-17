@@ -23,7 +23,7 @@ public class TestPreviewPopUpController {
             Parent CMEMS_Root = FXMLLoader.load(getClass().getResource("CEMS.fxml"));
             Scene CMEMS_Scene = new Scene(CMEMS_Root);
             Stage  CMEMS_Stage = new Stage();
-            CMEMS_Stage.setTitle("Login Window");
+            CMEMS_Stage.setTitle("C.E.M.S Test Manager");
             CMEMS_Stage.setScene(CMEMS_Scene);
             CMEMS_Stage.show();
 
