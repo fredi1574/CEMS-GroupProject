@@ -1,5 +1,6 @@
 package application;
 
+import application.Question;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,7 +42,7 @@ public class PickQuestionsController {
 
     public void backToCreateTest(ActionEvent e) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateTest.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateNewTestScreen/CreateNewTest.fxml"));
             Parent backToCreateTest_Root = loader.load();
             Scene backToCreateTest_Root_Scene = new Scene(backToCreateTest_Root);
             Stage backToCreateTest_Stage = new Stage();
@@ -61,10 +62,11 @@ public class PickQuestionsController {
             ex.printStackTrace();
         }
     }
+
     public void LogOut(ActionEvent e) {
         try {
 
-            Parent logOut_Root = FXMLLoader.load(getClass().getResource("LoginWindow.fxml"));
+            Parent logOut_Root = FXMLLoader.load(getClass().getResource("LoginWindowScreen/LoginWindow.fxml"));
             Scene logOut_Scene = new Scene(logOut_Root);
             Stage logOut_Stage = new Stage();
             logOut_Stage.setTitle("C.E.M.S Test Manager");

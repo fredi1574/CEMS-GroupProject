@@ -12,7 +12,7 @@ public class LoginController {
     public void logIN(ActionEvent e) {
 
         try {
-            Parent login_Root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+            Parent login_Root = FXMLLoader.load(getClass().getResource("MainMenuScreen/MainMenu.fxml"));
             Scene login_Scene = new Scene(login_Root);
             Stage login_Stage = new Stage();
             login_Stage.setTitle("C.E.M.S Test Manager");

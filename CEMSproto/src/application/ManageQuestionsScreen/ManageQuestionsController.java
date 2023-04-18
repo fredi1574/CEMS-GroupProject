@@ -1,4 +1,4 @@
-package application;
+package application.ManageQuestionsScreen;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
-public class QuestionManagementController {
+public class ManageQuestionsController {
 
     @FXML
     private ComboBox<String> combox;
@@ -27,7 +27,7 @@ public class QuestionManagementController {
     public void LogOut(ActionEvent e) {
         try {
 
-            Parent CMEMS_Root = FXMLLoader.load(getClass().getResource("LoginWindow.fxml"));
+            Parent CMEMS_Root = FXMLLoader.load(getClass().getResource("../LoginWindowScreen/LoginWindow.fxml"));
             Scene CMEMS_Scene = new Scene(CMEMS_Root);
             Stage CMEMS_Stage = new Stage();
             CMEMS_Stage.setTitle("Login Window");
@@ -49,7 +49,7 @@ public class QuestionManagementController {
 
     public void back(ActionEvent e) {
         try {
-            Parent back_Root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+            Parent back_Root = FXMLLoader.load(getClass().getResource("../MainMenuScreen/MainMenu.fxml"));
             Scene back_Scene = new Scene(back_Root);
             Stage back_Stage = new Stage();
             back_Stage.setTitle("C.E.M.S Test Manager");
@@ -68,9 +68,10 @@ public class QuestionManagementController {
             ex.printStackTrace();
         }
     }
+
     public void AddQuestion(ActionEvent e) {
         try {
-            Parent back_Root = FXMLLoader.load(getClass().getResource("AddQuestion.fxml"));
+            Parent back_Root = FXMLLoader.load(getClass().getResource("../AddAQuestionScreen/AddAQuestion.fxml"));
             Scene back_Scene = new Scene(back_Root);
             Stage back_Stage = new Stage();
             back_Stage.setTitle("C.E.M.S AddQuestion");

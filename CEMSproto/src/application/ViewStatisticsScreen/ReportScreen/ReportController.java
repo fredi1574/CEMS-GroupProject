@@ -1,4 +1,4 @@
-package application;
+package application.ViewStatisticsScreen.ReportScreen;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,32 +37,33 @@ public class ReportController {
         ObservableList<String> subject_options = FXCollections.observableArrayList("SoftWare Engineering", "Math", "...");
         subjectComboBox.setItems(subject_options);
     }
+
     public void backTo(ActionEvent e) {
         try {
-        	 Parent back_Root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-             Scene back_Scene = new Scene(back_Root);
-             Stage back_Stage = new Stage();
-             back_Stage.setTitle("C.E.M.S Test Manager");
-             back_Stage.setScene(back_Scene);
-             back_Stage.show();
+            Parent back_Root = FXMLLoader.load(getClass().getResource("../../MainMenuScreen/MainMenu.fxml"));
+            Scene back_Scene = new Scene(back_Root);
+            Stage back_Stage = new Stage();
+            back_Stage.setTitle("C.E.M.S Test Manager");
+            back_Stage.setScene(back_Scene);
+            back_Stage.show();
 
-             Node source = (Node) e.getSource();
+            Node source = (Node) e.getSource();
 
-             // Get the Stage object that contains the source node
-             Stage stage = (Stage) source.getScene().getWindow();
+            // Get the Stage object that contains the source node
+            Stage stage = (Stage) source.getScene().getWindow();
 
-             // Close the stage
-             stage.close();
+            // Close the stage
+            stage.close();
 
-         } catch (Exception ex) {
-             ex.printStackTrace();
-         }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
 
     public void showReports(ActionEvent e) {
         try {
-            Parent showReports_root = FXMLLoader.load(getClass().getResource("Statistics.fxml"));
+            Parent showReports_root = FXMLLoader.load(getClass().getResource("../ViewStatistics.fxml"));
             Scene showReports_Scene = new Scene(showReports_root);
             Stage showReports_Stage = new Stage();
             showReports_Stage.setTitle("C.E.M.S Test Manager");
@@ -79,12 +80,13 @@ public class ReportController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    
+
     }
+
     public void LogOut(ActionEvent e) {
         try {
 
-            Parent logOut_Root = FXMLLoader.load(getClass().getResource("LoginWindow.fxml"));
+            Parent logOut_Root = FXMLLoader.load(getClass().getResource("../../LoginWindowScreen/LoginWindow.fxml"));
             Scene logOut_Scene = new Scene(logOut_Root);
             Stage logOut_Stage = new Stage();
             logOut_Stage.setTitle("C.E.M.S Test Manager");
@@ -103,5 +105,5 @@ public class ReportController {
             ex.printStackTrace();
         }
     }
-    
+
 }

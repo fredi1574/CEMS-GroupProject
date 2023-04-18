@@ -1,4 +1,4 @@
-package application;
+package application.ViewStatisticsScreen;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -7,10 +7,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class StatisticsController {
+public class ViewStatisticsController {
     public void backToReport(ActionEvent e) {
         try {
-            Parent backToReport_Root = FXMLLoader.load(getClass().getResource("Reports.fxml"));
+            Parent backToReport_Root = FXMLLoader.load(getClass().getResource("ReportScreen/Reports.fxml"));
             Scene backToReport_Scene = new Scene(backToReport_Root);
             Stage backToReport_Stage = new Stage();
             backToReport_Stage.setTitle("C.E.M.S Test Manager");
@@ -29,10 +29,11 @@ public class StatisticsController {
             ex.printStackTrace();
         }
     }
+
     public void LogOut(ActionEvent e) {
         try {
 
-            Parent logOut_Root = FXMLLoader.load(getClass().getResource("LoginWindow.fxml"));
+            Parent logOut_Root = FXMLLoader.load(getClass().getResource("../LoginWindowScreen/LoginWindow.fxml"));
             Scene logOut_Scene = new Scene(logOut_Root);
             Stage logOut_Stage = new Stage();
             logOut_Stage.setTitle("C.E.M.S Test Manager");
@@ -51,9 +52,10 @@ public class StatisticsController {
             ex.printStackTrace();
         }
     }
+
     public void BackTo(ActionEvent e) {
         try {
-            Parent QuestionManagement_Root = FXMLLoader.load(getClass().getResource("CreateTest.fxml"));
+            Parent QuestionManagement_Root = FXMLLoader.load(getClass().getResource("../CreateNewTestScreen/CreateNewTest.fxml"));
             Scene QuestionManagement_Scene = new Scene(QuestionManagement_Root);
             Stage QuestionManagement_Stage = new Stage();
             QuestionManagement_Stage.setTitle("C.E.M.S Create Test");

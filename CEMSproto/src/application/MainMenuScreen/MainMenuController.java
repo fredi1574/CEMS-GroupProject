@@ -1,4 +1,4 @@
-package application;
+package application.MainMenuScreen;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,7 @@ public class MainMenuController {
 
     public void backTo(ActionEvent e) {
         try {
-            Parent backTo_Root = FXMLLoader.load(getClass().getResource("LoginWindow.fxml"));
+            Parent backTo_Root = FXMLLoader.load(getClass().getResource("../LoginWindowScreen/LoginWindow.fxml"));
             Scene backTo_Scene = new Scene(backTo_Root);
             Stage backTo_Stage = new Stage();
             backTo_Stage.setTitle("C.E.M.S Test Manager");
@@ -35,10 +35,10 @@ public class MainMenuController {
 
     public void manageQuestions(ActionEvent e) {
 
-        // Set the action to move to QuestionManagement.fxml when ManageQuestionBtn is clicked
+        // Set the action to move to ManageQuestions.fxml when ManageQuestionBtn is clicked
 
         try {
-            Parent manageQuestions_Root = FXMLLoader.load(getClass().getResource("QuestionManagement.fxml"));
+            Parent manageQuestions_Root = FXMLLoader.load(getClass().getResource("../ManageQuestionsScreen/ManageQuestions.fxml"));
             Scene manageQuestions_Scene = new Scene(manageQuestions_Root);
             Stage manageQuestions_Stage = new Stage();
             manageQuestions_Stage.getIcons().add(new Image("application/images/icons8-title-icon.png"));
@@ -64,7 +64,7 @@ public class MainMenuController {
 
 
         try {
-            Parent viewStatistics_Root = FXMLLoader.load(getClass().getResource("Reports.fxml"));
+            Parent viewStatistics_Root = FXMLLoader.load(getClass().getResource("../ViewStatisticsScreen/ReportScreen/Reports.fxml"));
             Scene viewStatistics_Scene = new Scene(viewStatistics_Root);
             Stage viewStatistics_Stage = new Stage();
             viewStatistics_Stage.setTitle("C.E.M.S Test Manager");
@@ -86,7 +86,7 @@ public class MainMenuController {
 
     public void CreateNewTest(ActionEvent e) {
         try {
-            Parent createNewTest_Root = FXMLLoader.load(getClass().getResource("CreateTest.fxml"));
+            Parent createNewTest_Root = FXMLLoader.load(getClass().getResource("../CreateNewTestScreen/CreateNewTest.fxml"));
             Scene createNewTest_Scene = new Scene(createNewTest_Root);
             Stage createNewTest_Stage = new Stage();
             createNewTest_Stage.setTitle("C.E.M.S Test Manager");
@@ -104,9 +104,10 @@ public class MainMenuController {
             ex.printStackTrace();
         }
     }
+
     public void addQuestion(ActionEvent e) {
         try {
-            Parent addQuestionRoot = FXMLLoader.load(getClass().getResource("AddQuestion.fxml"));
+            Parent addQuestionRoot = FXMLLoader.load(getClass().getResource("../AddAQuestionScreen/AddAQuestion.fxml"));
             Scene addQuestionScene = new Scene(addQuestionRoot);
             Stage addQuestionStage = new Stage();
             addQuestionStage.setTitle("C.E.M.S Test Manager");
@@ -120,9 +121,9 @@ public class MainMenuController {
 
             // Close the stage
             stage.close();
-             } catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
-             }
+        }
 
     }
 }
