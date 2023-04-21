@@ -1,5 +1,5 @@
-package application.ManageQuestionsScreen;
 
+package application.ManageQuestionsScreen;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,12 +27,12 @@ public class ManageQuestionsController {
     public void LogOut(ActionEvent e) {
         try {
 
-            Parent CMEMS_Root = FXMLLoader.load(getClass().getResource("../LoginWindowScreen/LoginWindow.fxml"));
-            Scene CMEMS_Scene = new Scene(CMEMS_Root);
-            Stage CMEMS_Stage = new Stage();
-            CMEMS_Stage.setTitle("Login Window");
-            CMEMS_Stage.setScene(CMEMS_Scene);
-            CMEMS_Stage.show();
+            Parent logOut_Root = FXMLLoader.load(getClass().getResource("../LoginWindowScreen/LoginWindow.fxml"));
+            Scene logOut_Root_Scene = new Scene(logOut_Root);
+            Stage logOut_Root_Stage = new Stage();
+            logOut_Root_Stage.setTitle("Login Window");
+            logOut_Root_Stage.setScene(logOut_Root_Scene);
+            logOut_Root_Stage.show();
 
             Node source = (Node) e.getSource();
 
@@ -68,7 +68,6 @@ public class ManageQuestionsController {
             ex.printStackTrace();
         }
     }
-
     public void AddQuestion(ActionEvent e) {
         try {
             Parent back_Root = FXMLLoader.load(getClass().getResource("../AddAQuestionScreen/AddAQuestion.fxml"));

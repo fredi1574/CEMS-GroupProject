@@ -1,4 +1,4 @@
-package application.CreateNewTestScreen;
+package application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -7,15 +7,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class CreateNewTestController {
+public class CreateTestController {
     public void BackToMenu(ActionEvent e) {
         try {
-            Parent QuestionManagement_Root = FXMLLoader.load(getClass().getResource("../MainMenuScreen/MainMenu.fxml"));
-            Scene QuestionManagement_Scene = new Scene(QuestionManagement_Root);
-            Stage QuestionManagement_Stage = new Stage();
-            QuestionManagement_Stage.setTitle("CMES Main Menu");
-            QuestionManagement_Stage.setScene(QuestionManagement_Scene);
-            QuestionManagement_Stage.show();
+            Parent backToMenu_Root = FXMLLoader.load(getClass().getResource("../MainMenuScreen/MainMenu.fxml"));
+            Scene backToMenu_Scene = new Scene(backToMenu_Root);
+            Stage backToMenu_Stage = new Stage();
+            backToMenu_Stage.setTitle("CMES Main Menu");
+            backToMenu_Stage.setScene(backToMenu_Scene);
+            backToMenu_Stage.show();
 
             Node source = (Node) e.getSource();
 
@@ -33,12 +33,12 @@ public class CreateNewTestController {
     public void pickQuestion(ActionEvent e) {
 
         try {
-            Parent QuestionManagement_Root = FXMLLoader.load(getClass().getResource("../PickQuestions.fxml"));
-            Scene QuestionManagement_Scene = new Scene(QuestionManagement_Root);
-            Stage QuestionManagement_Stage = new Stage();
-            QuestionManagement_Stage.setTitle("Pick Questions");
-            QuestionManagement_Stage.setScene(QuestionManagement_Scene);
-            QuestionManagement_Stage.show();
+            Parent pickQuestion_Root = FXMLLoader.load(getClass().getResource("../PickQuestions.fxml"));
+            Scene pickQuestion_Scene = new Scene(pickQuestion_Root);
+            Stage pickQuestion_Stage = new Stage();
+            pickQuestion_Stage.setTitle("Pick Questions");
+            pickQuestion_Stage.setScene(pickQuestion_Scene);
+            pickQuestion_Stage.show();
 
             Node source = (Node) e.getSource();
 
@@ -52,8 +52,7 @@ public class CreateNewTestController {
             ex.printStackTrace();
         }
     }
-
-    public void openPreview(ActionEvent e) {
+    public void openPreview(ActionEvent e)  {
         try {
             Parent preview_Root = FXMLLoader.load(getClass().getResource("TestPreviewPopUp.fxml"));
             Scene preview_Scene = new Scene(preview_Root);
@@ -74,7 +73,6 @@ public class CreateNewTestController {
             ex.printStackTrace();
         }
     }
-
     public void LogOut(ActionEvent e) {
         try {
 
