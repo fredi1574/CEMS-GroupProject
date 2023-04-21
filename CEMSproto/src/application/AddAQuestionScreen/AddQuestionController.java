@@ -1,5 +1,5 @@
-package application;
 
+package application.AddAQuestionScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

@@ -1,5 +1,5 @@
-package application;
 
+package application.CreateNewTestScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

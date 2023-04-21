@@ -23,7 +23,7 @@
 
 <!--TODO: add text field for "test time", remove "test number"-->
 
-<AnchorPane accessibleRole="HYPERLINK" cache="true" prefHeight="533.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CreateNewTestScreen.CreateNewTestController">
+<AnchorPane accessibleRole="HYPERLINK" cache="true" prefHeight="533.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CreateNewTestScreen.CreateTestController">
     <children>
         <AnchorPane layoutY="-7.0" prefHeight="563.0" prefWidth="802.0">
             <children>
