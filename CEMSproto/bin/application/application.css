@@ -7,3 +7,63 @@
     -fx-font-size: 25px;
     -fx-text-fill: black;
 }
+
+/*Header bar styling*/
+.pageHeader {
+    -fx-font-family: "Trebuchet MS";
+    -fx-background-color: #306ebd;
+}
+
+.pageHeaderBtn {
+    -fx-background-color: transparent;
+    -fx-border-color: #7799c2;
+    -fx-border-radius: 5px;
+    -fx-text-fill: white;
+    -fx-font-family: "Trebuchet MS";
+}
+
+/*screen background color*/
+.backgroundColor {
+    -fx-background-color: #e6eef7;
+}
+
+/*test area styling (excluding background color)*/
+.text-area {
+    -fx-background-color: #7799c2; /*text area border color*/
+    -fx-text-fill: #7799c2;
+    -fx-font-size: 14px;
+}
+
+/*scroll bar styling*/
+.scroll-bar {
+    -fx-background-color: #dae5f3;
+}
+
+/*scroll bar arrow styling*/
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    /*    -fx-shape: " ";*/
+    -fx-background-color: #7799c2;
+}
+
+/*scroll bar thumb styling*/
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #7799c2;
+    -fx-background-radius: 0;
+}
+
+/*text area background color styling*/
+.text-area *.content {
+    -fx-background-color: #dae5f3;
+}
+
+.radio-button .radio {
+    -fx-background-color: transparent;
+    -fx-border-color: #284263;
+    -fx-border-radius: 50px;
+}
+
+.radio-button .dot {
+    -fx-mark-highlight-color: #284263;
+    -fx-mark-color: #284263;
+    -fx-background-insets: 0;
+}
