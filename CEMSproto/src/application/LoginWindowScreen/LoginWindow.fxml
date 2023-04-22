@@ -12,13 +12,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="271.0" prefWidth="516.0" style="-fx-background-color: #FFFFFF;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="271.0" prefWidth="516.0" styleClass="backgroundColor" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
     <center>
         <AnchorPane prefHeight="248.0" prefWidth="651.0" stylesheets="@../application.css" BorderPane.alignment="CENTER">
             <children>
                 <TextField blendMode="MULTIPLY" layoutX="327.0" layoutY="110.0" promptText="User ID" />
                 <PasswordField blendMode="MULTIPLY" layoutX="327.0" layoutY="149.0" promptText="Password" />
-                <Button fx:id="logIN" layoutX="309.0" layoutY="206.0" mnemonicParsing="false" onAction="#logIN" prefHeight="36.0" prefWidth="185.0" style="-fx-background-color: #649DAD; -fx-background-radius: 90;" text="LOGIN" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+                <Button fx:id="logIN" layoutX="306.0" layoutY="207.0" mnemonicParsing="false" onAction="#logIN" prefHeight="36.0" prefWidth="185.0" style="-fx-background-radius: 90;" styleClass="pageHeader" text="LOGIN" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
                     <font>
                         <Font name="Franklin Gothic Demi" size="16.0" />
                     </font>
@@ -33,31 +33,31 @@
                         <Image url="@../images/icons8-password-key-2.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="39.0" fitWidth="200.0" layoutX="302.0" layoutY="49.0">
-                    <image>
-                        <Image url="@../images/welcome.png" />
-                    </image>
-                </ImageView>
-                <Line endX="100.0" layoutX="402.0" layoutY="88.0" startX="-100.0" />
-                <Line endX="100.0" layoutX="402.0" layoutY="49.0" startX="-100.0" />
-                <Text fill="#649dad" layoutX="400.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forgot password?" underline="true">
+                <Line endX="98.20001220703125" endY="10.199996948242188" layoutX="405.0" layoutY="80.0" startX="-109.4000244140625" startY="10.199996948242188" />
+                <Line endX="101.79998779296875" endY="-10.000011444091797" layoutX="397.0" layoutY="57.0" startX="-97.4000244140625" startY="-10.000011444091797" />
+                <Text fill="#649dad" layoutX="400.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="content" text="Forgot password?" underline="true">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </Text>
-                <Pane prefHeight="271.0" prefWidth="272.0" style="-fx-background-color: #649DAD;">
-                    <children>
-                        <ImageView fitHeight="109.0" fitWidth="280.0" layoutX="-5.0" layoutY="91.0">
-                            <image>
-                                <Image url="@../images/CEMS-NEW.png" />
-                            </image>
-                        </ImageView>
-                    </children>
+                <Pane prefHeight="271.0" prefWidth="272.0" styleClass="pageHeader">
+               <children>
+                  <ImageView fitHeight="69.0" fitWidth="274.0" layoutY="101.0">
+                     <image>
+                        <Image url="@../images/Logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
                 </Pane>
             <Button layoutX="461.0" layoutY="8.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="29.0" style="-fx-background-color: transparent;" />
             <ImageView fitHeight="29.0" fitWidth="34.0" layoutX="484.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/icons8-close-window-50.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="43.0" fitWidth="200.0" layoutX="302.0" layoutY="47.0">
+               <image>
+                  <Image url="@../images/Screenshot%202023-04-22%20172619.png" />
                </image>
             </ImageView>
             </children>

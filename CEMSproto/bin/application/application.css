@@ -1,6 +1,8 @@
 .mainMenuButtons:hover {
+    -fx-border-color:#306ebd;
     -fx-text-fill: darkGray;
     -fx-translate-x: 25px;
+
 }
 
 .mainMenuButtons:pressed {

@@ -27,16 +27,11 @@
     <children>
         <AnchorPane layoutY="-7.0" prefHeight="563.0" prefWidth="802.0">
             <children>
-                <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="533.0" prefWidth="775.0" style="-fx-background-color: #FFFFFF;">
+                <AnchorPane layoutX="-17.0" prefHeight="563.0" prefWidth="873.0" styleClass="backgroundColor" stylesheets="@../application.css">
                     <children>
-                        <ImageView fitHeight="86.0" fitWidth="240.0" layoutX="534.0" layoutY="452.0">
-                            <image>
-                                <Image url="@../images/CEMS-NEW-removebg-preview.png" />
-                            </image>
-                        </ImageView>
-                        <AnchorPane layoutX="-9.0" layoutY="-3.0" prefHeight="86.0" prefWidth="806.0" style="-fx-background-color: #649DAD #649DAD;">
+                        <AnchorPane layoutX="-1.0" layoutY="1.0" prefHeight="91.0" prefWidth="874.0" styleClass="pageHeader" stylesheets="@../application.css">
                             <children>
-                                <Label layoutX="257.0" layoutY="16.0" prefHeight="54.0" prefWidth="336.0" style="-fx-font-weight: bold;" text="Create New Test" textFill="#fafafa">
+                                <Label layoutX="321.0" layoutY="18.0" prefHeight="54.0" prefWidth="336.0" style="-fx-font-weight: bold;" text="Create New Test" textFill="#fafafa">
                                     <font>
                                         <Font name="Trebuchet MS" size="28.0" />
                                     </font>
@@ -44,7 +39,7 @@
                                         <DropShadow />
                                     </effect>
                                 </Label>
-                                <Button fx:id="LogOut" layoutX="712.0" layoutY="48.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: #649DAD; -fx-background-radius: 10;" text="Logout">
+                                <Button fx:id="LogOut" layoutX="773.0" layoutY="48.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" styleClass="pageHeaderBtn" text="Logout">
                                     <font>
                                         <Font name="Franklin Gothic Demi Cond" size="14.0" />
                                     </font>
@@ -59,25 +54,25 @@
                                         </Lighting>
                                     </effect>
                                 </Button>
-                              <ImageView layoutX="720.0" layoutY="27.0">
+                              <ImageView layoutX="773.0" layoutY="22.0">
                                   <image>
                                       <Image url="@../images/icons8-person-16.png" />
                                   </image>
                               </ImageView>
+                              <Text fill="#3b3131" layoutX="796.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true">
+                                  <font>
+                                      <Font name="Trebuchet MS" size="12.0" />
+                                  </font>
+                              </Text>
                             </children>
                             <effect>
                                 <DropShadow />
                             </effect>
                         </AnchorPane>
-                        <Text fill="#3b3131" layoutX="729.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true">
-                            <font>
-                                <Font name="Trebuchet MS" size="12.0" />
-                            </font>
-                        </Text>
                         <Button alignment="BASELINE_CENTER" layoutX="31.0" layoutY="487.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="58.0" style="-fx-background-color: transparent;" />
-                        <Pane layoutX="15.0" layoutY="100.0" prefHeight="356.0" prefWidth="322.0" style="-fx-background-color: #e4ecdf; -fx-background-radius: 30;">
+                        <Pane layoutX="40.0" layoutY="127.0" prefHeight="361.0" prefWidth="330.0" styleClass="backgroundColor">
                             <children>
-                                <MenuButton layoutX="85.0" layoutY="34.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="137.0" style="-fx-background-color: #649DAD #649DAD; -fx-background-radius: 10; -fx-font-weight: bold;" text="        Pick Subject">
+                                <MenuButton layoutX="85.0" layoutY="34.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="137.0" style="-fx-background-color: transparent transparent; -fx-border-color: #7799c2; -fx-border-radius: 5;" styleClass="pageHeaderBtn" text="        Pick Subject">
                                     <items>
                                         <Menu mnemonicParsing="false" text="Software Engineering">
                                             <items>
@@ -149,36 +144,43 @@
                               </HBox>
                            </children>
                         </VBox>
-                                <Button fx:id="pickQuestion" layoutX="84.0" layoutY="232.0" mnemonicParsing="false" onAction="#pickQuestion" prefHeight="25.0" prefWidth="137.0" style="-fx-background-color: #649DAD #649DAD; -fx-background-radius: 10; -fx-font-weight: bold;" text="Pick Questions" />
-                                <Button fx:id="openPreview" layoutX="116.0" layoutY="280.0" mnemonicParsing="false" onAction="#openPreview" prefHeight="34.0" prefWidth="74.0" style="-fx-background-color: #649DAD #649DAD; -fx-background-radius: 10; -fx-font-weight: bold;" text="Preview" />
+                                <Button fx:id="pickQuestion" layoutX="84.0" layoutY="232.0" mnemonicParsing="false" onAction="#pickQuestion" prefHeight="25.0" prefWidth="137.0" style="-fx-background-color: transparent transparent; -fx-background-radius: 4; -fx-border-color: #7799c2;" text="Pick Questions" />
+                                <Button fx:id="openPreview" layoutX="116.0" layoutY="280.0" mnemonicParsing="false" onAction="#openPreview" prefHeight="34.0" prefWidth="74.0" style="-fx-background-color: transparent transparent; -fx-background-radius: 10; -fx-border-color: #7799c2;" text="Preview" />
+                        <ImageView fitHeight="54.0" fitWidth="117.0" layoutX="-33.0" layoutY="-28.0">
+                           <image>
+                              <Image url="@../../../../../Users/Abed%20Tayar/Desktop/light123.png" />
+                           </image>
+                        </ImageView>
                             </children>
                         </Pane>
-                        <Label layoutX="353.0" layoutY="283.0" text="Student Note">
+                        <Label layoutX="427.0" layoutY="305.0" prefHeight="24.0" prefWidth="74.0" text="Student Note">
                             <font>
                                 <Font name="Trebuchet MS Bold" size="12.0" />
                             </font>
                         </Label>
-                        <Label layoutX="353.0" layoutY="104.0" text="Teachers Note">
+                        <Label layoutX="428.0" layoutY="125.0" prefHeight="24.0" prefWidth="82.0" text="Teachers Note">
                             <font>
                                 <Font name="Trebuchet MS Bold" size="12.0" />
                             </font>
                         </Label>
-                        <TextArea layoutX="349.0" layoutY="124.0" prefHeight="147.0" prefWidth="408.0" promptText="Add note.." />
-                        <TextArea layoutX="349.0" layoutY="302.0" prefHeight="147.0" prefWidth="408.0" promptText="Add note.." />
-                        <Button fx:id="BackToMenu" layoutY="489.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="34.0" prefWidth="54.0" style="-fx-background-color: transparent;">
-                            <graphic>
+                        <TextArea layoutX="428.0" layoutY="152.0" prefHeight="147.0" prefWidth="408.0" promptText="Add note.." />
+                        <TextArea layoutX="429.0" layoutY="338.0" prefHeight="147.0" prefWidth="415.0" promptText="Add note.." />
+                        <Button fx:id="BackToMenu" layoutX="14.0" layoutY="502.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="34.0" prefWidth="54.0" style="-fx-background-color: transparent;">
+                     <graphic>
                                 <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../images/Back.png" />
+                                        <Image url="@../images/icons8-back-96.png" />
                                     </image>
                                 </ImageView>
-                            </graphic>
+                     </graphic>
                         </Button>
-                          <ImageView fitHeight="34.0" fitWidth="37.0" layoutX="59.0" layoutY="491.0">
+                          <ImageView fitHeight="34.0" fitWidth="37.0" layoutX="799.0" layoutY="507.0">
                               <image>
-                                  <Image url="@../images/save.png" />
+                                  <Image url="@../images/icons8-save-96.png" />
                               </image>
                           </ImageView>
+                  <Label layoutX="31.0" layoutY="540.0" prefHeight="18.0" prefWidth="31.0" text="Back" />
+                  <Label layoutX="804.0" layoutY="541.0" text="Save" />
                     </children>
                 </AnchorPane>
             </children>

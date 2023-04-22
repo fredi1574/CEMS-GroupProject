@@ -18,9 +18,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="logout" prefHeight="533.0" prefWidth="775.0" style="-fx-background-color: #FFFFFF; -fx-text-fill: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ManageQuestionsScreen.ManageQuestionsController">
+<AnchorPane fx:id="logout" prefHeight="533.0" prefWidth="775.0" styleClass="backgroundColor" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ManageQuestionsScreen.ManageQuestionsController">
     <children>
-        <ComboBox id="combPick" fx:id="combox" cache="true" depthTest="DISABLE" layoutX="348.0" layoutY="114.0" prefHeight="26.0" prefWidth="158.0" promptText="Select Subject" style="-fx-background-color: #649DAD; -fx-background-radius: 10; -fx-font-weight: bold;">
+        <ComboBox id="combPick" fx:id="combox" cache="true" depthTest="DISABLE" layoutX="348.0" layoutY="114.0" prefHeight="26.0" prefWidth="158.0" promptText="Select Subject" style="-fx-background-radius: 10; -fx-font-weight: bold;" styleClass="pageHeader">
             <effect>
                 <DropShadow height="5.0" radius="2.0" width="5.0">
                     <color>
@@ -29,7 +29,7 @@
                 </DropShadow>
             </effect>
         </ComboBox>
-        <Button alignment="CENTER" layoutX="26.0" layoutY="398.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #649DAD; -fx-background-radius: 10;" stylesheets="@../application2.css" text="Delete">
+        <Button alignment="CENTER" layoutX="26.0" layoutY="398.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" style="-fx-background-radius: 10;" styleClass="pageHeaderBtn" stylesheets="@../application2.css" text="Delete">
             <font>
                 <Font name="Franklin Gothic Demi Cond" size="12.0" />
             </font>
@@ -48,7 +48,7 @@
                 </DropShadow>
             </effect>
         </Button>
-        <Button fx:id="AddQuestion" alignment="TOP_CENTER" layoutX="511.0" layoutY="114.0" mnemonicParsing="false" onAction="#AddQuestion" prefHeight="26.0" prefWidth="240.0" style="-fx-background-color: #649DAD; -fx-background-radius: 10; -fx-font-weight: bold;" stylesheets="@../application2.css" text="Add Question">
+        <Button fx:id="AddQuestion" alignment="TOP_CENTER" layoutX="511.0" layoutY="114.0" mnemonicParsing="false" onAction="#AddQuestion" prefHeight="26.0" prefWidth="240.0" style="-fx-background-radius: 10; -fx-font-weight: bold;" styleClass="pageHeader" stylesheets="@../application2.css" text="Add Question">
             <font>
                 <Font name="Franklin Gothic Demi" size="13.0" />
             </font>
@@ -69,18 +69,18 @@
         </Button>
         <TableView layoutX="27.0" layoutY="144.0" prefHeight="250.0" prefWidth="726.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #649DAD;">
             <columns>
-                <TableColumn prefWidth="106.4000244140625" style="-fx-background-color: #649DAD;" text="Number" />
-                <TableColumn prefWidth="212.79995727539062" style="-fx-background-color: #649DAD;" text=" Question ID" />
-                <TableColumn prefWidth="204.800048828125" style="-fx-background-color: #649DAD;" text="           Questions" />
-                <TableColumn prefWidth="198.39999999999998" style="-fx-background-color: #649DAD;" text="Written By" />
+                <TableColumn prefWidth="106.4000244140625" style="-fx-background-color: #306ebd;" text="Number" />
+                <TableColumn prefWidth="212.79995727539062" style="-fx-background-color: #306ebd;" text=" Question ID" />
+                <TableColumn prefWidth="204.800048828125" style="-fx-background-color: #306ebd;" text="           Questions" />
+                <TableColumn prefWidth="198.39999999999998" style="-fx-background-color: #306ebd;" text="Written By" />
             </columns>
         </TableView>
-        <ImageView fitHeight="86.0" fitWidth="240.0" layoutX="534.0" layoutY="449.0">
+        <ImageView fitHeight="86.0" fitWidth="251.0" layoutX="278.0" layoutY="447.0">
             <image>
-                <Image url="@../images/CEMS-NEW-removebg-preview.png" />
+                <Image url="@../images/logo2.png" />
             </image>
         </ImageView>
-        <AnchorPane prefHeight="86.0" prefWidth="806.0" style="-fx-background-color: #649DAD #649DAD;">
+        <AnchorPane prefHeight="86.0" prefWidth="806.0" styleClass="pageHeader">
             <children>
                 <Label layoutX="258.0" layoutY="16.0" prefHeight="54.0" prefWidth="336.0" style="-fx-font-weight: bold;" text=" Questions Managment " textFill="#fafafa" AnchorPane.leftAnchor="258.0" AnchorPane.rightAnchor="209.0">
                     <font>
@@ -95,7 +95,7 @@
                         <Font name="Trebuchet MS" size="12.0" />
                     </font>
                 </Text>
-                <Button fx:id="LogOut" layoutX="712.0" layoutY="48.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: #649DAD; -fx-background-radius: 10;" stylesheets="@../application2.css" text="Logout">
+                <Button fx:id="LogOut" layoutX="712.0" layoutY="48.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" style="-fx-background-radius: 10;" styleClass="pageHeaderBtn" stylesheets="@../application2.css" text="Logout">
                     <font>
                         <Font name="Franklin Gothic Demi Cond" size="14.0" />
                     </font>
@@ -120,26 +120,18 @@
                 <DropShadow />
             </effect>
         </AnchorPane>
-        <Button fx:id="back" contentDisplay="CENTER" layoutX="27.0" layoutY="490.0" minWidth="35.0" mnemonicParsing="false" onAction="#back" prefHeight="33.0" prefWidth="35.0" style="-fx-background-color: transparent;" textFill="#0d0d0d">
-            <graphic>
-                <ImageView fitHeight="36.0" fitWidth="38.0" style="-fx-background-color: #FFFFFF;">
-                    <image>
-                        <Image url="@../images/Back.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-        </Button>
-        <Button layoutX="61.0" layoutY="488.0" minWidth="29.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="53.0" style="-fx-background-color: transparent;" text="Save">
+        <Button fx:id="back" contentDisplay="CENTER" layoutX="27.0" layoutY="490.0" minWidth="35.0" mnemonicParsing="false" onAction="#back" prefHeight="33.0" prefWidth="35.0" style="-fx-background-color: transparent;" textFill="#0d0d0d" />
+        <Button layoutX="743.0" layoutY="472.0" minWidth="29.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="53.0" style="-fx-background-color: transparent;">
             <cursor>
                 <Cursor fx:constant="SE_RESIZE" />
             </cursor>
-            <graphic>
+         <graphic>
                 <ImageView fitHeight="36.0" fitWidth="37.0">
                     <image>
-                        <Image url="@../images/save.png" />
+                        <Image url="@../images/icons8-save-96.png" />
                     </image>
                 </ImageView>
-            </graphic>
+         </graphic>
         </Button>
         <TextField layoutX="63.0" layoutY="114.0" prefHeight="26.0" prefWidth="278.0" promptText="Search a question" />
         <Button layoutX="26.0" layoutY="114.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" style="-fx-background-color: #FFFFFF;">
@@ -151,5 +143,12 @@
                 </ImageView>
             </graphic>
         </Button>
+          <ImageView fitHeight="36.0" fitWidth="38.0" layoutX="23.0" layoutY="476.0" style="-fx-background-color: #FFFFFF;">
+              <image>
+                  <Image url="@../images/icons8-back-96.png" />
+              </image>
+          </ImageView>
+      <Label layoutX="30.0" layoutY="510.0" text="Back" />
+      <Label layoutX="758.0" layoutY="515.0" text="Save" />
     </children>
 </AnchorPane>

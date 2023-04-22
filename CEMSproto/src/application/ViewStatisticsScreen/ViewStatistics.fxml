@@ -16,13 +16,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="533.0" prefWidth="775.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewStatisticsScreen.ViewStatisticsController">
+<AnchorPane prefHeight="533.0" prefWidth="775.0" styleClass="backgroundColor" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewStatisticsScreen.ViewStatisticsController">
     <children>
-        <Button fx:id="BackToReport" layoutX="3.0" layoutY="490.0" mnemonicParsing="false" onAction="#backToReport" prefHeight="34.0" prefWidth="54.0" style="-fx-background-color: #FFFFFF;">
+        <Button fx:id="BackToReport" layoutX="14.0" layoutY="470.0" mnemonicParsing="false" onAction="#backToReport" prefHeight="34.0" prefWidth="54.0" styleClass="backgroundColor">
             <graphic>
                 <ImageView fitHeight="36.0" fitWidth="38.0" style="-fx-background-color: #FFFFFF;">
                     <image>
-                        <Image url="@../images/Back.png" />
+                        <Image url="@../images/icons8-back-96.png" />
                     </image>
                 </ImageView>
             </graphic>
@@ -32,7 +32,7 @@
                 <Image url="@../images/CEMS-NEW-removebg-preview.png" />
             </image>
         </ImageView>
-        <AnchorPane layoutX="-7.0" layoutY="1.0" prefHeight="86.0" prefWidth="806.0" style="-fx-background-color: #649DAD #649DAD;">
+        <AnchorPane layoutX="-7.0" layoutY="1.0" prefHeight="86.0" prefWidth="806.0" styleClass="pageHeader" stylesheets="@../application.css">
             <children>
                 <Label layoutX="326.0" layoutY="16.0" prefHeight="54.0" prefWidth="336.0" style="-fx-font-weight: bold;" text="Reports" textFill="#fafafa">
                     <font>
@@ -42,7 +42,7 @@
                         <DropShadow />
                     </effect>
                 </Label>
-                <Button fx:id="LogOut" layoutX="712.0" layoutY="48.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: #649DAD; -fx-background-radius: 10;" text="Logout">
+                <Button fx:id="LogOut" layoutX="712.0" layoutY="48.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" style="-fx-background-radius: 10;" styleClass="pageHeaderBtn" text="Logout">
                     <font>
                         <Font name="Franklin Gothic Demi Cond" size="14.0" />
                     </font>
@@ -72,7 +72,7 @@
                 <Font name="Trebuchet MS" size="12.0" />
             </font>
         </Text>
-        <Pane layoutX="21.0" layoutY="129.0" prefHeight="252.0" prefWidth="296.0" style="-fx-background-color: #e4ecdf; -fx-background-radius: 10;">
+        <Pane layoutX="3.0" layoutY="131.0" prefHeight="252.0" prefWidth="296.0" style="-fx-background-radius: 10;" styleClass="pageHeader">
             <children>
                 <Label alignment="BASELINE_CENTER" layoutY="189.0" prefHeight="24.0" prefWidth="87.0" text="Average :">
                     <font>
@@ -118,7 +118,7 @@
                         <Insets left="10.0" />
                     </padding>
                 </TextField>
-                <Label layoutX="74.0" layoutY="14.0" prefHeight="54.0" prefWidth="96.0" style="-fx-font-weight: bold;" text="Overall" textFill="#649dad">
+                <Label layoutX="84.0" layoutY="14.0" prefHeight="54.0" prefWidth="114.0" style="-fx-font-weight: bold;" text="Overall" textFill="WHITE">
                     <font>
                         <Font name="Trebuchet MS" size="28.0" />
                     </font>
@@ -142,5 +142,6 @@
                 <Image url="@../../../bin/application/images/graph.png" />
             </image>
         </ImageView>
+      <Label layoutX="29.0" layoutY="512.0" text="Back" />
     </children>
 </AnchorPane>

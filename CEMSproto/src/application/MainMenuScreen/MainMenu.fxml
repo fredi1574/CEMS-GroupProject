@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
@@ -10,121 +11,124 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="borderPane" prefHeight="489.0" prefWidth="508.0" style="-fx-background-color: #FFFFFF;"
-            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="application.MainMenuScreen.MainMenuController">
+<AnchorPane id="borderPane" prefHeight="489.0" prefWidth="508.0" style="-fx-background-color: #FFFFFF;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainMenuScreen.MainMenuController">
     <children>
         <ImageView fitHeight="39.0" fitWidth="200.0">
             <image>
-                <Image url="@../images/welcome.png"/>
+                <Image url="@../images/welcome.png" />
             </image>
         </ImageView>
-        <VBox prefHeight="489.0" prefWidth="319.0" style="-fx-background-color: #649DAD;">
+        <VBox prefHeight="489.0" prefWidth="319.0" styleClass="pageHeader">
             <children>
-                <Pane prefHeight="86.0" prefWidth="319.0"/>
-                <Button fx:id="CreateNewTestBtn" alignment="BASELINE_LEFT" mnemonicParsing="false"
-                        onAction="#CreateNewTest" prefHeight="48.0" prefWidth="266.0"
-                        style="-fx-background-color: #649DAD;" styleClass="mainMenuButtons"
-                        stylesheets="@../application.css" text=" Create New Test" textFill="WHITE">
+                <Pane prefHeight="86.0" prefWidth="319.0" styleClass="pageHeader" />
+                <Button fx:id="CreateNewTestBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#CreateNewTest" prefHeight="48.0" prefWidth="271.0" stylesheets="@../application.css" text=" Create New Test" textFill="WHITE">
                     <font>
-                        <Font name="Trebuchet MS" size="25.0"/>
+                        <Font name="Trebuchet MS" size="25.0" />
                     </font>
                     <graphic>
                         <ImageView fitHeight="32.0" fitWidth="31.0">
                             <image>
-                                <Image url="@../images/icons8-new-copy-50.png"/>
+                                <Image url="@../images/icons8-new-copy-50.png" />
                             </image>
                         </ImageView>
                     </graphic>
                     <VBox.margin>
-                        <Insets top="10.0"/>
+                        <Insets top="10.0" />
                     </VBox.margin>
+               <styleClass>
+                  <String fx:value="mainMenuButtons" />
+                  <String fx:value="pageHeader" />
+               </styleClass>
                 </Button>
-                <Button id="addAQuestion" fx:id="addQuestion" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="106.0"
-                        mnemonicParsing="false" onAction="#addQuestion" prefHeight="49.0" prefWidth="248.0"
-                        snapToPixel="false" style="-fx-background-color: #649DAD;" styleClass="mainMenuButtons"
-                        stylesheets="@../application.css" text=" Add a Question" textFill="WHITE" textOverrun="CLIP">
+                <Button id="addAQuestion" fx:id="addQuestion" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="106.0" mnemonicParsing="false" onAction="#addQuestion" prefHeight="49.0" prefWidth="272.0" snapToPixel="false" stylesheets="@../application.css" text=" Add a Question" textFill="WHITE">
                     <font>
-                        <Font name="Trebuchet MS" size="25.0"/>
+                        <Font name="Trebuchet MS" size="25.0" />
                     </font>
                     <graphic>
                         <ImageView fitHeight="32.0" fitWidth="31.0">
                             <image>
-                                <Image url="@../images/icons8-add-question.png"/>
+                                <Image url="@../images/icons8-add-question.png" />
                             </image>
                         </ImageView>
                     </graphic>
                     <VBox.margin>
-                        <Insets top="10.0"/>
+                        <Insets top="10.0" />
                     </VBox.margin>
+               <styleClass>
+                  <String fx:value="mainMenuButtons" />
+                  <String fx:value="pageHeader" />
+               </styleClass>
                 </Button>
-                <Button fx:id="manageQuestions" alignment="BASELINE_LEFT" mnemonicParsing="false"
-                        onAction="#manageQuestions" prefHeight="48.0" prefWidth="278.0"
-                        style="-fx-background-color: #649DAD;" styleClass="mainMenuButtons"
-                        stylesheets="@../application.css" text=" Manage Questions" textFill="WHITE">
+                <Button fx:id="manageQuestions" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#manageQuestions" prefHeight="48.0" prefWidth="274.0" stylesheets="@../application.css" text=" Manage Questions" textFill="WHITE">
                     <font>
-                        <Font name="Trebuchet MS" size="25.0"/>
+                        <Font name="Trebuchet MS" size="25.0" />
                     </font>
                     S
                     <opaqueInsets>
-                        <Insets/>
+                        <Insets />
                     </opaqueInsets>
                     <VBox.margin>
-                        <Insets top="10.0"/>
+                        <Insets top="10.0" />
                     </VBox.margin>
                     <graphic>
                         <ImageView fitHeight="32.0" fitWidth="31.0">
                             <image>
-                                <Image url="@../images/icons8-data-protection-80.png"/>
+                                <Image url="@../images/icons8-data-protection-80.png" />
                             </image>
                         </ImageView>
                     </graphic>
+               <styleClass>
+                  <String fx:value="pageHeader" />
+                  <String fx:value="mainMenuButtons" />
+               </styleClass>
                 </Button>
-                <Button fx:id="ManageTestsBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="48.0"
-                        prefWidth="230.0" style="-fx-background-color: #649DAD;" styleClass="mainMenuButtons"
-                        stylesheets="@../application.css" text=" Manage Tests" textFill="WHITE">
+                <Button fx:id="ManageTestsBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="48.0" prefWidth="270.0" stylesheets="@../application.css" text=" Manage Tests" textFill="WHITE">
                     <font>
-                        <Font name="Trebuchet MS" size="25.0"/>
+                        <Font name="Trebuchet MS" size="25.0" />
                     </font>
                     <opaqueInsets>
-                        <Insets/>
+                        <Insets />
                     </opaqueInsets>
                     <VBox.margin>
-                        <Insets top="10.0"/>
+                        <Insets top="10.0" />
                     </VBox.margin>
                     <graphic>
                         <ImageView fitHeight="32.0" fitWidth="31.0">
                             <image>
-                                <Image url="@../images/icons8-documents-50.png"/>
+                                <Image url="@../images/icons8-documents-50.png" />
                             </image>
                         </ImageView>
                     </graphic>
+               <styleClass>
+                  <String fx:value="mainMenuButtons" />
+                  <String fx:value="pageHeader" />
+               </styleClass>
                 </Button>
-                <Button fx:id="ViewStatistics" alignment="BASELINE_LEFT" mnemonicParsing="false"
-                        onAction="#ViewStatistics" prefHeight="48.0" prefWidth="242.0"
-                        style="-fx-background-color: #649DAD;" styleClass="mainMenuButtons"
-                        stylesheets="@../application.css" text=" View Statistics" textFill="WHITE">
+                <Button fx:id="ViewStatistics" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#ViewStatistics" prefHeight="48.0" prefWidth="269.0" stylesheets="@../application.css" text=" View Statistics" textFill="WHITE">
                     <font>
-                        <Font name="Trebuchet MS" size="25.0"/>
+                        <Font name="Trebuchet MS" size="25.0" />
                     </font>
                     <graphic>
                         <ImageView fitHeight="32.0" fitWidth="31.0">
                             <image>
-                                <Image url="@../images/icons8-statistic-64.png"/>
+                                <Image url="@../images/icons8-statistic-64.png" />
                             </image>
                         </ImageView>
                     </graphic>
                     <VBox.margin>
-                        <Insets top="10.0"/>
+                        <Insets top="10.0" />
                     </VBox.margin>
+               <styleClass>
+                  <String fx:value="mainMenuButtons" />
+                  <String fx:value="pageHeader" />
+               </styleClass>
                 </Button>
-                <Pane prefHeight="88.0" prefWidth="220.0"/>
-                <Button fx:id="backTo" mnemonicParsing="false" onAction="#backTo" prefHeight="34.0" prefWidth="66.0"
-                        style="-fx-background-color: #649DAD;">
+                <Pane prefHeight="88.0" prefWidth="220.0" />
+                <Button fx:id="backTo" mnemonicParsing="false" onAction="#backTo" prefHeight="34.0" prefWidth="66.0" styleClass="pageHeader">
                     <graphic>
                         <ImageView fx:id="LogoutBtn" fitHeight="50.0" fitWidth="50.0">
                             <image>
-                                <Image url="@../images/icons8-logout-100.png"/>
+                                <Image url="@../images/icons8-logout-100.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -133,20 +137,19 @@
         </VBox>
         <ImageView fitHeight="73.0" fitWidth="187.0" layoutX="321.0" layoutY="416.0">
             <image>
-                <Image url="@../images/CEMS-NEW.png"/>
+                <Image url="@../images/Logo.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="32.0" fitWidth="187.0" layoutX="320.0" layoutY="23.0">
+        <ImageView fitHeight="32.0" fitWidth="187.0" layoutX="321.0" layoutY="23.0">
             <image>
-                <Image url="@../images/welcome.png"/>
+                <Image url="@../images/Screenshot%202023-04-22%20172619.png" />
             </image>
         </ImageView>
-        <Text fill="#4d7885" layoutX="326.0" layoutY="73.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
-              text="May" wrappingWidth="176.48748779296875">
+        <Text fill="#306ebd" layoutX="326.0" layoutY="73.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="May" wrappingWidth="176.48748779296875">
             <font>
-                <Font name="Tahoma" size="18.0"/>
+                <Font name="Tahoma" size="18.0" />
             </font>
         </Text>
-        <Pane layoutX="319.0" layoutY="18.0" prefHeight="3.0" prefWidth="189.0" style="-fx-background-color: #4D7885;"/>
+        <Pane layoutX="318.0" layoutY="18.0" prefHeight="3.0" prefWidth="189.0" style="-fx-background-color: #306ebd;" />
     </children>
 </AnchorPane>
