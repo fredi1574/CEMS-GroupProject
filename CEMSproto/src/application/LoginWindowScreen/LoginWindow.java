@@ -6,32 +6,31 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+//import application.MenuController;
 
 public class LoginWindow extends Application {
+//    MenuController menu = new MenuController();
 
     public static void main(String[] args) {
         launch(args);
-
     }
 
     @Override
     public void start(Stage primaryStage) {
-
+//        menu.goToNewScreen(, "LoginWindowScreen/LoginWindow.fxml", "C.E.M.S Test Manager - Login");
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("LoginWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginWindow.fxml"));
+            Parent root = loader.load();
+
             Scene scene = new Scene(root);
-            primaryStage.getIcons().add(new Image("application/images/icons8-title-icon.png"));
+            primaryStage.getIcons().add(new Image("application/images/Title_icon.png"));
             primaryStage.setTitle("C.E.M.S - Tests Manager");
+
             primaryStage.setScene(scene);
             primaryStage.show();
-
-            // Get reference to the LoginBtn in LoginWindow.fxml
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 }
