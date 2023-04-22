@@ -14,7 +14,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="271.0" prefWidth="516.0" styleClass="backgroundColor" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
     <center>
-        <AnchorPane prefHeight="248.0" prefWidth="651.0" stylesheets="@../application.css" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="248.0" prefWidth="651.0" BorderPane.alignment="CENTER">
             <children>
                 <TextField blendMode="MULTIPLY" layoutX="327.0" layoutY="110.0" promptText="User ID" />
                 <PasswordField blendMode="MULTIPLY" layoutX="327.0" layoutY="149.0" promptText="Password" />
@@ -33,16 +33,16 @@
                         <Image url="@../images/icons8-password-key-2.png" />
                     </image>
                 </ImageView>
-                <Line endX="98.20001220703125" endY="10.199996948242188" layoutX="405.0" layoutY="80.0" startX="-109.4000244140625" startY="10.199996948242188" />
                 <Line endX="101.79998779296875" endY="-10.000011444091797" layoutX="397.0" layoutY="57.0" startX="-97.4000244140625" startY="-10.000011444091797" />
-                <Text fill="#649dad" layoutX="400.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="content" text="Forgot password?" underline="true">
+            <Line endX="100.77774047851562" endY="-10.000011444091797" layoutX="397.0" layoutY="96.0" startX="-97.4000244140625" startY="-10.000011444091797" />
+                <Text fill="#306ebd" layoutX="393.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="content" text="Forgot password?" underline="true">
                     <font>
-                        <Font size="10.0" />
+                        <Font name="Trebuchet MS" size="11.0" />
                     </font>
                 </Text>
                 <Pane prefHeight="271.0" prefWidth="272.0" styleClass="pageHeader">
                <children>
-                  <ImageView fitHeight="69.0" fitWidth="274.0" layoutY="101.0">
+                  <ImageView fitHeight="105.0" fitWidth="274.0" layoutY="98.0" preserveRatio="true">
                      <image>
                         <Image url="@../images/Logo.png" />
                      </image>
@@ -55,9 +55,9 @@
                   <Image url="@../images/icons8-close-window-50.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="43.0" fitWidth="200.0" layoutX="302.0" layoutY="47.0">
+            <ImageView fitHeight="43.0" fitWidth="220.0" layoutX="288.0" layoutY="45.0" preserveRatio="true">
                <image>
-                  <Image url="@../images/Screenshot%202023-04-22%20172619.png" />
+                  <Image url="@../images/welcome.png" />
                </image>
             </ImageView>
             </children>

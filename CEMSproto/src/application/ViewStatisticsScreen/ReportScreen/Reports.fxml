@@ -20,7 +20,7 @@
             <children>
                 <ImageView fitHeight="86.0" fitWidth="240.0" layoutX="544.0" layoutY="450.0">
                     <image>
-                        <Image url="@../../images/logo2.png" />
+                        <Image url="@../../images/Logo.png" />
                     </image>
                 </ImageView>
                 <AnchorPane layoutX="-9.0" layoutY="-9.0" prefHeight="86.0" prefWidth="806.0" styleClass="pageHeader">

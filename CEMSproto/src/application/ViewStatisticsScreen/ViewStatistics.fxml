@@ -29,7 +29,7 @@
         </Button>
         <ImageView fitHeight="86.0" fitWidth="240.0" layoutX="534.0" layoutY="449.0">
             <image>
-                <Image url="@../images/CEMS-NEW-removebg-preview.png" />
+                <Image url="@../images/Logo.png" />
             </image>
         </ImageView>
         <AnchorPane layoutX="-7.0" layoutY="1.0" prefHeight="86.0" prefWidth="806.0" styleClass="pageHeader" stylesheets="@../application.css">

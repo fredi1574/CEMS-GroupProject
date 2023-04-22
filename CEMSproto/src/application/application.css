@@ -1,13 +1,18 @@
+/*TODO: change username color in header to be consistent across screens*/
+
+.mainMenuButtons {
+    -fx-background-color: transparent;
+}
+
 .mainMenuButtons:hover {
-    -fx-border-color:#306ebd;
-    -fx-text-fill: darkGray;
+    -fx-font-weight: bold;
     -fx-translate-x: 25px;
 
 }
 
 .mainMenuButtons:pressed {
+    -fx-background-color: #306ebd;
     -fx-font-size: 25px;
-    -fx-text-fill: black;
 }
 
 /*Header bar styling*/

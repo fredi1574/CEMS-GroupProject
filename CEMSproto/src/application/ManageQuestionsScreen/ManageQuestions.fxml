@@ -77,7 +77,7 @@
         </TableView>
         <ImageView fitHeight="86.0" fitWidth="251.0" layoutX="278.0" layoutY="447.0">
             <image>
-                <Image url="@../images/logo2.png" />
+                <Image url="@../images/Logo.png" />
             </image>
         </ImageView>
         <AnchorPane prefHeight="86.0" prefWidth="806.0" styleClass="pageHeader">
