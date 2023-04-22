@@ -81,9 +81,9 @@ public class MainMenuController {
     }
 
     public void ViewStatistics(ActionEvent event) {
-        menu.goToNewScreen(event, "ViewStatisticsScreen/ReportScreen/Reports.fxml", "C.E.M.S Test Manager - Reports");
+        menu.goToNewScreen(event, "ViewStatisticsScreen/ViewStatistics.fxml", "C.E.M.S Test Manager - Reports");
 //        try {
-//            Parent viewStatistics_Root = FXMLLoader.load(getClass().getResource("../ViewStatisticsScreen/ReportScreen/Reports.fxml"));
+//            Parent viewStatistics_Root = FXMLLoader.load(getClass().getResource("../ViewStatisticsScreen/ReportScreen/ViewReport.fxml"));
 //            Scene viewStatistics_Scene = new Scene(viewStatistics_Root);
 //            Stage viewStatistics_Stage = new Stage();
 //            viewStatistics_Stage.setTitle("C.E.M.S Test Manager");
