@@ -3,8 +3,6 @@
 .button:hover {
     -fx-font-weight: bold;
     -fx-text-fill: black;
-    -fx-background-radius: 90;
-     -fx-background-color: black;
 }
 .table-view .column-header-background{
     -fx-background-color: linear-gradient(to bottom, #1dbbdd44, #93f9b944);

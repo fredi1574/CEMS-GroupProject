@@ -1,4 +1,4 @@
-package application.LoginWindowScreen;
+package application.Client;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,23 +6,21 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-public class LoginWindow extends Application {
+public class Client extends Application {
 
     public static void main(String[] args) {
         launch(args);
 
     }
 
-    @Override
     public void start(Stage primaryStage) {
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("LoginWindow.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("ClientGui.fxml"));
             Scene scene = new Scene(root);
-            primaryStage.getIcons().add(new Image("application/images/icons8-title-icon.png"));
-            primaryStage.setTitle("C.E.M.S - Tests Manager");
+            primaryStage.getIcons().add(new Image("application/images/Logo.png"));
+            primaryStage.setTitle("C.E.M.S - Ip Connection");
             primaryStage.setScene(scene);
             primaryStage.show();
 
@@ -31,7 +29,6 @@ public class LoginWindow extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
+    
 }
