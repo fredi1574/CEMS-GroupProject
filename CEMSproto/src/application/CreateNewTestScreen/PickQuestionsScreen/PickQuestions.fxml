@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="598.0" prefWidth="821.0" styleClass="backgroundColor" stylesheets="@../application.css"
+            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="application.CreateNewTestScreen.PickQuestionsScreen.PickQuestionsController">
+    <children>
+        <AnchorPane layoutY="-2.0" prefHeight="558.0" prefWidth="818.0" styleClass="backgroundColor">
+            <children>
+                <AnchorPane layoutX="2.0" layoutY="-7.0" prefHeight="544.0" prefWidth="810.0"
+                            styleClass="backgroundColor" stylesheets="@../application.css">
+                    <children>
+                        <AnchorPane layoutX="-4.0" prefHeight="86.0" prefWidth="821.0" styleClass="pageHeader"
+                                    stylesheets="@../application.css">
+                            <children>
+                                <Label layoutX="290.0" layoutY="16.0" prefHeight="54.0" prefWidth="336.0"
+                                       style="-fx-font-weight: bold;" text="Pick Questions" textFill="#fafafa">
+                                    <font>
+                                        <Font name="Trebuchet MS" size="28.0"/>
+                                    </font>
+                                    <effect>
+                                        <DropShadow/>
+                                    </effect>
+                                </Label>
+                                <Button fx:id="LogOut" layoutX="724.0" layoutY="43.0" minWidth="36.0"
+                                        mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0"
+                                        style="-fx-background-color: transparent;" styleClass="pageHeaderBtn"
+                                        text="Logout">
+                                    <font>
+                                        <Font name="Franklin Gothic Demi Cond" size="14.0"/>
+                                    </font>
+                                    <effect>
+                                        <Lighting diffuseConstant="1.25" specularConstant="0.17"
+                                                  specularExponent="10.82" surfaceScale="2.05">
+                                            <bumpInput>
+                                                <Shadow/>
+                                            </bumpInput>
+                                            <light>
+                                                <Light.Distant azimuth="28.49" elevation="127.57"/>
+                                            </light>
+                                        </Lighting>
+                                    </effect>
+                                </Button>
+                                <ImageView layoutX="716.0" layoutY="27.0">
+                                    <image>
+                                        <Image url="@../images/icons8-person-16.png"/>
+                                    </image>
+                                </ImageView>
+                            </children>
+                            <effect>
+                                <DropShadow/>
+                            </effect>
+                        </AnchorPane>
+                        <Text fill="#3b3131" layoutX="729.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              text="May Caspi" underline="true">
+                            <font>
+                                <Font name="Trebuchet MS" size="12.0"/>
+                            </font>
+                        </Text>
+                        <Label layoutX="78.0" layoutY="303.0" prefHeight="71.0" prefWidth="207.0"
+                               text="Selected Questions:">
+                            <font>
+                                <Font name="System Bold" size="18.0"/>
+                            </font>
+                        </Label>
+                        <Button layoutX="-6.0" layoutY="375.0" mnemonicParsing="false"
+                                style="-fx-background-color: transparent;"/>
+                        <Button layoutX="-6.0" layoutY="158.0" mnemonicParsing="false"
+                                style="-fx-background-color: transparent;"/>
+                        <Label layoutX="78.0" layoutY="88.0" prefHeight="71.0" prefWidth="207.0"
+                               text="Question Database:">
+                            <font>
+                                <Font name="System Bold" size="18.0"/>
+                            </font>
+                        </Label>
+                        <TextField layoutX="428.0" layoutY="106.0" prefHeight="26.0" prefWidth="278.0"
+                                   promptText="Search a question"/>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="397.0" layoutY="111.0">
+                            <image>
+                                <Image url="@../../../bin/application/images/icons8-search-24.png"/>
+                            </image>
+                        </ImageView>
+                        <TableView fx:id="tableView" layoutX="78.0" layoutY="146.0" prefHeight="178.0" prefWidth="663.0"
+                                   style="-fx-border-color: #649DAD;">
+                            <columns>
+                                <TableColumn fx:id="questionNumber" prefWidth="116.0"
+                                             style="-fx-background-color: #306ebd;" text="Number"/>
+                                <TableColumn fx:id="questionID" minWidth="8.79998779296875" prefWidth="97.5999755859375"
+                                             style="-fx-background-color: #306ebd;" text="Question ID"/>
+                                <TableColumn fx:id="questionDescription" minWidth="0.0" prefWidth="299.0"
+                                             style="-fx-background-color: #306ebd;" text="Question"/>
+                                <TableColumn fx:id="author" prefWidth="147.9999877929688"
+                                             style="-fx-background-color: #306ebd;" text="Written by"/>
+                            </columns>
+                        </TableView>
+                        <TableView layoutX="78.0" layoutY="351.0" prefHeight="178.0" prefWidth="663.0"
+                                   style="-fx-border-color: #649DAD;">
+                            <columns>
+                                <TableColumn prefWidth="57.0" style="-fx-background-color: #306ebd;" text="Number"/>
+                                <TableColumn prefWidth="154.39998626708984" style="-fx-background-color: #306ebd;"
+                                             text="Question ID"/>
+                                <TableColumn fx:id="selectedQuestion" prefWidth="289.6000061035156"
+                                             style="-fx-background-color: #306ebd;" text="Question"/>
+                                <TableColumn fx:id="selectedQuestionPoints" minWidth="0.0"
+                                             prefWidth="159.20000000000005" style="-fx-background-color: #306ebd;"
+                                             text="Points"/>
+                            </columns>
+                        </TableView>
+                        <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="54.0" layoutY="184.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@../images/icons8-plus-green-50.png"/>
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="54.0" layoutY="389.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@../images/icons8-cancel-50.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+        <Button fx:id="SaveBtn" layoutX="746.0" layoutY="537.0" mnemonicParsing="false" prefHeight="54.0"
+                prefWidth="53.0" style="-fx-background-color: transparent;">
+            <graphic>
+                <ImageView fitHeight="34.0" fitWidth="37.0">
+                    <image>
+                        <Image url="@../images/icons8-save-96.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="backBtn" layoutX="14.0" layoutY="543.0" mnemonicParsing="false" onAction="#backToCreateTest"
+                prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: transparent;">
+            <graphic>
+                <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/icons8-back-96.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Label layoutX="760.0" layoutY="576.0" text="Save"/>
+        <Label layoutX="27.0" layoutY="576.0" text="Back"/>
+    </children>
+</AnchorPane>
