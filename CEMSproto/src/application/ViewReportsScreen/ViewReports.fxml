@@ -14,13 +14,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="533.0" prefWidth="775.0" styleClass="backgroundColor" stylesheets="@../../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewStatisticsScreen.ReportScreen.ReportController">
+<AnchorPane prefHeight="533.0" prefWidth="775.0" styleClass="backgroundColor" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewReportsScreen.GraphScreen.ReportController">
     <children>
         <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="533.0" prefWidth="775.0" styleClass="backgroundColor">
             <children>
                 <ImageView fitHeight="86.0" fitWidth="240.0" layoutX="544.0" layoutY="450.0">
                     <image>
-                        <Image url="@../../images/Logo.png" />
+                        <Image url="@../images/Logo.png" />
                     </image>
                 </ImageView>
                 <AnchorPane layoutX="-9.0" layoutY="-9.0" prefHeight="86.0" prefWidth="806.0" styleClass="pageHeader">
@@ -55,7 +55,7 @@
                 </AnchorPane>
                 <ImageView layoutX="710.0" layoutY="15.0">
                     <image>
-                        <Image url="@../../images/icons8-person-16.png" />
+                        <Image url="@../images/icons8-person-16.png" />
                     </image>
                 </ImageView>
                 <Text fill="#3b3131" layoutX="729.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true">
@@ -78,7 +78,7 @@
                   <graphic>
                       <ImageView fitHeight="28.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                           <image>
-                              <Image url="@../../images/icons8-back-96.png" />
+                              <Image url="@../images/icons8-back-96.png" />
                           </image>
                       </ImageView>
                   </graphic>

@@ -14,7 +14,7 @@ public class CreateTestController {
     }
 
     public void openPreview(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "CreateNewTestScreen/TestPreviewPopUp.fxml", "C.E.M.S Test Manager - Test Preview");
+        ScreenChanger.goToNewScreen(event, "CreateNewTestScreen/TestPreviewScreen/TestPreview.fxml", "C.E.M.S Test Manager - Test Preview");
     }
 
     public void LogOut(ActionEvent event) {

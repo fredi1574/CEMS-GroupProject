@@ -87,7 +87,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="ViewStatistics" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#ViewStatistics" prefHeight="48.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" View Statistics" textFill="WHITE">
+                <Button fx:id="ViewStatistics" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#ViewReports" prefHeight="48.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" View Statistics" textFill="WHITE">
                     <font>
                         <Font name="Trebuchet MS" size="25.0" />
                     </font>
@@ -114,9 +114,9 @@
                 </Button>
             </children>
         </VBox>
-        <ImageView fitHeight="73.0" fitWidth="187.0" layoutX="321.0" layoutY="416.0">
+        <ImageView fitHeight="73.0" fitWidth="200.0" layoutX="321.0" layoutY="416.0">
             <image>
-                <Image url="@../images/Logo_Transparent.png" />
+                <Image url="@../images/CEMS%20NEW%20COLOR.png" />
             </image>
         </ImageView>
         <ImageView fitHeight="39.0" fitWidth="187.0" layoutX="321.0" layoutY="20.0" preserveRatio="true">

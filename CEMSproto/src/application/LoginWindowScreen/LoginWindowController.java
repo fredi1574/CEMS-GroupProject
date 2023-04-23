@@ -3,7 +3,7 @@ package application.LoginWindowScreen;
 import application.ScreenChanger;
 import javafx.event.ActionEvent;
 
-public class LoginController {
+public class LoginWindowController {
 
 
     public void logIN(ActionEvent event) {

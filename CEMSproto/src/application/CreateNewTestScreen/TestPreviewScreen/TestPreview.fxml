@@ -18,9 +18,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="533.0" prefWidth="775.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewStatisticsScreen.ViewStatisticsController">
+<AnchorPane prefHeight="533.0" prefWidth="775.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CreateNewTestScreen.TestPreviewScreen.TestPreviewController">
     <children>
-        <AnchorPane layoutX="-6.0" layoutY="1.0" prefHeight="86.0" prefWidth="817.0" styleClass="pageHeader" stylesheets="@../application.css">
+        <AnchorPane layoutX="-6.0" layoutY="1.0" prefHeight="86.0" prefWidth="817.0" styleClass="pageHeader" stylesheets="@../../application.css">
             <children>
                 <Label layoutX="353.0" layoutY="16.0" prefHeight="54.0" prefWidth="224.0" text="Preview" textFill="#fafafa">
                     <font>
@@ -30,7 +30,7 @@
                         <DropShadow />
                     </effect>
                 </Label>
-                <Button fx:id="LogOut" layoutX="712.0" layoutY="48.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" style="-fx-background-radius: 10; -fx-background-color: transparent;" styleClass="pageHeaderBtn" stylesheets="@../application.css" text="Logout" textFill="WHITE">
+                <Button fx:id="LogOut" layoutX="712.0" layoutY="48.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" style="-fx-background-radius: 10; -fx-background-color: transparent;" styleClass="pageHeaderBtn" stylesheets="@../../application.css" text="Logout" textFill="WHITE">
                     <font>
                         <Font name="Franklin Gothic Demi Cond" size="14.0" />
                     </font>
@@ -52,7 +52,7 @@
         </AnchorPane>
         <ImageView layoutX="712.0" layoutY="25.0">
             <image>
-                <Image url="@../images/icons8-person-16.png" />
+                <Image url="@../../images/icons8-person-16.png" />
             </image>
         </ImageView>
         <Text fill="#3b3131" layoutX="731.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true">
@@ -60,7 +60,7 @@
                 <Font name="Trebuchet MS" size="12.0" />
             </font>
         </Text>
-        <Pane layoutX="1.0" layoutY="87.0" prefHeight="447.0" prefWidth="811.0" styleClass="backgroundColor" stylesheets="@../application.css">
+        <Pane layoutX="1.0" layoutY="87.0" prefHeight="447.0" prefWidth="811.0" styleClass="backgroundColor" stylesheets="@../../application.css">
             <children>
                 <Label alignment="BASELINE_CENTER" layoutX="2.0" layoutY="31.0" prefHeight="40.0" prefWidth="99.0" text="Test Time">
                     <font>
@@ -297,14 +297,14 @@
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/icons8-back-96.png" />
+                        <Image url="@../../images/icons8-back-96.png" />
                      </image>
                   </ImageView>
                </graphic>
                 </Button>
             <ImageView fitHeight="76.0" fitWidth="200.0" layoutX="587.0" layoutY="350.0">
                <image>
-                  <Image url="@../images/Logo.png" />
+                  <Image url="@../../images/Logo.png" />
                </image>
             </ImageView>
             </children>

@@ -1,4 +1,4 @@
-package application.ViewStatisticsScreen;
+package application.ViewReportsScreen;
 
 import application.ScreenChanger;
 import javafx.collections.FXCollections;
@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 
 
-public class ViewStatisticsController {
+public class ViewReportsController {
 
 
     @FXML
@@ -43,7 +43,7 @@ public class ViewStatisticsController {
 
 
     public void showReports(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "ViewStatisticsScreen/ReportScreen/ViewReport.fxml", "C.E.M.S Test Manager - Report");
+        ScreenChanger.goToNewScreen(event, "ViewReportsScreen/GraphScreen/ViewGraph.fxml", "C.E.M.S Test Manager - Report");
     }
 
     public void LogOut(ActionEvent event) {

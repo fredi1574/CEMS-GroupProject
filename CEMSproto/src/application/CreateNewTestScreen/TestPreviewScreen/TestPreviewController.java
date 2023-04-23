@@ -1,10 +1,10 @@
-package application.CreateNewTestScreen;
+package application.CreateNewTestScreen.TestPreviewScreen;
 
 import application.ScreenChanger;
 import javafx.event.ActionEvent;
 
 
-public class TestPreviewPopUpController {
+public class TestPreviewController {
 
 
     public void LogOut(ActionEvent event) {
