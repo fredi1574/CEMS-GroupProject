@@ -1,6 +1,6 @@
 package application.CreateNewTestScreen.PickQuestionsScreen;
 
-import application.MenuController;
+import application.ScreenChanger;
 import application.Question;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 //TODO: change add/delete buttons of questions
 public class PickQuestionsController {
 
-    MenuController menu = new MenuController();
 
     @FXML
     TableView<Question> tableView = new TableView<>();
@@ -40,49 +39,10 @@ public class PickQuestionsController {
     }
 
     public void backToCreateTest(ActionEvent event) {
-        menu.goToNewScreen(event, "CreateNewTestScreen/CreateNewTest.fxml", "C.E.M.S Test Manager - Create a new test");
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateNewTestScreen/CreateNewTest.fxml"));
-//            Parent backToCreateTest_Root = loader.load();
-//            Scene backToCreateTest_Root_Scene = new Scene(backToCreateTest_Root);
-//            Stage backToCreateTest_Stage = new Stage();
-//            backToCreateTest_Stage.setTitle("C.E.M.S Test Manager");
-//            backToCreateTest_Stage.setScene(backToCreateTest_Root_Scene);
-//            backToCreateTest_Stage.show();
-//
-//            Node source = (Node) e.getSource();
-//
-//            // Get the Stage object that contains the source node
-//            Stage stage = (Stage) source.getScene().getWindow();
-//
-//            // Close the stage
-//            stage.close();
-//
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
+        ScreenChanger.goToNewScreen(event, "CreateNewTestScreen/CreateNewTest.fxml", "C.E.M.S Test Manager - Create a new test");
     }
 
     public void LogOut(ActionEvent event) {
-        menu.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", "C.E.M.S Test Manager");
-//        try {
-//            Parent logOut_Root = FXMLLoader.load(getClass().getResource("LoginWindowScreen/LoginWindow.fxml"));
-//            Scene logOut_Scene = new Scene(logOut_Root);
-//            Stage logOut_Stage = new Stage();
-//            logOut_Stage.setTitle("C.E.M.S Test Manager");
-//            logOut_Stage.setScene(logOut_Scene);
-//            logOut_Stage.show();
-//
-//            Node source = (Node) e.getSource();
-//
-//            // Get the Stage object that contains the source node
-//            Stage stage = (Stage) source.getScene().getWindow();
-//
-//            // Close the stage
-//            stage.close();
-//
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
+        ScreenChanger.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", "C.E.M.S Test Manager");
     }
 }

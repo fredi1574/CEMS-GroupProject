@@ -17,7 +17,6 @@ public class LoginWindow extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-//        menu.goToNewScreen(, "LoginWindowScreen/LoginWindow.fxml", "C.E.M.S Test Manager - Login");
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginWindow.fxml"));
             Parent root = loader.load();

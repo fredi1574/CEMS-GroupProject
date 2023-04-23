@@ -8,11 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class MenuController {
+public class ScreenChanger {
 
-    public void goToNewScreen(ActionEvent event, String screenRelativePath, String title) {
+    public static void goToNewScreen(ActionEvent event, String screenRelativePath, String title) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(screenRelativePath));
+            FXMLLoader loader = new FXMLLoader(ScreenChanger.class.getResource(screenRelativePath));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);

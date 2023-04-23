@@ -1,20 +1,17 @@
-package application.CreateNewTestScreen;
+
+package application.AddAQuestionScreen;
 
 import application.ScreenChanger;
 import javafx.event.ActionEvent;
 
-public class CreateTestController {
+public class AddAQuestionController {
 
     public void BackToMenu(ActionEvent event) {
         ScreenChanger.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml", "C.E.M.S Test Manager");
     }
 
     public void pickQuestion(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "CreateNewTestScreen/PickQuestionsScreen/PickQuestions.fxml", "C.E.M.S Test Manager - Pick Questions");
-    }
-
-    public void openPreview(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "CreateNewTestScreen/TestPreviewPopUp.fxml", "C.E.M.S Test Manager - Test Preview");
+        ScreenChanger.goToNewScreen(event, "PickQuestions.fxml", "C.E.M.S Test Manager - Pick Questions");
     }
 
     public void LogOut(ActionEvent event) {
