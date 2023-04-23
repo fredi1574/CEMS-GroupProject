@@ -14,22 +14,13 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="logout" prefHeight="533.0" prefWidth="775.0" styleClass="backgroundColor" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ManageQuestionsScreen.ManageQuestionsController">
     <children>
-        <ComboBox id="combPick" fx:id="combox" cache="true" depthTest="DISABLE" layoutX="348.0" layoutY="114.0" prefHeight="26.0" prefWidth="158.0" promptText="Select Subject" style="-fx-background-radius: 10; -fx-font-weight: bold;" styleClass="pageHeader">
-            <effect>
-                <DropShadow height="5.0" radius="2.0" width="5.0">
-                    <color>
-                        <Color red="0.20000000298023224" green="0.19607843458652496" blue="0.19607843458652496" />
-                    </color>
-                </DropShadow>
-            </effect>
-        </ComboBox>
-        <Button alignment="CENTER" layoutX="26.0" layoutY="398.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" style="-fx-background-radius: 10;" styleClass="pageHeaderBtn" stylesheets="@../application2.css" text="Delete">
+        <ComboBox id="combPick" fx:id="combox" cache="true" depthTest="DISABLE" layoutX="348.0" layoutY="114.0" prefHeight="26.0" prefWidth="158.0" promptText="Select Subject" style="-fx-background-radius: 10; -fx-font-weight: bold;" styleClass="pageHeader" />
+        <Button alignment="CENTER" layoutX="26.0" layoutY="398.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" style="-fx-background-radius: 10;" styleClass="pageHeader" stylesheets="@../application2.css" text="Delete">
             <font>
                 <Font name="Franklin Gothic Demi Cond" size="12.0" />
             </font>
@@ -40,13 +31,6 @@
                     </image>
                 </ImageView>
             </graphic>
-            <effect>
-                <DropShadow height="5.0" radius="2.0" width="5.0">
-                    <color>
-                        <Color red="0.20000000298023224" green="0.19607843458652496" blue="0.19607843458652496" />
-                    </color>
-                </DropShadow>
-            </effect>
         </Button>
         <Button fx:id="AddQuestion" alignment="TOP_CENTER" layoutX="511.0" layoutY="114.0" mnemonicParsing="false" onAction="#AddQuestion" prefHeight="26.0" prefWidth="240.0" style="-fx-background-radius: 10; -fx-font-weight: bold;" styleClass="pageHeader" stylesheets="@../application2.css" text="Add Question">
             <font>
@@ -59,13 +43,6 @@
                     </image>
                 </ImageView>
             </graphic>
-            <effect>
-                <DropShadow height="5.0" radius="2.0" width="5.0">
-                    <color>
-                        <Color red="0.20000000298023224" green="0.19607843458652496" blue="0.19607843458652496" />
-                    </color>
-                </DropShadow>
-            </effect>
         </Button>
         <TableView layoutX="27.0" layoutY="144.0" prefHeight="250.0" prefWidth="726.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #649DAD;">
             <columns>
@@ -134,7 +111,7 @@
          </graphic>
         </Button>
         <TextField layoutX="63.0" layoutY="114.0" prefHeight="26.0" prefWidth="278.0" promptText="Search a question" />
-        <Button layoutX="26.0" layoutY="114.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" style="-fx-background-color: #FFFFFF;">
+        <Button layoutX="26.0" layoutY="114.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" styleClass="backgroundColor">
             <graphic>
                 <ImageView fitHeight="16.0" fitWidth="16.0">
                     <image>

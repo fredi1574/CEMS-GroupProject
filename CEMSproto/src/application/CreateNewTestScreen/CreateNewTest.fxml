@@ -181,6 +181,11 @@
                           </ImageView>
                   <Label layoutX="31.0" layoutY="540.0" prefHeight="18.0" prefWidth="31.0" text="Back" />
                   <Label layoutX="804.0" layoutY="541.0" text="Save" />
+                  <ImageView fitHeight="66.0" fitWidth="188.0" layoutX="331.0" layoutY="494.0">
+                     <image>
+                        <Image url="@../images/Logo.png" />
+                     </image>
+                  </ImageView>
                     </children>
                 </AnchorPane>
             </children>
