@@ -1,7 +1,7 @@
 package application.CreateNewTestScreen.PickQuestionsScreen;
 
-import application.ScreenChanger;
 import application.Question;
+import application.ScreenChanger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,29 +13,30 @@ import javafx.scene.control.cell.PropertyValueFactory;
 //TODO: change add/delete buttons of questions
 public class PickQuestionsController {
 
-
     @FXML
-    TableView<Question> tableView = new TableView<>();
+    private TableView<Question> questionsTableView;
     @FXML
-    TableColumn<Question, String> questionNumber;
+    private TableColumn<Question,String> questionNumberColumn;
     @FXML
-    TableColumn<Question, String> questionID;
+    private TableColumn<Question,String> questionIdColumn;
     @FXML
-    TableColumn<Question, String> questionDescription;
+    private TableColumn<Question,String> questionTextColumn;
     @FXML
-    TableColumn<Question, String> author;
-
-    //TODO: add elements to questions table
-    ObservableList<Question> questions = FXCollections.observableArrayList(new Question("1", "023564", "<What is the value of x in this equation>", "Roman"),
-            new Question("2", "025324", "<What is the value of y in this equation>", "Abed"));
+    private TableColumn<Question,String> questionAuthorColumn;
 
     public void initialize() {
 
-        questionNumber.setCellValueFactory(new PropertyValueFactory<>("Number"));
-        questionID.setCellValueFactory(new PropertyValueFactory<>("Question ID"));
-        questionDescription.setCellValueFactory(new PropertyValueFactory<>("Questions"));
-        author.setCellValueFactory(new PropertyValueFactory<>("Author"));
-        tableView.setItems(questions);
+    ObservableList<Question> questionList = FXCollections.observableArrayList(
+            new Question(69,"1A23B","what is 2+2?","Fredi"),
+            new Question(420,"420690","what is the meaning of life?","Fredi")
+    );
+
+        questionNumberColumn.setCellValueFactory(new PropertyValueFactory<>("questionNumber"));
+        questionIdColumn.setCellValueFactory(new PropertyValueFactory<>("questionId"));
+        questionTextColumn.setCellValueFactory(new PropertyValueFactory<>("questionText"));
+        questionAuthorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
+
+        questionsTableView.setItems(questionList);
     }
 
     public void backToCreateTest(ActionEvent event) {
