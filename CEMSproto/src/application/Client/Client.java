@@ -19,8 +19,9 @@ public class Client extends Application {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("ClientGui.fxml"));
             Scene scene = new Scene(root);
-            primaryStage.getIcons().add(new Image("application/images/Logo.png"));
-            primaryStage.setTitle("C.E.M.S - Ip Connection");
+            primaryStage.getIcons().add(new Image("application/images/icon3.png"));
+
+            primaryStage.setTitle("C.E.M.S - IP Connection");
             primaryStage.setScene(scene);
             primaryStage.show();
 

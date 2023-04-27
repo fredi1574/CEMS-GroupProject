@@ -18,7 +18,7 @@ public class ScreenChanger {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle(title);
-            stage.getIcons().add(new Image("application/images/Title_icon.png"));
+            stage.getIcons().add(new Image("application/images/icon3.png"));
 
             stage.setScene(scene);
             stage.show();

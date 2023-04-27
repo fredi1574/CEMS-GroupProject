@@ -12,62 +12,47 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="271.0"
-            prefWidth="516.0" styleClass="backgroundColor" stylesheets="@../application.css"
-            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="application.LoginWindowScreen.LoginWindowController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="271.0" prefWidth="516.0" styleClass="backgroundColor" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginWindowScreen.LoginWindowController">
     <center>
         <AnchorPane prefHeight="248.0" prefWidth="651.0" BorderPane.alignment="CENTER">
             <children>
-                <TextField blendMode="MULTIPLY" layoutX="327.0" layoutY="110.0" promptText="User ID"/>
-                <PasswordField blendMode="MULTIPLY" layoutX="327.0" layoutY="149.0" promptText="Password"/>
-                <Button fx:id="logIN" layoutX="306.0" layoutY="207.0" mnemonicParsing="false" onAction="#logIN"
-                        prefHeight="36.0" prefWidth="185.0" style="-fx-background-radius: 90;" styleClass="pageHeader"
-                        text="LOGIN" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+                <TextField blendMode="MULTIPLY" layoutX="327.0" layoutY="110.0" promptText="User ID" />
+                <PasswordField blendMode="MULTIPLY" layoutX="327.0" layoutY="149.0" promptText="Password" />
+                <Button fx:id="logIN" layoutX="306.0" layoutY="207.0" mnemonicParsing="false" onAction="#logIN" prefHeight="36.0" prefWidth="185.0" style="-fx-background-radius: 90;" styleClass="pageHeader" text="LOGIN" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
                     <font>
-                        <Font name="Franklin Gothic Demi" size="16.0"/>
+                        <Font name="Franklin Gothic Demi" size="16.0" />
                     </font>
                 </Button>
                 <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="303.0" layoutY="113.0">
                     <image>
-                        <Image url="@../images/icons8-user-32.png"/>
+                        <Image url="@../images/icons8-user-32.png" />
                     </image>
                 </ImageView>
                 <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="305.0" layoutY="154.0">
                     <image>
-                        <Image url="@../images/icons8-password-key-2.png"/>
+                        <Image url="@../images/icons8-password-key-2.png" />
                     </image>
                 </ImageView>
-                <Line endX="101.79998779296875" endY="-10.000011444091797" layoutX="397.0" layoutY="57.0"
-                      startX="-97.4000244140625" startY="-10.000011444091797"/>
-                <Line endX="100.77774047851562" endY="-10.000011444091797" layoutX="397.0" layoutY="96.0"
-                      startX="-97.4000244140625" startY="-10.000011444091797"/>
-                <Text fill="#306ebd" layoutX="393.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      styleClass="content" text="Forgot password?" underline="true">
+                <Line endX="101.79998779296875" endY="-10.000011444091797" layoutX="397.0" layoutY="57.0" startX="-97.4000244140625" startY="-10.000011444091797" />
+                <Line endX="100.77774047851562" endY="-10.000011444091797" layoutX="397.0" layoutY="96.0" startX="-97.4000244140625" startY="-10.000011444091797" />
+                <Text fill="#306ebd" layoutX="393.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="content" text="Forgot password?" underline="true">
                     <font>
-                        <Font name="Trebuchet MS" size="11.0"/>
+                        <Font name="Trebuchet MS" size="11.0" />
                     </font>
                 </Text>
-                <Pane prefHeight="271.0" prefWidth="272.0" styleClass="pageHeader">
+                <Pane layoutY="-12.0" prefHeight="283.0" prefWidth="272.0" styleClass="pageHeader">
                     <children>
                         <ImageView fitHeight="105.0" fitWidth="274.0" layoutY="98.0" preserveRatio="true">
                             <image>
-                                <Image url="@../images/Logo.png"/>
+                                <Image url="@../images/Logo.png" />
                             </image>
                         </ImageView>
                     </children>
                 </Pane>
-                <Button layoutX="461.0" layoutY="8.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="29.0"
-                        style="-fx-background-color: transparent;"/>
-                <ImageView fitHeight="29.0" fitWidth="34.0" layoutX="484.0" layoutY="2.0" pickOnBounds="true"
-                           preserveRatio="true">
-                    <image>
-                        <Image url="@../images/icons8-close-window-50.png"/>
-                    </image>
-                </ImageView>
+                <Button layoutX="461.0" layoutY="8.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="29.0" style="-fx-background-color: transparent;" />
                 <ImageView fitHeight="43.0" fitWidth="220.0" layoutX="288.0" layoutY="45.0" preserveRatio="true">
                     <image>
-                        <Image url="@../images/welcome.png"/>
+                        <Image url="@../images/welcome.png" />
                     </image>
                 </ImageView>
             </children>

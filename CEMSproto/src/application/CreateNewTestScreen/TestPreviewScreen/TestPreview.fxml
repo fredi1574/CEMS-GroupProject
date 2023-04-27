@@ -8,9 +8,6 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.Light.Distant?>
-<?import javafx.scene.effect.Lighting?>
-<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="533.0" prefWidth="775.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CreateNewTestScreen.TestPreviewScreen.TestPreviewController">
+<AnchorPane prefHeight="533.0" prefWidth="775.0" stylesheets="@../../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CreateNewTestScreen.TestPreviewScreen.TestPreviewController">
     <children>
         <AnchorPane layoutX="-6.0" layoutY="1.0" prefHeight="86.0" prefWidth="817.0" styleClass="pageHeader" stylesheets="@../../application.css">
             <children>
@@ -26,25 +23,17 @@
                     <font>
                         <Font name="Trebuchet MS" size="28.0" />
                     </font>
-                    <effect>
-                        <DropShadow />
-                    </effect>
                 </Label>
-                <Button fx:id="LogOut" layoutX="712.0" layoutY="48.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" style="-fx-background-radius: 10; -fx-background-color: transparent;" styleClass="pageHeaderBtn" stylesheets="@../../application.css" text="Logout" textFill="WHITE">
+                <Button fx:id="LogOut" layoutX="712.0" layoutY="48.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" styleClass="pageHeaderBtn" stylesheets="@../../application.css" text="Logout" textFill="WHITE">
                     <font>
                         <Font name="Franklin Gothic Demi Cond" size="14.0" />
                     </font>
-                    <effect>
-                        <Lighting diffuseConstant="1.25" specularConstant="0.17" specularExponent="10.82" surfaceScale="2.05">
-                            <bumpInput>
-                                <Shadow />
-                            </bumpInput>
-                            <light>
-                                <Light.Distant azimuth="28.49" elevation="127.57" />
-                            </light>
-                        </Lighting>
-                    </effect>
                 </Button>
+            <ImageView fitHeight="76.0" fitWidth="200.0" layoutX="27.0" layoutY="5.0">
+               <image>
+                  <Image url="@../../images/Logo_Transparent2.png" />
+               </image>
+            </ImageView>
             </children>
             <effect>
                 <DropShadow />
@@ -302,11 +291,6 @@
                   </ImageView>
                </graphic>
                 </Button>
-            <ImageView fitHeight="76.0" fitWidth="200.0" layoutX="587.0" layoutY="350.0">
-               <image>
-                  <Image url="@../../images/Logo.png" />
-               </image>
-            </ImageView>
             </children>
         </Pane>
     </children>
