@@ -5,8 +5,8 @@ import javafx.event.ActionEvent;
 
 public class MainMenuController {
 
-    public void goBackToPreviousScreen(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", "C.E.M.S Test Manager - Login");
+    public void LogOut(ActionEvent event) {
+        ScreenChanger.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", "C.E.M.S Test Manager");
     }
 
     public void manageQuestions(ActionEvent event) {
