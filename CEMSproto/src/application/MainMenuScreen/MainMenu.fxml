@@ -1,131 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-
-<AnchorPane id="borderPane" prefHeight="489.0" prefWidth="508.0" style="-fx-background-color: #FFFFFF;" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainMenuScreen.MainMenuController">
-    <children>
-        <ImageView fitHeight="39.0" fitWidth="200.0">
-            <image>
-                <Image url="@../images/welcome.png" />
-            </image>
-        </ImageView>
-        <VBox prefHeight="489.0" prefWidth="319.0" styleClass="pageHeader">
-            <children>
-                <Pane prefHeight="86.0" prefWidth="319.0" styleClass="pageHeader" />
-                <Button fx:id="CreateNewTestBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#CreateNewTest" prefHeight="48.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" Create New Test" textFill="WHITE">
-                    <font>
-                        <Font name="Trebuchet MS" size="25.0" />
-                    </font>
-                    <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="31.0">
-                            <image>
-                                <Image url="@../images/icons8-new-copy-50.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <VBox.margin>
-                        <Insets top="10.0" />
-                    </VBox.margin>
-                </Button>
-                <Button id="addAQuestion" fx:id="addQuestion" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="106.0" mnemonicParsing="false" onAction="#addQuestion" prefHeight="49.0" prefWidth="287.0" snapToPixel="false" styleClass="mainMenuButtons" text=" Add a Question" textFill="WHITE">
-                    <font>
-                        <Font name="Trebuchet MS" size="25.0" />
-                    </font>
-                    <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="31.0">
-                            <image>
-                                <Image url="@../images/icons8-add-question.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <VBox.margin>
-                        <Insets top="10.0" />
-                    </VBox.margin>
-                </Button>
-                <Button fx:id="manageQuestions" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#manageQuestions" prefHeight="48.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" Manage Questions" textFill="WHITE">
-                    <font>
-                        <Font name="Trebuchet MS" size="25.0" />
-                    </font>
-                    S
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                    <VBox.margin>
-                        <Insets top="10.0" />
-                    </VBox.margin>
-                    <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="31.0">
-                            <image>
-                                <Image url="@../images/icons8-data-protection-80.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button fx:id="ManageTestsBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="48.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" Manage Tests" textFill="WHITE">
-                    <font>
-                        <Font name="Trebuchet MS" size="25.0" />
-                    </font>
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                    <VBox.margin>
-                        <Insets top="10.0" />
-                    </VBox.margin>
-                    <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="31.0">
-                            <image>
-                                <Image url="@../images/icons8-documents-50.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button fx:id="ViewStatistics" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#ViewReports" prefHeight="48.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" View Statistics" textFill="WHITE">
-                    <font>
-                        <Font name="Trebuchet MS" size="25.0" />
-                    </font>
-                    <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="31.0">
-                            <image>
-                                <Image url="@../images/icons8-statistic-64.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <VBox.margin>
-                        <Insets top="10.0" />
-                    </VBox.margin>
-                </Button>
-                <Pane prefHeight="88.0" prefWidth="220.0" />
-            </children>
-        </VBox>
-        <ImageView fitHeight="73.0" fitWidth="200.0" layoutX="321.0" layoutY="416.0">
-            <image>
-                <Image url="@../images/CEMS%20NEW%20COLOR.png" />
-            </image>
-        </ImageView>
-        <ImageView fitHeight="43.0" fitWidth="200.0" layoutX="321.0" layoutY="20.0" preserveRatio="true">
-            <image>
-                <Image url="@../images/welcome.png" />
-            </image>
-        </ImageView>
-        <Text fill="#306ebd" layoutX="326.0" layoutY="79.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="May" wrappingWidth="176.48748779296875">
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane id="borderPane" prefHeight="489.0" prefWidth="508.0" style="-fx-background-color: #FFFFFF;"
+            stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="application.MainMenuScreen.MainMenuController">
+    <VBox prefHeight="489.0" prefWidth="319.0" styleClass="pageHeader">
+        <Pane prefHeight="86.0" prefWidth="319.0" styleClass="pageHeader"/>
+        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#CreateNewTest" prefHeight="48.0"
+                prefWidth="287.0" styleClass="mainMenuButtons" text=" Create New Test" textFill="WHITE">
             <font>
-                <Font name="Tahoma" size="18.0" />
+                <Font name="Trebuchet MS" size="25.0"/>
             </font>
-        </Text>
-        <Pane layoutX="318.0" layoutY="18.0" prefHeight="3.0" prefWidth="203.0" style="-fx-background-color: #306ebd;" />
-      <ImageView fitHeight="76.0" fitWidth="200.0" layoutX="321.0" layoutY="412.0">
-         <image>
-            <Image url="@../images/CEMS%20NEW%20COLOR.png" />
-         </image>
-      </ImageView>
-          <Button fx:id="backTo" layoutX="10.0" layoutY="446.0" mnemonicParsing="false" onAction="#backTo" prefHeight="34.0" prefWidth="66.0" styleClass="pageHeaderBtn" text="Log out" />
-    </children>
+            <graphic>
+                <ImageView fitHeight="32.0" fitWidth="31.0">
+                    <Image url="@../images/icons8-new-copy-50.png"/>
+                </ImageView>
+            </graphic>
+            <VBox.margin>
+                <Insets top="10.0"/>
+            </VBox.margin>
+        </Button>
+        <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="106.0" mnemonicParsing="false" onAction="#addQuestion"
+                prefHeight="49.0" prefWidth="287.0" snapToPixel="false" styleClass="mainMenuButtons"
+                text=" Add a Question" textFill="WHITE">
+            <font>
+                <Font name="Trebuchet MS" size="25.0"/>
+            </font>
+            <graphic>
+                <ImageView fitHeight="32.0" fitWidth="31.0">
+                    <Image url="@../images/icons8-add-question.png"/>
+                </ImageView>
+            </graphic>
+            <VBox.margin>
+                <Insets top="10.0"/>
+            </VBox.margin>
+        </Button>
+        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#manageQuestions" prefHeight="48.0"
+                prefWidth="287.0" styleClass="mainMenuButtons" text=" Manage Questions" textFill="WHITE">
+            <font>
+                <Font name="Trebuchet MS" size="25.0"/>
+            </font>
+            S
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <VBox.margin>
+                <Insets top="10.0"/>
+            </VBox.margin>
+            <graphic>
+                <ImageView fitHeight="32.0" fitWidth="31.0">
+                    <Image url="@../images/icons8-data-protection-80.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="48.0" prefWidth="287.0"
+                styleClass="mainMenuButtons" text=" Manage Tests" textFill="WHITE">
+            <font>
+                <Font name="Trebuchet MS" size="25.0"/>
+            </font>
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <VBox.margin>
+                <Insets top="10.0"/>
+            </VBox.margin>
+            <graphic>
+                <ImageView fitHeight="32.0" fitWidth="31.0">
+                    <Image url="@../images/icons8-documents-50.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#ViewReports" prefHeight="48.0"
+                prefWidth="287.0" styleClass="mainMenuButtons" text=" View Statistics" textFill="WHITE">
+            <font>
+                <Font name="Trebuchet MS" size="25.0"/>
+            </font>
+            <graphic>
+                <ImageView fitHeight="32.0" fitWidth="31.0">
+                    <Image url="@../images/icons8-statistic-64.png"/>
+                </ImageView>
+            </graphic>
+            <VBox.margin>
+                <Insets top="10.0"/>
+            </VBox.margin>
+        </Button>
+        <Pane prefHeight="88.0" prefWidth="220.0"/>
+    </VBox>
+    <ImageView fitHeight="43.0" fitWidth="200.0" layoutX="321.0" layoutY="20.0" preserveRatio="true">
+        <Image url="@../images/welcome.png"/>
+    </ImageView>
+    <Text fill="#306ebd" layoutX="326.0" layoutY="79.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="May"
+          wrappingWidth="176.48748779296875">
+        <font>
+            <Font name="Tahoma" size="18.0"/>
+        </font>
+    </Text>
+    <Pane layoutX="318.0" layoutY="18.0" prefHeight="3.0" prefWidth="203.0" style="-fx-background-color: #306ebd;"/>
+    <ImageView fitHeight="76.0" fitWidth="200.0" layoutX="321.0" layoutY="412.0">
+        <Image url="@../images/CEMS%20NEW%20COLOR.png"/>
+    </ImageView>
+    <Button layoutX="10.0" layoutY="446.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="66.0"
+            styleClass="pageHeaderBtn" text="Log out"/>
 </AnchorPane>

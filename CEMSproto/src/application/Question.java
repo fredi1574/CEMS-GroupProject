@@ -7,7 +7,7 @@ public class Question {
     private String author;
 
 
-    public Question(int questionNumber,String questionId, String questionText, String author) {
+    public Question(int questionNumber, String questionId, String questionText, String author) {
         this.questionNumber = questionNumber;
         this.questionId = questionId;
         this.questionText = questionText;

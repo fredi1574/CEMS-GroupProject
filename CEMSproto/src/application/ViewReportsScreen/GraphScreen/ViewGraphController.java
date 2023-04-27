@@ -3,20 +3,16 @@ package application.ViewReportsScreen.GraphScreen;
 import application.ScreenChanger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
 public class ViewGraphController {
 
     @FXML
     BarChart<String, Number> reportGraph;
 
-    public void initialize(){
+    //todo: add the value of each bar above it
+    public void initialize() {
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
 
@@ -32,15 +28,11 @@ public class ViewGraphController {
         //TODO: change the color of the axis title
     }
 
-    public void backToReport(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "ViewStatisticsScreen/ViewGraph.fxml", "C.E.M.S Test Manager - View statistics");
-    }
-
     public void LogOut(ActionEvent event) {
         ScreenChanger.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", "C.E.M.S Test Manager");
     }
 
-    public void BackTo(ActionEvent event) {
+    public void goBackToPreviousScreen(ActionEvent event) {
         ScreenChanger.goToNewScreen(event, "ViewReportsScreen/ViewReports.fxml", "C.E.M.S Test Manager - Create a new test");
     }
 }

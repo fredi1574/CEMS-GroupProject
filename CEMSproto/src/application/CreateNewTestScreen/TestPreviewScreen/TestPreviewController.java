@@ -3,7 +3,6 @@ package application.CreateNewTestScreen.TestPreviewScreen;
 import application.ScreenChanger;
 import javafx.event.ActionEvent;
 
-
 public class TestPreviewController {
 
 
@@ -12,8 +11,7 @@ public class TestPreviewController {
 
     }
 
-    public void BackTo(ActionEvent event) {
+    public void goBackToPreviousScreen(ActionEvent event) {
         ScreenChanger.goToNewScreen(event, "CreateNewTestScreen/CreateNewTest.fxml", "C.E.M.S Test Manager - Create a new test");
     }
-
 }

@@ -1,116 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Light.Distant?>
-<?import javafx.scene.effect.Lighting?>
-<?import javafx.scene.effect.Shadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-
-<AnchorPane prefHeight="598.0" prefWidth="821.0" styleClass="backgroundColor" stylesheets="@../../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CreateNewTestScreen.PickQuestionsScreen.PickQuestionsController">
-    <children>
-            <AnchorPane prefHeight="78.0" prefWidth="842.0" styleClass="pageHeader">
-         <children>
-                    <Label alignment="CENTER" layoutX="173.0" layoutY="14.0" prefHeight="54.0" prefWidth="481.0" style="-fx-font-weight: bold;" text="Pick Questions" textFill="#fafafa">
-                        <font>
-                            <Font name="Trebuchet MS" size="40.0" />
-                        </font>
-                    </Label>
-                    <ImageView layoutX="746.0" layoutY="17.0">
-                        <image>
-                            <Image url="@../../images/icons8-person-16.png" />
-                        </image>
-                    </ImageView>
-                  <Text fill="#3b3131" layoutX="769.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true" wrappingWidth="52.798828125">
-                      <font>
-                          <Font name="Trebuchet MS" size="12.0" />
-                      </font>
-                  </Text>
-                    <Button fx:id="LogOut" layoutX="746.0" layoutY="39.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" styleClass="pageHeaderBtn" text="Logout">
-                        <font>
-                            <Font name="Franklin Gothic Demi Cond" size="14.0" />
-                        </font>
-                        <effect>
-                            <Lighting diffuseConstant="1.25" specularConstant="0.17" specularExponent="10.82" surfaceScale="2.05">
-                                <bumpInput>
-                                    <Shadow />
-                                </bumpInput>
-                                <light>
-                                    <Light.Distant azimuth="28.49" elevation="127.57" />
-                                </light>
-                            </Lighting>
-                        </effect>
-                    </Button>
-            <ImageView fitHeight="71.0" fitWidth="155.0" layoutX="28.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../images/Logo_Transparent2.png" />
-               </image>
+<?import javafx.scene.text.*?>
+<AnchorPane prefHeight="598.0" prefWidth="821.0" styleClass="backgroundColor" stylesheets="@../../application.css"
+            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="application.CreateNewTestScreen.PickQuestionsScreen.PickQuestionsController">
+    <AnchorPane prefHeight="78.0" prefWidth="842.0" styleClass="pageHeader">
+        <Label alignment="CENTER" layoutX="173.0" layoutY="14.0" prefHeight="54.0" prefWidth="481.0"
+               style="-fx-font-weight: bold;" text="Pick Questions" textFill="#fafafa">
+            <font>
+                <Font name="Trebuchet MS" size="40.0"/>
+            </font>
+        </Label>
+        <ImageView layoutX="746.0" layoutY="17.0">
+            <Image url="@../../images/icons8-person-16.png"/>
+        </ImageView>
+        <Text fill="#3b3131" layoutX="769.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi"
+              underline="true" wrappingWidth="52.798828125">
+            <font>
+                <Font name="Trebuchet MS" size="12.0"/>
+            </font>
+        </Text>
+        <Button layoutX="746.0" layoutY="39.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut"
+                prefHeight="26.0" prefWidth="82.0" styleClass="pageHeaderBtn" text="Logout">
+            <font>
+                <Font name="Franklin Gothic Demi Cond" size="14.0"/>
+            </font>
+        </Button>
+        <ImageView fitHeight="71.0" fitWidth="155.0" layoutX="28.0" layoutY="11.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <Image url="@../../images/Logo_Transparent2.png"/>
+        </ImageView>
+    </AnchorPane>
+    <Label layoutX="53.0" layoutY="78.0" prefHeight="54.0" prefWidth="207.0" text="Question Database:">
+        <font>
+            <Font name="System Bold" size="18.0"/>
+        </font>
+    </Label>
+    <HBox alignment="CENTER" layoutX="488.0" layoutY="84.0" prefHeight="28.0" prefWidth="298.0" spacing="10.0">
+        <ImageView fitHeight="16.0" fitWidth="16.0">
+            <Image url="@../../images/icons8-search-24.png"/>
+        </ImageView>
+        <TextField prefHeight="27.0" prefWidth="379.0" promptText="Search a question"/>
+    </HBox>
+    <TableView fx:id="questionsTableView" layoutX="56.0" layoutY="121.0" prefHeight="189.0" prefWidth="730.0">
+        <columns>
+            <TableColumn fx:id="questionNumberColumn" prefWidth="53.0" text="Number"/>
+            <TableColumn fx:id="questionIdColumn" prefWidth="76.0" text="Question ID"/>
+            <TableColumn fx:id="questionTextColumn" prefWidth="506.0" text="Question"/>
+            <TableColumn fx:id="questionAuthorColumn" minWidth="0.0" prefWidth="93.0" text="Author"/>
+        </columns>
+    </TableView>
+    <TableView layoutX="56.0" layoutY="345.0" prefHeight="178.0" prefWidth="730.0" style="-fx-border-color: #649DAD;">
+        <columns>
+            <TableColumn prefWidth="57.0" text="Number"/>
+            <TableColumn prefWidth="78.0" text="Question ID"/>
+            <TableColumn prefWidth="540.0" text="Question"/>
+            <TableColumn minWidth="0.0" prefWidth="53.0" text="Points"/>
+        </columns>
+    </TableView>
+    <Label layoutX="53.0" layoutY="318.0" prefHeight="27.0" prefWidth="207.0" text="Selected Questions:">
+        <font>
+            <Font name="System Bold" size="18.0"/>
+        </font>
+    </Label>
+    <Button layoutX="14.0" layoutY="522.0" mnemonicParsing="false" onAction="#backToCreateTest" prefHeight="46.0"
+            prefWidth="53.0" style="-fx-background-color: transparent;">
+        <graphic>
+            <ImageView fitHeight="43.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../../images/icons8-back-96.png"/>
             </ImageView>
-         </children>
-            </AnchorPane>
-            <Label layoutX="53.0" layoutY="78.0" prefHeight="54.0" prefWidth="207.0" text="Question Database:">
-                <font>
-                    <Font name="System Bold" size="18.0" />
-                </font>
-            </Label>
-      <HBox alignment="CENTER" layoutX="488.0" layoutY="84.0" prefHeight="28.0" prefWidth="298.0" spacing="10.0">
-         <children>
-                  <ImageView fitHeight="16.0" fitWidth="16.0">
-                      <image>
-                          <Image url="@../../images/icons8-search-24.png" />
-                      </image>
-                  </ImageView>
-                  <TextField prefHeight="27.0" prefWidth="379.0" promptText="Search a question" />
-         </children>
-      </HBox>
-      <TableView fx:id="questionsTableView" layoutX="56.0" layoutY="121.0" prefHeight="189.0" prefWidth="730.0">
-         <columns>
-            <TableColumn fx:id="questionNumberColumn" prefWidth="53.0" text="Number" />
-            <TableColumn fx:id="questionIdColumn" prefWidth="76.0" text="Question ID" />
-            <TableColumn fx:id="questionTextColumn" prefWidth="506.0" text="Question" />
-            <TableColumn fx:id="questionAuthorColumn" minWidth="0.0" prefWidth="93.0" text="Author" />
-         </columns>
-      </TableView>
-            <TableView layoutX="56.0" layoutY="345.0" prefHeight="178.0" prefWidth="730.0" style="-fx-border-color: #649DAD;">
-                <columns>
-                    <TableColumn prefWidth="57.0" text="Number" />
-                    <TableColumn prefWidth="78.0" text="Question ID" />
-                    <TableColumn fx:id="selectedQuestion" prefWidth="540.0" text="Question" />
-                    <TableColumn fx:id="selectedQuestionPoints" minWidth="0.0" prefWidth="53.0" text="Points" />
-                </columns>
-            </TableView>
-            <Label layoutX="53.0" layoutY="318.0" prefHeight="27.0" prefWidth="207.0" text="Selected Questions:">
-                <font>
-                    <Font name="System Bold" size="18.0" />
-                </font>
-            </Label>
-        <Button fx:id="backBtn" layoutX="14.0" layoutY="522.0" mnemonicParsing="false" onAction="#backToCreateTest" prefHeight="46.0" prefWidth="53.0" style="-fx-background-color: transparent;">
-         <graphic>
-                <ImageView fitHeight="43.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../images/icons8-back-96.png" />
-                    </image>
-                </ImageView>
-         </graphic>
-        </Button>
-        <Label layoutX="28.0" layoutY="567.0" text="Back" />
-        <Button fx:id="SaveBtn" layoutX="778.0" layoutY="519.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="53.0" style="-fx-background-color: transparent;">
-         <graphic>
-                <ImageView fitHeight="34.0" fitWidth="37.0">
-                    <image>
-                        <Image url="@../../images/icons8-save-96.png" />
-                    </image>
-                </ImageView>
-         </graphic>
-        </Button>
-        <Label layoutX="792.0" layoutY="567.0" text="Save" />
-    </children>
+        </graphic>
+    </Button>
+    <Label layoutX="28.0" layoutY="567.0" text="Back"/>
+    <Button layoutX="778.0" layoutY="519.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="53.0"
+            style="-fx-background-color: transparent;">
+        <graphic>
+            <ImageView fitHeight="34.0" fitWidth="37.0">
+                <Image url="@../../images/icons8-save-96.png"/>
+            </ImageView>
+        </graphic>
+    </Button>
+    <Label layoutX="792.0" layoutY="567.0" text="Save"/>
 </AnchorPane>

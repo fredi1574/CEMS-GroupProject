@@ -30,8 +30,8 @@ public class ViewReportsController {
 
         ObservableList<Report> reportList = FXCollections.observableArrayList(
                 new Report(2023, 'A', "Computer Science", "Automatons", 42069),
-                new Report(2021, 'A', "Mathematics", "Statistics", 13096)
-                );
+                new Report(2021, 'B', "Mathematics", "Statistics", 13096)
+        );
 
         yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
         semesterColumn.setCellValueFactory(new PropertyValueFactory<>("semester"));
@@ -42,11 +42,10 @@ public class ViewReportsController {
         reportsTableView.setItems(reportList);
     }
 
-    public void backTo(ActionEvent event) {
+    public void goBackToPreviousScreen(ActionEvent event) {
         ScreenChanger.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml", "C.E.M.S Test Manager");
     }
-
-
+    
     public void showReports(ActionEvent event) {
         ScreenChanger.goToNewScreen(event, "ViewReportsScreen/GraphScreen/ViewGraph.fxml", "C.E.M.S Test Manager - Report");
     }

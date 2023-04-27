@@ -1,4 +1,5 @@
 /*TODO: change username color in header to be consistent across screens*/
+/*TODO: clean this file. maybe separate into multiple files*/
 
 .mainMenuButtons {
     -fx-background-color: transparent;
