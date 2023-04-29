@@ -1,5 +1,7 @@
 package application.ViewReportsScreen;
 
+import application.ExitButton;
+import application.MinimizeButton;
 import application.ScreenChanger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,14 +45,23 @@ public class ViewReportsController {
     }
 
     public void goBackToPreviousScreen(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml", "C.E.M.S Test Manager");
+        ScreenChanger.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml");
     }
     
     public void showReports(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "ViewReportsScreen/GraphScreen/ViewGraph.fxml", "C.E.M.S Test Manager - Report");
+        ScreenChanger.goToNewScreen(event, "ViewReportsScreen/GraphScreen/ViewGraph.fxml");
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", "C.E.M.S Test Manager");
+        ScreenChanger.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
+    }
+
+    public void closeClient(ActionEvent event){
+        ExitButton.closeClient(event);
+    }
+
+    @FXML
+    private void minimizeWindow(ActionEvent event) {
+        MinimizeButton.minimizeWindow(event);
     }
 }

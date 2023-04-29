@@ -1,5 +1,7 @@
 package application.ManageQuestionsScreen;
 
+import application.ExitButton;
+import application.MinimizeButton;
 import application.ScreenChanger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,16 +21,24 @@ public class ManageQuestionsController {
         comboBox.setItems(options);
     }
 
-
     public void LogOut(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", "C.E.M.S Test Manager");
+        ScreenChanger.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
     }
 
     public void back(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml", "C.E.M.S Test Manager");
+        ScreenChanger.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml");
     }
 
     public void AddQuestion(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "AddAQuestionScreen/AddAQuestion.fxml", "C.E.M.S Test Manager - Add a question");
+        ScreenChanger.goToNewScreen(event, "AddAQuestionScreen/AddAQuestion.fxml");
+    }
+
+    public void closeClient(ActionEvent event){
+        ExitButton.closeClient(event);
+    }
+
+    @FXML
+    private void minimizeWindow(ActionEvent event) {
+        MinimizeButton.minimizeWindow(event);
     }
 }

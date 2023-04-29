@@ -1,5 +1,7 @@
 package application.CreateNewTestScreen.PickQuestionsScreen;
 
+import application.ExitButton;
+import application.MinimizeButton;
 import application.Question;
 import application.ScreenChanger;
 import javafx.collections.FXCollections;
@@ -40,10 +42,19 @@ public class PickQuestionsController {
     }
 
     public void backToCreateTest(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "CreateNewTestScreen/CreateNewTest.fxml", "C.E.M.S Test Manager - Create a new test");
+        ScreenChanger.goToNewScreen(event, "CreateNewTestScreen/CreateNewTest.fxml");
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", "C.E.M.S Test Manager");
+        ScreenChanger.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
+    }
+
+    public void closeClient(ActionEvent event){
+        ExitButton.closeClient(event);
+    }
+
+    @FXML
+    private void minimizeWindow(ActionEvent event) {
+        MinimizeButton.minimizeWindow(event);
     }
 }

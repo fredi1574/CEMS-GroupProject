@@ -8,7 +8,6 @@
 .mainMenuButtons:hover {
     -fx-font-weight: bold;
     -fx-translate-x: 25px;
-
 }
 
 .mainMenuButtons:pressed {
@@ -20,7 +19,6 @@
 .pageHeader {
     -fx-font-family: "Trebuchet MS";
     -fx-background-color: #306ebd;
-
 }
 
 .pageHeaderBtn {
@@ -104,6 +102,7 @@
 .table-view .table-column {
     -fx-alignment: CENTER;
 }
+
 .table-view .column-header {
     -fx-background-color: #6ea6ef;
     -fx-border-color: #7799c2;
@@ -130,11 +129,3 @@
     -fx-bar-fill: #306ebd;
     -fx-background-radius: 3px 3px 0 0;
 }
-
-/*.bar-chart > chart-content > plot-background > chart-plot-background {*/
-/*    -fx-bar-label-visible: true;*/
-/*    -fx-bar-label-fill: white;*/
-/*    -fx-bar-label-background-color: black;*/
-/*    -fx-bar-label-padding: 2px;*/
-/*    -fx-font-size: 12px;*/
-/*}*/

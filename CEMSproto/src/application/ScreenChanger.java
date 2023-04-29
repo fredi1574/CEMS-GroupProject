@@ -7,18 +7,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class ScreenChanger {
 
-    public static void goToNewScreen(ActionEvent event, String screenRelativePath, String title) {
+    public static void goToNewScreen(ActionEvent event, String screenRelativePath) {
         try {
             FXMLLoader loader = new FXMLLoader(ScreenChanger.class.getResource(screenRelativePath));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
-            stage.setTitle(title);
-            stage.getIcons().add(new Image("application/images/icon3.png"));
+            stage.initStyle(StageStyle.TRANSPARENT);
+
+            stage.getIcons().add(new Image("application/images/icon.png"));
 
             stage.setScene(scene);
             stage.show();
@@ -26,14 +28,13 @@ public class ScreenChanger {
             // Get the Stage object that contains the source node
             Node source = (Node) event.getSource();
 
-            Stage stage1 = (Stage) source.getScene().getWindow();
+            Stage previousWindow = (Stage) source.getScene().getWindow();
 
             // Close the stage
-            stage1.close();
+            previousWindow.close();
 
         } catch (Exception exception) {
             exception.printStackTrace();
         }
     }
-
 }

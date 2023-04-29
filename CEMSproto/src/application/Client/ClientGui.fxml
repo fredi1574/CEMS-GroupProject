@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="351.0" prefWidth="324.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Client.ClientGuiController">
+<AnchorPane prefHeight="351.0" prefWidth="324.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Client.ClientGuiController">
    <children>
       <Pane prefHeight="351.0" prefWidth="324.0" style="-fx-background-color: #e6eef7;">
          <children>
@@ -31,15 +31,12 @@
             </Button>
          </children>
       </Pane>
-      <Button fx:id="closeBtn" layoutX="290.0" layoutY="8.0" mnemonicParsing="false" onAction="#Close" styleClass="pageHeader" stylesheets="@../application.css" text="X" textFill="#fff2f2">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
       <ImageView fitHeight="116.0" fitWidth="283.0" layoutX="19.0" layoutY="70.0">
          <image>
             <Image url="@../images/Logo.png" />
          </image>
       </ImageView>
+      <Button layoutX="290.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
+      <Button layoutX="254.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="-" />
    </children>
 </AnchorPane>
