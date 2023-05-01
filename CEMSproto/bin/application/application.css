@@ -29,6 +29,35 @@
     -fx-font-family: "Trebuchet MS";
 }
 
+.combo-box {
+    -fx-border-radius: 7px;
+    -fx-background-color: transparent;
+    -fx-border-color: #7799c2;
+}
+
+.combo-box:hover {
+    -fx-background-radius: 7px;
+    -fx-background-color: #7799c2;
+}
+
+.combo-box-popup{
+    -fx-background-radius: 10px;
+}
+
+.combo-box-popup .list-cell {
+    -fx-background-color: #c1dfff;
+}
+
+.combo-box .combo-box-popup .list-cell:hover {
+    -fx-text-fill: #142c4b;
+    -fx-background-color: #306ebd;
+}
+
+.combo-box .combo-box-popup .list-cell:selected {
+    -fx-background-color: #306ebd;
+    -fx-text-fill: #7799c2;
+}
+
 .pageHeaderBtn:hover {
     -fx-background-color: #7799c2;
     -fx-text-fill: white;

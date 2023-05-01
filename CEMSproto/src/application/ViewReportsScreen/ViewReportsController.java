@@ -40,7 +40,8 @@ public class ViewReportsController {
 
         ObservableList<Integer> yearList = FXCollections.observableArrayList(2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015);
         ObservableList<Character> semesterList = FXCollections.observableArrayList('A', 'B', 'S');
-        ObservableList<String> subjectList = FXCollections.observableArrayList("Computer Science","Mathematics", "Algorithms","Statistics","Bananas and monkeys");
+        ObservableList<String> subjectList = FXCollections.observableArrayList("Computer Science", "Mathematics",
+                "Algorithms", "Statistics", "Bananas and monkeys", "Introduction to Databases");
 
         yearComboBox.setItems(yearList);
         semesterComboBox.setItems(semesterList);

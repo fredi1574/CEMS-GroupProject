@@ -58,16 +58,16 @@
    <Button layoutX="773.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
    <Button layoutX="737.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="-" />
     <HBox alignment="CENTER" layoutX="26.0" layoutY="95.0" prefHeight="61.0" prefWidth="755.0">
-        <ComboBox fx:id="yearComboBox" prefHeight="40.0" prefWidth="200.0" promptText="Select Year" styleClass="regularButtons">
+        <ComboBox fx:id="yearComboBox" prefHeight="40.0" prefWidth="200.0" promptText="Select Year">
            <HBox.margin>
                <Insets right="20.0" />
            </HBox.margin>
         </ComboBox>
-        <ComboBox fx:id="semesterComboBox" prefHeight="40.0" prefWidth="200.0" promptText="Select Semester" styleClass="regularButtons">
+        <ComboBox fx:id="semesterComboBox" prefHeight="40.0" prefWidth="200.0" promptText="Select Semester">
            <HBox.margin>
                <Insets right="20.0" />
            </HBox.margin>
         </ComboBox>
-        <ComboBox fx:id="subjectComboBox" prefHeight="40.0" prefWidth="200.0" promptText="Select Subject" styleClass="regularButtons" />
+        <ComboBox fx:id="subjectComboBox" prefHeight="40.0" prefWidth="200.0" promptText="Select Subject" />
     </HBox>
 </AnchorPane>
