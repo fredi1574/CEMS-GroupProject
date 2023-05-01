@@ -7,12 +7,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 //todo: add the option to double click as an alternative to clicking on a button
 public class ViewReportsController {
+
+    @FXML
+    private ComboBox<Integer> yearComboBox;
+    @FXML
+    private ComboBox<Character> semesterComboBox;
+    @FXML
+    private ComboBox<String> subjectComboBox;
 
     @FXML
     private TableView<Report> reportsTableView;
@@ -29,6 +37,14 @@ public class ViewReportsController {
 
     @FXML
     public void initialize() {
+
+        ObservableList<Integer> yearList = FXCollections.observableArrayList(2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015);
+        ObservableList<Character> semesterList = FXCollections.observableArrayList('A', 'B', 'S');
+        ObservableList<String> subjectList = FXCollections.observableArrayList("Computer Science","Mathematics", "Algorithms","Statistics","Bananas and monkeys");
+
+        yearComboBox.setItems(yearList);
+        semesterComboBox.setItems(semesterList);
+        subjectComboBox.setItems(subjectList);
 
         ObservableList<Report> reportList = FXCollections.observableArrayList(
                 new Report(2023, 'A', "Computer Science", "Automatons", 42069),
@@ -47,7 +63,7 @@ public class ViewReportsController {
     public void goBackToPreviousScreen(ActionEvent event) {
         ScreenChanger.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml");
     }
-    
+
     public void showReports(ActionEvent event) {
         ScreenChanger.goToNewScreen(event, "ViewReportsScreen/GraphScreen/ViewGraph.fxml");
     }
@@ -56,7 +72,8 @@ public class ViewReportsController {
         ScreenChanger.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
     }
 
-    public void closeClient(ActionEvent event){
+    @FXML
+    public void closeClient(ActionEvent event) {
         ExitButton.closeClient(event);
     }
 
