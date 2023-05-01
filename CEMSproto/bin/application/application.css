@@ -95,8 +95,8 @@
 
 .regularButtons:hover {
     -fx-background-color: #7799c2;
+    -fx-background-radius: 7;
     -fx-text-fill: white;
-    -fx-border-radius: 7;
 }
 
 .table-view .table-column {

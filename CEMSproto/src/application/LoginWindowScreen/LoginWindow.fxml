@@ -17,7 +17,7 @@
         <AnchorPane prefHeight="248.0" prefWidth="651.0" BorderPane.alignment="CENTER">
             <TextField blendMode="MULTIPLY" layoutX="327.0" layoutY="110.0" promptText="User ID" />
             <PasswordField blendMode="MULTIPLY" layoutX="327.0" layoutY="149.0" promptText="Password" />
-            <Button layoutX="306.0" layoutY="207.0" mnemonicParsing="false" onAction="#logIN" prefHeight="36.0" prefWidth="185.0" style="-fx-background-radius: 90;" styleClass="pageHeader" text="LOGIN" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+            <Button layoutX="306.0" layoutY="207.0" mnemonicParsing="false" onAction="#logIN" prefHeight="36.0" prefWidth="185.0" style="-fx-background-radius: 7;" styleClass="pageHeader" text="LOGIN" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
                 <font>
                     <Font name="Franklin Gothic Demi" size="16.0" />
                 </font>
