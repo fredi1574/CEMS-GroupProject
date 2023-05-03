@@ -2,7 +2,7 @@ package application.ViewReportsScreen;
 
 import application.ExitButton;
 import application.MinimizeButton;
-import application.ScreenChanger;
+import application.ScreenManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,9 +11,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 
 //todo: add the option to double click as an alternative to clicking on a button
 public class ViewReportsController {
+
+    @FXML
+    private AnchorPane header;
 
     @FXML
     private ComboBox<Integer> yearComboBox;
@@ -37,6 +41,7 @@ public class ViewReportsController {
 
     @FXML
     public void initialize() {
+        ScreenManager.dragAndDrop(header);
 
         ObservableList<Integer> yearList = FXCollections.observableArrayList(2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015);
         ObservableList<Character> semesterList = FXCollections.observableArrayList('A', 'B', 'S');
@@ -62,15 +67,15 @@ public class ViewReportsController {
     }
 
     public void goBackToPreviousScreen(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml");
+        ScreenManager.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml", false);
     }
 
     public void showReports(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "ViewReportsScreen/GraphScreen/ViewGraph.fxml");
+        ScreenManager.goToNewScreen(event, "ViewReportsScreen/GraphScreen/ViewGraph.fxml", false);
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
+        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", false);
     }
 
     @FXML

@@ -2,30 +2,38 @@ package application.MainMenuScreen;
 
 import application.ExitButton;
 import application.MinimizeButton;
-import application.ScreenChanger;
+import application.ScreenManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
 
 public class MainMenuController {
 
+    @FXML
+    private AnchorPane header;
+
+    public void initialize() {
+        ScreenManager.dragAndDrop(header);
+    }
+
     public void LogOut(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
+        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", false);
     }
 
     public void manageQuestions(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "ManageQuestionsScreen/ManageQuestions.fxml");
+        ScreenManager.goToNewScreen(event, "ManageQuestionsScreen/ManageQuestions.fxml", false);
     }
 
     public void ViewReports(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "ViewReportsScreen/ViewReports.fxml");
+        ScreenManager.goToNewScreen(event, "ViewReportsScreen/ViewReports.fxml", false);
     }
 
     public void CreateNewTest(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "CreateNewTestScreen/CreateNewTest.fxml");
+        ScreenManager.goToNewScreen(event, "CreateNewTestScreen/CreateNewTest.fxml", false);
     }
 
     public void addQuestion(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "AddAQuestionScreen/AddAQuestion.fxml");
+        ScreenManager.goToNewScreen(event, "AddAQuestionScreen/AddAQuestion.fxml", false);
     }
 
     @FXML

@@ -1,13 +1,10 @@
 package application.Client;
 
-import application.ScreenChanger;
+import application.ScreenManager;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -22,7 +19,8 @@ public class Client extends Application {
     public void start(Stage primaryStage) {
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("ClientGui.fxml"));
+            FXMLLoader loader = new FXMLLoader(ScreenManager.class.getResource("Client/ClientGui.fxml"));
+            Parent root = loader.load();
             Scene scene = new Scene(root);
 
             primaryStage.getIcons().add(new Image("application/images/icon.png"));

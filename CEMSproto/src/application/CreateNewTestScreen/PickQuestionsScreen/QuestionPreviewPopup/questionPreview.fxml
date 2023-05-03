@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../application.css"
+            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="application.CreateNewTestScreen.PickQuestionsScreen.QuestionPreviewPopup.questionPreviewController">
+    <AnchorPane fx:id="header" layoutY="-2.0" prefHeight="99.0" prefWidth="819.0" styleClass="pageHeader">
+        <Label alignment="CENTER" layoutX="1.0" prefHeight="99.0" prefWidth="819.0" text="Question Preview"
+               textAlignment="CENTER" textFill="#fafafa">
+            <font>
+                <Font name="Trebuchet MS" size="40.0"/>
+            </font>
+        </Label>
+        <Button layoutX="787.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
+                onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X"/>
+        <Button layoutX="748.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
+                onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="-"/>
+        <ImageView fitHeight="78.0" fitWidth="201.0" layoutX="24.0" layoutY="11.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <Image url="@../../../images/Logo_Transparent2.png"/>
+        </ImageView>
+    </AnchorPane>
+    <AnchorPane layoutY="97.0" minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="819.0"
+                styleClass="backgroundColor">
+        <Label layoutX="14.0" layoutY="2.0" prefHeight="34.0" prefWidth="98.0" text="Question ID:">
+            <font>
+                <Font name="Trebuchet MS Bold" size="15.0"/>
+            </font>
+        </Label>
+        <Label layoutX="14.0" layoutY="39.0" prefHeight="34.0" prefWidth="77.0" text="Question:">
+            <font>
+                <Font name="Trebuchet MS Bold" size="15.0"/>
+            </font>
+        </Label>
+        <TextArea editable="false" layoutX="105.0" layoutY="46.0" prefHeight="150.0" prefWidth="626.0"
+                  text="what is 2+2 ?" wrapText="true"/>
+        <Label layoutX="14.0" layoutY="224.0" prefHeight="34.0" prefWidth="77.0" text="Answers:">
+            <font>
+                <Font name="Trebuchet MS Bold" size="15.0"/>
+            </font>
+        </Label>
+        <VBox layoutX="75.0" layoutY="216.0" prefHeight="328.0" prefWidth="669.0">
+            <padding>
+                <Insets top="15.0"/>
+            </padding>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="75.0" prefWidth="669.0">
+                <VBox.margin>
+                    <Insets/>
+                </VBox.margin>
+                <RadioButton disable="true" mnemonicParsing="false">
+                    <HBox.margin>
+                        <Insets right="5.0"/>
+                    </HBox.margin>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="answers"/>
+                    </toggleGroup>
+                </RadioButton>
+                <TextArea editable="false" prefHeight="60.0" prefWidth="626.0" text="0" wrapText="true"/>
+            </HBox>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="75.0" prefWidth="642.0">
+                <RadioButton disable="true" mnemonicParsing="false" toggleGroup="$answers">
+                    <HBox.margin>
+                        <Insets right="5.0"/>
+                    </HBox.margin>
+                </RadioButton>
+                <TextArea editable="false" prefHeight="60.0" prefWidth="626.0" text="1" wrapText="true"/>
+            </HBox>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="75.0" prefWidth="200.0">
+                <RadioButton disable="true" mnemonicParsing="false" toggleGroup="$answers">
+                    <HBox.margin>
+                        <Insets right="5.0"/>
+                    </HBox.margin>
+                </RadioButton>
+                <TextArea editable="false" prefHeight="60.0" prefWidth="626.0" text="2" wrapText="true"/>
+            </HBox>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="75.0" prefWidth="669.0">
+                <RadioButton disable="true" mnemonicParsing="false" toggleGroup="$answers">
+                    <HBox.margin>
+                        <Insets right="5.0"/>
+                    </HBox.margin>
+                </RadioButton>
+                <TextArea editable="false" prefHeight="60.0" prefWidth="626.0"
+                          style="-fx-text-fill: green; -fx-border-color: green; -fx-border-radius: 7;" text="4"
+                          wrapText="true"/>
+            </HBox>
+        </VBox>
+        <TextField layoutX="105.0" layoutY="7.0"/>
+        <Button layoutX="605.0" layoutY="577.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="63.0"
+                styleClass="subButtons">
+            <graphic>
+                <ImageView fitHeight="33.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../images/2023_05_03_0tp_Kleki.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button layoutX="674.0" layoutY="577.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="63.0"
+                styleClass="subButtons">
+            <graphic>
+                <ImageView fitHeight="40.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../images/icons8-create-48.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Label layoutX="696.0" layoutY="629.0" text="Edit"/>
+        <Label layoutX="618.0" layoutY="629.0" text="Delete"/>
+    </AnchorPane>
+    <Button alignment="BASELINE_CENTER" layoutX="743.0" layoutY="674.0" mnemonicParsing="false" prefHeight="54.0"
+            prefWidth="63.0" styleClass="subButtons">
+        <graphic>
+            <ImageView fitHeight="39.0" fitWidth="39.0" preserveRatio="true">
+                <Image url="@../../../images/Save icon.png"/>
+            </ImageView>
+        </graphic>
+    </Button>
+    <Label layoutX="762.0" layoutY="726.0" text="Save"/>
+</AnchorPane>

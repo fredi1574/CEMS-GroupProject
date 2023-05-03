@@ -2,19 +2,23 @@ package application.ViewReportsScreen.GraphScreen;
 
 import application.ExitButton;
 import application.MinimizeButton;
-import application.ScreenChanger;
+import application.ScreenManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.layout.AnchorPane;
 
 public class ViewGraphController {
 
     @FXML
-    BarChart<String, Number> reportGraph;
+    private AnchorPane header;
+    @FXML
+    private BarChart<String, Number> reportGraph;
 
     //todo: add the value of each bar above it
     public void initialize() {
+        ScreenManager.dragAndDrop(header);
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
 
@@ -31,14 +35,14 @@ public class ViewGraphController {
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
+        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", false);
     }
 
     public void goBackToPreviousScreen(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "ViewReportsScreen/ViewReports.fxml");
+        ScreenManager.goToNewScreen(event, "ViewReportsScreen/ViewReports.fxml", false);
     }
 
-    public void closeClient(ActionEvent event){
+    public void closeClient(ActionEvent event) {
         ExitButton.closeClient(event);
     }
 

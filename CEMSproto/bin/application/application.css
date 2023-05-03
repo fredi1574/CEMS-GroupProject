@@ -2,8 +2,18 @@
 /*TODO: clean this file. maybe separate into multiple files*/
 
 /*refers to Back Save Delete and edit buttons*/
+.subButtons{
+    -fx-background-color: transparent;
+}
+
 .subButtons:hover {
-    -fx-border-color: red;
+    -fx-background-color: #7799c2;
+    -fx-background-radius: 7px;
+}
+
+.subButtons:pressed {
+    -fx-background-color: #306ebd;
+    -fx-background-radius: 7px;
 }
 
 .mainMenuButtons {

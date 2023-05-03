@@ -1,5 +1,4 @@
-package application.CreateNewTestScreen;
-//TODO: change the style of pick subject sub menus and its functionality
+package application.CreateNewTestScreen.PickQuestionsScreen.QuestionPreviewPopup;
 
 import application.ExitButton;
 import application.MinimizeButton;
@@ -8,25 +7,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 
-public class CreateTestController {
+public class questionPreviewController {
 
     @FXML
     private AnchorPane header;
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-    }
-
-    public void BackToMenu(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml", false);
-    }
-
-    public void pickQuestion(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "CreateNewTestScreen/PickQuestionsScreen/PickQuestions.fxml", false);
-    }
-
-    public void openPreview(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "CreateNewTestScreen/TestPreviewScreen/TestPreview.fxml", false);
     }
 
     public void LogOut(ActionEvent event) {
@@ -41,4 +28,5 @@ public class CreateTestController {
     private void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
+
 }

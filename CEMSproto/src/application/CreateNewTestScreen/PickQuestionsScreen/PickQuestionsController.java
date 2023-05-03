@@ -3,20 +3,28 @@ package application.CreateNewTestScreen.PickQuestionsScreen;
 import application.ExitButton;
 import application.MinimizeButton;
 import application.Question;
-import application.ScreenChanger;
+import application.ScreenManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 
 //TODO: change add/delete buttons of questions
 public class PickQuestionsController {
 
     @FXML
+    private AnchorPane header;
+
+    @FXML
     private TableView<Question> questionsTableView;
+    @FXML
+    private TableColumn<Question, CheckBox> questionCheckBoxColumn;
     @FXML
     private TableColumn<Question, String> questionNumberColumn;
     @FXML
@@ -27,11 +35,33 @@ public class PickQuestionsController {
     private TableColumn<Question, String> questionAuthorColumn;
 
     public void initialize() {
+        ScreenManager.dragAndDrop(header);
 
         ObservableList<Question> questionList = FXCollections.observableArrayList(
                 new Question(69, "1A23B", "what is 2+2?", "Fredi"),
                 new Question(420, "420690", "what is the meaning of life?", "Fredi")
         );
+
+        questionsTableView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                ScreenManager.goToNewScreen(new ActionEvent(), "CreateNewTestScreen/PickQuestionsScreen/QuestionPreviewPopup/questionPreview.fxml", true);
+            }
+        });
+
+        questionCheckBoxColumn.setCellFactory(column -> new TableCell<>() {
+            private final CheckBox checkBox = new CheckBox();
+
+            @Override
+            protected void updateItem(CheckBox item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(checkBox);
+                }
+            }
+        });
+
 
         questionNumberColumn.setCellValueFactory(new PropertyValueFactory<>("questionNumber"));
         questionIdColumn.setCellValueFactory(new PropertyValueFactory<>("questionId"));
@@ -42,14 +72,14 @@ public class PickQuestionsController {
     }
 
     public void backToCreateTest(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "CreateNewTestScreen/CreateNewTest.fxml");
+        ScreenManager.goToNewScreen(event, "CreateNewTestScreen/CreateNewTest.fxml", false);
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
+        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", false);
     }
 
-    public void closeClient(ActionEvent event){
+    public void closeClient(ActionEvent event) {
         ExitButton.closeClient(event);
     }
 

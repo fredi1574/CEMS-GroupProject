@@ -2,15 +2,22 @@ package application.LoginWindowScreen;
 
 import application.ExitButton;
 import application.MinimizeButton;
-import application.ScreenChanger;
+import application.ScreenManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 
 public class LoginWindowController {
 
+    @FXML
+    private AnchorPane header;
+
+    public void initialize() {
+        ScreenManager.dragAndDrop(header);
+    }
+
     public void logIN(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml");
+        ScreenManager.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml", false);
     }
 
     @FXML

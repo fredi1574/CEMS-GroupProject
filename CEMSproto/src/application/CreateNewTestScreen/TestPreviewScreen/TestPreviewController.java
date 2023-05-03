@@ -2,19 +2,26 @@ package application.CreateNewTestScreen.TestPreviewScreen;
 
 import application.ExitButton;
 import application.MinimizeButton;
-import application.ScreenChanger;
+import application.ScreenManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
 
 public class TestPreviewController {
 
-    public void LogOut(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
+    @FXML
+    private AnchorPane header;
 
+    public void initialize() {
+        ScreenManager.dragAndDrop(header);
+    }
+
+    public void LogOut(ActionEvent event) {
+        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", false);
     }
 
     public void goBackToPreviousScreen(ActionEvent event) {
-        ScreenChanger.goToNewScreen(event, "CreateNewTestScreen/CreateNewTest.fxml");
+        ScreenManager.goToNewScreen(event, "CreateNewTestScreen/CreateNewTest.fxml", false);
     }
 
     public void closeClient(ActionEvent event) {
