@@ -35,12 +35,12 @@
             </ImageView>
         </graphic>
     </Button>
-    <TableView layoutX="27.0" layoutY="144.0" prefHeight="250.0" prefWidth="726.0">
+    <TableView layoutX="27.0" layoutY="144.0" prefHeight="250.0" prefWidth="747.0">
         <columns>
             <TableColumn prefWidth="106.4000244140625" text="Number" />
             <TableColumn prefWidth="212.79995727539062" text="Question ID" />
-            <TableColumn prefWidth="204.800048828125" text="Questions" />
-            <TableColumn prefWidth="198.39999999999998" text="Written By" />
+            <TableColumn prefWidth="344.0" text="Questions" />
+            <TableColumn text="Written By" />
         </columns>
     </TableView>
     <AnchorPane prefHeight="100.0" prefWidth="806.0" styleClass="pageHeader">

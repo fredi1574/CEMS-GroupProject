@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 
-//todo: add the option to get back to this screen after clicking on add question.
 public class ManageQuestionsController {
 
     @FXML

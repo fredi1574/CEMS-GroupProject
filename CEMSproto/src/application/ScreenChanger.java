@@ -18,8 +18,8 @@ public class ScreenChanger {
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
-            stage.initStyle(StageStyle.TRANSPARENT);
 
+            stage.initStyle(StageStyle.TRANSPARENT);
             stage.getIcons().add(new Image("application/images/icon.png"));
 
             stage.setScene(scene);

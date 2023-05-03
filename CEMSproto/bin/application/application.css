@@ -1,6 +1,11 @@
 /*TODO: change username color in header to be consistent across screens*/
 /*TODO: clean this file. maybe separate into multiple files*/
 
+/*refers to Back Save Delete and edit buttons*/
+.subButtons:hover {
+    -fx-border-color: red;
+}
+
 .mainMenuButtons {
     -fx-background-color: transparent;
 }
@@ -38,10 +43,6 @@
 .combo-box:hover {
     -fx-background-radius: 7px;
     -fx-background-color: #7799c2;
-}
-
-.combo-box-popup{
-    -fx-background-radius: 10px;
 }
 
 .combo-box-popup .list-cell {
