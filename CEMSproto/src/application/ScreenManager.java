@@ -11,28 +11,32 @@ import javafx.stage.StageStyle;
 
 public class ScreenManager {
 
+    private static final double SCREEN_OFFSET_X = 100;
+    private static final double SCREEN_OFFSET_Y = -100;
 
     public static void goToNewScreen(ActionEvent event, String screenRelativePath, boolean popUp) {
         try {
             FXMLLoader loader = new FXMLLoader(ScreenManager.class.getResource(screenRelativePath));
             Parent root = loader.load();
 
+            // Get the Stage object that contains the source node
+            Node source = (Node) event.getSource();
+            Stage previousWindow = (Stage) source.getScene().getWindow();
+
             Scene scene = new Scene(root);
             Stage stage = new Stage();
-
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.getIcons().add(new Image("application/images/icon.png"));
 
             stage.setScene(scene);
             stage.show();
 
-
-            // Close the previous Window
+            if (popUp) {
+                stage.setX(previousWindow.getX() + SCREEN_OFFSET_X);
+                stage.setY(previousWindow.getY() + SCREEN_OFFSET_Y);
+            }
             if (!popUp) {
-                // Get the Stage object that contains the source node
-                Node source = (Node) event.getSource();
-
-                Stage previousWindow = (Stage) source.getScene().getWindow();
+                // Close the previous Window
                 previousWindow.close();
             }
 

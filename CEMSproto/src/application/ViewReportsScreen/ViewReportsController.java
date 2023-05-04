@@ -71,7 +71,7 @@ public class ViewReportsController {
     }
 
     public void showReports(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "ViewReportsScreen/GraphScreen/ViewGraph.fxml", false);
+        ScreenManager.goToNewScreen(event, "ViewReportsScreen/GraphScreen/ViewGraph.fxml", true);
     }
 
     public void LogOut(ActionEvent event) {

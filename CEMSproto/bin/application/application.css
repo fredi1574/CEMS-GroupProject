@@ -39,9 +39,15 @@
 .pageHeaderBtn {
     -fx-background-color: transparent;
     -fx-border-color: #7799c2;
-    -fx-border-radius: 5px;
+    -fx-border-radius: 7px;
     -fx-text-fill: white;
     -fx-font-family: "Trebuchet MS";
+}
+
+.pageHeaderBtn:hover {
+    -fx-background-color: #7799c2;
+    -fx-text-fill: white;
+    -fx-border-radius: 7px;
 }
 
 .combo-box {
@@ -67,11 +73,6 @@
 .combo-box .combo-box-popup .list-cell:selected {
     -fx-background-color: #306ebd;
     -fx-text-fill: #7799c2;
-}
-
-.pageHeaderBtn:hover {
-    -fx-background-color: #7799c2;
-    -fx-text-fill: white;
 }
 
 /*screen background color*/
