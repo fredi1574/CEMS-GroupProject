@@ -38,13 +38,16 @@ public class PickQuestionsController {
         ScreenManager.dragAndDrop(header);
 
         ObservableList<Question> questionList = FXCollections.observableArrayList(
-                new Question(69, "1A23B", "what is 2+2?", "Fredi"),
-                new Question(420, "420690", "what is the meaning of life?", "Fredi")
+                new Question(78, "1A23B", "what is 2+2?", "Fredi"),
+                new Question(420, "42040", "what is the meaning of life?", "Fredi")
         );
 
         questionsTableView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) {
-                ScreenManager.goToNewScreen(new ActionEvent(), "CreateNewTestScreen/PickQuestionsScreen/QuestionPreviewPopup/questionPreview.fxml", true);
+            if (event.getClickCount() == 2 && !questionsTableView.getSelectionModel().isEmpty()) { //check whether the event was double click and the row contains a question
+                // Get selected row data
+//                    Question rowData = questionsTableView.getSelectionModel().getSelectedItem();
+                // Create new pop-up window
+                ScreenManager.getStage("CreateNewTestScreen/PickQuestionsScreen/QuestionPreviewPopup/questionPreview.fxml");
             }
         });
 

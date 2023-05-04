@@ -9,40 +9,49 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.IOException;
+
 public class ScreenManager {
 
     private static final double SCREEN_OFFSET_X = 100;
     private static final double SCREEN_OFFSET_Y = -100;
 
     public static void goToNewScreen(ActionEvent event, String screenRelativePath, boolean popUp) {
-        try {
-            FXMLLoader loader = new FXMLLoader(ScreenManager.class.getResource(screenRelativePath));
-            Parent root = loader.load();
 
-            // Get the Stage object that contains the source node
-            Node source = (Node) event.getSource();
-            Stage previousWindow = (Stage) source.getScene().getWindow();
+        // Get the Stage object that contains the source node
+        Node source = (Node) event.getSource();
+        Stage previousWindow = (Stage) source.getScene().getWindow();
 
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.initStyle(StageStyle.TRANSPARENT);
-            stage.getIcons().add(new Image("application/images/icon.png"));
+        Stage stage = getStage(screenRelativePath);
 
-            stage.setScene(scene);
-            stage.show();
-
-            if (popUp) {
-                stage.setX(previousWindow.getX() + SCREEN_OFFSET_X);
-                stage.setY(previousWindow.getY() + SCREEN_OFFSET_Y);
-            }
-            if (!popUp) {
-                // Close the previous Window
-                previousWindow.close();
-            }
-
-        } catch (Exception exception) {
-            exception.printStackTrace();
+        if (popUp) {
+            // Move the popup so the user could differentiate the two screens
+            stage.setX(previousWindow.getX() + SCREEN_OFFSET_X);
+            stage.setY(previousWindow.getY() + SCREEN_OFFSET_Y);
+        } else {
+            // Close the previous Window
+            previousWindow.close();
         }
+    }
+
+    public static Stage getStage(String screenRelativePath) {
+        FXMLLoader loader = new FXMLLoader(ScreenManager.class.getResource(screenRelativePath));
+        Parent root = null;
+
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.getIcons().add(new Image("application/images/icon.png"));
+
+        stage.setScene(scene);
+        stage.show();
+        return stage;
     }
 
     public static void dragAndDrop(Node node) {
