@@ -1,108 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.*?>
-<AnchorPane prefHeight="533.0" prefWidth="775.0" styleClass="backgroundColor" stylesheets="@../application.css"
-            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="application.ManageQuestionsScreen.ManageQuestionsController">
-    <ComboBox fx:id="comboBox" cache="true" depthTest="DISABLE" layoutX="350.0" layoutY="111.0" prefHeight="27.0"
-              prefWidth="223.0" promptText="Select Subject" styleClass="regularButtons"
-              stylesheets="@../application.css"/>
-    <Button alignment="CENTER" layoutX="26.0" layoutY="398.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0"
-            styleClass="regularButtons" stylesheets="@../application.css" text="Delete">
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="533.0" prefWidth="775.0" styleClass="backgroundColor" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ManageQuestionsScreen.ManageQuestionsController">
+    <ComboBox fx:id="comboBox" cache="true" depthTest="DISABLE" layoutX="350.0" layoutY="111.0" prefHeight="27.0" prefWidth="223.0" promptText="Select Subject" styleClass="regularButtons" stylesheets="@../application.css" />
+    <Button alignment="CENTER" layoutX="26.0" layoutY="398.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" styleClass="regularButtons" stylesheets="@../application.css" text="Delete">
         <font>
-            <Font name="Franklin Gothic Demi Cond" size="12.0"/>
+            <Font name="Franklin Gothic Demi Cond" size="12.0" />
         </font>
         <graphic>
             <ImageView fitHeight="13.0" fitWidth="15.0">
-                <Image url="@../images/icons8-delete-24.png"/>
+                <Image url="@../images/icons8-delete-24.png" />
             </ImageView>
         </graphic>
     </Button>
-    <Button alignment="TOP_CENTER" layoutX="583.0" layoutY="111.0" mnemonicParsing="false" onAction="#AddQuestion"
-            prefHeight="27.0" prefWidth="170.0" styleClass="regularButtons" stylesheets="@../application.css"
-            text="Add Question">
+    <Button alignment="TOP_CENTER" layoutX="583.0" layoutY="111.0" mnemonicParsing="false" onAction="#AddQuestion" prefHeight="27.0" prefWidth="170.0" styleClass="regularButtons" stylesheets="@../application.css" text="Add Question">
         <font>
-            <Font name="Franklin Gothic Demi" size="13.0"/>
+            <Font name="Franklin Gothic Demi" size="13.0" />
         </font>
         <graphic>
             <ImageView fitHeight="14.0" fitWidth="15.0">
-                <Image url="@../images/icons8-add-24.png"/>
+                <Image url="@../images/icons8-add-24.png" />
             </ImageView>
         </graphic>
     </Button>
     <TableView layoutX="27.0" layoutY="144.0" prefHeight="250.0" prefWidth="747.0">
         <columns>
-            <TableColumn prefWidth="106.4000244140625" text="Number"/>
-            <TableColumn prefWidth="212.79995727539062" text="Question ID"/>
-            <TableColumn prefWidth="344.0" text="Questions"/>
-            <TableColumn text="Written By"/>
+            <TableColumn prefWidth="106.4000244140625" text="Number" />
+            <TableColumn prefWidth="212.79995727539062" text="Question ID" />
+            <TableColumn prefWidth="344.0" text="Questions" />
+            <TableColumn text="Written By" />
         </columns>
     </TableView>
     <AnchorPane fx:id="header" prefHeight="100.0" prefWidth="806.0" styleClass="pageHeader">
-        <Label layoutX="213.0" layoutY="4.0" prefHeight="81.0" prefWidth="426.0" styleClass="pageHeader"
-               text=" Questions Managment " textFill="#fafafa" AnchorPane.leftAnchor="213.0"
-               AnchorPane.rightAnchor="167.0">
+        <Label layoutX="213.0" layoutY="4.0" prefHeight="81.0" prefWidth="426.0" styleClass="pageHeader" text=" Questions Managment " textFill="#fafafa" AnchorPane.leftAnchor="213.0" AnchorPane.rightAnchor="167.0">
             <font>
-                <Font name="Trebuchet MS" size="40.0"/>
+                <Font name="Trebuchet MS" size="40.0" />
             </font>
         </Label>
-        <Text fill="#3b3131" layoutX="737.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi"
-              underline="true">
+        <Text fill="#3b3131" layoutX="737.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true">
             <font>
-                <Font name="Trebuchet MS" size="12.0"/>
+                <Font name="Trebuchet MS" size="12.0" />
             </font>
         </Text>
-        <Button layoutX="712.0" layoutY="68.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut"
-                prefHeight="26.0" prefWidth="82.0" styleClass="pageHeaderBtn" stylesheets="@../application.css"
-                text="Logout">
+        <Button layoutX="712.0" layoutY="68.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" styleClass="pageHeaderBtn" stylesheets="@../application.css" text="Logout">
             <font>
-                <Font name="Franklin Gothic Demi Cond" size="14.0"/>
+                <Font name="Franklin Gothic Demi Cond" size="14.0" />
             </font>
         </Button>
         <ImageView layoutX="714.0" layoutY="45.0">
-            <Image url="@../images/icons8-person-16.png"/>
+            <Image url="@../images/icons8-person-16.png" />
         </ImageView>
         <ImageView fitHeight="73.0" fitWidth="196.0" layoutX="14.0" layoutY="7.0" preserveRatio="true">
-            <Image url="@../images/Logo_Transparent2.png"/>
+            <Image url="@../images/Logo_Transparent2.png" />
         </ImageView>
     </AnchorPane>
-    <TextField layoutX="61.0" layoutY="111.0" prefHeight="26.0" prefWidth="278.0" promptText="Search a question"/>
-    <Button layoutX="24.0" layoutY="110.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0"
-            styleClass="backgroundColor">
+    <TextField layoutX="61.0" layoutY="111.0" prefHeight="26.0" prefWidth="278.0" promptText="Search a question" />
+    <Button layoutX="24.0" layoutY="110.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" styleClass="backgroundColor">
         <graphic>
             <ImageView fitHeight="16.0" fitWidth="16.0">
-                <Image url="@../../../bin/application/images/icons8-search-24.png"/>
+                <Image url="@../../../bin/application/images/icons8-search-24.png" />
             </ImageView>
         </graphic>
     </Button>
-    <Button contentDisplay="CENTER" layoutX="18.0" layoutY="469.0" minWidth="35.0" mnemonicParsing="false"
-            onAction="#back" prefHeight="54.0" prefWidth="44.0" style="-fx-background-color: transparent;"
-            textFill="#0d0d0d">
+    <Button contentDisplay="CENTER" layoutX="15.0" layoutY="467.0" minWidth="35.0" mnemonicParsing="false" onAction="#back" prefHeight="54.0" prefWidth="53.0" styleClass="subButtons" textFill="#0d0d0d">
         <graphic>
-            <ImageView fitHeight="36.0" fitWidth="38.0" style="-fx-background-color: #FFFFFF;">
-                <Image url="@../images/icons8-back-96.png"/>
+            <ImageView fitHeight="36.0" fitWidth="38.0">
+                <Image url="@../images/icons8-back-96.png" />
             </ImageView>
         </graphic>
     </Button>
-    <Label layoutX="28.0" layoutY="515.0" text="Back"/>
-    <Button layoutX="743.0" layoutY="472.0" minWidth="29.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="53.0"
-            style="-fx-background-color: transparent;">
+    <Label layoutX="28.0" layoutY="515.0" text="Back" />
+    <Button layoutX="744.0" layoutY="472.0" minWidth="29.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="53.0" styleClass="subButtons">
         <cursor>
-            <Cursor fx:constant="SE_RESIZE"/>
+            <Cursor fx:constant="SE_RESIZE" />
         </cursor>
         <graphic>
             <ImageView fitHeight="36.0" fitWidth="37.0">
-                <Image url="@../images/Save icon.png"/>
+                <Image url="@../images/Save icon.png" />
             </ImageView>
         </graphic>
     </Button>
-    <Label layoutX="758.0" layoutY="515.0" text="Save"/>
-    <Button layoutX="770.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
-            onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X"/>
-    <Button layoutX="734.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
-            onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="-"/>
+    <Label layoutX="758.0" layoutY="515.0" text="Save" />
+    <Button layoutX="770.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
+    <Button layoutX="734.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="-" />
 </AnchorPane>
