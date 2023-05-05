@@ -17,7 +17,7 @@ public class LoginWindowController {
     }
 
     public void logIN(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml", false);
+        ScreenManager.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml");
     }
 
     @FXML

@@ -17,7 +17,7 @@ public class ClientGuiController {
     }
 
     public void logIN(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", false);
+        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
     }
 
     public void closeClient(ActionEvent event){

@@ -17,23 +17,23 @@ public class MainMenuController {
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", false);
+        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
     }
 
     public void manageQuestions(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "ManageQuestionsScreen/ManageQuestions.fxml", false);
+        ScreenManager.goToNewScreen(event, "ManageQuestionsScreen/ManageQuestions.fxml");
     }
 
     public void ViewReports(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "ViewReportsScreen/ViewReports.fxml", false);
+        ScreenManager.goToNewScreen(event, "ViewReportsScreen/ViewReports.fxml");
     }
 
     public void CreateNewTest(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "CreateNewTestScreen/CreateNewTest.fxml", false);
+        ScreenManager.goToNewScreen(event, "CreateNewTestScreen/CreateNewTest.fxml");
     }
 
     public void addQuestion(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "AddAQuestionScreen/AddAQuestion.fxml", false);
+        ScreenManager.goToNewScreen(event, "AddAQuestionScreen/AddAQuestion.fxml");
     }
 
     @FXML

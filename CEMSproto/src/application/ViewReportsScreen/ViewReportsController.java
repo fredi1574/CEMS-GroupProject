@@ -67,15 +67,15 @@ public class ViewReportsController {
     }
 
     public void goBackToPreviousScreen(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml", false);
+        ScreenManager.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml");
     }
 
     public void showReports(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "ViewReportsScreen/GraphScreen/ViewGraph.fxml", true);
+        ScreenManager.goToNewScreen(event, "ViewReportsScreen/GraphScreen/ViewGraph.fxml");
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", false);
+        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
     }
 
     @FXML

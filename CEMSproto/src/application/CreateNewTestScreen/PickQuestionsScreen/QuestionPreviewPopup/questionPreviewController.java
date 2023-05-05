@@ -17,7 +17,7 @@ public class questionPreviewController {
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", false);
+        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
     }
 
     public void closeClient(ActionEvent event) {

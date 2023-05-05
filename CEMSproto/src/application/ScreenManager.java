@@ -8,33 +8,31 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
 
 import java.io.IOException;
 
 public class ScreenManager {
 
     private static final double SCREEN_OFFSET_X = 100;
-    private static final double SCREEN_OFFSET_Y = -100;
+    private static final double SCREEN_OFFSET_Y = -50;
 
-    public static void goToNewScreen(ActionEvent event, String screenRelativePath, boolean popUp) {
+    public static void goToNewScreen(ActionEvent event, String screenRelativePath) {
+        showStage(screenRelativePath);
 
         // Get the Stage object that contains the source node
         Node source = (Node) event.getSource();
         Stage previousWindow = (Stage) source.getScene().getWindow();
 
-        Stage stage = getStage(screenRelativePath);
-
-        if (popUp) {
-            // Move the popup so the user could differentiate the two screens
-            stage.setX(previousWindow.getX() + SCREEN_OFFSET_X);
-            stage.setY(previousWindow.getY() + SCREEN_OFFSET_Y);
-        } else {
-            // Close the previous Window
-            previousWindow.close();
-        }
+        previousWindow.close();
     }
 
-    public static Stage getStage(String screenRelativePath) {
+    public static void popUpScreen(String screenRelativePath) {
+        Stage stage = showStage(screenRelativePath);
+        moveStage(stage);
+    }
+
+    public static Stage showStage(String screenRelativePath) {
         FXMLLoader loader = new FXMLLoader(ScreenManager.class.getResource(screenRelativePath));
         Parent root = null;
 
@@ -54,8 +52,14 @@ public class ScreenManager {
         return stage;
     }
 
+    public static void moveStage(Stage stage) {
+        // Get the current window
+        Window currentWindow = stage.getScene().getWindow();
+        currentWindow.setX(currentWindow.getX() + SCREEN_OFFSET_X);
+        currentWindow.setY(currentWindow.getY() + SCREEN_OFFSET_Y);
+    }
+
     public static void dragAndDrop(Node node) {
-        //todo: change that method to not use arrays of one element
         final double[] xOffset = {0};
         final double[] yOffset = {0};
 

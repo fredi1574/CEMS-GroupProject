@@ -18,19 +18,19 @@ public class CreateTestController {
     }
 
     public void BackToMenu(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml", false);
+        ScreenManager.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml");
     }
 
     public void pickQuestion(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "CreateNewTestScreen/PickQuestionsScreen/PickQuestions.fxml", false);
+        ScreenManager.goToNewScreen(event, "CreateNewTestScreen/PickQuestionsScreen/PickQuestions.fxml");
     }
 
     public void openPreview(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "CreateNewTestScreen/TestPreviewScreen/TestPreview.fxml", false);
+        ScreenManager.goToNewScreen(event, "CreateNewTestScreen/TestPreviewScreen/TestPreview.fxml");
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", false);
+        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
     }
 
     public void closeClient(ActionEvent event) {

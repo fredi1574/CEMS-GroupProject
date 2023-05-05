@@ -35,11 +35,11 @@ public class ViewGraphController {
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", false);
+        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
     }
 
     public void goBackToPreviousScreen(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "ViewReportsScreen/ViewReports.fxml", false);
+        ScreenManager.goToNewScreen(event, "ViewReportsScreen/ViewReports.fxml");
     }
 
     public void closeClient(ActionEvent event) {

@@ -17,11 +17,11 @@ public class AddAQuestionController {
     }
 
     public void BackToMenu(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml", false);
+        ScreenManager.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml");
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", false);
+        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
     }
 
     @FXML

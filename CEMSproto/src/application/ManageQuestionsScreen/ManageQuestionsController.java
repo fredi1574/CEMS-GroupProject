@@ -27,15 +27,15 @@ public class ManageQuestionsController {
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml", false);
+        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
     }
 
     public void back(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml", false);
+        ScreenManager.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml");
     }
 
     public void AddQuestion(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "AddAQuestionScreen/AddAQuestion.fxml", false);
+        ScreenManager.goToNewScreen(event, "AddAQuestionScreen/AddAQuestion.fxml");
     }
 
     public void closeClient(ActionEvent event) {
