@@ -57,6 +57,17 @@ public class ViewReportsController {
                 new Report(2021, 'B', "Mathematics", "Statistics", 13096)
         );
 
+        reportsTableView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && !reportsTableView.getSelectionModel().isEmpty()) { //check whether the event was double click and the row contains a question
+
+                //Get selected row data
+                //Question rowData = questionsTableView.getSelectionModel().getSelectedItem();
+
+                // Create new pop-up window
+                ScreenManager.popUpScreen("ViewReportsScreen/GraphScreen/ViewGraph.fxml");
+            }
+        });
+
         yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
         semesterColumn.setCellValueFactory(new PropertyValueFactory<>("semester"));
         subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
@@ -70,8 +81,8 @@ public class ViewReportsController {
         ScreenManager.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml");
     }
 
-    public void showReports(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "ViewReportsScreen/GraphScreen/ViewGraph.fxml");
+    public void showReports() {
+        ScreenManager.popUpScreen("ViewReportsScreen/GraphScreen/ViewGraph.fxml");
     }
 
     public void LogOut(ActionEvent event) {
