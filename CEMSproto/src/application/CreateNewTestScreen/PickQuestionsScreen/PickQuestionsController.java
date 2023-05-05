@@ -15,7 +15,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
-//TODO: change add/delete buttons of questions
 public class PickQuestionsController {
 
     @FXML

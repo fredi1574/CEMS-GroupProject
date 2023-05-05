@@ -31,7 +31,6 @@ public class ViewGraphController {
             series.getData().add(new XYChart.Data<>(group, numOfStudentsPerGroup[i]));
         }
         reportGraph.getData().add(series);
-        //TODO: change the color of the axis title
     }
 
     public void LogOut(ActionEvent event) {

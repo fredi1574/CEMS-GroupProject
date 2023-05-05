@@ -1,5 +1,4 @@
 package application.CreateNewTestScreen;
-//TODO: change the style of pick subject sub menus and its functionality
 
 import application.ExitButton;
 import application.MinimizeButton;
