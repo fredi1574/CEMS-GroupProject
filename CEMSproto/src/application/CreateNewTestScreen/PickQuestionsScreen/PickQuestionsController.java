@@ -45,12 +45,10 @@ public class PickQuestionsController {
         questionsTableView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && !questionsTableView.getSelectionModel().isEmpty()) { //check whether the event was double click and the row contains a question
 
-                //               Get selected row data
-//               Question rowData = questionsTableView.getSelectionModel().getSelectedItem();
+                //Get selected row data
+                //Question rowData = questionsTableView.getSelectionModel().getSelectedItem();
 
                 // Create new pop-up window
-//                Stage stage = ScreenManager.getStage("CreateNewTestScreen/PickQuestionsScreen/QuestionPreviewPopup/questionPreview.fxml");
-//                ScreenManager.moveStage(stage);
                 ScreenManager.popUpScreen("CreateNewTestScreen/PickQuestionsScreen/QuestionPreviewPopup/questionPreview.fxml");
             }
         });
