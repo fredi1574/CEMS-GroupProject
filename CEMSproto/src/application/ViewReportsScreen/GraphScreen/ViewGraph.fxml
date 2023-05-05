@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="533.0" prefWidth="775.0" styleClass="backgroundColor" stylesheets="@../../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewReportsScreen.GraphScreen.ViewGraphController">
     <AnchorPane fx:id="header" layoutX="-7.0" layoutY="-5.0" prefHeight="106.0" prefWidth="806.0" styleClass="pageHeader" stylesheets="@../../application.css">
@@ -21,22 +20,9 @@
                 <Font name="Trebuchet MS" size="40.0" />
             </font>
         </Label>
-        <Button layoutX="712.0" layoutY="68.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" styleClass="pageHeaderBtn" text="Logout">
-            <font>
-                <Font name="Franklin Gothic Demi Cond" size="14.0" />
-            </font>
-        </Button>
         <ImageView fitHeight="86.0" fitWidth="240.0" layoutX="22.0" layoutY="9.0">
             <Image url="@../../images/Logo_Transparent2.png" />
         </ImageView>
-        <ImageView layoutX="712.0" layoutY="45.0">
-            <Image url="@../../images/icons8-person-16.png" />
-        </ImageView>
-        <Text fill="#3b3131" layoutX="733.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true">
-            <font>
-                <Font name="Trebuchet MS" size="12.0" />
-            </font>
-        </Text>
     </AnchorPane>
     <VBox alignment="CENTER_LEFT" layoutX="9.0" layoutY="101.0" prefHeight="356.0" prefWidth="782.0">
         <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="781.0">
@@ -148,14 +134,6 @@
             </Label>
         </HBox>
     </VBox>
-    <Button layoutX="14.0" layoutY="470.0" mnemonicParsing="false" onAction="#goBackToPreviousScreen" prefHeight="34.0" prefWidth="54.0" styleClass="subButtons">
-        <graphic>
-            <ImageView fitHeight="36.0" fitWidth="38.0" style="-fx-background-color: #FFFFFF;">
-                <Image url="@../../images/icons8-back-96.png" />
-            </ImageView>
-        </graphic>
-    </Button>
-    <Label layoutX="29.0" layoutY="512.0" text="Back" />
     <BarChart fx:id="reportGraph" animated="false" layoutX="133.0" layoutY="146.0" legendSide="LEFT" legendVisible="false" prefHeight="386.0" prefWidth="666.0">
         <xAxis>
             <CategoryAxis label="Grades" prefHeight="41.0" prefWidth="569.0" side="BOTTOM" tickLabelFill="#306ebd" />
