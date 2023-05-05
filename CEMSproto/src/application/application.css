@@ -77,7 +77,8 @@
 
 /*screen background color*/
 .backgroundColor {
-    -fx-background-color: #e6eef7;
+    /*-fx-background-color: #e6eef7;*/
+    -fx-background-image: url("images/background.png");
 }
 
 /*test area styling (excluding background color)*/
