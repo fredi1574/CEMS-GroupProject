@@ -47,7 +47,7 @@
 .pageHeaderBtn:hover {
     -fx-background-color: #7799c2;
     -fx-text-fill: white;
-    -fx-border-radius: 7px;
+    -fx-background-radius: 7px;
 }
 
 .combo-box {
