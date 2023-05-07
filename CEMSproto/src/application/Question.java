@@ -1,25 +1,44 @@
 package application;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 public class Question {
-    private int questionNumber;
+
+    private BooleanProperty selected = new SimpleBooleanProperty(false);
+    private int number;
     private String questionId;
     private String questionText;
     private String author;
 
-
-    public Question(int questionNumber, String questionId, String questionText, String author) {
-        this.questionNumber = questionNumber;
+    //    public Question(BooleanProperty selected, int number, String questionId, String questionText, String author) {
+//        this.selected = selected;
+//        this.number = number;
+//        this.questionId = questionId;
+//        this.questionText = questionText;
+//        this.author = author;
+//    }
+    public Question(int number, String questionId, String questionText, String author) {
+        this.number = number;
         this.questionId = questionId;
         this.questionText = questionText;
         this.author = author;
     }
 
-    public int getQuestionNumber() {
-        return questionNumber;
+    public BooleanProperty getSelected() {
+        return selected;
     }
 
-    public void setQuestionNumber(int questionNumber) {
-        this.questionNumber = questionNumber;
+    public void setSelected(BooleanProperty selected) {
+        this.selected = selected;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public String getQuestionId() {

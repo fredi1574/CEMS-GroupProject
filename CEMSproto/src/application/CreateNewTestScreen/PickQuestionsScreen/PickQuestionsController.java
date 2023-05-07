@@ -1,18 +1,12 @@
 package application.CreateNewTestScreen.PickQuestionsScreen;
 
-import application.ExitButton;
-import application.MinimizeButton;
-import application.Question;
-import application.ScreenManager;
+import application.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 public class PickQuestionsController {
@@ -22,16 +16,16 @@ public class PickQuestionsController {
 
     @FXML
     private TableView<Question> questionsTableView;
-    @FXML
-    private TableColumn<Question, CheckBox> questionCheckBoxColumn;
-    @FXML
-    private TableColumn<Question, String> questionNumberColumn;
-    @FXML
-    private TableColumn<Question, String> questionIdColumn;
-    @FXML
-    private TableColumn<Question, String> questionTextColumn;
-    @FXML
-    private TableColumn<Question, String> questionAuthorColumn;
+//    @FXML
+//    private TableColumn<Question, CheckBox> questionCheckBoxColumn;
+//    @FXML
+//    private TableColumn<Question, String> questionNumberColumn;
+//    @FXML
+//    private TableColumn<Question, String> questionIdColumn;
+//    @FXML
+//    private TableColumn<Question, String> questionTextColumn;
+//    @FXML
+//    private TableColumn<Question, String> questionAuthorColumn;
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
@@ -41,37 +35,23 @@ public class PickQuestionsController {
                 new Question(420, "42040", "what is the meaning of life?", "Fredi")
         );
 
-        questionsTableView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2 && !questionsTableView.getSelectionModel().isEmpty()) { //check whether the event was double click and the row contains a question
+        ObservableList<String> columnList = FXCollections.observableArrayList();
+        columnList.addAll("Number", "QuestionId", "QuestionText", "Author");
 
-                //Get selected row data
-                //Question rowData = questionsTableView.getSelectionModel().getSelectedItem();
+        ObservableList<TableColumn<Question, ?>> columns = TableManager.createTable(questionsTableView, columnList, questionList);
+        TableManager.addCheckBoxesToTable(questionsTableView);
 
-                // Create new pop-up window
-                ScreenManager.popUpScreen("CreateNewTestScreen/PickQuestionsScreen/QuestionPreviewPopup/questionPreview.fxml");
+        TableManager.addDoubleClickFunctionality(questionsTableView, "CreateNewTestScreen/PickQuestionsScreen/QuestionPreviewPopup/questionPreview.fxml");
+
+        //todo: find a cleaner way to do change the width of every column
+        for (TableColumn<Question, ?> column : columns) {
+            if (column.getText().equals("QuestionText")) {
+                column.prefWidthProperty().bind(questionsTableView.widthProperty().multiply(0.625));
+            } else {
+                column.prefWidthProperty().bind(questionsTableView.widthProperty().multiply(0.1));
+
             }
-        });
-
-        questionCheckBoxColumn.setCellFactory(column -> new TableCell<>() {
-            private final CheckBox checkBox = new CheckBox();
-
-            @Override
-            protected void updateItem(CheckBox item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    setGraphic(checkBox);
-                }
-            }
-        });
-
-        questionNumberColumn.setCellValueFactory(new PropertyValueFactory<>("questionNumber"));
-        questionIdColumn.setCellValueFactory(new PropertyValueFactory<>("questionId"));
-        questionTextColumn.setCellValueFactory(new PropertyValueFactory<>("questionText"));
-        questionAuthorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
-
-        questionsTableView.setItems(questionList);
+        }
     }
 
     public void backToCreateTest(ActionEvent event) {

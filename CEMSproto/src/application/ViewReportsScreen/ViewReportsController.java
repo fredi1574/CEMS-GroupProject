@@ -3,6 +3,7 @@ package application.ViewReportsScreen;
 import application.ExitButton;
 import application.MinimizeButton;
 import application.ScreenManager;
+import application.TableManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,10 +11,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
-//todo: add the option to double click as an alternative to clicking on a button
 public class ViewReportsController {
 
     @FXML
@@ -57,24 +56,21 @@ public class ViewReportsController {
                 new Report(2021, 'B', "Mathematics", "Statistics", 13096)
         );
 
-        reportsTableView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2 && !reportsTableView.getSelectionModel().isEmpty()) { //check whether the event was double click and the row contains a question
+        ObservableList<String> columnList = FXCollections.observableArrayList();
+        columnList.addAll("Year", "Semester", "Subject", "Course", "TestId");
 
-                //Get selected row data
-                //Question rowData = questionsTableView.getSelectionModel().getSelectedItem();
+        ObservableList<TableColumn<Report, ?>> columns = TableManager.createTable(reportsTableView, columnList, reportList);
+        TableManager.addDoubleClickFunctionality(reportsTableView, "ViewReportsScreen/GraphScreen/ViewGraph.fxml");
 
-                // Create new pop-up window
-                ScreenManager.popUpScreen("ViewReportsScreen/GraphScreen/ViewGraph.fxml");
+        //todo: find a cleaner way to do change the width of every column
+        for (TableColumn<Report, ?> column : columns) {
+            if (column.getText().equals("Subject")) {
+                column.prefWidthProperty().bind(reportsTableView.widthProperty().multiply(0.594));
+            } else {
+                column.prefWidthProperty().bind(reportsTableView.widthProperty().multiply(0.1));
             }
-        });
+        }
 
-        yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
-        semesterColumn.setCellValueFactory(new PropertyValueFactory<>("semester"));
-        subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
-        courseColumn.setCellValueFactory(new PropertyValueFactory<>("course"));
-        testIdColumn.setCellValueFactory(new PropertyValueFactory<>("testId"));
-
-        reportsTableView.setItems(reportList);
     }
 
     public void goBackToPreviousScreen(ActionEvent event) {

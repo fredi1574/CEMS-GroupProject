@@ -104,13 +104,13 @@
         </Button>
         <Label layoutX="696.0" layoutY="629.0" text="Edit" />
         <Label layoutX="618.0" layoutY="629.0" text="Delete" />
+       <Button alignment="BASELINE_CENTER" layoutX="744.0" layoutY="576.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
+           <graphic>
+               <ImageView fitHeight="39.0" fitWidth="39.0" preserveRatio="true">
+                   <Image url="@../../../images/Save icon.png" />
+               </ImageView>
+           </graphic>
+       </Button>
     </AnchorPane>
-    <Button alignment="BASELINE_CENTER" layoutX="743.0" layoutY="674.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
-        <graphic>
-            <ImageView fitHeight="39.0" fitWidth="39.0" preserveRatio="true">
-                <Image url="@../../../images/Save icon.png" />
-            </ImageView>
-        </graphic>
-    </Button>
-    <Label layoutX="762.0" layoutY="726.0" text="Save" />
+    <Label layoutX="762.0" layoutY="730.0" text="Save" />
 </AnchorPane>

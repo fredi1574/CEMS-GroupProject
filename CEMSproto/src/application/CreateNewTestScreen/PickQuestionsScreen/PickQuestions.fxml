@@ -47,15 +47,7 @@
         </ImageView>
         <TextField prefHeight="27.0" prefWidth="379.0" promptText="Search a question" />
     </HBox>
-    <TableView fx:id="questionsTableView" layoutX="56.0" layoutY="141.0" prefHeight="167.0" prefWidth="730.0">
-        <columns>
-            <TableColumn fx:id="questionCheckBoxColumn" prefWidth="31.999969482421875" />
-            <TableColumn fx:id="questionNumberColumn" prefWidth="72.79996490478516" text="Number" />
-            <TableColumn fx:id="questionIdColumn" prefWidth="82.4000244140625" text="Question ID" />
-            <TableColumn fx:id="questionTextColumn" prefWidth="462.3999938964844" text="Question" />
-            <TableColumn fx:id="questionAuthorColumn" minWidth="0.0" prefWidth="77.0" text="Author" />
-        </columns>
-    </TableView>
+    <TableView fx:id="questionsTableView" layoutX="56.0" layoutY="141.0" prefHeight="167.0" prefWidth="730.0" />
     <TableView layoutX="56.0" layoutY="374.0" prefHeight="178.0" prefWidth="730.0" style="-fx-border-color: #649DAD;">
         <columns>
             <TableColumn prefWidth="57.0" text="Number" />
