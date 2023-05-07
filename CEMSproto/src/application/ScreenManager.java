@@ -60,19 +60,18 @@ public class ScreenManager {
     }
 
     public static void dragAndDrop(Node node) {
-        final double[] xOffset = {0};
-        final double[] yOffset = {0};
+        double[] offset ={0,0}; //offset[0] - X axis, offset[1] - Y axis
 
         // Set the mouse pressed event for the node to enable drag and drop
         node.setOnMousePressed(event -> {
-            xOffset[0] = event.getSceneX();
-            yOffset[0] = event.getSceneY();
+            offset[0] = event.getSceneX();
+            offset[1] = event.getSceneY();
         });
 
         // Set the mouse dragged event for the node to enable drag and drop
         node.setOnMouseDragged(event -> {
-            node.getScene().getWindow().setX(event.getScreenX() - xOffset[0]);
-            node.getScene().getWindow().setY(event.getScreenY() - yOffset[0]);
+            node.getScene().getWindow().setX(event.getScreenX() - offset[0]);
+            node.getScene().getWindow().setY(event.getScreenY() - offset[1]);
         });
     }
 }
