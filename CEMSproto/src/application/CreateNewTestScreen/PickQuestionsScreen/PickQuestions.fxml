@@ -36,7 +36,7 @@
             <Image url="@../../images/Logo_Transparent2.png" />
         </ImageView>
     </AnchorPane>
-    <Label layoutX="53.0" layoutY="98.0" prefHeight="54.0" prefWidth="207.0" text="Question Database:">
+    <Label layoutX="57.0" layoutY="85.0" prefHeight="54.0" prefWidth="207.0" text="Question Database:">
         <font>
             <Font name="System Bold" size="18.0" />
         </font>
@@ -82,4 +82,5 @@
     <Button layoutX="59.0" layoutY="315.0" mnemonicParsing="false" styleClass="regularButtons" text="Add selected" />
     <Button layoutX="166.0" layoutY="315.0" mnemonicParsing="false" styleClass="regularButtons" text="Deselect all" />
     <Button layoutX="59.0" layoutY="563.0" mnemonicParsing="false" styleClass="regularButtons" text="Remove selected" />
+   <Label layoutX="56.0" layoutY="125.0" text="*Double click on a question to see full information on it" />
 </AnchorPane>
