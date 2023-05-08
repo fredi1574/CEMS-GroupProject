@@ -1,6 +1,7 @@
 package application.AddAQuestionScreen;
 
 import application.ExitButton;
+import application.LogOut;
 import application.MinimizeButton;
 import application.ScreenManager;
 import javafx.event.ActionEvent;
@@ -21,11 +22,11 @@ public class AddAQuestionController {
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
+        LogOut.logOutToLoginScreen(event);
     }
 
     @FXML
-    private void minimizeWindow(ActionEvent event) {
+    private void minimize(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
 

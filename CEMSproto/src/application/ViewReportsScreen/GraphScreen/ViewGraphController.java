@@ -41,8 +41,8 @@ public class ViewGraphController {
         ScreenManager.goToNewScreen(event, "ViewReportsScreen/ViewReports.fxml");
     }
 
-    public void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    public void closePopUp(ActionEvent event) {
+        ExitButton.closePopUp(event);
     }
 
     @FXML

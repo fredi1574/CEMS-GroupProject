@@ -44,23 +44,26 @@ public class ScreenManager {
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();
+
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.getIcons().add(new Image("application/images/icon.png"));
-
         stage.setScene(scene);
         stage.show();
+
         return stage;
     }
 
     public static void moveStage(Stage stage) {
         // Get the current window
         Window currentWindow = stage.getScene().getWindow();
+
+        // Set the current window position according to the previous window
         currentWindow.setX(currentWindow.getX() + SCREEN_OFFSET_X);
         currentWindow.setY(currentWindow.getY() + SCREEN_OFFSET_Y);
     }
 
     public static void dragAndDrop(Node node) {
-        double[] offset ={0,0}; //offset[0] - X axis, offset[1] - Y axis
+        double[] offset = {0, 0}; //offset[0] - X axis, offset[1] - Y axis
 
         // Set the mouse pressed event for the node to enable drag and drop
         node.setOnMousePressed(event -> {

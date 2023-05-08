@@ -133,5 +133,5 @@
     </Button>
     <Label layoutX="753.0" layoutY="717.0" text="Save" />
     <Button layoutX="777.0" layoutY="4.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
-    <Button layoutX="741.0" layoutY="4.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="-" />
+    <Button layoutX="741.0" layoutY="4.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimize" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="-" />
 </AnchorPane>

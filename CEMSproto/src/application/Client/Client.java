@@ -1,38 +1,68 @@
 package application.Client;
 
-import application.ScreenManager;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import java.io.IOException;
 
-public class Client extends Application {
+import application.common.ChatIF;
+import application.common.MsgHandler;
+import ocsf.client.AbstractClient;
 
-    public static void main(String[] args) {
-        launch(args);
+public class Client extends AbstractClient {
+	private ChatIF clientUI; 
+	private boolean waitResponse = false;
+	public static MsgHandler<Object> messageFromServer;
 
-    }
+	//constructor
+	
+	public Client(String host, int port,ChatIF clientUI) {
+		super(host, port);
+		this.clientUI = clientUI;
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	protected void handleMessageFromServer(Object msg) {
+		 waitResponse = false;
+		 messageFromServer = (MsgHandler<Object>) msg;
+		 System.out.println("handleMessageFromServer ");
+		 System.out.println(messageFromServer.getType().toString());
+		 switch(messageFromServer.getType())
+		 {
+		 	case Connected:
+				break;
+			case Disconnected:
+				System.exit(0);
+				break;
+			case ImportedSuccessfully:
+				break;
+		 }		
+	}
+	public void handleMessageFromClientUI(Object message) {
+		try {
+			openConnection();
+			waitResponse = true;
+			sendToServer(message);
+			// wait for response
+			while (waitResponse) {
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		} catch (IOException e) {
+			clientUI.display("Could not send message to server.  Terminating client.");
+			quit();
+		}
+	}
+	 public void quit()
+	  {
+	    try
+	    {
+	      closeConnection();
+	    }
+	    catch(IOException e) {}
+	    System.exit(0);
+	  }
 
-    public void start(Stage primaryStage) {
 
-        try {
-            FXMLLoader loader = new FXMLLoader(ScreenManager.class.getResource("Client/ClientGui.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-
-            primaryStage.getIcons().add(new Image("application/images/icon.png"));
-            primaryStage.initStyle(StageStyle.TRANSPARENT);
-
-            primaryStage.setScene(scene);
-            primaryStage.show();
-
-            // Get reference to the LoginBtn in LoginWindow.fxml
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-}
+	}

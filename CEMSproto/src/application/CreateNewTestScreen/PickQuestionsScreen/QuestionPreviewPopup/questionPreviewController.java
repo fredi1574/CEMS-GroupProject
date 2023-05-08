@@ -20,8 +20,8 @@ public class questionPreviewController {
         ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
     }
 
-    public void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    public void closePopUp(ActionEvent event) {
+        ExitButton.closePopUp(event);
     }
 
     @FXML

@@ -17,7 +17,7 @@
                 <Font name="Trebuchet MS Bold" size="21.0" />
             </font>
         </Label>
-        <TextField layoutX="48.0" layoutY="239.0" prefHeight="24.0" prefWidth="228.0" style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;">
+            <TextField fx:id="IPtxt" layoutX="48.0" layoutY="239.0" prefHeight="24.0" prefWidth="228.0" style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;" text="localhost">
             <padding>
                 <Insets left="10.0" />
             </padding>

@@ -25,7 +25,7 @@ public class CreateTestController {
     }
 
     public void openPreview(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "CreateNewTestScreen/TestPreviewScreen/TestPreview.fxml");
+        ScreenManager.popUpScreen("CreateNewTestScreen/TestPreviewScreen/TestPreview.fxml");
     }
 
     public void LogOut(ActionEvent event) {

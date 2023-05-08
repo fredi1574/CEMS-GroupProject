@@ -17,14 +17,19 @@
 
 <AnchorPane accessibleRole="HYPERLINK" cache="true" prefHeight="661.0" prefWidth="785.0" styleClass="backgroundColor" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Server.ServerGuiController">
    <children>
-      <AnchorPane layoutY="-4.0" prefHeight="91.0" prefWidth="808.0" styleClass="pageHeader">
+      <AnchorPane fx:id="header" layoutY="-4.0" prefHeight="91.0" prefWidth="808.0" styleClass="pageHeader">
          <children>
             <Label alignment="CENTER" layoutX="1.0" layoutY="20.0" prefHeight="54.0" prefWidth="807.0" style="-fx-font-weight: bold;" text="CEMS Server" textAlignment="CENTER" textFill="#fafafa">
                <font>
                   <Font name="MV Boli" size="40.0" />
                </font>
             </Label>
-            <Button fx:id="Close" layoutX="770.0" layoutY="17.0" mnemonicParsing="false" onAction="#Close" style="-fx-background-color: white;" styleClass="pageHeader" stylesheets="@../application.css" text="X" textFill="#306ebd">
+            <Button fx:id="Close" layoutX="770.0" layoutY="17.0" mnemonicParsing="false" onAction="#Close" styleClass="pageHeaderBtn" stylesheets="@../application.css" text="X">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="Close1" layoutX="730.0" layoutY="17.0" mnemonicParsing="false" onAction="#minimizeWindow" styleClass="pageHeaderBtn" stylesheets="@../application.css" text="_">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -33,12 +38,12 @@
       </AnchorPane>
       <AnchorPane layoutY="87.0" prefHeight="117.0" prefWidth="808.0" styleClass="backgroundColor">
          <children>
-            <Label fx:id="ServerConfig" layoutX="14.0" layoutY="14.0" prefHeight="33.0" prefWidth="231.0" text="Server Configuration" textFill="#306ebd">
+            <Label fx:id="ServerConfig" layoutX="81.0" layoutY="50.0" prefHeight="33.0" prefWidth="208.0" text="Server Configuration" textFill="#306ebd">
                <font>
                   <Font name="Trebuchet MS Bold" size="21.0" />
                </font>
             </Label>
-            <Label fx:id="QuestionId11" layoutX="357.0" layoutY="14.0" prefHeight="33.0" prefWidth="231.0" text="Connected Clients" textFill="#306ebd">
+            <Label fx:id="ConnectedClients" layoutX="357.0" layoutY="14.0" prefHeight="33.0" prefWidth="231.0" text="Connected Clients" textFill="#306ebd">
                <font>
                   <Font name="Trebuchet MS Bold" size="21.0" />
                </font>
@@ -47,77 +52,72 @@
       </AnchorPane>
       <HBox layoutX="14.0" layoutY="143.0" prefHeight="508.0" prefWidth="765.0">
          <children>
-            <VBox prefHeight="502.0" prefWidth="346.0">
+            <VBox alignment="CENTER" prefHeight="502.0" prefWidth="346.0">
                <children>
-                  <Label fx:id="QuestionId" prefHeight="33.0" prefWidth="92.0" text="IP:">
+                  <Label fx:id="labelIP" prefHeight="31.0" prefWidth="198.0" text="IP:">
                      <font>
                         <Font name="Trebuchet MS Bold" size="15.0" />
                      </font>
                   </Label>
-                  <TextField maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="197.0" style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;">
+                  <TextField fx:id="txtIP" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="197.0" style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
                   </TextField>
-                  <Label fx:id="QuestionId2" prefHeight="33.0" prefWidth="92.0" text="Port:">
+                  <Label fx:id="labelPort" contentDisplay="CENTER" prefHeight="31.0" prefWidth="196.0" text="Port:">
                      <font>
                         <Font name="Trebuchet MS Bold" size="15.0" />
                      </font>
                   </Label>
-                  <TextField maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="197.0" style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;">
+                  <TextField fx:id="txtPort" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="197.0" style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
                   </TextField>
-                  <Label fx:id="QuestionId21" prefHeight="33.0" prefWidth="92.0" text="DB Name:">
+                  <Label fx:id="labelDBNAME" contentDisplay="CENTER" prefHeight="31.0" prefWidth="197.0" text="DB Name:">
                      <font>
                         <Font name="Trebuchet MS Bold" size="15.0" />
                      </font>
                   </Label>
-                  <TextField maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="197.0" style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;">
+                  <TextField fx:id="txtDBname" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="197.0" style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
                   </TextField>
-                  <Label fx:id="QuestionId211" prefHeight="33.0" prefWidth="113.0" text="DB Username:">
+                  <Label fx:id="labelDBUsername" contentDisplay="CENTER" prefHeight="32.0" prefWidth="197.0" text="DB Username:">
                      <font>
                         <Font name="Trebuchet MS Bold" size="15.0" />
                      </font>
                   </Label>
-                  <TextField maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="197.0" style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;">
+                  <TextField fx:id="txtUsername" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="197.0" style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
                   </TextField>
-                  <Label fx:id="QuestionId2111" prefHeight="33.0" prefWidth="113.0" text="DB Password:">
+                  <Label fx:id="labelDBPassword" contentDisplay="CENTER" prefHeight="32.0" prefWidth="194.0" text="DB Password:">
                      <font>
                         <Font name="Trebuchet MS Bold" size="15.0" />
                      </font>
                   </Label>
-                  <TextField maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="197.0" style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;">
+                  <TextField fx:id="txtPassword" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="197.0" style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
                   </TextField>
                   <Pane prefHeight="179.0" prefWidth="344.0">
                      <children>
-                        <Button layoutX="57.0" layoutY="64.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" styleClass="pageHeader" stylesheets="@../application.css" text="Connect" textFill="WHITE">
+                        <Button fx:id="btnConnect" layoutX="122.0" layoutY="40.0" mnemonicParsing="false" onAction="#Connection" prefHeight="25.0" prefWidth="101.0" styleClass="pageHeader" stylesheets="@../application.css" text="Connect" textFill="WHITE">
                            <font>
                               <Font name="Trebuchet MS Bold" size="13.0" />
                            </font>
                         </Button>
-                        <Button layoutX="57.0" layoutY="108.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" styleClass="pageHeader" stylesheets="@../application.css" text="Disconnect" textFill="WHITE">
+                        <Button fx:id="btnDisconnect" layoutX="122.0" layoutY="108.0" mnemonicParsing="false" onAction="#Disconnection" prefHeight="25.0" prefWidth="101.0" styleClass="pageHeader" stylesheets="@../application.css" text="Disconnect" textFill="WHITE">
                            <font>
                               <Font name="Trebuchet MS Bold" size="13.0" />
                            </font>
                         </Button>
                      </children>
                   </Pane>
-                  <ImageView fitHeight="76.0" fitWidth="200.0">
-                     <image>
-                        <Image url="@../images/Logo.png" />
-                     </image>
-                  </ImageView>
                </children>
             </VBox>
             <VBox prefHeight="392.0" prefWidth="424.0">
@@ -132,7 +132,7 @@
                   <Pane prefHeight="284.0" prefWidth="412.0">
                      <children>
                         <TextArea fx:id="Console" layoutX="1.0" layoutY="72.0" onInputMethodTextChanged="#consoleStreamIntoGUI" prefHeight="202.0" prefWidth="422.0" />
-                        <Button fx:id="ImportBtn" layoutX="321.0" layoutY="8.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" styleClass="pageHeader" stylesheets="@../application.css" text="Import Data" textFill="WHITE">
+                        <Button fx:id="btnImport" layoutX="321.0" layoutY="8.0" mnemonicParsing="false" onAction="#ImportData" prefHeight="25.0" prefWidth="101.0" styleClass="pageHeader" stylesheets="@../application.css" text="Import Data" textFill="WHITE">
                            <font>
                               <Font name="Trebuchet MS Bold" size="13.0" />
                            </font>
@@ -148,5 +148,10 @@
             </VBox>
          </children>
       </HBox>
+      <ImageView fitHeight="76.0" fitWidth="200.0" layoutX="83.0" layoutY="581.0">
+         <image>
+            <Image url="@../images/Logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
