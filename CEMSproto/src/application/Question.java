@@ -7,20 +7,13 @@ public class Question {
 
     private BooleanProperty selected = new SimpleBooleanProperty(false);
     private int number;
-    private String questionId;
+    private String questionID;
     private String questionText;
     private String author;
 
-    //    public Question(BooleanProperty selected, int number, String questionId, String questionText, String author) {
-//        this.selected = selected;
-//        this.number = number;
-//        this.questionId = questionId;
-//        this.questionText = questionText;
-//        this.author = author;
-//    }
-    public Question(int number, String questionId, String questionText, String author) {
+    public Question(int number, String questionID, String questionText, String author) {
         this.number = number;
-        this.questionId = questionId;
+        this.questionID = questionID;
         this.questionText = questionText;
         this.author = author;
     }
@@ -41,12 +34,12 @@ public class Question {
         this.number = number;
     }
 
-    public String getQuestionId() {
-        return questionId;
+    public String getQuestionID() {
+        return questionID;
     }
 
-    public void setQuestionId(String questionId) {
-        this.questionId = questionId;
+    public void setQuestionID(String questionID) {
+        this.questionID = questionID;
     }
 
     public String getQuestionText() {
