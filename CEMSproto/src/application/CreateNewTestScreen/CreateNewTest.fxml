@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane accessibleRole="HYPERLINK" cache="true" prefHeight="548.0" prefWidth="888.0" styleClass="backgroundColor" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CreateNewTestScreen.CreateTestController">
+<AnchorPane accessibleRole="HYPERLINK" cache="true" prefHeight="570.0" prefWidth="888.0" styleClass="backgroundColor" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CreateNewTestScreen.CreateTestController">
     <AnchorPane fx:id="header" prefHeight="104.0" prefWidth="888.0" styleClass="pageHeader">
         <ImageView fitHeight="82.0" fitWidth="210.0" layoutX="14.0" layoutY="9.0" preserveRatio="true">
             <Image url="@../images/Logo_Transparent2.png" />
@@ -43,7 +43,7 @@
             </font>
         </Button>
     </AnchorPane>
-    <AnchorPane layoutX="25.0" layoutY="126.0" prefHeight="350.0" prefWidth="358.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
+    <AnchorPane layoutX="25.0" layoutY="126.0" prefHeight="362.0" prefWidth="358.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
         <MenuButton contentDisplay="CENTER" layoutX="111.0" layoutY="22.0" mnemonicParsing="false" popupSide="RIGHT" prefHeight="25.0" prefWidth="137.0" style="-fx-background-color: transparent transparent; -fx-border-color: #7799c2; -fx-border-radius: 5;" styleClass="pageHeaderBtn" text="        Pick Subject">
             <items>
                 <Menu mnemonicParsing="false" text="Software Engineering">
@@ -57,7 +57,7 @@
                 </Menu>
             </items>
         </MenuButton>
-        <VBox alignment="CENTER" layoutY="56.0" prefHeight="222.0" prefWidth="358.0">
+        <VBox alignment="CENTER" layoutY="56.0" prefHeight="216.0" prefWidth="358.0">
             <HBox prefHeight="100.0" prefWidth="200.0">
                 <VBox.margin>
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -88,9 +88,9 @@
                     </padding>
                 </TextField>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="100.0" prefWidth="328.0">
                 <VBox.margin>
-                    <Insets bottom="20.0" left="20.0" right="10.0" top="10.0" />
+                    <Insets left="20.0" right="10.0" top="10.0" />
                 </VBox.margin>
                 <Label alignment="BASELINE_CENTER" prefHeight="27.0" prefWidth="126.0" text="Test Time:">
                     <font>
@@ -104,38 +104,38 @@
                 </TextField>
             </HBox>
         </VBox>
-        <Button layoutX="111.0" layoutY="264.0" mnemonicParsing="false" onAction="#pickQuestion" prefHeight="25.0" prefWidth="137.0" styleClass="regularButtons" text="Pick Questions" />
-        <Button layoutX="142.0" layoutY="302.0" mnemonicParsing="false" onAction="#openPreview" prefHeight="34.0" prefWidth="74.0" styleClass="regularButtons" text="Preview" />
+        <Button layoutX="111.0" layoutY="273.0" mnemonicParsing="false" onAction="#pickQuestion" prefHeight="25.0" prefWidth="137.0" styleClass="regularButtons" text="Pick Questions" />
+        <Button layoutX="142.0" layoutY="311.0" mnemonicParsing="false" onAction="#openPreview" prefHeight="34.0" prefWidth="74.0" styleClass="regularButtons" text="Preview" />
     </AnchorPane>
-    <Label layoutX="414.0" layoutY="113.0" prefHeight="24.0" prefWidth="82.0" text="Student Note:">
+    <Label layoutX="414.0" layoutY="121.0" prefHeight="24.0" prefWidth="82.0" text="Student Note:">
         <font>
             <Font name="Trebuchet MS Bold" size="12.0" />
         </font>
     </Label>
-    <TextArea layoutX="414.0" layoutY="137.0" prefHeight="147.0" prefWidth="408.0" promptText="Add note.." />
-    <Label layoutX="414.0" layoutY="301.0" prefHeight="24.0" prefWidth="90.0" text="Teachers Note:">
+    <TextArea layoutX="414.0" layoutY="145.0" prefHeight="147.0" prefWidth="408.0" promptText="Add note.." />
+    <Label layoutX="414.0" layoutY="309.0" prefHeight="24.0" prefWidth="90.0" text="Teachers Note:">
         <font>
             <Font name="Trebuchet MS Bold" size="12.0" />
         </font>
     </Label>
-    <TextArea layoutX="414.0" layoutY="325.0" prefHeight="147.0" prefWidth="408.0" promptText="Add note.." />
-    <Button layoutX="2.0" layoutY="483.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="34.0" prefWidth="54.0" styleClass="subButtons">
+    <TextArea layoutX="414.0" layoutY="333.0" prefHeight="147.0" prefWidth="408.0" promptText="Add note.." />
+    <Button layoutX="9.0" layoutY="496.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
         <graphic>
             <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../images/icons8-back-96.png" />
             </ImageView>
         </graphic>
     </Button>
-    <Label layoutX="14.0" layoutY="521.0" prefHeight="18.0" prefWidth="31.0" text="Back" />
-    <Button alignment="BASELINE_CENTER" layoutX="823.0" layoutY="477.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="58.0" styleClass="subButtons">
+    <Label layoutX="26.0" layoutY="546.0" prefHeight="18.0" prefWidth="31.0" text="Back" />
+    <Button alignment="BASELINE_CENTER" layoutX="816.0" layoutY="496.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
         <graphic>
             <ImageView fitHeight="34.0" fitWidth="37.0">
                 <Image url="@../images/Save icon.png" />
             </ImageView>
         </graphic>
     </Button>
-    <Label layoutX="839.0" layoutY="521.0" text="Save" />
-    <Separator layoutX="399.0" layoutY="104.0" orientation="VERTICAL" prefHeight="430.0" prefWidth="7.0" style="-fx-background-color: transparent;" />
+    <Label layoutX="835.0" layoutY="546.0" text="Save" />
+    <Separator layoutX="396.0" layoutY="104.0" orientation="VERTICAL" prefHeight="466.0" prefWidth="7.0" style="-fx-background-color: transparent;" />
     <Button layoutX="850.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
     <Button layoutX="814.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="-" />
 </AnchorPane>
