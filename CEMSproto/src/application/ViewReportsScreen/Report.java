@@ -2,14 +2,14 @@ package application.ViewReportsScreen;
 
 public class Report {
     private int year;
-    private char Semester;
+    private String Semester;
     private String subject;
     private String course;
     private int testId;
 
-    public Report(int year, char semester, String subject, String course, int testId) {
+    public Report(int year, String semester, String subject, String course, int testID) {
         this.year = year;
-        Semester = semester;
+        this.Semester = semester;
         this.subject = subject;
         this.course = course;
         this.testId = testId;
@@ -23,11 +23,11 @@ public class Report {
         this.year = year;
     }
 
-    public char getSemester() {
+    public String getSemester() {
         return Semester;
     }
 
-    public void setSemester(char semester) {
+    public void setSemester(String semester) {
         Semester = semester;
     }
 
