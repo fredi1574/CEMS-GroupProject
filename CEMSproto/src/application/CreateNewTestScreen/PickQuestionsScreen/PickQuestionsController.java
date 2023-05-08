@@ -16,16 +16,6 @@ public class PickQuestionsController {
 
     @FXML
     private TableView<Question> questionsTableView;
-//    @FXML
-//    private TableColumn<Question, CheckBox> questionCheckBoxColumn;
-//    @FXML
-//    private TableColumn<Question, String> questionNumberColumn;
-//    @FXML
-//    private TableColumn<Question, String> questionIdColumn;
-//    @FXML
-//    private TableColumn<Question, String> questionTextColumn;
-//    @FXML
-//    private TableColumn<Question, String> questionAuthorColumn;
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
@@ -36,20 +26,19 @@ public class PickQuestionsController {
         );
 
         ObservableList<String> columnList = FXCollections.observableArrayList();
-        columnList.addAll("Number", "QuestionId", "QuestionText", "Author");
+        columnList.addAll("Number", "Question ID", "Question Text", "Author");
 
         ObservableList<TableColumn<Question, ?>> columns = TableManager.createTable(questionsTableView, columnList, questionList);
-        TableManager.addCheckBoxesToTable(questionsTableView);
 
+        TableManager.addCheckBoxesToTable(questionsTableView);
         TableManager.addDoubleClickFunctionality(questionsTableView, "CreateNewTestScreen/PickQuestionsScreen/QuestionPreviewPopup/questionPreview.fxml");
 
         //todo: find a cleaner way to do change the width of every column
         for (TableColumn<Question, ?> column : columns) {
-            if (column.getText().equals("QuestionText")) {
+            if (column.getText().equals("Question Text")) {
                 column.prefWidthProperty().bind(questionsTableView.widthProperty().multiply(0.625));
             } else {
                 column.prefWidthProperty().bind(questionsTableView.widthProperty().multiply(0.1));
-
             }
         }
     }
