@@ -51,8 +51,8 @@ public class PickQuestionsController {
         ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
     }
 
-    public void closePopUp(ActionEvent event) {
-        ExitButton.closePopUp(event);
+    public void closeClient(ActionEvent event) {
+        ExitButton.closeClient(event);
     }
 
     @FXML
