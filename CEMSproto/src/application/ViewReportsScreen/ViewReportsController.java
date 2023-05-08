@@ -33,7 +33,7 @@ public class ViewReportsController {
         ScreenManager.dragAndDrop(header);
 
         ObservableList<Integer> yearList = FXCollections.observableArrayList(2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015);
-        ObservableList<Character> semesterList = FXCollections.observableArrayList('A', 'B', 'S');
+        ObservableList<String> semesterList = FXCollections.observableArrayList("A", "B", "Summer");
         ObservableList<String> subjectList = FXCollections.observableArrayList("Computer Science", "Mathematics",
                 "Algorithms", "Statistics", "Bananas n' monkeys", "Introduction to Databases");
 
