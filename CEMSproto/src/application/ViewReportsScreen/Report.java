@@ -5,14 +5,14 @@ public class Report {
     private String Semester;
     private String subject;
     private String course;
-    private int testId;
+    private int testID;
 
     public Report(int year, String semester, String subject, String course, int testID) {
         this.year = year;
         this.Semester = semester;
         this.subject = subject;
         this.course = course;
-        this.testId = testId;
+        this.testID = testID;
     }
 
     public int getYear() {
@@ -47,11 +47,11 @@ public class Report {
         this.course = course;
     }
 
-    public int getTestId() {
-        return testId;
+    public int getTestID() {
+        return testID;
     }
 
-    public void setTestId(int testId) {
-        this.testId = testId;
+    public void setTestID(int testID) {
+        this.testID = testID;
     }
 }
