@@ -67,7 +67,7 @@ public class TableManager {
 
 
     //todo: add a method to change the width of columns in the table
-    public static <T> void resizeColumns(TableView tableView, double[] multipliers) {
+    public static <T> void resizeColumns(TableView<T> tableView, double[] multipliers) {
         ObservableList<TableColumn<T, ?>> columns = tableView.getColumns();
 //        System.out.println(columns.size());
 //        System.out.println(multipliers.length);
