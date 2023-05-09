@@ -2,11 +2,13 @@ package application.Server;
 
 import application.MinimizeButton;
 import application.ScreenManager;
+import application.TableManager;
 import application.common.ConnectToClients;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.PrintStream;
@@ -92,7 +94,6 @@ public class ServerGuiController {
         System.setErr(switchConsole);
     }
 
-
     public String getIp() {
         String ip = null;
         try {
@@ -136,24 +137,28 @@ public class ServerGuiController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
 
-        this.connectToClients.setItems(CemsServer.getClientList());
+        ObservableList<String> columnList = FXCollections.observableArrayList();
+        columnList.addAll("IP", "Host", "Status");
+
+        TableManager.createTable(connectToClients, columnList);
+
+        double[] multipliers = {0.33, 0.33, 0.33};
+        TableManager.resizeColumns(connectToClients, multipliers);
+
         consoleStreamIntoGUI();
+
+        this.connectToClients.setItems(CemsServer.getClientList());
+        //Default data input for server
         this.txtIP.setText(getIp());
         this.txtPort.setText("5555");
         this.txtDBname.setText("jdbc:mysql://localhost/Cems?serverTimezone=IST");
         this.txtUsername.setText("root");
         this.txtPassword.setText("Aa123456");
         this.btnDisconnect.setDisable(true);
-        setTableColumns();
+
+        //todo: convert line 147 to use TableManager.importData
+//        TableManager.importData(connectToClients, CemsServer.getClientList());
     }
-
-
-    private void setTableColumns() {
-        this.IP.setCellValueFactory(new PropertyValueFactory<ConnectToClients, String>("ip"));
-        this.Host.setCellValueFactory(new PropertyValueFactory<ConnectToClients, String>("host"));
-        this.Status.setCellValueFactory(new PropertyValueFactory<ConnectToClients, String>("Status"));
-    }
-
 
     @FXML
     void ImportData(ActionEvent event) {

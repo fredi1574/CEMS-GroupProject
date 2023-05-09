@@ -8,7 +8,7 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TableManager {
-    public static <T> ObservableList<TableColumn<T, ?>> createTable(TableView<T> tableView, ObservableList<String> columnList, ObservableList<T> data) {
+    public static <T> void createTable(TableView<T> tableView, ObservableList<String> columnList) {
         ObservableList<TableColumn<T, ?>> columns = FXCollections.observableArrayList();
 
         // create table columns dynamically
@@ -19,10 +19,11 @@ public class TableManager {
             tableView.getColumns().add(column);
             columns.add(column);
         }
+    }
 
+    public static <T> void importData(TableView<T> tableView, ObservableList<T> data) {
         // add data to the table dynamically
         tableView.getItems().addAll(data);
-        return columns;
     }
 
     // Adds checkbox column
@@ -33,6 +34,21 @@ public class TableManager {
         checkboxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(checkboxColumn));
 //        checkboxColumn.prefWidthProperty().bind(tableView.widthProperty().multiply(0.1));
         tableView.getColumns().add(0, checkboxColumn);
+
+        //todo: alternative and probably better way to implement check boxes
+        //        questionCheckBoxColumn.setCellFactory(column -> new TableCell<>() {
+//            private final CheckBox checkBox = new CheckBox();
+//
+//            @Override
+//            protected void updateItem(CheckBox item, boolean empty) {
+//                super.updateItem(item, empty);
+//                if (empty) {
+//                    setGraphic(null);
+//                } else {
+//                    setGraphic(checkBox);
+//                }
+//            }
+//        });
     }
 
     public static <T> void addDoubleClickFunctionality(TableView<T> tableView, String relativePath) {
@@ -48,19 +64,23 @@ public class TableManager {
             }
         });
     }
-    //todo: alternative and probably better way to implement check boxes
-    //        questionCheckBoxColumn.setCellFactory(column -> new TableCell<>() {
-//            private final CheckBox checkBox = new CheckBox();
-//
-//            @Override
-//            protected void updateItem(CheckBox item, boolean empty) {
-//                super.updateItem(item, empty);
-//                if (empty) {
-//                    setGraphic(null);
-//                } else {
-//                    setGraphic(checkBox);
-//                }
-//            }
-//        });
+
+
     //todo: add a method to change the width of columns in the table
+    public static <T> void resizeColumns(TableView tableView, double[] multipliers) {
+        ObservableList<TableColumn<T, ?>> columns = tableView.getColumns();
+//        System.out.println(columns.size());
+//        System.out.println(multipliers.length);
+
+
+        if (columns.size() != multipliers.length) {
+            throw new IllegalArgumentException("Number of columns does not match the number of multipliers");
+        }
+        int index = 0;
+
+        for (TableColumn<T, ?> column : columns) {
+            column.prefWidthProperty().bind(tableView.widthProperty().multiply(multipliers[index]));
+            index++;
+        }
+    }
 }

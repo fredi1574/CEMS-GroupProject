@@ -24,7 +24,7 @@ public class CreateTestController {
         ScreenManager.goToNewScreen(event, "CreateNewTestScreen/PickQuestionsScreen/PickQuestions.fxml");
     }
 
-    public void openPreview(ActionEvent event) {
+    public void openPreview() {
         ScreenManager.popUpScreen("CreateNewTestScreen/TestPreviewScreen/TestPreview.fxml");
     }
 
@@ -37,7 +37,7 @@ public class CreateTestController {
     }
 
     @FXML
-    private void minimizeWindow(ActionEvent event) {
+    public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
 }

@@ -5,7 +5,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 
@@ -28,19 +27,14 @@ public class PickQuestionsController {
         ObservableList<String> columnList = FXCollections.observableArrayList();
         columnList.addAll("Number", "Question ID", "Question Text", "Author");
 
-        ObservableList<TableColumn<Question, ?>> columns = TableManager.createTable(questionsTableView, columnList, questionList);
+        TableManager.createTable(questionsTableView, columnList);
+        TableManager.importData(questionsTableView, questionList);
 
         TableManager.addCheckBoxesToTable(questionsTableView);
         TableManager.addDoubleClickFunctionality(questionsTableView, "CreateNewTestScreen/PickQuestionsScreen/QuestionPreviewPopup/questionPreview.fxml");
 
-        //todo: find a cleaner way to do change the width of every column
-        for (TableColumn<Question, ?> column : columns) {
-            if (column.getText().equals("Question Text")) {
-                column.prefWidthProperty().bind(questionsTableView.widthProperty().multiply(0.625));
-            } else {
-                column.prefWidthProperty().bind(questionsTableView.widthProperty().multiply(0.1));
-            }
-        }
+        double[] multipliers = {0.071, 0.1, 0.1, 0.625, 0.1};
+        TableManager.resizeColumns(questionsTableView, multipliers);
     }
 
     public void backToCreateTest(ActionEvent event) {
@@ -56,7 +50,7 @@ public class PickQuestionsController {
     }
 
     @FXML
-    private void minimizeWindow(ActionEvent event) {
+    public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
 }
