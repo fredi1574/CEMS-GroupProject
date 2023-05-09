@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 
@@ -32,38 +31,35 @@ public class ViewReportsController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
 
+        // Temporary lists, for presentation
         ObservableList<Integer> yearList = FXCollections.observableArrayList(2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015);
         ObservableList<String> semesterList = FXCollections.observableArrayList("A", "B", "Summer");
         ObservableList<String> subjectList = FXCollections.observableArrayList("Computer Science", "Mathematics",
                 "Algorithms", "Statistics", "Bananas n' monkeys", "Introduction to Databases");
 
+        // Binds the data into the correct dropdown lists
         yearComboBox.setItems(yearList);
         semesterComboBox.setItems(semesterList);
         subjectComboBox.setItems(subjectList);
 
+        // Temporary lists, for presentation
         ObservableList<Report> reportList = FXCollections.observableArrayList(
                 new Report(2023, "A", "Computer Science", "Automatons", 42069),
                 new Report(2021, "B", "Mathematics", "Statistics", 13096),
                 new Report(2021, "Summer", "Statistics", "Bananas n' monkeys", 13099)
         );
 
+        // Sets the column name
         ObservableList<String> columnList = FXCollections.observableArrayList();
         columnList.addAll("Year", "Semester", "Subject", "Course", "Test ID");
+        // Creates the report table with the correct data
+        TableManager.createTable(reportsTableView, columnList);
+        TableManager.importData(reportsTableView, reportList);
 
-        ObservableList<TableColumn<Report, ?>> columns = TableManager.createTable(reportsTableView, columnList, reportList);
         TableManager.addDoubleClickFunctionality(reportsTableView, "ViewReportsScreen/GraphScreen/ViewGraph.fxml");
 
-        //todo: find a cleaner way to do change the width of every column
-        for (TableColumn<Report, ?> column : columns) {
-            if (column.getText().equals("Course")) {
-                column.prefWidthProperty().bind(reportsTableView.widthProperty().multiply(0.544));
-            } else if (column.getText().equals("Subject")) {
-                column.prefWidthProperty().bind(reportsTableView.widthProperty().multiply(0.15));
-            } else {
-                column.prefWidthProperty().bind(reportsTableView.widthProperty().multiply(0.1));
-            }
-        }
-
+        double[] multipliers = {0.07, 0.1, 0.2, 0.525, 0.1};
+        TableManager.resizeColumns(reportsTableView, multipliers);
     }
 
     public void goBackToPreviousScreen(ActionEvent event) {
@@ -84,7 +80,7 @@ public class ViewReportsController {
     }
 
     @FXML
-    private void minimizeWindow(ActionEvent event) {
+    public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
 }
