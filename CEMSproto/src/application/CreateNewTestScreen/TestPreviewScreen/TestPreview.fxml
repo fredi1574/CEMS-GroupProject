@@ -19,28 +19,12 @@
                 <Font name="Trebuchet MS" size="40.0"/>
             </font>
         </Label>
-        <ImageView layoutX="728.0" layoutY="47.0">
-            <Image url="@../../images/icons8-person-16.png"/>
-        </ImageView>
-        <Text fill="#3b3131" layoutX="757.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi"
-              underline="true">
-            <font>
-                <Font name="Trebuchet MS" size="12.0"/>
-            </font>
-        </Text>
-        <Button layoutX="728.0" layoutY="68.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut"
-                prefHeight="26.0" prefWidth="82.0" styleClass="pageHeaderBtn" stylesheets="@../../application.css"
-                text="Logout" textFill="WHITE">
-            <font>
-                <Font name="Franklin Gothic Demi Cond" size="14.0"/>
-            </font>
-        </Button>
         <ImageView fitHeight="95.0" fitWidth="235.0" layoutX="18.0" layoutY="5.0" preserveRatio="true">
             <Image url="@../../images/Logo_Transparent2.png"/>
         </ImageView>
-        <Button layoutX="790.0" layoutY="4.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
+        <Button layoutX="785.0" layoutY="9.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
                 onAction="#closePopUp" prefHeight="25.0" prefWidth="25.0" styleClass="pageHeaderBtn" text="X"/>
-        <Button layoutX="754.0" layoutY="4.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
+        <Button layoutX="749.0" layoutY="9.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
                 onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="pageHeaderBtn" text="_"/>
     </AnchorPane>
     <HBox alignment="CENTER" layoutX="66.0" layoutY="129.0" prefHeight="46.0" prefWidth="383.0"
