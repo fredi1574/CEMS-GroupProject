@@ -5,8 +5,8 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane fx:id="header" prefHeight="489.0" prefWidth="508.0" styleClass="backgroundColor"
-            stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="header" prefHeight="489.0" prefWidth="508.0"
+            styleClass="backgroundColor" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19"
             fx:controller="application.MainMenuScreen.MainMenuController">
     <VBox prefHeight="489.0" prefWidth="319.0" styleClass="pageHeader">
         <Pane prefHeight="86.0" prefWidth="319.0" styleClass="pageHeader"/>

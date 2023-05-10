@@ -5,8 +5,8 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane prefHeight="742.0" prefWidth="842.0" styleClass="backgroundColor" stylesheets="@../../application.css"
-            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="742.0" prefWidth="842.0" styleClass="backgroundColor"
+            stylesheets="@../../application.css" xmlns="http://javafx.com/javafx/19"
             fx:controller="application.CreateNewTestScreen.PickQuestionsScreen.PickQuestionsController">
     <AnchorPane fx:id="header" prefHeight="101.0" prefWidth="842.0" styleClass="pageHeader">
         <Label alignment="CENTER" layoutX="173.0" layoutY="14.0" prefHeight="54.0" prefWidth="481.0"
