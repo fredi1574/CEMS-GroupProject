@@ -8,7 +8,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.PrintStream;
@@ -21,28 +24,7 @@ public class ServerGuiController {
     private AnchorPane header;
 
     @FXML
-    private Button Close;
-
-    @FXML
-    private Label ConnectedClients;
-
-    @FXML
     private TextArea Console;
-
-    @FXML
-    private Label ConsoleTitle;
-
-    @FXML
-    private TableColumn<ConnectToClients, String> Host;
-
-    @FXML
-    private TableColumn<ConnectToClients, String> IP;
-
-    @FXML
-    private Label ServerConfig;
-
-    @FXML
-    private TableColumn<ConnectToClients, String> Status;
 
     @FXML
     private Button btnConnect;
@@ -51,25 +33,7 @@ public class ServerGuiController {
     private Button btnDisconnect;
 
     @FXML
-    private Button btnImport;
-
-    @FXML
-    private TableView<ConnectToClients> connectToClients;
-
-    @FXML
-    private Label labelDBNAME;
-
-    @FXML
-    private Label labelDBPassword;
-
-    @FXML
-    private Label labelDBUsername;
-
-    @FXML
-    private Label labelIP;
-
-    @FXML
-    private Label labelPort;
+    private TableView<ConnectToClients> clientsTable;
 
     @FXML
     private TextField txtDBname;
@@ -85,11 +49,10 @@ public class ServerGuiController {
 
     @FXML
     private TextField txtUsername;
-    private PrintStream switchConsole;
 
     @FXML
     void consoleStreamIntoGUI() {
-        switchConsole = new PrintStream(new Console(Console));
+        PrintStream switchConsole = new PrintStream(new Console(Console));
         System.setOut(switchConsole);
         System.setErr(switchConsole);
     }
@@ -106,9 +69,9 @@ public class ServerGuiController {
     }
 
     @FXML
-    void Connection(javafx.event.ActionEvent event) throws InterruptedException {
+    void Connection() {
 
-        ServerUI.runServer(txtIP.getText(), txtPort.getText(), txtDBname.getText(), txtUsername.getText(), txtPassword.getText());
+        ServerUI.runServer(txtPort.getText());
         btnConnect.setDisable(true);
         btnDisconnect.setDisable(false);
         disableDataInput(true);
@@ -116,7 +79,7 @@ public class ServerGuiController {
     }
 
     @FXML
-    void Disconnection(ActionEvent event) {
+    void Disconnection() {
         ServerUI.disconnect();
         btnDisconnect.setDisable(true);
         btnConnect.setDisable(false);
@@ -125,12 +88,12 @@ public class ServerGuiController {
     }
     //Turns off the option to pass data in the TextArea
 
-    void disableDataInput(boolean Condi) {
-        txtIP.setDisable(Condi);
-        txtPort.setDisable(Condi);
-        txtDBname.setDisable(Condi);
-        txtUsername.setDisable(Condi);
-        txtPassword.setDisable(Condi);
+    void disableDataInput(boolean Condition) {
+        txtIP.setDisable(Condition);
+        txtPort.setDisable(Condition);
+        txtDBname.setDisable(Condition);
+        txtUsername.setDisable(Condition);
+        txtPassword.setDisable(Condition);
     }
 
     @FXML
@@ -139,15 +102,14 @@ public class ServerGuiController {
 
         ObservableList<String> columnList = FXCollections.observableArrayList();
         columnList.addAll("IP", "Host", "Status");
-
-        TableManager.createTable(connectToClients, columnList);
-
         double[] multipliers = {0.33, 0.33, 0.33};
-        TableManager.resizeColumns(connectToClients, multipliers);
 
+        TableManager.createTable(clientsTable, columnList);
+        TableManager.resizeColumns(clientsTable, multipliers);
 
-        this.connectToClients.setItems(CemsServer.getClientList());
         consoleStreamIntoGUI();
+
+        this.clientsTable.setItems(CemsServer.getClientList());
         //Default data input for server
         this.txtIP.setText(getIp());
         this.txtPort.setText("5555");
@@ -161,11 +123,11 @@ public class ServerGuiController {
     }
 
     @FXML
-    void ImportData(ActionEvent event) {
+    void ImportData() {
         MysqlConnection.connectToDb();
     }
 
-    public void Close(ActionEvent event) { //close button
+    public void Close() { //close button
         ServerUI.disconnect();
         System.exit(0);
     }

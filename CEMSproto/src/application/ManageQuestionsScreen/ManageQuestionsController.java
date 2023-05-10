@@ -43,7 +43,7 @@ public class ManageQuestionsController {
     }
 
     @FXML
-    private void minimizeWindow(ActionEvent event) {
+    public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
 }

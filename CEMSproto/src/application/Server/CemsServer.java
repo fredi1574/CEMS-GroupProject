@@ -1,16 +1,14 @@
 package application.Server;
-import ocsf.server.AbstractServer;
-import ocsf.server.ConnectionToClient;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import java.io.IOException;
 
 import application.common.ConnectToClients;
 import application.common.MsgHandler;
 import application.common.TypeMsg;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import ocsf.server.AbstractServer;
+import ocsf.server.ConnectionToClient;
 
 public class CemsServer extends AbstractServer{
-	final public static int DEFAULT_PORT = 5555;
 	// This holds the list of the connected clients to the server and their status
 	static ObservableList<ConnectToClients> clientList = FXCollections.observableArrayList();
 	//Constructors ****************************************************
@@ -45,7 +43,7 @@ public class CemsServer extends AbstractServer{
 			}
 		}
 
-		 //In both cases of Connect and Disconnected we will need to add Client into the
+		 //In both cases of Connect and Disconnected, we will need to add Client into the
 		 //list so this function covers both of them simultaneously
 		try {
 			clientList.add(new ConnectToClients(client.getInetAddress().getHostAddress(),
@@ -101,7 +99,7 @@ public class CemsServer extends AbstractServer{
 //	}
 //	@Override
 //	synchronized protected void clientDisconnected(ConnectionToClient client) {
-//		updateClientList(client,"Disonnected");
+//		updateClientList(client,"Disconnected");
 //	}
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
@@ -112,7 +110,7 @@ public class CemsServer extends AbstractServer{
 				switch (messageFromClient.getType()) {
 				case Connected:
 				 	updateClientList(client, "Connected");
-					client.sendToClient(new MsgHandler(TypeMsg.Connected, null));
+					client.sendToClient(new MsgHandler<>(TypeMsg.Connected, null));
 			 		break;
 				case Disconnected:
 				 updateClientList(client, "Disconnected");

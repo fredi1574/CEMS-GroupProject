@@ -31,7 +31,7 @@ public class AddAQuestionController {
     }
 
     @FXML
-    private void closeClient(ActionEvent event) {
+    public void closeClient(ActionEvent event) {
         ExitButton.closeClient(event);
     }
 }

@@ -20,10 +20,6 @@ public class TestPreviewController {
         ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
     }
 
-    public void goBackToPreviousScreen(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "CreateNewTestScreen/CreateNewTest.fxml");
-    }
-
     public void closePopUp(ActionEvent event) {
         ExitButton.closePopUp(event);
     }
