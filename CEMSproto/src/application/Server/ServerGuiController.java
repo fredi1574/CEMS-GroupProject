@@ -145,9 +145,9 @@ public class ServerGuiController {
         double[] multipliers = {0.33, 0.33, 0.33};
         TableManager.resizeColumns(connectToClients, multipliers);
 
-        consoleStreamIntoGUI();
 
         this.connectToClients.setItems(CemsServer.getClientList());
+        consoleStreamIntoGUI();
         //Default data input for server
         this.txtIP.setText(getIp());
         this.txtPort.setText("5555");
