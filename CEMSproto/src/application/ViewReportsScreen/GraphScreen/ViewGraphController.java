@@ -37,16 +37,12 @@ public class ViewGraphController {
         ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
     }
 
-    public void goBackToPreviousScreen(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "ViewReportsScreen/ViewReports.fxml");
-    }
-
     public void closePopUp(ActionEvent event) {
         ExitButton.closePopUp(event);
     }
 
     @FXML
-    private void minimizeWindow(ActionEvent event) {
+    public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
 }
