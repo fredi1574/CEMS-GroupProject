@@ -94,7 +94,7 @@
 }
 
 .text-field {
-    -fx-background-color: rgba(119, 153, 194, 0.15);
+    -fx-background-color: #7799c226;
     -fx-border-color: #7799c2;
     -fx-border-radius: 5px;
 }
