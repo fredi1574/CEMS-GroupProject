@@ -10,8 +10,8 @@
             stylesheets="@../application.css" xmlns="http://javafx.com/javafx/19"
             fx:controller="application.ViewReportsScreen.ViewReportsController">
     <AnchorPane fx:id="header" prefHeight="92.0" prefWidth="807.0" styleClass="pageHeader">
-        <Label layoutX="325.0" layoutY="18.0" prefHeight="54.0" prefWidth="157.0" styleClass="pageHeader" text="Reports"
-               textFill="#fafafa">
+        <Label layoutX="251.0" layoutY="18.0" prefHeight="54.0" prefWidth="305.0" styleClass="pageHeader"
+               text="Report Selection" textFill="#fafafa">
             <font>
                 <Font name="Trebuchet MS" size="40.0"/>
             </font>
@@ -31,19 +31,19 @@
                 <Font name="Franklin Gothic Demi Cond" size="14.0"/>
             </font>
         </Button>
-        <ImageView fitHeight="80.0" fitWidth="235.0" layoutX="21.0" layoutY="5.0">
+        <ImageView fitHeight="80.0" fitWidth="235.0" layoutX="11.0" layoutY="5.0">
             <Image url="@../images/Logo_Transparent2.png"/>
         </ImageView>
     </AnchorPane>
-    <Button layoutX="20.0" layoutY="459.0" mnemonicParsing="false" onAction="#goBackToPreviousScreen" prefHeight="34.0"
-            prefWidth="54.0" styleClass="subButtons">
+    <Button layoutX="16.0" layoutY="450.0" mnemonicParsing="false" onAction="#goBackToPreviousScreen" prefHeight="54.0"
+            prefWidth="63.0" styleClass="subButtons">
         <graphic>
-            <ImageView fitHeight="28.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../images/icons8-back-96.png"/>
             </ImageView>
         </graphic>
     </Button>
-    <Label layoutX="35.0" layoutY="495.0" text="Back"/>
+    <Label layoutX="35.0" layoutY="501.0" text="Back"/>
     <TableView fx:id="reportsTableView" layoutX="27.0" layoutY="172.0" prefHeight="266.0" prefWidth="755.0"/>
     <Button layoutX="682.0" layoutY="463.0" mnemonicParsing="false" onAction="#showReports" prefHeight="28.0"
             prefWidth="100.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;"
@@ -51,19 +51,19 @@
     <Button layoutX="773.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
             onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X"/>
     <Button layoutX="737.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
-            onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="-"/>
-    <HBox alignment="CENTER" layoutX="26.0" layoutY="95.0" prefHeight="61.0" prefWidth="755.0">
+            onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_"/>
+    <HBox alignment="CENTER" layoutX="26.0" layoutY="95.0" prefHeight="61.0" prefWidth="755.0" spacing="20.0">
+        <ComboBox fx:id="subjectComboBox" prefHeight="40.0" prefWidth="200.0" promptText="Select Subject"/>
         <ComboBox fx:id="yearComboBox" prefHeight="40.0" prefWidth="200.0" promptText="Select Year">
             <HBox.margin>
-                <Insets right="20.0"/>
+                <Insets/>
             </HBox.margin>
         </ComboBox>
         <ComboBox fx:id="semesterComboBox" prefHeight="40.0" prefWidth="200.0" promptText="Select Semester">
             <HBox.margin>
-                <Insets right="20.0"/>
+                <Insets/>
             </HBox.margin>
         </ComboBox>
-        <ComboBox fx:id="subjectComboBox" prefHeight="40.0" prefWidth="200.0" promptText="Select Subject"/>
     </HBox>
     <Label layoutX="28.0" layoutY="152.0" text="*Double click on a Report to see full information on it"/>
 </AnchorPane>
