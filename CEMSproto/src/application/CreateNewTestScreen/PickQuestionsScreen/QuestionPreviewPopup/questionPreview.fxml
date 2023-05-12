@@ -22,7 +22,7 @@
             </font>
         </Label>
         <Button layoutX="787.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closePopUp" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
-        <Button layoutX="748.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="-" />
+        <Button layoutX="748.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
         <ImageView fitHeight="78.0" fitWidth="201.0" layoutX="24.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../../images/Logo_Transparent2.png" />
         </ImageView>

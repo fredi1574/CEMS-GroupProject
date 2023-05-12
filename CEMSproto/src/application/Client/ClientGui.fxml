@@ -32,5 +32,5 @@
         <Image url="@../images/Logo_Transparent.png" />
     </ImageView>
     <Button layoutX="290.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
-    <Button layoutX="254.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="-" />
+    <Button layoutX="254.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
 </AnchorPane>
