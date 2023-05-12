@@ -37,7 +37,7 @@
             </Text>
             <Pane prefHeight="271.0" prefWidth="272.0" styleClass="pageHeader">
                 <ImageView fitHeight="117.0" fitWidth="274.0" layoutY="86.0" preserveRatio="true">
-                    <Image url="@../images/Logo.png" />
+                    <Image url="@../images/logo.png" />
                 </ImageView>
             </Pane>
             <Button layoutX="479.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
