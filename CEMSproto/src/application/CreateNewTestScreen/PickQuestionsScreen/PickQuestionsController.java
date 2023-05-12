@@ -15,6 +15,8 @@ public class PickQuestionsController {
 
     @FXML
     private TableView<Question> questionsTableView;
+    @FXML
+    private TableView<Question> selectedQuestionsTableView;
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
@@ -24,10 +26,10 @@ public class PickQuestionsController {
                 new Question(420, "42040", "what is the meaning of life?", "Fredi")
         );
 
-        ObservableList<String> columnList = FXCollections.observableArrayList();
-        columnList.addAll("Number", "Question ID", "Question Text", "Author");
+        ObservableList<String> questionColumnList = FXCollections.observableArrayList();
+        questionColumnList.addAll("Number", "Question ID", "Question Text", "Author");
 
-        TableManager.createTable(questionsTableView, columnList);
+        TableManager.createTable(questionsTableView, questionColumnList);
         TableManager.importData(questionsTableView, questionList);
 
         TableManager.addCheckBoxesToTable(questionsTableView);
@@ -35,6 +37,15 @@ public class PickQuestionsController {
 
         double[] multipliers = {0.071, 0.1, 0.1, 0.625, 0.1};
         TableManager.resizeColumns(questionsTableView, multipliers);
+
+
+        ObservableList<String> selectedQuestionColumnList = FXCollections.observableArrayList();
+        selectedQuestionColumnList.addAll("Number", "Question ID", "Question Text", "Points");
+
+        TableManager.createTable(selectedQuestionsTableView, selectedQuestionColumnList);
+
+        multipliers = new double[]{0.1, 0.1, 0.7, 0.1};
+        TableManager.resizeColumns(selectedQuestionsTableView, multipliers);
     }
 
     public void backToCreateTest(ActionEvent event) {
