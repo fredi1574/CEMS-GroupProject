@@ -77,7 +77,7 @@
     <Button contentDisplay="CENTER" layoutX="15.0" layoutY="464.0" minWidth="35.0" mnemonicParsing="false" onAction="#back" prefHeight="54.0" prefWidth="54.0" styleClass="subButtons" textFill="#0d0d0d">
         <graphic>
             <ImageView fitHeight="36.0" fitWidth="38.0">
-                <Image url="@../images/icons8-back-96.png" />
+                <Image url="@../images/back.png" />
             </ImageView>
         </graphic>
     </Button>
@@ -88,7 +88,7 @@
         </cursor>
         <graphic>
             <ImageView fitHeight="36.0" fitWidth="37.0">
-                <Image url="@../images/Save icon.png" />
+                <Image url="@../images/Save.png" />
             </ImageView>
         </graphic>
     </Button>

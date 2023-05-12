@@ -20,95 +20,81 @@
             </ImageView>
         </Pane>
         <Pane>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="320.0"
-                   style="-fx-font-size: 20;" text="Tests" textAlignment="CENTER" textFill="#c1dfff" underline="true"/>
-            <Button alignment="BASELINE_LEFT" layoutY="25.0" mnemonicParsing="false" onAction="#CreateNewTest"
-                    prefHeight="39.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" Create New Test"
-                    textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="320.0" style="-fx-font-size: 20;" text="Tests" textAlignment="CENTER" textFill="#c1dfff" underline="true" />
+            <Button alignment="BASELINE_LEFT" layoutY="25.0" mnemonicParsing="false" onAction="#CreateNewTest" prefHeight="39.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" Create New Test" textFill="WHITE">
                 <font>
-                    <Font name="Trebuchet MS" size="25.0"/>
+                    <Font name="Trebuchet MS" size="25.0" />
                 </font>
                 <graphic>
                     <ImageView fitHeight="32.0" fitWidth="31.0">
-                        <Image url="@../images/icons8-folder-96.png"/>
+                        <Image url="@../images/test_add.png" />
                     </ImageView>
                 </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutY="73.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="287.0"
-                    styleClass="mainMenuButtons" text=" Manage Tests" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" layoutY="73.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" Manage Tests" textFill="WHITE">
                 <font>
-                    <Font name="Trebuchet MS" size="25.0"/>
+                    <Font name="Trebuchet MS" size="25.0" />
                 </font>
                 <opaqueInsets>
-                    <Insets/>
+                    <Insets />
                 </opaqueInsets>
                 <graphic>
                     <ImageView fitHeight="32.0" fitWidth="31.0">
-                        <Image url="@../images/icons8-folder-96%20(1).png"/>
+                        <Image url="@../images/test_manage.png" />
                     </ImageView>
                 </graphic>
             </Button>
         </Pane>
         <Pane>
             <VBox.margin>
-                <Insets top="10.0"/>
+                <Insets top="10.0" />
             </VBox.margin>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="320.0"
-                   style="-fx-font-size: 20;" text="Questions" textAlignment="CENTER" textFill="#c1dfff"
-                   underline="true">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="320.0" style="-fx-font-size: 20;" text="Questions" textAlignment="CENTER" textFill="#c1dfff" underline="true">
                 <font>
-                    <Font name="Trebuchet MS" size="18.0"/>
+                    <Font name="Trebuchet MS" size="18.0" />
                 </font>
             </Label>
-            <Button alignment="BASELINE_LEFT" layoutY="25.0" mnemonicParsing="false" onAction="#addQuestion"
-                    prefHeight="49.0" prefWidth="287.0" snapToPixel="false" styleClass="mainMenuButtons"
-                    text=" Add a Question" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" layoutY="25.0" mnemonicParsing="false" onAction="#addQuestion" prefHeight="49.0" prefWidth="287.0" snapToPixel="false" styleClass="mainMenuButtons" text=" Add a Question" textFill="WHITE">
                 <font>
-                    <Font name="Trebuchet MS" size="25.0"/>
+                    <Font name="Trebuchet MS" size="25.0" />
                 </font>
                 <graphic>
                     <ImageView fitHeight="32.0" fitWidth="31.0">
-                        <Image url="@../images/icons8-file-48.png"/>
+                        <Image url="@../images/question_add.png" />
                     </ImageView>
                 </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutY="74.0" mnemonicParsing="false" onAction="#manageQuestions"
-                    prefHeight="48.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" Manage Questions"
-                    textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" layoutY="74.0" mnemonicParsing="false" onAction="#manageQuestions" prefHeight="48.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" Manage Questions" textFill="WHITE">
                 <font>
-                    <Font name="Trebuchet MS" size="25.0"/>
+                    <Font name="Trebuchet MS" size="25.0" />
                 </font>
                 S
                 <opaqueInsets>
-                    <Insets/>
+                    <Insets />
                 </opaqueInsets>
                 <graphic>
                     <ImageView fitHeight="32.0" fitWidth="31.0">
-                        <Image url="@../images/icons8-file-48%20(8).png"/>
+                        <Image url="@../images/question_manage.png" />
                     </ImageView>
                 </graphic>
             </Button>
         </Pane>
         <Pane>
             <VBox.margin>
-                <Insets top="10.0"/>
+                <Insets top="10.0" />
             </VBox.margin>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="320.0"
-                   style="-fx-font-size: 20;" text="Statistics" textAlignment="CENTER" textFill="#c1dfff"
-                   underline="true">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="320.0" style="-fx-font-size: 20;" text="Statistics" textAlignment="CENTER" textFill="#c1dfff" underline="true">
                 <font>
-                    <Font size="20.0"/>
+                    <Font size="20.0" />
                 </font>
           </Label>
-            <Button alignment="BASELINE_LEFT" layoutY="25.0" mnemonicParsing="false" onAction="#ViewReports"
-                    prefHeight="48.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" View Statistics"
-                    textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" layoutY="25.0" mnemonicParsing="false" onAction="#ViewReports" prefHeight="48.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" View Statistics" textFill="WHITE">
                 <font>
-                    <Font name="Trebuchet MS" size="25.0"/>
+                    <Font name="Trebuchet MS" size="25.0" />
                 </font>
                 <graphic>
                     <ImageView fitHeight="32.0" fitWidth="31.0">
-                        <Image url="@../images/icons8-statistics-48.png"/>
+                        <Image url="@../images/statistics.png" />
                     </ImageView>
                 </graphic>
             </Button>

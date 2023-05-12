@@ -39,7 +39,7 @@
             prefWidth="63.0" styleClass="subButtons">
         <graphic>
             <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                <Image url="@../images/icons8-back-96.png"/>
+                <Image url="@../images/back.png"/>
             </ImageView>
         </graphic>
     </Button>

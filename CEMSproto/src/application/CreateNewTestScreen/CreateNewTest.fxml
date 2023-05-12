@@ -122,7 +122,7 @@
     <Button layoutX="9.0" layoutY="496.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
         <graphic>
             <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-                <Image url="@../images/icons8-back-96.png" />
+                <Image url="@../images/back.png" />
             </ImageView>
         </graphic>
     </Button>
@@ -130,7 +130,7 @@
     <Button alignment="BASELINE_CENTER" layoutX="816.0" layoutY="496.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
         <graphic>
             <ImageView fitHeight="34.0" fitWidth="37.0">
-                <Image url="@../images/Save icon.png" />
+                <Image url="@../images/Save.png" />
             </ImageView>
         </graphic>
     </Button>
