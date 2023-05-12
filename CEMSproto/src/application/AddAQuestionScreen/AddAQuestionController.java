@@ -1,20 +1,29 @@
 package application.AddAQuestionScreen;
 
-import application.ExitButton;
-import application.LogOut;
-import application.MinimizeButton;
-import application.ScreenManager;
+import application.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 
 public class AddAQuestionController {
 
     @FXML
     private AnchorPane header;
+    @FXML
+    private TableView<String> courseTableView;
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
+
+        ObservableList<String> columns = FXCollections.observableArrayList();
+        columns.addAll("Course", "Subject");
+        double[] multipliers = {0.75, 0.25};
+
+        TableManager.createTable(courseTableView, columns);
+        TableManager.resizeColumns(courseTableView, multipliers);
     }
 
     public void BackToMenu(ActionEvent event) {
