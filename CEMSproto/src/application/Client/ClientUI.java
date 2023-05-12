@@ -1,24 +1,20 @@
 package application.Client;
 
-import java.io.IOException;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class ClientUI extends Application {
 	private static Stage stage;
 	public static ClientControl chat; //only one instance
 
-	public static void main( String args[] ) throws Exception
-	   { 
+	public static void main(String[] args) {
 		    launch(args);  
 	   } 
 	 
 	@Override
-	public void start(Stage stage) throws Exception {
+	public void start(Stage stage) {
 		setStage(stage);
 		ClientGuiController aFrame = new ClientGuiController();
 		aFrame.start();
