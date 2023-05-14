@@ -51,33 +51,34 @@ public class ManageQuestionsController {
     private TableColumn<Question, String> lecturer;
 
     @FXML
+    private ObservableList<Question> observableData;
+
+
+    @FXML
     public void initialize() {
+        System.out.println("init manage questions");
         ScreenManager.dragAndDrop(header);
 
         ObservableList<String> options = FXCollections.observableArrayList("Software Engineering", "Math", "...");
         comboBox.setItems(options);
 
         MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestions, null);
-        ClientUI.chat.accept((Object) getTable);
+        ClientUI.chat.accept(getTable);
 //
 //        //creates the question table
 //
 //        //TODO: fix this mess
-//        ArrayList<Object> questionObjectsList = ClientUI.chat.getList();
-//        ObservableList<Question> questionList = FXCollections.observableArrayList((List)questionObjectsList);
-//        //ArrayList<Question> questionList = ClientUI.chat.getList();
-//
-//        ObservableList<String> columnList = FXCollections.observableArrayList();
-//        columnList.addAll("id", "question_text", "question_number", "lecturer", "course_name","subject");
-//        TableManager.createTable(manageQuestionsTableView,columnList);
-//        TableManager.importData(manageQuestionsTableView,questionList);
-//        TableManager.addDoubleClickFunctionality(manageQuestionsTableView,"ManageQuestionsScreen/UpdateQuestion.fxml");
+        ArrayList<Object> questionObjectsList = ClientUI.chat.getList();
+        ObservableList<Question> questionList = FXCollections.observableArrayList((List)questionObjectsList);
+        //ArrayList<Question> questionList = ClientUI.chat.getList();
+
+        ObservableList<String> columnList = FXCollections.observableArrayList();
+        columnList.addAll("id", "question_text", "question_number", "lecturer", "course_name","subject");
+        TableManager.createTable(manageQuestionsTableView,columnList);
+        TableManager.importData(manageQuestionsTableView,questionList);
+        TableManager.addDoubleClickFunctionality(manageQuestionsTableView,"ManageQuestionsScreen/UpdateQuestion.fxml");
 
 
-        //ObservableList<Question> = questionList = FXCollections.observableArrayList(
-        //        new Question()
-        //);
-        //TableManager.createTable(manageQuestionsTableView,);
     }
 
 
