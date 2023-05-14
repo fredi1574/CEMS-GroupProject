@@ -38,7 +38,7 @@ public class ClientGuiController {
     }
 
     public void start() {
-        ScreenManager.showStage("Client/ClientGui.fxml", "application/images/icon.png");
+        ScreenManager.showStage("/application/Client/ClientGui.fxml", "/application/images/icon.png");
     }
 
     //        public void start(Stage stage) {
