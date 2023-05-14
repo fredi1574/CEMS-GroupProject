@@ -1,6 +1,8 @@
 package application.Client;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import application.common.ChatIF;
 import application.common.MsgHandler;
@@ -10,7 +12,7 @@ public class Client extends AbstractClient {
 	private ChatIF clientUI; 
 	private boolean waitResponse = false;
 	public static MsgHandler<Object> messageFromServer;
-
+	public  ArrayList<Object> list;
 	//constructor
 	
 	public Client(String host, int port,ChatIF clientUI) {
@@ -32,10 +34,18 @@ public class Client extends AbstractClient {
 			case Disconnected:
 				System.exit(0);
 				break;
-			case ImportedSuccessfully:
-				break;
+//			case ImportedSuccessfully:
+//				break;
+			 case QuestionsResponse:
+				 list = ((MsgHandler<Object>)messageFromServer).getMsg();
+				 break;
+			 case QuestionUpdated:
+				 break;
+
 		 }		
 	}
+
+
 	public void handleMessageFromClientUI(Object message) {
 		try {
 			openConnection();

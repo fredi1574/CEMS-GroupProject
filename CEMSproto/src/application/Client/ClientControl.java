@@ -1,6 +1,7 @@
 package application.Client;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import application.common.ChatIF;
 
@@ -28,6 +29,11 @@ public class ClientControl implements ChatIF{
 		client= new Client(host, port, this);
 	}
 
+	private ArrayList<Object> response;
+	public   ArrayList<Object> getList(){
+		response=client.list;
+		return  response;
+	}
 
 	//Instance methods ************************************************
 

@@ -18,6 +18,9 @@ import java.io.PrintStream;
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
 
+import java.util.logging.ConsoleHandler;
+
+
 public class ServerGuiController {
 
     @FXML
@@ -69,9 +72,9 @@ public class ServerGuiController {
     }
 
     @FXML
-    void Connection() {
+    void Connection(javafx.event.ActionEvent event)  {
 
-        ServerUI.runServer(txtPort.getText());
+        ServerUI.runServer(txtIP.getText(), txtPort.getText(), txtDBname.getText(), txtUsername.getText(), txtPassword.getText());
         btnConnect.setDisable(true);
         btnDisconnect.setDisable(false);
         disableDataInput(true);
@@ -79,7 +82,7 @@ public class ServerGuiController {
     }
 
     @FXML
-    void Disconnection() {
+    void Disconnection(ActionEvent event) {
         ServerUI.disconnect();
         btnDisconnect.setDisable(true);
         btnConnect.setDisable(false);
@@ -123,8 +126,8 @@ public class ServerGuiController {
     }
 
     @FXML
-    void ImportData() {
-        MysqlConnection.connectToDb();
+    void ImportData(ActionEvent event) {
+        MysqlConnection.connectToDb(this.txtPassword.getText());
     }
 
     public void Close() { //close button

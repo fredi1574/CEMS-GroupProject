@@ -6,6 +6,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import ocsf.server.*;
+
 public class ServerUI extends Application {
     static CemsServer Cems;
     static ServerGuiController controller;
@@ -28,8 +30,8 @@ public class ServerUI extends Application {
         }
     }
 
-    public static void runServer(String port) {
-        int Port; // Port to listen on
+    public static void runServer(String IP, String port,String DBName, String username, String password) {
+        int Port = 0; // Port to listen on
 
         try {
             Port = Integer.parseInt(port); // Set port to 5555
@@ -38,10 +40,10 @@ public class ServerUI extends Application {
             System.out.println("ERROR - Could not connect!");
             return;
         }
-        System.out.println("Server Started");
-        Cems = new CemsServer(Port);
+        Cems = new CemsServer(Port, password);
         try {
             Cems.listen(); // Start listening for connections
+
         } catch (IOException e) {
             System.out.println("IO exception");
         }

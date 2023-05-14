@@ -22,8 +22,8 @@ public class PickQuestionsController {
         ScreenManager.dragAndDrop(header);
 
         ObservableList<Question> questionList = FXCollections.observableArrayList(
-                new Question(78, "1A23B", "what is 2+2?", "Fredi"),
-                new Question(420, "42040", "what is the meaning of life?", "Fredi")
+                new Question("78", "1A23B", "what is 2+2?", "Fredi","Math","Algebra"),
+                new Question("420", "42040", "what is the meaning of life?", "Fredi","Software Engineering","Data Structures")
         );
 
         ObservableList<String> questionColumnList = FXCollections.observableArrayList();
@@ -35,8 +35,8 @@ public class PickQuestionsController {
         TableManager.addCheckBoxesToTable(questionsTableView);
         TableManager.addDoubleClickFunctionality(questionsTableView, "CreateNewTestScreen/PickQuestionsScreen/QuestionPreviewPopup/questionPreview.fxml");
 
-        double[] multipliers = {0.071, 0.1, 0.1, 0.625, 0.1};
-        TableManager.resizeColumns(questionsTableView, multipliers);
+        //double[] multipliers = {0.071, 0.1, 0.1, 0.625, 0.1};
+        //TableManager.resizeColumns(questionsTableView, multipliers);
 
 
         ObservableList<String> selectedQuestionColumnList = FXCollections.observableArrayList();
@@ -44,8 +44,8 @@ public class PickQuestionsController {
 
         TableManager.createTable(selectedQuestionsTableView, selectedQuestionColumnList);
 
-        multipliers = new double[]{0.1, 0.1, 0.7, 0.1};
-        TableManager.resizeColumns(selectedQuestionsTableView, multipliers);
+        //multipliers = new double[]{0.1, 0.1, 0.7, 0.1};
+        //TableManager.resizeColumns(selectedQuestionsTableView, multipliers);
     }
 
     public void backToCreateTest(ActionEvent event) {

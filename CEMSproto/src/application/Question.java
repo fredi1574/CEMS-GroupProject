@@ -1,60 +1,63 @@
 package application;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import java.io.Serializable;
+import java.util.Observable;
 
-public class Question {
+public class Question extends Observable implements Serializable {
+    private String id;
+    private String question_number;
+    private String subject;
+    private String course_name;
+    private String question_text;
+    private String lecturer;
 
-    private BooleanProperty selected = new SimpleBooleanProperty(false);
-    private int number;
-    private String questionID;
-    private String questionText;
-    private String author;
 
-    public Question(int number, String questionID, String questionText, String author) {
-        this.number = number;
-        this.questionID = questionID;
-        this.questionText = questionText;
-        this.author = author;
+
+    public Question(String questionNumber,String questionId,String questionText, String questionWrittenBy,String subject,String course_name) {
+        this.question_number = questionNumber;
+        this.id = questionId;
+        this.question_text = questionText;
+        this.lecturer = questionWrittenBy;
+        this.course_name=course_name;
+        this.subject=subject;
     }
 
-    public BooleanProperty getSelected() {
-        return selected;
+
+
+    public String getId() {
+        return id;
     }
 
-    public void setSelected(BooleanProperty selected) {
-        this.selected = selected;
+
+    public String getQuestion_number() {
+        return question_number;
     }
 
-    public int getNumber() {
-        return number;
+    public String getQuestion_text() {
+        return question_text;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public String getLecturer() {
+        return lecturer;
     }
 
-    public String getQuestionID() {
-        return questionID;
+    public String getCourse_name() {
+        return course_name;
     }
 
-    public void setQuestionID(String questionID) {
-        this.questionID = questionID;
+    public String getSubject() {
+        return subject;
     }
 
-    public String getQuestionText() {
-        return questionText;
-    }
-
-    public void setQuestionText(String questionText) {
-        this.questionText = questionText;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
+    @Override
+    public String toString() {
+        return "MyClass{" +
+                "id='" + id + '\'' +
+                ", question_number='" + question_number + '\'' +
+                ", subject='" + subject + '\'' +
+                ", course_name='" + course_name + '\'' +
+                ", question_text='" + question_text + '\'' +
+                ", lecturer='" + lecturer + '\'' +
+                '}';
     }
 }
