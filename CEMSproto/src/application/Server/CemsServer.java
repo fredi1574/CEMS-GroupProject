@@ -24,6 +24,7 @@ public class CemsServer extends AbstractServer{
 	 */
 	public CemsServer(int port,String passwordSQL) {
 		super(port);
+		this.passwordSQL = passwordSQL;
 		// TODO Auto-generated constructor stub
 	}
 	/**
