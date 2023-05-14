@@ -27,7 +27,7 @@ public class PickQuestionsController {
         );
 
         ObservableList<String> questionColumnList = FXCollections.observableArrayList();
-        questionColumnList.addAll("Number", "Question ID", "Question Text", "Author");
+        questionColumnList.addAll("id", "question_text", "question_number", "lecturer", "course_name","subject");
 
         TableManager.createTable(questionsTableView, questionColumnList);
         TableManager.importData(questionsTableView, questionList);
