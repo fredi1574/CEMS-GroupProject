@@ -7,7 +7,8 @@ import java.io.Serializable;
 import java.util.Observable;
 
 public class Question extends Observable implements Serializable {
-    private BooleanProperty selected = new SimpleBooleanProperty(false);
+    //TODO: fix selected property support (used in checkboxes)
+    //private BooleanProperty selected = new SimpleBooleanProperty(false);
     private String id;
     private String question_number;
     private String subject;
@@ -26,13 +27,13 @@ public class Question extends Observable implements Serializable {
         this.subject=subject;
     }
 
-    public BooleanProperty getSelected() {
-        return selected;
-    }
-
-    public void setSelected(BooleanProperty selected) {
-        this.selected = selected;
-    }
+//    public BooleanProperty getSelected() {
+//        return selected;
+//    }
+//
+//    public void setSelected(BooleanProperty selected) {
+//        this.selected = selected;
+//    }
 
     public String getId() {
         return id;
