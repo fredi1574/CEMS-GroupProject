@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -28,6 +29,27 @@ public class ManageQuestionsController {
     @FXML
     private TableView<Question> manageQuestionsTableView;
 
+    //TODO: remove TableColumns if unnecessary
+    @FXML
+    private TableColumn<Question, String> id;
+
+    @FXML
+    private TableColumn<Question, String> question_text;
+
+
+
+    @FXML
+    private TableColumn<Question, String> course_name;
+
+    @FXML
+    private TableColumn<Question, String> subject;
+
+    @FXML
+    private TableColumn<Question, String> question_number;
+
+    @FXML
+    private TableColumn<Question, String> lecturer;
+
     @FXML
     public void initialize() {
         ScreenManager.dragAndDrop(header);
@@ -37,19 +59,19 @@ public class ManageQuestionsController {
 
         MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestions, null);
         ClientUI.chat.accept((Object) getTable);
-
-        //creates the question table
-
-        //TODO: fix this mess
-        ArrayList<Object> questionObjectsList = ClientUI.chat.getList();
-        ObservableList<Question> questionList = FXCollections.observableArrayList((List)questionObjectsList);
-        //ArrayList<Question> questionList = ClientUI.chat.getList();
-
-        ObservableList<String> columnList = FXCollections.observableArrayList();
-        columnList.addAll("id", "question_text", "question_number", "lecturer", "course_name","subject");
-        TableManager.createTable(manageQuestionsTableView,columnList);
-        TableManager.importData(manageQuestionsTableView,questionList);
-        TableManager.addDoubleClickFunctionality(manageQuestionsTableView,"ManageQuestionsScreen/UpdateQuestion.fxml");
+//
+//        //creates the question table
+//
+//        //TODO: fix this mess
+//        ArrayList<Object> questionObjectsList = ClientUI.chat.getList();
+//        ObservableList<Question> questionList = FXCollections.observableArrayList((List)questionObjectsList);
+//        //ArrayList<Question> questionList = ClientUI.chat.getList();
+//
+//        ObservableList<String> columnList = FXCollections.observableArrayList();
+//        columnList.addAll("id", "question_text", "question_number", "lecturer", "course_name","subject");
+//        TableManager.createTable(manageQuestionsTableView,columnList);
+//        TableManager.importData(manageQuestionsTableView,questionList);
+//        TableManager.addDoubleClickFunctionality(manageQuestionsTableView,"ManageQuestionsScreen/UpdateQuestion.fxml");
 
 
         //ObservableList<Question> = questionList = FXCollections.observableArrayList(
@@ -58,24 +80,7 @@ public class ManageQuestionsController {
         //TableManager.createTable(manageQuestionsTableView,);
     }
 
-    public void updateColumns(){
 
-        // data.clear();
-
-        //         for (Object o : temp) {
-        //             data.add((Question)o);
-        //         }
-        //observableData = FXCollections.observableArrayList((List)temp);
-        //tableView.setItems(observableData);
-        //Platform.runLater(() -> {
-        //    tableView.refresh();
-        //     tableView.layout();
-        //   });
-        //   tableView.requestLayout();
-        //tableView.requestRefresh();
-        //        if(fromC)
-        //        tableView.setVisible(false);
-    }
     public void LogOut(ActionEvent event) {
         ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
     }

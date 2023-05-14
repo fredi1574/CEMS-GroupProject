@@ -118,7 +118,7 @@ public class ServerGuiController {
         this.txtPort.setText("5555");
         this.txtDBname.setText("jdbc:mysql://localhost/Cems?serverTimezone=IST");
         this.txtUsername.setText("root");
-        this.txtPassword.setText("Aa123456");
+        this.txtPassword.setText("");
         this.btnDisconnect.setDisable(true);
 
         //todo: convert line 147 to use TableManager.importData
