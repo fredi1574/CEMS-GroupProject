@@ -37,7 +37,7 @@ public class PickQuestionsController {
         TableManager.addDoubleClickFunctionality(questionsTableView, "CreateNewTestScreen/PickQuestionsScreen/QuestionPreviewPopup/questionPreview.fxml");
 
         //double[] multipliers = {0.071, 0.1, 0.1, 0.625, 0.1}; //proper values (when checkbox is included)
-        double[] multipliers = {0.16, 0.05, 0.61,0.175};
+        double[] multipliers = {0.13, 0.1, 0.6,0.165};
         TableManager.resizeColumns(questionsTableView, multipliers);
 
 

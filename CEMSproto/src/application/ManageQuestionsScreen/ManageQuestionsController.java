@@ -53,7 +53,7 @@ public class ManageQuestionsController {
         TableManager.importData(manageQuestionsTableView,questionList);
         TableManager.addDoubleClickFunctionality(manageQuestionsTableView,"ManageQuestionsScreen/UpdateQuestion.fxml");
 
-        double[] multipliers = {0.16, 0.05, 0.61,0.175};
+        double[] multipliers = {0.13, 0.1, 0.6,0.165};
         TableManager.resizeColumns(manageQuestionsTableView, multipliers);
 
     }
