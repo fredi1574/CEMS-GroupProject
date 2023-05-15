@@ -34,7 +34,7 @@ public class PickQuestionsController {
         TableManager.importData(questionsTableView, questionList);
 
         //TableManager.addCheckBoxesToTable(questionsTableView);
-        TableManager.addDoubleClickFunctionality(questionsTableView, "CreateNewTestScreen/PickQuestionsScreen/QuestionPreviewPopup/questionPreview.fxml");
+        TableManager.addDoubleClickFunctionality(questionsTableView, "CreateNewTestScreen/PickQuestionsScreen/QuestionPreviewPopup/questionPreview.fxml",false);
 
         //double[] multipliers = {0.071, 0.1, 0.1, 0.625, 0.1}; //proper values (when checkbox is included)
         double[] multipliers = {0.13, 0.1, 0.6,0.165};

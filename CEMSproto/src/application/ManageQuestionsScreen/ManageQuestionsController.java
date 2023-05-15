@@ -51,7 +51,7 @@ public class ManageQuestionsController {
         columnList.addAll("Question Number","ID","Subject","Course Name", "Question Text", "Lecturer");
         TableManager.createTable(manageQuestionsTableView,columnList);
         TableManager.importData(manageQuestionsTableView,questionList);
-        TableManager.addDoubleClickFunctionality(manageQuestionsTableView,"ManageQuestionsScreen/UpdateQuestion.fxml");
+        TableManager.addDoubleClickFunctionality(manageQuestionsTableView,"ManageQuestionsScreen/UpdateQuestion.fxml",true);
 
         double[] multipliers = {0.15, 0.1,0.1,0.13,0.35,0.162};
         TableManager.resizeColumns(manageQuestionsTableView, multipliers);

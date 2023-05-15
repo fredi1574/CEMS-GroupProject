@@ -56,7 +56,7 @@ public class ViewReportsController {
         TableManager.createTable(reportsTableView, columnList);
         TableManager.importData(reportsTableView, reportList);
 
-        TableManager.addDoubleClickFunctionality(reportsTableView, "ViewReportsScreen/GraphScreen/ViewGraph.fxml");
+        TableManager.addDoubleClickFunctionality(reportsTableView, "ViewReportsScreen/GraphScreen/ViewGraph.fxml",false);
 
         double[] multipliers = {0.07, 0.1, 0.2, 0.525, 0.1};
         TableManager.resizeColumns(reportsTableView, multipliers);

@@ -60,38 +60,40 @@ public class TableManager {
 //            }
 //        });
     }
-
-    public static <T> void addDoubleClickFunctionality(TableView<T> tableView, String relativePath) {
+    //TODO: fix the boolean mess
+    public static <T> void addDoubleClickFunctionality(TableView<T> tableView, String relativePath, boolean isManageQuestionTable) {
 
         tableView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && !tableView.getSelectionModel().isEmpty()) { //check whether the event was double click and the row contains a question
+                if (isManageQuestionTable) {
+                    FXMLLoader loader = new FXMLLoader(TableManager.class.getResource(relativePath));
 
-                FXMLLoader loader = new FXMLLoader(TableManager.class.getResource(relativePath));
+                    try {
+                        Parent root = loader.load();
 
-                try {
-                    Parent root = loader.load();
-
-                UpdateQuestionController updateQuestionController = loader.getController();
+                        UpdateQuestionController updateQuestionController = loader.getController();
 
 //                //Get selected row data
-                Question rowData = (Question) tableView.getSelectionModel().getSelectedItem();
+                        Question rowData = (Question) tableView.getSelectionModel().getSelectedItem();
 
-                updateQuestionController.setQuestion(rowData);
+                        updateQuestionController.setQuestion(rowData);
 
-                Node source = (Node) event.getSource();
+                        Node source = (Node) event.getSource();
 
-                // Get the Stage object that contains the source node
-                Stage stage = (Stage) source.getScene().getWindow();
-                updateQuestionController.setManage(stage);
-                stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                        // Get the Stage object that contains the source node
+                        Stage stage = (Stage) source.getScene().getWindow();
+                        updateQuestionController.setManage(stage);
+                        stage = new Stage();
+                        stage.setScene(new Scene(root));
+                        stage.show();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-
-                // Create a new pop-up window
-                //ScreenManager.popUpScreen(relativePath);
+                else {
+                    // Create a new pop-up window
+                    ScreenManager.popUpScreen(relativePath);
+                }
             }
         });
     }
