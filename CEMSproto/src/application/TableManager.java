@@ -13,7 +13,7 @@ public class TableManager {
 
         // create table columns dynamically
         for (String columnName : columnList) {
-            String propertyName = columnName.replaceAll("\\s+", ""); // remove spaces from column name
+            String propertyName = columnName.toLowerCase().replaceAll("\\s+", "_"); // remove spaces from column name
             TableColumn<T, ?> column = new TableColumn<>(columnName);
             column.setCellValueFactory(new PropertyValueFactory<>(propertyName));
             tableView.getColumns().add(column);

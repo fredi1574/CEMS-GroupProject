@@ -29,31 +29,6 @@ public class ManageQuestionsController {
     @FXML
     private TableView<Question> manageQuestionsTableView;
 
-    //TODO: remove TableColumns if unnecessary
-    @FXML
-    private TableColumn<Question, String> id;
-
-    @FXML
-    private TableColumn<Question, String> question_text;
-
-
-
-    @FXML
-    private TableColumn<Question, String> course_name;
-
-    @FXML
-    private TableColumn<Question, String> subject;
-
-    @FXML
-    private TableColumn<Question, String> question_number;
-
-    @FXML
-    private TableColumn<Question, String> lecturer;
-
-    @FXML
-    private ObservableList<Question> observableData;
-
-
     @FXML
     public void initialize() {
         System.out.println("init manage questions");
@@ -64,20 +39,22 @@ public class ManageQuestionsController {
 
         MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestions, null);
         ClientUI.chat.accept(getTable);
-//
+
+
 //        //creates the question table
-//
-//        //TODO: fix this mess
+        //TODO: fix this mess
         ArrayList<Object> questionObjectsList = ClientUI.chat.getList();
         ObservableList<Question> questionList = FXCollections.observableArrayList((List)questionObjectsList);
         //ArrayList<Question> questionList = ClientUI.chat.getList();
 
         ObservableList<String> columnList = FXCollections.observableArrayList();
-        columnList.addAll("id", "question_text", "question_number", "lecturer", "course_name","subject");
+        columnList.addAll("Question Number","ID", "Question Text", "Lecturer");
         TableManager.createTable(manageQuestionsTableView,columnList);
         TableManager.importData(manageQuestionsTableView,questionList);
         TableManager.addDoubleClickFunctionality(manageQuestionsTableView,"ManageQuestionsScreen/UpdateQuestion.fxml");
 
+        double[] multipliers = {0.16, 0.05, 0.61,0.175};
+        TableManager.resizeColumns(manageQuestionsTableView, multipliers);
 
     }
 
