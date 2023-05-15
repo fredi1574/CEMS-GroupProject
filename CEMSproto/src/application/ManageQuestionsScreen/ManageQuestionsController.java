@@ -48,12 +48,12 @@ public class ManageQuestionsController {
         //ArrayList<Question> questionList = ClientUI.chat.getList();
 
         ObservableList<String> columnList = FXCollections.observableArrayList();
-        columnList.addAll("Question Number","ID", "Question Text", "Lecturer");
+        columnList.addAll("Question Number","ID","Subject","Course Name", "Question Text", "Lecturer");
         TableManager.createTable(manageQuestionsTableView,columnList);
         TableManager.importData(manageQuestionsTableView,questionList);
         TableManager.addDoubleClickFunctionality(manageQuestionsTableView,"ManageQuestionsScreen/UpdateQuestion.fxml");
 
-        double[] multipliers = {0.13, 0.1, 0.6,0.165};
+        double[] multipliers = {0.15, 0.1,0.1,0.13,0.35,0.162};
         TableManager.resizeColumns(manageQuestionsTableView, multipliers);
 
     }

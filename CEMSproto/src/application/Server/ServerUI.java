@@ -51,7 +51,7 @@ public class ServerUI extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        ScreenManager.showStage("Server/ServerGui.fxml", "application/images/server.png");
+        ScreenManager.showStage("Server/ServerGUI.fxml", "application/images/server.png");
     }
     //public static void runServer(String IP, String port, String username, String password)
 }
