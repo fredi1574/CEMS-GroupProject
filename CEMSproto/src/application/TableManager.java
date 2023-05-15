@@ -1,13 +1,20 @@
 package application;
 
+import application.ManageQuestionsScreen.UpdateQuestionController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.IOException;
+
 public class TableManager {
+
+
     public static <T> void createTable(TableView<T> tableView, ObservableList<String> columnList) {
         ObservableList<TableColumn<T, ?>> columns = FXCollections.observableArrayList();
 
@@ -56,8 +63,27 @@ public class TableManager {
         tableView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && !tableView.getSelectionModel().isEmpty()) { //check whether the event was double click and the row contains a question
 
-                //Get selected row data
-                //Question rowData = questionsTableView.getSelectionModel().getSelectedItem();
+                FXMLLoader loader = new FXMLLoader(TableManager.class.getResource("/application/ManageQuestionsScreen/UpdateQuestion.fxml"));
+                try {
+                    Parent root = loader.load();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                UpdateQuestionController updateQuestionController = loader.getController();
+
+//                //Get selected row data
+                Question rowData = (Question) tableView.getSelectionModel().getSelectedItem();
+
+                updateQuestionController.setQuestion(rowData);
+
+//                FXMLLoader loader = new FXMLLoader(TableManager.class.getResource("/application/ManageQuestionsScreen/UpdateQuestion.fxml"));
+//                try {
+//                    Parent root = loader.load();
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//                UpdateQuestionController controller = loader.getController();
+//                controller.setQuestion(rowData);
 
                 // Create a new pop-up window
                 ScreenManager.popUpScreen(relativePath);
