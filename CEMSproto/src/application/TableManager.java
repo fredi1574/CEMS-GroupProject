@@ -4,11 +4,14 @@ import application.ManageQuestionsScreen.UpdateQuestionController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -63,12 +66,11 @@ public class TableManager {
         tableView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && !tableView.getSelectionModel().isEmpty()) { //check whether the event was double click and the row contains a question
 
-                FXMLLoader loader = new FXMLLoader(TableManager.class.getResource("/application/ManageQuestionsScreen/UpdateQuestion.fxml"));
+                FXMLLoader loader = new FXMLLoader(TableManager.class.getResource(relativePath));
+
                 try {
                     Parent root = loader.load();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+
                 UpdateQuestionController updateQuestionController = loader.getController();
 
 //                //Get selected row data
@@ -76,17 +78,20 @@ public class TableManager {
 
                 updateQuestionController.setQuestion(rowData);
 
-//                FXMLLoader loader = new FXMLLoader(TableManager.class.getResource("/application/ManageQuestionsScreen/UpdateQuestion.fxml"));
-//                try {
-//                    Parent root = loader.load();
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//                UpdateQuestionController controller = loader.getController();
-//                controller.setQuestion(rowData);
+                Node source = (Node) event.getSource();
+
+                // Get the Stage object that contains the source node
+                Stage stage = (Stage) source.getScene().getWindow();
+                updateQuestionController.setManage(stage);
+                stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
 
                 // Create a new pop-up window
-                ScreenManager.popUpScreen(relativePath);
+                //ScreenManager.popUpScreen(relativePath);
             }
         });
     }
