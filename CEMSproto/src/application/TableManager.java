@@ -3,17 +3,20 @@ package application;
 import application.ManageQuestionsScreen.UpdateQuestionController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.function.Function;
 
 public class TableManager {
 
@@ -35,7 +38,19 @@ public class TableManager {
         // add data to the table dynamically
         tableView.getItems().addAll(data);
     }
+    public static <T> void MakeFilterListForSearch(FilteredList<T> filteredData, TextField searchField, Function<T, String> getTextFunction) {
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(item -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
 
+                String lowerCaseFilter = newValue.toLowerCase();
+                String itemText = getTextFunction.apply(item);
+                return itemText.toLowerCase().contains(lowerCaseFilter);
+            });
+        });
+    }
     // Adds checkbox column
     //todo: add the check boxes ticking functionality
     public static <T> void addCheckBoxesToTable(TableView<T> tableView) {

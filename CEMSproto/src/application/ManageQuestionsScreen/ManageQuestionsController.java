@@ -6,11 +6,14 @@ import application.common.TypeMsg;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
@@ -20,11 +23,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 public class ManageQuestionsController {
 
+    public TextField searchField;
     @FXML
     private AnchorPane header;
-
-    @FXML
-    private ComboBox<String> comboBox;
 
     @FXML
     private TableView<Question> manageQuestionsTableView;
@@ -34,8 +35,8 @@ public class ManageQuestionsController {
         System.out.println("init manage questions");
         ScreenManager.dragAndDrop(header);
 
-        ObservableList<String> options = FXCollections.observableArrayList("Software Engineering", "Math", "...");
-        comboBox.setItems(options);
+//        ObservableList<String> options = FXCollections.observableArrayList("Software Engineering", "Math", "...");
+//        comboBox.setItems(options);
 
         MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestions, null);
         ClientUI.chat.accept(getTable);
@@ -55,6 +56,13 @@ public class ManageQuestionsController {
 
         double[] multipliers = {0.15, 0.1,0.1,0.13,0.35,0.162};
         TableManager.resizeColumns(manageQuestionsTableView, multipliers);
+        //filter result as you search
+        FilteredList<Question> filteredData = new FilteredList<>(questionList, b -> true);
+        TableManager.MakeFilterListForSearch(filteredData, searchField, Question::getQuestion_text);
+
+        SortedList<Question> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(manageQuestionsTableView.comparatorProperty());
+        manageQuestionsTableView.setItems(sortedData);
 
     }
 
