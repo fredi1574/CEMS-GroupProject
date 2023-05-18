@@ -8,7 +8,7 @@ public abstract class User {
    
 
     public enum Role {
-        student, lecturer, headofdepartment
+        student, lecturer, headOfDepartment
     }
 
     /**
