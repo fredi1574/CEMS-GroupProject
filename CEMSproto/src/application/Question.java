@@ -16,6 +16,7 @@ public class Question extends Observable implements Serializable {
     private String question_text;
     private String lecturer;
 
+    protected String content;
 
 
     public Question(String questionNumber,String questionId,String questionText, String questionWrittenBy,String subject,String course_name) {
@@ -71,4 +72,11 @@ public class Question extends Observable implements Serializable {
                 ", lecturer='" + lecturer + '\'' +
                 '}';
     }
+
+
+	public String getContent() {
+		// TODO Auto-generated method stub
+		return content;
+		
+	}
 }

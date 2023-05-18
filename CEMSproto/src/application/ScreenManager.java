@@ -38,7 +38,7 @@ public class ScreenManager {
 //    }
 
     public static void goToNewScreen(ActionEvent event, String screenRelativePath) {
-        showStage(screenRelativePath, "/application/images/icon.png");
+        showStage(screenRelativePath, "/application/images/Icon.png");
 
         // Get the Stage object that contains the source node
         Node source = (Node) event.getSource();
@@ -48,7 +48,7 @@ public class ScreenManager {
     }
 
     public static void popUpScreen(String screenRelativePath) {
-        Stage stage = showStage(screenRelativePath, "/application/images/icon.png");
+        Stage stage = showStage(screenRelativePath, "/application/images/Icon.png");
         moveStage(stage);
     }
 
@@ -68,7 +68,7 @@ public class ScreenManager {
         stage.initStyle(StageStyle.TRANSPARENT);
 
         //TODO: fix icon pathing
-        //stage.getIcons().add(new Image(iconPath));
+        stage.getIcons().add(new Image(iconPath));
         stage.setScene(scene);
         stage.show();
 

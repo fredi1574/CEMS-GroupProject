@@ -13,28 +13,30 @@ import java.net.UnknownHostException;
 public class ConnectToClients implements Serializable {
 
 
-	private String IP;
+	private String ip;
 	private String host;
 	private String status;
 
-	public ConnectToClients(String IP, String host, String status) {
-		this.IP = IP;
+	public ConnectToClients(String ip, String host, String status) {
+		this.ip = ip;
 		this.host = host;
 		this.status = status;
 	}
-	public void setIP(String ip) {
-		this.IP = IP;
-	}
-	public String getIP() {
-		String IP = null;
-		try {
-			IP = Inet4Address.getLocalHost().getHostAddress();
-		}catch (UnknownHostException exception){
-			exception.printStackTrace();
-		}
 
+	//NOTE: for whatever reason capitalizing 'Ip' breaks the function...
+	public String getIp() {
 
-		return IP;
+		//TODO: fix ip retrieval via this method (if it is necessary)
+//		String IP = null;
+//		try {
+//			IP = Inet4Address.getLocalHost().getHostAddress();
+//		}catch (UnknownHostException exception){
+//			exception.printStackTrace();
+//		}
+//
+//
+//		return IP;
+		return ip;
 	}
 	public void setHost(String host) {
 		this.host = host;

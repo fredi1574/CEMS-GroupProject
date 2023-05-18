@@ -39,7 +39,7 @@ public class CemsServer extends AbstractServer{
 		for (int i = 0; i < clientList.size(); i++) {
 			/* Comparing clients by IP addresses */
 			try {
-				if (clientList.get(i).getIP().equals(client.getInetAddress().getHostAddress())) {
+				if (clientList.get(i).getIp().equals(client.getInetAddress().getHostAddress())) {
 					clientList.get(i).setStatus(connectionStatus);
 					clientList.remove(i);
 				}
