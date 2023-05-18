@@ -7,7 +7,7 @@ import java.util.List;
 import application.common.ChatIF;
 import application.common.MsgHandler;
 import ocsf.client.AbstractClient;
-
+//test
 public class Client extends AbstractClient {
 	private ChatIF clientUI; 
 	private boolean waitResponse = false;
