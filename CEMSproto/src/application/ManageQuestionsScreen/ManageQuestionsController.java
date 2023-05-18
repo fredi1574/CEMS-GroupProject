@@ -56,7 +56,7 @@ public class ManageQuestionsController {
 
         double[] multipliers = {0.15, 0.1,0.1,0.13,0.35,0.162};
         TableManager.resizeColumns(manageQuestionsTableView, multipliers);
-        //filter result as you search
+        //filter result as you search yay
         FilteredList<Question> filteredData = new FilteredList<>(questionList, b -> true);
         TableManager.MakeFilterListForSearch(filteredData, searchField, Question::getQuestion_text);
 
