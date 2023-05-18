@@ -41,7 +41,6 @@ public class MysqlConnection {
 			stmt = conn.prepareStatement(q);
 			stmt.executeUpdate();
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
@@ -52,7 +51,6 @@ public class MysqlConnection {
 			stmt = conn.createStatement();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -84,7 +82,6 @@ public class MysqlConnection {
 //                System.out.println(id);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;

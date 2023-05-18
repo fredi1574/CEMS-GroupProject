@@ -38,21 +38,20 @@ public class TableManager {
         // add data to the table dynamically
         tableView.getItems().addAll(data);
     }
-    public static <T> void MakeFilterListForSearch(FilteredList<T> filteredData, TextField searchField, Function<T, String> getTextFunction) {
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(item -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
 
-                String lowerCaseFilter = newValue.toLowerCase();
-                String itemText = getTextFunction.apply(item);
-                return itemText.toLowerCase().contains(lowerCaseFilter);
-            });
-        });
+    public static <T> void MakeFilterListForSearch(FilteredList<T> filteredData, TextField searchField, Function<T, String> getTextFunction) {
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(item -> {
+            if (newValue == null || newValue.isEmpty()) {
+                return true;
+            }
+
+            String lowerCaseFilter = newValue.toLowerCase();
+            String itemText = getTextFunction.apply(item);
+            return itemText.toLowerCase().contains(lowerCaseFilter);
+        }));
     }
+
     // Adds checkbox column
-    //todo: add the check boxes ticking functionality
     public static <T> void addCheckBoxesToTable(TableView<T> tableView) {
         TableColumn<T, Boolean> checkboxColumn = new TableColumn<>("Select");
         checkboxColumn.setCellValueFactory(new PropertyValueFactory<>("selected"));
@@ -75,6 +74,7 @@ public class TableManager {
 //            }
 //        });
     }
+
     //TODO: fix the boolean mess
     public static <T> void addDoubleClickFunctionality(TableView<T> tableView, String relativePath, boolean isManageQuestionTable) {
 
@@ -104,8 +104,7 @@ public class TableManager {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                }
-                else {
+                } else {
                     // Create a new pop-up window
                     ScreenManager.popUpScreen(relativePath);
                 }
@@ -114,12 +113,8 @@ public class TableManager {
     }
 
 
-    //todo: add a method to change the width of columns in the table
     public static <T> void resizeColumns(TableView<T> tableView, double[] multipliers) {
         ObservableList<TableColumn<T, ?>> columns = tableView.getColumns();
-//        System.out.println(columns.size());
-//        System.out.println(multipliers.length);
-
 
         if (columns.size() != multipliers.length) {
             throw new IllegalArgumentException("Number of columns does not match the number of multipliers");

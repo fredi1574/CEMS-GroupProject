@@ -25,17 +25,6 @@ public class ConnectToClients implements Serializable {
 
 	//NOTE: for whatever reason capitalizing 'Ip' breaks the function...
 	public String getIp() {
-
-		//TODO: fix ip retrieval via this method (if it is necessary)
-//		String IP = null;
-//		try {
-//			IP = Inet4Address.getLocalHost().getHostAddress();
-//		}catch (UnknownHostException exception){
-//			exception.printStackTrace();
-//		}
-//
-//
-//		return IP;
 		return ip;
 	}
 	public void setHost(String host) {

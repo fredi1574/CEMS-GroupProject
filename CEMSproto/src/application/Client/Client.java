@@ -18,7 +18,6 @@ public class Client extends AbstractClient {
 	public Client(String host, int port,ChatIF clientUI) {
 		super(host, port);
 		this.clientUI = clientUI;
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override

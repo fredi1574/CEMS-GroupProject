@@ -67,7 +67,6 @@ public class ScreenManager {
 
         stage.initStyle(StageStyle.TRANSPARENT);
 
-        //TODO: fix icon pathing
         stage.getIcons().add(new Image(iconPath));
         stage.setScene(scene);
         stage.show();

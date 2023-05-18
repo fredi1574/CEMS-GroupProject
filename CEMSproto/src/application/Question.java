@@ -75,7 +75,6 @@ public class Question extends Observable implements Serializable {
 
 
 	public String getContent() {
-		// TODO Auto-generated method stub
 		return content;
 		
 	}

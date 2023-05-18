@@ -25,7 +25,6 @@ public class CemsServer extends AbstractServer{
 	public CemsServer(int port,String passwordSQL) {
 		super(port);
 		this.passwordSQL = passwordSQL;
-		// TODO Auto-generated constructor stub
 	}
 	/**
 	 * This method updates the Connected\Disconnect clients to our Server Each time
@@ -97,7 +96,6 @@ public class CemsServer extends AbstractServer{
 //		try {
 //			 client.sendToClient(new MsgHandler(TypeMsg.Connected, null));
 //		} catch (IOException e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
 //	}
@@ -109,7 +107,6 @@ public class CemsServer extends AbstractServer{
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		MsgHandler<Object> messageFromClient = (MsgHandler<Object>) msg;
 		System.out.println("Message received from " + client);
-		String messgeFromClient = String.valueOf(msg); //TODO: remove this (unless needed)
 		try {
 			switch (messageFromClient.getType()) {
 				case Connected:

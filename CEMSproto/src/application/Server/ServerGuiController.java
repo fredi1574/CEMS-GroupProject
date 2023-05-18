@@ -120,9 +120,6 @@ public class ServerGuiController {
         this.txtUsername.setText("root");
         this.txtPassword.setText("");
         this.btnDisconnect.setDisable(true);
-
-        //todo: convert line 147 to use TableManager.importData
-//        TableManager.importData(connectToClients, CemsServer.getClientList());
     }
 
     @FXML

@@ -27,7 +27,6 @@ public class ClientGuiController {
 //				ClientControl client = new ClientControl(host,5555);
 //				client.client.openConnection();
 //			} catch (IOException e2) {
-//				// TODO Auto-generated catch block
 //				e2.printStackTrace();
 //		}
         MsgHandler connectToServer = new MsgHandler(TypeMsg.Connected, null);
