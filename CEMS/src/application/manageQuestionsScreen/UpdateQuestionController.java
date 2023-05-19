@@ -1,9 +1,9 @@
 package application.manageQuestionsScreen;
 
 import client.ClientUI;
-import util.*;
+import common.MsgHandler;
+import common.TypeMsg;
 import entity.Question;
-import common.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,6 +11,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import util.ExitButton;
+import util.MinimizeButton;
+import util.ScreenManager;
 
 import java.util.ArrayList;
 

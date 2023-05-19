@@ -1,6 +1,5 @@
 package application.loginWindowScreen;
 
-import util.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -8,7 +7,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-
+import util.ExitButton;
+import util.MinimizeButton;
+import util.ScreenManager;
 
 public class LoginWindowController {
 
@@ -61,8 +62,6 @@ public class LoginWindowController {
             showAlertDialog(AlertType.ERROR, "Database Error", "An error occurred while connecting to the database.");
             }
              */
-
-
 
 
     private void showAlertDialog(AlertType alertType, String title, String message) {

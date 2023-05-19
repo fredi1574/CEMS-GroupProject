@@ -1,4 +1,4 @@
-package application.viewReportsScreen;
+package entity;
 
 public class Report {
     private int year;

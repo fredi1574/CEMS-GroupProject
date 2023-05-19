@@ -21,7 +21,6 @@ import java.util.function.Function;
  */
 public class TableManager {
 
-
     /**
      * creates a new table object
      *
@@ -73,7 +72,7 @@ public class TableManager {
 //        checkboxColumn.prefWidthProperty().bind(tableView.widthProperty().multiply(0.1));
         tableView.getColumns().add(0, checkboxColumn);
 
-        //todo: alternative and probably better way to implement check boxes
+        //TODO: alternative and probably better way to implement check boxes
         //        questionCheckBoxColumn.setCellFactory(column -> new TableCell<>() {
 //            private final CheckBox checkBox = new CheckBox();
 //
@@ -89,10 +88,11 @@ public class TableManager {
 //        });
     }
 
-    //todo convert the controller to a generic one so the method
-    // will work for every double click
-    // and not only on updateQuestion screen
-    public static <T> void addDoubleClickFunctionality(TableView<T> tableView, String relativePath) {
+    //TODO: convert the controller to a generic one so the method
+    // will work for every double click,
+    // not only on updateQuestion screen.
+    // the method of the controller should not be invoked here.
+    public static <T, C, U> void addDoubleClickFunctionality(TableView<T> tableView, String relativePath) {
 
         tableView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && !tableView.getSelectionModel().isEmpty()) { //check whether the event was double click and the row contains a question
@@ -102,7 +102,10 @@ public class TableManager {
                 FXMLLoader loader = screenElements.getFXMLLoader();
                 Stage stage = screenElements.getStage();
 
+//                Class<U> controller = loader.getController();
                 UpdateQuestionController controller = loader.getController();
+
+                //should not be here. every controller should have its own methods.
                 Question rowData = (Question) tableView.getSelectionModel().getSelectedItem();
                 controller.setQuestion(rowData);
                 controller.setManage(stage);

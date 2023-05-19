@@ -1,6 +1,5 @@
 package application.createNewTestScreen.pickQuestionsScreen;
 
-import util.*;
 import entity.Question;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +8,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import util.ExitButton;
+import util.MinimizeButton;
+import util.ScreenManager;
+import util.TableManager;
 
 public class PickQuestionsController {
 
