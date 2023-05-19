@@ -25,11 +25,11 @@ public class ScreenManager {
      * closes the screen from which the method was called
      * and shows a new screen using the showStage method
      *
-     * @param event              the source event that triggered the method
-     * @param screenRelativePath the path of the new screen
+     * @param event      the source event that triggered the method
+     * @param screenPath the path of the new screen
      */
-    public static void goToNewScreen(ActionEvent event, String screenRelativePath) {
-        showStage(screenRelativePath, "/application/images/Icon.png");
+    public static void goToNewScreen(ActionEvent event, String screenPath) {
+        showStage(screenPath, "images/Icon.png");
 
         // Get the Stage object that contains the source node
         Node source = (Node) event.getSource();
@@ -44,8 +44,8 @@ public class ScreenManager {
      * @param screenRelativePath the path of the new popup
      * @return the Stage and FXMLLoader objects of the current window
      */
-    public static ScreenElements<Stage, FXMLLoader> popUpScreen(String screenRelativePath) {
-        ScreenElements<Stage, FXMLLoader> screenElement = showStage(screenRelativePath, "/application/images/Icon.png");
+    public static ScreenElements<Stage, FXMLLoader> popUpScreen(String screenPath) {
+        ScreenElements<Stage, FXMLLoader> screenElement = showStage(screenPath, "images/Icon.png");
 
         moveStage(screenElement.getStage());
         return screenElement;
@@ -58,8 +58,8 @@ public class ScreenManager {
      * @param iconPath           the path of the program icon
      * @return the Stage and FXMLLoader objects of the current window
      */
-    public static ScreenElements<Stage, FXMLLoader> showStage(String screenRelativePath, String iconPath) {
-        FXMLLoader loader = new FXMLLoader(ScreenManager.class.getResource(screenRelativePath));
+    public static ScreenElements<Stage, FXMLLoader> showStage(String screenPath, String iconPath) {
+        FXMLLoader loader = new FXMLLoader(ScreenManager.class.getResource(screenPath));
         Parent root = null;
 
         try {

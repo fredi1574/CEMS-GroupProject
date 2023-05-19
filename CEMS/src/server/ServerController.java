@@ -72,7 +72,7 @@ public class ServerController {
     @FXML
     void Connection(javafx.event.ActionEvent event)  {
 
-        ServerUI.runServer(txtIP.getText(), txtPort.getText(), txtDBname.getText(), txtUsername.getText(), txtPassword.getText());
+        ServerGUI.runServer(txtIP.getText(), txtPort.getText(), txtDBname.getText(), txtUsername.getText(), txtPassword.getText());
         btnConnect.setDisable(true);
         btnDisconnect.setDisable(false);
         disableDataInput(true);
@@ -81,7 +81,7 @@ public class ServerController {
 
     @FXML
     void Disconnection(ActionEvent event) {
-        ServerUI.disconnect();
+        ServerGUI.disconnect();
         btnDisconnect.setDisable(true);
         btnConnect.setDisable(false);
         disableDataInput(false);
@@ -126,7 +126,7 @@ public class ServerController {
     }
 
     public void Close() { //close button
-        ServerUI.disconnect();
+        ServerGUI.disconnect();
         System.exit(0);
     }
 

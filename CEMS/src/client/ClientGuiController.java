@@ -21,7 +21,7 @@ public class ClientGuiController {
         System.exit(0);
     }
 
-    public void logIN(ActionEvent event) {//login button
+    public void logIn(ActionEvent event) {//login button
         String host = IPtxt.getText();
 //		 	try {
 //				ClientControl client = new ClientControl(host,5555);
@@ -33,11 +33,11 @@ public class ClientGuiController {
         ClientUI.setChat(host, 5555);
         ClientUI.chat.accept((Object) connectToServer);
 
-        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
+        ScreenManager.goToNewScreen(event, "/application/loginWindowScreen/LoginWindow.fxml");
     }
 
     public void start() {
-        ScreenManager.showStage("/client/ClientGui.fxml", "/images/Icon.png");
+        ScreenManager.showStage("/client/ClientGui.fxml", "images/Icon.png");
     }
 
     //        public void start(Stage stage) {

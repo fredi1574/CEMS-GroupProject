@@ -8,16 +8,16 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module" module-name="ocsf" />
+    <orderEntry type="module" module-name="common" />
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/CEMSproto/lib/mysql-connector-java-8.0.13.jar!/" />
+          <root url="jar://$MODULE_DIR$/CEMS/lib/mysql-connector-java-8.0.13.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="ocsf" />
-    <orderEntry type="module" module-name="common" />
   </component>
 </module>

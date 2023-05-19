@@ -10,7 +10,7 @@ public class LogOut {
     public static void logOutToLoginScreen(ActionEvent event) {
 //        logOut();
         //todo: add the function of logging out
-        ScreenManager.goToNewScreen(event, "LoginWindowScreen/LoginWindow.fxml");
+        ScreenManager.goToNewScreen(event, "/application/loginWindowScreen/LoginWindow.fxml");
     }
 
     public static void logOut() {

@@ -1,13 +1,11 @@
 package util;
 
+import application.manageQuestionsScreen.UpdateQuestionController;
 import entity.Question;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -15,7 +13,6 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.function.Function;
 
 /**
@@ -26,8 +23,9 @@ public class TableManager {
 
 
     /**
-     * creates a new table object 
-     * @param tableView the table object that is being built
+     * creates a new table object
+     *
+     * @param tableView  the table object that is being built
      * @param columnList a list of the table's columns
      */
     public static <T> void createTable(TableView<T> tableView, ObservableList<String> columnList) {
@@ -45,6 +43,7 @@ public class TableManager {
 
     /**
      * imports data into the given table
+     *
      * @param tableView
      * @param data
      * @param <T>
@@ -90,66 +89,41 @@ public class TableManager {
 //        });
     }
 
+    //todo convert the controller to a generic one so the method
+    // will work for every double click
+    // and not only on updateQuestion screen
     public static <T> void addDoubleClickFunctionality(TableView<T> tableView, String relativePath) {
 
         tableView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && !tableView.getSelectionModel().isEmpty()) { //check whether the event was double click and the row contains a question
 
-                FXMLLoader loader = new FXMLLoader(TableManager.class.getResource(relativePath));
+                ScreenElements screenElements = ScreenManager.popUpScreen(relativePath);
 
-                try {
-                    Parent root = loader.load();
+                FXMLLoader loader = (FXMLLoader) screenElements.getFXMLLoader();
+                Stage stage = (Stage) screenElements.getStage();
 
-                    Object updateQuestionController = loader.getController();
+                UpdateQuestionController controller = loader.getController();
+                Question rowData = (Question) tableView.getSelectionModel().getSelectedItem();
+                controller.setQuestion(rowData);
+                controller.setManage(stage);
 
-                    //Get selected row data
-                    Question rowData = (Question) tableView.getSelectionModel().getSelectedItem();
-
-//                    updateQuestionController.setQuestion(rowData);
-
-                    Node source = (Node) event.getSource();
-
-                    // Get the Stage object that contains the source node
-                    Stage stage = (Stage) source.getScene().getWindow();
-//                    updateQuestionController.setManage(stage);
-                    stage = new Stage();
-                    stage.setScene(new Scene(root));
-                    stage.show();
-
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
-//                ScreenElements screenElements = ScreenManager.popUpScreen(relativePath);
-
-//                FXMLLoader loader = (FXMLLoader) screenElements.getFXMLLoader();
-//                Stage stage = (Stage) screenElements.getStage();
-//
-//                UpdateQuestionController controller = loader.getController();
-//                Question rowData = (Question) tableView.getSelectionModel().getSelectedItem();
-//                controller.setQuestion(rowData);
-//                controller.setManage(stage);
-            }
-        });
-    }
-
-    //                FXMLLoader loader = new FXMLLoader(TableManager.class.getResource(relativePath));
+//                FXMLLoader loader = new FXMLLoader(TableManager.class.getResource(relativePath));
 //
 //                try {
 //                    Parent root = loader.load();
 //
-//                    UpdateQuestionController updateQuestionController = loader.getController();
+//                    Object updateQuestionController = loader.getController();
 //
 //                    //Get selected row data
-//                    Question rowData = (Question) tableView.getSelectionModel().getSelectedItem();
+////                    Question rowData = (Question) tableView.getSelectionModel().getSelectedItem();
 //
-//                    updateQuestionController.setQuestion(rowData);
+////                    updateQuestionController.setQuestion(rowData);
 //
 //                    Node source = (Node) event.getSource();
 //
 //                    // Get the Stage object that contains the source node
 //                    Stage stage = (Stage) source.getScene().getWindow();
-//                    updateQuestionController.setManage(stage);
+////                    updateQuestionController.setManage(stage);
 //                    stage = new Stage();
 //                    stage.setScene(new Scene(root));
 //                    stage.show();
@@ -157,6 +131,9 @@ public class TableManager {
 //                } catch (IOException e) {
 //                    throw new RuntimeException(e);
 //                }
+            }
+        });
+    }
 
     public static <T> void resizeColumns(TableView<T> tableView, double[] multipliers) {
         ObservableList<TableColumn<T, ?>> columns = tableView.getColumns();
