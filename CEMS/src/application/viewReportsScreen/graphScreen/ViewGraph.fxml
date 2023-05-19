@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="524.0" prefWidth="799.0"
-            styleClass="backgroundColor" stylesheets="@../../../util/application.css"
+            styleClass="backgroundColor" stylesheets="@../../../util/style.css"
             xmlns="http://javafx.com/javafx/19"
             fx:controller="application.viewReportsScreen.graphScreen.ViewGraphController">
     <AnchorPane fx:id="header" prefHeight="105.0" prefWidth="800.0"

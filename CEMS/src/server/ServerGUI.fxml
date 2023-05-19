@@ -13,19 +13,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane accessibleRole="HYPERLINK" cache="true" prefHeight="661.0" prefWidth="785.0" styleClass="backgroundColor" stylesheets="@../util/application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.ServerController">
+<AnchorPane accessibleRole="HYPERLINK" cache="true" prefHeight="661.0" prefWidth="785.0" styleClass="backgroundColor" stylesheets="@../util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.ServerController">
     <AnchorPane fx:id="header" layoutY="-4.0" prefHeight="91.0" prefWidth="808.0" styleClass="pageHeader">
         <Label alignment="CENTER" layoutX="1.0" layoutY="20.0" prefHeight="54.0" prefWidth="807.0" style="-fx-font-weight: bold;" text="CEMS Server" textAlignment="CENTER" textFill="#fafafa">
             <font>
                 <Font name="MV Boli" size="40.0" />
             </font>
         </Label>
-        <Button fx:id="Close" layoutX="770.0" layoutY="17.0" mnemonicParsing="false" onAction="#Close" styleClass="pageHeaderBtn" stylesheets="@../util/application.css" text="X">
+        <Button fx:id="Close" layoutX="770.0" layoutY="17.0" mnemonicParsing="false" onAction="#Close" styleClass="pageHeaderBtn" stylesheets="@../util/style.css" text="X">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </Button>
-        <Button layoutX="730.0" layoutY="17.0" mnemonicParsing="false" onAction="#minimizeWindow" styleClass="pageHeaderBtn" stylesheets="@../util/application.css" text="_">
+        <Button layoutX="730.0" layoutY="17.0" mnemonicParsing="false" onAction="#minimizeWindow" styleClass="pageHeaderBtn" stylesheets="@../util/style.css" text="_">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
@@ -91,7 +91,7 @@
                     <Insets left="10.0" />
                 </padding>
             </TextField>
-            <Button fx:id="btnConnect" mnemonicParsing="false" onAction="#Connection" prefHeight="25.0" prefWidth="101.0" styleClass="pageHeader" stylesheets="@../util/application.css" text="Connect" textFill="WHITE">
+            <Button fx:id="btnConnect" mnemonicParsing="false" onAction="#Connection" prefHeight="25.0" prefWidth="101.0" styleClass="pageHeader" stylesheets="@../util/style.css" text="Connect" textFill="WHITE">
                 <font>
                     <Font name="Trebuchet MS Bold" size="13.0" />
                 </font>
@@ -99,7 +99,7 @@
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                 </VBox.margin>
             </Button>
-            <Button fx:id="btnDisconnect" mnemonicParsing="false" onAction="#Disconnection" prefHeight="25.0" prefWidth="101.0" styleClass="pageHeader" stylesheets="@../util/application.css" text="Disconnect" textFill="WHITE">
+            <Button fx:id="btnDisconnect" mnemonicParsing="false" onAction="#Disconnection" prefHeight="25.0" prefWidth="101.0" styleClass="pageHeader" stylesheets="@../util/style.css" text="Disconnect" textFill="WHITE">
                 <font>
                     <Font name="Trebuchet MS Bold" size="13.0" />
                 </font>
@@ -115,7 +115,7 @@
                 </font>
             </Label>
             <TableView fx:id="clientsTable" maxWidth="678.0" prefHeight="229.0" prefWidth="424.0" style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2;" />
-            <Button fx:id="btnImport" layoutX="321.0" layoutY="8.0" mnemonicParsing="false" onAction="#ImportData" prefHeight="25.0" prefWidth="101.0" styleClass="pageHeader" stylesheets="@../util/application.css" text="Import Data" textFill="WHITE" translateX="323.0" translateY="10.0">
+            <Button fx:id="btnImport" layoutX="321.0" layoutY="8.0" mnemonicParsing="false" onAction="#ImportData" prefHeight="25.0" prefWidth="101.0" styleClass="pageHeader" stylesheets="@../util/style.css" text="Import Data" textFill="WHITE" translateX="323.0" translateY="10.0">
                 <font>
                     <Font name="Trebuchet MS Bold" size="13.0" />
                 </font>

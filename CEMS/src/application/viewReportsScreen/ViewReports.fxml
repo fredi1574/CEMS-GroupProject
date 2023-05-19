@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="521.0" prefWidth="807.0" styleClass="backgroundColor"
-            stylesheets="@../../util/application.css" xmlns="http://javafx.com/javafx/19"
+            stylesheets="@../../util/style.css" xmlns="http://javafx.com/javafx/19"
             fx:controller="application.viewReportsScreen.ViewReportsController">
     <AnchorPane fx:id="header" prefHeight="92.0" prefWidth="807.0" styleClass="pageHeader">
         <Label layoutX="251.0" layoutY="18.0" prefHeight="54.0" prefWidth="305.0" styleClass="pageHeader"

@@ -92,7 +92,7 @@ public class TableManager {
     // will work for every double click,
     // not only on updateQuestion screen.
     // the method of the controller should not be invoked here.
-    public static <T, C, U> void addDoubleClickFunctionality(TableView<T> tableView, String relativePath) {
+    public static <T, U> void addDoubleClickFunctionality(TableView<T> tableView, String relativePath) {
 
         tableView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && !tableView.getSelectionModel().isEmpty()) { //check whether the event was double click and the row contains a question

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="742.0" prefWidth="842.0"
-            styleClass="backgroundColor" stylesheets="@../../../util/application.css"
+            styleClass="backgroundColor" stylesheets="@../../../util/style.css"
             xmlns="http://javafx.com/javafx/19"
             fx:controller="application.createNewTestScreen.pickQuestionsScreen.PickQuestionsController">
     <AnchorPane fx:id="header" prefHeight="101.0" prefWidth="842.0" styleClass="pageHeader">

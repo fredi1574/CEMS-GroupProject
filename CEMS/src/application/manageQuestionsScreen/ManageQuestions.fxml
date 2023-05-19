@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="533.0" prefWidth="775.0" styleClass="backgroundColor"
-            stylesheets="@../../util/application.css" xmlns="http://javafx.com/javafx/19"
+            stylesheets="@../../util/style.css" xmlns="http://javafx.com/javafx/19"
             fx:controller="application.manageQuestionsScreen.ManageQuestionsController">
     <Button alignment="CENTER" layoutX="26.0" layoutY="417.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0"
             styleClass="regularButtons" text="Delete">

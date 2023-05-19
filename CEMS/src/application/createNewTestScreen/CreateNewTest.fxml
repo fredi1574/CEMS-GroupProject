@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" accessibleRole="HYPERLINK" cache="true" prefHeight="570.0"
             prefWidth="888.0"
-            styleClass="backgroundColor" stylesheets="@../../util/application.css"
+            styleClass="backgroundColor" stylesheets="@../../util/style.css"
             xmlns="http://javafx.com/javafx/19" fx:controller="application.createNewTestScreen.CreateTestController">
     <AnchorPane fx:id="header" prefHeight="104.0" prefWidth="888.0" styleClass="pageHeader">
         <ImageView fitHeight="82.0" fitWidth="210.0" layoutX="14.0" layoutY="9.0" preserveRatio="true">

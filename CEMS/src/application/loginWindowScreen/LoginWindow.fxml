@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Text?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="271.0" prefWidth="516.0" styleClass="backgroundColor"
-            stylesheets="@../../util/application.css" xmlns="http://javafx.com/javafx/19"
+            stylesheets="@../../util/style.css" xmlns="http://javafx.com/javafx/19"
             fx:controller="application.loginWindowScreen.LoginWindowController">
     <center>
         <AnchorPane fx:id="header" prefHeight="248.0" prefWidth="651.0" BorderPane.alignment="CENTER">

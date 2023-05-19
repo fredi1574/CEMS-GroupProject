@@ -82,7 +82,7 @@ public class UpdateQuestionController {
         currentStage.close();
 
         manageQuestions.close();
-        ScreenManager.showStage("/manageQuestionsScreen/ManageQuestions.fxml", "/application/images/Icon.png");
+        ScreenManager.showStage("/application/manageQuestionsScreen/ManageQuestions.fxml", "images/Icon.png");
     }
 
     public void setQuestion(Question question) {
