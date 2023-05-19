@@ -14,7 +14,7 @@ public class LogOut {
     }
 
     public static void logOut() {
-        MsgHandler disconnectToServer = new MsgHandler(TypeMsg.Disconnected, null);
+        common.MsgHandler disconnectToServer = new MsgHandler(TypeMsg.Disconnected, null);
         ClientUI.chat.accept((Object) disconnectToServer);
     }
 }
