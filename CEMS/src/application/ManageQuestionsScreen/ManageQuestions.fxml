@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="533.0" prefWidth="775.0" styleClass="backgroundColor" stylesheets="@../../util/application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ManageQuestionsScreen.ManageQuestionsController">
-    <Button alignment="CENTER" layoutX="26.0" layoutY="417.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" styleClass="regularButtons" stylesheets="@../application.css" text="Delete">
+    <Button alignment="CENTER" layoutX="26.0" layoutY="417.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" styleClass="regularButtons" text="Delete">
         <font>
             <Font name="Franklin Gothic Demi Cond" size="12.0" />
         </font>
@@ -22,7 +22,7 @@
             </ImageView>
         </graphic>
     </Button>
-    <Button alignment="TOP_CENTER" layoutX="583.0" layoutY="111.0" mnemonicParsing="false" onAction="#AddQuestion" prefHeight="27.0" prefWidth="170.0" styleClass="regularButtons" stylesheets="@../application.css" text="Add Question">
+    <Button alignment="TOP_CENTER" layoutX="583.0" layoutY="111.0" mnemonicParsing="false" onAction="#AddQuestion" prefHeight="27.0" prefWidth="170.0" styleClass="regularButtons" text="Add Question">
         <font>
             <Font name="Franklin Gothic Demi" size="13.0" />
         </font>
