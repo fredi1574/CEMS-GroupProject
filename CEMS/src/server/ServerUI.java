@@ -54,22 +54,23 @@ public class ServerUI extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-//        ScreenManager.showStage("server/ServerGUI.fxml", "application/images/server.png");
-
-        FXMLLoader loader = new FXMLLoader(ScreenManager.class.getResource("/server/ServerGUI.fxml"));
-        Parent root = null;
-
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Scene scene = new Scene(root);
-
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.getIcons().add(new Image("application/images/server.png"));
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        ScreenManager.showStage("/server/ServerGUI.fxml", "application/images/server.png");
+//
+//        FXMLLoader loader = new FXMLLoader(ScreenManager.class.getResource("/server/ServerGUI.fxml"));
+//        Parent root = null;
+//
+//        try {
+//            root = loader.load();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Scene scene = new Scene(root);
+//
+//        primaryStage.initStyle(StageStyle.TRANSPARENT);
+//        primaryStage.getIcons().add(new Image("application/images/server.png"));
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
+//    }
     }
 }
