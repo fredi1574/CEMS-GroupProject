@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="header" prefHeight="351.0" prefWidth="324.0"
+            stylesheets="@../util/application.css" xmlns="http://javafx.com/javafx/19"
+            fx:controller="client.ClientGuiController">
+    <Pane prefHeight="351.0" prefWidth="324.0" styleClass="backgroundColor">
+        <Label layoutX="85.0" layoutY="191.0" prefHeight="33.0" prefWidth="198.0" text="Enter Server IP"
+               textFill="#7799c2">
+            <font>
+                <Font name="Trebuchet MS Bold" size="21.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="IPtxt" layoutX="48.0" layoutY="239.0" prefHeight="24.0" prefWidth="228.0"
+                   style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;"
+                   text="localhost">
+            <padding>
+                <Insets left="10.0"/>
+            </padding>
+        </TextField>
+        <Button layoutX="111.0" layoutY="285.0" mnemonicParsing="false" onAction="#logIN" prefHeight="25.0"
+                prefWidth="101.0" styleClass="pageHeader" text="Connect" textFill="WHITE">
+            <font>
+                <Font name="Trebuchet MS Bold" size="13.0"/>
+            </font>
+        </Button>
+    </Pane>
+    <ImageView fitHeight="116.0" fitWidth="283.0" layoutX="19.0" layoutY="70.0">
+        <Image url="@../images/Logo_Transparent.png"/>
+    </ImageView>
+    <Button layoutX="290.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
+            onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X"/>
+    <Button layoutX="254.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
+            onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_"/>
+</AnchorPane>

@@ -3,6 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CERM-GroupProject.iml" filepath="$PROJECT_DIR$/CERM-GroupProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CEMS/src/client/client.iml" filepath="$PROJECT_DIR$/CEMS/src/client/client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CEMS/src/common/common.iml" filepath="$PROJECT_DIR$/CEMS/src/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ocsf/ocsf.iml" filepath="$PROJECT_DIR$/ocsf/ocsf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CEMS/src/server/server.iml" filepath="$PROJECT_DIR$/CEMS/src/server/server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CEMS/src/util/util.iml" filepath="$PROJECT_DIR$/CEMS/src/util/util.iml" />
     </modules>
   </component>
 </project>
