@@ -79,9 +79,7 @@
     <Button layoutX="770.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
     <Button layoutX="734.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
     <Label layoutX="26.0" layoutY="145.0" text="*Double click on a question to update it" />
-   <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="34.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../../images/icons8-search-24.png" />
-      </image>
-   </ImageView>
+    <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="34.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../images/icons8-search-24.png"/>
+    </ImageView>
 </AnchorPane>

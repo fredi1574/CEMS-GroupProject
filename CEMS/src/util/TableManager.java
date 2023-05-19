@@ -97,10 +97,10 @@ public class TableManager {
         tableView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && !tableView.getSelectionModel().isEmpty()) { //check whether the event was double click and the row contains a question
 
-                ScreenElements screenElements = ScreenManager.popUpScreen(relativePath);
+                ScreenElements<Stage, FXMLLoader> screenElements = ScreenManager.popUpScreen(relativePath);
 
-                FXMLLoader loader = (FXMLLoader) screenElements.getFXMLLoader();
-                Stage stage = (Stage) screenElements.getStage();
+                FXMLLoader loader = screenElements.getFXMLLoader();
+                Stage stage = screenElements.getStage();
 
                 UpdateQuestionController controller = loader.getController();
                 Question rowData = (Question) tableView.getSelectionModel().getSelectedItem();

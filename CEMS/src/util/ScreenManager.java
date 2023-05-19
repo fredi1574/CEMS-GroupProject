@@ -41,7 +41,7 @@ public class ScreenManager {
     /**
      * opens a new window as a popup on top of the current window
      *
-     * @param screenRelativePath the path of the new popup
+     * @param screenPath the path of the new popup
      * @return the Stage and FXMLLoader objects of the current window
      */
     public static ScreenElements<Stage, FXMLLoader> popUpScreen(String screenPath) {
@@ -54,7 +54,7 @@ public class ScreenManager {
     /**
      * displays a new screen
      *
-     * @param screenRelativePath the path of the new screen
+     * @param screenPath the path of the new screen
      * @param iconPath           the path of the program icon
      * @return the Stage and FXMLLoader objects of the current window
      */
