@@ -26,8 +26,8 @@ public class PickQuestionsController {
         ScreenManager.dragAndDrop(header);
 
         ObservableList<Question> questionList = FXCollections.observableArrayList(
-                new Question("78", "1A23B", "what is 2+2?", "Fredi", "Math", "Algebra"),
-                new Question("420", "42040", "what is the meaning of life?", "Fredi", "Software Engineering", "Data Structures")
+                new Question("78", "1A23B", "what is 2+2?", "Fredi", "Math", "Algebra","","","","",""),
+                new Question("420", "42040", "what is the meaning of life?", "Fredi", "Software Engineering", "Data Structures","","","","","")
         );
 
         ObservableList<String> questionColumnList = FXCollections.observableArrayList();

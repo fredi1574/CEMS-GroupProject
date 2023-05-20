@@ -44,19 +44,28 @@ public class UpdateQuestionController {
     private Button saveButton;
     @FXML
     private Button deleteBtn;
+    @FXML
+    private TextArea answer1;
 
+    @FXML
+    private TextArea answer2;
+
+    @FXML
+    private TextArea answer3;
+
+    @FXML
+    private TextArea answer4;
+    @FXML
+    private TextField correctAnswer;
     private Question question;
     private Stage manageQuestions;
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
     }
-
     public void setManage(Stage manageQuestions) {
         this.manageQuestions = manageQuestions;
     }
-
-
     @FXML
     void onSaveButtonClicked() {
         saveData();
@@ -67,6 +76,7 @@ public class UpdateQuestionController {
         DeleteQuestion();
         reloadPage();
     }
+
     public Question AlterQuestion(){
         Question alteredQuestion= new Question(
                 questionNumberField.getText(),
@@ -74,10 +84,16 @@ public class UpdateQuestionController {
                 questionTextField.getText(),
                 lecturerField.getText(),
                 subjectField.getText(),
-                courseNameField.getText()
+                courseNameField.getText(),
+                answer1.getText(),
+                answer2.getText(),
+                answer3.getText(),
+                answer4.getText(),
+                correctAnswer.getText()
         );
         return alteredQuestion;
     }
+
     public void DeleteQuestion() {
             ArrayList<Question> arr = new ArrayList<>();
             arr.add(AlterQuestion());
@@ -107,6 +123,13 @@ public class UpdateQuestionController {
         questionNumberField.setText(question.getQuestion_number());
         lecturerField.setText(question.getLecturer());
         idField.setText(question.getId());
+        answer1.setText(question.getAnswer1());
+        answer2.setText(question.getAnswer2());
+        answer3.setText(question.getAnswer3());
+        answer4.setText(question.getAnswer4());
+        correctAnswer.setText(question.getCorrectAnswer());
+
+
     }
 
     public void closePopUp(ActionEvent event) {

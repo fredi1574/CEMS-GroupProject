@@ -21,7 +21,7 @@ public class ExamQuestion {
 	public ExamQuestion(Question question, int points, String studentComment, String teacherComment, String examID) {
 		this.question = question;
 		this.questionID = question.getId();
-		this.questionContent = question.getContent();
+		this.questionContent = question.getQuestion_text();
 		this.points = points;
 		this.studentComment = studentComment;
 		this.teacherComment = teacherComment;

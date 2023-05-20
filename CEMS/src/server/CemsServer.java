@@ -137,9 +137,21 @@ public class CemsServer extends AbstractServer{
 				case  EditQuestion:
 					this.m = (MsgHandler<Question>) msg;
 					this.q = (Question)m.getMsg().get(0);
-					String updateQuery = "UPDATE cems.questions SET question_number='"+q.getQuestion_number()+"' ,subject='" + q.getSubject() + "', course_name='" + q.getCourse_name() + "', question_text='" + q.getQuestion_text() + "', lecturer='" + q.getLecturer() + "' WHERE id='" + q.getId() + "'";
+					String updateQuery = "UPDATE cems.questions SET question_number='" + q.getQuestion_number() + "', subject='" + q.getSubject() + "', course_name='" + q.getCourse_name() + "', question_text='" + q.getQuestion_text() + "', lecturer='" + q.getLecturer() + "', answer1='" + q.getAnswer1() + "', answer2='" + q.getAnswer2() + "', " +
+							"answer3='" + q.getAnswer3() + "', correctAnswer='" + q.getCorrectAnswer() + "', answer4='" + q.getAnswer4() + "' WHERE id='" + q.getId() + "'";
+
 					MysqlConnection.update(updateQuery);
 					client.sendToClient(new MsgHandler<>(TypeMsg.QuestionUpdated,null));
+					break;
+				case  AddNewQuestion:
+					this.m = (MsgHandler<Question>) msg;
+					this.q = (Question)m.getMsg().get(0);
+					String newQuery = "INSERT INTO cems.questions (id, subject, course_name, question_text, question_number, lecturer, answer1, answer2, answer3, correctAnswer, answer4) " +
+							"VALUES ('" + q.getId() + "', '" + q.getSubject() + "', '" + q.getCourse_name() + "', '" + q.getQuestion_text() + "', " +
+							"'" + q.getQuestion_number() + "', '" + q.getLecturer() + "', '" + q.getAnswer1() + "', '" + q.getAnswer2() + "', " +
+							"'" + q.getAnswer3() + "', '" + q.getCorrectAnswer() + "', '" + q.getAnswer4() + "')";
+					MysqlConnection.update(newQuery);
+					client.sendToClient(new MsgHandler<>(TypeMsg.QuestionAddedSuccessfuly,null));
 					break;
 
 				default:

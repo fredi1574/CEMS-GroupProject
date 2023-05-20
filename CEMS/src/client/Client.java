@@ -40,6 +40,8 @@ public class Client extends AbstractClient {
 				 break;
 			 case QuestionUpdated:
 				 break;
+			 case QuestionAddedSuccessfuly:
+				 break;
 
 		 }		
 	}

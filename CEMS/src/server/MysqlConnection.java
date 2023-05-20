@@ -66,11 +66,16 @@ public class MysqlConnection {
 				String question_text = rs.getString("question_text");
 				String question_number = rs.getString("question_number");
 				String lecturer = rs.getString("lecturer");
+				String answer1 = rs.getString("answer1");
+				String answer2 = rs.getString("answer2");
+				String answer3= rs.getString("answer3");
+				String answer4= rs.getString("answer4");
+				String correctAnswer= rs.getString("correctAnswer");
 
 				// public Question(String questionNumber,String questionId,String questionText,
 				// String questionWrittenBy) {
 				Question qeustion = new Question(question_number, Integer.toString(id), question_text, lecturer, subject,
-						course_name);
+						course_name,answer1,answer2,answer3,answer4,correctAnswer);
 				list.add(qeustion);
 //                list.add(Integer.toString(id));
 //                String course_name = rs.getString("course_name");
