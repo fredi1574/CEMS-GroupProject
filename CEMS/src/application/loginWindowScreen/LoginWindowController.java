@@ -10,8 +10,17 @@ import javafx.scene.layout.AnchorPane;
 import util.ExitButton;
 import util.MinimizeButton;
 import util.ScreenManager;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class LoginWindowController {
+
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/cems?serverTimezone=UTC&useSSL=false";
+    private static final String DB_USER = "root";
+    private static final String DB_PASSWORD = "Aa123456";
 
     @FXML
     private AnchorPane header;
@@ -26,43 +35,36 @@ public class LoginWindowController {
 
     @FXML
     public void logIN(ActionEvent event) {
-//        String username = usernameField.getText();
-//        String password = passwordField.getText();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
 
-//        if (username.isEmpty() || password.isEmpty()) {
-//            showAlertDialog(AlertType.WARNING, "Incomplete Fields", "Please enter both username and password.");
-//            return;
-//        }
-        ScreenManager.goToNewScreen(event, "/application/mainMenuScreen/MainMenu.fxml");
+        if (username.isEmpty() || password.isEmpty()) {
+            showAlertDialog(AlertType.WARNING, "Incomplete Fields", "Please enter both username and password.");
+            return;
+        }
+
+        if (authenticateUser(username, password)) {
+            ScreenManager.goToNewScreen(event, "/application/MainMenuScreen/MainMenu.fxml");
+        } else {
+            showAlertDialog(AlertType.ERROR, "Authentication Failed", "Invalid username or password.");
+        }
     }
-/*
-        try {
-
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:5555/cems", "username", "password");
-            String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
+    private boolean authenticateUser(String username, String password) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM users WHERE username = ? AND password = ?")) {
             statement.setString(1, username);
             statement.setString(2, password);
-
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                ScreenManager.goToNewScreen(event, "MainMenuScreen/MainMenu.fxml");
-            } else {
-                showAlertDialog(AlertType.ERROR, "Invalid Credentials", "The entered username or password is incorrect.");
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    return count > 0;
+                }
             }
-
-            connection.close();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            showAlertDialog(AlertType.ERROR, "Database Error", "MySQL Connector/J driver not found.");
         } catch (SQLException e) {
             e.printStackTrace();
-            showAlertDialog(AlertType.ERROR, "Database Error", "An error occurred while connecting to the database.");
-            }
-             */
-
+        }
+        return false;
+    }
 
     private void showAlertDialog(AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
