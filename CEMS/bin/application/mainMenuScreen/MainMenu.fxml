@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="header" prefHeight="489.0" prefWidth="508.0"
+            styleClass="backgroundColor" stylesheets="@../../util/style.css"
+            xmlns="http://javafx.com/javafx/19" fx:controller="application.mainMenuScreen.MainMenuController">
+    <VBox prefHeight="489.0" prefWidth="319.0" styleClass="pageHeader">
+        <Pane prefHeight="89.0" prefWidth="319.0" styleClass="pageHeader">
+            <ImageView fitHeight="76.0" fitWidth="200.0" layoutX="60.0" layoutY="3.0">
+                <Image url="@../../images/Logo_Transparent2.png"/>
+            </ImageView>
+        </Pane>
+        <Pane>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="320.0"
+                   style="-fx-font-size: 20;" text="Tests" textAlignment="CENTER" textFill="#c1dfff" underline="true"/>
+            <Button alignment="BASELINE_LEFT" layoutY="25.0" mnemonicParsing="false" onAction="#CreateNewTest"
+                    prefHeight="39.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" Create New Test"
+                    textFill="WHITE">
+                <font>
+                    <Font name="Trebuchet MS" size="25.0"/>
+                </font>
+                <graphic>
+                    <ImageView fitHeight="32.0" fitWidth="31.0">
+                        <Image url="@../../images/test_add.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutY="73.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="287.0"
+                    styleClass="mainMenuButtons" text=" Manage Tests" textFill="WHITE">
+                <font>
+                    <Font name="Trebuchet MS" size="25.0"/>
+                </font>
+                <opaqueInsets>
+                    <Insets/>
+                </opaqueInsets>
+                <graphic>
+                    <ImageView fitHeight="32.0" fitWidth="31.0">
+                        <Image url="@../../images/test_manage.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </Pane>
+        <Pane>
+            <VBox.margin>
+                <Insets top="10.0"/>
+            </VBox.margin>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="320.0"
+                   style="-fx-font-size: 20;" text="Questions" textAlignment="CENTER" textFill="#c1dfff"
+                   underline="true">
+                <font>
+                    <Font name="Trebuchet MS" size="18.0"/>
+                </font>
+            </Label>
+            <Button alignment="BASELINE_LEFT" layoutY="25.0" mnemonicParsing="false" onAction="#addQuestion"
+                    prefHeight="49.0" prefWidth="287.0" snapToPixel="false" styleClass="mainMenuButtons"
+                    text=" Add a Question" textFill="WHITE">
+                <font>
+                    <Font name="Trebuchet MS" size="25.0"/>
+                </font>
+                <graphic>
+                    <ImageView fitHeight="32.0" fitWidth="31.0">
+                        <Image url="@../../images/question_add.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutY="74.0" mnemonicParsing="false" onAction="#manageQuestions"
+                    prefHeight="48.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" Manage Questions"
+                    textFill="WHITE">
+                <font>
+                    <Font name="Trebuchet MS" size="25.0"/>
+                </font>
+                S
+                <opaqueInsets>
+                    <Insets/>
+                </opaqueInsets>
+                <graphic>
+                    <ImageView fitHeight="32.0" fitWidth="31.0">
+                        <Image url="@../../images/question_manage.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </Pane>
+        <Pane>
+            <VBox.margin>
+                <Insets top="10.0"/>
+            </VBox.margin>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="320.0"
+                   style="-fx-font-size: 20;" text="Reports" textAlignment="CENTER" textFill="#c1dfff" underline="true">
+                <font>
+                    <Font size="20.0"/>
+                </font>
+            </Label>
+            <Button alignment="BASELINE_LEFT" layoutY="25.0" mnemonicParsing="false" onAction="#ViewReports"
+                    prefHeight="48.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" View Reports"
+                    textFill="WHITE">
+                <font>
+                    <Font name="Trebuchet MS" size="25.0"/>
+                </font>
+                <graphic>
+                    <ImageView fitHeight="32.0" fitWidth="31.0">
+                        <Image url="@../../images/Reports.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </Pane>
+        <Pane prefHeight="88.0" prefWidth="220.0">
+            <Button layoutX="14.0" layoutY="41.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="31.0"
+                    prefWidth="66.0" styleClass="pageHeaderBtn" text="Log out"/>
+        </Pane>
+    </VBox>
+    <Pane layoutX="318.0" layoutY="38.0">
+        <Pane prefHeight="3.0" prefWidth="203.0" style="-fx-background-color: #306ebd;"/>
+        <ImageView fitHeight="43.0" fitWidth="200.0" layoutX="3.0" layoutY="2.0" preserveRatio="true">
+            <Image url="@../../images/welcome.png"/>
+        </ImageView>
+        <Text fill="#306ebd" layoutX="9.0" layoutY="63.9912109375" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="May" wrappingWidth="176.48748779296875">
+            <font>
+                <Font name="Tahoma" size="18.0"/>
+            </font>
+        </Text>
+    </Pane>
+    <HBox layoutX="451.0" layoutY="5.0" spacing="10.0">
+        <Button minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0"
+                prefWidth="25.0" styleClass="regularButtons" text="_"/>
+        <Button minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0"
+                prefWidth="25.0" styleClass="regularButtons" text="X"/>
+    </HBox>
+</AnchorPane>
