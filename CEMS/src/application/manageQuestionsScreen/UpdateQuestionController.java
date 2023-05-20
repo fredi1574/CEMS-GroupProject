@@ -42,6 +42,8 @@ public class UpdateQuestionController {
 
     @FXML
     private Button saveButton;
+    @FXML
+    private Button deleteBtn;
 
     private Question question;
     private Stage manageQuestions;
@@ -60,11 +62,13 @@ public class UpdateQuestionController {
         saveData();
         reloadPage();
     }
-
-    private void saveData() {
-        ArrayList<Question> arr = new ArrayList<>();
-
-        Question updatedQuestion = new Question(
+    @FXML
+    void onDeleteButtonClicked() {
+        DeleteQuestion();
+        reloadPage();
+    }
+    public Question AlterQuestion(){
+        Question alteredQuestion= new Question(
                 questionNumberField.getText(),
                 question.getId(),
                 questionTextField.getText(),
@@ -72,7 +76,17 @@ public class UpdateQuestionController {
                 subjectField.getText(),
                 courseNameField.getText()
         );
-        arr.add(updatedQuestion);
+        return alteredQuestion;
+    }
+    public void DeleteQuestion() {
+            ArrayList<Question> arr = new ArrayList<>();
+            arr.add(AlterQuestion());
+            MsgHandler deleteQ = new MsgHandler(TypeMsg.DeleteQuestion, arr);
+            ClientUI.chat.accept(deleteQ);
+        }
+    private void saveData() {
+        ArrayList<Question> arr = new ArrayList<>();
+        arr.add(AlterQuestion());
         MsgHandler editQ = new MsgHandler(TypeMsg.EditQuestion, arr);
         ClientUI.chat.accept(editQ);
     }

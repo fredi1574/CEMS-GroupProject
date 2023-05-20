@@ -10,9 +10,9 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import util.ExitButton;
 import util.MinimizeButton;
 import util.ScreenManager;
@@ -26,6 +26,8 @@ public class ManageQuestionsController {
     public TextField searchField;
     @FXML
     private AnchorPane header;
+    @FXML
+    private Button deleteBtn;
 
     @FXML
     private TableView<Question> manageQuestionsTableView;
@@ -58,6 +60,30 @@ public class ManageQuestionsController {
         SortedList<Question> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(manageQuestionsTableView.comparatorProperty());
         manageQuestionsTableView.setItems(sortedData);
+    }
+
+    /**
+     *
+     * @param event clicking "delete" on a selected row to delete a question
+     * this method deletes the question in the question table not through the DB. In order to delete the permanently delete it,
+     * "Save" button needs to be clicked.
+     */
+    @FXML
+    public void DeleteQuestion(ActionEvent event) {
+            int selectedQuestionIndex = manageQuestionsTableView.getSelectionModel().getFocusedIndex();
+            if (selectedQuestionIndex != -1) {
+                Question questionToDelete = manageQuestionsTableView.getItems().get(selectedQuestionIndex);
+                ArrayList<Question> arr = new ArrayList<>();
+                arr.add(questionToDelete);
+                MsgHandler deleteQ = new MsgHandler(TypeMsg.DeleteQuestion, arr);
+                ClientUI.chat.accept(deleteQ);
+                reloadPage();
+            }
+    }
+    private void reloadPage() {
+        Stage currentStage = (Stage) deleteBtn.getScene().getWindow();
+        currentStage.close();
+        ScreenManager.showStage("/application/manageQuestionsScreen/ManageQuestions.fxml", "images/Icon.png");
     }
 
 

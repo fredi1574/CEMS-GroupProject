@@ -33,6 +33,8 @@ public class Client extends AbstractClient {
 				break;
 //			case ImportedSuccessfully:
 //				break;
+			 case QuestionDeleted:
+				 break;
 			 case QuestionsResponse:
 				 list = ((MsgHandler<Object>)messageFromServer).getMsg();
 				 break;

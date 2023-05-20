@@ -15,7 +15,8 @@ public class CemsServer extends AbstractServer{
 	static ObservableList<ConnectToClients> clientList = FXCollections.observableArrayList();
 	//Constructors ****************************************************
 	public String passwordSQL;
-
+	Question q;
+	MsgHandler<Question> m;
 	/**
 	 * Constructs an instance of the echo server.
 	 *
@@ -84,7 +85,6 @@ public class CemsServer extends AbstractServer{
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-		System.out.println("Server has stopped listening for connections.");
 		MysqlConnection.closeConnection();
 
 	}
@@ -127,13 +127,21 @@ public class CemsServer extends AbstractServer{
 					//List<String>
 					client.sendToClient(new MsgHandler<>(TypeMsg.QuestionsResponse,list));
 					break;
+				case DeleteQuestion:
+					this.m = (MsgHandler<Question>) msg;
+					this.q = (Question)m.getMsg().get(0);
+					String DeleteQuery = "DELETE FROM cems.questions WHERE id='" + q.getId() + "'";;
+					MysqlConnection.update(DeleteQuery);
+					client.sendToClient(new MsgHandler<>(TypeMsg.QuestionDeleted,null));
+
 				case  EditQuestion:
-					MsgHandler<Question> m = (MsgHandler<Question>) msg;
-					Question q=(Question)m.getMsg().get(0);
+					this.m = (MsgHandler<Question>) msg;
+					this.q = (Question)m.getMsg().get(0);
 					String updateQuery = "UPDATE cems.questions SET question_number='"+q.getQuestion_number()+"' ,subject='" + q.getSubject() + "', course_name='" + q.getCourse_name() + "', question_text='" + q.getQuestion_text() + "', lecturer='" + q.getLecturer() + "' WHERE id='" + q.getId() + "'";
 					MysqlConnection.update(updateQuery);
 					client.sendToClient(new MsgHandler<>(TypeMsg.QuestionUpdated,null));
 					break;
+
 				default:
 					break;
 			}

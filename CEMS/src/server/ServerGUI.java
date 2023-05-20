@@ -20,10 +20,10 @@ public class ServerGUI extends Application {
         else {
             try {
                 Cems.serverStopped();
-                System.out.println("Server Disconnected");
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            System.out.println("Server has stopped listening for connections.");
             System.out.println("Server Disconnected");
         }
     }

@@ -29,8 +29,16 @@ public enum TypeMsg {
 		public String toString() {
 			return "User asked to edit question";
 		}
+	},DeleteQuestion {
+		public String toString() {
+			return "User asked to delete question";
+		}
+	},QuestionDeleted {
+		public String toString() {
+			return "User deleted a question";
+		}
 	},QuestionUpdated {
-	public String toString() {
+		public String toString() {
 		return "User updated a question ";
 	}
 	}
