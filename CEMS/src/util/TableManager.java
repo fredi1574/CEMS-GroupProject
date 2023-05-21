@@ -13,6 +13,7 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -44,7 +45,7 @@ public class TableManager {
      * imports data into the given table
      *
      * @param tableView the table object that is receiving the data
-     * @param data the list of table entries that are being imported
+     * @param data      the list of table entries that are being imported
      */
     public static <T> void importData(TableView<T> tableView, ObservableList<T> data) {
         // add data to the table dynamically
@@ -53,11 +54,13 @@ public class TableManager {
 
     /**
      * Creates a filtered list of the table's entries based on user input
-     * @param filteredData the original list of entries
-     * @param searchField the text field where the input is read
+     *
+     * @param filteredData    the original list of entries
+     * @param searchField     the text field where the input is read
      * @param getTextFunction the function that reads the entity's text value that represents the searchable text
      */
-    public static <T> void MakeFilterListForSearch(FilteredList<T> filteredData, TextField searchField, Function<T, String> getTextFunction) {
+    public static <T> void MakeFilterListForSearch(FilteredList<T> filteredData, TextField searchField,
+                                                   Function<T, String> getTextFunction) {
         searchField.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(item -> {
             if (newValue == null || newValue.isEmpty()) {
                 return true;
@@ -71,6 +74,7 @@ public class TableManager {
 
     /**
      * adds a checkbox for every element in the given table
+     *
      * @param tableView the relevant table object
      */
     public static <T> void addCheckBoxesToTable(TableView<T> tableView) {
@@ -100,55 +104,19 @@ public class TableManager {
     // will work for every double click,
     // not only on updateQuestion screen.
     // the method of the controller should not be invoked here.
-    public static <T, U> void addDoubleClickFunctionality(TableView<T> tableView, String relativePath) {
+    public static <T> void addDoubleClickFunctionality(TableView<T> tableView, String relativePath, Consumer<String> setFunctionsFunction) {
 
         tableView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && !tableView.getSelectionModel().isEmpty()) { //check whether the event was double click and the row contains a question
-
-                ScreenElements<Stage, FXMLLoader> screenElements = ScreenManager.popUpScreen(relativePath);
-
-                FXMLLoader loader = screenElements.getFXMLLoader();
-                Stage stage = screenElements.getStage();
-
-//                Class<U> controller = loader.getController();
-                UpdateQuestionController controller = loader.getController();
-
-                //should not be here. every controller should have its own methods.
-                Question rowData = (Question) tableView.getSelectionModel().getSelectedItem();
-                controller.setQuestion(rowData);
-                controller.setManage(stage);
-
-//                FXMLLoader loader = new FXMLLoader(TableManager.class.getResource(relativePath));
-//
-//                try {
-//                    Parent root = loader.load();
-//
-//                    Object updateQuestionController = loader.getController();
-//
-//                    //Get selected row data
-////                    Question rowData = (Question) tableView.getSelectionModel().getSelectedItem();
-//
-////                    updateQuestionController.setQuestion(rowData);
-//
-//                    Node source = (Node) event.getSource();
-//
-//                    // Get the Stage object that contains the source node
-//                    Stage stage = (Stage) source.getScene().getWindow();
-////                    updateQuestionController.setManage(stage);
-//                    stage = new Stage();
-//                    stage.setScene(new Scene(root));
-//                    stage.show();
-//
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
+                setFunctionsFunction.accept(relativePath);
             }
         });
     }
 
     /**
      * resizes every column in the table based on given percentage values
-     * @param tableView the table object that is receiving the column size values
+     *
+     * @param tableView   the table object that is receiving the column size values
      * @param multipliers the column size values
      */
     public static <T> void resizeColumns(TableView<T> tableView, double[] multipliers) {

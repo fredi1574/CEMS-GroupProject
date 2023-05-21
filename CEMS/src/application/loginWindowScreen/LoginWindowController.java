@@ -35,19 +35,19 @@ public class LoginWindowController {
 
     @FXML
     public void logIN(ActionEvent event) {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-
-        if (username.isEmpty() || password.isEmpty()) {
-            showAlertDialog(AlertType.WARNING, "Incomplete Fields", "Please enter both username and password.");
-            return;
-        }
-
-        if (authenticateUser(username, password)) {
+//        String username = usernameField.getText();
+//        String password = passwordField.getText();
+//
+//        if (username.isEmpty() || password.isEmpty()) {
+//            showAlertDialog(AlertType.WARNING, "Incomplete Fields", "Please enter both username and password.");
+//            return;
+//        }
+//
+//        if (authenticateUser(username, password)) {
             ScreenManager.goToNewScreen(event, "/application/MainMenuScreen/MainMenu.fxml");
-        } else {
-            showAlertDialog(AlertType.ERROR, "Authentication Failed", "Invalid username or password.");
-        }
+//        } else {
+//            showAlertDialog(AlertType.ERROR, "Authentication Failed", "Invalid username or password.");
+//        }
     }
     private boolean authenticateUser(String username, String password) {
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);

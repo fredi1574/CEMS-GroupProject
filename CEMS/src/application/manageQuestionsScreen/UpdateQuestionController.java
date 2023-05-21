@@ -54,7 +54,6 @@ public class UpdateQuestionController {
         this.manageQuestions = manageQuestions;
     }
 
-
     @FXML
     void onSaveButtonClicked() {
         saveData();

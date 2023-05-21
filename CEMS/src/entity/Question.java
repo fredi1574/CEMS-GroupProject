@@ -18,7 +18,6 @@ public class Question extends Observable implements Serializable {
 
     protected String content;
 
-
     public Question(String questionNumber,String questionId,String questionText, String questionWrittenBy,String subject,String course_name) {
         this.question_number = questionNumber;
         this.id = questionId;

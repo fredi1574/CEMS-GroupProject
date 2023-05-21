@@ -10,15 +10,13 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import util.ExitButton;
-import util.MinimizeButton;
-import util.ScreenManager;
-import util.TableManager;
+import javafx.stage.Stage;
+import util.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ManageQuestionsController {
@@ -40,24 +38,36 @@ public class ManageQuestionsController {
 
 
         //creates the question table
-        ArrayList<Object> questionObjectsList = ClientUI.chat.getList();
-        ObservableList<Question> questionList = FXCollections.observableArrayList((List) questionObjectsList);
+        ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.getList());
 
-        ObservableList<String> columnList = FXCollections.observableArrayList();
-        columnList.addAll("Question Number", "ID", "Subject", "Course Name", "Question Text", "Lecturer");
-        TableManager.createTable(manageQuestionsTableView, columnList);
-        TableManager.importData(manageQuestionsTableView, questionList);
-        TableManager.addDoubleClickFunctionality(manageQuestionsTableView, "/application/manageQuestionsScreen/UpdateQuestion.fxml");
+        ObservableList<String> columns = FXCollections.observableArrayList();
+        columns.addAll("Question Number", "ID", "Subject", "Course Name", "Question Text", "Lecturer");
+        TableManager.createTable(manageQuestionsTableView, columns);
+        TableManager.importData(manageQuestionsTableView, questions);
+        TableManager.addDoubleClickFunctionality(manageQuestionsTableView, "/application/manageQuestionsScreen/UpdateQuestion.fxml", this::setFunctions);
 
         double[] multipliers = {0.15, 0.1, 0.1, 0.13, 0.35, 0.162};
         TableManager.resizeColumns(manageQuestionsTableView, multipliers);
         //filter result as you search yay
-        FilteredList<Question> filteredData = new FilteredList<>(questionList, b -> true);
+        FilteredList<Question> filteredData = new FilteredList<>(questions, b -> true);
         TableManager.MakeFilterListForSearch(filteredData, searchField, Question::getQuestion_text);
 
         SortedList<Question> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(manageQuestionsTableView.comparatorProperty());
         manageQuestionsTableView.setItems(sortedData);
+    }
+
+    public void setFunctions(String relativePath) {
+        ScreenElements<Stage, FXMLLoader> screenElements = ScreenManager.popUpScreen(relativePath);
+
+        FXMLLoader loader = screenElements.getFXMLLoader();
+
+        UpdateQuestionController controller = loader.getController();
+
+        Question rowData = manageQuestionsTableView.getSelectionModel().getSelectedItem();
+        controller.setQuestion(rowData);
+
+        controller.setManage((Stage) header.getScene().getWindow());
     }
 
 
