@@ -43,15 +43,20 @@ public class TableManager {
     /**
      * imports data into the given table
      *
-     * @param tableView
-     * @param data
-     * @param <T>
+     * @param tableView the table object that is receiving the data
+     * @param data the list of table entries that are being imported
      */
     public static <T> void importData(TableView<T> tableView, ObservableList<T> data) {
         // add data to the table dynamically
         tableView.getItems().addAll(data);
     }
 
+    /**
+     * Creates a filtered list of the table's entries based on user input
+     * @param filteredData the original list of entries
+     * @param searchField the text field where the input is read
+     * @param getTextFunction the function that reads the entity's text value that represents the searchable text
+     */
     public static <T> void MakeFilterListForSearch(FilteredList<T> filteredData, TextField searchField, Function<T, String> getTextFunction) {
         searchField.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(item -> {
             if (newValue == null || newValue.isEmpty()) {
@@ -64,7 +69,10 @@ public class TableManager {
         }));
     }
 
-    // Adds checkbox column
+    /**
+     * adds a checkbox for every element in the given table
+     * @param tableView the relevant table object
+     */
     public static <T> void addCheckBoxesToTable(TableView<T> tableView) {
         TableColumn<T, Boolean> checkboxColumn = new TableColumn<>("Select");
         checkboxColumn.setCellValueFactory(new PropertyValueFactory<>("selected"));
@@ -138,6 +146,11 @@ public class TableManager {
         });
     }
 
+    /**
+     * resizes every column in the table based on given percentage values
+     * @param tableView the table object that is receiving the column size values
+     * @param multipliers the column size values
+     */
     public static <T> void resizeColumns(TableView<T> tableView, double[] multipliers) {
         ObservableList<TableColumn<T, ?>> columns = tableView.getColumns();
         int index = 0;
