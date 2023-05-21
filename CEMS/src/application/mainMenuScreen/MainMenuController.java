@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import util.ExitButton;
 import util.MinimizeButton;
+import util.PathConstants;
 import util.ScreenManager;
 
 public class MainMenuController {
@@ -17,23 +18,23 @@ public class MainMenuController {
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/loginWindowScreen/LoginWindow.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.loginPath);
     }
 
     public void manageQuestions(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/manageQuestionsScreen/ManageQuestions.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.manageQuestions);
     }
 
     public void ViewReports(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/viewReportsScreen/ViewReports.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.viewReportsPath);
     }
 
     public void CreateNewTest(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/createNewTestScreen/CreateNewTest.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.createNewTestPath);
     }
 
     public void addQuestion(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/addAQuestionScreen/AddAQuestion.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.addQuestionPath);
     }
 
     @FXML

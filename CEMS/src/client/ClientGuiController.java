@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import util.ExitButton;
 import util.MinimizeButton;
+import util.PathConstants;
 import util.ScreenManager;
 
 public class ClientGuiController {
@@ -33,30 +34,13 @@ public class ClientGuiController {
         ClientUI.setChat(host, 5555);
         ClientUI.chat.accept((Object) connectToServer);
 
-        ScreenManager.goToNewScreen(event, "/application/loginWindowScreen/LoginWindow.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.loginPath);
     }
 
     public void start() {
-        ScreenManager.showStage("/client/ClientGui.fxml", "images/Icon.png");
+        ScreenManager.showStage(PathConstants.clientPath, PathConstants.iconPath);
     }
 
-    //        public void start(Stage stage) {
-//                AnchorPane pane;
-//        try {
-//            FXMLLoader loader = new FXMLLoader();
-//            loader.setLocation(getClass().getResource("ClientGui.fxml"));
-//            pane = loader.load();
-//            mainClient = loader.getController();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return;
-//        }
-//        Scene scene = new Scene(pane);
-//        stage.initStyle(StageStyle.UNDECORATED);
-//        stage.setScene(scene);
-//        stage.show();
-//}
     public void initialize() {
         ScreenManager.dragAndDrop(header);
     }

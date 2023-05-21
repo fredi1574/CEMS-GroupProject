@@ -9,12 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import util.ExitButton;
 import util.MinimizeButton;
+import util.PathConstants;
 import util.ScreenManager;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 
 public class LoginWindowController {
 
@@ -44,11 +42,12 @@ public class LoginWindowController {
 //        }
 //
 //        if (authenticateUser(username, password)) {
-            ScreenManager.goToNewScreen(event, "/application/MainMenuScreen/MainMenu.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
 //        } else {
 //            showAlertDialog(AlertType.ERROR, "Authentication Failed", "Invalid username or password.");
 //        }
     }
+
     private boolean authenticateUser(String username, String password) {
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM users WHERE username = ? AND password = ?")) {

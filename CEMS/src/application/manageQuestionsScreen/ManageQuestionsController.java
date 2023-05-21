@@ -44,7 +44,7 @@ public class ManageQuestionsController {
         columns.addAll("Question Number", "ID", "Subject", "Course Name", "Question Text", "Lecturer");
         TableManager.createTable(manageQuestionsTableView, columns);
         TableManager.importData(manageQuestionsTableView, questions);
-        TableManager.addDoubleClickFunctionality(manageQuestionsTableView, "/application/manageQuestionsScreen/UpdateQuestion.fxml", this::setFunctions);
+        TableManager.addDoubleClickFunctionality(manageQuestionsTableView, PathConstants.updateQuestionPath, this::setFunctions);
 
         double[] multipliers = {0.15, 0.1, 0.1, 0.13, 0.35, 0.162};
         TableManager.resizeColumns(manageQuestionsTableView, multipliers);
@@ -72,15 +72,15 @@ public class ManageQuestionsController {
 
 
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/loginWindowScreen/LoginWindow.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.loginPath);
     }
 
     public void back(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/mainMenuScreen/MainMenu.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
     }
 
     public void AddQuestion(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/addAQuestionScreen/AddAQuestion.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.addQuestionPath);
     }
 
     public void closeClient(ActionEvent event) {

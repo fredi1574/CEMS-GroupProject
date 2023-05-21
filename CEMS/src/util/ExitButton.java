@@ -8,6 +8,7 @@ public class ExitButton {
 
     /**
      * closes the entire application
+     *
      * @param event the source event that triggered the method
      */
     public static void closeClient(ActionEvent event) {
@@ -17,6 +18,7 @@ public class ExitButton {
 
     /**
      * closes the popup window (not the whole application)
+     *
      * @param event the source event that triggered the method
      */
     public static void closePopUp(ActionEvent event) {

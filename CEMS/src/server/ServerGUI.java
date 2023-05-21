@@ -2,6 +2,7 @@ package server;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import util.PathConstants;
 import util.ScreenManager;
 
 import java.io.IOException;
@@ -33,9 +34,10 @@ public class ServerGUI extends Application {
 
     /**
      * connects to the server
-     * @param IP the IP address
-     * @param port the port number
-     * @param DBName the address of the database
+     *
+     * @param IP       the IP address
+     * @param port     the port number
+     * @param DBName   the address of the database
      * @param username the DB username
      * @param password the DB password
      */
@@ -60,6 +62,6 @@ public class ServerGUI extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        ScreenManager.showStage("/server/ServerGUI.fxml", "images/server.png");
+        ScreenManager.showStage(PathConstants.serverPath, PathConstants.serverIcon);
     }
 }

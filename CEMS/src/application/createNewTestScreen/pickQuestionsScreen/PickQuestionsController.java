@@ -37,9 +37,7 @@ public class PickQuestionsController {
         TableManager.importData(questionsTableView, questionList);
 
         //TableManager.addCheckBoxesToTable(questionsTableView);
-        TableManager.addDoubleClickFunctionality(questionsTableView,
-                "/application/createNewTestScreen/PickQuestionsScreen/QuestionPreviewPopup/questionPreview.fxml",
-                this::setFunctions);
+        TableManager.addDoubleClickFunctionality(questionsTableView, PathConstants.questionPreviewPath, this::setFunctions);
 
         //double[] multipliers = {0.071, 0.1, 0.1, 0.625, 0.1}; //proper values (when checkbox is included)
         double[] multipliers = {0.13, 0.1, 0.6, 0.165};
@@ -57,16 +55,16 @@ public class PickQuestionsController {
 
     public void setFunctions(String relativePath) {
         ScreenElements<Stage, FXMLLoader> screenElements = ScreenManager.popUpScreen(relativePath);
+//        FXMLLoader loader = screenElements.getFXMLLoader();
 
-        FXMLLoader loader = screenElements.getFXMLLoader();
     }
 
     public void backToCreateTest(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/createNewTestScreen/CreateNewTest.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.createNewTestPath);
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/loginWindowScreen/LoginWindow.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.loginPath);
     }
 
     public void closeClient(ActionEvent event) {

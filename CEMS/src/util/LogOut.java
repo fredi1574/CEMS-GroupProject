@@ -9,12 +9,13 @@ public class LogOut {
 
     /**
      * goes to the login screen and logs the user out
-     * @param event   the source event that triggered the method
+     *
+     * @param event the source event that triggered the method
      */
     public static void logOutToLoginScreen(ActionEvent event) {
 //        logOut();
         //todo: add the function of logging out
-        ScreenManager.goToNewScreen(event, "/application/loginWindowScreen/LoginWindow.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.loginPath);
     }
 
     /**

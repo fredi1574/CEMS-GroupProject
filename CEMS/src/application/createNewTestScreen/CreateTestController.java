@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import util.ExitButton;
 import util.MinimizeButton;
+import util.PathConstants;
 import util.ScreenManager;
 
 public class CreateTestController {
@@ -17,19 +18,19 @@ public class CreateTestController {
     }
 
     public void BackToMenu(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/mainMenuScreen/MainMenu.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
     }
 
     public void pickQuestion(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/createNewTestScreen/pickQuestionsScreen/PickQuestions.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.pickQuestionsPath);
     }
 
     public void openPreview() {
-        ScreenManager.popUpScreen("/application/createNewTestScreen/testPreviewScreen/TestPreview.fxml");
+        ScreenManager.popUpScreen(PathConstants.testPreviewPath);
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/loginWindowScreen/LoginWindow.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.loginPath);
     }
 
     public void closeClient(ActionEvent event) {

@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import util.ExitButton;
 import util.MinimizeButton;
+import util.PathConstants;
 import util.ScreenManager;
 
 import java.util.ArrayList;
@@ -81,7 +82,7 @@ public class UpdateQuestionController {
         currentStage.close();
 
         manageQuestions.close();
-        ScreenManager.showStage("/application/manageQuestionsScreen/ManageQuestions.fxml", "images/Icon.png");
+        ScreenManager.showStage(PathConstants.manageQuestions, PathConstants.iconPath);
     }
 
     public void setQuestion(Question question) {

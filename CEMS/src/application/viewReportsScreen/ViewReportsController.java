@@ -1,7 +1,5 @@
 package application.viewReportsScreen;
 
-import application.manageQuestionsScreen.UpdateQuestionController;
-import entity.Question;
 import entity.Report;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,7 +56,7 @@ public class ViewReportsController {
         TableManager.createTable(reportsTableView, columnList);
         TableManager.importData(reportsTableView, reportList);
 
-        TableManager.addDoubleClickFunctionality(reportsTableView, "/application/viewReportsScreen/GraphScreen/ViewGraph.fxml", this::setFunctions);
+        TableManager.addDoubleClickFunctionality(reportsTableView, PathConstants.viewGraphPath, this::setFunctions);
 
         double[] multipliers = {0.07, 0.1, 0.2, 0.525, 0.1};
         TableManager.resizeColumns(reportsTableView, multipliers);
@@ -67,19 +65,19 @@ public class ViewReportsController {
     public void setFunctions(String relativePath) {
         ScreenElements<Stage, FXMLLoader> screenElements = ScreenManager.popUpScreen(relativePath);
 
-        FXMLLoader loader = screenElements.getFXMLLoader();
+//        FXMLLoader loader = screenElements.getFXMLLoader();
     }
 
     public void goBackToPreviousScreen(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/mainMenuScreen/MainMenu.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
     }
 
     public void showReports() {
-        ScreenManager.popUpScreen("/application/viewReportsScreen/graphScreen/ViewGraph.fxml");
+        ScreenManager.popUpScreen(PathConstants.viewGraphPath);
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/loginWindowScreen/LoginWindow.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.loginPath);
     }
 
     @FXML
