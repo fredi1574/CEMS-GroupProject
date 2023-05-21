@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -16,8 +17,13 @@ import util.*;
 
 import java.util.ArrayList;
 
-public class AddAQuestionController {
 
+
+public class AddAQuestionController {
+    @FXML
+    private ComboBox<String> CourseCombo;
+    @FXML
+    private ComboBox<String>SubjectCombo;
     @FXML
     private AnchorPane header;
     @FXML
@@ -35,7 +41,7 @@ public class AddAQuestionController {
     private TextArea answer4;
 
     @FXML
-    private TextField questionID;
+    private TextField questionNumber;
 
     @FXML
     private TextArea questionTextField;
@@ -45,21 +51,30 @@ public class AddAQuestionController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
 
-        ObservableList<String> columns = FXCollections.observableArrayList();
-        columns.addAll("Course", "Subject");
-        double[] multipliers = {0.75, 0.25};
-
-        TableManager.createTable(courseTableView, columns);
-        TableManager.resizeColumns(courseTableView, multipliers);
+    }
+    public boolean areAllFieldsFilled() {
+        return //!CourseCombo.getSelectionModel().isEmpty() &&
+               // !SubjectCombo.getSelectionModel().isEmpty() && (wait for login info)
+                !questionNumber.getText().isEmpty() &&
+                !questionTextField.getText().isEmpty() &&
+                !answer1.getText().isEmpty() &&
+                !answer2.getText().isEmpty() &&
+                !answer3.getText().isEmpty() &&
+                !answer4.getText().isEmpty() &&
+                !CorrectAnswer.getText().isEmpty();
     }
     @FXML
     private void saveData(ActionEvent event) {
+       if (!(areAllFieldsFilled())){
+           showError.showErrorPopup("Not all fields are filled!");
+           return;
+        }
         Question newQuestion= new Question(
                 "123",
-                questionID.getText(),
+                Question.setId(),
                 questionTextField.getText(),
                 "May",
-                "Math",
+                "01",
                 "Algebra",
                 //subjectField.getText(),
                 //courseNameField.getText(),
@@ -68,13 +83,16 @@ public class AddAQuestionController {
                 answer3.getText(),
                 answer4.getText(),
                 CorrectAnswer.getText()
+
         );
 
         ArrayList<Question> arr = new ArrayList<>();
         arr.add(newQuestion);
         MsgHandler addNewQuestion = new MsgHandler(TypeMsg.AddNewQuestion, arr);
         ClientUI.chat.accept(addNewQuestion);
+
     }
+
     public void BackToMenu(ActionEvent event) {
         ScreenManager.goToNewScreen(event, "/application/mainMenuScreen/MainMenu.fxml");
     }

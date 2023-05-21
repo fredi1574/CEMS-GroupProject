@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import util.ExitButton;
 import util.MinimizeButton;
 import util.ScreenManager;
+import util.showError;
 
 import java.util.ArrayList;
 
@@ -76,8 +77,17 @@ public class UpdateQuestionController {
         DeleteQuestion();
         reloadPage();
     }
+    public boolean areAllFieldsFilled() {
+        return !questionTextField.getText().isEmpty() &&
+                !answer1.getText().isEmpty() &&
+                !answer2.getText().isEmpty() &&
+                !answer3.getText().isEmpty() &&
+                !answer4.getText().isEmpty() &&
+                !correctAnswer.getText().isEmpty();
+    }
 
     public Question AlterQuestion(){
+
         Question alteredQuestion= new Question(
                 questionNumberField.getText(),
                 question.getId(),
@@ -101,6 +111,10 @@ public class UpdateQuestionController {
             ClientUI.chat.accept(deleteQ);
         }
     private void saveData() {
+        if (!(areAllFieldsFilled())){
+            showError.showErrorPopup("Not all fields are filled!");
+            return;
+        }
         ArrayList<Question> arr = new ArrayList<>();
         arr.add(AlterQuestion());
         MsgHandler editQ = new MsgHandler(TypeMsg.EditQuestion, arr);

@@ -54,6 +54,10 @@ public class Question extends Observable implements Serializable {
     public String getId() {
         return id;
     }
+    public static String setId() {
+        return "123";
+    }
+
     public String getQuestion_number() {
         return question_number;
     }
