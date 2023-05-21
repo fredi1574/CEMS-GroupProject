@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
--- Host: localhost    Database: cems
+-- Host: 127.0.0.1    Database: cems
 -- ------------------------------------------------------
--- Server version	8.0.33
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -57,6 +57,7 @@ CREATE TABLE `exam` (
   `startingTime` varchar(45) DEFAULT NULL,
   `teacherComment` varchar(45) DEFAULT NULL,
   `examType` enum('Computerized','Manually') DEFAULT NULL,
+  `studentComment` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id`,`subject`,`course`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -138,7 +139,11 @@ CREATE TABLE `questions` (
   `question_text` text,
   `question_number` int DEFAULT NULL,
   `lecturer` varchar(255) DEFAULT NULL,
-  `correctQuestion` int DEFAULT NULL,
+  `answer1` varchar(255) DEFAULT NULL,
+  `answer2` varchar(255) DEFAULT NULL,
+  `answer3` varchar(255) DEFAULT NULL,
+  `correctAnswer` varchar(255) DEFAULT NULL,
+  `answer4` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -149,8 +154,31 @@ CREATE TABLE `questions` (
 
 LOCK TABLES `questions` WRITE;
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
-INSERT INTO `questions` VALUES (123,'Math','Algebra','How much is 1+1? its two\n',22,'Abed',NULL),(134,'Math','Statistics','What is the possibility to get an A in our  project??\n',33,'May',NULL);
+INSERT INTO `questions` VALUES (15,'Math','Algebra','What is my fucking name?',123,'May','May	','Noa','Shay','1','Tiran'),(123,'Math','Algebra','working?',123,'May','make it work','check','check','1','check');
 /*!40000 ALTER TABLE `questions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `subject`
+--
+
+DROP TABLE IF EXISTS `subject`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `subject` (
+  `subjectID` varchar(45) NOT NULL,
+  `subjectName` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`subjectID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `subject`
+--
+
+LOCK TABLES `subject` WRITE;
+/*!40000 ALTER TABLE `subject` DISABLE KEYS */;
+/*!40000 ALTER TABLE `subject` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -191,4 +219,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-19 11:49:57
+-- Dump completed on 2023-05-21 11:49:17
