@@ -5,12 +5,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import util.ExitButton;
-import util.MinimizeButton;
-import util.ScreenManager;
-import util.TableManager;
+import javafx.stage.Stage;
+import util.*;
 
 public class PickQuestionsController {
 
@@ -38,8 +37,7 @@ public class PickQuestionsController {
         TableManager.importData(questionsTableView, questionList);
 
         //TableManager.addCheckBoxesToTable(questionsTableView);
-        TableManager.addDoubleClickFunctionality(questionsTableView,
-                "/application/createNewTestScreen/PickQuestionsScreen/QuestionPreviewPopup/questionPreview.fxml");
+        TableManager.addDoubleClickFunctionality(questionsTableView, PathConstants.questionPreviewPath, this::setFunctions);
 
         //double[] multipliers = {0.071, 0.1, 0.1, 0.625, 0.1}; //proper values (when checkbox is included)
         double[] multipliers = {0.13, 0.1, 0.6, 0.165};
@@ -55,12 +53,18 @@ public class PickQuestionsController {
         TableManager.resizeColumns(selectedQuestionsTableView, multipliers);
     }
 
+    public void setFunctions(String relativePath) {
+        ScreenElements<Stage, FXMLLoader> screenElements = ScreenManager.popUpScreen(relativePath);
+//        FXMLLoader loader = screenElements.getFXMLLoader();
+
+    }
+
     public void backToCreateTest(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/createNewTestScreen/CreateNewTest.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.createNewTestPath);
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/loginWindowScreen/LoginWindow.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.loginPath);
     }
 
     public void closeClient(ActionEvent event) {

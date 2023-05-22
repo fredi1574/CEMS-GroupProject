@@ -51,6 +51,10 @@ public class ServerController {
     @FXML
     private TextField txtUsername;
 
+    /**
+     * updates the text in the console text area in real time
+     * based on client-server related events or errors
+     */
     @FXML
     void consoleStreamIntoGUI() {
         PrintStream switchConsole = new PrintStream(new Console(Console));
@@ -58,6 +62,10 @@ public class ServerController {
         System.setErr(switchConsole);
     }
 
+    /**
+     * gets the server's IP address
+     * @return a string of the IP
+     */
     public String getIp() {
         String ip = null;
         try {
@@ -69,6 +77,11 @@ public class ServerController {
         return ip;
     }
 
+    /**
+     * calls the server's runServer method
+     * (used by the connect button in the server GUI)
+     * @param event the source event that triggered the method
+     */
     @FXML
     void Connection(javafx.event.ActionEvent event)  {
 
@@ -79,6 +92,11 @@ public class ServerController {
 
     }
 
+    /**
+     * calls the server's disconnect method
+     * (used by the disconnect button in the server GUI)
+     * @param event   the source event that triggered the method
+     */
     @FXML
     void Disconnection(ActionEvent event) {
         ServerGUI.disconnect();
@@ -87,8 +105,10 @@ public class ServerController {
         disableDataInput(false);
 
     }
-    //Turns off the option to pass data in the TextArea
 
+    /**
+     * Turns off the option to pass data in the TextArea
+     */
     void disableDataInput(boolean Condition) {
         txtIP.setDisable(Condition);
         txtPort.setDisable(Condition);
@@ -97,6 +117,9 @@ public class ServerController {
         txtPassword.setDisable(Condition);
     }
 
+    /**
+     * fills the server's table and text fields with initial information
+     */
     @FXML
     public void initialize() {
         ScreenManager.dragAndDrop(header);

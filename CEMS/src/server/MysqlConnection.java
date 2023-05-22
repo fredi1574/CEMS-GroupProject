@@ -5,7 +5,10 @@ import entity.Question;
 import java.sql.*;
 import java.util.ArrayList;
 
-
+/**
+ * the class contains methods which connect to the CEMS database
+ * and perform various queries on the data
+ */
 public class MysqlConnection {
     static Connection conn;
     static String url = "jdbc:mysql://localhost/cems?serverTimezone=IST&allowPublicKeyRetrieval=true&useSSL=false"; // replace
@@ -36,6 +39,10 @@ public class MysqlConnection {
         }
     }
 
+	/**
+	 * executes an UPDATE query on the CEMS database
+	 * @param q the given update query
+	 */
 	public static void update(String q) {
 		PreparedStatement stmt;
 		try {
@@ -46,6 +53,11 @@ public class MysqlConnection {
 		}
 	}
 
+	/**
+	 * gets an array list of the questions from the CEMS database
+	 * @param q the given SELECT query
+	 * @return ArrayList of the questions
+	 */
 	public static ArrayList<Question> getQuestionsTable(String q) {
 		Statement stmt = null;
 		try {

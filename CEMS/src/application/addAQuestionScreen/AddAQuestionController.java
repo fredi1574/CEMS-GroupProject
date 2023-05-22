@@ -94,7 +94,7 @@ public class AddAQuestionController {
     }
 
     public void BackToMenu(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/mainMenuScreen/MainMenu.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
     }
 
     public void LogOut(ActionEvent event) {

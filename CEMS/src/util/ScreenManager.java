@@ -29,7 +29,7 @@ public class ScreenManager {
      * @param screenPath the path of the new screen
      */
     public static void goToNewScreen(ActionEvent event, String screenPath) {
-        showStage(screenPath, "images/Icon.png");
+        showStage(screenPath, PathConstants.iconPath);
 
         // Get the Stage object that contains the source node
         Node source = (Node) event.getSource();
@@ -45,7 +45,7 @@ public class ScreenManager {
      * @return the Stage and FXMLLoader objects of the current window
      */
     public static ScreenElements<Stage, FXMLLoader> popUpScreen(String screenPath) {
-        ScreenElements<Stage, FXMLLoader> screenElement = showStage(screenPath, "images/Icon.png");
+        ScreenElements<Stage, FXMLLoader> screenElement = showStage(screenPath, PathConstants.iconPath);
 
         moveStage(screenElement.getStage());
         return screenElement;
@@ -55,7 +55,7 @@ public class ScreenManager {
      * displays a new screen
      *
      * @param screenPath the path of the new screen
-     * @param iconPath           the path of the program icon
+     * @param iconPath   the path of the program icon
      * @return the Stage and FXMLLoader objects of the current window
      */
     public static ScreenElements<Stage, FXMLLoader> showStage(String screenPath, String iconPath) {

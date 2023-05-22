@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import util.ExitButton;
 import util.MinimizeButton;
+import util.PathConstants;
 import util.ScreenManager;
 
 public class questionPreviewController {
@@ -17,7 +18,7 @@ public class questionPreviewController {
     }
 
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/loginWindowScreen/LoginWindow.fxml");
+        ScreenManager.goToNewScreen(event, PathConstants.loginPath);
     }
 
     public void closePopUp(ActionEvent event) {

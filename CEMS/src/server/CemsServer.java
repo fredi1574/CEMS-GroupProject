@@ -88,6 +88,11 @@ public class CemsServer extends AbstractServer{
 		MysqlConnection.closeConnection();
 
 	}
+
+	/**
+	 * gets a list of clients connected to the server
+	 * @return an observable list of the connected clients
+	 */
 	public static ObservableList<ConnectToClients> getClientList() {
 	    return clientList;
 	  }
