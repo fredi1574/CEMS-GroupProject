@@ -25,6 +25,14 @@ public enum TypeMsg {
 		public String toString() {
 			return "Here is the questions table";
 		}
+	},TryLogin {
+		public String toString() {
+			return "new user try to login.";
+		}
+	},LoginSuccess {
+		public String toString() {
+			return "new user logged into the system.";
+		}
 	},EditQuestion {
 		public String toString() {
 			return "User asked to edit question";
