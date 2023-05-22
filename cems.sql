@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
--- Host: localhost    Database: cems
+-- Host: 127.0.0.1    Database: cems
 -- ------------------------------------------------------
--- Server version	8.0.33
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -37,17 +37,98 @@ CREATE TABLE `course` (
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
+INSERT INTO `course` VALUES ('01','01','Math','Algebra'),('01','02','Math','Hedva'),('02','03','Software','Phyton'),('02','04','Software','C++'),('03','05','Biology','Anatomy'),('03','06','Biology','Microbiology');
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `exam`
+-- Table structure for table `lecturersubjects`
 --
 
-DROP TABLE IF EXISTS `exam`;
+DROP TABLE IF EXISTS `lecturersubjects`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `exam` (
+CREATE TABLE `lecturersubjects` (
+  `lecturerid` varchar(45) NOT NULL,
+  `subjectid` varchar(45) NOT NULL,
+  PRIMARY KEY (`lecturerid`,`subjectid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `lecturersubjects`
+--
+
+LOCK TABLES `lecturersubjects` WRITE;
+/*!40000 ALTER TABLE `lecturersubjects` DISABLE KEYS */;
+/*!40000 ALTER TABLE `lecturersubjects` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `questions`
+--
+
+DROP TABLE IF EXISTS `questions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `questions` (
+  `id` varchar(255) NOT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `course_name` varchar(255) DEFAULT NULL,
+  `question_text` text,
+  `question_number` int DEFAULT NULL,
+  `lecturer` varchar(255) DEFAULT NULL,
+  `answer1` varchar(255) DEFAULT NULL,
+  `answer2` varchar(255) DEFAULT NULL,
+  `answer3` varchar(255) DEFAULT NULL,
+  `correctAnswer` varchar(255) DEFAULT NULL,
+  `answer4` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `questions`
+--
+
+LOCK TABLES `questions` WRITE;
+/*!40000 ALTER TABLE `questions` DISABLE KEYS */;
+INSERT INTO `questions` VALUES ('123','01','Algebra','1',123,'May','2','3','4','1','5'),('15','Math','Algebra','What is my fucking name?',123,'May','May	','Noa','Shay','1','Tiran'),('3333','01','Algebra','me',13333,'May','hola','hello','hi','3','bye'),('889','01','Algebra','check	',1889,'May','check','check','check','1','check'),('928','01','Algebra','MAY',1928,'May','may','may','may','2','may');
+/*!40000 ALTER TABLE `questions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `subject`
+--
+
+DROP TABLE IF EXISTS `subject`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `subject` (
+  `subjectID` varchar(45) NOT NULL,
+  `subjectName` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`subjectID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `subject`
+--
+
+LOCK TABLES `subject` WRITE;
+/*!40000 ALTER TABLE `subject` DISABLE KEYS */;
+INSERT INTO `subject` VALUES ('01','Math'),('02','Software'),('03','Biology');
+/*!40000 ALTER TABLE `subject` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `test`
+--
+
+DROP TABLE IF EXISTS `test`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `test` (
   `id` varchar(45) NOT NULL,
   `dateOfExam` varchar(45) DEFAULT NULL,
   `timeInMinutes` varchar(45) DEFAULT NULL,
@@ -56,28 +137,29 @@ CREATE TABLE `exam` (
   `course` varchar(45) NOT NULL,
   `startingTime` varchar(45) DEFAULT NULL,
   `teacherComment` varchar(45) DEFAULT NULL,
-  `examType` enum('Computerized','Manually') DEFAULT NULL,
+  `examType` enum('C','M') DEFAULT NULL,
+  `studentComment` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id`,`subject`,`course`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `exam`
+-- Dumping data for table `test`
 --
 
-LOCK TABLES `exam` WRITE;
-/*!40000 ALTER TABLE `exam` DISABLE KEYS */;
-/*!40000 ALTER TABLE `exam` ENABLE KEYS */;
+LOCK TABLES `test` WRITE;
+/*!40000 ALTER TABLE `test` DISABLE KEYS */;
+/*!40000 ALTER TABLE `test` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `examquestion`
+-- Table structure for table `testquestion`
 --
 
-DROP TABLE IF EXISTS `examquestion`;
+DROP TABLE IF EXISTS `testquestion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `examquestion` (
+CREATE TABLE `testquestion` (
   `question` text,
   `points` int DEFAULT NULL,
   `studentComment` varchar(45) DEFAULT NULL,
@@ -90,22 +172,22 @@ CREATE TABLE `examquestion` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `examquestion`
+-- Dumping data for table `testquestion`
 --
 
-LOCK TABLES `examquestion` WRITE;
-/*!40000 ALTER TABLE `examquestion` DISABLE KEYS */;
-/*!40000 ALTER TABLE `examquestion` ENABLE KEYS */;
+LOCK TABLES `testquestion` WRITE;
+/*!40000 ALTER TABLE `testquestion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `testquestion` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `examrequest`
+-- Table structure for table `testrequest`
 --
 
-DROP TABLE IF EXISTS `examrequest`;
+DROP TABLE IF EXISTS `testrequest`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `examrequest` (
+CREATE TABLE `testrequest` (
   `newDuration` varchar(45) DEFAULT NULL,
   `explanation` varchar(45) DEFAULT NULL,
   `id` varchar(45) NOT NULL,
@@ -116,41 +198,12 @@ CREATE TABLE `examrequest` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `examrequest`
+-- Dumping data for table `testrequest`
 --
 
-LOCK TABLES `examrequest` WRITE;
-/*!40000 ALTER TABLE `examrequest` DISABLE KEYS */;
-/*!40000 ALTER TABLE `examrequest` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `questions`
---
-
-DROP TABLE IF EXISTS `questions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `questions` (
-  `id` int NOT NULL,
-  `subject` varchar(255) DEFAULT NULL,
-  `course_name` varchar(255) DEFAULT NULL,
-  `question_text` text,
-  `question_number` int DEFAULT NULL,
-  `lecturer` varchar(255) DEFAULT NULL,
-  `correctQuestion` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `questions`
---
-
-LOCK TABLES `questions` WRITE;
-/*!40000 ALTER TABLE `questions` DISABLE KEYS */;
-INSERT INTO `questions` VALUES (123,'Math','Algebra','How much is 1+1? its two\n',22,'Abed',NULL),(134,'Math','Statistics','What is the possibility to get an A in our  project??\n',33,'May',NULL);
-/*!40000 ALTER TABLE `questions` ENABLE KEYS */;
+LOCK TABLES `testrequest` WRITE;
+/*!40000 ALTER TABLE `testrequest` DISABLE KEYS */;
+/*!40000 ALTER TABLE `testrequest` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -191,4 +244,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-19 11:49:57
+-- Dump completed on 2023-05-22 17:23:52
