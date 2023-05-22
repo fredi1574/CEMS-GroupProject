@@ -70,8 +70,8 @@ public class AddAQuestionController {
            return;
         }
         Question newQuestion= new Question(
-                "123",
-                Question.setId(),
+                "01" + questionNumber.getText(),
+                questionNumber.getText(),
                 questionTextField.getText(),
                 "May",
                 "01",
@@ -85,12 +85,12 @@ public class AddAQuestionController {
                 CorrectAnswer.getText()
 
         );
-
         ArrayList<Question> arr = new ArrayList<>();
         arr.add(newQuestion);
         MsgHandler addNewQuestion = new MsgHandler(TypeMsg.AddNewQuestion, arr);
         ClientUI.chat.accept(addNewQuestion);
-
+        showError.showInfoPopup("Added question successfully");
+        ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
     }
 
     public void BackToMenu(ActionEvent event) {

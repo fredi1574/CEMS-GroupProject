@@ -11,6 +11,13 @@ public class showError {
         alert.setContentText(message);
         alert.showAndWait();
     }
+    public static void showInfoPopup(String message) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
     public static boolean showConfirmationPopup(String message) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
