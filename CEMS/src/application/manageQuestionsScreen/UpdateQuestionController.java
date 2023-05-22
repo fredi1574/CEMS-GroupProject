@@ -108,16 +108,24 @@ public class UpdateQuestionController {
             ClientUI.chat.accept(deleteQ);
         }
     private void saveData() {
-        if (!(areAllFieldsFilled())){
-            showError.showErrorPopup("Not all fields are filled!");
-            return;
-        }
+        if (!checkValidData())return;
         ArrayList<Question> arr = new ArrayList<>();
         arr.add(AlterQuestion());
         MsgHandler editQ = new MsgHandler(TypeMsg.EditQuestion, arr);
         ClientUI.chat.accept(editQ);
     }
+    private boolean checkValidData() {
+        if (!(areAllFieldsFilled())) {
+            showError.showErrorPopup("Not all fields are filled!\nno changes were made");
+            return false;
+        }
+        if (!(correctAnswer.getText().matches("[1-4]"))) {
+            showError.showErrorPopup("Choose values from 1 to 4 in Correct Answer field\nno changes were made");
+            return false;
+        }
+        return true;
 
+    }
     private void reloadPage() {
         Stage currentStage = (Stage) saveButton.getScene().getWindow();
         currentStage.close();

@@ -63,12 +63,24 @@ public class AddAQuestionController {
                 !answer4.getText().isEmpty() &&
                 !CorrectAnswer.getText().isEmpty();
     }
+    private boolean checkValidData() {
+        if (!(areAllFieldsFilled())) {
+            showError.showErrorPopup("Not all fields are filled!");
+            return false;
+        }
+        if (!(CorrectAnswer.getText().matches("[1-4]"))) {
+            showError.showErrorPopup("Choose values from 1 to 4 in Correct Answer field");
+            return false;
+        }
+        if (!(questionNumber.getText().matches("\\d+"))) { //checks if only digits
+            showError.showErrorPopup("Question number contains NUMBERS only");
+            return false;
+        }
+        return true;
+    }
     @FXML
     private void saveData(ActionEvent event) {
-       if (!(areAllFieldsFilled())){
-           showError.showErrorPopup("Not all fields are filled!");
-           return;
-        }
+       if (!checkValidData()){return;}
         Question newQuestion= new Question(
                 "01" + questionNumber.getText(),
                 questionNumber.getText(),
