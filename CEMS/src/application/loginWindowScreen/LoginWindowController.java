@@ -14,6 +14,8 @@ import util.ScreenManager;
 
 import java.sql.*;
 
+import static javafx.scene.control.Alert.AlertType.CONFIRMATION;
+
 public class LoginWindowController {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/cems?serverTimezone=UTC&useSSL=false";
@@ -26,6 +28,7 @@ public class LoginWindowController {
     private TextField usernameField;
     @FXML
     private PasswordField passwordField;
+
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
@@ -40,12 +43,18 @@ public class LoginWindowController {
 //            showAlertDialog(AlertType.WARNING, "Incomplete Fields", "Please enter both username and password.");
 //            return;
 //        }
-//
 //        if (authenticateUser(username, password)) {
-        ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
+         ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
 //        } else {
 //            showAlertDialog(AlertType.ERROR, "Authentication Failed", "Invalid username or password.");
 //        }
+    }
+    public void handleTextClick() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText("to reset password please contact our admin");
+        alert.showAndWait();
     }
 
     private boolean authenticateUser(String username, String password) {
