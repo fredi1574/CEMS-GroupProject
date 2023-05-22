@@ -33,6 +33,10 @@ public enum TypeMsg {
 		public String toString() {
 			return "new user logged into the system.";
 		}
+	},LogoutSuccess {
+		public String toString() {
+			return "user logged out from the system.";
+		}
 	},EditQuestion {
 		public String toString() {
 			return "User asked to edit question";
