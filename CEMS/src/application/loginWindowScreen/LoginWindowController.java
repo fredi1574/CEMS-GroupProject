@@ -13,7 +13,6 @@ import util.MinimizeButton;
 import util.PathConstants;
 import util.ScreenManager;
 
-import java.sql.*;
 
 
 public class LoginWindowController {
