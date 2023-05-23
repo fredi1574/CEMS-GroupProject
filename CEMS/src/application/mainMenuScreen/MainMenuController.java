@@ -7,17 +7,28 @@ import util.ExitButton;
 import util.MinimizeButton;
 import util.PathConstants;
 import util.ScreenManager;
+import application.loginWindowScreen.LoginWindowController;
 
+
+
+import javafx.scene.text.Text;
 public class MainMenuController {
-
+    @FXML
+    private Text usernameText;
     @FXML
     private AnchorPane header;
 
     public void initialize() {
+        // Get the logged-in username from the LoginWindowController
+        String loggedInUsername = LoginWindowController.loggedInUsername;
+
+        // Set the text in the usernameText element
+        usernameText.setText(loggedInUsername);
         ScreenManager.dragAndDrop(header);
     }
 
     public void LogOut(ActionEvent event) {
+        LoginWindowController.loggedInUsername = null;
         ScreenManager.goToNewScreen(event, PathConstants.loginPath);
     }
 

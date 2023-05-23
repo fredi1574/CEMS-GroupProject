@@ -5,6 +5,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import application.loginWindowScreen.LoginWindowController?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" accessibleRole="HYPERLINK" cache="true" prefHeight="570.0"
             prefWidth="888.0"
             styleClass="backgroundColor" stylesheets="@../../util/style.css"
@@ -22,8 +23,7 @@
         <ImageView layoutX="787.0" layoutY="43.0">
             <Image url="@../../images/icons8-person-16.png"/>
         </ImageView>
-        <Text fill="#3b3131" layoutX="810.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi"
-              underline="true" wrappingWidth="52.798828125">
+        <Text fx:id="usernameText" fill="#3b3131" layoutX="810.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" underline="true" wrappingWidth="52.798828125">
             <font>
                 <Font name="Trebuchet MS" size="12.0"/>
             </font>

@@ -16,7 +16,7 @@ import util.ScreenManager;
 
 
 public class LoginWindowController {
-
+    public static String loggedInUsername;
     @FXML
     private AnchorPane header;
     @FXML
@@ -48,12 +48,15 @@ public class LoginWindowController {
             // Redirect to the appropriate screen based on the user's role
             switch (role) {
                 case "Student":
+                    loggedInUsername = username;
                     ScreenManager.goToNewScreen(event, PathConstants.manageQuestions);
                     break;
                 case "Lecturer":
+                    loggedInUsername = username;
                     ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
                     break;
                 case "HeadOfDepartment":
+                    loggedInUsername = username;
                     ScreenManager.goToNewScreen(event, PathConstants.viewReportsPath);
                     break;
                 default:

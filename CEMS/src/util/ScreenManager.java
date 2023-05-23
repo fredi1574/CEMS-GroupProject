@@ -11,7 +11,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
 import java.io.IOException;
-
+import application.loginWindowScreen.LoginWindowController;
 /**
  * class containing functions relevant to screen interactions
  * and transitions
