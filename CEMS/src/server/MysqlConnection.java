@@ -102,6 +102,7 @@ public class MysqlConnection {
 
 	public static String authenticateUser(String username, String password) {
 		try {
+			connectToDb("Aa123456");
 			PreparedStatement statement = conn.prepareStatement("SELECT role FROM users WHERE username = ? AND password = ?");
 			statement.setString(1, username);
 			statement.setString(2, password);

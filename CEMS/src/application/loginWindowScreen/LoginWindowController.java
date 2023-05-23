@@ -28,7 +28,6 @@ public class LoginWindowController {
     public void initialize() {
         // Enables dragging and dropping of the application window using the header pane
         ScreenManager.dragAndDrop(header);
-        MysqlConnection.connectToDb("Aa123456");
     }
 
     // Event handler for login button click
