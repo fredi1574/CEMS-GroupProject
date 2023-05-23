@@ -5,7 +5,6 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import application.loginWindowScreen.LoginWindowController?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" accessibleRole="HYPERLINK" cache="true" prefHeight="570.0"
             prefWidth="888.0"
             styleClass="backgroundColor" stylesheets="@../../util/style.css"
