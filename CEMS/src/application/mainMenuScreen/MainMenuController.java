@@ -10,9 +10,6 @@ import util.MinimizeButton;
 import util.PathConstants;
 import util.ScreenManager;
 
-
-
-
 import javafx.scene.text.Text;
 public class MainMenuController {
     @FXML
