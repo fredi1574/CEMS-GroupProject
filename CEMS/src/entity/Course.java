@@ -1,7 +1,10 @@
 package entity;
 
 
-public class Course {
+import java.io.Serializable;
+import java.util.Observable;
+
+public class Course extends Observable implements Serializable {
 
     private String subjectID;
     private String courseID;
@@ -32,67 +35,28 @@ public class Course {
         return subjectID;
     }
 
-    /**
-     * Sets the subject ID of the course.
-     * 
-     * @param subjectID the subject ID to set
-     */
-    public void setSubjectID(String subjectID) {
-        this.subjectID = subjectID;
-    }
-
-    /**
-     * Returns the course ID of the course.
-     * 
-     * @return the course ID of the course
-     */
     public String getCourseID() {
         return courseID;
     }
 
-    /**
-     * Sets the course ID of the course.
-     * 
-     * @param courseID the course ID to set
-     */
-    public void setCourseID(String courseID) {
-        this.courseID = courseID;
-    }
 
-    /**
-     * Returns the subject name of the course.
-     * 
-     * @return the subject name of the course
-     */
     public String getSubjectName() {
         return subjectName;
     }
 
-    /**
-     * Sets the subject name of the course.
-     * 
-     * @param subjectName the subject name to set
-     */
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
-    }
 
-    /**
-     * Returns the course name.
-     * 
-     * @return the course name
-     */
     public String getCourseName() {
         return courseName;
     }
 
-    /**
-     * Sets the course name.
-     * 
-     * @param courseName the course name to set
-     */
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    @Override
+    public String toString() {
+        return "Course{" +
+                "subjectID='" + subjectID + '\'' +
+                ", courseID='" + courseID + '\'' +
+                ", subjectName='" + subjectName + '\'' +
+                ", courseName='" + courseName + '\'' +
+                '}';
     }
 
 }

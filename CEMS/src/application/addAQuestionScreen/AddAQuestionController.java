@@ -24,10 +24,9 @@ import java.util.List;
 
 
 public class AddAQuestionController {
+    public ComboBox subjectCombo;
     @FXML
-    private ComboBox<Course> CourseCombo;
-    @FXML
-    private ComboBox<String>SubjectCombo;
+    private ComboBox CourseCombo;
     @FXML
     private AnchorPane header;
     @FXML
@@ -61,18 +60,39 @@ public class AddAQuestionController {
         username.add(loggedInUsername);
         MsgHandler getSubject = new MsgHandler(TypeMsg.importSubjects,username);
         ClientUI.chat.accept(getSubject);
-        ObservableList<Subject> subjectsList = FXCollections.observableArrayList((List)ClientUI.chat.getSubjects());
-        ObservableList<String> subjectsName = FXCollections.observableArrayList();
-        for (Subject subject : subjectsList) {
-            String subjectName = subject.getSubjectName();
-            subjectsName.add(subjectName);
-        }
-        SubjectCombo.setItems(subjectsName);
+        createSubjectCombo(username);
+        createCourseCombo(username);
 
     }
-    public boolean areAllFieldsFilled() {
-        return //!CourseCombo.getSelectionModel().isEmpty() &&
-               // !SubjectCombo.getSelectionModel().isEmpty() && (wait for login info)
+    private void createSubjectCombo(List<String> username) {
+        MsgHandler getSubject = new MsgHandler(TypeMsg.importSubjects, username);
+        ClientUI.chat.accept(getSubject);
+        List<Object> subjectObjectsList = ClientUI.chat.getSubjects();
+        ObservableList<Subject> subjectsList = FXCollections.observableArrayList((List) subjectObjectsList);
+        ObservableList<String> subjectNames = FXCollections.observableArrayList();
+
+        for (Subject subject : subjectsList) {
+            String subjectNameandID = subject.getSubjectName() + " -" + subject.getSubjectID();
+            subjectNames.add(subjectNameandID);
+        }
+        subjectCombo.setItems(subjectNames);
+    }
+    private void createCourseCombo(List<String> username) {
+        MsgHandler getCourses = new MsgHandler(TypeMsg.importCourses, username);
+        ClientUI.chat.accept(getCourses);
+        List<Object> courseObjectsList = ClientUI.chat.getCourses();
+        ObservableList<Course> coursesList = FXCollections.observableArrayList((List) courseObjectsList);
+        ObservableList<String> courseNames = FXCollections.observableArrayList();
+
+        for (Course course : coursesList) {
+            String courseNameandID = course.getCourseName() + " -"+ course.getCourseID();
+            courseNames.add(courseNameandID);
+        }
+        CourseCombo.setItems(courseNames);
+    }
+        public boolean areAllFieldsFilled() {
+        return  !CourseCombo.getSelectionModel().isEmpty() &&
+                !subjectCombo.getSelectionModel().isEmpty() &&
                 !questionNumber.getText().isEmpty() &&
                 !questionTextField.getText().isEmpty() &&
                 !answer1.getText().isEmpty() &&
@@ -98,16 +118,16 @@ public class AddAQuestionController {
     }
     @FXML
     private void saveData(ActionEvent event) {
+        String Subject = subjectCombo.getSelectionModel().getSelectedItem().toString();
+        String Course = CourseCombo.getSelectionModel().getSelectedItem().toString();
        if (!checkValidData()){return;}
         Question newQuestion= new Question(
                 "01" + questionNumber.getText(),
                 questionNumber.getText(),
                 questionTextField.getText(),
-                "May",
-                "01",
-                "Algebra",
-                //subjectField.getText(),
-                //courseNameField.getText(),
+                usernameText.getText(),
+                Subject.substring(Subject.indexOf("-")+1),
+                Course.substring(Subject.indexOf("-")+1),
                 answer1.getText(),
                 answer2.getText(),
                 answer3.getText(),

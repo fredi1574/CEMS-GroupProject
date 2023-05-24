@@ -3,6 +3,7 @@ package server;
 import common.ConnectToClients;
 import common.MsgHandler;
 import common.TypeMsg;
+import entity.Course;
 import entity.Question;
 import entity.Subject;
 import javafx.collections.FXCollections;
@@ -151,24 +152,31 @@ public class CemsServer extends AbstractServer{
 				case  importSubjects:
 					this.m = (MsgHandler<Object>) msg;
 					this.q = (String)m.getMsg().get(0);
-					ArrayList<Subject> importSubjects = MysqlConnection.getSubjectList("SELECT s.* " + "FROM subject s " +
-									"JOIN lecturersubjects ls ON s.subjectID = ls.subjectID " +
-									"JOIN users u ON u.id = ls.id " +
-									"WHERE u.username = '"+ q +"'");
+					ArrayList<Subject> importSubjects = MysqlConnection.getSubjectList( "SELECT * " +
+							"FROM subject s " +
+							"JOIN lecturersubjects ls ON s.subjectID = ls.subjectID " +
+							"JOIN users u ON u.id = ls.id " +
+							"WHERE u.username = '" + q + "'");
 
-							client.sendToClient(new MsgHandler<>(TypeMsg.importSuccess,importSubjects));
+							client.sendToClient(new MsgHandler<>(TypeMsg.SubjectsimportSuccess,importSubjects));
 					break;
 
 				case  importCourses:
 					this.m = (MsgHandler<Object>) msg;
-					this.q = (Question)m.getMsg().get(0);
-					//String importCourses =
+					this.q = (String)m.getMsg().get(0);
+					ArrayList<Course> importCourses = MysqlConnection.getCourseList( "SELECT * " +
+						"FROM course AS c " +
+						"JOIN lecturersubjects AS ls ON c.subjectID = ls.subjectID " +
+						"JOIN users AS u ON ls.id = u.id " +
+						"WHERE u.username = '"+ q + "'");
+
+					client.sendToClient(new MsgHandler<>(TypeMsg.CoursesimportSuccess,importCourses));
 				case  EditQuestion:
 					this.m = (MsgHandler<Object>) msg;
 					this.q = (Question)m.getMsg().get(0);
 					this.question = (Question) q;
 					String updateQuery = "UPDATE cems.questions SET question_number='" + question.getQuestion_number() + "', subject='" + question.getSubject() + "'," +
-							" course_name='" + question.getCourse_name() + "', question_text='" + question.getQuestion_text() + "'," +
+							" courseName='" + question.getCourse_name() + "', question_text='" + question.getQuestion_text() + "'," +
 							" lecturer='" + question.getLecturer() + "', answer1='" + question.getAnswer1() + "', answer2='" + question.getAnswer2() + "', " +
 							"answer3='" + question.getAnswer3() + "', correctAnswer='" + question.getCorrectAnswer() + "', answer4='" +
 							question.getAnswer4() + "' WHERE id='" + question.getId() + "'";
@@ -180,7 +188,7 @@ public class CemsServer extends AbstractServer{
 					this.m = (MsgHandler<Object>) msg;
 					this.q = (Question)m.getMsg().get(0);
 					Question question = (Question) q;
-					String newQuery = "INSERT INTO cems.questions (id, subject, course_name, question_text, question_number, lecturer, answer1, answer2, answer3, correctAnswer, answer4) " +
+					String newQuery = "INSERT INTO cems.questions (id, subject, courseName, question_text, question_number, lecturer, answer1, answer2, answer3, correctAnswer, answer4) " +
 							"VALUES ('" + question.getId() + "', '" + question.getSubject() + "', '" + question.getCourse_name() + "', '" + question.getQuestion_text() + "', " +
 							"'" + question.getQuestion_number() + "', '" + question.getLecturer() + "', '" + question.getAnswer1() + "', '" + question.getAnswer2() + "', " +
 							"'" + question.getAnswer3() + "', '" + question.getCorrectAnswer() + "', '" + question.getAnswer4() + "')";

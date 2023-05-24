@@ -37,7 +37,11 @@ public enum TypeMsg {
 		public String toString() {
 			return "import Subjects list for user";
 		}
-	},importSuccess {
+	},SubjectsimportSuccess {
+		public String toString() {
+			return "import Successfully";
+		}
+	},CoursesimportSuccess {
 		public String toString() {
 			return "import Successfully";
 		}
@@ -45,6 +49,7 @@ public enum TypeMsg {
 		public String toString() {
 			return "import Courses list for user";
 		}
+
 	},LogoutSuccess {
 		public String toString() {
 			return "user logged out from the system.";

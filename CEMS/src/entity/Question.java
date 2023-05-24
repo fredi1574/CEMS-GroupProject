@@ -28,7 +28,7 @@ public class Question extends Observable implements Serializable {
         this.id = questionId;
         this.question_text = questionText;
         this.lecturer = questionWrittenBy;
-        this.course_name=course_name;
+        this.course_name = course_name;
         this.subject=subject;
         this.answer1 = answer1;
         this.answer2 = answer2;
@@ -77,11 +77,11 @@ public class Question extends Observable implements Serializable {
 
     @Override
     public String toString() {
-        return "MyClass{" +
+        return "Question{" +
                 "id='" + id + '\'' +
                 ", question_number='" + question_number + '\'' +
                 ", subject='" + subject + '\'' +
-                ", course_name='" + course_name + '\'' +
+                ", courseName='" + course_name + '\'' +
                 ", question_text='" + question_text + '\'' +
                 ", lecturer='" + lecturer + '\'' +
                 ", wrongAnswer1='" + answer1 + '\'' +

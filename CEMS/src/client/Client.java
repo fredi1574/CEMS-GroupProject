@@ -2,6 +2,7 @@ package client;
 
 import common.ChatIF;
 import common.MsgHandler;
+import entity.Subject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,10 +39,12 @@ public class Client extends AbstractClient {
 				 break;
 			 case QuestionsResponse:
 				 this.questions = ((MsgHandler<Object>)messageFromServer).getMsg();
-
 				 break;
-			 case importSuccess:
+			 case SubjectsimportSuccess:
 				 this.subjectList = ((MsgHandler<Object>)messageFromServer).getMsg();
+				 break;
+			 case CoursesimportSuccess:
+				 this.coursesList = ((MsgHandler<Object>)messageFromServer).getMsg();
 				 break;
 			 case QuestionUpdated:
 				 break;

@@ -92,15 +92,7 @@ public class MysqlConnection {
 				Question qeustion = new Question(question_number, id, question_text, lecturer, subject,
 						course_name,answer1,answer2,answer3,answer4,correctAnswer);
 				list.add(qeustion);
-//                list.add(Integer.toString(id));
-//                String course_name = rs.getString("course_name");
-//                list.add(course_name);
-////
-////				String name = rs.getString("name"); // assuming your table has a column named "name" with type VARCHAR
-////				int age = rs.getInt("age"); // assuming your table has a column named "age" with type INT
-////
-////				System.out.println("ID: " + id + ", Name: " + name + ", Age: " + age);
-//                System.out.println(id);
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

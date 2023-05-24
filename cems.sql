@@ -135,7 +135,7 @@ DROP TABLE IF EXISTS `questions`;
 CREATE TABLE `questions` (
   `id` int NOT NULL,
   `subject` varchar(255) DEFAULT NULL,
-  `course_name` varchar(255) DEFAULT NULL,
+  `courseName` varchar(255) DEFAULT NULL,
   `question_text` text,
   `question_number` int DEFAULT NULL,
   `lecturer` varchar(255) DEFAULT NULL,
