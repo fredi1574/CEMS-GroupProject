@@ -85,8 +85,8 @@ public class AddAQuestionController {
         ObservableList<String> courseNames = FXCollections.observableArrayList();
 
         for (Course course : coursesList) {
-            String courseNameandID = course.getCourseName() + " -"+ course.getCourseID();
-            courseNames.add(courseNameandID);
+            String courseName = course.getCourseName();
+            courseNames.add(courseName);
         }
         CourseCombo.setItems(courseNames);
     }
@@ -127,7 +127,7 @@ public class AddAQuestionController {
                 questionTextField.getText(),
                 usernameText.getText(),
                 Subject.substring(Subject.indexOf("-")+1),
-                Course.substring(Subject.indexOf("-")+1),
+                Course,
                 answer1.getText(),
                 answer2.getText(),
                 answer3.getText(),
