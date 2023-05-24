@@ -105,6 +105,24 @@ public class MysqlConnection {
 		return list;
 	}
 
+	public static String authenticateUser(String username, String password) {
+		try {
+			connectToDb("Aa123456");
+			PreparedStatement statement = conn.prepareStatement("SELECT role FROM users WHERE username = ? AND password = ?");
+			statement.setString(1, username);
+			statement.setString(2, password);
+
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					return resultSet.getString("role");
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	/**
 	 * this method closes the connection to the DB and the server
 	 */
