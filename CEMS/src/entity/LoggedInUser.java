@@ -1,7 +1,7 @@
 package entity;
 
 public class LoggedInUser extends User {
-    private static User authenticatedUser;
+    public static User authenticatedUser;
 
     public LoggedInUser(String id, String firstName, String lastName, String userName, String password, String email) {
         super(id, firstName, lastName, userName, password, email);
@@ -15,8 +15,9 @@ public class LoggedInUser extends User {
         authenticatedUser = user;
     }
 
+
     public String getName() {
-        return getFirstName();
+        return getFirstName() + " " + getLastName();
     }
 
     @Override

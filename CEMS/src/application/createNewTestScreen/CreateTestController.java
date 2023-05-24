@@ -12,15 +12,10 @@ import util.ScreenManager;
 public class CreateTestController {
 
     @FXML
-    private Text usernameText;
-    @FXML
     private AnchorPane header;
 
     public void initialize() {
-        // Get the logged-in username from the LoginWindowController
-        String loggedInUsername = LoginWindowController.loggedInUsername;
-        // Set the text in the usernameText element
-        usernameText.setText(loggedInUsername);
+
         ScreenManager.dragAndDrop(header);
     }
 
