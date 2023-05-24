@@ -1,9 +1,12 @@
 package application.addAQuestionScreen;
 
+import application.loginWindowScreen.LoginWindowController;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
+import entity.Course;
 import entity.Question;
+import entity.Subject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,16 +15,17 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.scene.layout.AnchorPane;
 import util.*;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class AddAQuestionController {
     @FXML
-    private ComboBox<String> CourseCombo;
+    private ComboBox<Course> CourseCombo;
     @FXML
     private ComboBox<String>SubjectCombo;
     @FXML
@@ -47,9 +51,23 @@ public class AddAQuestionController {
     private TextArea questionTextField;
     @FXML
     private TextField CorrectAnswer;
-
+    @FXML
+    private Text usernameText;
     public void initialize() {
         ScreenManager.dragAndDrop(header);
+        String loggedInUsername = LoginWindowController.loggedInUsername;
+        usernameText.setText(loggedInUsername);
+        List<String> username = new ArrayList<>();
+        username.add(loggedInUsername);
+        MsgHandler getSubject = new MsgHandler(TypeMsg.importSubjects,username);
+        ClientUI.chat.accept(getSubject);
+        ObservableList<Subject> subjectsList = FXCollections.observableArrayList((List)ClientUI.chat.getSubjects());
+        ObservableList<String> subjectsName = FXCollections.observableArrayList();
+        for (Subject subject : subjectsList) {
+            String subjectName = subject.getSubjectName();
+            subjectsName.add(subjectName);
+        }
+        SubjectCombo.setItems(subjectsName);
 
     }
     public boolean areAllFieldsFilled() {

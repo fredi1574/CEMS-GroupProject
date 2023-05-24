@@ -33,6 +33,18 @@ public enum TypeMsg {
 		public String toString() {
 			return "new user logged into the system.";
 		}
+	},importSubjects {
+		public String toString() {
+			return "import Subjects list for user";
+		}
+	},importSuccess {
+		public String toString() {
+			return "import Successfully";
+		}
+	},importCourses {
+		public String toString() {
+			return "import Courses list for user";
+		}
 	},LogoutSuccess {
 		public String toString() {
 			return "user logged out from the system.";

@@ -4,6 +4,7 @@ import common.ConnectToClients;
 import common.MsgHandler;
 import common.TypeMsg;
 import entity.Question;
+import entity.Subject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -15,8 +16,9 @@ public class CemsServer extends AbstractServer{
 	static ObservableList<ConnectToClients> clientList = FXCollections.observableArrayList();
 	//Constructors ****************************************************
 	public String passwordSQL;
-	Question q;
-	MsgHandler<Question> m;
+	Object q;
+	MsgHandler<Object> m;
+	Question question;
 	/**
 	 * Constructs an instance of the echo server.
 	 *
@@ -128,33 +130,60 @@ public class CemsServer extends AbstractServer{
 					client.sendToClient(new MsgHandler<>(TypeMsg.Disconnected, null));
 					break;
 				case  GetQuestions:
-					ArrayList<Question> list=MysqlConnection.getQuestionsTable("select * from cems.questions");
+					this.m = (MsgHandler<Object>) msg;
+					this.q = (String)m.getMsg().get(0);
+
+					ArrayList<Question> list = MysqlConnection.getQuestionsTable( "SELECT q.* " +
+							"FROM questions q " +
+							"JOIN lecturersubjects ls ON q.subject = ls.subjectID " +
+							"JOIN users u ON u.id = ls.id " +
+							"WHERE u.username = + '"+ q +"'");
 					//List<String>
 					client.sendToClient(new MsgHandler<>(TypeMsg.QuestionsResponse,list));
 					break;
 				case DeleteQuestion:
-					this.m = (MsgHandler<Question>) msg;
+					this.m = (MsgHandler<Object>) msg;
 					this.q = (Question)m.getMsg().get(0);
-					String DeleteQuery = "DELETE FROM cems.questions WHERE id='" + q.getId() + "'";;
+					this.question = (Question) q;
+					String DeleteQuery = "DELETE FROM cems.questions WHERE id='" + question.getId() + "'";;
 					MysqlConnection.update(DeleteQuery);
 					client.sendToClient(new MsgHandler<>(TypeMsg.QuestionDeleted,null));
+				case  importSubjects:
+					this.m = (MsgHandler<Object>) msg;
+					this.q = (String)m.getMsg().get(0);
+					ArrayList<Subject> importSubjects = MysqlConnection.getSubjectList("SELECT s.* " + "FROM subject s " +
+									"JOIN lecturersubjects ls ON s.subjectID = ls.subjectID " +
+									"JOIN users u ON u.id = ls.id " +
+									"WHERE u.username = '"+ q +"'");
 
-				case  EditQuestion:
-					this.m = (MsgHandler<Question>) msg;
+							client.sendToClient(new MsgHandler<>(TypeMsg.importSuccess,importSubjects));
+					break;
+
+				case  importCourses:
+					this.m = (MsgHandler<Object>) msg;
 					this.q = (Question)m.getMsg().get(0);
-					String updateQuery = "UPDATE cems.questions SET question_number='" + q.getQuestion_number() + "', subject='" + q.getSubject() + "', course_name='" + q.getCourse_name() + "', question_text='" + q.getQuestion_text() + "', lecturer='" + q.getLecturer() + "', answer1='" + q.getAnswer1() + "', answer2='" + q.getAnswer2() + "', " +
-							"answer3='" + q.getAnswer3() + "', correctAnswer='" + q.getCorrectAnswer() + "', answer4='" + q.getAnswer4() + "' WHERE id='" + q.getId() + "'";
+					//String importCourses =
+				case  EditQuestion:
+					this.m = (MsgHandler<Object>) msg;
+					this.q = (Question)m.getMsg().get(0);
+					this.question = (Question) q;
+					String updateQuery = "UPDATE cems.questions SET question_number='" + question.getQuestion_number() + "', subject='" + question.getSubject() + "'," +
+							" course_name='" + question.getCourse_name() + "', question_text='" + question.getQuestion_text() + "'," +
+							" lecturer='" + question.getLecturer() + "', answer1='" + question.getAnswer1() + "', answer2='" + question.getAnswer2() + "', " +
+							"answer3='" + question.getAnswer3() + "', correctAnswer='" + question.getCorrectAnswer() + "', answer4='" +
+							question.getAnswer4() + "' WHERE id='" + question.getId() + "'";
 
 					MysqlConnection.update(updateQuery);
 					client.sendToClient(new MsgHandler<>(TypeMsg.QuestionUpdated,null));
 					break;
 				case  AddNewQuestion:
-					this.m = (MsgHandler<Question>) msg;
+					this.m = (MsgHandler<Object>) msg;
 					this.q = (Question)m.getMsg().get(0);
+					Question question = (Question) q;
 					String newQuery = "INSERT INTO cems.questions (id, subject, course_name, question_text, question_number, lecturer, answer1, answer2, answer3, correctAnswer, answer4) " +
-							"VALUES ('" + q.getId() + "', '" + q.getSubject() + "', '" + q.getCourse_name() + "', '" + q.getQuestion_text() + "', " +
-							"'" + q.getQuestion_number() + "', '" + q.getLecturer() + "', '" + q.getAnswer1() + "', '" + q.getAnswer2() + "', " +
-							"'" + q.getAnswer3() + "', '" + q.getCorrectAnswer() + "', '" + q.getAnswer4() + "')";
+							"VALUES ('" + question.getId() + "', '" + question.getSubject() + "', '" + question.getCourse_name() + "', '" + question.getQuestion_text() + "', " +
+							"'" + question.getQuestion_number() + "', '" + question.getLecturer() + "', '" + question.getAnswer1() + "', '" + question.getAnswer2() + "', " +
+							"'" + question.getAnswer3() + "', '" + question.getCorrectAnswer() + "', '" + question.getAnswer4() + "')";
 					MysqlConnection.update(newQuery);
 					client.sendToClient(new MsgHandler<>(TypeMsg.QuestionAddedSuccessfuly,null));
 					break;

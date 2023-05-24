@@ -1,20 +1,24 @@
 package common;
 
+import entity.Question;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @SuppressWarnings("serial")
 public class MsgHandler<Object> implements  Serializable {
 	
 	private TypeMsg type;
-	private ArrayList<Object> msg;
+	private List<Object> msg;
 	
-	public MsgHandler(TypeMsg type, ArrayList<Object> msg) {
+	public MsgHandler(TypeMsg type, List<Object> msg) {
 		super();
 		this.type = type;
-		this.msg = msg;
+		this.msg =  msg;
 	}
+
 	public TypeMsg getType() {
 		return type;
 	}
@@ -23,11 +27,11 @@ public class MsgHandler<Object> implements  Serializable {
 		this.type = type;
 	}
 
-	public ArrayList<Object> getMsg() {
+	public List<Object> getMsg() {
 		return msg;
 	}
 
-	public void setMsg(ArrayList<Object> msg) {
+	public void setMsg(List<Object> msg) {
 		this.msg = msg;
 	}
 	@Override

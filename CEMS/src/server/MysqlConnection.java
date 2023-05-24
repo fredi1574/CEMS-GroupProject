@@ -1,9 +1,12 @@
 package server;
 
+import entity.Course;
 import entity.Question;
+import entity.Subject;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * the class contains methods which connect to the CEMS database
@@ -72,9 +75,9 @@ public class MysqlConnection {
 			ResultSet rs = stmt.executeQuery(q);
 			while (rs.next()) {
 
-				int id = rs.getInt("id"); // assuming your table has a column named "id" with type INT
+				String id = rs.getString("id"); // assuming your table has a column named "id" with type INT
 				String subject = rs.getString("subject");
-				String course_name = rs.getString("course_name");
+				String course_name = rs.getString("courseName");
 				String question_text = rs.getString("question_text");
 				String question_number = rs.getString("question_number");
 				String lecturer = rs.getString("lecturer");
@@ -86,7 +89,7 @@ public class MysqlConnection {
 
 				// public Question(String questionNumber,String questionId,String questionText,
 				// String questionWrittenBy) {
-				Question qeustion = new Question(question_number, Integer.toString(id), question_text, lecturer, subject,
+				Question qeustion = new Question(question_number, id, question_text, lecturer, subject,
 						course_name,answer1,answer2,answer3,answer4,correctAnswer);
 				list.add(qeustion);
 //                list.add(Integer.toString(id));
@@ -103,6 +106,60 @@ public class MysqlConnection {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	public static ArrayList<Course> getCourseList(String q) {
+		Statement stmt = null;
+		try {
+			stmt = conn.createStatement();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		ArrayList<Course> coursesList = new ArrayList<>();
+		try {
+			ResultSet rs = stmt.executeQuery(q);
+			while (rs.next()) {
+
+				String subjectID = rs.getString("subjectID"); // assuming your table has a column named "id" with type INT
+				String courseID = rs.getString("courseID");
+				String subjectName = rs.getString("subjectName");
+				String courseName = rs.getString("courseName");
+
+				Course course = new Course(subjectID,courseID,subjectName,courseName);
+				coursesList.add(course);
+//
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return coursesList;
+	}
+	public static ArrayList<Subject> getSubjectList(String q) {
+		Statement stmt = null;
+		try {
+			stmt = conn.createStatement();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		ArrayList<Subject> subjectsList = new ArrayList<>();
+		try {
+			ResultSet rs = stmt.executeQuery(q);
+			while (rs.next()) {
+
+				String subjectID = rs.getString("subjectID"); // assuming your table has a column named "id" with type INT
+				String subjectName= rs.getString("subjectName");
+
+				Subject subject = new Subject(subjectID ,subjectName);
+				subjectsList.add(subject);
+//
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return subjectsList;
 	}
 
 	public static String authenticateUser(String username, String password) {

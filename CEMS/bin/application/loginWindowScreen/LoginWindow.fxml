@@ -34,7 +34,8 @@
             <Line endX="100.77774047851562" endY="-10.000011444091797" layoutX="397.0" layoutY="96.0"
                   startX="-97.4000244140625" startY="-10.000011444091797"/>
             <Text fill="#306ebd" layoutX="393.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                  styleClass="content" text="Forgot password?" underline="true">
+                  styleClass="content" text="Forgot password?" underline="true"
+                  onMouseClicked="#handleTextClick">
                 <font>
                     <Font name="Trebuchet MS" size="11.0"/>
                 </font>

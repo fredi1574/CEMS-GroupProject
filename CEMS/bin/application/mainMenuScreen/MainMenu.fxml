@@ -5,6 +5,8 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+
+
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="header" prefHeight="489.0" prefWidth="508.0"
             styleClass="backgroundColor" stylesheets="@../../util/style.css"
             xmlns="http://javafx.com/javafx/19" fx:controller="application.mainMenuScreen.MainMenuController">
@@ -117,8 +119,7 @@
         <ImageView fitHeight="43.0" fitWidth="200.0" layoutX="3.0" layoutY="2.0" preserveRatio="true">
             <Image url="@../../images/welcome.png"/>
         </ImageView>
-        <Text fill="#306ebd" layoutX="9.0" layoutY="63.9912109375" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
-              text="May" wrappingWidth="176.48748779296875">
+        <Text fx:id="usernameText" fill="#306ebd" layoutX="9.0" layoutY="63.9912109375" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="176.48748779296875">
             <font>
                 <Font name="Tahoma" size="18.0"/>
             </font>

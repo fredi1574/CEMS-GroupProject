@@ -1,5 +1,6 @@
 package application.manageQuestionsScreen;
 
+import application.loginWindowScreen.LoginWindowController;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
@@ -13,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import util.*;
 
@@ -29,17 +31,22 @@ public class ManageQuestionsController {
 
     @FXML
     private TableView<Question> manageQuestionsTableView;
+    @FXML
+    private Text usernameText;
 
+    public static ManageQuestionsController ManageQuestionsControl;
     @FXML
     public void initialize() {
         System.out.println("init manage questions");
         ScreenManager.dragAndDrop(header);
-        MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestions, null);
+        String loggedInUsername = LoginWindowController.loggedInUsername;
+        usernameText.setText(loggedInUsername);
+        List<String> username = new ArrayList<>();
+        username.add(loggedInUsername);
+        MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestions,username);
         ClientUI.chat.accept(getTable);
-
-
         //creates the question table
-        ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.getList());
+        ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.getQuestions());
         ObservableList<String> columns = FXCollections.observableArrayList();
         columns.addAll("Question Number", "ID", "Subject", "Course Name", "Question Text", "Lecturer");
         TableManager.createTable(manageQuestionsTableView, columns);
