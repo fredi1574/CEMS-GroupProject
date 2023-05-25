@@ -46,12 +46,10 @@ public class ViewReportsController {
             // Set the text in the usernameText element
             usernameText.setText(authenticatedUser.getUserName());
         }
-        List<String> username = new ArrayList<>();
-        username.add(usernameText.getText());
         // Temporary lists, for presentation
         ObservableList<Integer> yearList = FXCollections.observableArrayList(2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015);
         ObservableList<String> semesterList = FXCollections.observableArrayList("A", "B", "Summer");
-        createSubjectCombo(username);
+        createSubjectCombo(usernameText.getText());
         // Binds the data into the correct dropdown lists
         yearComboBox.setItems(yearList);
         semesterComboBox.setItems(semesterList);
@@ -75,7 +73,7 @@ public class ViewReportsController {
         double[] multipliers = {0.07, 0.1, 0.2, 0.525, 0.1};
         TableManager.resizeColumns(reportsTableView, multipliers);
     }
-    private void createSubjectCombo(List<String> username) {
+    private void createSubjectCombo(String username) {
         MsgHandler getSubject = new MsgHandler(TypeMsg.importSubjects, username);
         ClientUI.chat.accept(getSubject);
         List<Object> subjectObjectsList = ClientUI.chat.getSubjects();

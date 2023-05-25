@@ -57,8 +57,6 @@ public class AddAQuestionController {
             // Set the text in the usernameText element
             usernameText.setText(authenticatedUser.getUserName());
         }
-        MsgHandler getSubject = new MsgHandler(TypeMsg.importSubjects,usernameText.getText());
-        ClientUI.chat.accept(getSubject);
         createSubjectCombo(usernameText.getText());
         createCourseCombo(usernameText.getText());
 
