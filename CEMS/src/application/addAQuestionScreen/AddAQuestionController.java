@@ -57,15 +57,13 @@ public class AddAQuestionController {
             // Set the text in the usernameText element
             usernameText.setText(authenticatedUser.getUserName());
         }
-        List<String> username = new ArrayList<>();
-        username.add(usernameText.getText());
-        MsgHandler getSubject = new MsgHandler(TypeMsg.importSubjects,username);
+        MsgHandler getSubject = new MsgHandler(TypeMsg.importSubjects,usernameText.getText());
         ClientUI.chat.accept(getSubject);
-        createSubjectCombo(username);
-        createCourseCombo(username);
+        createSubjectCombo(usernameText.getText());
+        createCourseCombo(usernameText.getText());
 
     }
-    private void createSubjectCombo(List<String> username) {
+    private void createSubjectCombo(String username) {
         MsgHandler getSubject = new MsgHandler(TypeMsg.importSubjects, username);
         ClientUI.chat.accept(getSubject);
         List<Object> subjectObjectsList = ClientUI.chat.getSubjects();
@@ -78,7 +76,7 @@ public class AddAQuestionController {
         }
         subjectCombo.setItems(subjectNames);
     }
-    private void createCourseCombo(List<String> username) {
+    private void createCourseCombo(String username) {
         MsgHandler getCourses = new MsgHandler(TypeMsg.importCourses, username);
         ClientUI.chat.accept(getCourses);
         List<Object> courseObjectsList = ClientUI.chat.getCourses();
@@ -136,9 +134,7 @@ public class AddAQuestionController {
                 CorrectAnswer.getText()
 
         );
-        ArrayList<Question> arr = new ArrayList<>();
-        arr.add(newQuestion);
-        MsgHandler addNewQuestion = new MsgHandler(TypeMsg.AddNewQuestion, arr);
+        MsgHandler addNewQuestion = new MsgHandler(TypeMsg.AddNewQuestion, newQuestion);
         ClientUI.chat.accept(addNewQuestion);
         showError.showInfoPopup("Added question successfully");
         ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);

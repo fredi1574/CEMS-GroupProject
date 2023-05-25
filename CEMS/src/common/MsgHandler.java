@@ -11,9 +11,9 @@ import java.util.Objects;
 public class MsgHandler<Object> implements  Serializable {
 	
 	private TypeMsg type;
-	private List<Object> msg;
+	private Object msg;
 	
-	public MsgHandler(TypeMsg type, List<Object> msg) {
+	public MsgHandler(TypeMsg type, Object msg) {
 		super();
 		this.type = type;
 		this.msg =  msg;
@@ -27,11 +27,11 @@ public class MsgHandler<Object> implements  Serializable {
 		this.type = type;
 	}
 
-	public List<Object> getMsg() {
+	public Object getMsg() {
 		return msg;
 	}
 
-	public void setMsg(List<Object> msg) {
+	public void setMsg(Object msg) {
 		this.msg = msg;
 	}
 	@Override

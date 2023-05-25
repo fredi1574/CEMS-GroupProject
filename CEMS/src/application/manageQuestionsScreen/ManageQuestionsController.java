@@ -46,9 +46,7 @@ public class ManageQuestionsController {
             // Set the text in the usernameText element
             usernameText.setText(authenticatedUser.getUserName());
         }
-        List<String> username = new ArrayList<>();
-        username.add(usernameText.getText());
-        MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestions,username);
+        MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestions,authenticatedUser.getUserName());
         ClientUI.chat.accept(getTable);
         //creates the question table
         ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.getQuestions());
@@ -88,9 +86,7 @@ public class ManageQuestionsController {
         if (selectedQuestionIndex != -1) {
             Question questionToDelete = manageQuestionsTableView.getItems().get(selectedQuestionIndex);
             if (showError.showConfirmationPopup("Are you sure you want to delete this question?")) {
-                ArrayList<Question> arr = new ArrayList<>();
-                arr.add(questionToDelete);
-                MsgHandler deleteQ = new MsgHandler(TypeMsg.DeleteQuestion, arr);
+                MsgHandler deleteQ = new MsgHandler(TypeMsg.DeleteQuestion, questionToDelete);
                 ClientUI.chat.accept(deleteQ);
                 reloadPage();
             }

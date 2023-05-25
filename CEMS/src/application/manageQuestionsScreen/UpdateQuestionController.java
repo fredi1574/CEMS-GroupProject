@@ -106,16 +106,13 @@ public class UpdateQuestionController {
     }
 
     public void DeleteQuestion() {
-            ArrayList<Question> arr = new ArrayList<>();
-            arr.add(AlterQuestion());
-            MsgHandler deleteQ = new MsgHandler(TypeMsg.DeleteQuestion, arr);
+
+            MsgHandler deleteQ = new MsgHandler(TypeMsg.DeleteQuestion, AlterQuestion());
             ClientUI.chat.accept(deleteQ);
         }
     private void saveData() {
         if (!checkValidData())return;
-        ArrayList<Question> arr = new ArrayList<>();
-        arr.add(AlterQuestion());
-        MsgHandler editQ = new MsgHandler(TypeMsg.EditQuestion, arr);
+        MsgHandler editQ = new MsgHandler(TypeMsg.EditQuestion, AlterQuestion());
         ClientUI.chat.accept(editQ);
     }
     private boolean checkValidData() {

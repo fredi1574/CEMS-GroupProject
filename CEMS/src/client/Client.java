@@ -38,13 +38,13 @@ public class Client extends AbstractClient {
 			 case QuestionDeleted:
 				 break;
 			 case QuestionsResponse:
-				 this.questions = ((MsgHandler<Object>)messageFromServer).getMsg();
+				 this.questions = (List<Object>) messageFromServer.getMsg();
 				 break;
 			 case SubjectsimportSuccess:
-				 this.subjectList = ((MsgHandler<Object>)messageFromServer).getMsg();
+				 this.subjectList = (List<Object>) messageFromServer.getMsg();
 				 break;
 			 case CoursesimportSuccess:
-				 this.coursesList = ((MsgHandler<Object>)messageFromServer).getMsg();
+				 this.coursesList = (List<Object>) messageFromServer.getMsg();
 				 break;
 			 case QuestionUpdated:
 				 break;

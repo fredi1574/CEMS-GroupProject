@@ -77,7 +77,6 @@ public class MysqlConnection {
 		try {
 			ResultSet rs = stmt.executeQuery(q);
 			while (rs.next()) {
-
 				String id = rs.getString("id"); // assuming your table has a column named "id" with type INT
 				String subject = rs.getString("subject");
 				String course_name = rs.getString("courseName");
