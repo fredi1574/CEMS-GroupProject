@@ -3,7 +3,7 @@ package application.loginWindowScreen;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
-import entity.LoggedInUser;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -12,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import server.MysqlConnection;
 import util.*;
 
-import static entity.LoggedInUser.authenticatedUser;
+
 
 
 public class LoginWindowController {
