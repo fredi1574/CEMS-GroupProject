@@ -3,13 +3,16 @@ package application.manageQuestionsScreen;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
+import entity.LoggedInUser;
 import entity.Question;
+import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import util.*;
 
@@ -57,13 +60,19 @@ public class UpdateQuestionController {
     private TextField correctAnswer;
     private Question question;
     private Stage manageQuestions;
-
+    @FXML
+    private Text usernameText;
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         questionNumberField.setDisable(true);
         lecturerField.setDisable(true);
         subjectField.setDisable(true);
         idField.setDisable(true);
+        User authenticatedUser = LoggedInUser.getAuthenticatedUser();
+        if (authenticatedUser != null) {
+            // Set the text in the usernameText element
+            usernameText.setText(authenticatedUser.getUserName());
+        }
     }
     public void setManage(Stage manageQuestions) {
         this.manageQuestions = manageQuestions;

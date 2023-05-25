@@ -1,6 +1,4 @@
 package application.addAQuestionScreen;
-
-import application.loginWindowScreen.LoginWindowController;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
@@ -16,8 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.layout.AnchorPane;
 import util.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 

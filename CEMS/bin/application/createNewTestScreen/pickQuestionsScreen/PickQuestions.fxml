@@ -23,7 +23,7 @@
         <ImageView layoutX="746.0" layoutY="47.0">
             <Image url="@../../../images/icons8-person-16.png"/>
         </ImageView>
-        <Text fill="#3b3131" layoutX="769.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi"
+        <Text fx:id="usernameText" fill="WHITE" layoutX="769.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0"
               underline="true" wrappingWidth="52.798828125">
             <font>
                 <Font name="Trebuchet MS" size="12.0"/>

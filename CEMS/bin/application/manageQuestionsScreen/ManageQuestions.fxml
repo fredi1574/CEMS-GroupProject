@@ -39,7 +39,7 @@
                 <Font name="Trebuchet MS" size="40.0" />
             </font>
         </Label>
-        <Text fx:id="usernameText" fill="#3b3131" layoutX="737.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" underline="true">
+        <Text fx:id="usernameText" fill="WHITE" layoutX="737.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" underline="true">
             <font>
                 <Font name="Trebuchet MS" size="12.0" />
             </font>
