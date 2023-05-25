@@ -46,8 +46,6 @@ public class LoginWindowController {
         // Authenticate user and retrieve their role
         String role = MysqlConnection.authenticateUser(username, password);
         if (role != null) {
-            // Set the authenticated user in the LoggedInUser entity
-            LoggedInUser.setAuthenticatedUser(authenticatedUser);
 //message
             MsgHandler Login = new MsgHandler(TypeMsg.TryLogin,null);
             ClientUI.chat.accept(Login);
