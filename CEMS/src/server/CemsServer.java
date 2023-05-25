@@ -149,6 +149,9 @@ public class CemsServer extends AbstractServer{
 					String DeleteQuery = "DELETE FROM cems.questions WHERE id='" + question.getId() + "'";;
 					MysqlConnection.update(DeleteQuery);
 					client.sendToClient(new MsgHandler<>(TypeMsg.QuestionDeleted,null));
+				case TryLogin:
+					client.sendToClient(new MsgHandler<>(TypeMsg.LoginSuccess,null));
+
 				case  importSubjects:
 					this.m = (MsgHandler<Object>) msg;
 					this.q = (String)m.getMsg();

@@ -37,6 +37,8 @@ public class Client extends AbstractClient {
 				break;
 			 case QuestionDeleted:
 				 break;
+			 case LoginSuccess:
+				 break;
 			 case QuestionsResponse:
 				 this.questions = (List<Object>) messageFromServer.getMsg();
 				 break;

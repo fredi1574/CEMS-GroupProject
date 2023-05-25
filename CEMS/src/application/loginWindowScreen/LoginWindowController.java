@@ -1,5 +1,8 @@
 package application.loginWindowScreen;
 
+import client.ClientUI;
+import common.MsgHandler;
+import common.TypeMsg;
 import entity.LoggedInUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,6 +44,8 @@ public class LoginWindowController {
             return;
         }
 
+        MsgHandler Login = new MsgHandler(TypeMsg.TryLogin,null);
+        ClientUI.chat.accept(Login);
         // Authenticate user and retrieve their role
         String role = MysqlConnection.authenticateUser(username, password);
         if (role != null) {
