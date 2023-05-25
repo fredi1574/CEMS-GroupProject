@@ -1,5 +1,6 @@
 package server;
 
+import entity.ConcreteUser;
 import entity.Course;
 import entity.Question;
 import entity.Subject;
@@ -7,6 +8,8 @@ import entity.Subject;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static entity.LoggedInUser.setAuthenticatedUser;
 
 /**
  * the class contains methods which connect to the CEMS database
@@ -157,13 +160,26 @@ public class MysqlConnection {
 	public static String authenticateUser(String username, String password) {
 		try {
 			connectToDb("Aa123456");
-			PreparedStatement statement = conn.prepareStatement("SELECT role FROM users WHERE username = ? AND password = ?");
+			PreparedStatement statement = conn.prepareStatement("SELECT id, firstName, lastName, email, role FROM users WHERE username = ? AND password = ?");
 			statement.setString(1, username);
 			statement.setString(2, password);
 
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
-					return resultSet.getString("role");
+					// Retrieve the user details from the database
+					String id = resultSet.getString("id");
+					String firstName = resultSet.getString("firstName");
+					String lastName = resultSet.getString("lastName");
+					String email = resultSet.getString("email");
+					String role = resultSet.getString("role");
+
+					// Create a new ConcreteUser object with the retrieved details
+					ConcreteUser user = new ConcreteUser(id, firstName, lastName, username, password, email);
+
+					// Set the authenticated user
+					setAuthenticatedUser(user);
+
+					return role;
 				}
 			}
 		} catch (SQLException e) {
@@ -171,6 +187,8 @@ public class MysqlConnection {
 		}
 		return null;
 	}
+
+
 
 	/**
 	 * this method closes the connection to the DB and the server

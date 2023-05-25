@@ -1,5 +1,7 @@
 package application.mainMenuScreen;
 
+import entity.LoggedInUser;
+import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
@@ -7,9 +9,6 @@ import util.ExitButton;
 import util.MinimizeButton;
 import util.PathConstants;
 import util.ScreenManager;
-import application.loginWindowScreen.LoginWindowController;
-
-
 
 import javafx.scene.text.Text;
 public class MainMenuController {
@@ -19,16 +18,18 @@ public class MainMenuController {
     private AnchorPane header;
 
     public void initialize() {
-        // Get the logged-in username from the LoginWindowController
-        String loggedInUsername = LoginWindowController.loggedInUsername;
+        // Get the authenticated user from LoggedInUser
+        User authenticatedUser = LoggedInUser.getAuthenticatedUser();
 
-        // Set the text in the usernameText element
-        usernameText.setText(loggedInUsername);
+        if (authenticatedUser != null) {
+            // Set the text in the usernameText element
+            usernameText.setText(authenticatedUser.getUserName());
+        }
         ScreenManager.dragAndDrop(header);
     }
 
     public void LogOut(ActionEvent event) {
-        LoginWindowController.loggedInUsername = null;
+        LoggedInUser.setAuthenticatedUser(null);
         ScreenManager.goToNewScreen(event, PathConstants.loginPath);
     }
 
