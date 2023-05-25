@@ -9,10 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import server.MysqlConnection;
-import util.ExitButton;
-import util.MinimizeButton;
-import util.PathConstants;
-import util.ScreenManager;
+import util.*;
 
 import static entity.LoggedInUser.authenticatedUser;
 
@@ -40,7 +37,7 @@ public class LoginWindowController {
 
         // Check if username or password fields are empty
         if (username.isEmpty() || password.isEmpty()) {
-            showAlertDialog(AlertType.WARNING, "Incomplete Fields", "Please enter both username and password.");
+            showError.showErrorPopup("Please enter both username and password.");
             return;
         }
 
@@ -65,43 +62,25 @@ public class LoginWindowController {
                     ScreenManager.goToNewScreen(event, PathConstants.viewReportsPath);
                     break;
                 default:
-                    showAlertDialog(AlertType.ERROR, "Authentication Failed", "Invalid username or password.");
+                    showError.showErrorPopup("Invalid username or password.");
                     break;
             }
         } else {
-            showAlertDialog(AlertType.ERROR, "Authentication Failed", "Invalid username or password.");
+            showError.showErrorPopup("Invalid username or password.");
         }
     }
 
     // Event handler for text click
     public void handleTextClick() {
         // Show an information dialog with a message
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText(null);
-        alert.setContentText("To reset password, please contact our admin.");
-        alert.showAndWait();
+        showError.showInfoPopup("To reset password, please contact our admin.");
     }
-
-
-
-
-    // Show an alert dialog with the specified alert type, title, and message
-    private void showAlertDialog(AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
     // Event handler for close button click
     @FXML
     private void closeClient(ActionEvent event) {
         // Close the application window
         ExitButton.closeClient(event);
     }
-
     // Event handler for minimize button click
     @FXML
     public void minimizeWindow(ActionEvent event) {

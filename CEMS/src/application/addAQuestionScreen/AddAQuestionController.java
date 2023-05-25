@@ -4,9 +4,7 @@ import application.loginWindowScreen.LoginWindowController;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
-import entity.Course;
-import entity.Question;
-import entity.Subject;
+import entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -54,10 +52,13 @@ public class AddAQuestionController {
     private Text usernameText;
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        String loggedInUsername = LoginWindowController.loggedInUsername;
-        usernameText.setText(loggedInUsername);
+        User authenticatedUser = LoggedInUser.getAuthenticatedUser();
+        if (authenticatedUser != null) {
+            // Set the text in the usernameText element
+            usernameText.setText(authenticatedUser.getUserName());
+        }
         List<String> username = new ArrayList<>();
-        username.add(loggedInUsername);
+        username.add(usernameText.getText());
         MsgHandler getSubject = new MsgHandler(TypeMsg.importSubjects,username);
         ClientUI.chat.accept(getSubject);
         createSubjectCombo(username);

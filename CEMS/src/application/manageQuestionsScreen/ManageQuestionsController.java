@@ -4,7 +4,9 @@ import application.loginWindowScreen.LoginWindowController;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
+import entity.LoggedInUser;
 import entity.Question;
+import entity.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -39,10 +41,13 @@ public class ManageQuestionsController {
     public void initialize() {
         System.out.println("init manage questions");
         ScreenManager.dragAndDrop(header);
-        String loggedInUsername = LoginWindowController.loggedInUsername;
-        usernameText.setText(loggedInUsername);
+        User authenticatedUser = LoggedInUser.getAuthenticatedUser();
+        if (authenticatedUser != null) {
+            // Set the text in the usernameText element
+            usernameText.setText(authenticatedUser.getUserName());
+        }
         List<String> username = new ArrayList<>();
-        username.add(loggedInUsername);
+        username.add(usernameText.getText());
         MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestions,username);
         ClientUI.chat.accept(getTable);
         //creates the question table

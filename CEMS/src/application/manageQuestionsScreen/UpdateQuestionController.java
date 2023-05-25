@@ -60,6 +60,10 @@ public class UpdateQuestionController {
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
+        questionNumberField.setDisable(true);
+        lecturerField.setDisable(true);
+        subjectField.setDisable(true);
+        idField.setDisable(true);
     }
     public void setManage(Stage manageQuestions) {
         this.manageQuestions = manageQuestions;

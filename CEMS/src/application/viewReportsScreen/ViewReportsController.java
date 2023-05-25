@@ -1,6 +1,12 @@
 package application.viewReportsScreen;
 
+import client.ClientUI;
+import common.MsgHandler;
+import common.TypeMsg;
+import entity.LoggedInUser;
 import entity.Report;
+import entity.Subject;
+import entity.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,8 +15,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import util.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ViewReportsController {
 
@@ -26,21 +36,25 @@ public class ViewReportsController {
 
     @FXML
     private TableView<Report> reportsTableView;
-
+    @FXML
+    private Text usernameText;
     @FXML
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-
+        User authenticatedUser = LoggedInUser.getAuthenticatedUser();
+        if (authenticatedUser != null) {
+            // Set the text in the usernameText element
+            usernameText.setText(authenticatedUser.getUserName());
+        }
+        List<String> username = new ArrayList<>();
+        username.add(usernameText.getText());
         // Temporary lists, for presentation
         ObservableList<Integer> yearList = FXCollections.observableArrayList(2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015);
         ObservableList<String> semesterList = FXCollections.observableArrayList("A", "B", "Summer");
-        ObservableList<String> subjectList = FXCollections.observableArrayList("Computer Science", "Mathematics",
-                "Algorithms", "Statistics", "Bananas n' monkeys", "Introduction to Databases");
-
+        createSubjectCombo(username);
         // Binds the data into the correct dropdown lists
         yearComboBox.setItems(yearList);
         semesterComboBox.setItems(semesterList);
-        subjectComboBox.setItems(subjectList);
 
         // Temporary lists, for presentation
         ObservableList<Report> reportList = FXCollections.observableArrayList(
@@ -60,6 +74,19 @@ public class ViewReportsController {
 
         double[] multipliers = {0.07, 0.1, 0.2, 0.525, 0.1};
         TableManager.resizeColumns(reportsTableView, multipliers);
+    }
+    private void createSubjectCombo(List<String> username) {
+        MsgHandler getSubject = new MsgHandler(TypeMsg.importSubjects, username);
+        ClientUI.chat.accept(getSubject);
+        List<Object> subjectObjectsList = ClientUI.chat.getSubjects();
+        ObservableList<Subject> subjectsList = FXCollections.observableArrayList((List) subjectObjectsList);
+        ObservableList<String> subjectNames = FXCollections.observableArrayList();
+
+        for (Subject subject : subjectsList) {
+            String subjectNameandID = subject.getSubjectName() + " -" + subject.getSubjectID();
+            subjectNames.add(subjectNameandID);
+        }
+        subjectComboBox.setItems(subjectNames);
     }
 
     public void setFunctions(String relativePath) {
