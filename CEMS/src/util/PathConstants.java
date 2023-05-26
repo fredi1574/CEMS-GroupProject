@@ -18,4 +18,7 @@ public class PathConstants {
     public static final String clientPath = "/client/ClientGui.fxml";
     public static final String serverPath = "/server/ServerGUI.fxml";
     public static final String manageQuestions = "/application/manageQuestionsScreen/ManageQuestions.fxml";
+    public static final String mainMenuStudentPath = "/application/mainMenuScreen/MainMenuStudent.fxml";
+    public static final String mainMenuHeadOfDepartPath = "/application/mainMenuScreen/MainMenuHeadOfDepartment.fxml";
+
 }

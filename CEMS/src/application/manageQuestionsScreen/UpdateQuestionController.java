@@ -4,7 +4,6 @@ import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
-import entity.LoggedInUser;
 import entity.Question;
 import entity.User;
 import javafx.event.ActionEvent;
@@ -61,15 +60,13 @@ public class UpdateQuestionController {
     private TextField correctAnswer;
     private Question question;
     private Stage manageQuestions;
-    @FXML
-    private Text usernameText;
+
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         questionNumberField.setDisable(true);
         lecturerField.setDisable(true);
         subjectField.setDisable(true);
         idField.setDisable(true);
-        usernameText.setText(Client.user.getFullName());
     }
     public void setManage(Stage manageQuestions) {
         this.manageQuestions = manageQuestions;

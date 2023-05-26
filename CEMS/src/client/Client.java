@@ -2,7 +2,6 @@ package client;
 
 import common.ChatIF;
 import common.MsgHandler;
-import entity.LoggedInUser;
 import entity.Subject;
 import entity.User;
 

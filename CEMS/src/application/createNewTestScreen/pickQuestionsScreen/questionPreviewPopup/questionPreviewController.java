@@ -1,6 +1,4 @@
 package application.createNewTestScreen.pickQuestionsScreen.questionPreviewPopup;
-
-import entity.LoggedInUser;
 import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

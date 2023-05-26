@@ -4,7 +4,6 @@ import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
-import entity.LoggedInUser;
 import entity.Report;
 import entity.Subject;
 import entity.User;

@@ -2,7 +2,6 @@ package application.mainMenuScreen;
 
 import client.Client;
 import client.ClientControl;
-import entity.LoggedInUser;
 import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

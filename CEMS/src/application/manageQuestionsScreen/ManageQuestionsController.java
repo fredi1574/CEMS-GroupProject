@@ -5,7 +5,6 @@ import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
-import entity.LoggedInUser;
 import entity.Question;
 import entity.User;
 import javafx.collections.FXCollections;
@@ -43,7 +42,7 @@ public class ManageQuestionsController {
         System.out.println("init manage questions");
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getFullName());
-        MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestions,usernameText.getText());
+        MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestions,Client.user.getUserName());
         ClientUI.chat.accept(getTable);
         //creates the question table
         ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.getQuestions());

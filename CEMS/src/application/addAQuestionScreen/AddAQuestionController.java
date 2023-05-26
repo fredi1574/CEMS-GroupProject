@@ -50,8 +50,8 @@ public class AddAQuestionController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getFullName());
-        createSubjectCombo(usernameText.getText());
-        createCourseCombo(usernameText.getText());
+        createSubjectCombo(Client.user.getUserName());
+        createCourseCombo(Client.user.getUserName());
 
     }
     private void createSubjectCombo(String username) {

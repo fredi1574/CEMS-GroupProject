@@ -5,8 +5,6 @@ import client.ClientUI;
 import com.mysql.cj.log.Log;
 import common.MsgHandler;
 import common.TypeMsg;
-
-import entity.LoggedInUser;
 import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -59,15 +57,15 @@ public class LoginWindowController {
             switch (Client.user.getRole()) {
                 case "Student":
 
-                    ScreenManager.goToNewScreen(event, PathConstants.manageQuestions);
+                    ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
                     break;
                 case "Lecturer":
 
                     ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
                     break;
-                case "HeadOfDepartment":
+                case "Head Of Department":
 
-                    ScreenManager.goToNewScreen(event, PathConstants.viewReportsPath);
+                    ScreenManager.goToNewScreen(event,PathConstants. mainMenuHeadOfDepartPath);
                     break;
                 default:
                     showError.showErrorPopup("Invalid username or password.");

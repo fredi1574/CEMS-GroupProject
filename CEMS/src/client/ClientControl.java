@@ -1,7 +1,6 @@
 package client;
 
 import common.ChatIF;
-import entity.LoggedInUser;
 
 import java.io.IOException;
 import java.util.ArrayList;

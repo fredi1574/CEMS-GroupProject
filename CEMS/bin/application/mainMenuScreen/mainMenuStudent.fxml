@@ -104,7 +104,7 @@
                   <Image url="@../../images/welcome.png" />
                </image>
             </ImageView>
-            <Text fill="#306ebd" layoutX="9.0" layoutY="63.9912109375" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="May" wrappingWidth="176.48748779296875">
+            <Text fx:id="fullNameText" fill="#306ebd" layoutX="9.0" layoutY="63.9912109375" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="176.48748779296875">
                <font>
                   <Font name="Tahoma" size="18.0" />
                </font>
