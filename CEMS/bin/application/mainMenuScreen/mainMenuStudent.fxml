@@ -28,7 +28,7 @@
             <Pane prefHeight="155.0" prefWidth="319.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutY="13.0" prefHeight="15.0" prefWidth="320.0" style="-fx-font-size: 20;" text="Tests" textAlignment="CENTER" textFill="#c1dfff" underline="true" />
-                  <Button alignment="BASELINE_LEFT" layoutX="6.0" layoutY="93.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" View Tests" textFill="WHITE">
+                  <Button fx:id="ViewTestBtn" alignment="BASELINE_LEFT" layoutX="6.0" layoutY="93.0" mnemonicParsing="false" onAction="#ViewTests" prefHeight="39.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" View Tests" textFill="WHITE">
                      <font>
                         <Font name="Trebuchet MS" size="25.0" />
                      </font>
@@ -43,7 +43,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" layoutY="40.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" Enter Test" textFill="WHITE">
+                  <Button fx:id="EnterTestBtn" alignment="BASELINE_LEFT" layoutY="40.0" mnemonicParsing="false" onAction="#EnterTest" prefHeight="39.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" Enter Test" textFill="WHITE">
                      <font>
                         <Font name="Trebuchet MS" size="25.0" />
                      </font>
@@ -75,7 +75,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Button alignment="BASELINE_LEFT" layoutX="5.0" layoutY="25.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" View Reports" textFill="WHITE">
+                  <Button fx:id="ViewReportsBtn" alignment="BASELINE_LEFT" layoutX="5.0" layoutY="25.0" mnemonicParsing="false" onAction="#ViewReports" prefHeight="48.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" View Reports" textFill="WHITE">
                      <font>
                         <Font name="Trebuchet MS" size="25.0" />
                      </font>

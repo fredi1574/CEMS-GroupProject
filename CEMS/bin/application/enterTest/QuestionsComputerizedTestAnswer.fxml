@@ -33,7 +33,7 @@
                   <Image url="@../../images/icons8-person-16.png" />
                </image>
             </ImageView>
-            <Text fill="#3b3131" layoutX="792.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true" wrappingWidth="52.798828125">
+            <Text fx:id="fullNameText" fill="#3b3131" layoutX="792.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true" wrappingWidth="52.798828125">
                <font>
                   <Font name="Trebuchet MS" size="12.0" />
                </font>

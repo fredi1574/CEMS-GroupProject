@@ -5,9 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import util.ExitButton;
-import util.MinimizeButton;
-import util.ScreenManager;
+import util.*;
 
 public class mainMenuStudentController {
     @FXML
@@ -19,8 +17,15 @@ public class mainMenuStudentController {
         ScreenManager.dragAndDrop(header);
         fullNameText.setText(Client.user.getFullName());
     }
+    public void EnterTest(ActionEvent event) {
+        ScreenManager.goToNewScreen(event, PathConstants.EnterCodeForTestStudent);
+    }
+    public void ViewTests(ActionEvent event) {//todo
+    }
+    public void ViewReports(ActionEvent event) {//todo
+    }
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/loginWindowScreen/LoginWindow.fxml");
+        LogOut.logOutToLoginScreen(event);
     }
 
     @FXML

@@ -32,7 +32,7 @@
                   <Image url="@../../images/icons8-person-16.png" />
                </image>
             </ImageView>
-            <Text fill="#3b3131" layoutX="792.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true" wrappingWidth="52.798828125">
+            <Text fx:id="fullNameText" fill="#3b3131" layoutX="792.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true" wrappingWidth="52.798828125">
                <font>
                   <Font name="Trebuchet MS" size="12.0" />
                </font>
@@ -85,19 +85,19 @@
                   </VBox>
                   <VBox prefHeight="111.0" prefWidth="129.0">
                      <children>
-                        <TextField prefHeight="24.0" prefWidth="127.0" promptText="Test ID" styleClass="scroll-bar">
+                        <TextField fx:id="TestIdText" prefHeight="24.0" prefWidth="127.0" promptText="Test ID" styleClass="scroll-bar">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
                         </TextField>
                         <HBox prefHeight="25.0" prefWidth="86.0" />
-                        <TextField prefHeight="24.0" prefWidth="86.0" promptText="Studen ID" styleClass="scroll-bar">
+                        <TextField fx:id="StudentIDText" prefHeight="24.0" prefWidth="86.0" promptText="Student ID" styleClass="scroll-bar">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
                         </TextField>
                         <HBox prefHeight="25.0" prefWidth="86.0" />
-                        <TextField prefHeight="24.0" prefWidth="86.0" promptText="Number Questions" styleClass="scroll-bar">
+                        <TextField fx:id="NumberText" prefHeight="24.0" prefWidth="86.0" promptText="Number Questions" styleClass="scroll-bar">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
@@ -106,7 +106,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Button layoutX="341.0" layoutY="107.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="70.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="Approve ID">
+            <Button layoutX="341.0" layoutY="107.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="82.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="Approve ID">
                <font>
                   <Font size="11.0" />
                </font>
@@ -134,7 +134,7 @@
                            </font>
                         </Label>
                         <HBox prefHeight="18.0" prefWidth="294.0" />
-                        <Label alignment="BASELINE_CENTER" prefHeight="20.0" prefWidth="152.0" text="Time reamaining:">
+                        <Label fx:id="TimeRemainingText" alignment="BASELINE_CENTER" prefHeight="20.0" prefWidth="152.0" text="Time remaining:">
                            <font>
                               <Font name="Trebuchet MS Bold" size="17.0" />
                            </font>
@@ -143,11 +143,11 @@
                   </VBox>
                   <VBox prefHeight="144.0" prefWidth="291.0">
                      <children>
-                        <TextField prefHeight="21.0" prefWidth="138.0" />
+                        <TextField fx:id="StartTimeText" prefHeight="21.0" prefWidth="138.0" />
                         <HBox prefHeight="9.0" prefWidth="148.0" />
-                        <TextField prefHeight="21.0" prefWidth="138.0" />
+                        <TextField fx:id="EndTimeText" prefHeight="21.0" prefWidth="138.0" />
                         <HBox prefHeight="9.0" prefWidth="148.0" />
-                        <TextField prefHeight="21.0" prefWidth="148.0" />
+                        <TextField fx:id="TimeRem" prefHeight="21.0" prefWidth="148.0" />
                      </children>
                   </VBox>
                </children>
@@ -165,10 +165,10 @@
                <font>
                   <Font size="13.0" />
                </font></Text>
-            <TextArea prefHeight="76.0" prefWidth="753.0" text="Test's comments" />
+            <TextArea fx:id="TestComments" prefHeight="76.0" prefWidth="753.0" text="Test's comments" />
          </children>
       </VBox>
-      <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="807.0" layoutY="462.0">
+      <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="807.0" layoutY="462.0" onDragDetected="#NextBtn">
          <image>
             <Image url="@../../images/next.png" />
          </image>

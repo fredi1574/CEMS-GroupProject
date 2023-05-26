@@ -36,7 +36,7 @@
             </Pane>
             <Button layoutX="479.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
             <Button layoutX="443.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
-            <Text fill="#306ebd" layoutX="293.0" layoutY="56.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello May" wrappingWidth="181.48748779296875">
+            <Text fx:id="fullNameText" fill="#306ebd" layoutX="293.0" layoutY="56.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello " wrappingWidth="181.48748779296875">
                <font>
                   <Font name="Tahoma" size="23.0" />
                </font>

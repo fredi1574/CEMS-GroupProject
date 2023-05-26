@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import util.ExitButton;
+import util.LogOut;
 import util.MinimizeButton;
 import util.ScreenManager;
 
@@ -21,7 +22,7 @@ public class mainMenuHeadOfDepartmentController {
         fullNameText.setText(Client.user.getFullName());
     }
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, "/application/loginWindowScreen/LoginWindow.fxml");
+        LogOut.logOutToLoginScreen(event);
     }
 
     @FXML
