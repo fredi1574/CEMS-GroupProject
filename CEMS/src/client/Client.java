@@ -2,7 +2,9 @@ package client;
 
 import common.ChatIF;
 import common.MsgHandler;
+import entity.LoggedInUser;
 import entity.Subject;
+import entity.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ public class Client extends AbstractClient {
 	public List<Object> questions;
 	public List<Object> subjectList;
 	public List<Object> coursesList;
+
+	public static User user;
 	//constructor
 	public Client(String host, int port,ChatIF clientUI) {
 		super(host, port);
@@ -38,6 +42,7 @@ public class Client extends AbstractClient {
 			 case QuestionDeleted:
 				 break;
 			 case LoginSuccess:
+				 user = (User)messageFromServer.getMsg();
 				 break;
 			 case QuestionsResponse:
 				 this.questions = (List<Object>) messageFromServer.getMsg();

@@ -1,4 +1,5 @@
 package application.addAQuestionScreen;
+import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
@@ -48,11 +49,7 @@ public class AddAQuestionController {
     private Text usernameText;
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        User authenticatedUser = LoggedInUser.getAuthenticatedUser();
-        if (authenticatedUser != null) {
-            // Set the text in the usernameText element
-            usernameText.setText(authenticatedUser.getUserName());
-        }
+        usernameText.setText(Client.user.getFullName());
         createSubjectCombo(usernameText.getText());
         createCourseCombo(usernameText.getText());
 

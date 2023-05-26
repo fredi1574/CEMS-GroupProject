@@ -1,5 +1,6 @@
 package application.manageQuestionsScreen;
 
+import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
@@ -68,11 +69,7 @@ public class UpdateQuestionController {
         lecturerField.setDisable(true);
         subjectField.setDisable(true);
         idField.setDisable(true);
-        User authenticatedUser = LoggedInUser.getAuthenticatedUser();
-        if (authenticatedUser != null) {
-            // Set the text in the usernameText element
-            usernameText.setText(authenticatedUser.getUserName());
-        }
+        usernameText.setText(Client.user.getFullName());
     }
     public void setManage(Stage manageQuestions) {
         this.manageQuestions = manageQuestions;

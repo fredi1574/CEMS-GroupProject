@@ -1,9 +1,13 @@
 package application.loginWindowScreen;
 
+import client.Client;
 import client.ClientUI;
+import com.mysql.cj.log.Log;
 import common.MsgHandler;
 import common.TypeMsg;
 
+import entity.LoggedInUser;
+import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -12,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import server.MysqlConnection;
 import util.*;
 
+import java.util.ArrayList;
 
 
 
@@ -35,22 +40,23 @@ public class LoginWindowController {
     public void logIN(ActionEvent event) {
         String username = usernameField.getText();
         String password = passwordField.getText();
-
         // Check if username or password fields are empty
         if (username.isEmpty() || password.isEmpty()) {
             showError.showErrorPopup("Please enter both username and password.");
             return;
         }
-
-
+        ArrayList<String> UserToLogin = new ArrayList<>();
+        UserToLogin.add(username);
+        UserToLogin.add(password);
+        MsgHandler Login = new MsgHandler(TypeMsg.TryLogin,UserToLogin);
+        ClientUI.chat.accept(Login);
         // Authenticate user and retrieve their role
-        String role = MysqlConnection.authenticateUser(username, password);
-        if (role != null) {
+
+        if (Client.user.getRole() != null) {
 //message
-            MsgHandler Login = new MsgHandler(TypeMsg.TryLogin,null);
-            ClientUI.chat.accept(Login);
+
             // Redirect to the appropriate screen based on the user's role
-            switch (role) {
+            switch (Client.user.getRole()) {
                 case "Student":
 
                     ScreenManager.goToNewScreen(event, PathConstants.manageQuestions);

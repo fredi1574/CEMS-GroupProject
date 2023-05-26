@@ -3,9 +3,7 @@ package server;
 import common.ConnectToClients;
 import common.MsgHandler;
 import common.TypeMsg;
-import entity.Course;
-import entity.Question;
-import entity.Subject;
+import entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -150,8 +148,17 @@ public class CemsServer extends AbstractServer{
 					MysqlConnection.update(DeleteQuery);
 					client.sendToClient(new MsgHandler<>(TypeMsg.QuestionDeleted,null));
 				case TryLogin:
-					client.sendToClient(new MsgHandler<>(TypeMsg.LoginSuccess,null));
 
+					this.m = (MsgHandler<Object>) msg;
+					ArrayList<String> details = (ArrayList<String>) m.getMsg();
+					String Username = details.get(0);
+					String Password = details.get(1);
+					Object user = MysqlConnection.authenticateUser(Username, Password);
+					if (user instanceof User) {
+						client.setName(Username);
+						client.setInfo(client.getName(), ((User) user).getRole());
+					}
+					client.sendToClient(new MsgHandler<>(TypeMsg.LoginSuccess,user));
 				case  importSubjects:
 					this.m = (MsgHandler<Object>) msg;
 					this.q = (String)m.getMsg();

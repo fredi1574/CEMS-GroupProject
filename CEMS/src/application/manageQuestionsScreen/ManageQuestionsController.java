@@ -1,6 +1,7 @@
 package application.manageQuestionsScreen;
 
 import application.loginWindowScreen.LoginWindowController;
+import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
@@ -41,12 +42,8 @@ public class ManageQuestionsController {
     public void initialize() {
         System.out.println("init manage questions");
         ScreenManager.dragAndDrop(header);
-        User authenticatedUser = LoggedInUser.getAuthenticatedUser();
-        if (authenticatedUser != null) {
-            // Set the text in the usernameText element
-            usernameText.setText(authenticatedUser.getUserName());
-        }
-        MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestions,authenticatedUser.getUserName());
+        usernameText.setText(Client.user.getFullName());
+        MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestions,usernameText.getText());
         ClientUI.chat.accept(getTable);
         //creates the question table
         ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.getQuestions());

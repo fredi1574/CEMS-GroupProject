@@ -1,5 +1,6 @@
 package application.viewReportsScreen;
 
+import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
@@ -41,11 +42,7 @@ public class ViewReportsController {
     @FXML
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        User authenticatedUser = LoggedInUser.getAuthenticatedUser();
-        if (authenticatedUser != null) {
-            // Set the text in the usernameText element
-            usernameText.setText(authenticatedUser.getUserName());
-        }
+        usernameText.setText(Client.user.getFullName());
         // Temporary lists, for presentation
         ObservableList<Integer> yearList = FXCollections.observableArrayList(2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015);
         ObservableList<String> semesterList = FXCollections.observableArrayList("A", "B", "Summer");

@@ -1,6 +1,7 @@
 package client;
 
 import common.ChatIF;
+import entity.LoggedInUser;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class ClientControl implements ChatIF{
 		response = client.subjectList;
 		return  response;
 	}
+
 	//Instance methods ************************************************
 
 	/**
