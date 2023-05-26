@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane accessibleRole="HYPERLINK" cache="true" prefHeight="529.0" prefWidth="888.0" styleClass="backgroundColor" stylesheets="@../../util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.enterTest.ManualTestController">
+   <children>
+      <AnchorPane fx:id="header" prefHeight="104.0" prefWidth="888.0" styleClass="pageHeader">
+         <children>
+            <ImageView fitHeight="82.0" fitWidth="210.0" layoutX="14.0" layoutY="9.0" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/Logo_Transparent2.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="194.0" layoutY="4.0" prefHeight="91.0" prefWidth="501.0" style="-fx-text-fill: #e6eef7;" text="Manaul Test" textFill="#fafafa">
+               <font>
+                  <Font name="Trebuchet MS Bold" size="40.0" />
+               </font>
+            </Label>
+            <ImageView layoutX="787.0" layoutY="43.0">
+               <image>
+                  <Image url="@../../images/icons8-person-16.png" />
+               </image>
+            </ImageView>
+            <Text fill="#3b3131" layoutX="810.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true" wrappingWidth="52.798828125">
+               <font>
+                  <Font name="Trebuchet MS" size="12.0" />
+               </font>
+            </Text>
+            <Button layoutX="786.0" layoutY="67.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" styleClass="pageHeaderBtn" text="Logout">
+               <font>
+                  <Font name="Franklin Gothic Demi Cond" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="42.0" layoutY="153.0" prefHeight="295.0" prefWidth="451.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
+         <children>
+            <Text layoutX="19.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Algebra" wrappingWidth="97.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Button layoutX="59.0" layoutY="52.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="160.0" styleClass="regularButtons" text="Download Test">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Button>
+            <Button layoutX="59.0" layoutY="218.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="160.0" styleClass="regularButtons" text="Upload Test">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <AnchorPane layoutX="7.0" layoutY="120.0" prefHeight="104.0" prefWidth="438.0">
+               <children>
+                  <HBox prefHeight="104.0" prefWidth="438.0">
+                     <children>
+                        <VBox prefHeight="110.0" prefWidth="157.0">
+                           <children>
+                              <Label alignment="BASELINE_CENTER" prefHeight="20.0" prefWidth="167.0" text="Submission status:">
+                                 <font>
+                                    <Font name="Trebuchet MS Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="33.0" prefWidth="168.0" />
+                              <Label alignment="BASELINE_CENTER" prefHeight="20.0" prefWidth="142.0" text="File submissons:">
+                                 <font>
+                                    <Font name="Trebuchet MS Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="104.0" prefWidth="289.0">
+                           <children>
+                              <TextField prefHeight="50.0" prefWidth="233.0" />
+                              <TextField prefHeight="28.0" prefWidth="219.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="40.0" fitWidth="33.2" layoutX="19.0" layoutY="53.0">
+               <image>
+                  <Image url="@../../images/wordicon%20.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="33.2" layoutX="19.0" layoutY="220.0">
+               <image>
+                  <Image url="@../../images/uploadWordIcon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Button layoutX="9.0" layoutY="452.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
+         <graphic>
+            <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label layoutX="26.0" layoutY="502.0" prefHeight="18.0" prefWidth="31.0" text="Back" />
+      <Button layoutX="850.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
+      <Button layoutX="814.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
+      <AnchorPane layoutX="522.0" layoutY="153.0" prefHeight="118.0" prefWidth="328.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
+         <children>
+            <HBox layoutX="14.0" layoutY="14.0" prefHeight="111.0" prefWidth="299.0">
+               <children>
+                  <VBox prefHeight="148.0" prefWidth="294.0">
+                     <children>
+                        <Label alignment="BASELINE_CENTER" prefHeight="20.0" prefWidth="97.0" text="Start time:">
+                           <font>
+                              <Font name="Trebuchet MS Bold" size="17.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="18.0" prefWidth="294.0" />
+                        <Label alignment="BASELINE_CENTER" prefHeight="20.0" prefWidth="92.0" text="End time:">
+                           <font>
+                              <Font name="Trebuchet MS Bold" size="17.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="18.0" prefWidth="294.0" />
+                        <Label alignment="BASELINE_CENTER" prefHeight="20.0" prefWidth="152.0" text="Time reamaining:">
+                           <font>
+                              <Font name="Trebuchet MS Bold" size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="144.0" prefWidth="291.0">
+                     <children>
+                        <TextField prefHeight="21.0" prefWidth="138.0" />
+                        <HBox prefHeight="9.0" prefWidth="148.0" />
+                        <TextField prefHeight="21.0" prefWidth="138.0" />
+                        <HBox prefHeight="9.0" prefWidth="148.0" />
+                        <TextField prefHeight="21.0" prefWidth="148.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
