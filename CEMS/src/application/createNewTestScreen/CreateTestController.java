@@ -1,8 +1,7 @@
 package application.createNewTestScreen;
 
 
-import entity.LoggedInUser;
-import entity.User;
+import client.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
@@ -21,11 +20,8 @@ public class CreateTestController {
     private Text usernameText;
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        User authenticatedUser = LoggedInUser.getAuthenticatedUser();
-        if (authenticatedUser != null) {
-            // Set the text in the usernameText element
-            usernameText.setText(authenticatedUser.getUserName());
-        }
+        // Get the authenticated user from LoggedInUser
+        usernameText.setText(Client.user.getFullName());
     }
 
     public void BackToMenu(ActionEvent event) {
