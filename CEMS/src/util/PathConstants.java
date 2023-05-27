@@ -23,7 +23,7 @@ public class PathConstants {
     public static final String EnterCodeForTestStudent = "/application/enterTest/EnterCodePopUp.fxml";
     public static final String EnterComputerizedTestPath = "/application/enterTest/ComputerizedTest.fxml";
     public static final String StartComputerizedTestPath = "/application/enterTest/QuestionsComputerizedTestAnswer.fxml";
-
+    public static final String PickRolePath = "/application/mainMenuScreen/PickRole.fxml";
     public static final String ViewReportHeadOfDepartmentPath = "/application/viewReportsScreen/ViewReportHeadOfDepartment.fxml";
 
 }

@@ -22,7 +22,7 @@
                   <Image url="@../../images/icons8-person-16.png" />
                </image>
             </ImageView>
-            <Text fill="#3b3131" layoutX="673.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true">
+            <Text fx:id="FullNameText" fill="#3b3131" layoutX="673.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FullNameText" underline="true">
                <font>
                   <Font name="Trebuchet MS" size="12.0" />
                </font>
@@ -57,7 +57,7 @@
             <Font size="13.0" />
          </font>
       </Button>
-      <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="29.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="29.0" layoutY="419.0" onDragDetected="#goBackToPreviousScreen" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/back.png" />
          </image>

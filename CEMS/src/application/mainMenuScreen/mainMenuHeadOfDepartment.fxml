@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -140,6 +139,5 @@
             <Button minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
          </children>
       </HBox>
-      <ComboBox fx:id="RoleCombo" layoutX="328.0" layoutY="115.0" prefHeight="31.0" prefWidth="170.0" promptText="Role" />
    </children>
 </AnchorPane>

@@ -67,6 +67,9 @@ public class LoginWindowController {
 
                     ScreenManager.goToNewScreen(event,PathConstants. mainMenuHeadOfDepartPath);
                     break;
+                case "Head Of Department and Lecturer":
+                    ScreenManager.goToNewScreen(event,PathConstants. PickRolePath);
+                    break;
                 default:
                     showError.showErrorPopup("Invalid username or password.");
                     break;
