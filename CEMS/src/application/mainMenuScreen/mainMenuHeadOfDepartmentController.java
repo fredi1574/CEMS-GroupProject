@@ -5,10 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import util.ExitButton;
-import util.LogOut;
-import util.MinimizeButton;
-import util.ScreenManager;
+import util.*;
 
 public class mainMenuHeadOfDepartmentController {
 
@@ -24,7 +21,10 @@ public class mainMenuHeadOfDepartmentController {
     public void LogOut(ActionEvent event) {
         LogOut.logOutToLoginScreen(event);
     }
-
+    @FXML
+    public void ViewReportsHeadOfDepart(ActionEvent event) {
+        ScreenManager.goToNewScreen(event, PathConstants.ViewReportHeadOfDepartmentPath);
+    }
     @FXML
     private void closeClient(ActionEvent event) {
         ExitButton.closeClient(event);

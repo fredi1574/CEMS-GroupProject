@@ -98,7 +98,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Button alignment="BASELINE_LEFT" layoutY="25.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" View Reports" textFill="WHITE">
+                  <Button alignment="BASELINE_LEFT" layoutY="25.0" mnemonicParsing="false" onAction="#ViewReportsHeadOfDepart" prefHeight="48.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" View Reports" textFill="WHITE">
                      <font>
                         <Font name="Trebuchet MS" size="25.0" />
                      </font>
@@ -140,6 +140,6 @@
             <Button minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
          </children>
       </HBox>
-      <ComboBox layoutX="328.0" layoutY="115.0" prefHeight="31.0" prefWidth="170.0" promptText="Role" />
+      <ComboBox fx:id="RoleCombo" layoutX="328.0" layoutY="115.0" prefHeight="31.0" prefWidth="170.0" promptText="Role" />
    </children>
 </AnchorPane>
