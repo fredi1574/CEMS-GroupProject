@@ -45,7 +45,7 @@ public class ViewReportsController {
         // Temporary lists, for presentation
         ObservableList<Integer> yearList = FXCollections.observableArrayList(2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015);
         ObservableList<String> semesterList = FXCollections.observableArrayList("A", "B", "Summer");
-        createSubjectCombo(usernameText.getText());
+        createSubjectCombo(Client.user.getUserName());
         // Binds the data into the correct dropdown lists
         yearComboBox.setItems(yearList);
         semesterComboBox.setItems(semesterList);

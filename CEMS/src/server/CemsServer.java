@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CemsServer extends AbstractServer{
 	// This holds the list of the connected clients to the server and their status
@@ -148,11 +149,10 @@ public class CemsServer extends AbstractServer{
 					MysqlConnection.update(DeleteQuery);
 					client.sendToClient(new MsgHandler<>(TypeMsg.QuestionDeleted,null));
 				case TryLogin:
-
-					this.m = (MsgHandler<Object>) msg;
-					ArrayList<String> details = (ArrayList<String>) m.getMsg();
-					String Username = details.get(0);
-					String Password = details.get(1);
+					 m = (MsgHandler<Object>) msg;
+					List<Object> details = (List<Object>) m.getMsg();
+					String Username = (String) details.get(0);
+					String Password = (String) details.get(1);
 					Object user = MysqlConnection.authenticateUser(Username, Password);
 					if (user instanceof User) {
 						client.setName(Username);
@@ -161,43 +161,46 @@ public class CemsServer extends AbstractServer{
 					client.sendToClient(new MsgHandler<>(TypeMsg.LoginSuccess,user));
 				case  importSubjects:
 					this.m = (MsgHandler<Object>) msg;
-					this.q = (String)m.getMsg();
+					this.q = m.getMsg();
 
 					ArrayList<Subject> importSubjects = MysqlConnection.getSubjectList( "SELECT * " +
 							"FROM subject s " +
 							"JOIN lecturersubjects ls ON s.subjectID = ls.subjectID " +
 							"JOIN users u ON u.id = ls.id " +
-							"WHERE u.username = '" + q + "'");
+							"WHERE u.username = '" + q.toString() + "'");
 
 							client.sendToClient(new MsgHandler<>(TypeMsg.SubjectsimportSuccess,importSubjects));
 					break;
 
 				case  importCourses:
 					this.m = (MsgHandler<Object>) msg;
-					this.q = (String)m.getMsg();
+					this.q = m.getMsg();
 					ArrayList<Course> importCourses = MysqlConnection.getCourseList( "SELECT * " +
 						"FROM course AS c " +
 						"JOIN lecturersubjects AS ls ON c.subjectID = ls.subjectID " +
 						"JOIN users AS u ON ls.id = u.id " +
-						"WHERE u.username = '"+ q + "'");
+						"WHERE u.username = '"+ q.toString() + "'");
 
 					client.sendToClient(new MsgHandler<>(TypeMsg.CoursesimportSuccess,importCourses));
 				case  EditQuestion:
 					this.m = (MsgHandler<Object>) msg;
-					this.q = (Question)m.getMsg();
-					this.question = (Question) q;
-					String updateQuery = "UPDATE cems.questions SET question_number='" + question.getQuestion_number() + "', subject='" + question.getSubject() + "'," +
-							" courseName='" + question.getCourse_name() + "', question_text='" + question.getQuestion_text() + "'," +
-							" lecturer='" + question.getLecturer() + "', answer1='" + question.getAnswer1() + "', answer2='" + question.getAnswer2() + "', " +
-							"answer3='" + question.getAnswer3() + "', correctAnswer='" + question.getCorrectAnswer() + "', answer4='" +
-							question.getAnswer4() + "' WHERE id='" + question.getId() + "'";
+					this.q = m.getMsg();
+					if (q instanceof Question) {
+						this.question = (Question) q;
+						String updateQuery = "UPDATE cems.questions SET question_number='" + question.getQuestion_number() + "', subject='" + question.getSubject() + "'," +
+								" courseName='" + question.getCourse_name() + "', question_text='" + question.getQuestion_text() + "'," +
+								" lecturer='" + question.getLecturer() + "', answer1='" + question.getAnswer1() + "', answer2='" + question.getAnswer2() + "', " +
+								"answer3='" + question.getAnswer3() + "', correctAnswer='" + question.getCorrectAnswer() + "', answer4='" +
+								question.getAnswer4() + "' WHERE id='" + question.getId() + "'";
 
-					MysqlConnection.update(updateQuery);
-					client.sendToClient(new MsgHandler<>(TypeMsg.QuestionUpdated,null));
+						MysqlConnection.update(updateQuery);
+						client.sendToClient(new MsgHandler<>(TypeMsg.QuestionUpdated, null));
+					}
 					break;
 				case  AddNewQuestion:
 					this.m = (MsgHandler<Object>) msg;
 					this.q = (Question)m.getMsg();
+
 					Question question = (Question) q;
 					String newQuery = "INSERT INTO cems.questions (id, subject, courseName, question_text, question_number, lecturer, answer1, answer2, answer3, correctAnswer, answer4) " +
 							"VALUES ('" + question.getId() + "', '" + question.getSubject() + "', '" + question.getCourse_name() + "', '" + question.getQuestion_text() + "', " +

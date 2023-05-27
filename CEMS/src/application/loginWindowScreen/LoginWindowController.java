@@ -15,7 +15,7 @@ import server.MysqlConnection;
 import util.*;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class LoginWindowController {
@@ -43,7 +43,7 @@ public class LoginWindowController {
             showError.showErrorPopup("Please enter both username and password.");
             return;
         }
-        ArrayList<String> UserToLogin = new ArrayList<>();
+        List<String> UserToLogin = new ArrayList<>();
         UserToLogin.add(username);
         UserToLogin.add(password);
         MsgHandler Login = new MsgHandler(TypeMsg.TryLogin,UserToLogin);
