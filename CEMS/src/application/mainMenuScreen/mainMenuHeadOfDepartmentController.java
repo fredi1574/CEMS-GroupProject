@@ -29,6 +29,20 @@ public class mainMenuHeadOfDepartmentController {
     public void ViewReportsHeadOfDepart(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.ViewReportHeadOfDepartmentPath);
     }
+
+    @FXML
+    public void ViewTestsHeadOfDepart(ActionEvent event) {
+        ScreenManager.goToNewScreen(event, PathConstants.ViewTestHeadOfDepartmentPath);
+    }
+
+
+
+    @FXML
+    public void viewQuestionsHeadOfDepart(ActionEvent event) {
+        ScreenManager.goToNewScreen(event, PathConstants.ViewQuestionsHeadOfDepartmentPath);
+    }
+
+
     @FXML
     private void closeClient(ActionEvent event) {
         ExitButton.closeClient(event);

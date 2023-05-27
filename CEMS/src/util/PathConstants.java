@@ -25,5 +25,7 @@ public class PathConstants {
     public static final String StartComputerizedTestPath = "/application/enterTest/QuestionsComputerizedTestAnswer.fxml";
     public static final String PickRolePath = "/application/mainMenuScreen/PickRole.fxml";
     public static final String ViewReportHeadOfDepartmentPath = "/application/viewReportsScreen/ViewReportHeadOfDepartment.fxml";
+    public  static final String ViewQuestionsHeadOfDepartmentPath = "/application/manageQuestionsScreen/viewQuestionHeadOfDepartment.fxml";
+    public  static final String ViewTestHeadOfDepartmentPath = "/application/createNewTestScreen/viewTestsHeadOfDepartment/viewTestsForHeadOfDepartment.fxml";
 
 }

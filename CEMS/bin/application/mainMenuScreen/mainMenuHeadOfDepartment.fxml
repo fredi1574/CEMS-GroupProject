@@ -28,7 +28,7 @@
             <Pane prefHeight="126.0" prefWidth="319.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="320.0" style="-fx-font-size: 20;" text="Tests" textAlignment="CENTER" textFill="#c1dfff" underline="true" />
-                  <Button alignment="BASELINE_LEFT" layoutY="26.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" View Tests" textFill="WHITE">
+                  <Button alignment="BASELINE_LEFT" layoutY="26.0" mnemonicParsing="false" onAction="#ViewTestsHeadOfDepart" prefHeight="39.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" View Tests" textFill="WHITE">
                      <font>
                         <Font name="Trebuchet MS" size="25.0" />
                      </font>
@@ -70,7 +70,7 @@
                         <Font name="Trebuchet MS" size="18.0" />
                      </font>
                   </Label>
-                  <Button alignment="BASELINE_LEFT" layoutY="30.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" View Questions" textFill="WHITE">
+                  <Button alignment="BASELINE_LEFT" layoutY="30.0" mnemonicParsing="false" onAction="#viewQuestionsHeadOfDepart" prefHeight="48.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" View Questions" textFill="WHITE">
                      <font>
                         <Font name="Trebuchet MS" size="25.0" />
                      </font>
