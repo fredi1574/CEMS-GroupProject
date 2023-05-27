@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="521.0" prefWidth="807.0" styleClass="backgroundColor" stylesheets="@../../../util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.createNewTestScreen.viewTestsHeadOfDepartment.viewTestsForHeadOfDepartmentController">
+   <children>
+      <AnchorPane fx:id="header" prefHeight="92.0" prefWidth="807.0" styleClass="pageHeader">
+         <children>
+            <Label layoutX="346.0" layoutY="18.0" prefHeight="54.0" prefWidth="305.0" styleClass="pageHeader" text="View Test" textFill="#fafafa">
+               <font>
+                  <Font name="Trebuchet MS" size="40.0" />
+               </font>
+            </Label>
+            <ImageView layoutX="712.0" layoutY="37.0">
+               <image>
+                  <Image url="@../../../images/icons8-person-16.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="usernameText" fill="WHITE" layoutX="741.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" underline="true">
+               <font>
+                  <Font name="Trebuchet MS" size="12.0" />
+               </font>
+            </Text>
+            <Button layoutX="712.0" layoutY="58.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" styleClass="pageHeaderBtn" text="Logout">
+               <font>
+                  <Font name="Franklin Gothic Demi Cond" size="14.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="80.0" fitWidth="235.0" layoutX="11.0" layoutY="5.0">
+               <image>
+                  <Image url="@../../../images/Logo_Transparent2.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Button layoutX="16.0" layoutY="450.0" mnemonicParsing="false" onAction="#goBackToPreviousScreen" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label layoutX="35.0" layoutY="501.0" text="Back" />
+      <TableView fx:id="reportsTableView" layoutX="27.0" layoutY="172.0" prefHeight="266.0" prefWidth="755.0" />
+      <Button layoutX="773.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
+      <Button layoutX="737.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
+      <HBox alignment="CENTER" layoutX="27.0" layoutY="92.0" prefHeight="61.0" prefWidth="755.0" spacing="20.0">
+         <children>
+            <ComboBox prefHeight="40.0" prefWidth="200.0" promptText="Select Subject" />
+            <ComboBox prefHeight="40.0" prefWidth="200.0" promptText="Select Course">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ComboBox>
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="Show Tests" />
+         </children>
+      </HBox>
+      <Label layoutX="28.0" layoutY="152.0" text="*Double click on a Test to open the full information about the test." />
+   </children>
+</AnchorPane>
