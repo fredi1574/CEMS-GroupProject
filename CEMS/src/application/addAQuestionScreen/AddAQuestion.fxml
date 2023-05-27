@@ -37,20 +37,20 @@
         </Text>
     </AnchorPane>
     <AnchorPane layoutY="87.0" prefHeight="117.0" prefWidth="808.0" styleClass="backgroundColor">
-      <children>
-         <ComboBox fx:id="subjectCombo" layoutX="163.0" layoutY="39.0" prefWidth="150.0" />
-         <Label layoutX="98.0" layoutY="36.0" prefHeight="33.0" prefWidth="92.0" text="Subject:">
-            <font>
-               <Font name="Trebuchet MS Bold" size="15.0" />
-            </font>
-         </Label>
-         <Label layoutX="404.0" layoutY="36.0" prefHeight="33.0" prefWidth="92.0" text="Course:">
-            <font>
-               <Font name="Trebuchet MS Bold" size="15.0" />
-            </font>
-         </Label>
-         <ComboBox fx:id="CourseCombo" layoutX="463.0" layoutY="39.0" prefWidth="150.0" />
-      </children>
+        <children>
+            <ComboBox fx:id="subjectCombo" layoutX="163.0" layoutY="39.0" prefWidth="150.0" />
+            <Label layoutX="98.0" layoutY="36.0" prefHeight="33.0" prefWidth="92.0" text="Subject:">
+                <font>
+                    <Font name="Trebuchet MS Bold" size="15.0" />
+                </font>
+            </Label>
+            <Label layoutX="404.0" layoutY="36.0" prefHeight="33.0" prefWidth="92.0" text="Course:">
+                <font>
+                    <Font name="Trebuchet MS Bold" size="15.0" />
+                </font>
+            </Label>
+            <ComboBox fx:id="CourseCombo" layoutX="463.0" layoutY="39.0" prefWidth="150.0" />
+        </children>
     </AnchorPane>
     <Separator layoutY="192.0" prefHeight="14.0" prefWidth="808.0" />
     <AnchorPane layoutX="-2.0" layoutY="241.0" minHeight="0.0" minWidth="0.0" prefHeight="484.0" prefWidth="807.0">
@@ -114,14 +114,24 @@
             <Insets left="10.0" />
         </padding>
     </TextField>
-   <Label layoutX="270.0" layoutY="733.0" prefHeight="33.0" prefWidth="132.0" text="Correct Answer:">
-      <font>
-         <Font name="Trebuchet MS Bold" size="15.0" />
-      </font>
-   </Label>
-   <TextField fx:id="CorrectAnswer" layoutX="390.0" layoutY="737.0" prefHeight="24.0" prefWidth="33.0" style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;">
-      <padding>
-         <Insets left="10.0" />
-      </padding>
-   </TextField>
+    <Label layoutX="270.0" layoutY="733.0" prefHeight="33.0" prefWidth="132.0" text="Correct Answer:">
+        <font>
+            <Font name="Trebuchet MS Bold" size="15.0" />
+        </font>
+    </Label>
+    <TextField fx:id="CorrectAnswer" layoutX="390.0" layoutY="737.0" prefHeight="24.0" prefWidth="33.0" style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;">
+        <padding>
+            <Insets left="10.0" />
+        </padding>
+    </TextField>
+    <Label layoutX="467.0" layoutY="207.0" prefHeight="33.0" prefWidth="92.0" text="Question ID:">
+        <font>
+            <Font name="Trebuchet MS Bold" size="15.0" />
+        </font>
+    </Label>
+    <TextField fx:id="questionID" layoutX="566.0" layoutY="211.0" prefHeight="24.0" prefWidth="160.0" style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;">
+        <padding>
+            <Insets left="10.0" />
+        </padding>
+    </TextField>
 </AnchorPane>

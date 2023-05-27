@@ -197,16 +197,24 @@ public class CemsServer extends AbstractServer{
 						client.sendToClient(new MsgHandler<>(TypeMsg.QuestionUpdated, null));
 					}
 					break;
+				case GetAllQuestions:
+					this.m = (MsgHandler<Object>) msg;
+					this.q = (String)m.getMsg();
+					ArrayList<Question> allQuestions = MysqlConnection.getQuestionsTable("SELECT * FROM questions");
+					client.sendToClient(new MsgHandler<>(TypeMsg.allQuestionImported,allQuestions));
+
 				case  AddNewQuestion:
 					this.m = (MsgHandler<Object>) msg;
 					this.q = (Question)m.getMsg();
-
 					Question question = (Question) q;
-					String newQuery = "INSERT INTO cems.questions (id, subject, courseName, question_text, question_number, lecturer, answer1, answer2, answer3, correctAnswer, answer4) " +
-							"VALUES ('" + question.getId() + "', '" + question.getSubject() + "', '" + question.getCourse_name() + "', '" + question.getQuestion_text() + "', " +
-							"'" + question.getQuestion_number() + "', '" + question.getLecturer() + "', '" + question.getAnswer1() + "', '" + question.getAnswer2() + "', " +
-							"'" + question.getAnswer3() + "', '" + question.getCorrectAnswer() + "', '" + question.getAnswer4() + "')";
-					MysqlConnection.update(newQuery);
+					try {
+						String newQuery = "INSERT INTO cems.questions (id, subject, courseName, question_text, question_number, lecturer, answer1, answer2, answer3, correctAnswer, answer4) " +
+								"VALUES ('" + question.getId() + "', '" + question.getSubject() + "', '" + question.getCourse_name() + "', '" + question.getQuestion_text() + "', " +
+								"'" + question.getQuestion_number() + "', '" + question.getLecturer() + "', '" + question.getAnswer1() + "', '" + question.getAnswer2() + "', " +
+								"'" + question.getAnswer3() + "', '" + question.getCorrectAnswer() + "', '" + question.getAnswer4() + "')";
+						MysqlConnection.update(newQuery);
+					}catch (Exception e)
+					{}
 					client.sendToClient(new MsgHandler<>(TypeMsg.QuestionAddedSuccessfuly,null));
 					break;
 

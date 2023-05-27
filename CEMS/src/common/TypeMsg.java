@@ -1,8 +1,8 @@
 package common;
 
 public enum TypeMsg {
-	
-	
+
+
 	Disconnected {
 		public String toString() {
 			return "Disconnected";
@@ -19,12 +19,16 @@ public enum TypeMsg {
 //		}
 	},GetQuestions {
 		public String toString() {
-			return "User asked table questions";
+			return "User asked for specific table questions";
 		}
 	},QuestionsResponse {
 		public String toString() {
 			return "Here is the questions table";
 		}
+	},GetAllQuestions{
+		public String toString() { return "User asked for all questions"; }
+	},allQuestionImported{
+		public String toString() { return "imported all questions successfully "; }
 	},TryLogin {
 		public String toString() {
 			return "new user try to login.";
@@ -32,6 +36,10 @@ public enum TypeMsg {
 	},LoginSuccess {
 		public String toString() {
 			return "new user logged into the system.";
+		}
+	},LoginFailed {
+		public String toString() {
+			return "new user failed to login into the system.";
 		}
 	},importSubjects {
 		public String toString() {
@@ -77,8 +85,8 @@ public enum TypeMsg {
 		}
 	},QuestionUpdated {
 		public String toString() {
-		return "User updated a question ";
-	}
+			return "User updated a question ";
+		}
 	}
 
 

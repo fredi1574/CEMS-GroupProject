@@ -17,6 +17,7 @@ public class Client extends AbstractClient {
 	public List<Object> questions;
 	public List<Object> subjectList;
 	public List<Object> coursesList;
+	public List<Object> allQuestions;
 
 	public static User user;
 	//constructor
@@ -38,6 +39,10 @@ public class Client extends AbstractClient {
 			case Disconnected:
 				System.exit(0);
 				break;
+			 case allQuestionImported:
+				 this.allQuestions = (List<Object>) messageFromServer.getMsg();
+				 break;
+
 			 case QuestionDeleted:
 				 break;
 			 case LoginSuccess:
