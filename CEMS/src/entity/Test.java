@@ -2,7 +2,7 @@ package entity;
 
 import java.util.ArrayList;
 
-public class Exam {
+public class Test {
 
     String id;
     String dateOfExam;
@@ -26,7 +26,7 @@ public class Exam {
      * @param questions    The list of questions in the exam.
      * @param startingTime The starting time of the exam.
      */
-    public Exam(String id, String dateOfExam, String timeInMinutes, String author, String subject, String course, ArrayList<ExamQuestion> questions, String startingTime) {
+    public Test(String id, String dateOfExam, String timeInMinutes, String author, String subject, String course, ArrayList<ExamQuestion> questions, String startingTime) {
         this.id = id;
         this.dateOfExam = dateOfExam;
         this.timeInMinutes = timeInMinutes;

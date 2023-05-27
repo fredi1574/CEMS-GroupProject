@@ -74,8 +74,6 @@ public class LoginWindowController {
                     showError.showErrorPopup("Invalid username or password.");
                     break;
             }
-        } else {
-            showError.showErrorPopup("Invalid username or password.");
         }
     }
 

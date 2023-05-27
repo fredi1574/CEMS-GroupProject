@@ -174,6 +174,9 @@ public class MysqlConnection {
 
 					return user;
 				}
+				else {
+					return null;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

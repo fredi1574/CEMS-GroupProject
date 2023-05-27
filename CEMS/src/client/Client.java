@@ -4,6 +4,7 @@ import common.ChatIF;
 import common.MsgHandler;
 import entity.Subject;
 import entity.User;
+import util.showError;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,9 +49,11 @@ public class Client extends AbstractClient {
 			 case LoginSuccess:
 				 user = (User)messageFromServer.getMsg();
 				 break;
+			 case LoginFailed:
+				 showError.showErrorPopup("Invalid username or password.");
+				 break;
 			 case QuestionsResponse:
 				 this.questions = (List<Object>) messageFromServer.getMsg();
-
 				 break;
 			 case SubjectsimportSuccess:
 				 this.subjectList = (List<Object>) messageFromServer.getMsg();

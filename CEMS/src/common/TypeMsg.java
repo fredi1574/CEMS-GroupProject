@@ -47,11 +47,11 @@ public enum TypeMsg {
 		}
 	},SubjectsimportSuccess {
 		public String toString() {
-			return "import Successfully";
+			return "import subjects Successfully";
 		}
 	},CoursesimportSuccess {
 		public String toString() {
-			return "import Successfully";
+			return "import courses Successfully";
 		}
 	},importCourses {
 		public String toString() {

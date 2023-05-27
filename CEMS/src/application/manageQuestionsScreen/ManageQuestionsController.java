@@ -39,7 +39,6 @@ public class ManageQuestionsController {
     public static ManageQuestionsController ManageQuestionsControl;
     @FXML
     public void initialize() {
-        System.out.println("init manage questions");
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getFullName());
         MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestions,Client.user.getUserName());
