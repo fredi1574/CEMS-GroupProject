@@ -17,7 +17,10 @@ import javafx.scene.text.Text;
 import javafx.scene.layout.AnchorPane;
 import util.*;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class AddAQuestionController {
@@ -227,12 +230,25 @@ public class AddAQuestionController {
      * @return The first free index.
      */
     public int findFirstFreeIndex(List<Question> questionTableList) {
-        //if the test table is empty
         if (questionTableList.isEmpty()) {
             return 1;
         }
-        //if hadn't found a free index, returns the last index of the table
-        return questionTableList.size() + 1;
+
+        Set<Integer> indexSet = new HashSet<>();
+        for (Question question : questionTableList) {
+            indexSet.add(Integer.parseInt(question.getQuestion_number()));
+        }
+
+        int minIndex = Collections.min(indexSet);
+        int maxIndex = Collections.max(indexSet);
+
+        for (int i = 1; i <= maxIndex; i++) {
+            if (!indexSet.contains(i)) {
+                return i;
+            }
+        }
+
+        return maxIndex + 1;
     }
 
     /**
