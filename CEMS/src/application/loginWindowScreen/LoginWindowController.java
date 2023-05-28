@@ -27,13 +27,21 @@ public class LoginWindowController {
     @FXML
     private PasswordField passwordField;
 
-    // This method is called when the FXML file is loaded
+    /**
+     * This method is called when the FXML file is loaded.
+     * It enables dragging and dropping of the application window using the header pane.
+     */
     public void initialize() {
-        // Enables dragging and dropping of the application window using the header pane
         ScreenManager.dragAndDrop(header);
     }
 
-    // Event handler for login button click
+    /**
+     * Event handler for login button click.
+     * Authenticates the user and redirects to the appropriate screen based on the user's role.
+     * If the username or password fields are empty, it displays an error message.
+     * If the authentication fails, it displays an error message.
+     * @param event The event triggered by the login button click.
+     */
     @FXML
     public void logIN(ActionEvent event) {
         String username = usernameField.getText();
@@ -73,24 +81,33 @@ public class LoginWindowController {
         } catch (NullPointerException e) {
             showError.showErrorPopup("Wrong password or username");
         }
-
     }
 
-        // Event handler for text click
-        public void handleTextClick () {
-            // Show an information dialog with a message
-            showError.showInfoPopup("To reset password, please contact our admin.");
-        }
-        // Event handler for close button click
-        @FXML
-        private void closeClient (ActionEvent event){
-            // Close the application window
-            ExitButton.closeClient(event);
-        }
-        // Event handler for minimize button click
-        @FXML
-        public void minimizeWindow (ActionEvent event){
-            // Minimize the application window
-            MinimizeButton.minimizeWindow(event);
-        }
+    /**
+     * Event handler for text click.
+     * Displays an information dialog with a message to contact the admin for password reset.
+     */
+    public void handleTextClick() {
+        showError.showInfoPopup("To reset password, please contact our admin.");
     }
+
+    /**
+     * Event handler for close button click.
+     * Closes the application window.
+     * @param event The event triggered by the close button click.
+     */
+    @FXML
+    private void closeClient(ActionEvent event) {
+        ExitButton.closeClient(event);
+    }
+
+    /**
+     * Event handler for minimize button click.
+     * Minimizes the application window.
+     * @param event The event triggered by the minimize button click.
+     */
+    @FXML
+    public void minimizeWindow(ActionEvent event) {
+        MinimizeButton.minimizeWindow(event);
+    }
+}

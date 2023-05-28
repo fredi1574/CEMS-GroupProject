@@ -1,45 +1,69 @@
 package entity;
 
-import java.util.ArrayList;
+import javafx.collections.ObservableList;
 
-public class Test {
+import java.io.Serializable;
+import java.util.Observable;
 
-    String id;
-    String dateOfExam;
-    String timeInMinutes;
-    String author;
-    String subject;
-    String course;
-    String startingTime;
-    String teacherComment = " ";
-    ArrayList<ExamQuestion> questions = new ArrayList<ExamQuestion>();
+public class Test extends Observable implements Serializable {
+    private String id;
+    private int testNumber;
+    private String author;
+    private String testDuration;
+    private String dateOfTest;
+    private String startingTime;
+    private String subject;
+    private String courseName;
+    private String teacherComments;
+    private String studentComments;
+    private TestTypeEnum testType;
 
-    /**
-     * Constructs an Exam object with the provided details.
-     *
-     * @param id           The ID of the exam.
-     * @param dateOfExam   The date of the exam.
-     * @param timeInMinutes The duration of the exam in minutes.
-     * @param author       The author of the exam.
-     * @param subject      The subject of the exam.
-     * @param course       The course of the exam.
-     * @param questions    The list of questions in the exam.
-     * @param startingTime The starting time of the exam.
-     */
-    public Test(String id, String dateOfExam, String timeInMinutes, String author, String subject, String course, ArrayList<ExamQuestion> questions, String startingTime) {
+    private ObservableList<TestQuestion> questions;
+
+    //constructor for step 1 of test creation - adding test details
+    public Test(int testNumber, String id, String subject, String courseName, String author) {
+        this.testNumber = testNumber;
         this.id = id;
-        this.dateOfExam = dateOfExam;
-        this.timeInMinutes = timeInMinutes;
-        this.author = author;
         this.subject = subject;
-        this.course = course;
-        this.startingTime = startingTime;
-        this.questions.addAll(questions);
-        if (questions.size() != 0)
-            this.teacherComment = questions.get(0).getTeacherComment();
+        this.courseName = courseName;
+        this.author = author;
     }
 
-    // Getters and Setters
+    //constructor for step 2 of test creation - adding test questions
+    public Test(int testNumber, String id, String subject, String courseName, String author, ObservableList<TestQuestion> questions, String teacherComments, String studentComments) {
+        this.testNumber = testNumber;
+        this.id = id;
+        this.subject = subject;
+        this.courseName = courseName;
+        this.author = author;
+        this.questions = questions;
+        this.teacherComments = teacherComments;
+        this.studentComments = studentComments;
+    }
+
+    //constructor for fully created test
+    public Test(int testNumber, String id, String author, String testDuration, String dateOfTest, String courseName,
+                String teacherComments, TestTypeEnum TestType, String studentComments, String startingTime, String subject) {
+        this.id = id;
+        this.testNumber = testNumber;
+        this.author = author;
+        this.testDuration = testDuration;
+        this.dateOfTest = dateOfTest;
+        this.courseName = courseName;
+        this.teacherComments = teacherComments;
+        this.testType = TestType;
+        this.studentComments = studentComments;
+        this.startingTime = startingTime;
+        this.subject = subject;
+    }
+
+    public ObservableList<TestQuestion> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(ObservableList<TestQuestion> questions) {
+        this.questions = questions;
+    }
 
     public String getId() {
         return id;
@@ -49,20 +73,12 @@ public class Test {
         this.id = id;
     }
 
-    public String getDateOfExam() {
-        return dateOfExam;
+    public int getTestNumber() {
+        return testNumber;
     }
 
-    public void setDateOfExam(String dateOfExam) {
-        this.dateOfExam = dateOfExam;
-    }
-
-    public String getTimeInMinutes() {
-        return timeInMinutes;
-    }
-
-    public void setTimeInMinutes(String timeInMinutes) {
-        this.timeInMinutes = timeInMinutes;
+    public void setTestNumber(int testNumber) {
+        this.testNumber = testNumber;
     }
 
     public String getAuthor() {
@@ -73,6 +89,62 @@ public class Test {
         this.author = author;
     }
 
+    public String getTestDuration() {
+        return testDuration;
+    }
+
+    public void setTestDuration(String testDuration) {
+        this.testDuration = testDuration;
+    }
+
+    public String getDateOfTest() {
+        return dateOfTest;
+    }
+
+    public void setDateOfTest(String dateOfTest) {
+        this.dateOfTest = dateOfTest;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public String getTeacherComments() {
+        return teacherComments;
+    }
+
+    public void setTeacherComments(String teacherComments) {
+        this.teacherComments = teacherComments;
+    }
+
+    public TestTypeEnum getTestType() {
+        return testType;
+    }
+
+    public void setTestType(TestTypeEnum testType) {
+        this.testType = testType;
+    }
+
+    public String getStudentComments() {
+        return studentComments;
+    }
+
+    public void setStudentComment(String studentComment) {
+        this.studentComments = studentComment;
+    }
+
+    public String getStartingTime() {
+        return startingTime;
+    }
+
+    public void setStartingTime(String startingTime) {
+        this.startingTime = startingTime;
+    }
+
     public String getSubject() {
         return subject;
     }
@@ -81,41 +153,20 @@ public class Test {
         this.subject = subject;
     }
 
-    public String getCourse() {
-        return course;
+    @Override
+    public String toString() {
+        return "Test{" +
+                "id='" + id + '\'' +
+                ", testNum='" + testNumber + '\'' +
+                ", author='" + author + '\'' +
+                ", testDuration='" + testDuration + '\'' +
+                ", dateOfTest='" + dateOfTest + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", teacherComment='" + teacherComments + '\'' +
+                ", testType='" + testType + '\'' +
+                ", studentComment='" + studentComments + '\'' +
+                ", startingTime='" + startingTime + '\'' +
+                ", subject='" + subject + '\'' +
+                '}';
     }
-
-    public void setCourse(String course) {
-        this.course = course;
-    }
-
-    public ArrayList<ExamQuestion> getQuestions() {
-        return this.questions;
-    }
-
-    public void setQuestions(ArrayList<ExamQuestion> questions) {
-        this.questions = questions;
-    }
-
-    /**
-     * Returns a string representation of the Exam object.
-     *
-     * @return The string representation of the Exam object.
-     */
-
-	public String toString() {
-		return "examID: " + this.id + "dateOfExam: " + this.dateOfExam + "examDuration: " + this.timeInMinutes + "examComposer: " + this.author + "examSubject: " + this.subject + "examCourse: " + this.course + "startingTime: " + this.startingTime;
-	}
-
-	public String getStartingTime() {
-		return startingTime;
-	}
-
-	public void setStartingTime(String startingTime) {
-		this.startingTime = startingTime;
-	}
-
-	public String getTeacherComment() {
-		return teacherComment;
-	}
 }

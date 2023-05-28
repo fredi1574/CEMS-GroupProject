@@ -1,4 +1,5 @@
 package application.addAQuestionScreen;
+
 import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
@@ -56,6 +57,11 @@ public class AddAQuestionController {
     public static ObservableList<Course> coursesList;
 
 
+    /**
+     * This method is called when the FXML file is loaded.
+     * It initializes the necessary components, sets event listeners,
+     * and retrieves subject and course information from the server.
+     */
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getFullName());
@@ -74,6 +80,10 @@ public class AddAQuestionController {
         checkFieldsAndExecuteActions();
     }
 
+    /**
+     * Checks if both subject and course fields are selected,
+     * and executes actions accordingly.
+     */
     private void checkFieldsAndExecuteActions() {
         if (!subjectCombo.getSelectionModel().isEmpty() && !CourseCombo.getSelectionModel().isEmpty()) {
             setQuestionID();
@@ -81,11 +91,17 @@ public class AddAQuestionController {
             questionID.setVisible(true);
         }
     }
+
+    /**
+     * Retrieves subject information from the server and populates the subject combo box.
+     *
+     * @param username The username of the user.
+     */
     private void createSubjectCombo(String username) {
         MsgHandler getSubject = new MsgHandler(TypeMsg.importSubjects, username);
         ClientUI.chat.accept(getSubject);
         List<Object> subjectObjectsList = ClientUI.chat.getSubjects();
-        ObservableList<Subject>subjectsList = FXCollections.observableArrayList((List) subjectObjectsList);
+        ObservableList<Subject> subjectsList = FXCollections.observableArrayList((List) subjectObjectsList);
         ObservableList<String> subjectNames = FXCollections.observableArrayList();
 
         for (Subject subject : subjectsList) {
@@ -94,6 +110,12 @@ public class AddAQuestionController {
         }
         subjectCombo.setItems(subjectNames);
     }
+
+    /**
+     * Retrieves course information from the server and populates the course combo box.
+     *
+     * @param username The username of the user.
+     */
     private void createCourseCombo(String username) {
         MsgHandler getCourses = new MsgHandler(TypeMsg.importCourses, username);
         ClientUI.chat.accept(getCourses);
@@ -107,8 +129,14 @@ public class AddAQuestionController {
         }
         CourseCombo.setItems(courseNames);
     }
+
+    /**
+     * Checks if all required fields are filled.
+     *
+     * @return true if all fields are filled, false otherwise.
+     */
     public boolean areAllFieldsFilled() {
-        return  !CourseCombo.getSelectionModel().isEmpty() &&
+        return !CourseCombo.getSelectionModel().isEmpty() &&
                 !subjectCombo.getSelectionModel().isEmpty() &&
                 !questionNumber.getText().isEmpty() &&
                 !questionTextField.getText().isEmpty() &&
@@ -118,6 +146,13 @@ public class AddAQuestionController {
                 !answer4.getText().isEmpty() &&
                 !CorrectAnswer.getText().isEmpty();
     }
+
+    /**
+     * Checks the validity of the data entered in the fields.
+     * Displays error messages if the data is invalid.
+     *
+     * @return true if the data is valid, false otherwise.
+     */
     private boolean checkValidData() {
         if (!(areAllFieldsFilled())) {
             showError.showErrorPopup("Not all fields are filled!");
@@ -133,47 +168,65 @@ public class AddAQuestionController {
         }
         return true;
     }
+
+    /**
+     * Saves the entered question data and adds a new question.
+     * Displays a success message and navigates back to the main menu.
+     *
+     * @param event The event triggered by the save button click.
+     */
     @FXML
     private void saveData(ActionEvent event) {
         String Subject = subjectCombo.getSelectionModel().getSelectedItem().toString();
         String Course = CourseCombo.getSelectionModel().getSelectedItem().toString();
-        if (!checkValidData()){return;}
-        Question newQuestion= new Question(
+        if (!checkValidData()) {
+            return;
+        }
+        Question newQuestion = new Question(
                 questionNumber.getText(),
                 QuestionID,
                 questionTextField.getText(),
                 usernameText.getText(),
-                Subject.substring(Subject.indexOf("-")+1),
+                Subject.substring(Subject.indexOf("-") + 1),
                 Course,
                 answer1.getText(),
                 answer2.getText(),
                 answer3.getText(),
                 answer4.getText(),
                 CorrectAnswer.getText()
-
         );
         MsgHandler addNewQuestion = new MsgHandler(TypeMsg.AddNewQuestion, newQuestion);
         ClientUI.chat.accept(addNewQuestion);
         showError.showInfoPopup("Added question successfully");
         ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
     }
+
+    /**
+     * Sets the question ID based on the selected subject and course.
+     */
     public void setQuestionID() {
         String Subject = subjectCombo.getSelectionModel().getSelectedItem().toString();
         String Course = CourseCombo.getSelectionModel().getSelectedItem().toString();
         MsgHandler getQuestionTable = new MsgHandler(TypeMsg.GetAllQuestions, null);
         ClientUI.chat.accept(getQuestionTable);
-        List<Question> questions =((List) ClientUI.chat.getAllOfQuestions());
-        selectedCourse = getSelectedID(Course,CourseCombo,coursesList);
+        List<Question> questions = ((List) ClientUI.chat.getAllOfQuestions());
+        selectedCourse = getSelectedID(Course, CourseCombo, coursesList);
         newQuestionNumber = correctQuestionNumber(findFirstFreeIndex(questions));
-        QuestionID = ((Subject.substring(Subject.indexOf("-")+1)) + selectedCourse+newQuestionNumber);
+        QuestionID = ((Subject.substring(Subject.indexOf("-") + 1)) + selectedCourse + newQuestionNumber);
         System.out.println(QuestionID);
         questionNumber.setText(newQuestionNumber);
         questionID.setText(QuestionID);
         questionID.setDisable(true);
         questionNumber.setDisable(true);
     }
-    public int findFirstFreeIndex(List<Question> questionTableList) {
 
+    /**
+     * Finds the first free index in the question table list.
+     *
+     * @param questionTableList The list of questions.
+     * @return The first free index.
+     */
+    public int findFirstFreeIndex(List<Question> questionTableList) {
         //if the test table is empty
         if (questionTableList.isEmpty()) {
             return 1;
@@ -181,7 +234,16 @@ public class AddAQuestionController {
         //if hadn't found a free index, returns the last index of the table
         return questionTableList.size() + 1;
     }
-    public String getSelectedID(String choice,ComboBox comboBox,ObservableList<Course> listToCheck) {
+
+    /**
+     * Retrieves the ID of the selected item from the combo box.
+     *
+     * @param choice      The selected item.
+     * @param comboBox    The combo box containing the items.
+     * @param listToCheck The list to check for the item.
+     * @return The ID of the selected item.
+     */
+    public String getSelectedID(String choice, ComboBox comboBox, ObservableList<Course> listToCheck) {
         choice = comboBox.getSelectionModel().getSelectedItem().toString();
         for (Course item : listToCheck) {
             String course = item.getCourseName();
@@ -191,32 +253,57 @@ public class AddAQuestionController {
         }
         return null;
     }
-    public String correctQuestionNumber(int newQuestionIndex) {
 
+    /**
+     * Corrects the question number by adding leading zeros if necessary.
+     *
+     * @param newQuestionIndex The new question index.
+     * @return The corrected question number.
+     */
+    public String correctQuestionNumber(int newQuestionIndex) {
         if (newQuestionIndex >= 0 && newQuestionIndex < 100) {
-            if (newQuestionIndex< 10) {
+            if (newQuestionIndex < 10) {
                 return "0" + newQuestionIndex;
             }
             return String.valueOf(newQuestionIndex);
         }
-        throw new IllegalArgumentException("Test number is out of bounds: " + newQuestionIndex);
+        throw new IllegalArgumentException("Question number is out of bounds: " + newQuestionIndex);
     }
 
+    /**
+     * Navigates back to the main menu.
+     *
+     * @param event The event triggered by the back button click.
+     */
     public void BackToMenu(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
     }
 
+    /**
+     * Logs out the user and navigates back to the login screen.
+     *
+     * @param event The event triggered by the logout button click.
+     */
     public void LogOut(ActionEvent event) {
         LogOut.logOutToLoginScreen(event);
     }
 
     @FXML
+    /**
+    * Minimizes the application window.
+    * @param event The event triggered by the minimize button click.
+    */
     public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
 
     @FXML
+    /**
+    * Closes the application.
+    * @param event The event triggered by the close button click.
+    */
     public void closeClient(ActionEvent event) {
         ExitButton.closeClient(event);
     }
+
 }

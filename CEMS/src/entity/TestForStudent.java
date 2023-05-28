@@ -1,6 +1,6 @@
 package entity;
 
-public class ExamForStudent {
+public class TestForStudent {
 
 	private String studentID;
 	private String examID;
@@ -13,7 +13,7 @@ public class ExamForStudent {
 //
 	/**
 	 * Constructs a StudentExam object with the specified parameters.
-	 * 
+	 *
 	 * @param studentID             the ID of the student
 	 * @param examID                the ID of the exam
 	 * @param examType              the type of the exam
@@ -23,8 +23,8 @@ public class ExamForStudent {
 	 * @param reasonForGradeChange  the reason for grade change
 	 * @param studentAnswers        the student's answers
 	 */
-	public ExamForStudent(String studentID, String examID, String examType, String grade, String approved,
-			String noteForStudent, String reasonForGradeChange, String[] studentAnswers) {
+	public TestForStudent(String studentID, String examID, String examType, String grade, String approved,
+						  String noteForStudent, String reasonForGradeChange, String[] studentAnswers) {
 		this.studentID = studentID;
 		this.examID = examID;
 		this.examType = examType;

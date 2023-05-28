@@ -37,13 +37,21 @@ public class ManageQuestionsController {
     private Text usernameText;
 
     public static ManageQuestionsController ManageQuestionsControl;
+
+    /**
+     * Initializes the manage questions screen.
+     * Enables dragging and dropping of the application window using the header pane.
+     * Retrieves the questions from the server and populates the question table.
+     * Sets up filtering and searching functionality for the table.
+     */
     @FXML
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getFullName());
-        MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestions,Client.user.getUserName());
+        MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestions, Client.user.getUserName());
         ClientUI.chat.accept(getTable);
-        //creates the question table
+
+        // Creates the question table
         ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.getQuestions());
         ObservableList<String> columns = FXCollections.observableArrayList();
         columns.addAll("Question Number", "ID", "Subject", "Course Name", "Question Text", "Lecturer");
@@ -52,7 +60,8 @@ public class ManageQuestionsController {
         TableManager.addDoubleClickFunctionality(manageQuestionsTableView, PathConstants.updateQuestionPath, this::setFunctions);
         double[] multipliers = {0.15, 0.1, 0.1, 0.13, 0.35, 0.162};
         TableManager.resizeColumns(manageQuestionsTableView, multipliers);
-        //filter result as you search yay
+
+        // Filter the results as you search
         FilteredList<Question> filteredData = new FilteredList<>(questions, b -> true);
         TableManager.MakeFilterListForSearch(filteredData, searchField, Question::getQuestion_text);
 
@@ -60,6 +69,11 @@ public class ManageQuestionsController {
         sortedData.comparatorProperty().bind(manageQuestionsTableView.comparatorProperty());
         manageQuestionsTableView.setItems(sortedData);
     }
+
+    /**
+     * Sets the necessary functions for the update question screen.
+     * @param relativePath The relative path to the update question screen FXML file.
+     */
     public void setFunctions(String relativePath) {
         ScreenElements<Stage, FXMLLoader> screenElements = ScreenManager.popUpScreen(relativePath);
         FXMLLoader loader = screenElements.getFXMLLoader();
@@ -70,10 +84,8 @@ public class ManageQuestionsController {
     }
 
     /**
-     *
-     * @param event clicking "delete" on a selected row to delete a question
-     * this method deletes the question in the question table not through the DB. In order to delete the permanently delete it,
-     * "Save" button needs to be clicked.
+     * Deletes the selected question from the question table.
+     * @param event The event triggered by clicking the "Delete" button.
      */
     @FXML
     public void DeleteQuestion(ActionEvent event) {
@@ -87,30 +99,57 @@ public class ManageQuestionsController {
             }
         }
     }
+
+    /**
+     * Reloads the manage questions page.
+     */
     private void reloadPage() {
         Stage currentStage = (Stage) deleteBtn.getScene().getWindow();
         currentStage.close();
         ScreenManager.showStage(PathConstants.manageQuestions, PathConstants.iconPath);
     }
+
+    /**
+     * Logs out the user and navigates back to the login screen.
+     * @param event The event triggered by clicking the "Logout" button.
+     */
     public void LogOut(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.loginPath);
     }
 
+    /**
+     * Navigates back to the main menu screen.
+     * @param event The event triggered by clicking the "Back" button.
+     */
     public void back(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
     }
 
+    /**
+     * Navigates to the add question screen.
+     * @param event The event triggered by clicking the "Add Question" button.
+     */
     public void AddQuestion(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.addQuestionPath);
     }
+
+    /**
+     * Closes the application.
+     * @param event The event triggered by the close button click.
+     */
+    @FXML
 
     public void closeClient(ActionEvent event) {
         ExitButton.closeClient(event);
     }
 
+
+    /**
+     * Minimizes the application window.
+     * @param event The event triggered by the minimize button click.
+     */
     @FXML
     public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
-
 }

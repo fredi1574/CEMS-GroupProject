@@ -1,7 +1,7 @@
 package entity;
 
-public class ExamRequestForApproval {
-	
+public class TestRequestForApproval {
+
 	private String newDuration;
 	private String explanation;
 	private String id;
@@ -9,21 +9,21 @@ public class ExamRequestForApproval {
 	private String course;
 	/**
 	 * Constructs an ExamRequestForApproval object with the specified parameters.
-	 * 
+	 *
 	 * @param id           The ID of the exam.
 	 * @param subject      The subject of the exam.
 	 * @param course       The course of the exam.
 	 * @param newDuration  The new duration of the exam.
 	 * @param explanation  The explanation for the duration change.
 	 */
-	public ExamRequestForApproval(String id, String subject, String course, String newDuration, String explanation) {
+	public TestRequestForApproval(String id, String subject, String course, String newDuration, String explanation) {
 		this.newDuration = newDuration;
 		this.explanation = explanation;
 		this.id = id;
 		this.subject = subject;
 		this.course = course;
 	}
-	
+
 	// Getters and Setters
 
 	public String getNewDuration() {
