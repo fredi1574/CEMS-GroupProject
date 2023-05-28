@@ -158,7 +158,7 @@ public class CemsServer extends AbstractServer{
 						client.setName(Username);
 						client.setInfo(client.getName(), ((User) user).getRole());
 					}
-					client.sendToClient(new MsgHandler<>(TypeMsg.LoginSuccess,user));
+					client.sendToClient(new MsgHandler<>(TypeMsg.LoginResponse,user));
 				case  importSubjects:
 					this.m = (MsgHandler<Object>) msg;
 					this.q = m.getMsg();

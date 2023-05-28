@@ -46,11 +46,8 @@ public class Client extends AbstractClient {
 
 			 case QuestionDeleted:
 				 break;
-			 case LoginSuccess:
+			 case LoginResponse:
 				 user = (User)messageFromServer.getMsg();
-				 break;
-			 case LoginFailed:
-				 showError.showErrorPopup("Invalid username or password.");
 				 break;
 			 case QuestionsResponse:
 				 this.questions = (List<Object>) messageFromServer.getMsg();

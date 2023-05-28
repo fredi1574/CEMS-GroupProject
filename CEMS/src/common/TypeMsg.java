@@ -33,13 +33,9 @@ public enum TypeMsg {
 		public String toString() {
 			return "new user try to login.";
 		}
-	},LoginSuccess {
+	},LoginResponse {
 		public String toString() {
-			return "new user logged into the system.";
-		}
-	},LoginFailed {
-		public String toString() {
-			return "new user failed to login into the system.";
+			return "User pressed Login";
 		}
 	},importSubjects {
 		public String toString() {
@@ -58,10 +54,6 @@ public enum TypeMsg {
 			return "import Courses list for user";
 		}
 
-	},LogoutSuccess {
-		public String toString() {
-			return "user logged out from the system.";
-		}
 	},EditQuestion {
 		public String toString() {
 			return "User asked to edit question";
