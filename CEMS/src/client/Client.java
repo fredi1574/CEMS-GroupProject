@@ -19,6 +19,7 @@ public class Client extends AbstractClient {
 	public List<Object> subjectList;
 	public List<Object> coursesList;
 	public List<Object> allQuestions;
+	public List<Object> tests;
 
 	public static User user;
 	//constructor
@@ -61,7 +62,12 @@ public class Client extends AbstractClient {
 			 case SubjectsimportSuccess:
 				 this.subjectList = (List<Object>) messageFromServer.getMsg();
 				 break;
-
+			 case TestTableResponse:
+				 tests =(List<Object>) messageFromServer.getMsg();
+				 System.out.println(tests);
+				 break;
+			 case SaveTestResponse:
+				 break;
 		 }		
 	}
 

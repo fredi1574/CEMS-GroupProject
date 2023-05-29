@@ -79,9 +79,29 @@ public enum TypeMsg {
         public String toString() {
             return "import subjects Successfully";
         }
-    }
+
+    },GetTestTable{
+        public String toString() {
+            return "User Asked The Test Table";
+        }
+    },TestTableResponse{
+        public String toString() {
+            return "Here Is The Table Test";
+        }
+    }, SaveTestQuestions {
+        public String toString() { return "Lecturer asked to save the questions of test";}
+    }, TestQuestionsResponse {
+        public String toString() {return "The Questions is s saved";}
+    }, SaveTest {
+        public String toString() { return "Lecturer asked to save test"; }
+    }, SaveTestResponse {
+        public String toString() { return "The test is saved";}
+    },
 
 
 }
+
+
+
 
 

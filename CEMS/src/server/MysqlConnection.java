@@ -5,6 +5,7 @@ import entity.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -97,6 +98,44 @@ public class MysqlConnection {
 		}
 		return list;
 	}
+	public static ArrayList<Test> getTestTable(String q) {
+		System.out.println(q);
+		Statement stmt = null;
+
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		ArrayList<Test> tests = new ArrayList<>();
+		try {
+			ResultSet rs = stmt.executeQuery(q);
+			while (rs.next()) {
+				int testNumber = rs.getInt("testNumber"); // assuming your table has a column named "id" with type INT
+				String id = rs.getString("id");
+				String author = rs.getString("author");
+				String testDuration = rs.getString("testDuration");
+				String courseName = rs.getString("courseName");
+				String subject = rs.getString("subject");
+				String teacherComment = rs.getString("teacherComment");
+				String testType = rs.getString("testType");
+				String studentComment = rs.getString("studentComment");
+				String year = rs.getString("year");
+				String session = rs.getString("session");
+				String semester = rs.getString("semester");
+				TestTypeEnum testTypeEnum = (Objects.equals(testType, "C") ? TestTypeEnum.COMPUTERIZED : TestTypeEnum.MANUAL);
+				Test test = new Test(testNumber, id, author, testDuration, courseName,
+						teacherComment, testTypeEnum, studentComment,subject,year,session,semester);
+				tests.add(test);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(tests);
+		return tests;
+	}
+
 	public static ArrayList<Course> getCourseList(String q) {
 		Statement stmt = null;
 		try {

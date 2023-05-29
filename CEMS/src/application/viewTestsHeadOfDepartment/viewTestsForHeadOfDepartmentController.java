@@ -35,26 +35,36 @@ public class viewTestsForHeadOfDepartmentController {
     private TextField searchField;
     @FXML
     private ComboBox<String> SelectCourseCombo;
-
+    @FXML
+    private TableView<Test> manageTestsTableView;
+    @FXML
+    private TableView<Test> testApprovalTableView;
     @FXML
     public void initialize() {
         usernameText.setText(Client.user.getFullName());
-        // Creates the question table
+        MsgHandler getTestTable = new MsgHandler(TypeMsg.GetTestTable, null);
+        ClientUI.chat.accept(getTestTable);
 
-        //ObservableList<Test> testsBySubject = FXCollections.observableArrayList((List) ClientUI.chat.getQuestions());
+        //fetches the tests table from the database
+//        ArrayList<Object> testTableList = ClientUI.chat.getTests();
+        ObservableList<Test> tests = FXCollections.observableArrayList((List) ClientUI.chat.getTests() );
+
         ObservableList<String> columns = FXCollections.observableArrayList();
-        columns.addAll("Test Number", "ID", "Subject","Course Name", "Lecturer");
-        TableManager.createTable(reportsTableView, columns);
-        //TableManager.importData(reportsTableView, questions);
-        double[] multipliers = {0.2, 0.1, 0.2, 0.3, 0.2};
-        TableManager.resizeColumns(reportsTableView, multipliers);
-        // Filter the results as you search
-//        FilteredList<Test> filteredData = new FilteredList<>(testsBySubject, b -> true);
-//        TableManager.MakeFilterListForSearch(filteredData, searchField, Test::getId);
-//
-//        SortedList<Test> sortedData = new SortedList<>(filteredData);
-//        sortedData.comparatorProperty().bind(reportsTableView.comparatorProperty());
-//        reportsTableView.setItems(sortedData);
+        columns.addAll("Test Number", "ID", "Subject", "Course Name", "Year", "Semester", "Session", "Author");
+        TableManager.createTable(manageTestsTableView, columns);
+        TableManager.importData(manageTestsTableView, tests);
+        //TableManager.addDoubleClickFunctionality(testsTableView, PathConstants.updateQuestionPath, this::setFunctions);
+
+        double[] multipliers = {0.15, 0.1, 0.1, 0.13, 0.15,0.1,0.1, 0.162};
+        TableManager.resizeColumns(manageTestsTableView, multipliers);
+
+        //filter tests by course name
+        FilteredList<Test> filteredData = new FilteredList<>(tests, b -> true);
+        TableManager.MakeFilterListForSearch(filteredData, searchField, Test::getCourseName);
+
+        SortedList<Test> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(manageTestsTableView.comparatorProperty());
+        manageTestsTableView.setItems(sortedData);
     }
 
     @FXML

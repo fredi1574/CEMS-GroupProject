@@ -10,52 +10,61 @@ public class Test extends Observable implements Serializable {
     private int testNumber;
     private String author;
     private String testDuration;
-    private String dateOfTest;
-    private String startingTime;
     private String subject;
     private String courseName;
     private String teacherComments;
     private String studentComments;
     private TestTypeEnum testType;
-
+    private String year;
+    private String semester;
+    private String session;
     private ObservableList<TestQuestion> questions;
 
-    //constructor for step 1 of test creation - adding test details
-    public Test(int testNumber, String id, String subject, String courseName, String author) {
-        this.testNumber = testNumber;
-        this.id = id;
-        this.subject = subject;
-        this.courseName = courseName;
-        this.author = author;
-    }
-
-    //constructor for step 2 of test creation - adding test questions
-    public Test(int testNumber, String id, String subject, String courseName, String author, ObservableList<TestQuestion> questions, String teacherComments, String studentComments) {
-        this.testNumber = testNumber;
-        this.id = id;
-        this.subject = subject;
-        this.courseName = courseName;
-        this.author = author;
-        this.questions = questions;
-        this.teacherComments = teacherComments;
-        this.studentComments = studentComments;
-    }
-
     //constructor for fully created test
-    public Test(int testNumber, String id, String author, String testDuration, String dateOfTest, String courseName,
-                String teacherComments, TestTypeEnum TestType, String studentComments, String startingTime, String subject) {
+    public Test(int testNumber, String id, String author, String testDuration,  String courseName,
+                String teacherComments, TestTypeEnum TestType, String studentComments,  String subject,
+                String year,String session,String semester) {
         this.id = id;
         this.testNumber = testNumber;
         this.author = author;
         this.testDuration = testDuration;
-        this.dateOfTest = dateOfTest;
         this.courseName = courseName;
         this.teacherComments = teacherComments;
         this.testType = TestType;
         this.studentComments = studentComments;
-        this.startingTime = startingTime;
         this.subject = subject;
+        this.year = year;
+        this.session= session;
+        this.semester = semester;
     }
+    public void setStudentComments(String studentComments) {
+        this.studentComments = studentComments;
+    }
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getSemester() {
+        return semester;
+    }
+
+    public void setSemester(String semester) {
+        this.semester = semester;
+    }
+
+    public String getSession() {
+        return session;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
+    }
+
+
 
     public ObservableList<TestQuestion> getQuestions() {
         return questions;
@@ -97,14 +106,6 @@ public class Test extends Observable implements Serializable {
         this.testDuration = testDuration;
     }
 
-    public String getDateOfTest() {
-        return dateOfTest;
-    }
-
-    public void setDateOfTest(String dateOfTest) {
-        this.dateOfTest = dateOfTest;
-    }
-
     public String getCourseName() {
         return courseName;
     }
@@ -137,14 +138,6 @@ public class Test extends Observable implements Serializable {
         this.studentComments = studentComment;
     }
 
-    public String getStartingTime() {
-        return startingTime;
-    }
-
-    public void setStartingTime(String startingTime) {
-        this.startingTime = startingTime;
-    }
-
     public String getSubject() {
         return subject;
     }
@@ -153,20 +146,5 @@ public class Test extends Observable implements Serializable {
         this.subject = subject;
     }
 
-    @Override
-    public String toString() {
-        return "Test{" +
-                "id='" + id + '\'' +
-                ", testNum='" + testNumber + '\'' +
-                ", author='" + author + '\'' +
-                ", testDuration='" + testDuration + '\'' +
-                ", dateOfTest='" + dateOfTest + '\'' +
-                ", courseName='" + courseName + '\'' +
-                ", teacherComment='" + teacherComments + '\'' +
-                ", testType='" + testType + '\'' +
-                ", studentComment='" + studentComments + '\'' +
-                ", startingTime='" + startingTime + '\'' +
-                ", subject='" + subject + '\'' +
-                '}';
-    }
+
 }
