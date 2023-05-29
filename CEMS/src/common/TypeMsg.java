@@ -12,11 +12,6 @@ public enum TypeMsg {
         public String toString() {
             return "Connected";
         }
-//	},
-//	ImportedSuccessfully {
-//		public String toString() {
-//			return "User asks to logout";
-//		}
     }, GetQuestions {
         public String toString() {
             return "User asked for specific table questions";
