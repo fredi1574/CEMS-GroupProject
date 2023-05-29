@@ -99,7 +99,6 @@ public class MysqlConnection {
 		return list;
 	}
 	public static ArrayList<Test> getTestTable(String q) {
-		System.out.println(q);
 		Statement stmt = null;
 
 		try {

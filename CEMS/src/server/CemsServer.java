@@ -155,7 +155,6 @@ public class CemsServer extends AbstractServer {
                     break;
                 case GetTestTable:
                     ArrayList<Test> testList = MysqlConnection.getTestTable("SELECT * FROM test");
-                    System.out.println(testList);
                     client.sendToClient(new MsgHandler<>(TypeMsg.TestTableResponse,testList));
                     break;
                 case TryLogin:
