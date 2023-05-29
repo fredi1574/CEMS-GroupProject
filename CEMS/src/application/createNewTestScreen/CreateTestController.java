@@ -51,7 +51,8 @@ public class CreateTestController {
         ObservableList<Course> questionList = FXCollections.observableArrayList((List) courseObjectsList);
 
         ObservableList<String> columnList = FXCollections.observableArrayList();
-        columnList.addAll("Course", "Subject");
+        //TODO: fix the names of the table columns
+        columnList.addAll("Course Name", "Subject Name");
         TableManager.createTable(courseTableView, columnList);
         TableManager.importData(courseTableView, questionList);
         //TableManager.addDoubleClickFunctionality(courseTableView,"ManageQuestionsScreen/UpdateQuestion.fxml",true);
