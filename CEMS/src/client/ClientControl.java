@@ -3,7 +3,6 @@ package client;
 import common.ChatIF;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ClientControl implements ChatIF{
@@ -48,7 +47,7 @@ public class ClientControl implements ChatIF{
 		response = client.tests;
 		return  response;
 	}
-	public   List<Object> getAllOfQuestions(){
+	public   List<Object> getAllQuestions(){
 		response = client.allQuestions;
 		return  response;
 	}

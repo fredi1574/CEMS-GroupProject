@@ -57,7 +57,7 @@ public class PickQuestionsController {
         MsgHandler getTable = new MsgHandler(TypeMsg.GetAllQuestions, null);
         ClientUI.chat.accept(getTable);
         // creates the question table
-         ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.getQuestions());
+         ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.getAllQuestions());
 
         //creates a table of questions the author can see
         ObservableList<String> questionDBTableColumns = FXCollections.observableArrayList();

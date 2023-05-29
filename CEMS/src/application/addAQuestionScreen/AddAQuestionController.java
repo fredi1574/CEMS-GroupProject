@@ -212,7 +212,7 @@ public class AddAQuestionController {
         String Course = CourseCombo.getSelectionModel().getSelectedItem().toString();
         MsgHandler getQuestionTable = new MsgHandler(TypeMsg.GetAllQuestions, null);
         ClientUI.chat.accept(getQuestionTable);
-        List<Question> questions = ((List) ClientUI.chat.getAllOfQuestions());
+        List<Question> questions = ((List) ClientUI.chat.getAllQuestions());
         selectedCourse = getSelectedID(Course, CourseCombo, coursesList);
         newQuestionNumber = correctQuestionNumber(findFirstFreeIndex(questions));
         QuestionID = ((Subject.substring(Subject.indexOf("-") + 1)) + selectedCourse + newQuestionNumber);
