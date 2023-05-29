@@ -171,7 +171,7 @@ public class CemsServer extends AbstractServer {
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (Question) this.msg.getMsg();
                     this.question = (Question) obj;
-                    String DeleteQuery = "DELETE FROM cems.questions WHERE id='" + question.getId() + "'";
+                    String DeleteQuery = "DELETE FROM cems.question WHERE id='" + question.getId() + "'";
                     ;
                     MysqlConnection.update(DeleteQuery);
                     client.sendToClient(new MsgHandler<>(TypeMsg.QuestionDeleted, null));
@@ -195,8 +195,8 @@ public class CemsServer extends AbstractServer {
                     this.obj = this.msg.getMsg();
                     ArrayList<Subject> importSubjects = MysqlConnection.getSubjectList("SELECT * " +
                             "FROM subject s " +
-                            "JOIN lecturersubjects ls ON s.subjectID = ls.subjectID " +
-                            "JOIN users u ON u.id = ls.id " +
+                            "JOIN lecturersubject ls ON s.subjectID = ls.subjectID " +
+                            "JOIN user u ON u.id = ls.id " +
                             "WHERE u.username = '" + obj.toString() + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.SubjectsimportSuccess, importSubjects));
                     break;
@@ -206,8 +206,8 @@ public class CemsServer extends AbstractServer {
                     this.obj = this.msg.getMsg();
                     ArrayList<Course> importCourses = MysqlConnection.getCourseList("SELECT * " +
                             "FROM course AS c " +
-                            "JOIN lecturersubjects AS ls ON c.subjectID = ls.subjectID " +
-                            "JOIN users AS u ON ls.id = u.id " +
+                            "JOIN lecturersubject AS ls ON c.subjectID = ls.subjectID " +
+                            "JOIN user AS u ON ls.id = u.id " +
                             "WHERE u.username = '" + obj.toString() + "'");
 
                     client.sendToClient(new MsgHandler<>(TypeMsg.CoursesimportSuccess, importCourses));

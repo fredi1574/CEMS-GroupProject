@@ -54,7 +54,7 @@ public class PickQuestionsController {
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestions, null);
+        MsgHandler getTable = new MsgHandler(TypeMsg.GetAllQuestions, null);
         ClientUI.chat.accept(getTable);
         // creates the question table
          ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.getQuestions());
