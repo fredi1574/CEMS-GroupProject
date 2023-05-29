@@ -27,9 +27,6 @@ public class viewTestsForHeadOfDepartmentController {
     private AnchorPane header;
 
     @FXML
-    private TableView<Test> reportsTableView;
-
-    @FXML
     private Text usernameText;
     @FXML
     private TextField searchField;
@@ -41,14 +38,14 @@ public class viewTestsForHeadOfDepartmentController {
     private TableView<Test> testApprovalTableView;
     @FXML
     public void initialize() {
+        ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getFullName());
         MsgHandler getTestTable = new MsgHandler(TypeMsg.GetTestTable, null);
         ClientUI.chat.accept(getTestTable);
 
         //fetches the tests table from the database
 //        ArrayList<Object> testTableList = ClientUI.chat.getTests();
-        ObservableList<Test> tests = FXCollections.observableArrayList((List) ClientUI.chat.getTests() );
-
+        ObservableList<Test> tests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
         ObservableList<String> columns = FXCollections.observableArrayList();
         columns.addAll("Test Number", "ID", "Subject", "Course Name", "Year", "Semester", "Session", "Author");
         TableManager.createTable(manageTestsTableView, columns);

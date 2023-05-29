@@ -45,7 +45,7 @@ public class ClientControl implements ChatIF{
 		return  response;
 	}
 	public   List<Object> getTests(){
-		response=client.tests;
+		response = client.tests;
 		return  response;
 	}
 	public   List<Object> getAllOfQuestions(){

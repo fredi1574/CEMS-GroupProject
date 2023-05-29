@@ -77,8 +77,8 @@ public class MysqlConnection {
 				String id = rs.getString("id"); // assuming your table has a column named "id" with type INT
 				String subject = rs.getString("subject");
 				String course_name = rs.getString("courseName");
-				String question_text = rs.getString("question_text");
-				String question_number = rs.getString("question_number");
+				String question_text = rs.getString("questionText");
+				String question_number = rs.getString("questionNumber");
 				String lecturer = rs.getString("lecturer");
 				String answer1 = rs.getString("answer1");
 				String answer2 = rs.getString("answer2");
@@ -111,7 +111,7 @@ public class MysqlConnection {
 		try {
 			ResultSet rs = stmt.executeQuery(q);
 			while (rs.next()) {
-				int testNumber = rs.getInt("testNumber"); // assuming your table has a column named "id" with type INT
+				String testNumber = rs.getString("testNumber"); // assuming your table has a column named "id" with type INT
 				String id = rs.getString("id");
 				String author = rs.getString("author");
 				String testDuration = rs.getString("testDuration");
@@ -132,7 +132,7 @@ public class MysqlConnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println(tests);
+
 		return tests;
 	}
 

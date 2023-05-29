@@ -63,7 +63,7 @@ public class Client extends AbstractClient {
 				 this.subjectList = (List<Object>) messageFromServer.getMsg();
 				 break;
 			 case TestTableResponse:
-				 tests =(List<Object>) messageFromServer.getMsg();
+				 this.tests =(List<Object>) messageFromServer.getMsg();
 				 System.out.println(tests);
 				 break;
 			 case SaveTestResponse:

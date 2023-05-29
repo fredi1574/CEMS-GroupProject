@@ -236,7 +236,7 @@ public class AddAQuestionController {
 
         Set<Integer> indexSet = new HashSet<>();
         for (Question question : questionTableList) {
-            indexSet.add(Integer.parseInt(question.getQuestion_number()));
+            indexSet.add(Integer.parseInt(question.getQuestionNumber()));
         }
 
         int minIndex = Collections.min(indexSet);

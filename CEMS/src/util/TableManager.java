@@ -29,7 +29,17 @@ public class TableManager {
 
         // create table columns dynamically
         for (String columnName : columnList) {
-            String propertyName = columnName.toLowerCase().replaceAll("\\s+", "_"); // remove spaces from column name
+            String[] propertyNameArr = columnName.split("[\\W_]+");
+            String propertyName = propertyNameArr[0].toLowerCase();
+
+            //for fields names that are longer than one word
+            if (propertyNameArr.length > 1) {
+                for (int i = 1; i < propertyNameArr.length; i++) {
+                    propertyName = propertyName.concat(propertyNameArr[i]);
+                }
+            }
+
+            //String propertyName = columnName.toLowerCase().replaceAll("\\s+", ""); // remove spaces from column name
             TableColumn<T, ?> column = new TableColumn<>(columnName);
             column.setCellValueFactory(new PropertyValueFactory<>(propertyName));
             tableView.getColumns().add(column);

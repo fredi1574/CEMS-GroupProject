@@ -63,7 +63,7 @@ public class ManageQuestionsController {
 
         // Filter the results as you search
         FilteredList<Question> filteredData = new FilteredList<>(questions, b -> true);
-        TableManager.MakeFilterListForSearch(filteredData, searchField, Question::getQuestion_text);
+        TableManager.MakeFilterListForSearch(filteredData, searchField, Question::getQuestionText);
 
         SortedList<Question> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(manageQuestionsTableView.comparatorProperty());

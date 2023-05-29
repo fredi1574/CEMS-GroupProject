@@ -10,10 +10,10 @@ public class Question extends Observable implements Serializable {
     //TODO: fix selected property support (used in checkboxes)
     //private BooleanProperty selected = new SimpleBooleanProperty(false);
     private String id;
-    private String question_number;
+    private String questionNumber;
     private String subject;
-    private String course_name;
-    private String question_text;
+    private String courseName;
+    private String questionText;
     private String lecturer;
     private String answer1;
     private String answer2;
@@ -24,11 +24,11 @@ public class Question extends Observable implements Serializable {
     public Question(String questionNumber,
                     String questionId,String questionText, String questionWrittenBy,String subject,String course_name,
                     String answer1,String answer2,String answer3,String answer4,String correctAnswer) {
-        this.question_number = questionNumber;
+        this.questionNumber = questionNumber;
         this.id = questionId;
-        this.question_text = questionText;
+        this.questionText = questionText;
         this.lecturer = questionWrittenBy;
-        this.course_name = course_name;
+        this.courseName = course_name;
         this.subject=subject;
         this.answer1 = answer1;
         this.answer2 = answer2;
@@ -54,20 +54,20 @@ public class Question extends Observable implements Serializable {
     public String getId() {
         return id;
     }
-    public String getQuestion_number() {
-        return question_number;
+    public String getQuestionNumber() {
+        return questionNumber;
     }
 
-    public String getQuestion_text() {
-        return question_text;
+    public String getQuestionText() {
+        return questionText;
     }
 
     public String getLecturer() {
         return lecturer;
     }
 
-    public String getCourse_name() {
-        return course_name;
+    public String getCourseName() {
+        return courseName;
     }
 
     public String getSubject() {
@@ -79,10 +79,10 @@ public class Question extends Observable implements Serializable {
     public String toString() {
         return "Question{" +
                 "id='" + id + '\'' +
-                ", question_number='" + question_number + '\'' +
+                ", questionNumber='" + questionNumber + '\'' +
                 ", subject='" + subject + '\'' +
-                ", courseName='" + course_name + '\'' +
-                ", question_text='" + question_text + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", questionText='" + questionText + '\'' +
                 ", lecturer='" + lecturer + '\'' +
                 ", wrongAnswer1='" + answer1 + '\'' +
                 ", wrongAnswer2='" + answer2 + '\'' +

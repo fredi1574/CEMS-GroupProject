@@ -154,10 +154,10 @@ public class CemsServer extends AbstractServer {
                     client.sendToClient(new MsgHandler<>(TypeMsg.QuestionDeleted, null));
                     break;
                 case GetTestTable:
-                    ArrayList<Test> testList = MysqlConnection.getTestTable("select * from cems.test;");
+                    ArrayList<Test> testList = MysqlConnection.getTestTable("SELECT * FROM test");
                     System.out.println(testList);
                     client.sendToClient(new MsgHandler<>(TypeMsg.TestTableResponse,testList));
-
+                    break;
                 case TryLogin:
                     m = (MsgHandler<Object>) msg;
                     List<Object> details = (List<Object>) m.getMsg();
@@ -198,8 +198,8 @@ public class CemsServer extends AbstractServer {
                     this.q = m.getMsg();
                     if (q instanceof Question) {
                         this.question = (Question) q;
-                        String updateQuery = "UPDATE cems.questions SET question_number='" + question.getQuestion_number() + "', subject='" + question.getSubject() + "'," +
-                                " courseName='" + question.getCourse_name() + "', question_text='" + question.getQuestion_text() + "'," +
+                        String updateQuery = "UPDATE cems.questions SET questionNumber='" + question.getQuestionNumber() + "', subject='" + question.getSubject() + "'," +
+                                " courseName='" + question.getCourseName() + "', questionText='" + question.getQuestionText() + "'," +
                                 " lecturer='" + question.getLecturer() + "', answer1='" + question.getAnswer1() + "', answer2='" + question.getAnswer2() + "', " +
                                 "answer3='" + question.getAnswer3() + "', correctAnswer='" + question.getCorrectAnswer() + "', answer4='" +
                                 question.getAnswer4() + "' WHERE id='" + question.getId() + "'";
@@ -219,9 +219,9 @@ public class CemsServer extends AbstractServer {
                     this.q = (Question) m.getMsg();
                     Question question = (Question) q;
                     try {
-                        String newQuery = "INSERT INTO cems.questions (id, subject, courseName, question_text, question_number, lecturer, answer1, answer2, answer3, correctAnswer, answer4) " +
-                                "VALUES ('" + question.getId() + "', '" + question.getSubject() + "', '" + question.getCourse_name() + "', '" + question.getQuestion_text() + "', " +
-                                "'" + question.getQuestion_number() + "', '" + question.getLecturer() + "', '" + question.getAnswer1() + "', '" + question.getAnswer2() + "', " +
+                        String newQuery = "INSERT INTO cems.questions (id, subject, courseName, questionText, questionNumber, lecturer, answer1, answer2, answer3, correctAnswer, answer4) " +
+                                "VALUES ('" + question.getId() + "', '" + question.getSubject() + "', '" + question.getCourseName() + "', '" + question.getQuestionText() + "', " +
+                                "'" + question.getQuestionNumber() + "', '" + question.getLecturer() + "', '" + question.getAnswer1() + "', '" + question.getAnswer2() + "', " +
                                 "'" + question.getAnswer3() + "', '" + question.getCorrectAnswer() + "', '" + question.getAnswer4() + "')";
                         MysqlConnection.update(newQuery);
                     } catch (Exception e) {
