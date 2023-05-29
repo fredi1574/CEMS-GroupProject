@@ -22,7 +22,7 @@
                 onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_"/>
         <ImageView fitHeight="78.0" fitWidth="201.0" layoutX="17.0" layoutY="15.0" pickOnBounds="true"
                    preserveRatio="true">
-            <Image url="@../../../../images/Logo_Transparent2.png"/>
+            <Image url="@../../../../images/Logo_Transparent_Bright.png"/>
         </ImageView>
     </AnchorPane>
     <AnchorPane layoutY="103.0" minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="823.0"

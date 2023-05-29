@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="800.0" prefWidth="806.0" styleClass="backgroundColor" stylesheets="@../../util/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.manageTestsScreen.ManageTestsController">
+    <Button alignment="CENTER" layoutX="26.0" layoutY="419.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" styleClass="regularButtons" text="Delete">
+        <font>
+            <Font name="Franklin Gothic Demi Cond" size="12.0" />
+        </font>
+        <graphic>
+            <ImageView fitHeight="13.0" fitWidth="15.0">
+                <Image url="@../../images/delete_small.png" />
+            </ImageView>
+        </graphic>
+    </Button>
+    <Button alignment="TOP_CENTER" layoutX="583.0" layoutY="111.0" mnemonicParsing="false" onAction="#createNewTest" prefHeight="27.0" prefWidth="170.0" styleClass="regularButtons" text="Create New Test">
+        <font>
+            <Font name="Franklin Gothic Demi" size="13.0" />
+        </font>
+        <graphic>
+            <ImageView fitHeight="18.0" fitWidth="20.0" preserveRatio="true">
+                <Image url="@../../images/add_icon.png" />
+            </ImageView>
+        </graphic>
+    </Button>
+    <TableView fx:id="manageTestsTableView" layoutX="27.0" layoutY="183.0" prefHeight="230.0" prefWidth="747.0" />
+    <AnchorPane fx:id="header" prefHeight="100.0" prefWidth="806.0" styleClass="pageHeader">
+        <Label layoutX="220.0" layoutY="4.0" prefHeight="81.0" prefWidth="426.0" styleClass="pageHeader" text=" Tests Managment " textFill="#fafafa" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="160.0">
+            <font>
+                <Font name="Trebuchet MS" size="40.0" />
+            </font>
+        </Label>
+        <Text fill="#3b3131" layoutX="737.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true">
+            <font>
+                <Font name="Trebuchet MS" size="12.0" />
+            </font>
+        </Text>
+        <Button layoutX="712.0" layoutY="68.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" styleClass="pageHeaderBtn" text="Logout">
+            <font>
+                <Font name="Franklin Gothic Demi Cond" size="14.0" />
+            </font>
+        </Button>
+        <ImageView layoutX="714.0" layoutY="45.0">
+            <Image url="@../../images/avatar.png" />
+        </ImageView>
+        <ImageView fitHeight="73.0" fitWidth="196.0" layoutX="14.0" layoutY="7.0" preserveRatio="true">
+            <Image url="@../../images/Logo_Transparent_Bright.png" />
+        </ImageView>
+    </AnchorPane>
+    <TextField fx:id="searchField" layoutX="61.0" layoutY="111.0" onAction="#initialize" prefHeight="28.0" prefWidth="515.0" promptText="Search test by course name" />
+    <Button contentDisplay="CENTER" layoutX="15.0" layoutY="723.0" minWidth="35.0" mnemonicParsing="false" onAction="#back" prefHeight="54.0" prefWidth="54.0" styleClass="subButtons" textFill="#0d0d0d">
+        <graphic>
+            <ImageView fitHeight="36.0" fitWidth="38.0">
+                <Image url="@../../images/back.png" />
+            </ImageView>
+        </graphic>
+    </Button>
+    <Label layoutX="28.0" layoutY="775.0" text="Back" />
+    <Button layoutX="732.0" layoutY="723.0" minWidth="29.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" styleClass="subButtons">
+        <cursor>
+            <Cursor fx:constant="SE_RESIZE" />
+        </cursor>
+      <graphic>
+            <ImageView fitHeight="36.0" fitWidth="37.0">
+                <Image url="@../../images/Save.png" />
+            </ImageView>
+      </graphic>
+    </Button>
+    <Label layoutX="744.0" layoutY="775.0" text="Save" />
+    <Button layoutX="770.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
+    <Button layoutX="734.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
+    <Label layoutX="544.0" layoutY="157.0" text="*Double click on a test to update it" />
+    <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="34.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../images/search.png" />
+    </ImageView>
+   <TableView fx:id="testApprovalTableView" layoutX="28.0" layoutY="490.0" prefHeight="230.0" prefWidth="747.0" />
+   <Label layoutX="26.0" layoutY="154.0" prefHeight="27.0" prefWidth="175.0" text="Tests Database:">
+      <font>
+         <Font name="System Bold" size="18.0" />
+      </font>
+   </Label>
+   <Label layoutX="26.0" layoutY="460.0" prefHeight="27.0" prefWidth="248.0" text="Tests waiting for approval:">
+      <font>
+         <Font name="System Bold" size="18.0" />
+      </font>
+   </Label>
+   <Label layoutX="464.0" layoutY="463.0" text="*Double click on a test to approve and grade it" />
+   <Separator layoutY="453.0" prefHeight="0.0" prefWidth="806.0" />
+</AnchorPane>

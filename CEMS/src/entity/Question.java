@@ -14,7 +14,7 @@ public class Question extends Observable implements Serializable {
     private String subject;
     private String courseName;
     private String questionText;
-    private String lecturer;
+    private String author;
     private String answer1;
     private String answer2;
     private String answer3;
@@ -27,7 +27,7 @@ public class Question extends Observable implements Serializable {
         this.questionNumber = questionNumber;
         this.id = questionId;
         this.questionText = questionText;
-        this.lecturer = questionWrittenBy;
+        this.author = questionWrittenBy;
         this.courseName = course_name;
         this.subject=subject;
         this.answer1 = answer1;
@@ -62,8 +62,8 @@ public class Question extends Observable implements Serializable {
         return questionText;
     }
 
-    public String getLecturer() {
-        return lecturer;
+    public String getAuthor() {
+        return author;
     }
 
     public String getCourseName() {
@@ -83,7 +83,7 @@ public class Question extends Observable implements Serializable {
                 ", subject='" + subject + '\'' +
                 ", courseName='" + courseName + '\'' +
                 ", questionText='" + questionText + '\'' +
-                ", lecturer='" + lecturer + '\'' +
+                ", author='" + author + '\'' +
                 ", wrongAnswer1='" + answer1 + '\'' +
                 ", wrongAnswer2='" + answer2 + '\'' +
                 ", wrongAnswer3='" + answer3 + '\'' +

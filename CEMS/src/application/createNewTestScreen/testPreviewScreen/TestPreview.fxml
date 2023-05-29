@@ -19,7 +19,7 @@
             </font>
         </Label>
         <ImageView fitHeight="95.0" fitWidth="235.0" layoutX="18.0" layoutY="5.0" preserveRatio="true">
-            <Image url="@../../../images/Logo_Transparent2.png"/>
+            <Image url="@../../../images/Logo_Transparent_Bright.png"/>
         </ImageView>
         <Button layoutX="785.0" layoutY="9.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
                 onAction="#closePopUp" prefHeight="25.0" prefWidth="25.0" styleClass="pageHeaderBtn" text="X"/>

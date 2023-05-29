@@ -16,9 +16,11 @@ public class CemsServer extends AbstractServer {
     static ObservableList<ConnectToClients> clientList = FXCollections.observableArrayList();
     //Constructors ****************************************************
     public String passwordSQL;
-    Object q;
+    Object obj;
     MsgHandler<Object> m;
     Question question;
+    Test test;
+    TestQuestion testQuestion;
 
     /**
      * Constructs an instance of the echo server.
@@ -133,29 +135,38 @@ public class CemsServer extends AbstractServer {
                     break;
                 case GetQuestions:
                     this.m = (MsgHandler<Object>) msg;
-                    this.q = (String) m.getMsg();
+                    this.obj = (String) m.getMsg();
 
-                    ArrayList<Question> list = MysqlConnection.getQuestionsTable("SELECT q.* " +
-                            "FROM questions q " +
-                            "JOIN lecturersubjects ls ON q.subject = ls.subjectID " +
+                    ArrayList<Question> list = MysqlConnection.getQuestionsTable("SELECT obj.* " +
+                            "FROM questions obj " +
+                            "JOIN lecturersubjects ls ON obj.subject = ls.subjectID " +
                             "JOIN users u ON u.id = ls.id " +
-                            "WHERE u.username = + '" + q + "'");
-
-                    //List<String>
+                            "WHERE u.username = + '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.QuestionsResponse, list));
+                    break;
+                case EditQuestion:
+                    this.m = (MsgHandler<Object>) msg;
+                    this.obj = m.getMsg();
+                    if (obj instanceof Question) {
+                        this.question = (Question) obj;
+                        String updateQuery = "UPDATE cems.questions SET questionNumber='" + question.getQuestionNumber() + "', subject='" + question.getSubject() + "'," +
+                                " courseName='" + question.getCourseName() + "', questionText='" + question.getQuestionText() + "'," +
+                                " author='" + question.getAuthor() + "', answer1='" + question.getAnswer1() + "', answer2='" + question.getAnswer2() + "', " +
+                                "answer3='" + question.getAnswer3() + "', correctAnswer='" + question.getCorrectAnswer() + "', answer4='" +
+                                question.getAnswer4() + "' WHERE id='" + question.getId() + "'";
+
+                        MysqlConnection.update(updateQuery);
+                        client.sendToClient(new MsgHandler<>(TypeMsg.QuestionUpdated, null));
+                    }
                     break;
                 case DeleteQuestion:
                     this.m = (MsgHandler<Object>) msg;
-                    this.q = (Question) m.getMsg();
-                    this.question = (Question) q;
+                    this.obj = (Question) m.getMsg();
+                    this.question = (Question) obj;
                     String DeleteQuery = "DELETE FROM cems.questions WHERE id='" + question.getId() + "'";
                     ;
                     MysqlConnection.update(DeleteQuery);
                     client.sendToClient(new MsgHandler<>(TypeMsg.QuestionDeleted, null));
-                    break;
-                case GetTestTable:
-                    ArrayList<Test> testList = MysqlConnection.getTestTable("SELECT * FROM test");
-                    client.sendToClient(new MsgHandler<>(TypeMsg.TestTableResponse,testList));
                     break;
                 case TryLogin:
                     m = (MsgHandler<Object>) msg;
@@ -171,65 +182,112 @@ public class CemsServer extends AbstractServer {
                     break;
                 case importSubjects:
                     this.m = (MsgHandler<Object>) msg;
-                    this.q = m.getMsg();
+                    this.obj = m.getMsg();
                     ArrayList<Subject> importSubjects = MysqlConnection.getSubjectList("SELECT * " +
                             "FROM subject s " +
                             "JOIN lecturersubjects ls ON s.subjectID = ls.subjectID " +
                             "JOIN users u ON u.id = ls.id " +
-                            "WHERE u.username = '" + q.toString() + "'");
+                            "WHERE u.username = '" + obj.toString() + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.SubjectsimportSuccess, importSubjects));
                     break;
-
-
                 case importCourses:
                     this.m = (MsgHandler<Object>) msg;
-                    this.q = m.getMsg();
+                    this.obj = m.getMsg();
                     ArrayList<Course> importCourses = MysqlConnection.getCourseList("SELECT * " +
                             "FROM course AS c " +
                             "JOIN lecturersubjects AS ls ON c.subjectID = ls.subjectID " +
                             "JOIN users AS u ON ls.id = u.id " +
-                            "WHERE u.username = '" + q.toString() + "'");
+                            "WHERE u.username = '" + obj.toString() + "'");
 
                     client.sendToClient(new MsgHandler<>(TypeMsg.CoursesimportSuccess, importCourses));
                     break;
-                case EditQuestion:
-                    this.m = (MsgHandler<Object>) msg;
-                    this.q = m.getMsg();
-                    if (q instanceof Question) {
-                        this.question = (Question) q;
-                        String updateQuery = "UPDATE cems.questions SET questionNumber='" + question.getQuestionNumber() + "', subject='" + question.getSubject() + "'," +
-                                " courseName='" + question.getCourseName() + "', questionText='" + question.getQuestionText() + "'," +
-                                " lecturer='" + question.getLecturer() + "', answer1='" + question.getAnswer1() + "', answer2='" + question.getAnswer2() + "', " +
-                                "answer3='" + question.getAnswer3() + "', correctAnswer='" + question.getCorrectAnswer() + "', answer4='" +
-                                question.getAnswer4() + "' WHERE id='" + question.getId() + "'";
 
-                        MysqlConnection.update(updateQuery);
-                        client.sendToClient(new MsgHandler<>(TypeMsg.QuestionUpdated, null));
-                    }
-                    break;
                 case GetAllQuestions:
                     this.m = (MsgHandler<Object>) msg;
-                    this.q = (String) m.getMsg();
+                    this.obj = (String) m.getMsg();
                     ArrayList<Question> allQuestions = MysqlConnection.getQuestionsTable("SELECT * FROM questions");
                     client.sendToClient(new MsgHandler<>(TypeMsg.allQuestionImported, allQuestions));
                     break;
+
                 case AddNewQuestion:
                     this.m = (MsgHandler<Object>) msg;
-                    this.q = (Question) m.getMsg();
-                    Question question = (Question) q;
+                    this.obj = (Question) m.getMsg();
+                    Question question = (Question) obj;
                     try {
-                        String newQuery = "INSERT INTO cems.questions (id, subject, courseName, questionText, questionNumber, lecturer, answer1, answer2, answer3, correctAnswer, answer4) " +
+                        String newQuery = "INSERT INTO cems.questions (id, subject, courseName, questionText, questionNumber, author, answer1, answer2, answer3, correctAnswer, answer4) " +
                                 "VALUES ('" + question.getId() + "', '" + question.getSubject() + "', '" + question.getCourseName() + "', '" + question.getQuestionText() + "', " +
-                                "'" + question.getQuestionNumber() + "', '" + question.getLecturer() + "', '" + question.getAnswer1() + "', '" + question.getAnswer2() + "', " +
+                                "'" + question.getQuestionNumber() + "', '" + question.getAuthor() + "', '" + question.getAnswer1() + "', '" + question.getAnswer2() + "', " +
                                 "'" + question.getAnswer3() + "', '" + question.getCorrectAnswer() + "', '" + question.getAnswer4() + "')";
                         MysqlConnection.update(newQuery);
+                        break;
                     } catch (Exception e) {
                     }
                     client.sendToClient(new MsgHandler<>(TypeMsg.QuestionAddedSuccessfuly, null));
                     break;
 
+                case GetCourseTable:
+                    this.m = (MsgHandler<Object>) msg;
+                    this.obj = (String) m.getMsg();
+                    ArrayList<Course> courseList = MysqlConnection.getCourseTable("select * from cems.course");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.CourseTableResponse, courseList));
+                    break;
+
+                case GetTestTable:
+                    this.m = (MsgHandler<Object>) msg;
+                    this.obj = (String) m.getMsg();
+
+                    ArrayList<Test> testList = MysqlConnection.getTestTable("select * from cems.test;");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.TestTableResponse, testList));
+                    break;
+
+                case AddNewTest:
+                    this.m = (MsgHandler<Object>) msg;
+                    this.obj = m.getMsg();
+                    if (obj instanceof Test) {
+                        this.test = (Test) obj;
+                        String newQuery = "INSERT INTO cems.test (testNumber, id, testDuration, author, subject, courseName, " +
+                                "teacherComment, testType, studentComment, semester, year, session) " +
+                                "VALUES ('" + test.getTestNumber() + "', " +
+                                "'" + test.getId() + "', " +
+                                "'" + test.getTestDuration() + "', " +
+                                "'" + test.getAuthor() + "', " +
+                                "'" + test.getSubject() + "', " +
+                                "'" + test.getCourseName() + "', " +
+                                "'" + test.getTeacherComments() + "', " +
+                                "'" + test.getTestType() + "', " +
+                                "'" + test.getStudentComments() + "', " +
+                                "'" + test.getSemester() + "', " +
+                                "'" + test.getYear() + "', " +
+                                "'" + test.getSession() + "') ";
+                        MysqlConnection.update(newQuery);
+                        client.sendToClient(new MsgHandler<>(TypeMsg.AddNewTestResponse, null));
+                    }
+                    break;
+
+                case AddNewTestQuestion:
+                    this.m = (MsgHandler<Object>) msg;
+                    this.obj = m.getMsg();
+                    if (obj instanceof TestQuestion) {
+                        this.testQuestion = (TestQuestion) obj;
+                        String newQuery = "INSERT INTO cems.testquestion (questionID, questionNumber, points, " +
+                                "questionText, testID, courseName, subject, author) " +
+                                "VALUES ('" + testQuestion.getQuestionID() + "', " +
+                                "'" + testQuestion.getQuestionNumber() + "', " +
+                                "'" + testQuestion.getPoints() + "', " +
+                                "'" + testQuestion.getQuestionText() + "', " +
+                                "'" + testQuestion.getTestID() + "', " +
+                                "'" + testQuestion.getCourseName() + "', " +
+                                "'" + testQuestion.getSubject() + "', " +
+                                "'" + testQuestion.getAuthor() + "') ";
+                        MysqlConnection.update(newQuery);
+                        client.sendToClient(new MsgHandler<>(TypeMsg.AddNewTestQuestionsResponse, null));
+                        break;
+                    }
+
+
                 default:
                     break;
+
             }
 
 

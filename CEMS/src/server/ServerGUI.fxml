@@ -31,7 +31,7 @@
             </font>
         </Button>
         <ImageView fitHeight="76.0" fitWidth="200.0" layoutX="41.0" layoutY="9.0">
-            <Image url="@../images/Logo_Transparent2.png" />
+            <Image url="@../images/Logo_Transparent_Bright.png" />
         </ImageView>
     </AnchorPane>
     <HBox layoutY="86.0" prefHeight="575.0" prefWidth="808.0">

@@ -171,3 +171,8 @@
   -fx-bar-fill: #306ebd;
   -fx-background-radius: 3px 3px 0 0;
 }
+
+.alert-dialog {
+  -fx-font-family: "Arial";
+  -fx-font-size: 14px;
+}

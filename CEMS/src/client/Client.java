@@ -12,93 +12,96 @@ import java.util.List;
 
 //test
 public class Client extends AbstractClient {
-	private ChatIF clientUI; 
-	private boolean waitResponse = false;
-	public static MsgHandler<Object> messageFromServer;
-	public List<Object> questions;
-	public List<Object> subjectList;
-	public List<Object> coursesList;
-	public List<Object> allQuestions;
-	public List<Object> tests;
+    private ChatIF clientUI;
+    private boolean waitResponse = false;
+    public static MsgHandler<Object> messageFromServer;
+    public List<Object> questions;
+    public List<Object> subjects;
+    public List<Object> courses;
+    public List<Object> allQuestions;
+    public List<Object> tests;
 
-	public static User user;
-	//constructor
-	public Client(String host, int port,ChatIF clientUI) {
-		super(host, port);
-		this.clientUI = clientUI;
-	}
-	
-	@Override
-	protected void handleMessageFromServer(Object msg) {
-		 waitResponse = false;
-		 messageFromServer = (MsgHandler<Object>) msg;
-		 System.out.println("handleMessageFromServer ");
-		 System.out.println(messageFromServer.getType().toString());
-		 switch(messageFromServer.getType())
-		 {
-		 	case Connected:
-				break;
-			case Disconnected:
-				System.exit(0);
-				break;
-			 case allQuestionImported:
-				 this.allQuestions = (List<Object>) messageFromServer.getMsg();
-				 break;
-			 case QuestionDeleted:
-				 break;
-			 case LoginResponse:
-				 user = (User)messageFromServer.getMsg();
-				 break;
-			 case QuestionsResponse:
-				 this.questions = (List<Object>) messageFromServer.getMsg();
-				 break;
-			 case CoursesimportSuccess:
-				 this.coursesList = (List<Object>) messageFromServer.getMsg();
-				 break;
-			 case QuestionUpdated:
-				 break;
-			 case QuestionAddedSuccessfuly:
-				 break;
-			 case SubjectsimportSuccess:
-				 this.subjectList = (List<Object>) messageFromServer.getMsg();
-				 break;
-			 case TestTableResponse:
-				 this.tests =(List<Object>) messageFromServer.getMsg();
-				 System.out.println(tests);
-				 break;
-			 case SaveTestResponse:
-				 break;
-		 }		
-	}
+    public static User user;
 
+    //constructor
+    public Client(String host, int port, ChatIF clientUI) {
+        super(host, port);
+        this.clientUI = clientUI;
+    }
 
-	public void handleMessageFromClientUI(Object message) {
-		try {
-			openConnection();
-			waitResponse = true;
-			sendToServer(message);
-			// wait for response
-			while (waitResponse) {
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		} catch (IOException e) {
-			clientUI.display("Could not send message to server.  Terminating client.");
-			quit();
-		}
-	}
-	 public void quit()
-	  {
-	    try
-	    {
-	      closeConnection();
-	    }
-	    catch(IOException e) {}
-	    System.exit(0);
-	  }
+    @Override
+    protected void handleMessageFromServer(Object msg) {
+        waitResponse = false;
+        messageFromServer = (MsgHandler<Object>) msg;
+        System.out.println("handleMessageFromServer ");
+        System.out.println(messageFromServer.getType().toString());
+        switch (messageFromServer.getType()) {
+            case Connected:
+                break;
+            case Disconnected:
+                System.exit(0);
+                break;
+            case allQuestionImported:
+                this.allQuestions = (List<Object>) messageFromServer.getMsg();
+                break;
+            case QuestionDeleted:
+                break;
+            case LoginResponse:
+                user = (User) messageFromServer.getMsg();
+                break;
+            case QuestionsResponse:
+                this.questions = (List<Object>) messageFromServer.getMsg();
+                break;
+            case CoursesimportSuccess:
+                this.courses = (List<Object>) messageFromServer.getMsg();
+                break;
+            case QuestionUpdated:
+                break;
+            case QuestionAddedSuccessfuly:
+                break;
+            case SubjectsimportSuccess:
+                this.subjects = (List<Object>) messageFromServer.getMsg();
+                break;
+            case TestTableResponse:
+                this.tests = (List<Object>) messageFromServer.getMsg();
+                System.out.println(tests);
+                break;
+            case AddNewTestResponse:
+                break;
+            case AddNewTestQuestionsResponse:
+                break;
+
+        }
+
+    }
 
 
-	}
+    public void handleMessageFromClientUI(Object message) {
+        try {
+            openConnection();
+            waitResponse = true;
+            sendToServer(message);
+            // wait for response
+            while (waitResponse) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (IOException e) {
+            clientUI.display("Could not send message to server.  Terminating client.");
+            quit();
+        }
+    }
+
+    public void quit() {
+        try {
+            closeConnection();
+        } catch (IOException e) {
+        }
+        System.exit(0);
+    }
+
+
+}

@@ -194,7 +194,7 @@ public class UpdateQuestionController {
         courseNameField.setText(question.getCourseName());
         questionTextField.setText(question.getQuestionText());
         questionNumberField.setText(question.getQuestionNumber());
-        lecturerField.setText(question.getLecturer());
+        lecturerField.setText(question.getAuthor());
         idField.setText(question.getId());
         answer1.setText(question.getAnswer1());
         answer2.setText(question.getAnswer2());

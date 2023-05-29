@@ -1,7 +1,7 @@
 package entity;
 
 public class TestRequestForApproval {
-
+	
 	private String newDuration;
 	private String explanation;
 	private String id;
@@ -9,7 +9,7 @@ public class TestRequestForApproval {
 	private String course;
 	/**
 	 * Constructs an ExamRequestForApproval object with the specified parameters.
-	 *
+	 * 
 	 * @param id           The ID of the exam.
 	 * @param subject      The subject of the exam.
 	 * @param course       The course of the exam.
@@ -23,7 +23,7 @@ public class TestRequestForApproval {
 		this.subject = subject;
 		this.course = course;
 	}
-
+	
 	// Getters and Setters
 
 	public String getNewDuration() {

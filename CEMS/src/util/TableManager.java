@@ -34,7 +34,7 @@ public class TableManager {
 
             //for fields names that are longer than one word
             if (propertyNameArr.length > 1) {
-                for (int i = 1; i < propertyNameArr.length; i++) {
+                for (int i=1; i<propertyNameArr.length; i++) {
                     propertyName = propertyName.concat(propertyNameArr[i]);
                 }
             }
@@ -106,12 +106,7 @@ public class TableManager {
 //        });
     }
 
-    //TODO: convert the controller to a generic one so the method
-    // will work for every double click,
-    // not only on updateQuestion screen.
-    // the method of the controller should not be invoked here.
     public static <T> void addDoubleClickFunctionality(TableView<T> tableView, String relativePath, Consumer<String> setFunctionsFunction) {
-
         tableView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && !tableView.getSelectionModel().isEmpty()) { //check whether the event was double click and the row contains a question
                 setFunctionsFunction.accept(relativePath);

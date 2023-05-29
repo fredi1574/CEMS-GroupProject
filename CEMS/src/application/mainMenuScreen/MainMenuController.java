@@ -61,10 +61,10 @@ public class MainMenuController {
         ScreenManager.goToNewScreen(event, PathConstants.createNewTestPath);
     }
 
-    /**
-     * Navigates to the add question screen.
-     * @param event The event triggered by the add question button click.
-     */
+    public void manageTests(ActionEvent event) {
+        ScreenManager.goToNewScreen(event,PathConstants.manageTestsPath);
+    }
+
     public void addQuestion(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.addQuestionPath);
     }

@@ -1,6 +1,9 @@
 package entity;
 
-public class TestForStudent {
+import java.io.Serializable;
+import java.util.Observable;
+
+public class TestForStudent extends Observable implements Serializable {
 
 	private String studentID;
 	private String examID;
@@ -13,7 +16,7 @@ public class TestForStudent {
 //
 	/**
 	 * Constructs a StudentExam object with the specified parameters.
-	 *
+	 * 
 	 * @param studentID             the ID of the student
 	 * @param examID                the ID of the exam
 	 * @param examType              the type of the exam

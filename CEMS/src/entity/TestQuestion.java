@@ -1,96 +1,105 @@
 package entity;
 
-public class TestQuestion {
+import java.io.Serializable;
+import java.util.Observable;
 
-    private Question question;
-    private int points;
-    private String questionID;
-    private String questionText;
-    private String testID;
-    private String questionNumber;
-    private String subject;
-    private String courseName;
-    private String lecturer;
-    protected String content;
+public class TestQuestion extends Observable implements Serializable {
 
-    public TestQuestion(){
-    }
-    // Getters and Setters
-    public Question getQuestion() {
-        return question;
-    }
+	private Question question;
+	private int points;
+	private String questionID;
+	private String questionText;
+	private String testID;
+	private String questionNumber;
+	private String subject;
+	private String courseName;
+	private String author;
 
-    public void setQuestion(Question question) {
-        this.question = question;
-    }
+	public TestQuestion(){
+	}
+	// Getters and Setters
+	public Question getQuestion() {
+		return question;
+	}
 
-    public int getPoints() {
-        return points;
-    }
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
 
-    public void setPoints(int points) {
-        this.points = points;
-    }
+	public int getPoints() {
+		return points;
+	}
 
-    public String getQuestionID() {
-        return questionID;
-    }
+	public void setPoints(int points) {
+		this.points = points;
+	}
 
-    public void setQuestionID(String questionID) {
-        this.questionID = questionID;
-    }
+	public String getQuestionID() {
+		return questionID;
+	}
 
-    public String getQuestionText() {
-        return questionText;
-    }
+	public void setQuestionID(String questionID) {
+		this.questionID = questionID;
+	}
 
-    public void setQuestionText(String questionText) {
-        this.questionText = questionText;
-    }
+	public String getQuestionText() {
+		return questionText;
+	}
 
-    public String getTestID() {
-        return testID;
-    }
+	public void setQuestionText(String questionText) {
+		this.questionText = questionText;
+	}
 
-    public void setTestID(String testID) {
-        this.testID = testID;
-    }
-    public String getQuestionNumber() {
-        return questionNumber;
-    }
+	public String getTestID() {
+		return testID;
+	}
 
-    public void setQuestionNumber(String questionNumber) {
-        this.questionNumber = questionNumber;
-    }
+	public void setTestID(String testID) {
+		this.testID = testID;
+	}
+	public String getQuestionNumber() {
+		return questionNumber;
+	}
 
-    public String getSubject() {
-        return subject;
-    }
+	public void setQuestionNumber(String questionNumber) {
+		this.questionNumber = questionNumber;
+	}
 
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
+	public String getSubject() {
+		return subject;
+	}
 
-    public String getCourseName() {
-        return courseName;
-    }
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
+	public String getCourseName() {
+		return courseName;
+	}
 
-    public String getLecturer() {
-        return lecturer;
-    }
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
 
-    public void setLecturer(String lecturer) {
-        this.lecturer = lecturer;
-    }
+	public String getAuthor() {
+		return author;
+	}
 
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 
-    @Override
-    public String toString() {
-        return "Question ID: " + this.questionID + "\nPoints: " + this.points + "\nTeacher Comment: "
-                + "\nStudent Comment: " + "\nTest ID: " + this.testID;
-    }
+	@Override
+	public String toString() {
+		return "TestQuestion{" +
+				"points=" + points +
+				", questionID='" + questionID + '\'' +
+				", questionText='" + questionText + '\'' +
+				", testID='" + testID + '\'' +
+				", questionNumber='" + questionNumber + '\'' +
+				", subject='" + subject + '\'' +
+				", courseName='" + courseName + '\'' +
+				", author='" + author + '\'' +
+				'}';
+	}
 }

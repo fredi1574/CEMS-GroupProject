@@ -29,7 +29,6 @@ public class ScreenManager {
      */
     public static void goToNewScreen(ActionEvent event, String screenPath) {
         showStage(screenPath, PathConstants.iconPath);
-
         // Get the Stage object that contains the source node
         Node source = (Node) event.getSource();
         Stage previousWindow = (Stage) source.getScene().getWindow();

@@ -13,7 +13,7 @@
     <VBox prefHeight="489.0" prefWidth="319.0" styleClass="pageHeader">
         <Pane prefHeight="89.0" prefWidth="319.0" styleClass="pageHeader">
             <ImageView fitHeight="76.0" fitWidth="200.0" layoutX="60.0" layoutY="3.0">
-                <Image url="@../../images/Logo_Transparent2.png"/>
+                <Image url="@../../images/Logo_Transparent_Bright.png"/>
             </ImageView>
         </Pane>
         <Pane>
@@ -31,7 +31,7 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutY="73.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="287.0"
+            <Button alignment="BASELINE_LEFT" layoutY="73.0" mnemonicParsing="false" onAction="#manageTests" prefHeight="39.0" prefWidth="287.0"
                     styleClass="mainMenuButtons" text=" Manage Tests" textFill="WHITE">
                 <font>
                     <Font name="Trebuchet MS" size="25.0"/>

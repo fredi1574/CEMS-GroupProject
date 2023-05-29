@@ -42,26 +42,35 @@ public class MysqlConnection {
         }
     }
 
-	/**
-	 * executes an UPDATE query on the CEMS database
-	 * @param q the given update query
-	 */
-	public static void update(String q) {
-		PreparedStatement stmt;
-		try {
-			stmt = conn.prepareStatement(q);
-			stmt.executeUpdate();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-	}
+    public static void update(String question) {
+        PreparedStatement stmt;
+        try {
+            stmt = conn.prepareStatement(question);
+            stmt.executeUpdate();
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+    }
+    /*
+    public static void AddQuestionsOfTest(ArrayList<TestQuestion> arr) {
+        for(TestQuestion ar : arr) {
+            String question = "INSERT INTO questions (question, points,studentComment,teacherComment,questionID,questionContent,examID) VALUES (, %s, %s)";
+        }
+        PreparedStatement stmt;
+        try {
+            stmt = conn.prepareStatement(question);
+            stmt.executeUpdate();
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+    }
 
 	/**
 	 * gets an array list of the questions from the CEMS database
-	 * @param q the given SELECT query
+	 * @param question the given SELECT query
 	 * @return ArrayList of the questions
 	 */
-	public static ArrayList<Question> getQuestionsTable(String q) {
+	public static ArrayList<Question> getQuestionsTable(String question) {
 		Statement stmt = null;
 		try {
 			stmt = conn.createStatement();
@@ -72,14 +81,14 @@ public class MysqlConnection {
 
 		ArrayList<Question> list = new ArrayList<>();
 		try {
-			ResultSet rs = stmt.executeQuery(q);
+			ResultSet rs = stmt.executeQuery(question);
 			while (rs.next()) {
 				String id = rs.getString("id"); // assuming your table has a column named "id" with type INT
 				String subject = rs.getString("subject");
 				String course_name = rs.getString("courseName");
 				String question_text = rs.getString("questionText");
 				String question_number = rs.getString("questionNumber");
-				String lecturer = rs.getString("lecturer");
+				String author = rs.getString("author");
 				String answer1 = rs.getString("answer1");
 				String answer2 = rs.getString("answer2");
 				String answer3= rs.getString("answer3");
@@ -88,7 +97,7 @@ public class MysqlConnection {
 
 				// public Question(String questionNumber,String questionId,String questionText,
 				// String questionWrittenBy) {
-				Question qeustion = new Question(question_number, id, question_text, lecturer, subject,
+				Question qeustion = new Question(question_number, id, question_text, author, subject,
 						course_name,answer1,answer2,answer3,answer4,correctAnswer);
 				list.add(qeustion);
 
@@ -98,44 +107,8 @@ public class MysqlConnection {
 		}
 		return list;
 	}
-	public static ArrayList<Test> getTestTable(String q) {
-		Statement stmt = null;
 
-		try {
-			stmt = conn.createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		ArrayList<Test> tests = new ArrayList<>();
-		try {
-			ResultSet rs = stmt.executeQuery(q);
-			while (rs.next()) {
-				String testNumber = rs.getString("testNumber"); // assuming your table has a column named "id" with type INT
-				String id = rs.getString("id");
-				String author = rs.getString("author");
-				String testDuration = rs.getString("testDuration");
-				String courseName = rs.getString("courseName");
-				String subject = rs.getString("subject");
-				String teacherComment = rs.getString("teacherComment");
-				String testType = rs.getString("testType");
-				String studentComment = rs.getString("studentComment");
-				String year = rs.getString("year");
-				String session = rs.getString("session");
-				String semester = rs.getString("semester");
-				TestTypeEnum testTypeEnum = (Objects.equals(testType, "C") ? TestTypeEnum.COMPUTERIZED : TestTypeEnum.MANUAL);
-				Test test = new Test(testNumber, id, author, testDuration, courseName,
-						teacherComment, testTypeEnum, studentComment,subject,year,session,semester);
-				tests.add(test);
-
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return tests;
-	}
-
-	public static ArrayList<Course> getCourseList(String q) {
+	public static ArrayList<Course> getCourseList(String question) {
 		Statement stmt = null;
 		try {
 			stmt = conn.createStatement();
@@ -146,7 +119,7 @@ public class MysqlConnection {
 
 		ArrayList<Course> coursesList = new ArrayList<>();
 		try {
-			ResultSet rs = stmt.executeQuery(q);
+			ResultSet rs = stmt.executeQuery(question);
 			while (rs.next()) {
 
 				String subjectID = rs.getString("subjectID"); // assuming your table has a column named "id" with type INT
@@ -163,7 +136,7 @@ public class MysqlConnection {
 		}
 		return coursesList;
 	}
-	public static ArrayList<Subject> getSubjectList(String q) {
+	public static ArrayList<Subject> getSubjectList(String question) {
 		Statement stmt = null;
 		try {
 			stmt = conn.createStatement();
@@ -174,7 +147,7 @@ public class MysqlConnection {
 
 		ArrayList<Subject> subjectsList = new ArrayList<>();
 		try {
-			ResultSet rs = stmt.executeQuery(q);
+			ResultSet rs = stmt.executeQuery(question);
 			while (rs.next()) {
 
 				String subjectID = rs.getString("subjectID"); // assuming your table has a column named "id" with type INT
@@ -224,19 +197,84 @@ public class MysqlConnection {
 
 
 
-	/**
-	 * this method closes the connection to the DB and the server
-	 */
-	public static void closeConnection() {
-		if (conn == null)
-			System.out.println("Server Connection has been closed");
-		else {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// ignore
-			}
-		}
-	}
+    public static ArrayList<Course> getCourseTable(String question) {
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Course> courses = new ArrayList<>();
+        try {
+            ResultSet rs = stmt.executeQuery(question);
+            while (rs.next()) {
+                String subject_id = rs.getString("subjectID"); // assuming your table has a column named "id" with type INT
+                String course_id = rs.getString("courseID");
+                String subject_name = rs.getString("subjectName");
+                String course_name = rs.getString("courseName");
+                Course course = new Course(subject_id, course_id, subject_name, course_name);
+                courses.add(course);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return courses;
+    }
+
+    public static ArrayList<Test> getTestTable(String question) {
+        System.out.println(question);
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Test> tests = new ArrayList<>();
+        try {
+            ResultSet rs = stmt.executeQuery(question);
+            while (rs.next()) {
+                String testNumber = rs.getString("testNumber"); // assuming your table has a column named "id" with type INT
+                String id = rs.getString("id");
+                String author = rs.getString("author");
+                String testDuration = rs.getString("testDuration");
+                String courseName = rs.getString("courseName");
+                String subject = rs.getString("subject");
+                String teacherComment = rs.getString("teacherComment");
+                String testType = rs.getString("testType");
+                String studentComment = rs.getString("studentComment");
+                String year = rs.getString("year");
+                String session = rs.getString("session");
+                String semester = rs.getString("semester");
+                TestTypeEnum testTypeEnum = (Objects.equals(testType, "C") ? TestTypeEnum.C : TestTypeEnum.M);
+                Test test = new Test(testNumber, id, author, testDuration, courseName,
+                        teacherComment, testTypeEnum, studentComment,subject,year,session,semester);
+                tests.add(test);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println(tests);
+        return tests;
+    }
+
+
+    /**
+     * this method closes the connection to the DB and the server
+     */
+    public static void closeConnection() {
+        if (conn == null)
+            System.out.println("Server Connection has been closed");
+        else {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                // ignore
+            }
+        }
+    }
 }
 	

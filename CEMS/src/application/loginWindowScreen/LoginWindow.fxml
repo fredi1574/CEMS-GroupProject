@@ -24,10 +24,10 @@
                 </font>
             </Button>
             <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="303.0" layoutY="113.0">
-                <Image url="@../../images/icons8-user-32.png"/>
+                <Image url="@../../images/username.png"/>
             </ImageView>
             <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="305.0" layoutY="154.0">
-                <Image url="@../../images/icons8-password-key-2.png"/>
+                <Image url="@../../images/password.png"/>
             </ImageView>
             <Line endX="101.79998779296875" endY="-10.000011444091797" layoutX="397.0" layoutY="57.0"
                   startX="-97.4000244140625" startY="-10.000011444091797"/>

@@ -7,11 +7,11 @@ import java.util.Observable;
 
 public class Test extends Observable implements Serializable {
     private String id;
-    private final String testNumber;
-    private final String author;
+    private String testNumber;
+    private String author;
     private String testDuration;
-    private final String subject;
-    private final String courseName;
+    private String subject;
+    private String courseName;
     private String teacherComments;
     private String studentComments;
     private TestTypeEnum testType;
@@ -21,9 +21,9 @@ public class Test extends Observable implements Serializable {
     private ObservableList<TestQuestion> questions;
 
     //constructor for fully created test
-    public Test(String testNumber, String id, String author, String testDuration, String courseName,
-                String teacherComments, TestTypeEnum TestType, String studentComments, String subject,
-                String year, String session, String semester) {
+        public Test(String testNumber, String id, String author, String testDuration,  String courseName,
+                String teacherComments, TestTypeEnum TestType, String studentComments,  String subject,
+                String year,String session,String semester) {
         this.id = id;
         this.testNumber = testNumber;
         this.author = author;
@@ -86,11 +86,17 @@ public class Test extends Observable implements Serializable {
         return testNumber;
     }
 
+    public void setTestNumber(String testNumber) {
+        this.testNumber = testNumber;
+    }
 
     public String getAuthor() {
         return author;
     }
 
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
     public String getTestDuration() {
         return testDuration;
@@ -102,6 +108,10 @@ public class Test extends Observable implements Serializable {
 
     public String getCourseName() {
         return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
     public String getTeacherComments() {
@@ -131,5 +141,10 @@ public class Test extends Observable implements Serializable {
     public String getSubject() {
         return subject;
     }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
 
 }

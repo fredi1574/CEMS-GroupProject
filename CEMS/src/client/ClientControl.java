@@ -36,12 +36,12 @@ public class ClientControl implements ChatIF{
 		return  response;
 	}
 	public List<Object> getCourses(){
-		response = client.coursesList;
+		response = client.courses;
 		return  response;
 	}
 
 	public   List<Object> getSubjects(){
-		response = client.subjectList;
+		response = client.subjects;
 		return  response;
 	}
 	public   List<Object> getTests(){
@@ -52,7 +52,6 @@ public class ClientControl implements ChatIF{
 		response = client.allQuestions;
 		return  response;
 	}
-
 
 	//Instance methods ************************************************
 

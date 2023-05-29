@@ -1,7 +1,7 @@
 package entity;
 
 public class TestDetailsReport {
-
+	
 	private String examID;
 	private String examSubject;
 	private String examCourse;
@@ -11,7 +11,7 @@ public class TestDetailsReport {
 
 	/**
 	 * Constructs a ReportExamDetails object with the specified parameters.
-	 *
+	 * 
 	 * @param examID       the ID of the exam
 	 * @param examSubject  the subject of the exam
 	 * @param examCourse   the course of the exam
@@ -30,7 +30,7 @@ public class TestDetailsReport {
 
 	/**
 	 * Returns the ID of the exam.
-	 *
+	 * 
 	 * @return the ID of the exam
 	 */
 	public String getExamID() {
@@ -39,7 +39,7 @@ public class TestDetailsReport {
 
 	/**
 	 * Sets the ID of the exam.
-	 *
+	 * 
 	 * @param examID the ID of the exam to set
 	 */
 	public void setExamID(String examID) {
@@ -48,7 +48,7 @@ public class TestDetailsReport {
 
 	/**
 	 * Returns the subject of the exam.
-	 *
+	 * 
 	 * @return the subject of the exam
 	 */
 	public String getExamSubject() {
@@ -57,7 +57,7 @@ public class TestDetailsReport {
 
 	/**
 	 * Sets the subject of the exam.
-	 *
+	 * 
 	 * @param examSubject the subject of the exam to set
 	 */
 	public void setExamSubject(String examSubject) {
@@ -66,7 +66,7 @@ public class TestDetailsReport {
 
 	/**
 	 * Returns the course of the exam.
-	 *
+	 * 
 	 * @return the course of the exam
 	 */
 	public String getExamCourse() {
@@ -75,7 +75,7 @@ public class TestDetailsReport {
 
 	/**
 	 * Sets the course of the exam.
-	 *
+	 * 
 	 * @param examCourse the course of the exam to set
 	 */
 	public void setExamCourse(String examCourse) {
@@ -84,7 +84,7 @@ public class TestDetailsReport {
 
 	/**
 	 * Returns the average value of the exam.
-	 *
+	 * 
 	 * @return the average value of the exam
 	 */
 	public String getAvg() {
@@ -93,7 +93,7 @@ public class TestDetailsReport {
 
 	/**
 	 * Sets the average value of the exam.
-	 *
+	 * 
 	 * @param avg the average value of the exam to set
 	 */
 	public void setAvg(String avg) {
@@ -102,7 +102,7 @@ public class TestDetailsReport {
 
 	/**
 	 * Returns the median value of the exam.
-	 *
+	 * 
 	 * @return the median value of the exam
 	 */
 	public String getMedian() {
@@ -111,7 +111,7 @@ public class TestDetailsReport {
 
 	/**
 	 * Sets the median value of the exam.
-	 *
+	 * 
 	 * @param median the median value of the exam to set
 	 */
 	public void setMedian(String median) {
