@@ -2,9 +2,7 @@ package client;
 
 import common.ChatIF;
 import common.MsgHandler;
-import entity.Subject;
 import entity.User;
-import util.showError;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,36 +36,52 @@ public class Client extends AbstractClient {
         switch (messageFromServer.getType()) {
             case Connected:
                 break;
+
             case Disconnected:
                 System.exit(0);
                 break;
+
             case allQuestionImported:
                 this.allQuestions = (List<Object>) messageFromServer.getMsg();
                 break;
+
             case QuestionDeleted:
                 break;
+
             case LoginResponse:
                 user = (User) messageFromServer.getMsg();
                 break;
+
             case QuestionsResponse:
                 this.questions = (List<Object>) messageFromServer.getMsg();
                 break;
+
             case CoursesimportSuccess:
                 this.courses = (List<Object>) messageFromServer.getMsg();
                 break;
+
             case QuestionUpdated:
                 break;
+
             case QuestionAddedSuccessfuly:
                 break;
+
             case SubjectsimportSuccess:
                 this.subjects = (List<Object>) messageFromServer.getMsg();
+                break;
+
+            case CourseTableResponse:
+                courses = (ArrayList<Object>) ((MsgHandler<Object>) messageFromServer).getMsg();
+                this.courses = (List<Object>) messageFromServer.getMsg();
                 break;
             case TestTableResponse:
                 this.tests = (List<Object>) messageFromServer.getMsg();
                 System.out.println(tests);
                 break;
+
             case AddNewTestResponse:
                 break;
+
             case AddNewTestQuestionsResponse:
                 break;
 

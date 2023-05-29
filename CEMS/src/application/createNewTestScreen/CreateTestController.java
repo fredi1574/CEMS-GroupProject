@@ -1,5 +1,4 @@
 package application.createNewTestScreen;
-import application.createNewTestScreen.pickQuestionsScreen.PickQuestionsController;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
@@ -44,9 +43,11 @@ public class CreateTestController {
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
+
         MsgHandler getTableCourse = new MsgHandler(TypeMsg.GetCourseTable, null);
         ClientUI.chat.accept(getTableCourse);
         List<Object> courseObjectsList = ClientUI.chat.getCourses();
+
         ObservableList<Course> questionList = FXCollections.observableArrayList((List) courseObjectsList);
 
         ObservableList<String> columnList = FXCollections.observableArrayList();

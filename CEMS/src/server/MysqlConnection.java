@@ -4,7 +4,6 @@ import entity.*;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 
@@ -51,26 +50,13 @@ public class MysqlConnection {
             e1.printStackTrace();
         }
     }
-    /*
-    public static void AddQuestionsOfTest(ArrayList<TestQuestion> arr) {
-        for(TestQuestion ar : arr) {
-            String question = "INSERT INTO questions (question, points,studentComment,teacherComment,questionID,questionContent,examID) VALUES (, %s, %s)";
-        }
-        PreparedStatement stmt;
-        try {
-            stmt = conn.prepareStatement(question);
-            stmt.executeUpdate();
-        } catch (SQLException e1) {
-            e1.printStackTrace();
-        }
-    }
 
 	/**
 	 * gets an array list of the questions from the CEMS database
-	 * @param question the given SELECT query
+	 * @param query the given SELECT query
 	 * @return ArrayList of the questions
 	 */
-	public static ArrayList<Question> getQuestionsTable(String question) {
+	public static ArrayList<Question> getQuestionsTable(String query) {
 		Statement stmt = null;
 		try {
 			stmt = conn.createStatement();
@@ -81,7 +67,7 @@ public class MysqlConnection {
 
 		ArrayList<Question> list = new ArrayList<>();
 		try {
-			ResultSet rs = stmt.executeQuery(question);
+			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				String id = rs.getString("id"); // assuming your table has a column named "id" with type INT
 				String subject = rs.getString("subject");
@@ -108,7 +94,7 @@ public class MysqlConnection {
 		return list;
 	}
 
-	public static ArrayList<Course> getCourseList(String question) {
+	public static ArrayList<Course> getCourseList(String query) {
 		Statement stmt = null;
 		try {
 			stmt = conn.createStatement();
@@ -119,7 +105,7 @@ public class MysqlConnection {
 
 		ArrayList<Course> coursesList = new ArrayList<>();
 		try {
-			ResultSet rs = stmt.executeQuery(question);
+			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
 
 				String subjectID = rs.getString("subjectID"); // assuming your table has a column named "id" with type INT
@@ -136,7 +122,7 @@ public class MysqlConnection {
 		}
 		return coursesList;
 	}
-	public static ArrayList<Subject> getSubjectList(String question) {
+	public static ArrayList<Subject> getSubjectList(String query) {
 		Statement stmt = null;
 		try {
 			stmt = conn.createStatement();
@@ -147,7 +133,7 @@ public class MysqlConnection {
 
 		ArrayList<Subject> subjectsList = new ArrayList<>();
 		try {
-			ResultSet rs = stmt.executeQuery(question);
+			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
 
 				String subjectID = rs.getString("subjectID"); // assuming your table has a column named "id" with type INT
@@ -165,8 +151,7 @@ public class MysqlConnection {
 
 	public static Object authenticateUser(String username, String password) {
 		try {
-			//connectToDb("Aa123456");
-			PreparedStatement statement = conn.prepareStatement("SELECT id, firstName, lastName, email, role FROM users WHERE username = ? AND password = ?");
+			PreparedStatement statement = conn.prepareStatement("SELECT id, firstName, lastName, email, role FROM user WHERE username = ? AND password = ?");
 			statement.setString(1, username);
 			statement.setString(2, password);
 
@@ -197,7 +182,7 @@ public class MysqlConnection {
 
 
 
-    public static ArrayList<Course> getCourseTable(String question) {
+    public static ArrayList<Course> getCourseTable(String query) {
         Statement stmt = null;
 
         try {
@@ -207,24 +192,22 @@ public class MysqlConnection {
         }
         ArrayList<Course> courses = new ArrayList<>();
         try {
-            ResultSet rs = stmt.executeQuery(question);
+            ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String subject_id = rs.getString("subjectID"); // assuming your table has a column named "id" with type INT
-                String course_id = rs.getString("courseID");
-                String subject_name = rs.getString("subjectName");
-                String course_name = rs.getString("courseName");
-                Course course = new Course(subject_id, course_id, subject_name, course_name);
+                String subjectID = rs.getString("subjectID"); // assuming your table has a column named "id" with type INT
+                String courseID = rs.getString("courseID");
+                String subjectName = rs.getString("subjectName");
+                String courseName = rs.getString("courseName");
+                Course course = new Course(subjectID, courseID, subjectName, courseName);
                 courses.add(course);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return courses;
     }
 
-    public static ArrayList<Test> getTestTable(String question) {
-        System.out.println(question);
+    public static ArrayList<Test> getTestTable(String query) {
         Statement stmt = null;
 
         try {
@@ -234,7 +217,7 @@ public class MysqlConnection {
         }
         ArrayList<Test> tests = new ArrayList<>();
         try {
-            ResultSet rs = stmt.executeQuery(question);
+            ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 String testNumber = rs.getString("testNumber"); // assuming your table has a column named "id" with type INT
                 String id = rs.getString("id");

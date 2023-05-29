@@ -2,16 +2,13 @@ package application.loginWindowScreen;
 
 import client.Client;
 import client.ClientUI;
-import com.mysql.cj.log.Log;
 import common.MsgHandler;
 import common.TypeMsg;
-import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import server.MysqlConnection;
 import util.*;
 
 import java.util.ArrayList;
@@ -40,6 +37,7 @@ public class LoginWindowController {
      * Authenticates the user and redirects to the appropriate screen based on the user's role.
      * If the username or password fields are empty, it displays an error message.
      * If the authentication fails, it displays an error message.
+     *
      * @param event The event triggered by the login button click.
      */
     @FXML
@@ -67,14 +65,14 @@ public class LoginWindowController {
                     case "Lecturer":
                         ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
                         break;
-                    case "Head Of Department":
+                    case "Head of Department":
                         ScreenManager.goToNewScreen(event, PathConstants.mainMenuHeadOfDepartPath);
                         break;
-                    case "Head Of Department and Lecturer":
+                    case "Head of Department/Lecturer":
                         ScreenManager.goToNewScreen(event, PathConstants.PickRolePath);
                         break;
                     default:
-                        showError.showErrorPopup("Invalid username or password.");
+                        showError.showErrorPopup("No such role.");
                         break;
                 }
             }
@@ -94,6 +92,7 @@ public class LoginWindowController {
     /**
      * Event handler for close button click.
      * Closes the application window.
+     *
      * @param event The event triggered by the close button click.
      */
     @FXML
@@ -104,6 +103,7 @@ public class LoginWindowController {
     /**
      * Event handler for minimize button click.
      * Minimizes the application window.
+     *
      * @param event The event triggered by the minimize button click.
      */
     @FXML

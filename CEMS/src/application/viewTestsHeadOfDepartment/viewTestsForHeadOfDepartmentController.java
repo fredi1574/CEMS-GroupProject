@@ -4,7 +4,6 @@ import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
-import entity.Question;
 import entity.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

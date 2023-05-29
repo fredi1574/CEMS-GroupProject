@@ -1,22 +1,17 @@
 package application.manageQuestionsScreen;
 
-import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
 import entity.Question;
-import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import util.*;
-
-import java.util.ArrayList;
 
 public class UpdateQuestionController {
 

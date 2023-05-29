@@ -1,9 +1,7 @@
 package application.createNewTestScreen.pickQuestionsScreen.questionPreviewPopup;
-import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import util.ExitButton;
 import util.MinimizeButton;
 import util.PathConstants;

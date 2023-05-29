@@ -6,7 +6,6 @@ import common.MsgHandler;
 import common.TypeMsg;
 import entity.Report;
 import entity.Subject;
-import entity.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,7 +18,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import util.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ViewReportsController {

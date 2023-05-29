@@ -6,7 +6,6 @@ import common.TypeMsg;
 import entity.StateManagement;
 import entity.Test;
 import entity.TestQuestion;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

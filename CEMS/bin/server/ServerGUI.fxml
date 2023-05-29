@@ -120,7 +120,7 @@
                     <Font name="Trebuchet MS Bold" size="13.0" />
                 </font>
             </Button>
-            <Label prefHeight="33.0" prefWidth="89.0" text="server.Console:" textFill="#306ebd">
+            <Label prefHeight="33.0" prefWidth="157.0" text="Server console:" textFill="#306ebd">
                 <font>
                     <Font name="Trebuchet MS Bold" size="21.0" />
                 </font>
