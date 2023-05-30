@@ -4,6 +4,7 @@ import client.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import util.*;
 
@@ -13,7 +14,8 @@ public class mainMenuHeadOfDepartmentController {
     private AnchorPane header;
     @FXML
     private Text fullNameText;
-
+    @FXML
+    private Pane backPane;
     /**
      * Initializes the main menu screen for the head of department.
      * Enables dragging and dropping of the application window using the header pane.
@@ -22,6 +24,13 @@ public class mainMenuHeadOfDepartmentController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         fullNameText.setText(Client.user.getFullName());
+        backPane.setVisible(false);
+        if (Client.user.getRole().equals("Head of Department/Lecturer")) {
+            backPane.setVisible(true);
+        }
+    }
+    public void backToPickaRole(ActionEvent event) {
+        ScreenManager.goToNewScreen(event, PathConstants.PickRolePath);
     }
 
     /**

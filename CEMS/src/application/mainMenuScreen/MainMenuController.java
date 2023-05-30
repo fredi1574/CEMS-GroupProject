@@ -3,7 +3,9 @@ package application.mainMenuScreen;
 import client.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import util.ExitButton;
 import util.MinimizeButton;
 import util.PathConstants;
@@ -16,6 +18,9 @@ public class MainMenuController {
     private Text usernameText;
     @FXML
     private AnchorPane header;
+    @FXML
+    private Pane backPane;
+
 
     /**
      * Initializes the main menu screen.
@@ -25,7 +30,14 @@ public class MainMenuController {
     public void initialize() {
         usernameText.setText(Client.user.getFullName());
         ScreenManager.dragAndDrop(header);
+        backPane.setVisible(false);
+        if (Client.user.getRole().equals("Head of Department/Lecturer")) {
+            backPane.setVisible(true);
+        }
     }
+        public void backToPickaRole(ActionEvent event) {
+            ScreenManager.goToNewScreen(event, PathConstants.PickRolePath);
+        }
 
     /**
      * Logs out the user and navigates back to the login screen.

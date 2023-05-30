@@ -51,7 +51,7 @@ public class ManageQuestionsController {
         // Creates the question table
         ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.getQuestions());
         ObservableList<String> columns = FXCollections.observableArrayList();
-        columns.addAll("Question Number", "ID", "Subject", "Course Name", "Question Text", "Lecturer");
+        columns.addAll("Question Number", "ID", "Subject", "Course Name", "Question Text", "Author");
         TableManager.createTable(manageQuestionsTableView, columns);
         TableManager.importData(manageQuestionsTableView, questions);
         TableManager.addDoubleClickFunctionality(manageQuestionsTableView, PathConstants.updateQuestionPath, this::setFunctions);
