@@ -38,11 +38,11 @@ public class viewQuestionHeadOfDepartmentController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getFullName());
-        MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestions, Client.user.getUserName());
+        MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestionsBySubject, Client.user.getUserName());
         ClientUI.chat.accept(getTable);
 
         // Creates the question table
-        ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.getQuestions());
+        ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.GetQuestionsBySubject());
         ObservableList<String> columns = FXCollections.observableArrayList();
         columns.addAll("Question Number", "ID", "Subject", "Course Name", "Question Text", "Author");
         TableManager.createTable(manageQuestionsTableView, columns);

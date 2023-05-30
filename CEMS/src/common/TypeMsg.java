@@ -12,13 +12,13 @@ public enum TypeMsg {
         public String toString() {
             return "Connected";
         }
-    }, GetQuestions {
+    }, GetQuestionsBySubject {
         public String toString() {
-            return "User asked for specific table questions";
+            return "User asked for table questions of specific Subject";
         }
-    }, QuestionsResponse {
+    }, QuestionsBySubjectImported {
         public String toString() {
-            return "Here is the questions table";
+            return "imported all questions of specific subject";
         }
     }, GetAllQuestions {
         public String toString() {

@@ -30,7 +30,7 @@ public class ClientControl implements ChatIF{
 	}
 
 	private List<Object> response;
-	public   List<Object> getQuestions(){
+	public   List<Object> GetQuestionsBySubject(){
 		response = client.questions;
 		return  response;
 	}

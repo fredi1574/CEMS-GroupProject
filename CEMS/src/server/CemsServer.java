@@ -134,7 +134,7 @@ public class CemsServer extends AbstractServer {
                     client.sendToClient(new MsgHandler<>(TypeMsg.Disconnected, null));
                     break;
 
-                case GetQuestions:
+                case GetQuestionsBySubject:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
                     ArrayList<Question> list = MysqlConnection.getQuestionsTable("SELECT obj.* " +
@@ -142,7 +142,7 @@ public class CemsServer extends AbstractServer {
                             "JOIN lecturersubject ls ON obj.subject = ls.subjectID " +
                             "JOIN user u ON u.id = ls.id " +
                             "WHERE u.username = + '" + obj + "'");
-                    client.sendToClient(new MsgHandler<>(TypeMsg.QuestionsResponse, list));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.QuestionsBySubjectImported, list));
                     break;
 
                 case EditQuestion:

@@ -52,7 +52,7 @@ public class Client extends AbstractClient {
                 user = (User) messageFromServer.getMsg();
                 break;
 
-            case QuestionsResponse:
+            case QuestionsBySubjectImported:
                 this.questions = (List<Object>) messageFromServer.getMsg();
                 break;
 
