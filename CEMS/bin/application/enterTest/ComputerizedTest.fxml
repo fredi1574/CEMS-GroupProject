@@ -19,7 +19,7 @@
          <children>
             <ImageView fitHeight="82.0" fitWidth="241.0" layoutX="14.0" layoutY="9.0" preserveRatio="true">
                <image>
-                  <Image url="@../../images/Logo_Transparent2.png" />
+                  <Image url="@../../images/Logo_Transparent_Bright.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" layoutX="194.0" layoutY="4.0" prefHeight="91.0" prefWidth="501.0" style="-fx-text-fill: #e6eef7;" text="Computerized Test" textFill="#fafafa">
@@ -29,7 +29,7 @@
             </Label>
             <ImageView layoutX="769.0" layoutY="43.0">
                <image>
-                  <Image url="@../../images/icons8-person-16.png" />
+                  <Image url="@../../images/avatar.png" />
                </image>
             </ImageView>
             <Text fx:id="fullNameText" fill="#3b3131" layoutX="792.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true" wrappingWidth="52.798828125">

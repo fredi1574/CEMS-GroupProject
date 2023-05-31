@@ -18,7 +18,7 @@
         </font>
         <graphic>
             <ImageView fitHeight="13.0" fitWidth="15.0">
-                <Image url="@../../images/icons8-delete-24.png" />
+                <Image url="@../../images/delete.png" />
             </ImageView>
         </graphic>
     </Button>
@@ -28,7 +28,7 @@
         </font>
         <graphic>
             <ImageView fitHeight="18.0" fitWidth="20.0" preserveRatio="true">
-                <Image url="@../../images/icons8-add-24.png" />
+                <Image url="@../../images/add_icon.png" />
             </ImageView>
         </graphic>
     </Button>
@@ -50,10 +50,10 @@
             </font>
         </Button>
         <ImageView layoutX="714.0" layoutY="45.0">
-            <Image url="@../../images/icons8-person-16.png" />
+            <Image url="@../../images/avatar.png" />
         </ImageView>
         <ImageView fitHeight="73.0" fitWidth="196.0" layoutX="14.0" layoutY="7.0" preserveRatio="true">
-            <Image url="@../../images/Logo_Transparent2.png" />
+            <Image url="@../../images/Logo_Transparent_Bright.png" />
         </ImageView>
     </AnchorPane>
     <TextField fx:id="searchField" layoutX="61.0" layoutY="111.0" onAction="#initialize" prefHeight="28.0" prefWidth="515.0" promptText="Search a question" />
@@ -74,6 +74,6 @@
     <Button layoutX="734.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
     <Label layoutX="26.0" layoutY="145.0" text="*Double click on a question to update it" />
     <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="34.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../../images/icons8-search-24.png" />
+        <Image url="@../../images/search.png" />
     </ImageView>
 </AnchorPane>
