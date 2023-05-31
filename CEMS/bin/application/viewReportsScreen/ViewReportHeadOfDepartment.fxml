@@ -5,6 +5,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -41,22 +43,8 @@
       </AnchorPane>
       <Button layoutX="17.0" layoutY="412.0" mnemonicParsing="false" onAction="#goBackToPreviousScreen" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons" />
       <Label layoutX="36.0" layoutY="458.0" text="Back" />
-      <Button layoutX="61.0" layoutY="221.0" mnemonicParsing="false" onAction="#goToReportByLecturer" prefHeight="72.0" prefWidth="191.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="Show Report by Lecturer " textAlignment="CENTER">
-         <font>
-            <Font size="13.0" />
-         </font></Button>
       <Button layoutX="716.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
       <Button layoutX="683.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
-      <Button layoutX="284.0" layoutY="222.0" mnemonicParsing="false" onAction="#goToReportByCourse" prefHeight="72.0" prefWidth="191.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="Show Report by Course" textAlignment="CENTER">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Button>
-      <Button layoutX="516.0" layoutY="222.0" mnemonicParsing="false" onAction="#goToReportByStudent" prefHeight="72.0" prefWidth="191.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="Show Report by Student" textAlignment="CENTER">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Button>
       <Button contentDisplay="CENTER" layoutX="22.0" layoutY="404.0" minWidth="35.0" mnemonicParsing="false" onAction="#goBackToPreviousScreen" prefHeight="54.0" prefWidth="54.0" styleClass="subButtons" textFill="#0d0d0d">
          <graphic>
             <ImageView fitHeight="36.0" fitWidth="38.0">
@@ -66,5 +54,33 @@
             </ImageView>
          </graphic>
       </Button>
+      <VBox layoutX="217.0" layoutY="90.0" prefHeight="368.0" prefWidth="346.0">
+         <children>
+            <HBox prefHeight="30.0" prefWidth="200.0" />
+            <Button mnemonicParsing="false" onAction="#goToReportByLecturer" prefHeight="60.0" prefWidth="400.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="Show Report by Lecturer " textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <HBox prefHeight="30.0" prefWidth="200.0" />
+            <Button mnemonicParsing="false" onAction="#goToReportByCourse" prefHeight="60.0" prefWidth="400.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="Show Report by Course" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <HBox prefHeight="30.0" prefWidth="200.0" />
+            <Button mnemonicParsing="false" onAction="#goToReportByStudent" prefHeight="60.0" prefWidth="346.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="Show Report by Student" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <HBox prefHeight="30.0" prefWidth="200.0" />
+            <Button mnemonicParsing="false" onAction="#goToReportByStudent" prefHeight="60.0" prefWidth="346.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="Show General Report" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
