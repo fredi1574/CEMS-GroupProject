@@ -35,9 +35,22 @@ public class ViewReportHeadOfDepartmentController {
     }
 
     @FXML
+    void goToReportByLecturer(ActionEvent event) {
+        ScreenManager.goToNewScreen(event, PathConstants.EnterReportByLecturerForHeadOfDepartmentPath);
+    }
+    @FXML
+    void goToReportByCourse(ActionEvent event) {
+        ScreenManager.goToNewScreen(event, PathConstants.EnterReportByCourseForHeadOfDepartmentPath);
+    }
+    @FXML
+    void goToReportByStudent(ActionEvent event) {
+        ScreenManager.goToNewScreen(event, PathConstants.EnterReportByStudentForHeadOfDepartmentPath);
+    }
+    @FXML
     void goBackToPreviousScreen(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.mainMenuHeadOfDepartPath);
     }
+
 
     @FXML
     void minimizeWindow(ActionEvent event) {

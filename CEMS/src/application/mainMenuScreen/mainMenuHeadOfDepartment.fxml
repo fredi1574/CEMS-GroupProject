@@ -44,7 +44,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" layoutY="71.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" Manage Requests" textFill="WHITE">
+                  <Button alignment="BASELINE_LEFT" layoutY="71.0" mnemonicParsing="false" onAction="#enterManageRequestHeadOfDepart" prefHeight="39.0" prefWidth="287.0" styleClass="mainMenuButtons" text=" Manage Requests" textFill="WHITE">
                      <font>
                         <Font name="Trebuchet MS" size="25.0" />
                      </font>

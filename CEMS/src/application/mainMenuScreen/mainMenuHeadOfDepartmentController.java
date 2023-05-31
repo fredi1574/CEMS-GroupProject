@@ -67,6 +67,9 @@ public class mainMenuHeadOfDepartmentController {
     public void viewQuestionsHeadOfDepart(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.ViewQuestionsHeadOfDepartmentPath);
     }
+    @FXML
+    public void enterManageRequestHeadOfDepart(ActionEvent event) {
+        ScreenManager.goToNewScreen(event, PathConstants.EnterManageRequestsHeadOfDepart);}
 
 
     /**

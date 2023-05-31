@@ -30,5 +30,14 @@ public class PathConstants {
     public  static final String ViewQuestionsHeadOfDepartmentPath = "/application/manageQuestionsScreen/viewQuestionHeadOfDepartment.fxml";
     public  static final String ViewTestHeadOfDepartmentPath = "/application/viewTestsHeadOfDepartment/viewTestsForHeadOfDepartment.fxml";
     public  static final String ViewQuestionPath = "/application/manageQuestionsScreen/viewQuestion.fxml";
+    public  static final String EnterManageRequestsHeadOfDepart = "/application/manageRequestsHeadOfDepart/manageRequests.fxml";
+    public  static final String EnterReportByLecturerForHeadOfDepartmentPath ="/application/viewReportsScreen/ViewSpecificReportHeadOfDepart/showReportByLecturer.fxml";
 
+    public  static final String EnterReportByCourseForHeadOfDepartmentPath ="/application/viewReportsScreen/ViewSpecificReportHeadOfDepart/showReportByCourse.fxml";
+
+    public  static final String EnterReportByStudentForHeadOfDepartmentPath ="/application/viewReportsScreen/ViewSpecificReportHeadOfDepart/showReportByStudent.fxml";
+
+    public  static final String EnterReportByCoursePath = "/application/viewReportsScreen/ViewSpecificReportHeadOfDepart/openRepoGraphs/openReportByCourse.fxml";
+    public  static final String EnterReportByLecturerPath = "/application/viewReportsScreen/ViewSpecificReportHeadOfDepart/openRepoGraphs/openReportByLecturer.fxml";
+    public  static final String EnterReportByStudentPath = "/application/viewReportsScreen/ViewSpecificReportHeadOfDepart/openRepoGraphs/openReportByStudent.fxml";
 }
