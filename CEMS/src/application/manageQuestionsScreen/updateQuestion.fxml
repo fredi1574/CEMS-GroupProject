@@ -23,7 +23,7 @@
         <Button layoutX="772.0" layoutY="12.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closePopUp" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
         <Button layoutX="733.0" layoutY="12.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
         <ImageView fitHeight="78.0" fitWidth="201.0" layoutX="23.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../../images/Logo_Transparent2.png" />
+            <Image url="@../../images/Logo_Transparent_Bright.png" />
         </ImageView>
     </AnchorPane>
     <AnchorPane layoutY="113.0" minHeight="0.0" minWidth="0.0" prefHeight="669.0" prefWidth="810.0" style="-fx-border-color: #1d416e; -fx-border-width: 0 3 3 3;" styleClass="backgroundColor">

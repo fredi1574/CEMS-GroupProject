@@ -21,7 +21,7 @@
                <children>
                   <ImageView fitHeight="76.0" fitWidth="200.0" layoutX="60.0" layoutY="3.0">
                      <image>
-                        <Image url="@../../images/Logo_Transparent2.png" />
+                        <Image url="@../../images/Logo_Transparent_Bright.png" />
                      </image>
                   </ImageView>
                </children>
@@ -54,7 +54,7 @@
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="31.0">
                            <image>
-                              <Image url="@../../images/icons8-documents-50.png" />
+                              <Image url="@../../images/saveAndSubmit.png" />
                            </image>
                         </ImageView>
                      </graphic>
