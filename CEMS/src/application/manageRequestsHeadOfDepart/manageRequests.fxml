@@ -57,7 +57,7 @@
                   <Font size="11.0" />
                </font>
             </Label>
-            <TableView fx:id="questionDBTableView" prefHeight="326.0" prefWidth="724.0" />
+            <TableView fx:id="RequestsDBTableView" prefHeight="326.0" prefWidth="724.0" />
             <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="431.0" spacing="20.0">
                <opaqueInsets>
                   <Insets />
@@ -66,8 +66,8 @@
                   <Insets top="3.0" />
                </padding>
                <children>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" styleClass="regularButtons" text="Approve" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" styleClass="regularButtons" text="Decline" />
+                  <Button fx:id="approveBtn" mnemonicParsing="false" onAction="#approveRequest" prefHeight="25.0" prefWidth="105.0" styleClass="regularButtons" text="Approve" />
+                  <Button fx:id="declineBtn" mnemonicParsing="false" onAction="#declineRequest" prefHeight="25.0" prefWidth="105.0" styleClass="regularButtons" text="Decline" />
                </children>
             </HBox>
          </children>

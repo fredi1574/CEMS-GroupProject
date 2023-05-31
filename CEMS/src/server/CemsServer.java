@@ -301,6 +301,32 @@ public class CemsServer extends AbstractServer {
                         client.sendToClient(new MsgHandler<>(TypeMsg.AddNewTestQuestionsResponse, null));
                         break;
                     }
+                case GetRequestsBySubject:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    ArrayList<TestRequestForApproval> listOfRequests = MysqlConnection.getRequestsTable("SELECT tr.* " +
+                            "FROM testrequest AS tr " +
+                            "JOIN lecturersubject AS ls ON tr.subject = ls.subjectid " +
+                            "JOIN user AS u ON ls.id = u.id " +
+                            "WHERE u.username =  + '" + obj + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.RequestImportedSuccessfully, listOfRequests));
+                    break;
+                case ApproveRequestByHeadOfDepartment:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    String approvedRequest = "DELETE FROM cems.testrequest WHERE id='" + obj + "'";
+                    MysqlConnection.update(approvedRequest);
+                    client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsApproved, null));
+                    break;
+                case DeclineRequestByHeadOfDepartment:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    String declinedRequest = "DELETE FROM cems.testrequest WHERE id='" + obj + "'";
+                    MysqlConnection.update(declinedRequest);
+                    client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsDeclined, null));
+                    break;
+
+
                 default:
                     break;
             }

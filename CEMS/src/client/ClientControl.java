@@ -51,6 +51,10 @@ public class ClientControl implements ChatIF{
 		response = client.allQuestions;
 		return  response;
 	}
+	public   List<Object> gelAllRequests(){
+		response = client.requests;
+		return  response;
+	}
 
 	//Instance methods ************************************************
 

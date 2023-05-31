@@ -20,6 +20,7 @@ public class Client extends AbstractClient {
     public List<Object> tests;
 
     public static User user;
+    public List<Object> requests;
 
     //constructor
     public Client(String host, int port, ChatIF clientUI) {
@@ -84,6 +85,16 @@ public class Client extends AbstractClient {
 
             case AddNewTestQuestionsResponse:
                 break;
+
+            case RequestImportedSuccessfully:
+                requests = (ArrayList<Object>) ((MsgHandler<Object>) messageFromServer).getMsg();
+                this.requests = (List<Object>) messageFromServer.getMsg();
+                break;
+            case RequestIsApproved:
+                break;
+            case RequestIsDeclined:
+                break;
+
 
         }
 

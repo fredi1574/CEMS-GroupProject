@@ -44,7 +44,7 @@
                                     <Font name="Trebuchet MS Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField prefHeight="27.0" prefWidth="71.0" text="42040" />
+                              <TextField fx:id="testIDText" prefHeight="27.0" prefWidth="71.0" text="42040" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="225.0">
@@ -54,7 +54,7 @@
                                     <Font name="Trebuchet MS Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField prefHeight="27.0" prefWidth="71.0" text="?????????" />
+                              <TextField fx:id="CourseText" prefHeight="27.0" prefWidth="71.0" text="?????????" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="74.0" prefWidth="236.0">
@@ -65,7 +65,7 @@
                                  </font>
                               </Label>
                               <HBox prefHeight="31.0" prefWidth="51.0" />
-                              <TextField prefHeight="27.0" prefWidth="99.0" text="Shay Garbuz" />
+                              <TextField fx:id="LecturerText" prefHeight="27.0" prefWidth="99.0" text="Shay Garbuz" />
                            </children>
                         </HBox>
                      </children>
@@ -79,7 +79,7 @@
                                     <Font name="Trebuchet MS Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField prefHeight="27.0" prefWidth="151.0" />
+                              <TextField fx:id="TimeExtentionDurationText" prefHeight="27.0" prefWidth="151.0" />
                            </children>
                         </HBox>
                      </children>
@@ -92,7 +92,7 @@
                   <Font name="Trebuchet MS Bold" size="15.0" />
                </font>
             </Label>
-            <TextArea layoutX="170.0" layoutY="140.0" prefHeight="172.0" prefWidth="597.0" text="Hey mister Fredi. I would like to extend the Q.A test by 15 min.&#10;Thank you&#10;Shay" wrapText="true" />
+            <TextArea fx:id="RequestText" layoutX="170.0" layoutY="140.0" prefHeight="172.0" prefWidth="597.0" text="Hey mister Fredi. I would like to extend the Q.A test by 15 min.&#10;Thank you&#10;Shay" wrapText="true" />
             <HBox alignment="CENTER_LEFT" layoutX="540.0" layoutY="320.0" prefHeight="28.0" prefWidth="227.0" spacing="20.0">
                <opaqueInsets>
                   <Insets />
@@ -101,8 +101,8 @@
                   <Insets top="3.0" />
                </padding>
                <children>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" styleClass="regularButtons" text="Approve" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" styleClass="regularButtons" text="Decline" />
+                  <Button mnemonicParsing="false" onAction="#approveRequest" prefHeight="25.0" prefWidth="105.0" styleClass="regularButtons" text="Approve" />
+                  <Button mnemonicParsing="false" onAction="#declineRequest" prefHeight="25.0" prefWidth="105.0" styleClass="regularButtons" text="Decline" />
                </children>
             </HBox>
          </children>

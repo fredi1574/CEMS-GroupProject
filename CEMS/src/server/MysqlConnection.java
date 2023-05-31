@@ -243,6 +243,34 @@ public class MysqlConnection {
         System.out.println(tests);
         return tests;
     }
+	public static ArrayList<TestRequestForApproval> getRequestsTable(String query) {
+		Statement stmt = null;
+		try {
+			stmt = conn.createStatement();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		ArrayList<TestRequestForApproval> list = new ArrayList<>();
+		try {
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				String newDuration = rs.getString("newDuration"); // assuming your table has a column named "id" with type INT
+				String explanation = rs.getString("explanation");
+				String id = rs.getString("id");
+				String subject = rs.getString("subject");
+				String course = rs.getString("course");
+				String author = rs.getString("author");
+				TestRequestForApproval request = new TestRequestForApproval(id,subject,course, newDuration, explanation,author);
+				list.add(request);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 
     /**

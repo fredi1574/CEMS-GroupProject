@@ -1,12 +1,16 @@
 package entity;
 
-public class TestRequestForApproval {
+import java.io.Serializable;
+import java.util.Observable;
+
+public class TestRequestForApproval extends Observable implements Serializable {
 	
 	private String newDuration;
 	private String explanation;
 	private String id;
 	private String subject;
 	private String course;
+	private String author;
 	/**
 	 * Constructs an ExamRequestForApproval object with the specified parameters.
 	 * 
@@ -15,19 +19,24 @@ public class TestRequestForApproval {
 	 * @param course       The course of the exam.
 	 * @param newDuration  The new duration of the exam.
 	 * @param explanation  The explanation for the duration change.
+	 * @param author  The author of the test.
 	 */
-	public TestRequestForApproval(String id, String subject, String course, String newDuration, String explanation) {
+	public TestRequestForApproval(String id, String subject, String course, String newDuration, String explanation,String author) {
 		this.newDuration = newDuration;
 		this.explanation = explanation;
 		this.id = id;
 		this.subject = subject;
 		this.course = course;
+		this.author = author;
 	}
 	
 	// Getters and Setters
 
 	public String getNewDuration() {
 		return newDuration;
+	}
+	public String getAuthor() {
+		return author;
 	}
 
 	public void setNewDuration(String newDuration) {

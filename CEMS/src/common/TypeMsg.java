@@ -80,36 +80,73 @@ public enum TypeMsg {
         public String toString() {
             return "import subjects Successfully";
         }
-	},GetCourseTable {
-		public String toString() { return "User Asked The Courses";}
-	},CourseTableResponse{
-		public String toString() {
-			return "Here is the course table";
-		}
-	},GetTestTable{
-		public String toString() {
-			return "User Asked The Test Table";
-		}
-	},TestTableResponse{
-		public String toString() {
-			return "Here Is The Table Test";
-		}
-	}, AddNewTestQuestion {
-		public String toString() { return "Lecturer asked to save the questions of test";}
-	}, AddNewTestQuestionsResponse {
-		public String toString() {return "The Questions is s saved";}
-	}, AddNewTest {
-		public String toString() { return "Lecturer asked to save test"; }
-	}, AddNewTestResponse {
-		public String toString() { return "The test is saved";}
-	},
+    }, GetCourseTable {
+        public String toString() {
+            return "User Asked The Courses";
+        }
+    }, CourseTableResponse {
+        public String toString() {
+            return "Here is the course table";
+        }
+    }, GetTestTable {
+        public String toString() {
+            return "User Asked The Test Table";
+        }
+    }, TestTableResponse {
+        public String toString() {
+            return "Here Is The Table Test";
+        }
+    }, AddNewTestQuestion {
+        public String toString() {
+            return "Lecturer asked to save the questions of test";
+        }
+    }, AddNewTestQuestionsResponse {
+        public String toString() {
+            return "The Questions is s saved";
+        }
+    }, AddNewTest {
+        public String toString() {
+            return "Lecturer asked to save test";
+        }
+    }, AddNewTestResponse {
+        public String toString() {
+            return "The test is saved";
+        }
+    },
+    GetRequestsBySubject {
+        public String toString() {
+            return "Head Of Department want to import table of requests";
+        }
+    },
+    RequestImportedSuccessfully {
+        public String toString() {
+            return "Requests table imported successfully";
+        }
+    },
+    ApproveRequestByHeadOfDepartment {
+        public String toString() {
+            return "Head Of Department want to approve a requests";
+        }
+    },
+    RequestIsApproved {
+        public String toString() {
+            return "The request has been approved";
+        }
+    },
+
+    DeclineRequestByHeadOfDepartment {
+        public String toString() {
+            return "Head Of Department want to decline a requests";
+        }
+    },
+    RequestIsDeclined {
+        public String toString() {
+            return "The request has declined";
+        }
+    }
 
 
-
-
-
-
-}
+    }
 
 
 
