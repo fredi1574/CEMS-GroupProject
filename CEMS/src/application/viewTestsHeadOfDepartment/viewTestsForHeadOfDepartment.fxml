@@ -65,6 +65,5 @@
             <TextField fx:id="searchField" onAction="#initialize" prefHeight="28.0" prefWidth="322.0" promptText="search a test ID" />
          </children>
       </HBox>
-      <Label layoutX="28.0" layoutY="152.0" text="*Double click on a Test to open the full information about the test." />
    </children>
 </AnchorPane>

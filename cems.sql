@@ -142,6 +142,7 @@ CREATE TABLE `test` (
   `year` varchar(45) DEFAULT NULL,
   `semester` varchar(45) DEFAULT NULL,
   `session` varchar(45) DEFAULT NULL,
+  `testCode` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`,`subject`,`courseName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -152,7 +153,7 @@ CREATE TABLE `test` (
 
 LOCK TABLES `test` WRITE;
 /*!40000 ALTER TABLE `test` DISABLE KEYS */;
-INSERT INTO `test` VALUES ('01','010101','3','null','Math','Algebra','hey	','C','null','','',''),('2','020102','60','null','Math','Hedva','Lecturer note 1','C','Student Note 1','2020','B','A'),('01','020301','180','abed','Math','algebra1','asdasd','C','asdasd','2022','A','A'),('01','050301','','null','Biology','Anatomy','null','C','null','2020','A','A');
+INSERT INTO `test` VALUES ('01','010101','3','null','Math','Algebra','hey	','C','null','','','',NULL),('2','020102','60','null','Math','Hedva','Lecturer note 1','C','Student Note 1','2020','B','A',NULL),('01','020301','180','abed','Math','algebra1','asdasd','C','asdasd','2022','A','A',NULL),('01','050301','','null','Biology','Anatomy','null','C','null','2020','A','A',NULL);
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -251,4 +252,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-31 22:08:29
+-- Dump completed on 2023-05-31 22:24:12

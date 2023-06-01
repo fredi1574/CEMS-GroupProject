@@ -101,8 +101,8 @@
                   <Insets top="3.0" />
                </padding>
                <children>
-                  <Button mnemonicParsing="false" onAction="#approveRequest" prefHeight="25.0" prefWidth="105.0" styleClass="regularButtons" text="Approve" />
-                  <Button mnemonicParsing="false" onAction="#declineRequest" prefHeight="25.0" prefWidth="105.0" styleClass="regularButtons" text="Decline" />
+                  <Button fx:id="approveBtn" mnemonicParsing="false" onAction="#approveRequest" prefHeight="25.0" prefWidth="105.0" styleClass="regularButtons" text="Approve" />
+                  <Button fx:id="declineBtn" mnemonicParsing="false" onAction="#declineRequest" prefHeight="25.0" prefWidth="105.0" styleClass="regularButtons" text="Decline" />
                </children>
             </HBox>
          </children>
