@@ -143,6 +143,12 @@ public enum TypeMsg {
         public String toString() {
             return "The request has declined";
         }
+    },
+    DeleteTest {
+        public String toString() { return "User asked to delete a test"; }
+    },
+    DeleteTestResponse {
+        public String toString() { return "Server deleted the test"; }
     }
 
 

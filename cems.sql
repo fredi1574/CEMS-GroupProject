@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: cems
+-- Host: localhost    Database: cems
 -- ------------------------------------------------------
--- Server version	8.0.32
+-- Server version	8.0.33
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -205,7 +205,7 @@ CREATE TABLE `test` (
 
 LOCK TABLES `test` WRITE;
 /*!40000 ALTER TABLE `test` DISABLE KEYS */;
-INSERT INTO `test` VALUES ('01','010101','3','null','Math','Algebra','hey	','C','null','','','',NULL),('2','020102','60','null','Math','Hedva','Lecturer note 1','C','Student Note 1','2020','B','A',NULL),('01','020301','180','abed','Math','algebra1','asdasd','C','asdasd','2022','A','A',NULL),('01','050301','','null','Biology','Anatomy','null','C','null','2020','A','A',NULL);
+INSERT INTO `test` VALUES ('01','010101','3','null','Math','Algebra','hey	','C','null','1999','A','A','ab12'),('01','020101','','null','Math','Hedva','null','C','null','1888','A','B','cd31'),('2','020102','60','null','Math','Hedva','Lecturer note 1','C','Student Note 1','2020','B','A','kj14'),('01','020301','180','abed','Math','algebra1','asdasd','C','asdasd','2022','A','A','gg22');
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,7 +235,7 @@ CREATE TABLE `testquestion` (
 
 LOCK TABLES `testquestion` WRITE;
 /*!40000 ALTER TABLE `testquestion` DISABLE KEYS */;
-INSERT INTO `testquestion` VALUES ('3333','13333',75,'me','010101','Algebra','01','May'),('889','1889',25,'check.','010101','Algebra','01','May'),('928','1928',100,'MAY','050301','Algebra','01','May');
+INSERT INTO `testquestion` VALUES ('010201','1',24,'check	','020101','Hedva','01','a a'),('3333','13333',75,'me','010101','Algebra','01','May'),('889','1889',25,'check.','010101','Algebra','01','May'),('928','1928',100,'MAY','050301','Algebra','01','May');
 /*!40000 ALTER TABLE `testquestion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -292,7 +292,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'a','a','a','a','Lecturer','MayCaspi'),(3,'a','b','b','b','Head of Department/Lecturer','FrediBul');
+INSERT INTO `user` VALUES (2,'a','May','Caspi','a','Lecturer','MayCaspi'),(3,'a','b','b','b','Head of Department/Lecturer','FrediBul'),(4,'a','r','g','b','Student','Roman');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -305,4 +305,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-01 11:12:22
+-- Dump completed on 2023-06-01 19:28:13

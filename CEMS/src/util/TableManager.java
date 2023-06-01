@@ -39,7 +39,6 @@ public class TableManager {
                 }
             }
 
-            //String propertyName = columnName.toLowerCase().replaceAll("\\s+", ""); // remove spaces from column name
             TableColumn<T, ?> column = new TableColumn<>(columnName);
             column.setCellValueFactory(new PropertyValueFactory<>(propertyName));
             tableView.getColumns().add(column);

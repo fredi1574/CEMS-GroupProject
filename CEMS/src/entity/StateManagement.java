@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 public class StateManagement {
     public Course course;
     public String testNum;
+    public String testCode;
     public String year;
     public String session;
     public String semester;
@@ -45,7 +46,7 @@ public class StateManagement {
 
     }
     public void SaveTest(){
-        newTest = new Test(testNum,getTestID(),null,
+        newTest = new Test(testNum,getTestID(),getTestCode(),null,
                 durationTimeOfTest,course.getCourseName(),getTeacherComment(),testType,getStudentComment(),
                     course.getSubjectName(),year,session,semester);
     }
@@ -145,6 +146,9 @@ public class StateManagement {
     public void setCourse(Course course) {
         this.course = course;
     }
+
+    public String getTestCode() { return testCode; }
+    public void setTestCode(String testCode) { this.testCode = testCode; }
 
     /**
      * resets all test-state related data

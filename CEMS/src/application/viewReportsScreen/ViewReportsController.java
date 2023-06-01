@@ -75,8 +75,8 @@ public class ViewReportsController {
         ObservableList<String> subjectNames = FXCollections.observableArrayList();
 
         for (Subject subject : subjectsList) {
-            String subjectNameandID = subject.getSubjectName() + " -" + subject.getSubjectID();
-            subjectNames.add(subjectNameandID);
+            String subjectNameAndID = subject.getSubjectName() + " -" + subject.getSubjectID();
+            subjectNames.add(subjectNameAndID);
         }
         subjectComboBox.setItems(subjectNames);
     }

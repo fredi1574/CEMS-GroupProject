@@ -221,7 +221,8 @@ public class MysqlConnection {
             while (rs.next()) {
                 String testNumber = rs.getString("testNumber"); // assuming your table has a column named "id" with type INT
                 String id = rs.getString("id");
-                String author = rs.getString("author");
+				String testCode = rs.getString("testCode");
+				String author = rs.getString("author");
                 String testDuration = rs.getString("testDuration");
                 String courseName = rs.getString("courseName");
                 String subject = rs.getString("subject");
@@ -232,7 +233,7 @@ public class MysqlConnection {
                 String session = rs.getString("session");
                 String semester = rs.getString("semester");
                 TestTypeEnum testTypeEnum = (Objects.equals(testType, "C") ? TestTypeEnum.C : TestTypeEnum.M);
-                Test test = new Test(testNumber, id, author, testDuration, courseName,
+                Test test = new Test(testNumber, id, testCode, author, testDuration, courseName,
                         teacherComment, testTypeEnum, studentComment,subject,year,session,semester);
                 tests.add(test);
 
