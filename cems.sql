@@ -16,6 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `activetest`
+--
+
+DROP TABLE IF EXISTS `activetest`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `activetest` (
+  `testID` varchar(45) NOT NULL,
+  `testDuration` varchar(255) DEFAULT NULL,
+  `testCode` varchar(45) DEFAULT NULL,
+  `testType` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`testID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `activetest`
+--
+
+LOCK TABLES `activetest` WRITE;
+/*!40000 ALTER TABLE `activetest` DISABLE KEYS */;
+/*!40000 ALTER TABLE `activetest` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `course`
 --
 
@@ -96,6 +121,33 @@ LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
 INSERT INTO `question` VALUES ('010201','01','Hedva','check	',1,'a a','dsads','asddsa','sdaasddssaaasdsd','sadsdasad','1'),('15','Math','Algebra1','What is my name?',123,'May','May	','Noa','Shay','Tiran','1'),('3333','01','Algebra','me',13333,'May','hola','hello','hi','bye','3'),('889','01','Algebra','check.',1889,'May','check','check','check','check','1'),('928','01','Algebra','MAY',1928,'May','may','may','may','may','2');
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `studentstest`
+--
+
+DROP TABLE IF EXISTS `studentstest`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `studentstest` (
+  `studentID` varchar(255) NOT NULL,
+  `testID` varchar(255) NOT NULL,
+  `subjectID` varchar(255) DEFAULT NULL,
+  `course` varchar(255) DEFAULT NULL,
+  `testType` enum('C','M') DEFAULT NULL,
+  `score` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`studentID`,`testID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `studentstest`
+--
+
+LOCK TABLES `studentstest` WRITE;
+/*!40000 ALTER TABLE `studentstest` DISABLE KEYS */;
+/*!40000 ALTER TABLE `studentstest` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -211,6 +263,7 @@ CREATE TABLE `testrequest` (
 
 LOCK TABLES `testrequest` WRITE;
 /*!40000 ALTER TABLE `testrequest` DISABLE KEYS */;
+INSERT INTO `testrequest` VALUES ('48','dsfsdf','21','01','Algebra','May Caspi'),('48','dsfsdf','221','01','Algebra','May Caspi');
 /*!40000 ALTER TABLE `testrequest` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -252,4 +305,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-31 22:24:12
+-- Dump completed on 2023-06-01 11:12:22
