@@ -10,19 +10,21 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="524.0" prefWidth="799.0" styleClass="backgroundColor" stylesheets="@../../../../util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.openReportByStudentController">
+<AnchorPane fx:id="header" prefHeight="524.0" prefWidth="799.0" styleClass="backgroundColor" stylesheets="@../../../../util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.openReportByStudentController">
    <children>
-      <AnchorPane fx:id="header" prefHeight="105.0" prefWidth="800.0" style="-fx-border-color: #1d416e; -fx-border-width: 3 3 0 3;" styleClass="pageHeader">
+      <AnchorPane prefHeight="105.0" prefWidth="800.0" style="-fx-border-color: #1d416e; -fx-border-width: 3 3 0 3;" styleClass="pageHeader">
          <children>
-            <Label alignment="CENTER" layoutX="302.0" layoutY="19.0" prefHeight="47.0" prefWidth="208.0" text="Report For:" textFill="#fafafa">
+            <Label alignment="CENTER" layoutX="302.0" layoutY="19.0" prefHeight="47.0" prefWidth="224.0" text="Report For:" textFill="#fafafa">
                <font>
                   <Font name="Trebuchet MS" size="40.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="100.0" layoutY="69.0" prefHeight="26.0" prefWidth="612.0" text="Student Name" textFill="#fafafa">
+            <Label fx:id="studentsNameLabel" alignment="CENTER" layoutX="100.0" layoutY="69.0" prefHeight="26.0" prefWidth="612.0" text="Student Name" textFill="#fafafa">
                <font>
                   <Font name="Trebuchet MS" size="20.0" />
                </font>
@@ -42,27 +44,19 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="58.0" text="Date:" textFill="#7799c2">
+                        <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="148.0" textFill="#7799c2">
                            <font>
                               <Font name="Trebuchet MS Bold" size="17.0" />
                            </font>
                            <padding>
                               <Insets left="10.0" />
                            </padding>
-                        </Label>
-                        <Label prefHeight="26.0" prefWidth="90.0" text=" 19.12.2021">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
                         </Label>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="757.0">
                      <children>
-                        <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="79.0" text=" Median:" textFill="#7799c2">
+                        <Label alignment="CENTER" prefHeight="40.0" prefWidth="204.0" text="Number of tests taken:" textFill="#7799c2">
                            <font>
                               <Font name="Trebuchet MS Bold" size="17.0" />
                            </font>
@@ -73,16 +67,12 @@
                               <Insets right="2.0" />
                            </HBox.margin>
                         </Label>
-                        <Label prefHeight="25.0" prefWidth="141.0" text="72">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
+                        <Text fx:id="testsNumberText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="30.5367431640625" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="200.0">
                      <children>
-                        <Label alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="86.0" text="Average:" textFill="#7799c2">
+                        <Label alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="168.0" text="Computrized tests:" textFill="#7799c2">
                            <font>
                               <Font name="Trebuchet MS Bold" size="17.0" />
                            </font>
@@ -93,24 +83,103 @@
                               <Insets right="2.0" />
                            </HBox.margin>
                         </Label>
-                        <Label prefHeight="25.0" prefWidth="142.0" text="73">
+                        <Text fx:id="CtestNumberText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="757.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="123.0" text="Manual tests:" textFill="#7799c2">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="Trebuchet MS Bold" size="17.0" />
                            </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets right="2.0" />
+                           </HBox.margin>
                         </Label>
+                        <Text fx:id="MtestNumberText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="757.0">
+                     <children>
+                        <Pane prefHeight="386.0" prefWidth="538.0">
+                           <children>
+                              <Label alignment="CENTER_RIGHT" layoutY="5.0" prefHeight="40.0" prefWidth="79.0" text=" Median:" textFill="#7799c2">
+                                 <font>
+                                    <Font name="Trebuchet MS Bold" size="17.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </Label>
+                              <Text fx:id="medianText" layoutX="88.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="757.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="757.0">
+                           <children>
+                              <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="129.0" text="Highest score:" textFill="#7799c2" wrapText="true">
+                                 <font>
+                                    <Font name="Trebuchet MS Bold" size="17.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                                 <HBox.margin>
+                                    <Insets right="2.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Text fx:id="highestText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="757.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="757.0">
+                           <children>
+                              <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="81.0" text="Average" textFill="#7799c2" wrapText="true">
+                                 <font>
+                                    <Font name="Trebuchet MS Bold" size="17.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                                 <HBox.margin>
+                                    <Insets right="2.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Text fx:id="averageText" strokeType="OUTSIDE" strokeWidth="0.0" text="averageText" />
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <BarChart fx:id="reportGraph" animated="false" layoutX="124.0" layoutY="4.0" legendSide="LEFT" legendVisible="false" prefHeight="427.0" prefWidth="669.0" title="Grades distribution">
-               <xAxis>
-                  <CategoryAxis label="Courses's names" prefHeight="41.0" prefWidth="569.0" side="BOTTOM" tickLabelFill="#306ebd" />
-               </xAxis>
-               <yAxis>
-                  <NumberAxis animated="false" label="Grades" prefHeight="439.0" prefWidth="49.0" side="LEFT" tickLabelFill="#306ebd" tickLength="10.0" />
-               </yAxis>
-            </BarChart>
+            <Label layoutX="28.0" layoutY="410.0" text="Back" />
+            <Button contentDisplay="CENTER" layoutX="14.0" layoutY="356.0" minWidth="35.0" mnemonicParsing="false" onAction="#goBackToPreviousScreen" prefHeight="54.0" prefWidth="54.0" styleClass="subButtons" textFill="#0d0d0d">
+               <graphic>
+                  <ImageView fitHeight="36.0" fitWidth="38.0">
+                     <image>
+                        <Image url="@../../../../images/back.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
+      <BarChart fx:id="reportGraph" animated="false" layoutX="221.0" layoutY="110.0" legendSide="LEFT" legendVisible="false" prefHeight="410.0" prefWidth="551.0" title="Grades distribution">
+         <xAxis>
+            <CategoryAxis label="Courses's names" prefHeight="41.0" prefWidth="569.0" side="BOTTOM" tickLabelFill="#306ebd" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis animated="false" label="Grades" prefHeight="439.0" prefWidth="49.0" side="LEFT" tickLabelFill="#306ebd" tickLength="10.0" />
+         </yAxis>
+      </BarChart>
    </children>
 </AnchorPane>

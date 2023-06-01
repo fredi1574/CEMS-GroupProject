@@ -325,8 +325,17 @@ public class CemsServer extends AbstractServer {
                     MysqlConnection.update(declinedRequest);
                     client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsDeclined, null));
                     break;
-
-
+                case GetStudentReport:
+                    this.msg = (MsgHandler<Object>) msg;
+                    List<Object> Infomration = (List<Object>) this.msg.getMsg();
+                    String studentsID = (String) Infomration.get(0);
+                    String headID = (String) Infomration.get(1);
+                    ArrayList<StudentTest> studentInfo = MysqlConnection.getStudentInfo("select * FROM cems.studentstest");
+                    if (studentInfo != null)
+                        client.sendToClient(new MsgHandler<>(TypeMsg.StudentReportImported, studentInfo));
+                    else {
+                        client.sendToClient(new MsgHandler<>(TypeMsg.StudentReportImported, null));
+                    }
                 default:
                     break;
             }

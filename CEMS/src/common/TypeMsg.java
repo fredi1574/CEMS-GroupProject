@@ -143,10 +143,18 @@ public enum TypeMsg {
         public String toString() {
             return "The request has declined";
         }
+    },
+    GetStudentReport {
+        public String toString() {
+            return "Head of department want to get a report of a student";
+        }
+    },
+    StudentReportImported {
+        public String toString() {
+            return "Student's report was imported";
+        }
     }
-
-
-    }
+}
 
 
 

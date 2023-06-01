@@ -1,13 +1,17 @@
 package entity;
+
+import java.io.Serializable;
+import java.util.Observable;
+
 /**
  * Represents a student's test entity.
  */
-public class StudentTest {
+public class StudentTest extends Observable implements Serializable {
     private String studentID;
     private String testID;
     private String subjectID;
     private String course;
-    private String testType;
+    private TestTypeEnum testType;
     private String score;
 
     /**
@@ -20,7 +24,7 @@ public class StudentTest {
      * @param testType The type of the test.
      * @param score The test score.
      */
-    public StudentTest(String studentID, String testID, String subjectID, String course, String testType, String score) {
+    public StudentTest(String studentID, String testID, String subjectID, String course, TestTypeEnum testType, String score) {
         this.studentID = studentID;
         this.testID = testID;
         this.subjectID = subjectID;
@@ -70,7 +74,7 @@ public class StudentTest {
      *
      * @return The test type.
      */
-    public String getTestType() {
+    public TestTypeEnum getTestType() {
         return testType;
     }
 

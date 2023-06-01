@@ -1,12 +1,15 @@
 package client;
 
+import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.openReportByStudentController;
 import common.ChatIF;
 import common.MsgHandler;
 import entity.User;
+import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 //test
 public class Client extends AbstractClient {
@@ -21,7 +24,7 @@ public class Client extends AbstractClient {
 
     public static User user;
     public List<Object> requests;
-
+    public static openReportByStudentController HODPstudentReportcontroller = new openReportByStudentController();
     //constructor
     public Client(String host, int port, ChatIF clientUI) {
         super(host, port);
@@ -94,6 +97,8 @@ public class Client extends AbstractClient {
                 break;
             case RequestIsDeclined:
                 break;
+            case StudentReportImported:
+                HODPstudentReportcontroller.reportCalc((ArrayList<Object>) messageFromServer.getMsg());
 
 
         }

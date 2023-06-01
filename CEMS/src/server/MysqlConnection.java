@@ -271,6 +271,38 @@ public class MysqlConnection {
 		}
 		return list;
 	}
+	public static ArrayList<StudentTest> getStudentInfo(String query) {
+		Statement stmt = null;
+		try {
+			stmt = conn.createStatement();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		ArrayList<StudentTest> list = new ArrayList<>();
+		try {
+			ResultSet rs = stmt.executeQuery(query);
+			if (!(rs.next())){
+				return null;
+			}
+			while (rs.next()) {
+				String studentID = rs.getString("studentID"); // assuming your table has a column named "id" with type INT
+				String testID = rs.getString("testID");
+				String subjectID = rs.getString("subjectID");
+				String course = rs.getString("course");
+				TestTypeEnum testType = TestTypeEnum.valueOf(rs.getString("testType")); // Convert the string value to the enum
+				String score = rs.getString("score");
+				StudentTest StudentInfo = new StudentTest(studentID,testID,subjectID,course,testType,score);
+				list.add(StudentInfo);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 
     /**
