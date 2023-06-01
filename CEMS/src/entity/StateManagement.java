@@ -1,18 +1,18 @@
 package entity;
-
+import client.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 public class StateManagement {
     public Course course;
     public String testNum;
-    public String year;
-    public String session;
-    public String semester;
+    public String year = null;
+    public String session= null;
+    public String semester = null;
     public String testID;
+    public String TestCode;
     public String studentComment;
     public String teacherComment;
-    public String durationTimeOfTest;
+    public String durationTimeOfTest = null;
     ObservableList<TestQuestion> testQuestions = FXCollections.observableArrayList();
     public Test newTest;
     public int totalRemainingPoints;
@@ -26,32 +26,35 @@ public class StateManagement {
         }
         return instance;
     }
-
+    public static void resetInstance() {
+        instance = null;
+    }
     private StateManagement(){
 
        setTestID("-1"); //sets default empty value for testID on StateManagement initialization
        totalRemainingPoints = 100;
     }
-    public void setDataOfTest(Course course, String testNum, String testID, String durationTimeOfTest,
-                              String year, String session, String semester) {
-        this.durationTimeOfTest = durationTimeOfTest;
+    public void setDataOfTest(Course course, String testNum, String testID) {
+
         this.course = course;
         this.testID = testID;
         this.testNum = testNum;
-        this.year = year;
-        this.session = session;
-        this.semester = semester;
+
 
 
     }
     public void SaveTest(){
-        newTest = new Test(testNum,getTestID(),null,
+
+        newTest = new Test(testNum,getTestID(),Client.user.getFullName(),
                 durationTimeOfTest,course.getCourseName(),getTeacherComment(),testType,getStudentComment(),
-                    course.getSubjectName(),year,session,semester);
+                    course.getSubjectName(),year,session,semester,getTestCode());
+    }
+    public String getTestCode() {
+        return TestCode;
     }
 
-    public void SaveTestQuestions() {
-
+    public void setTestCode(String testCode) {
+        TestCode = testCode;
     }
     public String getYear() {
         return year;
@@ -150,23 +153,7 @@ public class StateManagement {
      * resets all test-state related data
      * used when a new test has been created
      */
-    public void clearTestState() { //TODO: alter the function if state management is utilized in more screens
-        instance = null;
-//        year = null;
-//        session = null;
-//        semester = null;
-//        testQuestions.clear();
-//        course.setSubject(null);
-//        course.setCourse(null);
-//        course.setCourseID(null);
-//        course.setSubjectID(null);
-//        testNum = null;
-//        teacherComment = null;
-//        studentComment = null;
-//        durationTimeOfTest = null;
-//        totalRemainingPoints = 100;
 
-    }
     @Override
     public String toString() {
         return "StateManagement{" +

@@ -41,10 +41,10 @@ public class MysqlConnection {
         }
     }
 
-    public static void update(String question) {
+    public static void update(String query) {
         PreparedStatement stmt;
         try {
-            stmt = conn.prepareStatement(question);
+            stmt = conn.prepareStatement(query);
             stmt.executeUpdate();
         } catch (SQLException e1) {
             e1.printStackTrace();
@@ -151,7 +151,8 @@ public class MysqlConnection {
 
 	public static Object authenticateUser(String username, String password) {
 		try {
-			PreparedStatement statement = conn.prepareStatement("SELECT id, firstName, lastName, email, role FROM user WHERE username = ? AND password = ?");
+			PreparedStatement statement = conn.prepareStatement("SELECT id, firstName, lastName, email," +
+					" role FROM user WHERE username = ? AND password = ?");
 			statement.setString(1, username);
 			statement.setString(2, password);
 
@@ -231,9 +232,10 @@ public class MysqlConnection {
                 String year = rs.getString("year");
                 String session = rs.getString("session");
                 String semester = rs.getString("semester");
+				String testCode = rs.getString("testCode");
                 TestTypeEnum testTypeEnum = (Objects.equals(testType, "C") ? TestTypeEnum.C : TestTypeEnum.M);
                 Test test = new Test(testNumber, id, author, testDuration, courseName,
-                        teacherComment, testTypeEnum, studentComment,subject,year,session,semester);
+                        teacherComment, testTypeEnum, studentComment,subject,year,session,semester,testCode);
                 tests.add(test);
 
             }

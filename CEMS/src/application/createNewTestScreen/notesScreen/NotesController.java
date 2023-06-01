@@ -1,5 +1,7 @@
 package application.createNewTestScreen.notesScreen;
+import java.util.UUID;
 
+import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
@@ -11,16 +13,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
-import util.ExitButton;
-import util.MinimizeButton;
-import util.PathConstants;
-import util.ScreenManager;
+import javafx.scene.text.Text;
+
+import util.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class NotesController {
     public StateManagement stateManagement = StateManagement.getInstance();
+    @FXML
+    private Text nameAuthor;
     @FXML
     private TextArea studentNote;
     private List<Test> newTest = new ArrayList<>();
@@ -30,12 +33,18 @@ public class NotesController {
     private AnchorPane header;
     public void initialize(){
         ScreenManager.dragAndDrop(header);
+        nameAuthor.setText(Client.user.getFullName());
         if(stateManagement.getStudentComment() != null)
             studentNote.setText(stateManagement.studentComment);
         if (stateManagement.getTeacherComment() != null)
             teacherNote.setText(stateManagement.teacherComment);
-    }
 
+    }
+    public String createTestCodeForExam(){
+        UUID uuid = UUID.randomUUID();
+        String randomString = uuid.toString().substring(0, 4);
+        return randomString;
+    }
 
     /**
      * navigates back to the second stage of test creation
@@ -62,14 +71,23 @@ public class NotesController {
      */
     @FXML
     void createTest(ActionEvent event){
-
+        if(stateManagement.semester == null||stateManagement.year == null ||stateManagement.session ==null
+                || stateManagement.durationTimeOfTest == null){
+            showError.showErrorPopup("Go to page one and complete the data of test");
+            return;
+        }
+        if(stateManagement.getTestQuestions().size() == 0){
+            showError.showErrorPopup("Select Questions for test from page 2");
+            return;
+        }
         if(!studentNote.getText().isEmpty()){
             stateManagement.setStudentComment(studentNote.getText());
         }
         if (!teacherNote.getText().isEmpty()){
             stateManagement.setTeacherComment(teacherNote.getText());
         }
-
+        //save the testCode for test
+        stateManagement.setTestCode(createTestCodeForExam());
         //adds a test to the DB
         stateManagement.SaveTest();
         MsgHandler addNewTest = new MsgHandler(TypeMsg.AddNewTest, stateManagement.newTest);
@@ -77,9 +95,7 @@ public class NotesController {
 
         //adds the test's questions to the DB
         addAllTestQuestions();
-
-        stateManagement.clearTestState();
-
+        stateManagement.resetInstance();
         ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
     }
 

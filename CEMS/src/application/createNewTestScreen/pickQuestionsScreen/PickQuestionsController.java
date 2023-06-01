@@ -1,5 +1,9 @@
 package application.createNewTestScreen.pickQuestionsScreen;
-
+import client.Client;
+import entity.Test;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.scene.text.Text;
 import application.createNewTestScreen.CreateTestController;
 import client.ClientUI;
 import common.MsgHandler;
@@ -17,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import util.*;
 
@@ -26,6 +31,8 @@ import java.util.List;
 public class PickQuestionsController {
     public ArrayList<TestQuestion> questions;
     public StateManagement stateManagement;
+    @FXML
+    private Text nameAuthor;
 
     @FXML
     public TextField searchField;
@@ -54,6 +61,7 @@ public class PickQuestionsController {
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
+        nameAuthor.setText(Client.user.getFullName());
         MsgHandler getTable = new MsgHandler(TypeMsg.GetAllQuestions, null);
         ClientUI.chat.accept(getTable);
         // creates the question table
@@ -97,7 +105,11 @@ public class PickQuestionsController {
            //totalRemainingPoints = stateManagment.getTotalRemainingPoints();
             TableManager.importData(selectedQuestionsTableView,(ObservableList<TestQuestion>) stateManagement.getTestQuestions());
         }
-
+        FilteredList<Question> filteredData = new FilteredList<>(questions, b -> true);
+        TableManager.MakeFilterListForSearch(filteredData, searchField, Question::getQuestionText);
+        SortedList<Question> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(questionDBTableView.comparatorProperty());
+        questionDBTableView.setItems(sortedData);
         totalRemainingPointsField.setText(String.valueOf(stateManagement.getTotalRemainingPoints()));
 
 

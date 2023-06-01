@@ -1,5 +1,5 @@
 package entity;
-
+import java.util.UUID;
 import javafx.collections.ObservableList;
 
 import java.io.Serializable;
@@ -16,6 +16,7 @@ public class Test extends Observable implements Serializable {
     private String studentComments;
     private TestTypeEnum testType;
     private String year;
+    private String testCode;
     private String semester;
     private String session;
     private ObservableList<TestQuestion> questions;
@@ -23,7 +24,7 @@ public class Test extends Observable implements Serializable {
     //constructor for fully created test
         public Test(String testNumber, String id, String author, String testDuration,  String courseName,
                 String teacherComments, TestTypeEnum TestType, String studentComments,  String subject,
-                String year,String session,String semester) {
+                String year,String session,String semester,String testCode) {
         this.id = id;
         this.testNumber = testNumber;
         this.author = author;
@@ -36,6 +37,14 @@ public class Test extends Observable implements Serializable {
         this.year = year;
         this.session= session;
         this.semester = semester;
+        this.testCode = testCode;
+    }
+    public String getTestCode() {
+        return testCode;
+    }
+
+    public void setTestCode(String testCode) {
+        this.testCode = testCode;
     }
     public void setStudentComments(String studentComments) {
         this.studentComments = studentComments;

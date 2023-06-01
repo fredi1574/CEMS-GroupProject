@@ -1,4 +1,6 @@
 package application.createNewTestScreen;
+import javafx.scene.text.Text;
+import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
@@ -13,10 +15,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import util.*;
-
 import java.util.List;
 public class CreateTestController {
     Course rowData = null;
+    @FXML
+    private Text nameAuthor;
     @FXML
     private TextField semesterTextField;
     @FXML
@@ -38,12 +41,9 @@ public class CreateTestController {
     public StateManagement stateManagement;
     @FXML
     private TableView<Course> courseTableView;
-
-
-
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-
+        nameAuthor.setText(Client.user.getFullName());
         MsgHandler getTableCourse = new MsgHandler(TypeMsg.GetCourseTable, null);
         ClientUI.chat.accept(getTableCourse);
         List<Object> courseObjectsList = ClientUI.chat.getCourses();
@@ -107,8 +107,10 @@ public class CreateTestController {
         }
 
         //iterates over the testTableList and checks if the current index is available
-        for (int i = 0; i < testTableList.size() - 1; i++) {
-            if (((Test) testTableList.get(i)).getTestNumber() + 1 != ((Test) testTableList.get(i + 1)).getTestNumber()) {
+        for (int i = 0; i < testTableList.size()-1; i++) {
+            String s = ((Test) testTableList.get(i)).getTestNumber();
+            String s1 = ((Test) testTableList.get(i + 1)).getTestNumber();
+            if (Integer.parseInt(s) + 1 != Integer.parseInt(s1)) {
                 return i + 1;
             }
         }
@@ -166,16 +168,31 @@ public class CreateTestController {
 
 
     public void BackToMenu(ActionEvent event) {
-        stateManagement.setTestID("-1");
+        stateManagement.resetInstance();
         ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
     }
 
 
     public void goToPickQuestions(ActionEvent event) {
         stateManagement = StateManagement.getInstance();
-        stateManagement.setDataOfTest(rowData,testNumberField.getText(),testIDField.getText(),testDurationField.getText(),yearField.getText(),
-                                     sessionTextField.getText(),semesterTextField.getText());
+            try {
+                if (!sessionTextField.getText().isEmpty()) {
+                    stateManagement.setSession(sessionTextField.getText());
+                }
+                if (!yearField.getText().isEmpty()) {
+                    stateManagement.setYear(yearField.getText());
+                }
+                if (!semesterTextField.getText().isEmpty()) {
+                    stateManagement.setSemester(semesterTextField.getText());
+                }
 
+                if (!testDurationField.getText().isEmpty()) {
+                    stateManagement.setDurationTimeOfTest(testDurationField.getText());
+                }
+            }catch(Exception exception){
+
+            }
+            stateManagement.setDataOfTest(rowData, testNumberField.getText(), testIDField.getText());
         if (rowData == null) {
             showError.showErrorPopup("Choose subject and course first");
         } else {
