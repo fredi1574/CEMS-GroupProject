@@ -174,6 +174,16 @@ public enum TypeMsg {
             return "Imported list of test made by lecturer";
         }
     },
+    GetTestsByCourse {
+        public String toString() {
+            return "Get list tests made by course";
+        }
+    },
+    ImportedTestsByCourse {
+        public String toString() {
+            return "Imported list of tests by course";
+        }
+    },
 
 
 }

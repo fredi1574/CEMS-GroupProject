@@ -365,6 +365,13 @@ public class CemsServer extends AbstractServer {
                     ArrayList<StudentTest> testsList = MysqlConnection.getStudentInfo(   "SELECT st.* FROM studentstest st JOIN test t ON st.testID = t.id WHERE t.author = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedTestsByLecturer, testsList));
                     break;
+                case GetTestsByCourse:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    ArrayList<StudentTest> testsListbyCourse = MysqlConnection.getStudentInfo(   "SELECT st.* FROM studentstest st WHERE st.course = '" + obj + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.ImportedTestsByCourse, testsListbyCourse));
+                    break;
+
 
                 default:
                     break;

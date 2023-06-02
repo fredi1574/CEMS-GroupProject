@@ -66,7 +66,6 @@ public class showReportByLecturerController {
             }
         }
     }
-
     @FXML
     public void goBackToPreviousScreen(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.ViewReportHeadOfDepartmentPath);
