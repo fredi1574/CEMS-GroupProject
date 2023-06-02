@@ -82,6 +82,7 @@ public class ManageTestsController {
             if (showError.showConfirmationPopup("Are you sure you want to delete this test?")) {
                 MsgHandler deleteTestMsg = new MsgHandler(TypeMsg.DeleteTest, testToDelete);
                 ClientUI.chat.accept(deleteTestMsg);
+
                 reloadPage();
             }
         }

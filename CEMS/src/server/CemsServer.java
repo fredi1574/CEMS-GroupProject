@@ -331,8 +331,10 @@ public class CemsServer extends AbstractServer {
                     this.obj = (Test) this.msg.getMsg();
                     this.test = (Test) obj;
                     String DeleteTestQuery = "DELETE FROM cems.test WHERE id='" + test.getId() + "'";
-                    ;
                     MysqlConnection.update(DeleteTestQuery);
+
+                    String deleteQuestionsQuery = "DELETE FROM cems.testquestion WHERE testID='" + test.getId() + "'";
+                    MysqlConnection.update(deleteQuestionsQuery);
                     client.sendToClient(new MsgHandler<>(TypeMsg.DeleteTestResponse, null));
                     break;
 

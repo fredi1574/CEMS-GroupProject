@@ -107,8 +107,10 @@ public class CreateTestController {
         }
 
         //iterates over the testTableList and checks if the current index is available
-        for (int i = 0; i < testTableList.size() - 1; i++) {
-            if (((Test) testTableList.get(i)).getTestNumber() + 1 != ((Test) testTableList.get(i + 1)).getTestNumber()) {
+        for (int i = 0; i < testTableList.size()-1; i++) {
+            String s = ((Test) testTableList.get(i)).getTestNumber();
+            String s1 = ((Test) testTableList.get(i + 1)).getTestNumber();
+            if (Integer.parseInt(s) + 1 != Integer.parseInt(s1)) {
                 return i + 1;
             }
         }
