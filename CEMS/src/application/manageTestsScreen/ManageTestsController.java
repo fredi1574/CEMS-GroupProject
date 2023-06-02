@@ -1,8 +1,14 @@
 package application.manageTestsScreen;
 
+import application.createNewTestScreen.CreateTestController;
+import application.manageQuestionsScreen.UpdateQuestionController;
+import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
+import entity.Course;
+import entity.Question;
+import entity.StateManagement;
 import entity.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,11 +16,14 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import util.*;
 
+import javax.swing.*;
 import java.util.List;
 
 
@@ -33,29 +42,45 @@ public class ManageTestsController {
     @FXML
     private Button viewTestInProgressBtn;
     @FXML
+    private Button editBtn;
+    @FXML
     private TableView<Test> testsFromDBTableView;
     @FXML
     private TableView<Test> testApprovalTableView;
     @FXML
     private TableView<Test> activeTestsTableView;
+    public StateManagement stateManagement;
+    Test rowData;
+
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
 
-        MsgHandler getTestTable = new MsgHandler(TypeMsg.GetTestTable, null);
-        ClientUI.chat.accept(getTestTable);
+        displayDbTestsTable();
+    }
 
+    private void displayDbTestsTable() {
         //fetches the tests table from the database
+        //only tests belonging to the lecturer's subjects are shown
+        MsgHandler getDbTestTable = new MsgHandler(TypeMsg.GetTestsBySubject, Client.user.getUserName());
+        ClientUI.chat.accept(getDbTestTable);
+
         ObservableList<Test> dbTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
 
         ObservableList<String> columns = FXCollections.observableArrayList();
         columns.addAll("Test Number", "ID", "Test Code", "Subject", "Course Name", "Year", "Semester", "Session", "Author");
         TableManager.createTable(testsFromDBTableView, columns);
         TableManager.importData(testsFromDBTableView, dbTests);
-        //TableManager.addDoubleClickFunctionality(testsTableView, PathConstants.updateQuestionPath, this::setFunctions);
+
+
 
         double[] dbTestsMultipliers = {0.1, 0.08, 0.1, 0.1, 0.175, 0.1, 0.1, 0.1, 0.14};
         TableManager.resizeColumns(testsFromDBTableView, dbTestsMultipliers);
+
+        //makes the elements in the database questions table clickable
+        testsFromDBTableView.setOnMouseClicked((e) -> {
+            rowData = testsFromDBTableView.getSelectionModel().getSelectedItem();
+        });
 
         //filter tests by course name
         FilteredList<Test> filteredData = new FilteredList<>(dbTests, b -> true);
@@ -65,9 +90,31 @@ public class ManageTestsController {
         sortedData.comparatorProperty().bind(testsFromDBTableView.comparatorProperty());
         testsFromDBTableView.setItems(sortedData);
     }
+    
 
     public void createNewTest(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.createNewTestPath);
+    }
+
+    /**
+     * switches to the edit test screen (identical to stage 1 of test creation)
+     * the relevant fields in stateManagement are updated with the values
+     * of the test that was selected
+     * @param event the event that triggered the method
+     */
+    public void editTest(ActionEvent event) {
+        stateManagement = StateManagement.getInstance();
+
+        //TODO: get Course object matching selected test (or alter StateManagement)
+        //TODO: get testQuestion object matching selected test
+        //stateManagement.setTestID(rowData.getId());
+        //stateManagement.setTestNum(rowData.getTestNumber());
+        //stateManagement.setDurationTimeOfTest(rowData.getTestDuration());
+        //stateManagement.setYear(rowData.getYear());
+        //stateManagement.setSession(rowData.getSession());
+        //stateManagement.setSemester(rowData.getSession());
+
+        ScreenManager.goToNewScreen(event,PathConstants.createNewTestPath);
     }
 
     /**
@@ -97,7 +144,12 @@ public class ManageTestsController {
         ScreenManager.showStage(PathConstants.manageTestsPath, PathConstants.iconPath);
     }
 
+    /**
+     * view the selected active test's current progress and info
+     * @param actionEvent the event that triggered the method
+     */
     public void viewTestInProgress(ActionEvent actionEvent) {
+        ScreenManager.popUpScreen(PathConstants.viewActiveTestPath);
     }
 
     public void viewTestResults(ActionEvent actionEvent) {
@@ -121,5 +173,6 @@ public class ManageTestsController {
     public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
+
 
 }

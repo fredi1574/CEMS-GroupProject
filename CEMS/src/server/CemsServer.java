@@ -250,12 +250,26 @@ public class CemsServer extends AbstractServer {
                     client.sendToClient(new MsgHandler<>(TypeMsg.CourseTableResponse, courseList));
                     break;
 
-                case GetTestTable:
+                case GetAllTestsTable:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
 
-                    ArrayList<Test> testList = MysqlConnection.getTestTable("select * from cems.test;");
-                    client.sendToClient(new MsgHandler<>(TypeMsg.TestTableResponse, testList));
+                    ArrayList<Test> allTestsList = MysqlConnection.getTestTable("select * from cems.test;");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.GetAllTestsTableResponse, allTestsList));
+                    break;
+
+                case GetTestsBySubject:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+
+                    ArrayList<Test> testsBySubjectList = MysqlConnection.getTestTable(
+                            "SELECT t.* " +
+                            "FROM cems.test AS t " +
+                            "JOIN lecturersubject ls ON t.subject = ls.subject " +
+                            "JOIN user u ON u.id = ls.id " +
+                            "WHERE u.username =  + '" + obj + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.GetTestsBySubjectResponse, testsBySubjectList));
+
                     break;
 
                 case AddNewTest:
@@ -264,7 +278,7 @@ public class CemsServer extends AbstractServer {
                     if (obj instanceof Test) {
                         this.test = (Test) obj;
                         String newQuery = "INSERT INTO cems.test (testNumber, id, testDuration, author, subject, courseName, " +
-                                "teacherComment, testType, studentComment, semester, year, session) " +
+                                "teacherComment, testType, studentComment, semester, year, session, testCode) " +
                                 "VALUES ('" + test.getTestNumber() + "', " +
                                 "'" + test.getId() + "', " +
                                 "'" + test.getTestDuration() + "', " +
@@ -276,7 +290,8 @@ public class CemsServer extends AbstractServer {
                                 "'" + test.getStudentComments() + "', " +
                                 "'" + test.getSemester() + "', " +
                                 "'" + test.getYear() + "', " +
-                                "'" + test.getSession() + "') ";
+                                "'" + test.getSession() + "', " +
+                                "'" + test.getTestCode() + "') ";
                         MysqlConnection.update(newQuery);
                         client.sendToClient(new MsgHandler<>(TypeMsg.AddNewTestResponse, null));
                     }

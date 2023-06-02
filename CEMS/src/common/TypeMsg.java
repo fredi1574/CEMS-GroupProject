@@ -88,13 +88,21 @@ public enum TypeMsg {
         public String toString() {
             return "Here is the course table";
         }
-    }, GetTestTable {
+    }, GetAllTestsTable {
         public String toString() {
-            return "User Asked The Test Table";
+            return "User requested the table of every test in the DB";
         }
-    }, TestTableResponse {
+    }, GetAllTestsTableResponse {
         public String toString() {
-            return "Here Is The Table Test";
+            return "Server returned the table of every test in the DB";
+        }
+    }, GetTestsBySubject {
+        public String toString() {
+            return "User requested the tests table filtered by subject";
+        }
+    }, GetTestsBySubjectResponse {
+        public String toString() {
+            return "Server returned the table of tests filtered by subject";
         }
     }, AddNewTestQuestion {
         public String toString() {
@@ -145,14 +153,18 @@ public enum TypeMsg {
         }
     },
     DeleteTest {
-        public String toString() { return "User asked to delete a test"; }
+        public String toString() {
+            return "User asked to delete a test";
+        }
     },
     DeleteTestResponse {
-        public String toString() { return "Server deleted the test"; }
+        public String toString() {
+            return "Server deleted the test";
+        }
     }
 
 
-    }
+}
 
 
 

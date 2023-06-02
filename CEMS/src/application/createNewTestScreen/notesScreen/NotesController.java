@@ -1,4 +1,5 @@
 package application.createNewTestScreen.notesScreen;
+import java.util.UUID;
 
 import client.ClientUI;
 import common.MsgHandler;
@@ -35,7 +36,11 @@ public class NotesController {
         if (stateManagement.getTeacherComment() != null)
             teacherNote.setText(stateManagement.teacherComment);
     }
-
+    public String createTestCodeForExam(){
+        UUID uuid = UUID.randomUUID();
+        String randomString = uuid.toString().substring(0, 4);
+        return randomString;
+    }
 
     /**
      * navigates back to the second stage of test creation
@@ -69,7 +74,8 @@ public class NotesController {
         if (!teacherNote.getText().isEmpty()){
             stateManagement.setTeacherComment(teacherNote.getText());
         }
-
+        //save the testCode for test
+        stateManagement.setTestCode(createTestCodeForExam());
         //adds a test to the DB
         stateManagement.SaveTest();
         MsgHandler addNewTest = new MsgHandler(TypeMsg.AddNewTest, stateManagement.newTest);
