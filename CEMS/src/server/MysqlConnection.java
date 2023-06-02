@@ -283,9 +283,9 @@ public class MysqlConnection {
 		ArrayList<StudentTest> list = new ArrayList<>();
 		try {
 			ResultSet rs = stmt.executeQuery(query);
-			if (!(rs.next())){
-				return null;
-			}
+//			if (!(rs.next())){
+//				return null;
+//			}
 			while (rs.next()) {
 				String studentID = rs.getString("studentID"); // assuming your table has a column named "id" with type INT
 				String testID = rs.getString("testID");
@@ -293,7 +293,8 @@ public class MysqlConnection {
 				String course = rs.getString("course");
 				TestTypeEnum testType = TestTypeEnum.valueOf(rs.getString("testType")); // Convert the string value to the enum
 				String score = rs.getString("score");
-				StudentTest StudentInfo = new StudentTest(studentID,testID,subjectID,course,testType,score);
+				String fullname = rs.getString("fullname");
+				StudentTest StudentInfo = new StudentTest(studentID,testID,subjectID,course,testType,score,fullname);
 				list.add(StudentInfo);
 
 			}
@@ -302,6 +303,29 @@ public class MysqlConnection {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	public static String getFullName(String query) {
+		Statement stmt = null;
+		try {
+			stmt = conn.createStatement();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		String fullname = null;
+		try {
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				String first = rs.getString("firstName"); // assuming your table has a column named "id" with type INT
+				String last = rs.getString("lastName");
+				fullname = first + " " + last;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return fullname;
 	}
 
 

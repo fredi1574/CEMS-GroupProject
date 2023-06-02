@@ -153,7 +153,7 @@ public enum TypeMsg {
         public String toString() {
             return "Student's report was imported";
         }
-    }
+    },
 }
 
 

@@ -17,16 +17,11 @@
 
 <AnchorPane fx:id="header" prefHeight="524.0" prefWidth="799.0" styleClass="backgroundColor" stylesheets="@../../../../util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.openReportByStudentController">
    <children>
-      <AnchorPane prefHeight="105.0" prefWidth="800.0" style="-fx-border-color: #1d416e; -fx-border-width: 3 3 0 3;" styleClass="pageHeader">
+      <AnchorPane prefHeight="96.0" prefWidth="800.0" style="-fx-border-color: #1d416e; -fx-border-width: 3 3 0 3;" styleClass="pageHeader">
          <children>
-            <Label alignment="CENTER" layoutX="302.0" layoutY="19.0" prefHeight="47.0" prefWidth="224.0" text="Report For:" textFill="#fafafa">
+            <Label alignment="CENTER" layoutX="302.0" layoutY="11.0" prefHeight="47.0" prefWidth="224.0" text="Report For:" textFill="#fafafa">
                <font>
                   <Font name="Trebuchet MS" size="40.0" />
-               </font>
-            </Label>
-            <Label fx:id="studentsNameLabel" alignment="CENTER" layoutX="100.0" layoutY="69.0" prefHeight="26.0" prefWidth="612.0" text="Student Name" textFill="#fafafa">
-               <font>
-                  <Font name="Trebuchet MS" size="20.0" />
                </font>
             </Label>
             <ImageView fitHeight="86.0" fitWidth="240.0" layoutX="22.0" layoutY="9.0">
@@ -36,6 +31,11 @@
             </ImageView>
             <Button layoutX="761.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
             <Button layoutX="721.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
+            <Text fx:id="studentsNameLabel" fill="WHITE" layoutX="295.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="224.0">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <AnchorPane layoutY="101.0" prefHeight="434.0" prefWidth="800.0" style="-fx-border-color: #1d416e; -fx-border-width: 0 3 3 3;">
@@ -175,10 +175,10 @@
       </AnchorPane>
       <BarChart fx:id="reportGraph" animated="false" layoutX="221.0" layoutY="110.0" legendSide="LEFT" legendVisible="false" prefHeight="410.0" prefWidth="551.0" title="Grades distribution">
          <xAxis>
-            <CategoryAxis label="Courses's names" prefHeight="41.0" prefWidth="569.0" side="BOTTOM" tickLabelFill="#306ebd" />
+            <CategoryAxis label="Test ID" prefHeight="41.0" prefWidth="569.0" side="BOTTOM" tickLabelFill="#306ebd" fx:id="xAxis" />
          </xAxis>
          <yAxis>
-            <NumberAxis animated="false" label="Grades" prefHeight="439.0" prefWidth="49.0" side="LEFT" tickLabelFill="#306ebd" tickLength="10.0" />
+            <NumberAxis fx:id="YAxis" animated="false" label="Grades" prefHeight="439.0" prefWidth="49.0" side="LEFT" tickLabelFill="#306ebd" tickLength="10.0" />
          </yAxis>
       </BarChart>
    </children>

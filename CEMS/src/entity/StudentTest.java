@@ -13,6 +13,7 @@ public class StudentTest extends Observable implements Serializable {
     private String course;
     private TestTypeEnum testType;
     private String score;
+    private String fullname;
 
     /**
      * Constructs a new StudentTest object.
@@ -23,14 +24,17 @@ public class StudentTest extends Observable implements Serializable {
      * @param course The course name.
      * @param testType The type of the test.
      * @param score The test score.
+     * @param fullname fullname of student
+     *
      */
-    public StudentTest(String studentID, String testID, String subjectID, String course, TestTypeEnum testType, String score) {
+    public StudentTest(String studentID, String testID, String subjectID, String course, TestTypeEnum testType, String score,String fullname) {
         this.studentID = studentID;
         this.testID = testID;
         this.subjectID = subjectID;
         this.course = course;
         this.testType = testType;
         this.score = score;
+        this.fullname = fullname;
     }
 
     /**
@@ -49,6 +53,9 @@ public class StudentTest extends Observable implements Serializable {
      */
     public String getTestID() {
         return testID;
+    }
+    public String getFullname() {
+        return fullname;
     }
 
     /**

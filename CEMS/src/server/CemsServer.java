@@ -327,15 +327,29 @@ public class CemsServer extends AbstractServer {
                     break;
                 case GetStudentReport:
                     this.msg = (MsgHandler<Object>) msg;
-                    List<Object> Infomration = (List<Object>) this.msg.getMsg();
-                    String studentsID = (String) Infomration.get(0);
-                    String headID = (String) Infomration.get(1);
-                    ArrayList<StudentTest> studentInfo = MysqlConnection.getStudentInfo("select * FROM cems.studentstest");
-                    if (studentInfo != null)
-                        client.sendToClient(new MsgHandler<>(TypeMsg.StudentReportImported, studentInfo));
-                    else {
-                        client.sendToClient(new MsgHandler<>(TypeMsg.StudentReportImported, null));
+                    Object messageData = this.msg.getMsg();
+
+                    if (messageData instanceof List<?>) {
+                        List<Object> information = (List<Object>) messageData;
+                        String studentsID = information.get(0).toString();
+                        String headID = information.get(1).toString();
+
+                        ArrayList<StudentTest> studentInfo = MysqlConnection.getStudentInfo(
+                                "SELECT st.* " +
+                                        "FROM studentstest st " +
+                                        "JOIN lecturersubject ls ON st.subjectID = ls.subjectID " +
+                                        "JOIN user u ON u.id = st.studentID " +
+                                        "WHERE ls.id = '" + headID + "' AND st.studentID = '" + studentsID + "'"
+                        );
+
+                        if (studentInfo != null) {
+                            client.sendToClient(new MsgHandler<>(TypeMsg.StudentReportImported, studentInfo));
+                        } else {
+                            client.sendToClient(new MsgHandler<>(TypeMsg.StudentReportImported, null));
+                        }
                     }
+
+                    break;
                 default:
                     break;
             }

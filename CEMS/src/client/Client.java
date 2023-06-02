@@ -99,6 +99,7 @@ public class Client extends AbstractClient {
                 break;
             case StudentReportImported:
                 HODPstudentReportcontroller.reportCalc((ArrayList<Object>) messageFromServer.getMsg());
+                break;
 
 
         }
