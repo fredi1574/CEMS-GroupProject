@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import util.*;
 
 import java.util.List;
@@ -38,7 +39,6 @@ public class CreateTestController {
     public StateManagement stateManagement;
     @FXML
     private TableView<Course> courseTableView;
-
 
 
     public void initialize() {
@@ -81,7 +81,7 @@ public class CreateTestController {
         courseIDField.setText(rowData.getCourseID());
         subjectIDField.setText(rowData.getSubjectID());
 
-        MsgHandler getTestTable = new MsgHandler(TypeMsg.GetTestTable, null);
+        MsgHandler getTestTable = new MsgHandler(TypeMsg.GetAllTestsTable, null);
         ClientUI.chat.accept(getTestTable);
         List<Object> testTableList = ClientUI.chat.getTests();
 
@@ -165,7 +165,6 @@ public class CreateTestController {
             semesterTextField.setText(stateManagement.getSemester());
         }
     }
-
 
     public void BackToMenu(ActionEvent event) {
         stateManagement.setTestID("-1");

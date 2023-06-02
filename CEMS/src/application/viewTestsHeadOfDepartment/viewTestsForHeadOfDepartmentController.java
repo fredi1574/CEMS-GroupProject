@@ -39,7 +39,7 @@ public class viewTestsForHeadOfDepartmentController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getFullName());
-        MsgHandler getTestTable = new MsgHandler(TypeMsg.GetTestTable, null);
+        MsgHandler getTestTable = new MsgHandler(TypeMsg.GetAllTestsTable, null);
         ClientUI.chat.accept(getTestTable);
 
         //fetches the tests table from the database

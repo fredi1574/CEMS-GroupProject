@@ -75,11 +75,12 @@ public class Client extends AbstractClient {
                 courses = (ArrayList<Object>) ((MsgHandler<Object>) messageFromServer).getMsg();
                 this.courses = (List<Object>) messageFromServer.getMsg();
                 break;
-            case TestTableResponse:
+            case GetAllTestsTableResponse:
                 this.tests = (List<Object>) messageFromServer.getMsg();
-                System.out.println(tests);
                 break;
-
+            case GetTestsBySubjectResponse:
+                this.tests = (List<Object>) messageFromServer.getMsg();
+                break;
             case AddNewTestResponse:
                 break;
 
