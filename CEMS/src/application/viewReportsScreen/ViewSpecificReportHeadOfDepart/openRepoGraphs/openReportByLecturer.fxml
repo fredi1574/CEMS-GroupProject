@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="524.0" prefWidth="799.0" styleClass="backgroundColor" stylesheets="@../../../../util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.openReportByLecturerController">
    <children>
@@ -22,11 +23,6 @@
                   <Font name="Trebuchet MS" size="40.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="100.0" layoutY="69.0" prefHeight="26.0" prefWidth="612.0" text="Lecturer Name" textFill="#fafafa">
-               <font>
-                  <Font name="Trebuchet MS" size="20.0" />
-               </font>
-            </Label>
             <ImageView fitHeight="86.0" fitWidth="240.0" layoutX="22.0" layoutY="9.0">
                <image>
                   <Image url="@../../../../images/Logo_Transparent_Bright.png" />
@@ -34,6 +30,11 @@
             </ImageView>
             <Button layoutX="761.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
             <Button layoutX="721.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
+            <Text fx:id="studentsNameLabel" fill="WHITE" layoutX="288.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="224.0">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <AnchorPane layoutY="101.0" prefHeight="434.0" prefWidth="800.0" style="-fx-border-color: #1d416e; -fx-border-width: 0 3 3 3;">
@@ -42,7 +43,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="58.0" text="Date:" textFill="#7799c2">
+                        <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="196.0" text="Total number of tests:" textFill="#7799c2">
                            <font>
                               <Font name="Trebuchet MS Bold" size="17.0" />
                            </font>
@@ -50,14 +51,7 @@
                               <Insets left="10.0" />
                            </padding>
                         </Label>
-                        <Label prefHeight="26.0" prefWidth="90.0" text=" 19.12.2021">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
+                        <Text fx:id="testsNumberText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="30.5367431640625" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="757.0">
@@ -73,11 +67,7 @@
                               <Insets right="2.0" />
                            </HBox.margin>
                         </Label>
-                        <Label prefHeight="25.0" prefWidth="141.0" text="72">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
+                        <Text fx:id="medianText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="200.0">
@@ -93,23 +83,29 @@
                               <Insets right="2.0" />
                            </HBox.margin>
                         </Label>
-                        <Label prefHeight="25.0" prefWidth="142.0" text="73">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
+                        <Text fx:id="averageText" strokeType="OUTSIDE" strokeWidth="0.0" text="averageText" />
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <BarChart fx:id="reportGraph" animated="false" layoutX="124.0" layoutY="4.0" legendSide="LEFT" legendVisible="false" prefHeight="427.0" prefWidth="669.0" title="Grades distribution">
+            <BarChart fx:id="reportGraph" animated="false" layoutX="259.0" layoutY="4.0" legendSide="LEFT" legendVisible="false" prefHeight="419.0" prefWidth="534.0" title="Grades distribution">
                <xAxis>
                   <CategoryAxis label="Courses's names" prefHeight="41.0" prefWidth="569.0" side="BOTTOM" tickLabelFill="#306ebd" />
                </xAxis>
                <yAxis>
-                  <NumberAxis animated="false" label="Grades" prefHeight="439.0" prefWidth="49.0" side="LEFT" tickLabelFill="#306ebd" tickLength="10.0" />
+                  <NumberAxis animated="false" label="Average" prefHeight="439.0" prefWidth="49.0" side="LEFT" tickLabelFill="#306ebd" tickLength="10.0" />
                </yAxis>
             </BarChart>
+            <Label layoutX="24.0" layoutY="409.0" text="Back" />
+            <Button contentDisplay="CENTER" layoutX="10.0" layoutY="355.0" minWidth="35.0" mnemonicParsing="false" onAction="#goBackToPreviousScreen" prefHeight="54.0" prefWidth="54.0" styleClass="subButtons" textFill="#0d0d0d">
+               <graphic>
+                  <ImageView fitHeight="36.0" fitWidth="38.0">
+                     <image>
+                        <Image url="@../../../../images/back.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
    </children>

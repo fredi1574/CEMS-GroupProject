@@ -328,7 +328,6 @@ public class CemsServer extends AbstractServer {
                 case GetStudentReport:
                     this.msg = (MsgHandler<Object>) msg;
                     Object messageData = this.msg.getMsg();
-
                     if (messageData instanceof List<?>) {
                         List<Object> information = (List<Object>) messageData;
                         String studentsID = information.get(0).toString();
@@ -348,11 +347,29 @@ public class CemsServer extends AbstractServer {
                             client.sendToClient(new MsgHandler<>(TypeMsg.StudentReportImported, null));
                         }
                     }
-
                     break;
+                case GetUser:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    ArrayList<User> userLists = MysqlConnection.getUser( "SELECT * FROM user u " +
+                            "JOIN lecturersubject ls ON u.id = ls.id " +
+                            "WHERE ls.subjectid = (" +
+                            "   SELECT subjectid " +
+                            "   FROM lecturersubject " +
+                            "   WHERE id = '" + obj + "')");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.UserImported, userLists));
+                    break;
+                case GetTestsByLecutrer:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    ArrayList<StudentTest> testsList = MysqlConnection.getStudentInfo(   "SELECT st.* FROM studentstest st JOIN test t ON st.testID = t.id WHERE t.author = '" + obj + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.ImportedTestsByLecturer, testsList));
+                    break;
+
                 default:
                     break;
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

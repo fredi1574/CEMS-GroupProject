@@ -154,6 +154,28 @@ public enum TypeMsg {
             return "Student's report was imported";
         }
     },
+    GetUser {
+        public String toString() {
+            return "Get list of users";
+        }
+    },
+    UserImported {
+        public String toString() {
+            return "Imported list of users";
+        }
+    },
+    GetTestsByLecutrer {
+        public String toString() {
+            return "Get list tests made by lecutrer";
+        }
+    },
+    ImportedTestsByLecturer {
+        public String toString() {
+            return "Imported list of test made by lecturer";
+        }
+    },
+
+
 }
 
 
