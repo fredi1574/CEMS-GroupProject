@@ -80,6 +80,11 @@ public class NotesController {
             showError.showErrorPopup("Select Questions for test from page 2");
             return;
         }
+        if(stateManagement.getTotalRemainingPoints() > 0){
+            showError.showErrorPopup("The test not completed yet, you should do test with total point 100% " +
+                    " go to page 2 and complete the points of test");
+            return;
+        }
         if(!studentNote.getText().isEmpty()){
             stateManagement.setStudentComment(studentNote.getText());
         }

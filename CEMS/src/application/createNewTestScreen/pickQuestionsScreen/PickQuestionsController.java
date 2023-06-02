@@ -98,7 +98,6 @@ public class PickQuestionsController {
         });
 
         stateManagement = StateManagement.getInstance();
-
         //reloads the selected questions table state if questions were added to this test
         if(stateManagement.getTestQuestions().size() != 0 )
         {
@@ -173,6 +172,7 @@ public class PickQuestionsController {
 
         ObservableList<TestQuestion> selectedQuestions = FXCollections.observableArrayList(testQuestions);
         questionDBTableView.getSelectionModel().clearSelection();
+        pointsField.clear();
         try {
             TableManager.importData(selectedQuestionsTableView, selectedQuestions);
         } catch (Exception exception) {
@@ -214,17 +214,17 @@ public class PickQuestionsController {
             showError.showErrorPopup("You Dont Have Any Questions to Remove");
         } else if (rowDataForQuestionsSelected != null) {
             selectedQuestionsTableView.getItems().remove(rowDataForQuestionsSelected);
+            stateManagement.getTestQuestions().remove(rowDataForQuestionsSelected);
             numQuestionSelectForTest--;
             selectedQuestionsTableView.getSelectionModel().clearSelection();
             stateManagement.addTotalRemainingPoints(rowDataForQuestionsSelected.getPoints());
-
             totalRemainingPointsField.setText(String.valueOf(stateManagement.getTotalRemainingPoints()));
             rowData = null;
 
         } else if (rowDataForQuestionsSelected == null) {
             showError.showErrorPopup("Select Questions To Remove");
         }
-
+        rowDataForQuestionsSelected =null;
     }
 
     public void setFunctions(String relativePath) {

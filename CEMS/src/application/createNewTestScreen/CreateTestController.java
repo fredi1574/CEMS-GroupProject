@@ -44,7 +44,7 @@ public class CreateTestController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         nameAuthor.setText(Client.user.getFullName());
-        MsgHandler getTableCourse = new MsgHandler(TypeMsg.GetCourseTable, null);
+        MsgHandler getTableCourse = new MsgHandler(TypeMsg.GetCourseTable, Client.user.getId());
         ClientUI.chat.accept(getTableCourse);
         List<Object> courseObjectsList = ClientUI.chat.getCourses();
 
@@ -56,8 +56,6 @@ public class CreateTestController {
         TableManager.createTable(courseTableView, columnList);
         TableManager.importData(courseTableView, questionList);
         //TableManager.addDoubleClickFunctionality(courseTableView,"ManageQuestionsScreen/UpdateQuestion.fxml",true);
-
-
         double[] multipliers = {0.7, 0.295};
         TableManager.resizeColumns(courseTableView, multipliers);
 
@@ -117,6 +115,13 @@ public class CreateTestController {
         //if hadn't found a free index, returns the last index of the table
         return testTableList.size() + 1;
     }
+
+    /**
+     *
+     * Compiling the number from two digits
+     * @param newTestIndex
+     * @return
+     */
 
     public String correctTestNumber(int newTestIndex) {
 
@@ -178,17 +183,21 @@ public class CreateTestController {
             try {
                 if (!sessionTextField.getText().isEmpty()) {
                     stateManagement.setSession(sessionTextField.getText());
-                }
+                }else
+                    stateManagement.setSession("");
                 if (!yearField.getText().isEmpty()) {
                     stateManagement.setYear(yearField.getText());
-                }
+                }else
+                    stateManagement.setYear("");
                 if (!semesterTextField.getText().isEmpty()) {
                     stateManagement.setSemester(semesterTextField.getText());
-                }
+                }else
+                    stateManagement.setSemester("");
 
                 if (!testDurationField.getText().isEmpty()) {
                     stateManagement.setDurationTimeOfTest(testDurationField.getText());
-                }
+                }else
+                    stateManagement.setDurationTimeOfTest("");
             }catch(Exception exception){
 
             }
