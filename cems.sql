@@ -76,7 +76,6 @@ DROP TABLE IF EXISTS `lecturersubject`;
 CREATE TABLE `lecturersubject` (
   `id` varchar(45) NOT NULL,
   `subjectid` varchar(45) NOT NULL,
-  `subject` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`,`subjectid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -87,7 +86,7 @@ CREATE TABLE `lecturersubject` (
 
 LOCK TABLES `lecturersubject` WRITE;
 /*!40000 ALTER TABLE `lecturersubject` DISABLE KEYS */;
-INSERT INTO `lecturersubject` VALUES ('2','01','Math'),('2','04','Nuclear Physics'),('3','01','Math');
+INSERT INTO `lecturersubject` VALUES ('2','01'),('2','04'),('3','01');
 /*!40000 ALTER TABLE `lecturersubject` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -293,7 +292,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'a','May','Caspi','a','Lecturer','MayCaspi'),(3,'a','b','b','b','Head of Department/Lecturer','FrediBul'),(4,'a','r','g','b','Student','Roman');
+INSERT INTO `user` VALUES (2,'a','May','Caspi','a','Lecturer','MayCaspi'),(3,'a','b','b','b','Head of Department/Lecturer','FrediBul'),(4,'a','r','g','b','Student','Roman'),(5,'a','aaa','bbb','a','Lecturer','a');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -306,4 +305,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-02 16:27:30
+-- Dump completed on 2023-06-03 11:11:39
