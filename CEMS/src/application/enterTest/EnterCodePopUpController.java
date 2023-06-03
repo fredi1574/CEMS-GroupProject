@@ -5,6 +5,7 @@ import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
 import entity.Test;
+import entity.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EnterCodePopUpController {
+    public static Test test;
 
     @FXML
     private AnchorPane header;
@@ -60,6 +62,8 @@ public class EnterCodePopUpController {
             if (testExists) {
                 // Test with the given code exists
                 // Handle the case accordingly
+
+               // test.setId(codet);
                 ScreenManager.goToNewScreen(event, PathConstants.EnterTest);
             } else {
                 // Test with the given code does not exist

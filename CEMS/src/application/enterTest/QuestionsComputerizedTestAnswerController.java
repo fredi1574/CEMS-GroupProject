@@ -26,6 +26,7 @@ import util.LogOut;
 
 public class QuestionsComputerizedTestAnswerController {
     private int testDurationMinutes;
+    private String testId;
     @FXML
     private AnchorPane header;
     @FXML
@@ -81,6 +82,7 @@ public class QuestionsComputerizedTestAnswerController {
 
     private void fetchQuestion() {
         try {
+           // String testId = EnterCodePopUpController.test.getId();
             String testDurationQuery = "SELECT testDuration FROM test WHERE id = ?";
             PreparedStatement durationStatement = connection.prepareStatement(testDurationQuery);
             durationStatement.setString(1, "010101");
