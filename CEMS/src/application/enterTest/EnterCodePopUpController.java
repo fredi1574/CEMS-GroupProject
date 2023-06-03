@@ -40,7 +40,9 @@ public class EnterCodePopUpController {
             showError.showErrorPopup("Please enter code.");
         } else if (!codet.matches("\\d+")) {
             showError.showErrorPopup("Code should contain only numbers.");
-        } else if (codet.length() != 6) {
+        } else if (codet.length() != 6)
+        {
+            showError.showErrorPopup("Code should contain 6 numbers.");
         } else {
             // Code is valid
             boolean testExists = false;
