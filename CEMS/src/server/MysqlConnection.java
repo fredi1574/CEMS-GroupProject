@@ -296,9 +296,11 @@ public class MysqlConnection {
                 TestTypeEnum testType = TestTypeEnum.valueOf(rs.getString("testType")); // Convert the string value to the enum
                 String score = rs.getString("score");
                 String fullname = rs.getString("fullname");
-                StudentTest StudentInfo = new StudentTest(studentID, testID, subjectID, course, testType, score, fullname);
+                String year = rs.getString("year");
+                String semester =rs.getString("semester");
+                String session = rs.getString("session");
+                StudentTest StudentInfo = new StudentTest(studentID, testID, subjectID, course, testType, score, fullname,semester,session,year);
                 list.add(StudentInfo);
-
             }
 
         } catch (SQLException e) {

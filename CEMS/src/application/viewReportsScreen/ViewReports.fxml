@@ -20,7 +20,7 @@
             </font>
         </Label>
         <ImageView layoutX="712.0" layoutY="37.0">
-            <Image url="@../../images/avatar.png"/>
+            <Image url="@../../images/avatar.png" />
         </ImageView>
         <Text fx:id="usernameText" fill="WHITE" layoutX="741.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" underline="true">
             <font>
@@ -33,7 +33,7 @@
             </font>
         </Button>
         <ImageView fitHeight="80.0" fitWidth="235.0" layoutX="11.0" layoutY="5.0">
-            <Image url="@../../images/Logo_Transparent_Bright.png"/>
+            <Image url="@../../images/Logo_Transparent_Bright.png" />
         </ImageView>
     </AnchorPane>
     <Button layoutX="16.0" layoutY="450.0" mnemonicParsing="false" onAction="#goBackToPreviousScreen" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
@@ -49,7 +49,6 @@
     <Button layoutX="773.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
     <Button layoutX="737.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
     <HBox alignment="CENTER" layoutX="26.0" layoutY="95.0" prefHeight="61.0" prefWidth="755.0" spacing="20.0">
-        <ComboBox fx:id="subjectComboBox" prefHeight="40.0" prefWidth="200.0" promptText="Select Subject" />
         <ComboBox fx:id="yearComboBox" prefHeight="40.0" prefWidth="200.0" promptText="Select Year">
             <HBox.margin>
                 <Insets />

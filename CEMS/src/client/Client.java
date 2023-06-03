@@ -1,5 +1,6 @@
 package client;
 
+import application.viewReportsScreen.ViewReportsController;
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.openReportByCourseController;
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.openReportByLecturerController;
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.openReportByStudentController;
@@ -31,6 +32,7 @@ public class Client extends AbstractClient {
     public static showReportByLecturerController HODPshowReportByLecturerController = new showReportByLecturerController();
     public static openReportByLecturerController HODPopenReporLecturerController = new openReportByLecturerController();
     public static openReportByCourseController HODPopenReportCourseController = new openReportByCourseController();
+    public static ViewReportsController LectureReportsController = new ViewReportsController();
     //constructor
     public Client(String host, int port, ChatIF clientUI) {
         super(host, port);
@@ -111,9 +113,13 @@ public class Client extends AbstractClient {
                 break;
             case ImportedTestsByLecturer:
                 HODPopenReporLecturerController.reportCalc((ArrayList<Object>) messageFromServer.getMsg());
+
                 break;
             case ImportedTestsByCourse:
                 HODPopenReportCourseController.reportCalc((ArrayList<Object>) messageFromServer.getMsg());
+                break;
+            case ImportedTestsByLecturerForLecturerReport:
+                LectureReportsController.setTestsTable((ArrayList<Object>) messageFromServer.getMsg());
 
 
 
