@@ -265,7 +265,7 @@ public class CemsServer extends AbstractServer {
                     ArrayList<Test> testsBySubjectList = MysqlConnection.getTestTable(
                             "SELECT t.* " +
                             "FROM cems.test AS t " +
-                            "JOIN lecturersubject ls ON t.subject = ls.subject " +
+                            "JOIN lecturersubject ls ON t.subject = (SELECT subjectName FROM subject WHERE subjectID = ls.subjectid) " +
                             "JOIN user u ON u.id = ls.id " +
                             "WHERE u.username =  + '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetTestsBySubjectResponse, testsBySubjectList));
