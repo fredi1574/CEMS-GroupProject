@@ -109,18 +109,8 @@
       </Button>
       <Label layoutX="31.0" layoutY="698.0" prefHeight="27.0" prefWidth="60.0" text="Back">
          <font>
-            <Font name="Trebuchet MS Bold" size="17.0" />
+            <Font name="Trebuchet MS" size="17.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="446.0" layoutY="348.0" prefHeight="103.0" prefWidth="397.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
-         <children>
-            <Label layoutX="-2.0" layoutY="7.0" prefHeight="27.0" prefWidth="397.0" text="                      Press to show the Test " textAlignment="CENTER">
-               <font>
-                  <Font name="Trebuchet MS Bold" size="17.0" />
-               </font>
-            </Label>
-            <Button fx:id="viewTestInProgressBtn" layoutX="125.0" layoutY="52.0" mnemonicParsing="false" onAction="#VeiwSoluationTest" prefHeight="28.0" prefWidth="161.0" styleClass="regularButtons" text="View Test" textAlignment="CENTER" />
-         </children>
-      </AnchorPane>
    </children>
 </AnchorPane>

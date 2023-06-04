@@ -6,10 +6,7 @@ import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
-import entity.Course;
-import entity.Question;
-import entity.StateManagement;
-import entity.Test;
+import entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -106,13 +103,15 @@ public class ManageTestsController {
         stateManagement = StateManagement.getInstance();
 
         //TODO: get Course object matching selected test (or alter StateManagement)
+        //Course testCourse = new Course()
         //TODO: get testQuestion object matching selected test
-        //stateManagement.setTestID(rowData.getId());
-        //stateManagement.setTestNum(rowData.getTestNumber());
-        //stateManagement.setDurationTimeOfTest(rowData.getTestDuration());
-        //stateManagement.setYear(rowData.getYear());
-        //stateManagement.setSession(rowData.getSession());
-        //stateManagement.setSemester(rowData.getSession());
+
+        stateManagement.setTestID(rowData.getId());
+        stateManagement.setTestNum(rowData.getTestNumber());
+        stateManagement.setDurationTimeOfTest(rowData.getTestDuration());
+        stateManagement.setYear(rowData.getYear());
+        stateManagement.setSession(rowData.getSession());
+        stateManagement.setSemester(rowData.getSession());
 
         ScreenManager.goToNewScreen(event,PathConstants.createNewTestPath);
     }
