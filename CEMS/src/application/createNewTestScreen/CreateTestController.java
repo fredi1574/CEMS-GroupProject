@@ -54,7 +54,7 @@ public class CreateTestController {
 
         nameAuthor.setText(Client.user.getFullName());
 
-        MsgHandler getTableCourse = new MsgHandler(TypeMsg.GetCourseTable, null);
+        MsgHandler getTableCourse = new MsgHandler(TypeMsg.GetCourseTable, Client.user.getId());
         ClientUI.chat.accept(getTableCourse);
         List<Object> courseObjectsList = ClientUI.chat.getCourses();
 

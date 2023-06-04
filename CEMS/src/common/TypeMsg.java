@@ -161,6 +161,12 @@ public enum TypeMsg {
         public String toString() {
             return "Server deleted the test";
         }
+    },
+    GetTestQuestions {
+        public String toString() { return "User asked for the questions of the chosen test";}
+    },
+    GetTestQuestionsResponse {
+        public String toString() { return "Server returned the list of test questions"; }
     }
 
 

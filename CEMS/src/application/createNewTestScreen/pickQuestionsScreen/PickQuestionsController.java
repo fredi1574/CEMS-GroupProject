@@ -172,7 +172,7 @@ public class PickQuestionsController {
 
         ObservableList<TestQuestion> selectedQuestions = FXCollections.observableArrayList(testQuestions);
         questionDBTableView.getSelectionModel().clearSelection();
-        pointsField.clear();
+
         try {
             TableManager.importData(selectedQuestionsTableView, selectedQuestions);
         } catch (Exception exception) {

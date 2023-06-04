@@ -244,6 +244,39 @@ public class MysqlConnection {
         System.out.println(tests);
         return tests;
     }
+
+	public static ArrayList<TestQuestion> getTestQuestionsTable(String query) {
+		Statement stmt = null;
+
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		ArrayList<TestQuestion> testQuestions = new ArrayList<>();
+		try {
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				String questionID = rs.getString("questionID"); // assuming your table has a column named "id" with type INT
+				String questionNumber = rs.getString("questionNumber");
+				String points = rs.getString("points");
+				String questionText = rs.getString("questionText");
+				String testID = rs.getString("testID");
+				String subject = rs.getString("subject");
+				String courseName = rs.getString("courseName");
+				String author = rs.getString("author");
+
+				TestQuestion testQuestion = new TestQuestion(questionID, questionNumber, Integer.parseInt(points),
+						questionText, testID, subject,courseName, author);
+				testQuestions.add(testQuestion);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return testQuestions;
+	}
+
 	public static ArrayList<TestRequestForApproval> getRequestsTable(String query) {
 		Statement stmt = null;
 		try {

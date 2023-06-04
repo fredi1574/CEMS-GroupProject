@@ -17,6 +17,19 @@ public class TestQuestion extends Observable implements Serializable {
 
 	public TestQuestion(){
 	}
+
+	public TestQuestion(String questionID, String questionNumber, int points, String questionText, String testID,
+						String subject,  String courseName, String author) {
+		this.questionID = questionID;
+		this.questionNumber = questionNumber;
+		this.points = points;
+		this.questionText = questionText;
+		this.testID = testID;
+		this.subject = subject;
+		this.courseName = courseName;
+		this.author = author;
+	}
+
 	// Getters and Setters
 	public Question getQuestion() {
 		return question;

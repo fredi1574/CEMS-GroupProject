@@ -103,15 +103,23 @@ public class ManageTestsController {
         stateManagement = StateManagement.getInstance();
 
         //TODO: get Course object matching selected test (or alter StateManagement)
-        //Course testCourse = new Course()
-        //TODO: get testQuestion object matching selected test
+        //stateManagement.setCourse();
+        String subjectID = rowData.getId().substring(0,2);
+        String courseID = rowData.getId().substring(2,4);
+        Course testCourse = new Course(subjectID,courseID,rowData.getSubject(), rowData.getCourseName());
 
+        MsgHandler getTestQuestions = new MsgHandler(TypeMsg.GetTestQuestions, rowData);
+        ClientUI.chat.accept(getTestQuestions);
+        List<Object> testQuestions = ClientUI.chat.getTestQuestions();
+        System.out.println(testQuestions);
+
+        stateManagement.setCourse(testCourse);
         stateManagement.setTestID(rowData.getId());
         stateManagement.setTestNum(rowData.getTestNumber());
         stateManagement.setDurationTimeOfTest(rowData.getTestDuration());
         stateManagement.setYear(rowData.getYear());
         stateManagement.setSession(rowData.getSession());
-        stateManagement.setSemester(rowData.getSession());
+        stateManagement.setSemester(rowData.getSemester());
 
         ScreenManager.goToNewScreen(event,PathConstants.createNewTestPath);
     }

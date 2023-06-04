@@ -18,6 +18,7 @@ public class Client extends AbstractClient {
     public List<Object> courses;
     public List<Object> allQuestions;
     public List<Object> tests;
+    public List<Object> testQuestions;
 
     public static User user;
     public List<Object> requests;
@@ -94,6 +95,9 @@ public class Client extends AbstractClient {
             case RequestIsApproved:
                 break;
             case RequestIsDeclined:
+                break;
+            case GetTestQuestionsResponse:
+                testQuestions = (List<Object>) messageFromServer.getMsg();
                 break;
 
 

@@ -17,7 +17,6 @@ public class Test extends Observable implements Serializable {
     private String studentComments;
     private TestTypeEnum testType;
     private String year;
-    private String testCode;
     private String semester;
     private String session;
     private ObservableList<TestQuestion> questions;
@@ -25,7 +24,7 @@ public class Test extends Observable implements Serializable {
     //constructor for fully created test
         public Test(String testNumber, String id, String testCode, String author, String testDuration,  String courseName,
                 String teacherComments, TestTypeEnum TestType, String studentComments,  String subject,
-                String year,String session,String semester,String testCode) {
+                String year,String session,String semester) {
         this.id = id;
         this.testNumber = testNumber;
         this.testCode = testCode;
@@ -41,13 +40,7 @@ public class Test extends Observable implements Serializable {
         this.semester = semester;
         this.testCode = testCode;
     }
-    public String getTestCode() {
-        return testCode;
-    }
 
-    public void setTestCode(String testCode) {
-        this.testCode = testCode;
-    }
     public void setStudentComments(String studentComments) {
         this.studentComments = studentComments;
     }
@@ -74,7 +67,6 @@ public class Test extends Observable implements Serializable {
     public void setSession(String session) {
         this.session = session;
     }
-
 
 
     public ObservableList<TestQuestion> getQuestions() {

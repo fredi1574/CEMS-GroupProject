@@ -355,6 +355,13 @@ public class CemsServer extends AbstractServer {
                     MysqlConnection.update(deleteQuestionsQuery);
                     client.sendToClient(new MsgHandler<>(TypeMsg.DeleteTestResponse, null));
                     break;
+                case GetTestQuestions:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (Test) this.msg.getMsg();
+                    this.test = (Test) obj;
+                    ArrayList<TestQuestion> testsQuestionsList = MysqlConnection.getTestQuestionsTable("SELECT * FROM cems.testquestion WHERE testID='" + test.getId() + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.GetTestQuestionsResponse, testsQuestionsList));
+                    break;
 
 
                 default:

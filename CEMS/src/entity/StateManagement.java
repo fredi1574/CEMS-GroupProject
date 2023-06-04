@@ -35,17 +35,10 @@ public class StateManagement {
        setTestID("-1"); //sets default empty value for testID on StateManagement initialization
        totalRemainingPoints = 100;
     }
-    public void setDataOfTest(Course course, String testNum, String testID, String durationTimeOfTest,
-                              String year, String session, String semester) {
-        this.durationTimeOfTest = durationTimeOfTest;
+    public void setDataOfTest(Course course, String testNum, String testID) {
         this.course = course;
         this.testID = testID;
         this.testNum = testNum;
-        this.year = year;
-        this.session = session;
-        this.semester = semester;
-
-
     }
     public void SaveTest(){
         newTest = new Test(testNum,getTestID(),getTestCode(),Client.user.getFullName(),
