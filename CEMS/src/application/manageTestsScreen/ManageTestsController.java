@@ -1,7 +1,5 @@
 package application.manageTestsScreen;
 
-import application.createNewTestScreen.CreateTestController;
-import application.manageQuestionsScreen.UpdateQuestionController;
 import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
@@ -13,14 +11,11 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import util.*;
 
-import javax.swing.*;
 import java.util.List;
 
 
@@ -110,16 +105,30 @@ public class ManageTestsController {
 
         MsgHandler getTestQuestions = new MsgHandler(TypeMsg.GetTestQuestions, rowData);
         ClientUI.chat.accept(getTestQuestions);
-        List<Object> testQuestions = ClientUI.chat.getTestQuestions();
-        System.out.println(testQuestions);
-
         stateManagement.setCourse(testCourse);
+
+        ObservableList<TestQuestion> testQuestions = FXCollections.observableArrayList((List) ClientUI.chat.getTestQuestions());
+        for (TestQuestion question: testQuestions) {
+            stateManagement.setTestQuestions(question);
+
+
+        }
         stateManagement.setTestID(rowData.getId());
         stateManagement.setTestNum(rowData.getTestNumber());
         stateManagement.setDurationTimeOfTest(rowData.getTestDuration());
         stateManagement.setYear(rowData.getYear());
         stateManagement.setSession(rowData.getSession());
         stateManagement.setSemester(rowData.getSemester());
+        stateManagement.setStudentComment(rowData.getStudentComments().equals("null") ? "" : rowData.getStudentComments());
+        stateManagement.setTeacherComment(rowData.getTeacherComments().equals("null") ? "" : rowData.getTeacherComments());
+
+        stateManagement.totalRemainingPoints = 0;
+
+        if(stateManagement.editable == false) {
+            MsgHandler clearTestMsg = new MsgHandler(TypeMsg.DeleteTest, rowData);
+            ClientUI.chat.accept(clearTestMsg);
+        }
+
 
         ScreenManager.goToNewScreen(event,PathConstants.createNewTestPath);
     }

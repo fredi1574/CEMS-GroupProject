@@ -94,12 +94,16 @@ public class NotesController {
         stateManagement.setTestCode(createTestCodeForExam());
         //adds a test to the DB
         stateManagement.SaveTest();
+
         MsgHandler addNewTest = new MsgHandler(TypeMsg.AddNewTest, stateManagement.newTest);
         ClientUI.chat.accept(addNewTest);
 
         //adds the test's questions to the DB
         addAllTestQuestions();
         stateManagement.resetInstance();
+
+        stateManagement = StateManagement.getInstance();
+        stateManagement.editable = true;
         ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
     }
 
