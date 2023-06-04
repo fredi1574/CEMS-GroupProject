@@ -54,7 +54,7 @@
                 </Label>
             </VBox>
             <VBox prefHeight="111.0" prefWidth="129.0">
-                <TextField fx:id="testIdTextField" prefHeight="24.0" prefWidth="127.0" promptText="Test ID" styleClass="scroll-bar">
+                <TextField fx:id="testIdTextField" editable="false" prefHeight="24.0" prefWidth="127.0" promptText="Test ID" styleClass="scroll-bar">
                     <padding>
                         <Insets left="10.0" />
                     </padding>
@@ -66,7 +66,7 @@
                     </padding>
                 </TextField>
                 <HBox prefHeight="25.0" prefWidth="86.0" />
-                <TextField fx:id="numOfQuestionsTextField" prefHeight="24.0" prefWidth="86.0" promptText="Number Questions" styleClass="scroll-bar">
+                <TextField fx:id="numOfQuestionsTextField" editable="false" prefHeight="24.0" prefWidth="86.0" promptText="Number Questions" styleClass="scroll-bar">
                     <padding>
                         <Insets left="10.0" />
                     </padding>
@@ -97,7 +97,7 @@
             </ImageView>
         </graphic>
     </Button>
-    <Label layoutX="733.0" layoutY="625.0" prefHeight="18.0" prefWidth="103.0" text="Request Extra Time" />
+    <Label layoutX="733.0" layoutY="628.0" prefHeight="18.0" prefWidth="103.0" text="Request Extra Time" />
     <Button layoutX="831.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
     <Button layoutX="794.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
     <AnchorPane layoutX="482.0" layoutY="294.0" prefHeight="54.0" prefWidth="328.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
@@ -120,7 +120,7 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Label fx:id="lockTestField1" alignment="CENTER" prefHeight="18.0" prefWidth="61.0" text="Unlock Test" visible="false" />
+                        <Label fx:id="unlockTestField" alignment="CENTER" prefHeight="18.0" prefWidth="61.0" text="Unlock Test" visible="false" />
                     </VBox>
                     <VBox>
                         <Button mnemonicParsing="false" onAction="#lockTest" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
@@ -155,7 +155,7 @@
             </Label>
             <Label alignment="BOTTOM_RIGHT" prefHeight="21.0" prefWidth="526.0" text="*Request message will be sent to the head of department" />
         </HBox>
-        <TextArea fx:id="TestComments" prefHeight="76.0" prefWidth="753.0" />
+        <TextArea fx:id="TestCommentsTextArea" prefHeight="76.0" prefWidth="753.0" />
     </VBox>
     <Button contentDisplay="CENTER" layoutX="19.0" layoutY="575.0" minWidth="35.0" mnemonicParsing="false" onAction="#back" prefHeight="54.0" prefWidth="54.0" styleClass="subButtons" textFill="#0d0d0d">
         <graphic>
@@ -164,7 +164,7 @@
             </ImageView>
         </graphic>
     </Button>
-    <Label layoutX="34.0" layoutY="625.0" text="Back" />
+    <Label layoutX="34.0" layoutY="628.0" text="Back" />
     <AnchorPane layoutX="479.0" layoutY="129.0" prefHeight="142.0" prefWidth="333.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
         <HBox alignment="CENTER" layoutX="17.0" layoutY="14.0" prefHeight="113.0" prefWidth="299.0">
             <VBox prefHeight="126.0" prefWidth="186.0">
@@ -196,7 +196,7 @@
                 </Label>
             </VBox>
             <VBox prefHeight="98.0" prefWidth="145.0">
-                <TextField fx:id="testDateTextField" prefHeight="24.0" prefWidth="132.0" promptText="Test Date" styleClass="scroll-bar">
+                <TextField fx:id="testDateTextField" editable="false" prefHeight="24.0" prefWidth="132.0" promptText="Test Date" styleClass="scroll-bar">
                     <padding>
                         <Insets left="10.0" />
                     </padding>

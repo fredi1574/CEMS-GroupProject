@@ -21,6 +21,7 @@ public class CemsServer extends AbstractServer {
     MsgHandler<Object> msg;
     Question question;
     Test test;
+    ActiveTest activeTest;
     TestQuestion testQuestion;
 
     /**
@@ -245,9 +246,9 @@ public class CemsServer extends AbstractServer {
                     break;
 
                 case GetCourseTable:
-
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
+
                     ArrayList<Course> courseList = MysqlConnection.getCourseTable("SELECT * FROM cems.course WHERE subjectID = " +
                             "(SELECT subjectid FROM cems.lecturersubject WHERE id = " + obj + ")");;
                     client.sendToClient(new MsgHandler<>(TypeMsg.CourseTableResponse, courseList));
@@ -362,8 +363,13 @@ public class CemsServer extends AbstractServer {
                     ArrayList<TestQuestion> testsQuestionsList = MysqlConnection.getTestQuestionsTable("SELECT * FROM cems.testquestion WHERE testID='" + test.getId() + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetTestQuestionsResponse, testsQuestionsList));
                     break;
+                case GetActiveTests:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
 
-
+                    ArrayList<ActiveTest> activeTestsList = MysqlConnection.getActiveTestsTable("select * from cems.activetest;");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.GetActiveTestsResponse, activeTestsList));
+                    break;
                 default:
                     break;
             }

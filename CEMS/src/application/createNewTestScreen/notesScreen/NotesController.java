@@ -18,7 +18,6 @@ import javafx.scene.text.Text;
 
 import util.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NotesController {
@@ -27,20 +26,27 @@ public class NotesController {
     private Text nameAuthor;
     @FXML
     private TextArea studentNote;
-    private List<Test> newTest = new ArrayList<>();
     @FXML
     private TextArea teacherNote;
     @FXML
     private AnchorPane header;
     public void initialize(){
         ScreenManager.dragAndDrop(header);
+
         nameAuthor.setText(Client.user.getFullName());
+
         if(stateManagement.getStudentComment() != null)
             studentNote.setText(stateManagement.studentComment);
         if (stateManagement.getTeacherComment() != null)
             teacherNote.setText(stateManagement.teacherComment);
     }
-    public String createTestCodeForExam(){
+
+    /**
+     * Generates a random 4-character string used as the test code
+     * The test code is used by the student to access a test
+     * @return the tet code string
+     */
+    public String generateTestCode(){
         UUID uuid = UUID.randomUUID();
         String randomString = uuid.toString().substring(0, 4);
         return randomString;
@@ -63,17 +69,18 @@ public class NotesController {
     }
 
     /**
-     * finalizes the test creation process -
-     * adds a test row to the tests table and adds rows for each selected question
-     * to the testQuestion table
-     * also calls the clearTestState method to reset all fields in the test creation screens
+     * finalizes the test creation process:
+     * - deletes a test with an identical id if one is found
+     * - adds a test row to the tests table
+     * - adds rows for each selected question to the testQuestion table
+     * - calls the resetInstance method to reset all fields in the test creation screens
      * @param event the event that triggered the method (clicking the submit button)
      */
     @FXML
     void createTest(ActionEvent event){
         if(stateManagement.semester == ""||stateManagement.year == "" ||stateManagement.session ==""
                 || stateManagement.durationTimeOfTest == ""){
-            showError.showErrorPopup("Go to page one and complete the data of test");
+            showError.showErrorPopup("Go to page 1 and complete the data of test");
             return;
         }
         if(stateManagement.getTestQuestions().size() == 0){
@@ -81,8 +88,7 @@ public class NotesController {
             return;
         }
         if(stateManagement.getTotalRemainingPoints() > 0){
-            showError.showErrorPopup("The test not completed yet, you should do test with total point 100% " +
-                    " go to page 2 and complete the points of test");
+            showError.showErrorPopup("Points for the questions do not add up to 100 in page 2");
             return;
         }
         if(!studentNote.getText().isEmpty()){
@@ -92,28 +98,23 @@ public class NotesController {
             stateManagement.setTeacherComment(teacherNote.getText());
         }
         //save the testCode for test
-        stateManagement.setTestCode(createTestCodeForExam());
-        //adds a test to the DB
+        stateManagement.setTestCode(generateTestCode());
 
-        deleteIfAlreadyExists();
+        deleteTestIfAlreadyExists();
+        addTestToDB();
+        addAllTestQuestionsToDB();
 
-        stateManagement.SaveTest();
-        MsgHandler addNewTest = new MsgHandler(TypeMsg.AddNewTest, stateManagement.newTest);
-        ClientUI.chat.accept(addNewTest);
-
-        //adds the test's questions to the DB
-        addAllTestQuestions();
         stateManagement.resetInstance();
 
         ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
     }
 
     /**
-     * checks if a test with the current testID already exists in the db
+     * Checks if a test with the current testID already exists in the db
      * if it does, it gets deleted
-     * Used for editing tests (Allow the lecturer to
+     * Used for editing tests (Allows the lecturer to override an existing test's data)
      */
-    public void deleteIfAlreadyExists() {
+    public void deleteTestIfAlreadyExists() {
         MsgHandler getDbTestTable = new MsgHandler(TypeMsg.GetTestsBySubject, Client.user.getUserName());
         ClientUI.chat.accept(getDbTestTable);
         ObservableList<Test> dbTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
@@ -126,7 +127,20 @@ public class NotesController {
             }
         }
     }
-    public void addAllTestQuestions() {
+
+    /**
+     * adds a test to the DB
+     */
+    public void addTestToDB() {
+        stateManagement.SaveTest();
+        MsgHandler addNewTest = new MsgHandler(TypeMsg.AddNewTest, stateManagement.newTest);
+        ClientUI.chat.accept(addNewTest);
+    }
+
+    /**
+     * adds all the test's questions to the DB
+     */
+    public void addAllTestQuestionsToDB() {
         ObservableList<TestQuestion> testQuestions = stateManagement.getTestQuestions();
         System.out.println("number of test questions: " + stateManagement.getTestQuestions().size());
         System.out.println("question 1: " + testQuestions.get(0));

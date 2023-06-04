@@ -167,6 +167,12 @@ public enum TypeMsg {
     },
     GetTestQuestionsResponse {
         public String toString() { return "Server returned the list of test questions"; }
+    },
+    GetActiveTests {
+        public String toString() { return "User asked for the active tests table"; }
+    },
+    GetActiveTestsResponse {
+        public String toString() { return "Server returned the active tests table"; }
     }
 
 

@@ -40,20 +40,25 @@ public class ManageTestsController {
     @FXML
     private TableView<Test> testApprovalTableView;
     @FXML
-    private TableView<Test> activeTestsTableView;
+    private TableView<ActiveTest> activeTestsTableView;
     public StateManagement stateManagement;
-    Test rowData;
+    Test testRowData;
+    ActiveTest activeTestRowData;
 
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
 
         displayDbTestsTable();
+        displayActiveTestsTable();
     }
 
+    /**
+     * fetches the tests table from the database
+     * only tests belonging to the lecturer's subjects are shown
+     */
     private void displayDbTestsTable() {
-        //fetches the tests table from the database
-        //only tests belonging to the lecturer's subjects are shown
+
         MsgHandler getDbTestTable = new MsgHandler(TypeMsg.GetTestsBySubject, Client.user.getUserName());
         ClientUI.chat.accept(getDbTestTable);
 
@@ -65,13 +70,12 @@ public class ManageTestsController {
         TableManager.importData(testsFromDBTableView, dbTests);
 
 
-
         double[] dbTestsMultipliers = {0.1, 0.08, 0.1, 0.1, 0.175, 0.1, 0.1, 0.1, 0.14};
         TableManager.resizeColumns(testsFromDBTableView, dbTestsMultipliers);
 
         //makes the elements in the database questions table clickable
         testsFromDBTableView.setOnMouseClicked((e) -> {
-            rowData = testsFromDBTableView.getSelectionModel().getSelectedItem();
+            testRowData = testsFromDBTableView.getSelectionModel().getSelectedItem();
         });
 
         //filter tests by course name
@@ -82,7 +86,30 @@ public class ManageTestsController {
         sortedData.comparatorProperty().bind(testsFromDBTableView.comparatorProperty());
         testsFromDBTableView.setItems(sortedData);
     }
-    
+
+    /**
+     * fetches the active tests table from the database
+     */
+    private void displayActiveTestsTable() {
+
+        MsgHandler getActiveTestsTable = new MsgHandler(TypeMsg.GetActiveTests, Client.user.getUserName());
+        ClientUI.chat.accept(getActiveTestsTable);
+
+        ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTests());
+
+        ObservableList<String> columns = FXCollections.observableArrayList();
+        columns.addAll("ID", "Test Code");
+        TableManager.createTable(activeTestsTableView, columns);
+        TableManager.importData(activeTestsTableView, activeTests);
+
+        double[] activeTestsMultipliers = {0.5, 0.5};
+        TableManager.resizeColumns(activeTestsTableView, activeTestsMultipliers);
+
+        //makes the elements in the database questions table clickable
+        activeTestsTableView.setOnMouseClicked((e) -> {
+            activeTestRowData = activeTestsTableView.getSelectionModel().getSelectedItem();
+        });
+    }
 
     public void createNewTest(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.createNewTestPath);
@@ -97,37 +124,46 @@ public class ManageTestsController {
     public void editTest(ActionEvent event) {
         stateManagement = StateManagement.getInstance();
 
-        //TODO: get Course object matching selected test (or alter StateManagement)
-        //stateManagement.setCourse();
-        if (rowData == null) {
+        if (testRowData == null) {
             showError.showErrorPopup("Select a test to edit");
             return;
         }
-        String subjectID = rowData.getId().substring(0,2);
-        String courseID = rowData.getId().substring(2,4);
-        Course testCourse = new Course(subjectID,courseID,rowData.getSubject(), rowData.getCourseName());
 
-        MsgHandler getTestQuestions = new MsgHandler(TypeMsg.GetTestQuestions, rowData);
+        //prevents an active test from being edited
+        for (int i = 0; i < activeTestsTableView.getItems().size(); i++) {
+            if (activeTestsTableView.getItems().get(i).getId().equals(testRowData.getId())) {
+                showError.showErrorPopup("Test is currently in process and cannot be edited");
+                return;
+            }
+        }
+
+        //load test's course
+        String subjectID = testRowData.getId().substring(0,2);
+        String courseID = testRowData.getId().substring(2,4);
+        Course testCourse = new Course(subjectID,courseID, testRowData.getSubject(), testRowData.getCourseName());
+
+        MsgHandler getTestQuestions = new MsgHandler(TypeMsg.GetTestQuestions, testRowData);
         ClientUI.chat.accept(getTestQuestions);
         stateManagement.setCourse(testCourse);
 
+        //load test's questions
         ObservableList<TestQuestion> testQuestions = FXCollections.observableArrayList((List) ClientUI.chat.getTestQuestions());
         for (TestQuestion question: testQuestions) {
             stateManagement.setTestQuestions(question);
-
-
         }
-        stateManagement.setTestID(rowData.getId());
-        stateManagement.setTestNum(rowData.getTestNumber());
-        stateManagement.setDurationTimeOfTest(rowData.getTestDuration());
-        stateManagement.setYear(rowData.getYear());
-        stateManagement.setSession(rowData.getSession());
-        stateManagement.setSemester(rowData.getSemester());
-        stateManagement.setStudentComment(rowData.getStudentComments().equals("null") ? "" : rowData.getStudentComments());
-        stateManagement.setTeacherComment(rowData.getTeacherComments().equals("null") ? "" : rowData.getTeacherComments());
 
-        stateManagement.totalRemainingPoints = 0; //when an existing test is opened, no points are available
+        //load test's other data
+        stateManagement.setTestID(testRowData.getId());
+        stateManagement.setTestNum(testRowData.getTestNumber());
+        stateManagement.setDurationTimeOfTest(testRowData.getTestDuration());
+        stateManagement.setYear(testRowData.getYear());
+        stateManagement.setSession(testRowData.getSession());
+        stateManagement.setSemester(testRowData.getSemester());
+        stateManagement.setStudentComment(testRowData.getStudentComments().equals("null") ? "" : testRowData.getStudentComments());
+        stateManagement.setTeacherComment(testRowData.getTeacherComments().equals("null") ? "" : testRowData.getTeacherComments());
 
+        //when an existing test is opened, no points are available
+        stateManagement.totalRemainingPoints = 0;
 
         ScreenManager.goToNewScreen(event,PathConstants.createNewTestPath);
     }
@@ -138,7 +174,7 @@ public class ManageTestsController {
      * @param event The event triggered by clicking the "Delete" button.
      */
     public void deleteTest(ActionEvent event) {
-        if (rowData == null) {
+        if (testRowData == null) {
             showError.showErrorPopup("Select a test to delete");
             return;
         }
@@ -168,6 +204,51 @@ public class ManageTestsController {
      * @param actionEvent the event that triggered the method
      */
     public void viewTestInProgress(ActionEvent actionEvent) {
+        stateManagement = StateManagement.getInstance();
+
+        if (activeTestRowData == null) {
+            showError.showErrorPopup("Select a test to view");
+            return;
+        }
+
+        //gets the matching Test object to the selected active test row
+        Test activeTest = testsFromDBTableView.getItems()
+                .stream()
+                .filter(test -> test.getId().equals(activeTestRowData.getId()))
+                .findFirst()
+                .orElse(null);
+
+        //TODO: seperate method for stateManagement loading
+
+        //load test's course
+        String subjectID = activeTest.getId().substring(0,2);
+        String courseID = activeTest.getId().substring(2,4);
+        Course testCourse = new Course(subjectID,courseID, activeTest.getSubject(), activeTest.getCourseName());
+
+        MsgHandler getTestQuestions = new MsgHandler(TypeMsg.GetTestQuestions, activeTest);
+        ClientUI.chat.accept(getTestQuestions);
+        stateManagement.setCourse(testCourse);
+
+        //load test's questions
+        ObservableList<TestQuestion> testQuestions = FXCollections.observableArrayList((List) ClientUI.chat.getTestQuestions());
+        for (TestQuestion question: testQuestions) {
+            stateManagement.setTestQuestions(question);
+        }
+
+        //load test's other data
+        stateManagement.setTestID(activeTest.getId());
+        stateManagement.setTestNum(activeTest.getTestNumber());
+        stateManagement.setDurationTimeOfTest(activeTest.getTestDuration());
+        stateManagement.setYear(activeTest.getYear());
+        stateManagement.setSession(activeTest.getSession());
+        stateManagement.setSemester(activeTest.getSemester());
+        stateManagement.setTestCode(activeTest.getTestCode());
+        stateManagement.setStudentComment(activeTest.getStudentComments().equals("null") ? "" : activeTest.getStudentComments());
+        stateManagement.setTeacherComment(activeTest.getTeacherComments().equals("null") ? "" : activeTest.getTeacherComments());
+
+        //when an existing test is opened, no points are available
+        stateManagement.totalRemainingPoints = 0;
+
         ScreenManager.popUpScreen(PathConstants.viewActiveTestPath);
     }
 

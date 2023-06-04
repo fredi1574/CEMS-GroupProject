@@ -152,7 +152,8 @@ public class MysqlConnection {
 	public static Object authenticateUser(String username, String password) {
 		try {
 			PreparedStatement statement = conn.prepareStatement("SELECT id, firstName, lastName, email," +
-					" role FROM user WHERE username = ? AND password = ?");			statement.setString(1, username);
+					" role FROM user WHERE username = ? AND password = ?");
+			statement.setString(1, username);
 			statement.setString(2, password);
 
 			try (ResultSet resultSet = statement.executeQuery()) {
@@ -241,9 +242,36 @@ public class MysqlConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(tests);
         return tests;
     }
+
+	public static ArrayList<ActiveTest> getActiveTestsTable(String query) {
+		Statement stmt = null;
+
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		ArrayList<ActiveTest> activeTests = new ArrayList<>();
+		try {
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				String id = rs.getString("testID"); // assuming your table has a column named "id" with type INT
+				String testDuration = rs.getString("testDuration");
+				String testCode = rs.getString("testCode");
+				String testType = rs.getString("testType");
+
+				TestTypeEnum testTypeEnum = (Objects.equals(testType, "C") ? TestTypeEnum.C : TestTypeEnum.M);
+				ActiveTest activeTest = new ActiveTest(id,testDuration,testCode,testTypeEnum);
+				activeTests.add(activeTest);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return activeTests;
+	}
 
 	public static ArrayList<TestQuestion> getTestQuestionsTable(String query) {
 		Statement stmt = null;

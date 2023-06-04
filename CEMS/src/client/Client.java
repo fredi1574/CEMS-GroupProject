@@ -19,6 +19,7 @@ public class Client extends AbstractClient {
     public List<Object> allQuestions;
     public List<Object> tests;
     public List<Object> testQuestions;
+    public List<Object> activeTests;
 
     public static User user;
     public List<Object> requests;
@@ -98,6 +99,9 @@ public class Client extends AbstractClient {
                 break;
             case GetTestQuestionsResponse:
                 testQuestions = (List<Object>) messageFromServer.getMsg();
+                break;
+            case GetActiveTestsResponse:
+                this.activeTests = (List<Object>) messageFromServer.getMsg();
                 break;
 
 
