@@ -26,6 +26,7 @@ public class Client extends AbstractClient {
     public List<Object> allQuestions;
     public List<Object> tests;
 
+
     public static User user;
     public List<Object> requests;
     public static openReportByStudentController HODPstudentReportcontroller = new openReportByStudentController();
@@ -52,7 +53,6 @@ public class Client extends AbstractClient {
             case Disconnected:
                 System.exit(0);
                 break;
-
             case allQuestionImported:
                 this.allQuestions = (List<Object>) messageFromServer.getMsg();
                 break;

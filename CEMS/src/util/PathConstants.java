@@ -29,6 +29,8 @@ public class PathConstants {
     public static final String ViewReportHeadOfDepartmentPath = "/application/viewReportsScreen/ViewReportHeadOfDepartment.fxml";
     public  static final String ViewQuestionsHeadOfDepartmentPath = "/application/manageQuestionsScreen/viewQuestionHeadOfDepartment.fxml";
     public  static final String ViewTestHeadOfDepartmentPath = "/application/viewTestsHeadOfDepartment/viewTestsForHeadOfDepartment.fxml";
+    public  static final String EnterTest = "/application/enterTest/QuestionsComputerizedTestAnswer.fxml";
+
     public  static final String ViewQuestionPath = "/application/manageQuestionsScreen/viewQuestion.fxml";
     public  static final String EnterManageRequestsHeadOfDepart = "/application/manageRequestsHeadOfDepart/manageRequests.fxml";
     public  static final String EnterViewRequestsHeadOfDepart = "/application/manageRequestsHeadOfDepart/viewRequest.fxml";

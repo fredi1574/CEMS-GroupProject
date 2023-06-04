@@ -111,15 +111,5 @@
                 <NumberAxis animated="false" label="Number of students" prefHeight="439.0" prefWidth="49.0" side="LEFT" tickLabelFill="#306ebd" tickLength="10.0" />
             </yAxis>
         </BarChart>
-      <Label layoutX="23.0" layoutY="403.0" text="Back" />
-      <Button contentDisplay="CENTER" layoutX="12.0" layoutY="357.0" minWidth="35.0" mnemonicParsing="false" onAction="#goBackToPreviousScreen" prefHeight="54.0" prefWidth="54.0" styleClass="subButtons" textFill="#0d0d0d">
-         <graphic>
-            <ImageView fitHeight="36.0" fitWidth="38.0">
-               <image>
-                  <Image url="@../../../images/back.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
     </AnchorPane>
 </AnchorPane>
