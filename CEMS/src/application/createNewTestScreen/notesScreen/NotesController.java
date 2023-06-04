@@ -8,6 +8,7 @@ import common.TypeMsg;
 import entity.StateManagement;
 import entity.Test;
 import entity.TestQuestion;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -93,8 +94,10 @@ public class NotesController {
         //save the testCode for test
         stateManagement.setTestCode(createTestCodeForExam());
         //adds a test to the DB
-        stateManagement.SaveTest();
 
+        deleteIfAlreadyExists();
+
+        stateManagement.SaveTest();
         MsgHandler addNewTest = new MsgHandler(TypeMsg.AddNewTest, stateManagement.newTest);
         ClientUI.chat.accept(addNewTest);
 
@@ -102,11 +105,27 @@ public class NotesController {
         addAllTestQuestions();
         stateManagement.resetInstance();
 
-        stateManagement = StateManagement.getInstance();
-        stateManagement.editable = true;
         ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
     }
 
+    /**
+     * checks if a test with the current testID already exists in the db
+     * if it does, it gets deleted
+     * Used for editing tests (Allow the lecturer to
+     */
+    public void deleteIfAlreadyExists() {
+        MsgHandler getDbTestTable = new MsgHandler(TypeMsg.GetTestsBySubject, Client.user.getUserName());
+        ClientUI.chat.accept(getDbTestTable);
+        ObservableList<Test> dbTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
+
+        for (int i = 0; i < dbTests.size(); i++) {
+            if(stateManagement.getTestID().equals(dbTests.get(i).getId())) {
+                MsgHandler clearTestMsg = new MsgHandler(TypeMsg.DeleteTest, dbTests.get(i));
+                ClientUI.chat.accept(clearTestMsg);
+                break;
+            }
+        }
+    }
     public void addAllTestQuestions() {
         ObservableList<TestQuestion> testQuestions = stateManagement.getTestQuestions();
         System.out.println("number of test questions: " + stateManagement.getTestQuestions().size());

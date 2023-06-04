@@ -99,6 +99,10 @@ public class ManageTestsController {
 
         //TODO: get Course object matching selected test (or alter StateManagement)
         //stateManagement.setCourse();
+        if (rowData == null) {
+            showError.showErrorPopup("Select a test to edit");
+            return;
+        }
         String subjectID = rowData.getId().substring(0,2);
         String courseID = rowData.getId().substring(2,4);
         Course testCourse = new Course(subjectID,courseID,rowData.getSubject(), rowData.getCourseName());
@@ -122,12 +126,7 @@ public class ManageTestsController {
         stateManagement.setStudentComment(rowData.getStudentComments().equals("null") ? "" : rowData.getStudentComments());
         stateManagement.setTeacherComment(rowData.getTeacherComments().equals("null") ? "" : rowData.getTeacherComments());
 
-        stateManagement.totalRemainingPoints = 0;
-
-        if(stateManagement.editable == false) {
-            MsgHandler clearTestMsg = new MsgHandler(TypeMsg.DeleteTest, rowData);
-            ClientUI.chat.accept(clearTestMsg);
-        }
+        stateManagement.totalRemainingPoints = 0; //when an existing test is opened, no points are available
 
 
         ScreenManager.goToNewScreen(event,PathConstants.createNewTestPath);
@@ -139,6 +138,10 @@ public class ManageTestsController {
      * @param event The event triggered by clicking the "Delete" button.
      */
     public void deleteTest(ActionEvent event) {
+        if (rowData == null) {
+            showError.showErrorPopup("Select a test to delete");
+            return;
+        }
         int selectedTestIndex = testsFromDBTableView.getSelectionModel().getFocusedIndex();
         if (selectedTestIndex != -1) {
             Test testToDelete = testsFromDBTableView.getItems().get(selectedTestIndex);

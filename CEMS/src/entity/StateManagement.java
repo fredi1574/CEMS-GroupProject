@@ -18,8 +18,6 @@ public class StateManagement {
     public Test newTest;
     public int totalRemainingPoints;
     public TestTypeEnum testType = TestTypeEnum.C;
-    public boolean editable = false;    //used to prevent a test from being deleted when the user
-                                        // enters edit mode and closes it without submitting his edits
 
     private  static StateManagement instance = null;
 
