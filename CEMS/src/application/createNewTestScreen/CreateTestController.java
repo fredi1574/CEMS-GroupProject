@@ -15,7 +15,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import util.*;
+
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 public class CreateTestController {
     Course rowData = null;
     @FXML
@@ -84,7 +89,7 @@ public class CreateTestController {
         List<Object> testTableList = ClientUI.chat.getTests();
 
         String newTestNumber = correctTestNumber(findFirstFreeIndex(testTableList));
-        String testID = rowData.getCourseID() + rowData.getSubjectID() + newTestNumber;
+        String testID = rowData.getSubjectID() +rowData.getCourseID() +  newTestNumber;
 
         testIDField.setText(testID);
         testNumberField.setText(newTestNumber);
@@ -96,25 +101,33 @@ public class CreateTestController {
      *
      * @param testTableList the table that will be scanned
      * @return the free index
-     */
-    public int findFirstFreeIndex(List<Object> testTableList) {
 
-        //if the test table is empty
+     */ public int findFirstFreeIndex(List<Object> testTableList) {
         if (testTableList.isEmpty()) {
             return 1;
         }
 
-        //iterates over the testTableList and checks if the current index is available
-        for (int i = 0; i < testTableList.size()-1; i++) {
-            String s = ((Test) testTableList.get(i)).getTestNumber();
-            String s1 = ((Test) testTableList.get(i + 1)).getTestNumber();
-            if (Integer.parseInt(s) + 1 != Integer.parseInt(s1)) {
-                return i + 1;
+        Set<Integer> indexSet = new HashSet<>();
+        for (Object test : testTableList) {
+            if (test instanceof Test) {
+                Test testObject = (Test) test;
+                indexSet.add(Integer.parseInt(testObject.getTestNumber()));
             }
         }
-        //if hadn't found a free index, returns the last index of the table
-        return testTableList.size() + 1;
+
+        int minIndex = Collections.min(indexSet);
+        int maxIndex = Collections.max(indexSet);
+
+        for (int i = 1; i <= maxIndex; i++) {
+            if (!indexSet.contains(i)) {
+                return i;
+            }
+        }
+
+        return maxIndex + 1;
     }
+
+
 
     /**
      *
@@ -185,10 +198,12 @@ public class CreateTestController {
                     stateManagement.setSession(sessionTextField.getText());
                 }else
                     stateManagement.setSession("");
+
                 if (!yearField.getText().isEmpty()) {
                     stateManagement.setYear(yearField.getText());
                 }else
                     stateManagement.setYear("");
+
                 if (!semesterTextField.getText().isEmpty()) {
                     stateManagement.setSemester(semesterTextField.getText());
                 }else

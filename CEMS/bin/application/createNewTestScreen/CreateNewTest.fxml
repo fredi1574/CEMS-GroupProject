@@ -20,7 +20,7 @@
         <ImageView fitHeight="82.0" fitWidth="210.0" layoutX="14.0" layoutY="9.0" preserveRatio="true">
             <Image url="@../../images/Logo_Transparent_Bright.png" />
         </ImageView>
-        <Label alignment="CENTER" layoutX="167.0" layoutY="4.0" prefHeight="91.0" prefWidth="501.0" style="-fx-text-fill: #e6eef7;" text="Create New Test" textFill="#fafafa">
+        <Label alignment="CENTER" layoutX="183.0" layoutY="3.0" prefHeight="91.0" prefWidth="501.0" style="-fx-text-fill: #e6eef7;" text="Enter Test Details" textFill="#fafafa">
             <font>
                 <Font name="Trebuchet MS Bold" size="40.0" />
             </font>
