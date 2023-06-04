@@ -1,5 +1,9 @@
 package application.createNewTestScreen.pickQuestionsScreen;
-
+import client.Client;
+import entity.Test;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.scene.text.Text;
 import application.createNewTestScreen.CreateTestController;
 import client.ClientUI;
 import common.MsgHandler;
@@ -17,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import util.*;
 
@@ -26,6 +31,8 @@ import java.util.List;
 public class PickQuestionsController {
     public ArrayList<TestQuestion> questions;
     public StateManagement stateManagement;
+    @FXML
+    private Text nameAuthor;
 
     @FXML
     public TextField searchField;
@@ -54,6 +61,7 @@ public class PickQuestionsController {
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
+        nameAuthor.setText(Client.user.getFullName());
         MsgHandler getTable = new MsgHandler(TypeMsg.GetAllQuestions, null);
         ClientUI.chat.accept(getTable);
         // creates the question table
@@ -90,14 +98,17 @@ public class PickQuestionsController {
         });
 
         stateManagement = StateManagement.getInstance();
-
         //reloads the selected questions table state if questions were added to this test
         if(stateManagement.getTestQuestions().size() != 0 )
         {
            //totalRemainingPoints = stateManagment.getTotalRemainingPoints();
             TableManager.importData(selectedQuestionsTableView,(ObservableList<TestQuestion>) stateManagement.getTestQuestions());
         }
-
+        FilteredList<Question> filteredData = new FilteredList<>(questions, b -> true);
+        TableManager.MakeFilterListForSearch(filteredData, searchField, Question::getQuestionText);
+        SortedList<Question> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(questionDBTableView.comparatorProperty());
+        questionDBTableView.setItems(sortedData);
         totalRemainingPointsField.setText(String.valueOf(stateManagement.getTotalRemainingPoints()));
 
 
@@ -161,6 +172,7 @@ public class PickQuestionsController {
 
         ObservableList<TestQuestion> selectedQuestions = FXCollections.observableArrayList(testQuestions);
         questionDBTableView.getSelectionModel().clearSelection();
+        pointsField.clear();
         try {
             TableManager.importData(selectedQuestionsTableView, selectedQuestions);
         } catch (Exception exception) {
@@ -202,17 +214,17 @@ public class PickQuestionsController {
             showError.showErrorPopup("You Dont Have Any Questions to Remove");
         } else if (rowDataForQuestionsSelected != null) {
             selectedQuestionsTableView.getItems().remove(rowDataForQuestionsSelected);
+            stateManagement.getTestQuestions().remove(rowDataForQuestionsSelected);
             numQuestionSelectForTest--;
             selectedQuestionsTableView.getSelectionModel().clearSelection();
             stateManagement.addTotalRemainingPoints(rowDataForQuestionsSelected.getPoints());
-
             totalRemainingPointsField.setText(String.valueOf(stateManagement.getTotalRemainingPoints()));
             rowData = null;
 
         } else if (rowDataForQuestionsSelected == null) {
             showError.showErrorPopup("Select Questions To Remove");
         }
-
+        rowDataForQuestionsSelected =null;
     }
 
     public void setFunctions(String relativePath) {

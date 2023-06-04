@@ -1,6 +1,7 @@
 package application.createNewTestScreen.notesScreen;
 import java.util.UUID;
 
+import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
@@ -12,16 +13,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
-import util.ExitButton;
-import util.MinimizeButton;
-import util.PathConstants;
-import util.ScreenManager;
+import javafx.scene.text.Text;
+
+import util.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class NotesController {
     public StateManagement stateManagement = StateManagement.getInstance();
+    @FXML
+    private Text nameAuthor;
     @FXML
     private TextArea studentNote;
     private List<Test> newTest = new ArrayList<>();
@@ -31,6 +33,7 @@ public class NotesController {
     private AnchorPane header;
     public void initialize(){
         ScreenManager.dragAndDrop(header);
+        nameAuthor.setText(Client.user.getFullName());
         if(stateManagement.getStudentComment() != null)
             studentNote.setText(stateManagement.studentComment);
         if (stateManagement.getTeacherComment() != null)
@@ -67,7 +70,20 @@ public class NotesController {
      */
     @FXML
     void createTest(ActionEvent event){
-
+        if(stateManagement.semester == ""||stateManagement.year == "" ||stateManagement.session ==""
+                || stateManagement.durationTimeOfTest == ""){
+            showError.showErrorPopup("Go to page one and complete the data of test");
+            return;
+        }
+        if(stateManagement.getTestQuestions().size() == 0){
+            showError.showErrorPopup("Select Questions for test from page 2");
+            return;
+        }
+        if(stateManagement.getTotalRemainingPoints() > 0){
+            showError.showErrorPopup("The test not completed yet, you should do test with total point 100% " +
+                    " go to page 2 and complete the points of test");
+            return;
+        }
         if(!studentNote.getText().isEmpty()){
             stateManagement.setStudentComment(studentNote.getText());
         }
@@ -83,9 +99,7 @@ public class NotesController {
 
         //adds the test's questions to the DB
         addAllTestQuestions();
-
-        stateManagement.clearTestState();
-
+        stateManagement.resetInstance();
         ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
     }
 

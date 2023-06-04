@@ -1,5 +1,5 @@
 package entity;
-
+import client.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -27,7 +27,9 @@ public class StateManagement {
         }
         return instance;
     }
-
+    public static void resetInstance() {
+        instance = null;
+    }
     private StateManagement(){
 
        setTestID("-1"); //sets default empty value for testID on StateManagement initialization
@@ -46,14 +48,12 @@ public class StateManagement {
 
     }
     public void SaveTest(){
-        newTest = new Test(testNum,getTestID(),getTestCode(),null,
+        newTest = new Test(testNum,getTestID(),getTestCode(),Client.user.getFullName(),
                 durationTimeOfTest,course.getCourseName(),getTeacherComment(),testType,getStudentComment(),
                     course.getSubjectName(),year,session,semester);
     }
 
-    public void SaveTestQuestions() {
 
-    }
     public String getYear() {
         return year;
     }
@@ -148,29 +148,14 @@ public class StateManagement {
     }
 
     public String getTestCode() { return testCode; }
+
     public void setTestCode(String testCode) { this.testCode = testCode; }
 
     /**
      * resets all test-state related data
      * used when a new test has been created
      */
-    public void clearTestState() { //TODO: alter the function if state management is utilized in more screens
-        instance = null;
-//        year = null;
-//        session = null;
-//        semester = null;
-//        testQuestions.clear();
-//        course.setSubject(null);
-//        course.setCourse(null);
-//        course.setCourseID(null);
-//        course.setSubjectID(null);
-//        testNum = null;
-//        teacherComment = null;
-//        studentComment = null;
-//        durationTimeOfTest = null;
-//        totalRemainingPoints = 100;
 
-    }
     @Override
     public String toString() {
         return "StateManagement{" +

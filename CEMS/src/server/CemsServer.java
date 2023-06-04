@@ -1,5 +1,6 @@
 package server;
 
+import client.Client;
 import common.ConnectToClients;
 import common.MsgHandler;
 import common.TypeMsg;
@@ -244,9 +245,11 @@ public class CemsServer extends AbstractServer {
                     break;
 
                 case GetCourseTable:
+
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
-                    ArrayList<Course> courseList = MysqlConnection.getCourseTable("select * from cems.course");
+                    ArrayList<Course> courseList = MysqlConnection.getCourseTable("SELECT * FROM cems.course WHERE subjectID = " +
+                            "(SELECT subjectid FROM cems.lecturersubject WHERE id = " + obj + ")");;
                     client.sendToClient(new MsgHandler<>(TypeMsg.CourseTableResponse, courseList));
                     break;
 

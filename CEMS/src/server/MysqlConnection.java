@@ -41,10 +41,10 @@ public class MysqlConnection {
         }
     }
 
-    public static void update(String question) {
+    public static void update(String query) {
         PreparedStatement stmt;
         try {
-            stmt = conn.prepareStatement(question);
+            stmt = conn.prepareStatement(query);
             stmt.executeUpdate();
         } catch (SQLException e1) {
             e1.printStackTrace();
@@ -151,8 +151,8 @@ public class MysqlConnection {
 
 	public static Object authenticateUser(String username, String password) {
 		try {
-			PreparedStatement statement = conn.prepareStatement("SELECT id, firstName, lastName, email, role FROM user WHERE username = ? AND password = ?");
-			statement.setString(1, username);
+			PreparedStatement statement = conn.prepareStatement("SELECT id, firstName, lastName, email," +
+					" role FROM user WHERE username = ? AND password = ?");			statement.setString(1, username);
 			statement.setString(2, password);
 
 			try (ResultSet resultSet = statement.executeQuery()) {
