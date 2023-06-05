@@ -42,7 +42,7 @@
                   <Font name="Franklin Gothic Demi Cond" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="gradeButton" text="Calculate Grade" onAction="#calculateGrade" />
+            <Button fx:id="gradeButton" onAction="#calculateGrade" text="Calculate Grade" />
          </children>
       </AnchorPane>
       <Button fx:id="previousButton" layoutX="722.0" layoutY="472.0" onAction="#handlePreviousButtonClick" prefHeight="20.0" prefWidth="16.0" visible="true" />
@@ -90,7 +90,7 @@
          <children>
             <Pane prefHeight="75.0" prefWidth="799.0" styleClass="pageHeader">
                <children>
-                  <Label fx:id="questionNumberLabel" alignment="BASELINE_CENTER" layoutX="-4.0" prefHeight="27.0" prefWidth="744.0" textFill="WHITE">
+                  <Label fx:id="questionNumberLabel" alignment="BASELINE_CENTER" layoutX="314.0" layoutY="1.0" prefHeight="27.0" prefWidth="427.0" text="afaf" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="Trebuchet MS Bold" size="16.0" />
                      </font>
@@ -107,6 +107,11 @@
                         </Text>
                      </children>
                   </Pane>
+                  <Text fx:id="courseNameTestIdText" fill="WHITE" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="320.39190673828125">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
             <Pane prefHeight="50.0" prefWidth="545.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #FFFFFF;">
