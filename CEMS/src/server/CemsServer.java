@@ -9,6 +9,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -250,7 +253,8 @@ public class CemsServer extends AbstractServer {
                     this.obj = (String) this.msg.getMsg();
 
                     ArrayList<Course> courseList = MysqlConnection.getCourseTable("SELECT * FROM cems.course WHERE subjectID = " +
-                            "(SELECT subjectid FROM cems.lecturersubject WHERE id = " + obj + ")");;
+                            "(SELECT subjectid FROM cems.lecturersubject WHERE id = " + obj + ")");
+                    ;
                     client.sendToClient(new MsgHandler<>(TypeMsg.CourseTableResponse, courseList));
                     break;
 
@@ -268,10 +272,10 @@ public class CemsServer extends AbstractServer {
 
                     ArrayList<Test> testsBySubjectList = MysqlConnection.getTestTable(
                             "SELECT t.* " +
-                            "FROM cems.test AS t " +
-                            "JOIN lecturersubject ls ON t.subject = (SELECT subjectName FROM subject WHERE subjectID = ls.subjectid) " +
-                            "JOIN user u ON u.id = ls.id " +
-                            "WHERE u.username =  + '" + obj + "'");
+                                    "FROM cems.test AS t " +
+                                    "JOIN lecturersubject ls ON t.subject = (SELECT subjectName FROM subject WHERE subjectID = ls.subjectid) " +
+                                    "JOIN user u ON u.id = ls.id " +
+                                    "WHERE u.username =  + '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetTestsBySubjectResponse, testsBySubjectList));
 
                     break;
@@ -370,7 +374,7 @@ public class CemsServer extends AbstractServer {
                 case GetUser:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
-                    ArrayList<User> userLists = MysqlConnection.getUser( "SELECT * FROM user u " +
+                    ArrayList<User> userLists = MysqlConnection.getUser("SELECT * FROM user u " +
                             "JOIN lecturersubject ls ON u.id = ls.id " +
                             "WHERE ls.subjectid = (" +
                             "   SELECT subjectid " +
@@ -381,19 +385,19 @@ public class CemsServer extends AbstractServer {
                 case GetTestsByLecutrer:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
-                    ArrayList<StudentTest> testsList = MysqlConnection.getStudentInfo(   "SELECT st.* FROM studentstest st JOIN test t ON st.testID = t.id WHERE t.author = '" + obj + "'");
+                    ArrayList<StudentTest> testsList = MysqlConnection.getStudentInfo("SELECT st.* FROM studentstest st JOIN test t ON st.testID = t.id WHERE t.author = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedTestsByLecturer, testsList));
                     break;
                 case GetTestsByLecutrerForLecturerReport:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
-                    ArrayList<StudentTest> testsListforReport = MysqlConnection.getStudentInfo(   "SELECT st.* FROM studentstest st JOIN test t ON st.testID = t.id WHERE t.author = '" + obj + "'");
+                    ArrayList<StudentTest> testsListforReport = MysqlConnection.getStudentInfo("SELECT st.* FROM studentstest st JOIN test t ON st.testID = t.id WHERE t.author = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedTestsByLecturerForLecturerReport, testsListforReport));
                     break;
                 case GetTestsByCourse:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
-                    ArrayList<StudentTest> testsListbyCourse = MysqlConnection.getStudentInfo(   "SELECT st.* FROM studentstest st WHERE st.course = '" + obj + "'");
+                    ArrayList<StudentTest> testsListbyCourse = MysqlConnection.getStudentInfo("SELECT st.* FROM studentstest st WHERE st.course = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedTestsByCourse, testsListbyCourse));
                     break;
 

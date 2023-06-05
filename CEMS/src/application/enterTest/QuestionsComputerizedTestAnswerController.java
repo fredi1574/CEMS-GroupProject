@@ -72,7 +72,6 @@ public class QuestionsComputerizedTestAnswerController {
         startTimer();
 
     }
-
     private void connectToDatabase() {
         // Establish database connection
         String url = "jdbc:mysql://localhost:3306/cems?serverTimezone=UTC";

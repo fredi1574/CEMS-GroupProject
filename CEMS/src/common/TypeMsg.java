@@ -98,7 +98,11 @@ public enum TypeMsg {
         }
     }, GetTestsBySubject {
         public String toString() {
-            return "User Asked The Test Table";
+            return "User requested the tests table filtered by subject";
+        }
+    }, GetTestsBySubjectResponse {
+        public String toString() {
+            return "Server returned the table of tests filtered by subject";
         }
     }, TestTableResponse {
         public String toString() {
@@ -223,6 +227,12 @@ public enum TypeMsg {
     },
     GetActiveTestsResponse {
         public String toString() { return "Server returned the active tests table"; }
+    },
+    GetCorrectAnswer {
+        public String toString() { return "Get correct Answer From the data base"; }
+    },
+    importedCorrectAnswer {
+        public String toString() { return "Imported correct answer"; }
     }
 
 

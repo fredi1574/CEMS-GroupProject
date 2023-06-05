@@ -4,6 +4,7 @@ import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
+import entity.ActiveTest;
 import entity.Test;
 import entity.User;
 import javafx.collections.FXCollections;
@@ -48,12 +49,12 @@ public class EnterCodePopUpController {
         } else {
             // Code is valid
             boolean testExists = false;
-            MsgHandler getTestTable = new MsgHandler(TypeMsg.GetTestTable, null);
+            MsgHandler getTestTable = new MsgHandler(TypeMsg.GetActiveTests, null);
             ClientUI.chat.accept(getTestTable);
-            ObservableList<Test> tests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
+            ObservableList<ActiveTest> tests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTests());
 
-            for (Test test : tests) {
-                if (test.getId().equals(codet)) {
+            for (ActiveTest test : tests) {
+                if (test.getTestCode().equals(codet)) {
                     testExists = true;
                     break;
                 }
