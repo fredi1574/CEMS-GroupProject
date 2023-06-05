@@ -45,7 +45,14 @@
             <Button fx:id="gradeButton" onAction="#calculateGrade" text="Calculate Grade" />
          </children>
       </AnchorPane>
-      <Button fx:id="previousButton" layoutX="722.0" layoutY="472.0" onAction="#handlePreviousButtonClick" prefHeight="20.0" prefWidth="16.0" styleClass="image-button" visible="true">
+      <Button fx:id="previousButton" layoutX="722.0" layoutY="472.0" onAction="#handlePreviousButtonClick" prefHeight="45.0" prefWidth="45.0" styleClass="image-button" visible="true">
+         <graphic>
+            <ImageView fitHeight="45.0" fitWidth="45.0">
+               <image>
+                  <Image url="@../../images/back.png" />
+               </image>
+            </ImageView>
+         </graphic>
          <style>
             -fx-background-color: transparent;
             -fx-background-radius: 0;
@@ -78,14 +85,21 @@
             <Font size="11.5" />
          </font>
       </Label>
-      <Button fx:id="myButton" layoutX="821.0" layoutY="472.0" onAction="#handleButtonClick" prefHeight="20.0" prefWidth="16.0" styleClass="image-button" visible="true">
+      <Button fx:id="myButton" layoutX="821.0" layoutY="472.0" onAction="#handleButtonClick" prefHeight="45.0" prefWidth="45.0" styleClass="image-button" visible="true">
+         <graphic>
+            <ImageView fitHeight="45.0" fitWidth="45.0">
+               <image>
+                  <Image url="@../../images/next.png" />
+               </image>
+            </ImageView>
+         </graphic>
          <style>
             -fx-background-color: transparent;
             -fx-background-radius: 0;
             -fx-padding: 0;
          </style>
       </Button>
-      <Label layoutX="723.0" layoutY="503.0" prefHeight="18.0" prefWidth="31.0" text="Back" />
+      <Label layoutX="737.0" layoutY="452.0" prefHeight="18.0" prefWidth="31.0" text="Back" />
       <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="62.0" layoutY="461.0">
          <image>
             <Image url="@../../images/saveAndSubmit.png" />
@@ -155,16 +169,6 @@
          </children>
       </VBox>
       <ProgressIndicator layoutX="35.0" layoutY="166.0" prefWidth="31.0" progress="0.25" />
-      <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="716.0" layoutY="459.0" mouseTransparent="true" pickOnBounds="true">
-         <image>
-            <Image url="@../../images/back.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="768.0" layoutY="459.0">
-         <image>
-            <Image url="@../../images/next.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="777.0" layoutY="503.0" text="Next" />
+      <Label layoutX="839.0" layoutY="452.0" text="Next" />
    </children>
 </AnchorPane>
