@@ -61,6 +61,11 @@
                   <Font size="16.0" />
                </font>
             </Label>
+            <Text fx:id="courseNameTestIdText" layoutX="14.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="testcode and name" wrappingWidth="320.39190673828125">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <Label layoutX="49.0" layoutY="501.0" prefHeight="17.0" prefWidth="92.0" text="Submit &amp; Save" textFill="#514f4f">
@@ -90,7 +95,7 @@
          <children>
             <Pane prefHeight="75.0" prefWidth="799.0" styleClass="pageHeader">
                <children>
-                  <Label fx:id="questionNumberLabel" alignment="BASELINE_CENTER" layoutX="314.0" layoutY="1.0" prefHeight="27.0" prefWidth="427.0" text="afaf" textAlignment="RIGHT" textFill="WHITE">
+                  <Label fx:id="questionNumberLabel" alignment="BASELINE_CENTER" layoutX="471.0" layoutY="1.0" prefHeight="27.0" prefWidth="270.0" text="afaf" textFill="WHITE">
                      <font>
                         <Font name="Trebuchet MS Bold" size="16.0" />
                      </font>
@@ -107,11 +112,6 @@
                         </Text>
                      </children>
                   </Pane>
-                  <Text fx:id="courseNameTestIdText" fill="WHITE" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="320.39190673828125">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Text>
                </children>
             </Pane>
             <Pane prefHeight="50.0" prefWidth="545.0" style="-fx-border-color: #A9A9A9; -fx-background-color: #FFFFFF;">
