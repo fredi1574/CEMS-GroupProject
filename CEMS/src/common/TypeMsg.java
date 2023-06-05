@@ -88,7 +88,15 @@ public enum TypeMsg {
         public String toString() {
             return "Here is the course table";
         }
-    }, GetTestTable {
+    }, GetAllTestsTable {
+        public String toString() {
+            return "User requested the table of every test in the DB";
+        }
+    }, GetAllTestsTableResponse {
+        public String toString() {
+            return "Server returned the table of every test in the DB";
+        }
+    }, GetTestsBySubject {
         public String toString() {
             return "User Asked The Test Table";
         }
@@ -194,10 +202,31 @@ public enum TypeMsg {
             return "Imported list of test made by lecturer";
         }
     },
+    DeleteTest {
+        public String toString() {
+            return "User asked to delete a test";
+        }
+    },
+    DeleteTestResponse {
+        public String toString() {
+            return "Server deleted the test";
+        }
+    },
+    GetTestQuestions {
+        public String toString() { return "User asked for the questions of the chosen test";}
+    },
+    GetTestQuestionsResponse {
+        public String toString() { return "Server returned the list of test questions"; }
+    },
+    GetActiveTests {
+        public String toString() { return "User asked for the active tests table"; }
+    },
+    GetActiveTestsResponse {
+        public String toString() { return "Server returned the active tests table"; }
+    }
 
 
-
-}
+    }
 
 
 

@@ -1,23 +1,27 @@
 package entity;
+
+import java.io.Serializable;
+import java.util.Observable;
+
 /**
  * Represents an active test entity.
  */
-public class ActiveTest {
-    private String testID;
+public class ActiveTest extends Observable implements Serializable {
+    private String id;
     private String testDuration;
     private String testCode;
-    private String testType;
+    private TestTypeEnum testType;
 
     /**
      * Constructs a new ActiveTest object.
      *
-     * @param testID The ID of the test.
+     * @param id The ID of the test.
      * @param testDuration The duration of the test.
      * @param testCode The code associated with the test.
      * @param testType The type of the test.
      */
-    public ActiveTest(String testID, String testDuration, String testCode, String testType) {
-        this.testID = testID;
+    public ActiveTest(String id, String testDuration, String testCode, TestTypeEnum testType) {
+        this.id = id;
         this.testDuration = testDuration;
         this.testCode = testCode;
         this.testType = testType;
@@ -28,8 +32,8 @@ public class ActiveTest {
      *
      * @return The test ID.
      */
-    public String getTestID() {
-        return testID;
+    public String getId() {
+        return id;
     }
 
     /**
@@ -55,7 +59,8 @@ public class ActiveTest {
      *
      * @return The test type.
      */
-    public String getTestType() {
+    public TestTypeEnum getTestType() {
         return testType;
     }
+
 }

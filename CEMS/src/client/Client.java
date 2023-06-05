@@ -25,7 +25,8 @@ public class Client extends AbstractClient {
     public List<Object> courses;
     public List<Object> allQuestions;
     public List<Object> tests;
-
+    public List<Object> testQuestions;
+    public List<Object> activeTests;
 
     public static User user;
     public List<Object> requests;
@@ -53,6 +54,7 @@ public class Client extends AbstractClient {
             case Disconnected:
                 System.exit(0);
                 break;
+
             case allQuestionImported:
                 this.allQuestions = (List<Object>) messageFromServer.getMsg();
                 break;
@@ -86,7 +88,10 @@ public class Client extends AbstractClient {
                 courses = (ArrayList<Object>) ((MsgHandler<Object>) messageFromServer).getMsg();
                 this.courses = (List<Object>) messageFromServer.getMsg();
                 break;
-            case TestTableResponse:
+            case GetAllTestsTableResponse:
+                this.tests = (List<Object>) messageFromServer.getMsg();
+                break;
+            case GetTestsBySubjectResponse:
                 this.tests = (List<Object>) messageFromServer.getMsg();
                 System.out.println(tests);
                 break;
@@ -121,6 +126,12 @@ public class Client extends AbstractClient {
             case ImportedTestsByLecturerForLecturerReport:
                 LectureReportsController.setTestsTable((ArrayList<Object>) messageFromServer.getMsg());
 
+            case GetTestQuestionsResponse:
+                testQuestions = (List<Object>) messageFromServer.getMsg();
+                break;
+            case GetActiveTestsResponse:
+                this.activeTests = (List<Object>) messageFromServer.getMsg();
+                break;
 
 
         }

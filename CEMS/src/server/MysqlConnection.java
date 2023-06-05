@@ -14,7 +14,7 @@ import java.util.Objects;
 public class MysqlConnection {
     static Connection conn;
     static String url = "jdbc:mysql://localhost/cems?serverTimezone=IST&allowPublicKeyRetrieval=true&useSSL=false"; // replace
-    // "mydatabase"
+                                                                                                                    // "mydatabase"
     static String username = "root"; // replace with your username
 
 
@@ -182,6 +182,7 @@ public class MysqlConnection {
     }
 
 
+
     public static ArrayList<Course> getCourseTable(String query) {
         Statement stmt = null;
 
@@ -221,7 +222,8 @@ public class MysqlConnection {
             while (rs.next()) {
                 String testNumber = rs.getString("testNumber"); // assuming your table has a column named "id" with type INT
                 String id = rs.getString("id");
-                String author = rs.getString("author");
+				String testCode = rs.getString("testCode");
+				String author = rs.getString("author");
                 String testDuration = rs.getString("testDuration");
                 String courseName = rs.getString("courseName");
                 String subject = rs.getString("subject");
@@ -232,8 +234,8 @@ public class MysqlConnection {
                 String session = rs.getString("session");
                 String semester = rs.getString("semester");
                 TestTypeEnum testTypeEnum = (Objects.equals(testType, "C") ? TestTypeEnum.C : TestTypeEnum.M);
-                Test test = new Test(testNumber, id, author, testDuration, courseName,
-                        teacherComment, testTypeEnum, studentComment, subject, year, session, semester);
+                Test test = new Test(testNumber, id, testCode, author, testDuration, courseName,
+                        teacherComment, testTypeEnum, studentComment,subject,year,session,semester);
                 tests.add(test);
 
             }
@@ -244,10 +246,70 @@ public class MysqlConnection {
         return tests;
     }
 
-    public static ArrayList<TestRequestForApproval> getRequestsTable(String query) {
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
+	public static ArrayList<ActiveTest> getActiveTestsTable(String query) {
+		Statement stmt = null;
+
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		ArrayList<ActiveTest> activeTests = new ArrayList<>();
+		try {
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				String id = rs.getString("testID"); // assuming your table has a column named "id" with type INT
+				String testDuration = rs.getString("testDuration");
+				String testCode = rs.getString("testCode");
+				String testType = rs.getString("testType");
+
+				TestTypeEnum testTypeEnum = (Objects.equals(testType, "C") ? TestTypeEnum.C : TestTypeEnum.M);
+				ActiveTest activeTest = new ActiveTest(id,testDuration,testCode,testTypeEnum);
+				activeTests.add(activeTest);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return activeTests;
+	}
+
+	public static ArrayList<TestQuestion> getTestQuestionsTable(String query) {
+		Statement stmt = null;
+
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		ArrayList<TestQuestion> testQuestions = new ArrayList<>();
+		try {
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				String questionID = rs.getString("questionID"); // assuming your table has a column named "id" with type INT
+				String questionNumber = rs.getString("questionNumber");
+				String points = rs.getString("points");
+				String questionText = rs.getString("questionText");
+				String testID = rs.getString("testID");
+				String subject = rs.getString("subject");
+				String courseName = rs.getString("courseName");
+				String author = rs.getString("author");
+
+				TestQuestion testQuestion = new TestQuestion(questionID, questionNumber, Integer.parseInt(points),
+						questionText, testID, subject,courseName, author);
+				testQuestions.add(testQuestion);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return testQuestions;
+	}
+
+	public static ArrayList<TestRequestForApproval> getRequestsTable(String query) {
+		Statement stmt = null;
+		try {
+			stmt = conn.createStatement();
 
         } catch (SQLException e) {
             e.printStackTrace();

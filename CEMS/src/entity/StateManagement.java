@@ -1,11 +1,12 @@
 package entity;
-
+import client.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class StateManagement {
     public Course course;
     public String testNum;
+    public String testCode;
     public String year;
     public String session;
     public String semester;
@@ -26,33 +27,26 @@ public class StateManagement {
         }
         return instance;
     }
-
+    public static void resetInstance() {
+        instance = null;
+    }
     private StateManagement(){
 
        setTestID("-1"); //sets default empty value for testID on StateManagement initialization
        totalRemainingPoints = 100;
     }
-    public void setDataOfTest(Course course, String testNum, String testID, String durationTimeOfTest,
-                              String year, String session, String semester) {
-        this.durationTimeOfTest = durationTimeOfTest;
+    public void setDataOfTest(Course course, String testNum, String testID) {
         this.course = course;
         this.testID = testID;
         this.testNum = testNum;
-        this.year = year;
-        this.session = session;
-        this.semester = semester;
-
-
     }
     public void SaveTest(){
-        newTest = new Test(testNum,getTestID(),null,
+        newTest = new Test(testNum,getTestID(),getTestCode(),Client.user.getFullName(),
                 durationTimeOfTest,course.getCourseName(),getTeacherComment(),testType,getStudentComment(),
                     course.getSubjectName(),year,session,semester);
     }
 
-    public void SaveTestQuestions() {
 
-    }
     public String getYear() {
         return year;
     }
@@ -135,7 +129,7 @@ public class StateManagement {
 
     //adds a single test question to the testQuestions observable list
     public void setTestQuestions(TestQuestion question) {
-        if(!testQuestions.contains(question))
+        //if(!testQuestions.contains(question))
             this.testQuestions.add(question);
     }
 
@@ -146,27 +140,15 @@ public class StateManagement {
         this.course = course;
     }
 
+    public String getTestCode() { return testCode; }
+
+    public void setTestCode(String testCode) { this.testCode = testCode; }
+
     /**
      * resets all test-state related data
      * used when a new test has been created
      */
-    public void clearTestState() { //TODO: alter the function if state management is utilized in more screens
-        instance = null;
-//        year = null;
-//        session = null;
-//        semester = null;
-//        testQuestions.clear();
-//        course.setSubject(null);
-//        course.setCourse(null);
-//        course.setCourseID(null);
-//        course.setSubjectID(null);
-//        testNum = null;
-//        teacherComment = null;
-//        studentComment = null;
-//        durationTimeOfTest = null;
-//        totalRemainingPoints = 100;
 
-    }
     @Override
     public String toString() {
         return "StateManagement{" +

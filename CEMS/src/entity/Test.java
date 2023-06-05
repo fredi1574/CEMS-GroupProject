@@ -1,5 +1,5 @@
 package entity;
-
+import java.util.UUID;
 import javafx.collections.ObservableList;
 
 import java.io.Serializable;
@@ -8,6 +8,7 @@ import java.util.Observable;
 public class Test extends Observable implements Serializable {
     private String id;
     private String testNumber;
+    private String testCode;
     private String author;
     private String testDuration;
     private String subject;
@@ -21,11 +22,12 @@ public class Test extends Observable implements Serializable {
     private ObservableList<TestQuestion> questions;
 
     //constructor for fully created test
-        public Test(String testNumber, String id, String author, String testDuration,  String courseName,
+        public Test(String testNumber, String id, String testCode, String author, String testDuration,  String courseName,
                 String teacherComments, TestTypeEnum TestType, String studentComments,  String subject,
                 String year,String session,String semester) {
         this.id = id;
         this.testNumber = testNumber;
+        this.testCode = testCode;
         this.author = author;
         this.testDuration = testDuration;
         this.courseName = courseName;
@@ -36,7 +38,9 @@ public class Test extends Observable implements Serializable {
         this.year = year;
         this.session= session;
         this.semester = semester;
+        this.testCode = testCode;
     }
+
     public void setStudentComments(String studentComments) {
         this.studentComments = studentComments;
     }
@@ -65,7 +69,6 @@ public class Test extends Observable implements Serializable {
     }
 
 
-
     public ObservableList<TestQuestion> getQuestions() {
         return questions;
     }
@@ -89,7 +92,8 @@ public class Test extends Observable implements Serializable {
     public void setTestNumber(String testNumber) {
         this.testNumber = testNumber;
     }
-
+    public String getTestCode() { return testCode; }
+    public void setTestCode(String testCode) { this.testCode = testCode; }
     public String getAuthor() {
         return author;
     }

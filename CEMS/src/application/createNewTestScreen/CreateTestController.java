@@ -1,4 +1,6 @@
 package application.createNewTestScreen;
+import javafx.scene.text.Text;
+import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
@@ -14,9 +16,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import util.*;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 public class CreateTestController {
     Course rowData = null;
+    @FXML
+    private Text nameAuthor;
     @FXML
     private TextField semesterTextField;
     @FXML
@@ -44,7 +52,9 @@ public class CreateTestController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
 
-        MsgHandler getTableCourse = new MsgHandler(TypeMsg.GetCourseTable, null);
+        nameAuthor.setText(Client.user.getFullName());
+
+        MsgHandler getTableCourse = new MsgHandler(TypeMsg.GetCourseTable, Client.user.getId());
         ClientUI.chat.accept(getTableCourse);
         List<Object> courseObjectsList = ClientUI.chat.getCourses();
 
@@ -81,12 +91,12 @@ public class CreateTestController {
         courseIDField.setText(rowData.getCourseID());
         subjectIDField.setText(rowData.getSubjectID());
 
-        MsgHandler getTestTable = new MsgHandler(TypeMsg.GetTestTable, null);
+        MsgHandler getTestTable = new MsgHandler(TypeMsg.GetAllTestsTable, null);
         ClientUI.chat.accept(getTestTable);
         List<Object> testTableList = ClientUI.chat.getTests();
 
         String newTestNumber = correctTestNumber(findFirstFreeIndex(testTableList));
-        String testID = rowData.getCourseID() + rowData.getSubjectID() + newTestNumber;
+        String testID = rowData.getSubjectID() +rowData.getCourseID() +  newTestNumber;
 
         testIDField.setText(testID);
         testNumberField.setText(newTestNumber);
@@ -106,15 +116,26 @@ public class CreateTestController {
             return 1;
         }
 
-        //iterates over the testTableList and checks if the current index is available
-        for (int i = 0; i < testTableList.size() - 1; i++) {
-            if (((Test) testTableList.get(i)).getTestNumber() + 1 != ((Test) testTableList.get(i + 1)).getTestNumber()) {
-                return i + 1;
+        Set<Integer> indexSet = new HashSet<>();
+        for (Object test : testTableList) {
+            if (test instanceof Test) {
+                Test testObject = (Test) test;
+                indexSet.add(Integer.parseInt(testObject.getTestNumber()));
             }
         }
-        //if hadn't found a free index, returns the last index of the table
-        return testTableList.size() + 1;
+
+        int minIndex = Collections.min(indexSet);
+        int maxIndex = Collections.max(indexSet);
+
+        for (int i = 1; i <= maxIndex; i++) {
+            if (!indexSet.contains(i)) {
+                return i;
+            }
+        }
+
+        return maxIndex + 1;
     }
+
 
     public String correctTestNumber(int newTestIndex) {
 
@@ -166,16 +187,37 @@ public class CreateTestController {
 
 
     public void BackToMenu(ActionEvent event) {
-        stateManagement.setTestID("-1");
+        stateManagement.resetInstance();
         ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
     }
 
 
     public void goToPickQuestions(ActionEvent event) {
         stateManagement = StateManagement.getInstance();
-        stateManagement.setDataOfTest(rowData,testNumberField.getText(),testIDField.getText(),testDurationField.getText(),yearField.getText(),
-                                     sessionTextField.getText(),semesterTextField.getText());
+        try {
+            if (!sessionTextField.getText().isEmpty()) {
+                stateManagement.setSession(sessionTextField.getText());
+            }else
+                stateManagement.setSession("");
 
+            if (!yearField.getText().isEmpty()) {
+                stateManagement.setYear(yearField.getText());
+            }else
+                stateManagement.setYear("");
+
+            if (!semesterTextField.getText().isEmpty()) {
+                stateManagement.setSemester(semesterTextField.getText());
+            }else
+                stateManagement.setSemester("");
+
+            if (!testDurationField.getText().isEmpty()) {
+                stateManagement.setDurationTimeOfTest(testDurationField.getText());
+            }else
+                stateManagement.setDurationTimeOfTest("");
+        }catch(Exception exception){
+
+        }
+        stateManagement.setDataOfTest(rowData, testNumberField.getText(), testIDField.getText());
         if (rowData == null) {
             showError.showErrorPopup("Choose subject and course first");
         } else {

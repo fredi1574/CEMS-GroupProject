@@ -12,6 +12,8 @@ public class PathConstants {
     public static final String questionPreviewPath = "/application/createNewTestScreen/PickQuestionsScreen/QuestionPreviewPopup/questionPreview.fxml";
     public static final String createNewTestPath = "/application/createNewTestScreen/CreateNewTest.fxml";
     public static final String manageTestsPath = "/application/manageTestsScreen/ManageTests.fxml";
+    public static final String viewActiveTestPath = "/application/manageTestsScreen/ViewActiveTest.fxml";
+    public static final String viewTestAwaitingApprovalPath = "/application/manageTestsScreen/viewTestAwaitingApproval.fxml";
     public static final String viewReportsPath = "/application/viewReportsScreen/ViewReports.fxml";
     public static final String viewGraphPath = "/application/viewReportsScreen/graphScreen/ViewGraph.fxml";
     public static final String addQuestionPath = "/application/addAQuestionScreen/AddAQuestion.fxml";
