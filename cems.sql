@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
--- Host: localhost    Database: cems
+-- Host: 127.0.0.1    Database: cems
 -- ------------------------------------------------------
--- Server version	8.0.33
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,11 +23,13 @@ DROP TABLE IF EXISTS `activetest`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `activetest` (
-  `testID` varchar(45) NOT NULL,
-  `testDuration` varchar(255) DEFAULT NULL,
+  `id` varchar(45) NOT NULL,
+  `numOfQuestions` int DEFAULT NULL,
+  `testDate` date DEFAULT NULL,
+  `startingTime` time DEFAULT NULL,
+  `timeLeft` int DEFAULT NULL,
   `testCode` varchar(45) DEFAULT NULL,
-  `testType` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`testID`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -37,6 +39,7 @@ CREATE TABLE `activetest` (
 
 LOCK TABLES `activetest` WRITE;
 /*!40000 ALTER TABLE `activetest` DISABLE KEYS */;
+INSERT INTO `activetest` VALUES ('010101',2,'2005-06-20','21:00:00',50,'ABC3');
 /*!40000 ALTER TABLE `activetest` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +175,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES ('010102','01','Algebra','STAVVVV',2,'a a','SADAS','SADSDA','SADASDADS','SDASDA','1'),('010201','01','Hedva','check	',1,'a a','dsads','asddsa','sdaasddssaaasdsd','sadsdasad','1'),('15','Math','Algebra1','What is my name?',123,'May','May	','Noa','Shay','Tiran','1'),('889','01','Algebra','check.!',1889,'May','check','check','check','check','1'),('928','01','Algebra','MAY',1928,'May','may','may','may','may','2');
+INSERT INTO `question` VALUES ('010102','01','Algebra','STAVVVV',2,'a a','SADAS','SADSDA','SADASDADS','SDASDA','1'),('010201','01','Hedva','check	',1,'a a','dsads','asddsa','sdaasddssaaasdsd','sadsdasad','1'),('15','Math','Algebra1','What is my name?',123,'May','May	','Noa','Shay','Tiran','1'),('3333','01','Algebra','sdadas',22,'asdsa','dsas','sdasd','saddsa','asds','2'),('889','01','Algebra','check.',1889,'May','check','check','check','check','1'),('928','01','Algebra','MAY',1928,'May','may','may','may','may','2');
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,20 +187,21 @@ DROP TABLE IF EXISTS `studentstest`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `studentstest` (
-  `studentID` varchar(45) NOT NULL,
-  `testID` varchar(45) NOT NULL,
-  `subjectID` varchar(45) DEFAULT NULL,
-  `course` varchar(45) DEFAULT NULL,
-  `grade` varchar(45) DEFAULT NULL,
-  `fullname` varchar(45) DEFAULT NULL,
-  `year` varchar(45) DEFAULT NULL,
-  `semester` varchar(45) DEFAULT NULL,
-  `session` varchar(45) DEFAULT NULL,
+  `studentID` varchar(255) NOT NULL,
+  `testID` varchar(255) NOT NULL,
+  `subjectID` varchar(255) DEFAULT NULL,
+  `course` varchar(255) DEFAULT NULL,
+  `testType` enum('C','M') DEFAULT NULL,
+  `score` varchar(255) DEFAULT NULL,
+  `fullname` varchar(255) DEFAULT NULL,
+  `year` varchar(10) DEFAULT NULL,
+  `semester` varchar(10) DEFAULT NULL,
+  `session` varchar(20) DEFAULT NULL,
   `suspicionOfCheating` enum('YES','NO') DEFAULT NULL,
   `correctAnswers` varchar(45) DEFAULT NULL,
   `totalQuestions` varchar(45) DEFAULT NULL,
   `lecturerComments` varchar(255) DEFAULT NULL,
-  `approved` enum('YES','NO') DEFAULT NULL,
+  `approved` enum('Y','N') DEFAULT NULL,
   PRIMARY KEY (`studentID`,`testID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -208,7 +212,7 @@ CREATE TABLE `studentstest` (
 
 LOCK TABLES `studentstest` WRITE;
 /*!40000 ALTER TABLE `studentstest` DISABLE KEYS */;
-INSERT INTO `studentstest` VALUES ('4','01','01','Algebra','90','Noa Krispin','2020','A','A','NO','6','10','Nice','YES'),('4','02','01','Hedva','99','Noa Krispin','2019','A','A',NULL,NULL,NULL,NULL,'NO'),('4','03','01','Hedva','30','Noa Krispin','2021','B','B',NULL,NULL,NULL,NULL,'NO'),('4','22222','02','Phyton','100','Noa Krispin',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'NO'),('4','333','01','Algebra','50','Noa Krispin','2022','B','B',NULL,NULL,NULL,NULL,'NO'),('5','02','01','Hedva','8','AbedTayer','2019','A','A',NULL,NULL,NULL,NULL,'NO'),('5','2213312','01','Algebra','100','Abed Tayer','2020','C','B',NULL,NULL,NULL,NULL,'NO');
+INSERT INTO `studentstest` VALUES ('4','01','01','Algebra','M','90','Noa Krispin','2020','A','A',NULL,NULL,NULL,NULL,NULL),('4','02','01','Hedva','C','99','Noa Krispin','2019','A','A',NULL,NULL,NULL,NULL,NULL),('4','03','01','Hedva','C','30','Noa Krispin','2021','B','B',NULL,NULL,NULL,NULL,NULL),('4','22222','02','Phyton','C','100','Noa Krispin',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('4','333','01','Algebra','C','50','Noa Krispin','2022','B','B',NULL,NULL,NULL,NULL,NULL),('5','02','01','Hedva','C','8','AbedTayer','2019','A','A',NULL,NULL,NULL,NULL,NULL),('5','2213312','01','Algebra','C','100','Abed Tayer','2020','C','B',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `studentstest` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -267,7 +271,7 @@ CREATE TABLE `test` (
 
 LOCK TABLES `test` WRITE;
 /*!40000 ALTER TABLE `test` DISABLE KEYS */;
-INSERT INTO `test` VALUES ('02','010102','60','a a','Math','Algebra','null','C','aaa','2015','A','A','f9eb'),('01','010201','11','a a','Math','Hedva','aa','C','bb','2011','Z','Z','ac42');
+INSERT INTO `test` VALUES ('01','010101','3','b b','Math','Algebra','hey	','C','null','2019','B','A','abc3'),('2','02','60','b b','Math','Hedva','Lecturer note 1','C','Student Note 1','2020','B','A','a82e'),('013','03','180','b b','Math','Hedva','asdasd','C','asdasd','2022','A','A','6543'),('01','050301','','null','Biology','Anatomy','null','C','null','2020','A','A',NULL);
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,7 +301,7 @@ CREATE TABLE `testquestion` (
 
 LOCK TABLES `testquestion` WRITE;
 /*!40000 ALTER TABLE `testquestion` DISABLE KEYS */;
-INSERT INTO `testquestion` VALUES ('010102','2',25,'STAVVVV','010102','Algebra','01','a a'),('010102','2',50,'STAVVVV','010201','Algebra','01','a a'),('010201','1',25,'check	','010102','Hedva','01','a a'),('15','123',50,'What is my name?','010201','Algebra1','Math','May'),('889','1889',25,'check.!','010102','Algebra','01','May'),('928','1928',25,'MAY','010102','Algebra','01','May');
+INSERT INTO `testquestion` VALUES ('3333','13333',75,'me','010101','Algebra','01','May'),('889','1889',25,'check.','010101','Algebra','01','May'),('928','1928',100,'MAY','050301','Algebra','01','May');
 /*!40000 ALTER TABLE `testquestion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -368,4 +372,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-04 22:58:21
+-- Dump completed on 2023-06-05 21:48:23
