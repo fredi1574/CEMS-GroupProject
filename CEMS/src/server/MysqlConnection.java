@@ -258,13 +258,13 @@ public class MysqlConnection {
 		try {
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
-				String id = rs.getString("testID"); // assuming your table has a column named "id" with type INT
-				String testDuration = rs.getString("testDuration");
-				String testCode = rs.getString("testCode");
-				String testType = rs.getString("testType");
+				String id = rs.getString("id"); // assuming your table has a column named "id" with type INT
+				String numOfQuestions = rs.getString("numOfQuestions");
+				String testDate = rs.getString("testDate");
+				String startingTime = rs.getString("startingTime");
+				String timeLeft = rs.getString("timeLeft");
 
-				TestTypeEnum testTypeEnum = (Objects.equals(testType, "C") ? TestTypeEnum.C : TestTypeEnum.M);
-				ActiveTest activeTest = new ActiveTest(id,testDuration,testCode,testTypeEnum);
+				ActiveTest activeTest = new ActiveTest(id,numOfQuestions,testDate,startingTime,timeLeft);
 				activeTests.add(activeTest);
 
 			}

@@ -8,59 +8,58 @@ import java.util.Observable;
  */
 public class ActiveTest extends Observable implements Serializable {
     private String id;
-    private String testDuration;
-    private String testCode;
-    private TestTypeEnum testType;
+    private String numOfQuestions;
+    private String testDate;
+    private String startingTime;
+    private String timeLeft;
 
-    /**
-     * Constructs a new ActiveTest object.
-     *
-     * @param id The ID of the test.
-     * @param testDuration The duration of the test.
-     * @param testCode The code associated with the test.
-     * @param testType The type of the test.
-     */
-    public ActiveTest(String id, String testDuration, String testCode, TestTypeEnum testType) {
+    public ActiveTest(String id, String numOfQuestions, String testDate, String startingTime, String timeLeft) {
         this.id = id;
-        this.testDuration = testDuration;
-        this.testCode = testCode;
-        this.testType = testType;
+        this.numOfQuestions = numOfQuestions;
+        this.testDate = testDate;
+        this.startingTime = startingTime;
+        this.timeLeft = timeLeft;
     }
 
-    /**
-     * Retrieves the ID of the test.
-     *
-     * @return The test ID.
-     */
     public String getId() {
         return id;
     }
 
-    /**
-     * Retrieves the duration of the test.
-     *
-     * @return The test duration.
-     */
-    public String getTestDuration() {
-        return testDuration;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    /**
-     * Retrieves the code associated with the test.
-     *
-     * @return The test code.
-     */
-    public String getTestCode() {
-        return testCode;
+    public String getNumOfQuestions() {
+        return numOfQuestions;
     }
 
-    /**
-     * Retrieves the type of the test.
-     *
-     * @return The test type.
-     */
-    public TestTypeEnum getTestType() {
-        return testType;
+    public void setNumOfQuestions(String numOfQuestions) {
+        this.numOfQuestions = numOfQuestions;
+    }
+
+    public String getTestDate() {
+        return testDate;
+    }
+
+    public void setTestDate(String testDate) {
+        this.testDate = testDate;
+    }
+
+    public String getStartingTime() {
+        return startingTime;
+    }
+
+    public void setStartingTime(String startingTime) {
+        this.startingTime = startingTime;
+    }
+
+    public String getTimeLeft() {
+        return timeLeft;
+    }
+
+    public void setTimeLeft(String timeLeft) {
+        this.timeLeft = timeLeft;
     }
 
 }
+

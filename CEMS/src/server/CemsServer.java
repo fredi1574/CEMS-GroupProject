@@ -426,6 +426,16 @@ public class CemsServer extends AbstractServer {
                     ArrayList<ActiveTest> activeTestsList = MysqlConnection.getActiveTestsTable("select * from cems.activetest;");
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetActiveTestsResponse, activeTestsList));
                     break;
+                case UpdateRemainingTime:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (ActiveTest) this.msg.getMsg();
+                    this.activeTest = (ActiveTest) obj;
+                    String updateRemainingTimeQuery = "UPDATE cems.activetest SET " +
+                            " timeLeft='" + activeTest.getTimeLeft() + "'" +
+                            " WHERE id='" + activeTest.getId() + "'";
+
+                    MysqlConnection.update(updateRemainingTimeQuery);
+                    client.sendToClient(new MsgHandler<>(TypeMsg.UpdateRemainingTimeResponse, null));
                 default:
                     break;
             }
