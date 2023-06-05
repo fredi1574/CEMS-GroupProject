@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.binding.Bindings;
 import javafx.util.Duration;
 import java.util.Map;
 import java.util.HashMap;
@@ -35,6 +36,8 @@ public class QuestionsComputerizedTestAnswerController {
     private Label questionNumberLabel;
     @FXML
     private Text questionText;
+    @FXML
+    private Button gradeButton;
     @FXML
     private CheckBox answer1CheckBox;
     @FXML
@@ -64,6 +67,7 @@ public class QuestionsComputerizedTestAnswerController {
         fetchQuestion();
         fetchTestDuration();  // Call fetchTestDuration() before startTimer()
         startTimer();
+
     }
 
     private void connectToDatabase() {
@@ -79,6 +83,61 @@ public class QuestionsComputerizedTestAnswerController {
             // Handle connection error
         }
     }
+    private void saveMarking() {
+        // Get the selected answer
+        int marking = 0;
+        if (answer1CheckBox.isSelected()) {
+            marking = 1;
+        } else if (answer2CheckBox.isSelected()) {
+            marking = 2;
+        } else if (answer3CheckBox.isSelected()) {
+            marking = 3;
+        } else if (answer4CheckBox.isSelected()) {
+            marking = 4;
+        }
+
+        // Update the marking for the current question
+        markings.put(currentQuestionIndex, marking);
+    }
+    @FXML
+    public void calculateGrade(ActionEvent event) {
+        int totalQuestions = markings.size();
+        int correctAnswers = 0;
+
+        // Print the markings map for debugging purposes
+        System.out.println("Markings map: " + markings);
+
+        // Iterate through the markings and check if they match the correct answer
+        for (Map.Entry<Integer, Integer> entry : markings.entrySet()) {
+            int questionNumber = entry.getKey();
+            int marking = entry.getValue();
+
+            // Retrieve the correct answer index for the question from the database
+            String correctAnswerQuery = "SELECT correctAnswer FROM question q INNER JOIN testquestion tq ON q.id = tq.questionID WHERE tq.testID = ? AND tq.questionNumber = ?";
+            try {
+                PreparedStatement answerStatement = connection.prepareStatement(correctAnswerQuery);
+                answerStatement.setString(1, testId);
+                answerStatement.setInt(2, questionNumber);
+                ResultSet answerResultSet = answerStatement.executeQuery();
+
+                if (answerResultSet.next()) {
+                    int correctAnswerIndex = answerResultSet.getInt("correctAnswer");
+
+                    if (marking == correctAnswerIndex) {
+                        correctAnswers++;
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // Handle database error
+            }
+        }
+
+        double grade = (correctAnswers / (double) totalQuestions) * 100;
+        System.out.println("Grade: " + grade);
+        // Perform further actions with the grade, such as displaying it to the user
+    }
+
 
     private void fetchQuestion() {
         try {
@@ -167,20 +226,8 @@ public class QuestionsComputerizedTestAnswerController {
 
     @FXML
     public void handlePreviousButtonClick() {
+        saveMarking();
         if (currentQuestionIndex > 1) {
-            // Get the selected answer
-            int marking = 0;
-            if (answer1CheckBox.isSelected()) {
-                marking = 1;
-            } else if (answer2CheckBox.isSelected()) {
-                marking = 2;
-            } else if (answer3CheckBox.isSelected()) {
-                marking = 3;
-            } else if (answer4CheckBox.isSelected()) {
-                marking = 4;
-            }
-            // Update the marking for the current question
-            markings.put(currentQuestionIndex, marking);
             currentQuestionIndex -= 2; // Go back two questions (currentQuestionIndex - 1)
             fetchQuestion();
         }
@@ -189,20 +236,7 @@ public class QuestionsComputerizedTestAnswerController {
     @FXML
     public void handleButtonClick() {
         // Get the selected answer
-        int marking = 0;
-        if (answer1CheckBox.isSelected()) {
-            marking = 1;
-        } else if (answer2CheckBox.isSelected()) {
-            marking = 2;
-        } else if (answer3CheckBox.isSelected()) {
-            marking = 3;
-        } else if (answer4CheckBox.isSelected()) {
-            marking = 4;
-        }
-
-        // Update the marking for the current question
-        markings.put(currentQuestionIndex, marking);
-
+        saveMarking();
         fetchQuestion();
     }
 

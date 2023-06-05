@@ -42,6 +42,7 @@
                   <Font name="Franklin Gothic Demi Cond" size="14.0" />
                </font>
             </Button>
+            <Button fx:id="gradeButton" text="Calculate Grade" onAction="#calculateGrade" />
          </children>
       </AnchorPane>
       <Button fx:id="previousButton" layoutX="722.0" layoutY="472.0" onAction="#handlePreviousButtonClick" prefHeight="20.0" prefWidth="16.0" visible="true" />
