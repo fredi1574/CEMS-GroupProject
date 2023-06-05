@@ -263,8 +263,9 @@ public class MysqlConnection {
 				String testDate = rs.getString("testDate");
 				String startingTime = rs.getString("startingTime");
 				String timeLeft = rs.getString("timeLeft");
+                String testCode = rs.getString("testCode");
 
-				ActiveTest activeTest = new ActiveTest(id,numOfQuestions,testDate,startingTime,timeLeft);
+				ActiveTest activeTest = new ActiveTest(id,numOfQuestions,testDate,startingTime,timeLeft,testCode);
 				activeTests.add(activeTest);
 
 			}
@@ -351,19 +352,27 @@ public class MysqlConnection {
 //				return null;
 //			}
             while (rs.next()) {
-                String studentID = rs.getString("studentID"); // assuming your table has a column named "id" with type INT
+                String studentID = rs.getString("studentID");
                 String testID = rs.getString("testID");
                 String subjectID = rs.getString("subjectID");
                 String course = rs.getString("course");
                 TestTypeEnum testType = TestTypeEnum.valueOf(rs.getString("testType")); // Convert the string value to the enum
-                String score = rs.getString("score");
+                String grade = rs.getString("grade"); // Assuming "grade" represents the grade
                 String fullname = rs.getString("fullname");
                 String year = rs.getString("year");
-                String semester =rs.getString("semester");
+                String semester = rs.getString("semester");
                 String session = rs.getString("session");
-                StudentTest StudentInfo = new StudentTest(studentID, testID, subjectID, course, testType, score, fullname,semester,session,year);
-                list.add(StudentInfo);
-            }
+
+                CheatingSuspicion suspicionOfCheating = CheatingSuspicion.valueOf(rs.getString("suspicionOfCheating")); // Assuming "suspicionOfCheating" is a string representation of the enum value
+                String correctAnswers = rs.getString("correctAnswers");
+                String totalQuestions = rs.getString("totalQuestions");
+                String lecturerComments = rs.getString("lecturerComments");
+                ApprovalStatus approved = ApprovalStatus.valueOf(rs.getString("approved")); // Assuming "approved" is a string representation of the enum value
+
+                StudentTest studentTest = new StudentTest(studentID, testID, subjectID, course, grade, fullname, year, semester, session, suspicionOfCheating, correctAnswers, totalQuestions, lecturerComments, approved, testType);
+                list.add(studentTest);
+
+        }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -442,6 +451,43 @@ public class MysqlConnection {
                 // ignore
             }
         }
+    }
+
+    public static Question getQuestionData(String query) {
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        Question question = null;
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String id = rs.getString("id"); // assuming your table has a column named "id" with type INT
+                String subject = rs.getString("subject");
+                String course_name = rs.getString("courseName");
+                String question_text = rs.getString("questionText");
+                String question_number = rs.getString("questionNumber");
+                String author = rs.getString("author");
+                String answer1 = rs.getString("answer1");
+                String answer2 = rs.getString("answer2");
+                String answer3 = rs.getString("answer3");
+                String answer4 = rs.getString("answer4");
+                String correctAnswer = rs.getString("correctAnswer");
+
+                // public Question(String questionNumber,String questionId,String questionText,
+                // String questionWrittenBy) {
+                question = new Question(question_number, id, question_text, author, subject,
+                        course_name, answer1, answer2, answer3, answer4, correctAnswer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return question;
     }
 }
 	

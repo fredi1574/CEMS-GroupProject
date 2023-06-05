@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EnterCodePopUpController {
-    public static Test test;
+    public static String testID;
 
     @FXML
     private AnchorPane header;
@@ -36,14 +36,15 @@ public class EnterCodePopUpController {
         ScreenManager.dragAndDrop(header);
         fullNameText.setText(Client.user.getFullName());
     }
+
     @FXML
     public void EnterCode(ActionEvent event) {
         String codet = CodeText.getText();
         if (codet.isEmpty()) {
             showError.showErrorPopup("Please enter code.");
-        } else if (!codet.matches("\\d+")) {
-            showError.showErrorPopup("Code should contain only numbers.");
-        } else if (codet.length() != 6)
+        } else if (codet.matches("\\d+")) {
+            showError.showErrorPopup("Code should contain numbers and letters.");
+        } else if (codet.length() != 4)
         {
             showError.showErrorPopup("Code should contain 6 numbers.");
         } else {
@@ -53,9 +54,10 @@ public class EnterCodePopUpController {
             ClientUI.chat.accept(getTestTable);
             ObservableList<ActiveTest> tests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTests());
 
-            for (ActiveTest test : tests) {
-                if (test.getTestCode().equals(codet)) {
+            for (ActiveTest activeTest: tests) {
+                if (activeTest.getTestCode().equals(codet)) {
                     testExists = true;
+                    testID = activeTest.getId();
                     break;
                 }
             }
@@ -63,8 +65,8 @@ public class EnterCodePopUpController {
             if (testExists) {
                 // Test with the given code exists
                 // Handle the case accordingly
-
                // test.setId(codet);
+
                 ScreenManager.goToNewScreen(event, PathConstants.EnterTest);
             } else {
                 // Test with the given code does not exist

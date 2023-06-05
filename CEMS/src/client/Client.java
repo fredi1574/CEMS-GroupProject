@@ -7,6 +7,7 @@ import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGrap
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.showReportByLecturerController;
 import common.ChatIF;
 import common.MsgHandler;
+import entity.Question;
 import entity.User;
 import javafx.fxml.FXMLLoader;
 
@@ -27,6 +28,7 @@ public class Client extends AbstractClient {
     public List<Object> tests;
     public List<Object> testQuestions;
     public List<Object> activeTests;
+    public Object singleQuestion;
 
     public static User user;
     public List<Object> requests;
@@ -134,6 +136,10 @@ public class Client extends AbstractClient {
                 break;
             case UpdateRemainingTimeResponse:
                 break;
+            case importedQuestionAndAnswerFromTest:
+                this.singleQuestion = (Question) messageFromServer.getMsg();
+                break;
+
 
 
         }

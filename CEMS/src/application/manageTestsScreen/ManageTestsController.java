@@ -217,7 +217,8 @@ public class ManageTestsController {
                 activeTestRowData.getNumOfQuestions(),
                 activeTestRowData.getTestDate(),
                 activeTestRowData.getStartingTime(),
-                activeTestRowData.getTimeLeft()
+                activeTestRowData.getTimeLeft(),
+                activeTestRowData.getTestCode()
         );
         stateManagement.setCurrentActivetest(curActiveTest);
 

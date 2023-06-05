@@ -414,15 +414,16 @@ public class CemsServer extends AbstractServer {
                     break;
                 case GetTestQuestions:
                     this.msg = (MsgHandler<Object>) msg;
-                    this.obj = (Test) this.msg.getMsg();
-                    this.test = (Test) obj;
-                    ArrayList<TestQuestion> testsQuestionsList = MysqlConnection.getTestQuestionsTable("SELECT * FROM cems.testquestion WHERE testID='" + test.getId() + "'");
-                    client.sendToClient(new MsgHandler<>(TypeMsg.GetTestQuestionsResponse, testsQuestionsList));
+                    this.obj = this.msg.getMsg();
+                    if (obj instanceof Test) {
+                        this.test = (Test) obj;
+                        ArrayList<TestQuestion> testsQuestionsList = MysqlConnection.getTestQuestionsTable("SELECT * FROM cems.testquestion WHERE testID='" + test.getId() + "'");
+                        client.sendToClient(new MsgHandler<>(TypeMsg.GetTestQuestionsResponse, testsQuestionsList));
+                    }
                     break;
                 case GetActiveTests:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
-
                     ArrayList<ActiveTest> activeTestsList = MysqlConnection.getActiveTestsTable("select * from cems.activetest;");
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetActiveTestsResponse, activeTestsList));
                     break;
@@ -436,8 +437,20 @@ public class CemsServer extends AbstractServer {
 
                     MysqlConnection.update(updateRemainingTimeQuery);
                     client.sendToClient(new MsgHandler<>(TypeMsg.UpdateRemainingTimeResponse, null));
-                default:
                     break;
+                case getQuestionAndAnswerFromTest:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    Question questionData = MysqlConnection.getQuestionData("SELECT * FROM question WHERE id = '" + obj + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.importedQuestionAndAnswerFromTest, questionData));
+                    break;
+                case GetTestQuestionsById:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String)this.msg.getMsg();
+                    ArrayList<TestQuestion> testsQuestionsList = MysqlConnection.getTestQuestionsTable("SELECT * FROM cems.testquestion WHERE testID='" + obj + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.GetTestQuestionsResponse, testsQuestionsList));
+                    break;
+
             }
 
         } catch (Exception e) {

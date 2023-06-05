@@ -5,13 +5,24 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import client.ClientUI;
+import common.MsgHandler;
+import common.TypeMsg;
+import entity.Question;
+import entity.TestQuestion;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.util.Duration;
+
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+
 import client.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +35,8 @@ import util.ExitButton;
 import util.MinimizeButton;
 import util.ScreenManager;
 import util.LogOut;
+
+import static application.enterTest.EnterCodePopUpController.testID;
 
 public class QuestionsComputerizedTestAnswerController {
     private int testDurationMinutes;
@@ -50,6 +63,8 @@ public class QuestionsComputerizedTestAnswerController {
     private CheckBox answer4CheckBox;
     @FXML
     private Button myButton;
+    @FXML
+    private Button previousButton;
     private Timeline timer;
     @FXML
     private Label timerLabel;
@@ -61,7 +76,7 @@ public class QuestionsComputerizedTestAnswerController {
     private PreparedStatement statement;
     private ResultSet resultSet;
 
-    public void initialize() {
+    public void initialize() throws SQLException {
         // Enables dragging and dropping of the application window using the header pane
         ScreenManager.dragAndDrop(header);
         fullNameText.setText(Client.user.getFullName());
@@ -72,6 +87,7 @@ public class QuestionsComputerizedTestAnswerController {
         startTimer();
 
     }
+
     private void connectToDatabase() {
         // Establish database connection
         String url = "jdbc:mysql://localhost:3306/cems?serverTimezone=UTC";
@@ -85,6 +101,7 @@ public class QuestionsComputerizedTestAnswerController {
             // Handle connection error
         }
     }
+
     private void saveMarking() {
         // Get the selected answer
         int marking = 0;
@@ -101,6 +118,7 @@ public class QuestionsComputerizedTestAnswerController {
         // Update the marking for the current question
         markings.put(currentQuestionIndex, marking);
     }
+
     @FXML
     public void calculateGrade(ActionEvent event) {
         int totalQuestions = markings.size();
@@ -140,6 +158,7 @@ public class QuestionsComputerizedTestAnswerController {
         System.out.println("Grade: " + grade);
         // Perform further actions with the grade, such as displaying it to the user
     }
+
     private void fetchCourseNameAndTestId() {
         try {
             String query = "SELECT courseName, id FROM test WHERE id = ?";
@@ -160,74 +179,64 @@ public class QuestionsComputerizedTestAnswerController {
         }
     }
 
-    private void fetchQuestion() {
-        try {
-           // String testId = EnterCodePopUpController.test.getId();
-            String testDurationQuery = "SELECT testDuration FROM test WHERE id = ?";
-            PreparedStatement durationStatement = connection.prepareStatement(testDurationQuery);
-            durationStatement.setString(1, "010101");
-            ResultSet durationResultSet = durationStatement.executeQuery();
+    private void fetchQuestion() throws SQLException {
 
-            if (durationResultSet.next()) {
-                String testDuration = durationResultSet.getString("testDuration");
-                testDurationMinutes = Integer.parseInt(testDuration);
-            }
-            String query = "SELECT COUNT(*) AS totalQuestions FROM question q INNER JOIN testquestion tq ON q.id = tq.questionID WHERE tq.testID = ?";
-            PreparedStatement countStatement = connection.prepareStatement(query);
-            countStatement.setString(1, "010101");
-            ResultSet countResultSet = countStatement.executeQuery();
+        // String testId = EnterCodePopUpController.test.getId();
+        String testDurationQuery = "SELECT testDuration FROM test WHERE id = ?";
+        PreparedStatement durationStatement = connection.prepareStatement(testDurationQuery);
+        durationStatement.setString(1, "010101");
+        ResultSet durationResultSet = durationStatement.executeQuery();
 
-            int totalQuestions = 0;
-            if (countResultSet.next()) {
-                totalQuestions = countResultSet.getInt("totalQuestions");
-            }
-
-            String questionQuery = "SELECT tq.points, q.questionText, q.answer1, q.answer2, q.answer3, q.answer4 FROM question q INNER JOIN testquestion tq ON q.id = tq.questionID WHERE tq.testID = ? ORDER BY tq.questionNumber LIMIT ?, 1";
-            statement = connection.prepareStatement(questionQuery);
-            statement.setString(1, "010101");
-            statement.setInt(2, currentQuestionIndex);
-            resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                myButton.setDisable(false);
-                currentQuestionIndex++;
-                int points = resultSet.getInt("points");
-                String question = resultSet.getString("questionText");
-                String answer1 = resultSet.getString("answer1");
-                String answer2 = resultSet.getString("answer2");
-                String answer3 = resultSet.getString("answer3");
-                String answer4 = resultSet.getString("answer4");
-
-                // Update FXML elements with question and answer data
-                questionNumberLabel.setText("Question " + currentQuestionIndex + " of " + totalQuestions + " (" + points + " points)");
-                questionText.setText(question);
-                answer1CheckBox.setText(answer1);
-                answer2CheckBox.setText(answer2);
-                answer3CheckBox.setText(answer3);
-                answer4CheckBox.setText(answer4);
-
-                // Check if there is a marking for the current question
-                if (markings.containsKey(currentQuestionIndex)) {
-                    int marking = markings.get(currentQuestionIndex);
-                    // Set the checkboxes based on the marking
-                    answer1CheckBox.setSelected(marking == 1);
-                    answer2CheckBox.setSelected(marking == 2);
-                    answer3CheckBox.setSelected(marking == 3);
-                    answer4CheckBox.setSelected(marking == 4);
-                } else {
-                    // No marking found, clear the checkboxes
-                    answer1CheckBox.setSelected(false);
-                    answer2CheckBox.setSelected(false);
-                    answer3CheckBox.setSelected(false);
-                    answer4CheckBox.setSelected(false);
-                }
-            } else {
-                myButton.setDisable(true);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle database error
+        if (durationResultSet.next()) {
+            String testDuration = durationResultSet.getString("testDuration");
+            testDurationMinutes = Integer.parseInt(testDuration);
         }
+        MsgHandler getTestQuestions = new MsgHandler(TypeMsg.GetTestQuestionsById, EnterCodePopUpController.testID);
+        ClientUI.chat.accept(getTestQuestions);
+        //load test's questions
+        ObservableList<TestQuestion> testQuestions = FXCollections.observableArrayList((List) ClientUI.chat.getTestQuestions());
+        int totalQuestions = testQuestions.size();
+        if (currentQuestionIndex < 1){
+            previousButton.setDisable(true);
+        }
+        else{
+            previousButton.setDisable(false);
+        }
+        if (currentQuestionIndex == totalQuestions -1){
+            myButton.setDisable(true);
+        }
+        else{
+            myButton.setDisable(false);
+        }
+        if (currentQuestionIndex < totalQuestions) {
+            TestQuestion question = testQuestions.get(currentQuestionIndex);
+            MsgHandler getQuestionAndAnswer = new MsgHandler(TypeMsg.getQuestionAndAnswerFromTest, question.getQuestionID());
+            ClientUI.chat.accept(getQuestionAndAnswer);
+            Question questionFromTest = (Question) ClientUI.chat.getSingleQuestion();
+            questionNumberLabel.setText("Question " + (currentQuestionIndex + 1) + " of " + totalQuestions + " (" + question.getPoints() + " points)");
+            questionText.setText(questionFromTest.getQuestionText());
+            answer1CheckBox.setText(questionFromTest.getAnswer1());
+            answer2CheckBox.setText(questionFromTest.getAnswer2());
+            answer3CheckBox.setText(questionFromTest.getAnswer3());
+            answer4CheckBox.setText(questionFromTest.getAnswer4());
+            if (markings.containsKey(currentQuestionIndex)) {
+                int marking = markings.get(currentQuestionIndex);
+                // Set the checkboxes based on the marking
+                answer1CheckBox.setSelected(marking == 1);
+                answer2CheckBox.setSelected(marking == 2);
+                answer3CheckBox.setSelected(marking == 3);
+                answer4CheckBox.setSelected(marking == 4);
+            } else {
+                // No marking found, clear the checkboxes
+                answer1CheckBox.setSelected(false);
+                answer2CheckBox.setSelected(false);
+                answer3CheckBox.setSelected(false);
+                answer4CheckBox.setSelected(false);
+            }
+
+        }
+
+
     }
 
     @FXML
@@ -246,18 +255,17 @@ public class QuestionsComputerizedTestAnswerController {
     }
 
     @FXML
-    public void handlePreviousButtonClick() {
-        if (currentQuestionIndex > 1) {
+    public void handlePreviousButtonClick() throws SQLException {
             saveMarking();
             currentQuestionIndex -= 2; // Go back two questions (currentQuestionIndex - 1)
             fetchQuestion();
         }
-    }
 
     @FXML
-    public void handleButtonClick() {
+    public void handleButtonClick() throws SQLException {
         // Get the selected answer
         saveMarking();
+        currentQuestionIndex++;
         fetchQuestion();
     }
 
@@ -281,7 +289,7 @@ public class QuestionsComputerizedTestAnswerController {
 
     private void startTimer() {
         int totalSeconds = remainingMinutes * 60;
-        final int[] seconds = { totalSeconds };  // Create a final array to hold the remaining seconds
+        final int[] seconds = {totalSeconds};  // Create a final array to hold the remaining seconds
 
         timer = new Timeline(
                 new KeyFrame(Duration.seconds(1), event -> {
@@ -302,7 +310,6 @@ public class QuestionsComputerizedTestAnswerController {
         // Update the timer label immediately
         timerLabel.setText(formatTime(seconds[0]));
     }
-
 
 
     private String formatTime(int seconds) {

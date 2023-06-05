@@ -245,7 +245,17 @@ public enum TypeMsg {
     },
     GetRemainingTimeResponse {
         public String toString() { return "Server returned the test's remaining time"; }
-    }
+    },
+    getQuestionAndAnswerFromTest{
+        public String toString() { return "Get Question and it's answers"; }
+    },
+    importedQuestionAndAnswerFromTest{
+        public String toString() { return "Imported Question and it's answers"; }
+    },
+    GetTestQuestionsById {
+        public String toString() { return "User asked for the questions of the chosen test";}
+    },
+
 
 
 }

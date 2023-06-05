@@ -30,6 +30,7 @@ public class ClientControl implements ChatIF{
 	}
 
 	private List<Object> response;
+	private Object singleResponse;
 	public   List<Object> GetQuestionsBySubject(){
 		response = client.questions;
 		return  response;
@@ -62,6 +63,10 @@ public class ClientControl implements ChatIF{
 	public List<Object> getActiveTests() {
 		response = client.activeTests;
 		return response;
+	}
+	public Object getSingleQuestion() {
+		singleResponse = client.singleQuestion;
+		return singleResponse;
 	}
 
 	//Instance methods ************************************************
