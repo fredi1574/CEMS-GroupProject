@@ -27,6 +27,8 @@ import util.LogOut;
 
 public class QuestionsComputerizedTestAnswerController {
     private int testDurationMinutes;
+    @FXML
+    private Text courseNameTestIdText;
     private String testId;
     @FXML
     private AnchorPane header;
@@ -66,6 +68,7 @@ public class QuestionsComputerizedTestAnswerController {
         connectToDatabase();
         fetchQuestion();
         fetchTestDuration();  // Call fetchTestDuration() before startTimer()
+        fetchCourseNameAndTestId();
         startTimer();
 
     }
@@ -138,7 +141,25 @@ public class QuestionsComputerizedTestAnswerController {
         System.out.println("Grade: " + grade);
         // Perform further actions with the grade, such as displaying it to the user
     }
+    private void fetchCourseNameAndTestId() {
+        try {
+            String query = "SELECT courseName, id FROM test WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, "010101");
+            ResultSet resultSet = statement.executeQuery();
 
+            if (resultSet.next()) {
+                String courseName = resultSet.getString("courseName");
+                String testID = resultSet.getString("id");
+
+                // Set the combined CourseName and testID to the Text element
+                courseNameTestIdText.setText("Course: " + courseName + " | Test ID: " + testID);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle database error
+        }
+    }
 
     private void fetchQuestion() {
         try {
