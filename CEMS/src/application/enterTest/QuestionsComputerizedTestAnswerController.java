@@ -226,8 +226,8 @@ public class QuestionsComputerizedTestAnswerController {
 
     @FXML
     public void handlePreviousButtonClick() {
-        saveMarking();
         if (currentQuestionIndex > 1) {
+            saveMarking();
             currentQuestionIndex -= 2; // Go back two questions (currentQuestionIndex - 1)
             fetchQuestion();
         }
