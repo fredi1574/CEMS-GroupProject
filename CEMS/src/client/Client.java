@@ -103,6 +103,8 @@ public class Client extends AbstractClient {
             case GetActiveTestsResponse:
                 this.activeTests = (List<Object>) messageFromServer.getMsg();
                 break;
+            case UpdateRemainingTimeResponse:
+                break;
 
 
         }

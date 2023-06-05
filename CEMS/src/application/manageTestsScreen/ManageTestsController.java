@@ -98,11 +98,11 @@ public class ManageTestsController {
         ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTests());
 
         ObservableList<String> columns = FXCollections.observableArrayList();
-        columns.addAll("ID", "Test Code");
+        columns.addAll("ID", "Starting Time", "Time Left");
         TableManager.createTable(activeTestsTableView, columns);
         TableManager.importData(activeTestsTableView, activeTests);
 
-        double[] activeTestsMultipliers = {0.5, 0.5};
+        double[] activeTestsMultipliers = {0.22, 0.39,0.39};
         TableManager.resizeColumns(activeTestsTableView, activeTestsMultipliers);
 
         //makes the elements in the database questions table clickable
@@ -155,7 +155,7 @@ public class ManageTestsController {
         //load test's other data
         stateManagement.setTestID(testRowData.getId());
         stateManagement.setTestNum(testRowData.getTestNumber());
-        stateManagement.setDurationTimeOfTest(testRowData.getTestDuration());
+        stateManagement.setTestDuration(testRowData.getTestDuration());
         stateManagement.setYear(testRowData.getYear());
         stateManagement.setSession(testRowData.getSession());
         stateManagement.setSemester(testRowData.getSemester());
@@ -211,8 +211,18 @@ public class ManageTestsController {
             return;
         }
 
+        //sets data exclusive to activeTest
+        ActiveTest curActiveTest = new ActiveTest(
+                activeTestRowData.getId(),
+                activeTestRowData.getNumOfQuestions(),
+                activeTestRowData.getTestDate(),
+                activeTestRowData.getStartingTime(),
+                activeTestRowData.getTimeLeft()
+        );
+        stateManagement.setCurrentActivetest(curActiveTest);
+
         //gets the matching Test object to the selected active test row
-        Test activeTest = testsFromDBTableView.getItems()
+        Test matchingTestFromDB = testsFromDBTableView.getItems()
                 .stream()
                 .filter(test -> test.getId().equals(activeTestRowData.getId()))
                 .findFirst()
@@ -221,11 +231,11 @@ public class ManageTestsController {
         //TODO: seperate method for stateManagement loading
 
         //load test's course
-        String subjectID = activeTest.getId().substring(0,2);
-        String courseID = activeTest.getId().substring(2,4);
-        Course testCourse = new Course(subjectID,courseID, activeTest.getSubject(), activeTest.getCourseName());
+        String subjectID = matchingTestFromDB.getId().substring(0,2);
+        String courseID = matchingTestFromDB.getId().substring(2,4);
+        Course testCourse = new Course(subjectID,courseID, matchingTestFromDB.getSubject(), matchingTestFromDB.getCourseName());
 
-        MsgHandler getTestQuestions = new MsgHandler(TypeMsg.GetTestQuestions, activeTest);
+        MsgHandler getTestQuestions = new MsgHandler(TypeMsg.GetTestQuestions, matchingTestFromDB);
         ClientUI.chat.accept(getTestQuestions);
         stateManagement.setCourse(testCourse);
 
@@ -236,15 +246,15 @@ public class ManageTestsController {
         }
 
         //load test's other data
-        stateManagement.setTestID(activeTest.getId());
-        stateManagement.setTestNum(activeTest.getTestNumber());
-        stateManagement.setDurationTimeOfTest(activeTest.getTestDuration());
-        stateManagement.setYear(activeTest.getYear());
-        stateManagement.setSession(activeTest.getSession());
-        stateManagement.setSemester(activeTest.getSemester());
-        stateManagement.setTestCode(activeTest.getTestCode());
-        stateManagement.setStudentComment(activeTest.getStudentComments().equals("null") ? "" : activeTest.getStudentComments());
-        stateManagement.setTeacherComment(activeTest.getTeacherComments().equals("null") ? "" : activeTest.getTeacherComments());
+        stateManagement.setTestID(matchingTestFromDB.getId());
+        stateManagement.setTestNum(matchingTestFromDB.getTestNumber());
+        stateManagement.setTestDuration(matchingTestFromDB.getTestDuration());
+        stateManagement.setYear(matchingTestFromDB.getYear());
+        stateManagement.setSession(matchingTestFromDB.getSession());
+        stateManagement.setSemester(matchingTestFromDB.getSemester());
+        stateManagement.setTestCode(matchingTestFromDB.getTestCode());
+        stateManagement.setStudentComment(matchingTestFromDB.getStudentComments().equals("null") ? "" : matchingTestFromDB.getStudentComments());
+        stateManagement.setTeacherComment(matchingTestFromDB.getTeacherComments().equals("null") ? "" : matchingTestFromDB.getTeacherComments());
 
         //when an existing test is opened, no points are available
         stateManagement.totalRemainingPoints = 0;

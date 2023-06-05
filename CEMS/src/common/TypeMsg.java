@@ -173,6 +173,18 @@ public enum TypeMsg {
     },
     GetActiveTestsResponse {
         public String toString() { return "Server returned the active tests table"; }
+    },
+    UpdateRemainingTime {
+        public String toString() { return "User wants to update the test's remaining time"; }
+    },
+    UpdateRemainingTimeResponse {
+        public String toString() { return "Server updated the test's remaining time"; }
+    },
+    GetRemainingTime {
+        public String toString() { return "User wants to get the test's remaining time"; }
+    },
+    GetRemainingTimeResponse {
+        public String toString() { return "Server returned the test's remaining time"; }
     }
 
 

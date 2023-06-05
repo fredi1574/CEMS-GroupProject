@@ -1,9 +1,11 @@
 package entity;
+
 import client.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class StateManagement {
+    //Test parameters
     public Course course;
     public String testNum;
     public String testCode;
@@ -13,37 +15,42 @@ public class StateManagement {
     public String testID;
     public String studentComment;
     public String teacherComment;
-    public String durationTimeOfTest;
+    public String testDuration;
     ObservableList<TestQuestion> testQuestions = FXCollections.observableArrayList();
     public Test newTest;
+    public ActiveTest currentActivetest;
     public int totalRemainingPoints;
     public TestTypeEnum testType = TestTypeEnum.C;
 
-    private  static StateManagement instance = null;
+    private static StateManagement instance = null;
 
-    public static StateManagement getInstance(){
-        if(instance ==  null){
+    public static StateManagement getInstance() {
+        if (instance == null) {
             instance = new StateManagement();
         }
         return instance;
     }
+
     public static void resetInstance() {
         instance = null;
     }
-    private StateManagement(){
 
-       setTestID("-1"); //sets default empty value for testID on StateManagement initialization
-       totalRemainingPoints = 100;
+    private StateManagement() {
+
+        setTestID("-1"); //sets default empty value for testID on StateManagement initialization
+        totalRemainingPoints = 100;
     }
+
     public void setDataOfTest(Course course, String testNum, String testID) {
         this.course = course;
         this.testID = testID;
         this.testNum = testNum;
     }
-    public void SaveTest(){
-        newTest = new Test(testNum,getTestID(),getTestCode(),Client.user.getFullName(),
-                durationTimeOfTest,course.getCourseName(),getTeacherComment(),testType,getStudentComment(),
-                    course.getSubjectName(),year,session,semester);
+
+    public void SaveTest() {
+        newTest = new Test(testNum, getTestID(), getTestCode(), Client.user.getFullName(),
+                testDuration, course.getCourseName(), getTeacherComment(), testType, getStudentComment(),
+                course.getSubjectName(), year, session, semester);
     }
 
 
@@ -90,6 +97,7 @@ public class StateManagement {
     public String getTestNum() {
         return testNum;
     }
+
     public int getTotalRemainingPoints() {
         return totalRemainingPoints;
     }
@@ -103,6 +111,7 @@ public class StateManagement {
     public void subtractTotalRemainingPoints(int totalRemainingPoints) {
         this.totalRemainingPoints -= totalRemainingPoints;
     }
+
     public void setTestNum(String testNum) {
         this.testNum = testNum;
     }
@@ -115,12 +124,12 @@ public class StateManagement {
         this.testID = testID;
     }
 
-    public String getDurationTimeOfTest() {
-        return durationTimeOfTest;
+    public String getTestDuration() {
+        return testDuration;
     }
 
-    public void setDurationTimeOfTest(String durationTimeOfTest) {
-        this.durationTimeOfTest = durationTimeOfTest;
+    public void setTestDuration(String testDuration) {
+        this.testDuration = testDuration;
     }
 
     public ObservableList<TestQuestion> getTestQuestions() {
@@ -130,19 +139,32 @@ public class StateManagement {
     //adds a single test question to the testQuestions observable list
     public void setTestQuestions(TestQuestion question) {
         //if(!testQuestions.contains(question))
-            this.testQuestions.add(question);
+        this.testQuestions.add(question);
     }
 
     public Course getCourse() {
         return course;
     }
+
     public void setCourse(Course course) {
         this.course = course;
     }
 
-    public String getTestCode() { return testCode; }
+    public String getTestCode() {
+        return testCode;
+    }
 
-    public void setTestCode(String testCode) { this.testCode = testCode; }
+    public void setTestCode(String testCode) {
+        this.testCode = testCode;
+    }
+
+    public ActiveTest getCurrentActivetest() {
+        return currentActivetest;
+    }
+
+    public void setCurrentActivetest(ActiveTest currentActivetest) {
+        this.currentActivetest = currentActivetest;
+    }
 
     /**
      * resets all test-state related data
@@ -157,7 +179,7 @@ public class StateManagement {
                 ", testID='" + testID + '\'' +
                 ", studentComment='" + studentComment + '\'' +
                 ", teacherComment='" + teacherComment + '\'' +
-                ", durationTimeOfTest='" + durationTimeOfTest + '\'' +
+                ", testDuration='" + testDuration + '\'' +
                 ", testQuestions=" + testQuestions +
                 '}';
     }

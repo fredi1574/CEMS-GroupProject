@@ -178,7 +178,7 @@ public class CreateTestController {
             subjectIDField.setText(stateManagement.course.getSubjectID());
             testIDField.setText(stateManagement.getTestID());
             testNumberField.setText(String.valueOf(stateManagement.getTestNum()));
-            testDurationField.setText(stateManagement.getDurationTimeOfTest());
+            testDurationField.setText(stateManagement.getTestDuration());
             yearField.setText(stateManagement.getYear());
             sessionTextField.setText(stateManagement.getSession());
             semesterTextField.setText(stateManagement.getSemester());
@@ -211,9 +211,9 @@ public class CreateTestController {
                 stateManagement.setSemester("");
 
             if (!testDurationField.getText().isEmpty()) {
-                stateManagement.setDurationTimeOfTest(testDurationField.getText());
+                stateManagement.setTestDuration(testDurationField.getText());
             }else
-                stateManagement.setDurationTimeOfTest("");
+                stateManagement.setTestDuration("");
         }catch(Exception exception){
 
         }
