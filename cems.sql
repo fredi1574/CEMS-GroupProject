@@ -23,11 +23,12 @@ DROP TABLE IF EXISTS `activetest`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `activetest` (
-  `testID` varchar(45) NOT NULL,
-  `testDuration` varchar(255) DEFAULT NULL,
-  `testCode` varchar(45) DEFAULT NULL,
-  `testType` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`testID`)
+  `id` varchar(45) NOT NULL,
+  `numOfQuestions` varchar(45) DEFAULT NULL,
+  `testDate` varchar(45) DEFAULT NULL,
+  `startingTime` varchar(45) DEFAULT NULL,
+  `timeLeft` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -37,6 +38,7 @@ CREATE TABLE `activetest` (
 
 LOCK TABLES `activetest` WRITE;
 /*!40000 ALTER TABLE `activetest` DISABLE KEYS */;
+INSERT INTO `activetest` VALUES ('010102','5','20.2.23','10:00','45'),('010201','10','01.01.22','14:00','120');
 /*!40000 ALTER TABLE `activetest` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +174,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES ('010102','01','Algebra','STAVVVV',2,'a a','SADAS','SADSDA','SADASDADS','SDASDA','1'),('010201','01','Hedva','check	',1,'a a','dsads','asddsa','sdaasddssaaasdsd','sadsdasad','1'),('15','Math','Algebra1','What is my name?',123,'May','May	','Noa','Shay','Tiran','1'),('889','01','Algebra','check.!',1889,'May','check','check','check','check','1'),('928','01','Algebra','MAY',1928,'May','may','may','may','may','2');
+INSERT INTO `question` VALUES ('010102','01','Algebra','STAVVVV',2,'a a','SADAS','SADSDA','SADASDADS','SDASDA','1'),('010104','01','Algebra','yes',4,'a a','a','b','c','d','4'),('010201','01','Hedva','check	',1,'a a','dsads','asddsa','sdaasddssaaasdsd','sadsdasad','1'),('010203','01','Hedva','2+2+2+2+2=?	',3,'a a','10','6','5','4','1'),('15','Math','Algebra1','What is my name?',123,'May','May	','Noa','Shay','Tiran','1'),('889','01','Algebra','check.!',1889,'May','check','check','check','check','1');
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -267,7 +269,7 @@ CREATE TABLE `test` (
 
 LOCK TABLES `test` WRITE;
 /*!40000 ALTER TABLE `test` DISABLE KEYS */;
-INSERT INTO `test` VALUES ('02','010102','60','a a','Math','Algebra','null','C','aaa','2015','A','A','f9eb'),('01','010201','11','a a','Math','Hedva','aa','C','bb','2011','Z','Z','ac42');
+INSERT INTO `test` VALUES ('02','010102','45','a a','Math','Algebra','null','C','aaa','2015','A','A','f9eb'),('03','010103','66','a a','Math','Algebra','null','C','null','2024','B','B','31e6'),('01','010201','120','a a','Math','Hedva','aa','C','bb','2011','Z','Z','ac42');
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,7 +299,7 @@ CREATE TABLE `testquestion` (
 
 LOCK TABLES `testquestion` WRITE;
 /*!40000 ALTER TABLE `testquestion` DISABLE KEYS */;
-INSERT INTO `testquestion` VALUES ('010102','2',25,'STAVVVV','010102','Algebra','01','a a'),('010102','2',50,'STAVVVV','010201','Algebra','01','a a'),('010201','1',25,'check	','010102','Hedva','01','a a'),('15','123',50,'What is my name?','010201','Algebra1','Math','May'),('889','1889',25,'check.!','010102','Algebra','01','May'),('928','1928',25,'MAY','010102','Algebra','01','May');
+INSERT INTO `testquestion` VALUES ('010102','2',25,'STAVVVV','010102','Algebra','01','a a'),('010102','2',34,'STAVVVV','010103','Algebra','01','a a'),('010102','2',50,'STAVVVV','010201','Algebra','01','a a'),('010201','1',25,'check	','010102','Hedva','01','a a'),('010203','3',33,'2+2+2+2+2=?	','010103','Hedva','01','a a'),('15','123',50,'What is my name?','010201','Algebra1','Math','May'),('889','1889',25,'check.!','010102','Algebra','01','May'),('889','1889',33,'check.!','010103','Algebra','01','May'),('928','1928',25,'MAY','010102','Algebra','01','May');
 /*!40000 ALTER TABLE `testquestion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -368,4 +370,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-04 22:58:21
+-- Dump completed on 2023-06-05 15:14:56
