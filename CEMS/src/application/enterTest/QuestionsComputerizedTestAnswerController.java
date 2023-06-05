@@ -103,6 +103,7 @@ public class QuestionsComputerizedTestAnswerController {
     public void calculateGrade(ActionEvent event) {
         int totalQuestions = markings.size();
         int correctAnswers = 0;
+        saveMarking();
 
         // Print the markings map for debugging purposes
         System.out.println("Markings map: " + markings);
@@ -113,7 +114,7 @@ public class QuestionsComputerizedTestAnswerController {
             int marking = entry.getValue();
 
             // Retrieve the correct answer index for the question from the database
-            String correctAnswerQuery = "SELECT correctAnswer FROM question q INNER JOIN testquestion tq ON q.id = tq.questionID WHERE tq.testID = ? AND tq.questionNumber = ?";
+            String correctAnswerQuery = "SELECT correctAnswer FROM question WHERE id IN (SELECT questionID FROM testquestion WHERE testID = ? AND questionNumber = ?)";
             try {
                 PreparedStatement answerStatement = connection.prepareStatement(correctAnswerQuery);
                 answerStatement.setString(1, testId);
