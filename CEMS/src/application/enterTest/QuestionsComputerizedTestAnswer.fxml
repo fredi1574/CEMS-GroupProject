@@ -27,12 +27,12 @@
                   <Font name="Trebuchet MS Bold" size="40.0" />
                </font>
             </Label>
-            <ImageView layoutX="769.0" layoutY="43.0">
+            <ImageView layoutX="759.0" layoutY="42.0">
                <image>
                   <Image url="@../../images/avatar.png" />
                </image>
             </ImageView>
-            <Text fx:id="fullNameText" fill="#3b3131" layoutX="792.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true" wrappingWidth="52.798828125">
+            <Text fx:id="fullNameText" fill="#3b3131" layoutX="775.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true" wrappingWidth="82.0">
                <font>
                   <Font name="Trebuchet MS" size="12.0" />
                </font>
@@ -42,6 +42,7 @@
                   <Font name="Franklin Gothic Demi Cond" size="14.0" />
                </font>
             </Button>
+            <Button fx:id="gradeButton" text="Calculate Grade" onAction="#calculateGrade" />
          </children>
       </AnchorPane>
       <Button fx:id="previousButton" layoutX="722.0" layoutY="472.0" onAction="#handlePreviousButtonClick" prefHeight="20.0" prefWidth="16.0" visible="true" />
