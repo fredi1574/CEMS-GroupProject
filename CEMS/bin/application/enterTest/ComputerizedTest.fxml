@@ -130,7 +130,7 @@
                               </Label>
                            </children></HBox>
                         <HBox prefHeight="9.0" prefWidth="148.0" />
-                        <Label fx:id="TimeRemainingText" alignment="BASELINE_CENTER" prefHeight="20.0" prefWidth="152.0" text="Time remaining:">
+                        <Label fx:id="TimeRemainingText" alignment="BASELINE_CENTER" prefHeight="20.0" prefWidth="152.0" text="Test's duration">
                            <font>
                               <Font name="Trebuchet MS Bold" size="17.0" />
                            </font>

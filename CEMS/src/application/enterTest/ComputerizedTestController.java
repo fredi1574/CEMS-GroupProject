@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -41,6 +42,7 @@ public class ComputerizedTestController {
 
     @FXML
     private TextField TestIdText;
+
 
     @FXML
     private TextField TimeRem;
@@ -91,6 +93,7 @@ public class ComputerizedTestController {
         TestIdText.setText(test.getId());
         TestComments.setText(test.getTeacherComments());
         CourseNameText.setText(test.getCourseName());
+        TimeRem.setText(test.getTestDuration());
         MsgHandler getActiveTestTable = new MsgHandler(TypeMsg.GetActiveTests, null);
         ClientUI.chat.accept(getActiveTestTable);
         ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTests());
@@ -99,7 +102,6 @@ public class ComputerizedTestController {
             {
                 NumberText.setText(activeTest.getNumOfQuestions());
                 StartTimeText.setText(activeTest.getStartingTime());
-                TimeRem.setText(activeTest.getTimeLeft());
             }
         }
         btnN.setDisable(true);

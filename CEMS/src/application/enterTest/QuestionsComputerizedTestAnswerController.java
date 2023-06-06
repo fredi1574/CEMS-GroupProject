@@ -16,12 +16,10 @@ import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ProgressIndicator;
 import javafx.util.Duration;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
 import client.Client;
 import javafx.event.ActionEvent;
@@ -32,6 +30,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import util.*;
+
+import javax.swing.*;
 
 import static application.enterTest.EnterCodePopUpController.testID;
 
@@ -65,13 +65,16 @@ public class QuestionsComputerizedTestAnswerController {
     private Timeline timer;
     @FXML
     private Label timerLabel;
+    @FXML
+    private ProgressIndicator points;
     private final Map<Integer, Integer> markings = new HashMap<>();
     private int currentQuestionIndex = 0;
     private int remainingMinutes;
     private int grade;
     private int correctAnswers;
     private int numberOfQuestions;
-
+    private static int selectedCount = 0;
+    private static boolean moreThanOneAnswer;
     private static ObservableList<TestQuestion> testQuestions;
     private Connection connection;
     private PreparedStatement statement;
@@ -103,64 +106,53 @@ public class QuestionsComputerizedTestAnswerController {
         }
     }
 
-    private void saveMarking() {
-        // Get the selected answer
+    private void saveMarkingWithValidation() throws SQLException {
+        CheckBox[] checkboxes = {answer1CheckBox, answer2CheckBox, answer3CheckBox, answer4CheckBox};
+
         int marking = 0;
-        if (answer1CheckBox.isSelected()) {
-            marking = 1;
-        } else if (answer2CheckBox.isSelected()) {
-            marking = 2;
-        } else if (answer3CheckBox.isSelected()) {
-            marking = 3;
-        } else if (answer4CheckBox.isSelected()) {
-            marking = 4;
+        selectedCount = 0;
+        for (CheckBox checkbox : checkboxes) {
+            if (checkbox.isSelected()) {
+                selectedCount++;
+                marking = Arrays.asList(checkboxes).indexOf(checkbox) + 1;
+            }
+            checkbox.setSelected(false);
         }
 
-        // Update the marking for the current question
-        markings.put(currentQuestionIndex, marking);
+        if (selectedCount > 1) {
+            showError.showErrorPopup("Please select only one answer");
+        } else {
+            // Update the marking for the current question
+            markings.put(currentQuestionIndex, marking);
+        }
     }
 
-    private Test getTestData()
-    {
+    private Test getTestData() {
         MsgHandler getTestInformation = new MsgHandler(TypeMsg.GetTestByID, EnterCodePopUpController.testID);
         ClientUI.chat.accept(getTestInformation);
         Test test = (Test) ClientUI.chat.getSingleTest();
         return test;
     }
+
     private void fetchCourseNameAndTestId() {
-                Test test = getTestData();
-                courseNameTestIdText.setText("Course: " + test.getCourseName() + " | Test ID: " + test.getId());
-            }
+        Test test = getTestData();
+        courseNameTestIdText.setText("Course: " + test.getCourseName() + " | Test ID: " + test.getId());
+    }
 
 
     private void fetchQuestion() throws SQLException {
         MsgHandler getQuestionInformation = new MsgHandler(TypeMsg.GetTestQuestionsById, EnterCodePopUpController.testID);
         ClientUI.chat.accept(getQuestionInformation);
-        // String testId = EnterCodePopUpController.test.getId();
-        String testDurationQuery = "SELECT testDuration FROM test WHERE id = ?";
-        PreparedStatement durationStatement = connection.prepareStatement(testDurationQuery);
-        durationStatement.setString(1, "010101");
-        ResultSet durationResultSet = durationStatement.executeQuery();
-
-        if (durationResultSet.next()) {
-            String testDuration = durationResultSet.getString("testDuration");
-            testDurationMinutes = Integer.parseInt(testDuration);
-        }
-        MsgHandler getTestQuestions = new MsgHandler(TypeMsg.GetTestQuestionsById, EnterCodePopUpController.testID);
-        ClientUI.chat.accept(getTestQuestions);
-        //load test's questions
         testQuestions = FXCollections.observableArrayList((List) ClientUI.chat.getTestQuestions());
         int totalQuestions = testQuestions.size();
-        if (currentQuestionIndex < 1){
+        if (currentQuestionIndex < 1) {
             previousButton.setDisable(true);
-        }
-        else{
+        } else {
             previousButton.setDisable(false);
         }
-        if (currentQuestionIndex == totalQuestions -1){
+        if (currentQuestionIndex == totalQuestions - 1) {
             myButton.setDisable(true);
-        }
-        else{
+        } else {
             myButton.setDisable(false);
         }
         if (currentQuestionIndex < totalQuestions) {
@@ -174,6 +166,7 @@ public class QuestionsComputerizedTestAnswerController {
             answer2CheckBox.setText(questionFromTest.getAnswer2());
             answer3CheckBox.setText(questionFromTest.getAnswer3());
             answer4CheckBox.setText(questionFromTest.getAnswer4());
+            points.setProgress(((double) question.getPoints() / 100));
             if (markings.containsKey(currentQuestionIndex)) {
                 int marking = markings.get(currentQuestionIndex);
                 // Set the checkboxes based on the marking
@@ -211,22 +204,28 @@ public class QuestionsComputerizedTestAnswerController {
 
     @FXML
     public void handlePreviousButtonClick() throws SQLException {
-            saveMarking();
+        saveMarkingWithValidation();
+        if (selectedCount <= 1) {
             currentQuestionIndex -= 1; // Go back two questions (currentQuestionIndex - 1)
             fetchQuestion();
         }
+    }
 
     @FXML
     public void handleButtonClick() throws SQLException {
-        // Get the selected answer
-        saveMarking();
-        currentQuestionIndex++;
-        fetchQuestion();
+        saveMarkingWithValidation();
+        if (selectedCount <= 1) {
+            currentQuestionIndex++;
+            fetchQuestion();
+        }
     }
+
     @FXML
     public void SubmitTest(ActionEvent event) throws SQLException {
-        saveMarking();
-        saveFinalAnswers();
+        saveMarkingWithValidation();
+        if (selectedCount <= 1) {
+            saveFinalAnswers();
+        }
 
         ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
     }
@@ -234,32 +233,30 @@ public class QuestionsComputerizedTestAnswerController {
     public void saveFinalAnswers() {
         int i = 0;
         numberOfQuestions = testQuestions.size();
-        for (TestQuestion answer: testQuestions)
-        {
+        for (TestQuestion answer : testQuestions) {
 
-            AnswerOfStudent answerForSpecificQ = new AnswerOfStudent(Client.user.getId(), testID,testQuestions.get(i).getQuestionID(),markings.get(i));
-            MsgHandler addAnswerOfTestFromStudent = new MsgHandler(TypeMsg.AddStudentAnswer, (AnswerOfStudent)answerForSpecificQ);
+            AnswerOfStudent answerForSpecificQ = new AnswerOfStudent(Client.user.getId(), testID, testQuestions.get(i).getQuestionID(), markings.get(i));
+            MsgHandler addAnswerOfTestFromStudent = new MsgHandler(TypeMsg.AddStudentAnswer, (AnswerOfStudent) answerForSpecificQ);
             ClientUI.chat.accept(addAnswerOfTestFromStudent);
             MsgHandler getCorrectAnswerOfQ = new MsgHandler(TypeMsg.getQuestionAndAnswerFromTest, testQuestions.get(i).getQuestionID());
             ClientUI.chat.accept(getCorrectAnswerOfQ);
-            Question question_i =(Question) (ClientUI.chat.getSingleQuestion());
+            Question question_i = (Question) (ClientUI.chat.getSingleQuestion());
             int getCorrect = Integer.parseInt(question_i.getCorrectAnswer());
-            if (getCorrect == markings.get(i))
-            {
+            if (getCorrect == markings.get(i)) {
                 correctAnswers++;
                 grade += answer.getPoints();
             }
             i++;
         }
-        saveStudentsTest(grade,correctAnswers,numberOfQuestions);
+        saveStudentsTest(grade, correctAnswers, numberOfQuestions);
 
     }
 
-    public void saveStudentsTest(int score,int correctAnswers, int totalQuestions) {
+    public void saveStudentsTest(int score, int correctAnswers, int totalQuestions) {
         Test test = getTestData();
-        StudentTest StudentsCopy =  new StudentTest(Client.user.getId(),test.getId(),test.getSubject(),test.getCourseName(),Integer.toString(score),
-                Client.user.getFullName(),test.getYear(),test.getSemester(),test.getSession(),CheatingSuspicion.NO,Integer.toString(correctAnswers),
-                Integer.toString(totalQuestions),"",ApprovalStatus.N,test.getTestType());
+        StudentTest StudentsCopy = new StudentTest(Client.user.getId(), test.getId(), test.getSubject(), test.getCourseName(), Integer.toString(score),
+                Client.user.getFullName(), test.getYear(), test.getSemester(), test.getSession(), CheatingSuspicion.NO, Integer.toString(correctAnswers),
+                Integer.toString(totalQuestions), "", ApprovalStatus.N, test.getTestType());
         MsgHandler AddNewTest = new MsgHandler(TypeMsg.AddNewTestOfStudent, StudentsCopy);
         ClientUI.chat.accept(AddNewTest);
 
@@ -267,6 +264,8 @@ public class QuestionsComputerizedTestAnswerController {
 
 
     private void fetchTestDuration() {
+        Test test = getTestData();
+
         try {
             String testDurationQuery = "SELECT testDuration FROM test WHERE id = ?";
             PreparedStatement durationStatement = connection.prepareStatement(testDurationQuery);

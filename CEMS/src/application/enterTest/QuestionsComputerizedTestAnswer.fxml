@@ -162,7 +162,7 @@
             </Pane>
          </children>
       </VBox>
-      <ProgressIndicator layoutX="35.0" layoutY="166.0" prefWidth="31.0" progress="0.25" />
+      <ProgressIndicator fx:id="points" layoutX="35.0" layoutY="166.0" prefWidth="31.0" progress="0.25" />
       <Label layoutX="839.0" layoutY="452.0" text="Next" />
       <Button fx:id="SubmbitBtn" layoutX="63.0" layoutY="453.0" onAction="#SubmitTest" prefHeight="45.0" prefWidth="45.0" style="&#10;            -fx-padding: 0;&#10;         " styleClass="subButtons" visible="true" />
       <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="64.0" layoutY="453.0">
