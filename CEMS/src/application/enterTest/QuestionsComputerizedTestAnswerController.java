@@ -120,45 +120,6 @@ public class QuestionsComputerizedTestAnswerController {
         markings.put(currentQuestionIndex, marking);
     }
 
-    @FXML
-    public void calculateGrade(ActionEvent event) {
-        int totalQuestions = markings.size();
-        int correctAnswers = 0;
-        saveMarking();
-
-        // Print the markings map for debugging purposes
-        System.out.println("Markings map: " + markings);
-
-        // Iterate through the markings and check if they match the correct answer
-        for (Map.Entry<Integer, Integer> entry : markings.entrySet()) {
-            int questionNumber = entry.getKey();
-            int marking = entry.getValue();
-
-            // Retrieve the correct answer index for the question from the database
-            String correctAnswerQuery = "SELECT correctAnswer FROM question WHERE id IN (SELECT questionID FROM testquestion WHERE testID = ? AND questionNumber = ?)";
-            try {
-                PreparedStatement answerStatement = connection.prepareStatement(correctAnswerQuery);
-                answerStatement.setString(1, testId);
-                answerStatement.setInt(2, questionNumber);
-                ResultSet answerResultSet = answerStatement.executeQuery();
-
-                if (answerResultSet.next()) {
-                    int correctAnswerIndex = answerResultSet.getInt("correctAnswer");
-
-                    if (marking == correctAnswerIndex) {
-                        correctAnswers++;
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                // Handle database error
-            }
-        }
-
-        double grade = (correctAnswers / (double) totalQuestions) * 100;
-        System.out.println("Grade: " + grade);
-        // Perform further actions with the grade, such as displaying it to the user
-    }
     private Test getTestData()
     {
         MsgHandler getTestInformation = new MsgHandler(TypeMsg.GetTestByID, EnterCodePopUpController.testID);

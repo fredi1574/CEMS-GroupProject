@@ -496,6 +496,16 @@ public class CemsServer extends AbstractServer {
 
                     }
                     break;
+                case CheckStudentRegisteredCourse:
+                    this.msg = (MsgHandler<Object>) msg;
+                    List<Object> studentsDetails = (List<Object>) this.msg.getMsg();
+                    String studentID = (String) studentsDetails.get(0);
+                    String courseName = (String) studentsDetails.get(1);
+                    StudentCourse isRegistered = MysqlConnection.checkRegistered("SELECT * FROM studentscourse WHERE studentID = '" + studentID + "' AND course = '" + courseName + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.StudentVerified, isRegistered));
+                    break;
+
+
             }
 
         } catch (Exception e) {

@@ -6,6 +6,7 @@ import common.MsgHandler;
 import common.TypeMsg;
 import entity.ActiveTest;
 import entity.Test;
+import entity.TestTypeEnum;
 import entity.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,6 +32,7 @@ public class EnterCodePopUpController {
     private Text fullNameText;
     @FXML
     private TextField CodeText;
+    private TestTypeEnum testType;
     public void initialize() {
         // Enables dragging and dropping of the application window using the header pane
         ScreenManager.dragAndDrop(header);
@@ -50,24 +52,36 @@ public class EnterCodePopUpController {
         } else {
             // Code is valid
             boolean testExists = false;
-            MsgHandler getTestTable = new MsgHandler(TypeMsg.GetActiveTests, null);
-            ClientUI.chat.accept(getTestTable);
-            ObservableList<ActiveTest> tests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTests());
+            MsgHandler getActiveTestTable = new MsgHandler(TypeMsg.GetActiveTests, null);
+            ClientUI.chat.accept(getActiveTestTable);
+            ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTests());
 
-            for (ActiveTest activeTest: tests) {
+            MsgHandler getAllTestTable = new MsgHandler(TypeMsg.GetAllTestsTable, null);
+            ClientUI.chat.accept(getAllTestTable);
+            ObservableList<Test> allTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
+            for (ActiveTest activeTest: activeTests) {
                 if (activeTest.getTestCode().equals(codet)) {
                     testExists = true;
                     testID = activeTest.getId();
-                    break;
+                    for (Test test: allTests) {
+                        if (testID.equals(test.getId())){
+                            testType = test.getTestType();
+                            break;
+                        }
+                    }
+
                 }
             }
 
             if (testExists) {
-                // Test with the given code exists
-                // Handle the case accordingly
-               // test.setId(codet);
+                switch(testType){
+                    case C:
+                        ScreenManager.goToNewScreen(event, PathConstants.EnterComputerizedTestPath);
+                        break;
+                    case M:
+                        ScreenManager.goToNewScreen(event, PathConstants.StartManualTestPath);
+                }
 
-                ScreenManager.goToNewScreen(event, PathConstants.EnterTest);
             } else {
                 // Test with the given code does not exist
                 // Handle the case accordingly

@@ -436,6 +436,7 @@ public class MysqlConnection {
     }
 
 
+
     /**
      * this method closes the connection to the DB and the server
      */
@@ -524,6 +525,34 @@ public class MysqlConnection {
         }
 
         return test;
+    }
+    public static StudentCourse checkRegistered(String query) {
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        StudentCourse getUser = null;
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                // Retrieve the user details from the database
+                String studentID = rs.getString("studentID");
+                String courseName = rs.getString("course");
+
+
+                // Create a new ConcreteUser object with the retrieved details
+                getUser = new StudentCourse(studentID, courseName);
+
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return getUser;
     }
 }
 	

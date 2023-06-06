@@ -196,7 +196,7 @@ public enum TypeMsg {
             return "Imported list of tests by course";
         }
     },
-    GetTestsByLecutrerForLecturerReport{
+    GetTestsByLecutrerForLecturerReport {
         public String toString() {
             return "Imported list of tests by lecturer";
         }
@@ -217,64 +217,110 @@ public enum TypeMsg {
         }
     },
     GetTestQuestions {
-        public String toString() { return "User asked for the questions of the chosen test";}
+        public String toString() {
+            return "User asked for the questions of the chosen test";
+        }
     },
     GetTestQuestionsResponse {
-        public String toString() { return "Server returned the list of test questions"; }
+        public String toString() {
+            return "Server returned the list of test questions";
+        }
     },
     GetActiveTests {
-        public String toString() { return "User asked for the active tests table"; }
+        public String toString() {
+            return "User asked for the active tests table";
+        }
     },
     GetActiveTestsResponse {
-        public String toString() { return "Server returned the active tests table"; }
+        public String toString() {
+            return "Server returned the active tests table";
+        }
     },
     GetCorrectAnswer {
-        public String toString() { return "Get correct Answer From the data base"; }
+        public String toString() {
+            return "Get correct Answer From the data base";
+        }
     },
     importedCorrectAnswer {
-        public String toString() { return "Imported correct answer"; }
+        public String toString() {
+            return "Imported correct answer";
+        }
     },
     UpdateRemainingTime {
-        public String toString() { return "User wants to update the test's remaining time"; }
+        public String toString() {
+            return "User wants to update the test's remaining time";
+        }
     },
     UpdateRemainingTimeResponse {
-        public String toString() { return "Server updated the test's remaining time"; }
+        public String toString() {
+            return "Server updated the test's remaining time";
+        }
     },
     GetRemainingTime {
-        public String toString() { return "User wants to get the test's remaining time"; }
+        public String toString() {
+            return "User wants to get the test's remaining time";
+        }
     },
     GetRemainingTimeResponse {
-        public String toString() { return "Server returned the test's remaining time"; }
+        public String toString() {
+            return "Server returned the test's remaining time";
+        }
     },
-    getQuestionAndAnswerFromTest{
-        public String toString() { return "Get Question and it's answers"; }
+    getQuestionAndAnswerFromTest {
+        public String toString() {
+            return "Get Question and it's answers";
+        }
     },
-    importedQuestionAndAnswerFromTest{
-        public String toString() { return "Imported Question and it's answers"; }
+    importedQuestionAndAnswerFromTest {
+        public String toString() {
+            return "Imported Question and it's answers";
+        }
     },
     GetTestQuestionsById {
-        public String toString() { return "User asked for the questions of the chosen test";}
+        public String toString() {
+            return "User asked for the questions of the chosen test";
+        }
     },
     AddStudentAnswer {
-        public String toString() { return "Student submitted an answer in the test";}
+        public String toString() {
+            return "Student submitted an answer in the test";
+        }
     },
     StudentAnswerAdded {
-        public String toString() { return "Student final answer is saved";}
+        public String toString() {
+            return "Student final answer is saved";
+        }
     },
     GetTestByID {
-        public String toString() { return "Get Test information by it's id";}
+        public String toString() {
+            return "Get Test information by it's id";
+        }
     },
     ImportedTestByID {
-        public String toString() { return "Test information imported";}
+        public String toString() {
+            return "Test information imported";
+        }
     },
-    AddNewTestOfStudent{
-        public String toString() { return "Student finished his test";}
+    AddNewTestOfStudent {
+        public String toString() {
+            return "Student finished his test";
+        }
     },
-    TestOfStudentSaved{
-        public String toString() { return "Test of student is saved";}
+    TestOfStudentSaved {
+        public String toString() {
+            return "Test of student is saved";
+        }
     },
-
-
+    CheckStudentRegisteredCourse {
+        public String toString() {
+            return "Check if student is in this course";
+        }
+    },
+    StudentVerified {
+        public String toString() {
+            return "Student id's is verified";
+        }
+    },
 
 
 }
