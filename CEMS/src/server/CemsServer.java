@@ -450,6 +450,21 @@ public class CemsServer extends AbstractServer {
                     ArrayList<TestQuestion> testsQuestionsList = MysqlConnection.getTestQuestionsTable("SELECT * FROM cems.testquestion WHERE testID='" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetTestQuestionsResponse, testsQuestionsList));
                     break;
+                case AddStudentAnswer:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (AnswerOfStudent) this.msg.getMsg();
+                    AnswerOfStudent answer = (AnswerOfStudent) obj;
+                    MysqlConnection.update("INSERT INTO cems.answersofstudent (studentID, testID, questionId, studentsAnswer) " +
+                            "VALUES ('" + answer.getStudentID() + "', " +
+                            "'" + answer.getTestID() + "', " +
+                            "'" + answer.getQuestionID()+ "', " +
+                            "'" + answer.getStudentsAnswer() + "')");
+
+                    client.sendToClient(new MsgHandler<>(TypeMsg.StudentAnswerAdded, null));
+                    break;
+
+
+
 
             }
 

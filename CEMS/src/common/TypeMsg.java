@@ -255,6 +255,12 @@ public enum TypeMsg {
     GetTestQuestionsById {
         public String toString() { return "User asked for the questions of the chosen test";}
     },
+    AddStudentAnswer {
+        public String toString() { return "Student submitted an answer in the test";}
+    },
+    StudentAnswerAdded {
+        public String toString() { return "Student final answer is saved";}
+    },
 
 
 

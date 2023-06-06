@@ -37,6 +37,7 @@ public class Client extends AbstractClient {
     public static openReportByLecturerController HODPopenReporLecturerController = new openReportByLecturerController();
     public static openReportByCourseController HODPopenReportCourseController = new openReportByCourseController();
     public static ViewReportsController LectureReportsController = new ViewReportsController();
+
     //constructor
     public Client(String host, int port, ChatIF clientUI) {
         super(host, port);
@@ -139,7 +140,8 @@ public class Client extends AbstractClient {
             case importedQuestionAndAnswerFromTest:
                 this.singleQuestion = (Question) messageFromServer.getMsg();
                 break;
-
+            case StudentAnswerAdded:
+                break;
 
 
         }

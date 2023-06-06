@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
+import entity.AnswerOfStudent;
 import entity.Question;
 import entity.TestQuestion;
 import javafx.animation.Animation;
@@ -19,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -31,10 +33,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import util.ExitButton;
-import util.MinimizeButton;
-import util.ScreenManager;
-import util.LogOut;
+import util.*;
 
 import static application.enterTest.EnterCodePopUpController.testID;
 
@@ -71,7 +70,7 @@ public class QuestionsComputerizedTestAnswerController {
     private final Map<Integer, Integer> markings = new HashMap<>();
     private int currentQuestionIndex = 0;
     private int remainingMinutes;
-
+    private static ObservableList<TestQuestion> testQuestions;
     private Connection connection;
     private PreparedStatement statement;
     private ResultSet resultSet;
@@ -194,7 +193,7 @@ public class QuestionsComputerizedTestAnswerController {
         MsgHandler getTestQuestions = new MsgHandler(TypeMsg.GetTestQuestionsById, EnterCodePopUpController.testID);
         ClientUI.chat.accept(getTestQuestions);
         //load test's questions
-        ObservableList<TestQuestion> testQuestions = FXCollections.observableArrayList((List) ClientUI.chat.getTestQuestions());
+        testQuestions = FXCollections.observableArrayList((List) ClientUI.chat.getTestQuestions());
         int totalQuestions = testQuestions.size();
         if (currentQuestionIndex < 1){
             previousButton.setDisable(true);
@@ -257,7 +256,7 @@ public class QuestionsComputerizedTestAnswerController {
     @FXML
     public void handlePreviousButtonClick() throws SQLException {
             saveMarking();
-            currentQuestionIndex -= 2; // Go back two questions (currentQuestionIndex - 1)
+            currentQuestionIndex -= 1; // Go back two questions (currentQuestionIndex - 1)
             fetchQuestion();
         }
 
@@ -268,6 +267,26 @@ public class QuestionsComputerizedTestAnswerController {
         currentQuestionIndex++;
         fetchQuestion();
     }
+    @FXML
+    public void SubmitTest(ActionEvent event) throws SQLException {
+        saveMarking();
+        saveFinalAnswers();
+        ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
+    }
+    @FXML
+    public void saveFinalAnswers() {
+        int i = 0;
+        for (TestQuestion answer: testQuestions)
+        {
+
+            AnswerOfStudent answerForSpecificQ = new AnswerOfStudent(Client.user.getId(),EnterCodePopUpController.testID,testQuestions.get(i).getQuestionID(),markings.get(i));
+            MsgHandler addAnswerOfTestFromStudent = new MsgHandler(TypeMsg.AddStudentAnswer, (AnswerOfStudent)answerForSpecificQ);
+            ClientUI.chat.accept(addAnswerOfTestFromStudent);
+            i++;
+        }
+    }
+
+
 
     private void fetchTestDuration() {
         try {
