@@ -9,9 +9,7 @@ import java.sql.SQLException;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
-import entity.AnswerOfStudent;
-import entity.Question;
-import entity.TestQuestion;
+import entity.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -70,6 +68,10 @@ public class QuestionsComputerizedTestAnswerController {
     private final Map<Integer, Integer> markings = new HashMap<>();
     private int currentQuestionIndex = 0;
     private int remainingMinutes;
+    private int grade;
+    private int correctAnswers;
+    private int numberOfQuestions;
+
     private static ObservableList<TestQuestion> testQuestions;
     private Connection connection;
     private PreparedStatement statement;
@@ -79,10 +81,10 @@ public class QuestionsComputerizedTestAnswerController {
         // Enables dragging and dropping of the application window using the header pane
         ScreenManager.dragAndDrop(header);
         fullNameText.setText(Client.user.getFullName());
+        fetchCourseNameAndTestId();
         connectToDatabase();
         fetchQuestion();
         fetchTestDuration();  // Call fetchTestDuration() before startTimer()
-        fetchCourseNameAndTestId();
         startTimer();
 
     }
@@ -157,29 +159,22 @@ public class QuestionsComputerizedTestAnswerController {
         System.out.println("Grade: " + grade);
         // Perform further actions with the grade, such as displaying it to the user
     }
-
-    private void fetchCourseNameAndTestId() {
-        try {
-            String query = "SELECT courseName, id FROM test WHERE id = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, "010101");
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                String courseName = resultSet.getString("courseName");
-                String testID = resultSet.getString("id");
-
-                // Set the combined CourseName and testID to the Text element
-                courseNameTestIdText.setText("Course: " + courseName + " | Test ID: " + testID);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle database error
-        }
+    private Test getTestData()
+    {
+        MsgHandler getTestInformation = new MsgHandler(TypeMsg.GetTestByID, EnterCodePopUpController.testID);
+        ClientUI.chat.accept(getTestInformation);
+        Test test = (Test) ClientUI.chat.getSingleTest();
+        return test;
     }
+    private void fetchCourseNameAndTestId() {
+                Test test = getTestData();
+                courseNameTestIdText.setText("Course: " + test.getCourseName() + " | Test ID: " + test.getId());
+            }
+
 
     private void fetchQuestion() throws SQLException {
-
+        MsgHandler getQuestionInformation = new MsgHandler(TypeMsg.GetTestQuestionsById, EnterCodePopUpController.testID);
+        ClientUI.chat.accept(getQuestionInformation);
         // String testId = EnterCodePopUpController.test.getId();
         String testDurationQuery = "SELECT testDuration FROM test WHERE id = ?";
         PreparedStatement durationStatement = connection.prepareStatement(testDurationQuery);
@@ -271,21 +266,43 @@ public class QuestionsComputerizedTestAnswerController {
     public void SubmitTest(ActionEvent event) throws SQLException {
         saveMarking();
         saveFinalAnswers();
+
         ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
     }
-    @FXML
+
     public void saveFinalAnswers() {
         int i = 0;
+        numberOfQuestions = testQuestions.size();
         for (TestQuestion answer: testQuestions)
         {
 
-            AnswerOfStudent answerForSpecificQ = new AnswerOfStudent(Client.user.getId(),EnterCodePopUpController.testID,testQuestions.get(i).getQuestionID(),markings.get(i));
+            AnswerOfStudent answerForSpecificQ = new AnswerOfStudent(Client.user.getId(), testID,testQuestions.get(i).getQuestionID(),markings.get(i));
             MsgHandler addAnswerOfTestFromStudent = new MsgHandler(TypeMsg.AddStudentAnswer, (AnswerOfStudent)answerForSpecificQ);
             ClientUI.chat.accept(addAnswerOfTestFromStudent);
+            MsgHandler getCorrectAnswerOfQ = new MsgHandler(TypeMsg.getQuestionAndAnswerFromTest, testQuestions.get(i).getQuestionID());
+            ClientUI.chat.accept(getCorrectAnswerOfQ);
+            Question question_i =(Question) (ClientUI.chat.getSingleQuestion());
+            int getCorrect = Integer.parseInt(question_i.getCorrectAnswer());
+            if (getCorrect == markings.get(i))
+            {
+                correctAnswers++;
+                grade += answer.getPoints();
+            }
             i++;
         }
+        saveStudentsTest(grade,correctAnswers,numberOfQuestions);
+
     }
 
+    public void saveStudentsTest(int score,int correctAnswers, int totalQuestions) {
+        Test test = getTestData();
+        StudentTest StudentsCopy =  new StudentTest(Client.user.getId(),test.getId(),test.getSubject(),test.getCourseName(),Integer.toString(score),
+                Client.user.getFullName(),test.getYear(),test.getSemester(),test.getSession(),CheatingSuspicion.NO,Integer.toString(correctAnswers),
+                Integer.toString(totalQuestions),"",ApprovalStatus.N,test.getTestType());
+        MsgHandler AddNewTest = new MsgHandler(TypeMsg.AddNewTestOfStudent, StudentsCopy);
+        ClientUI.chat.accept(AddNewTest);
+
+    }
 
 
     private void fetchTestDuration() {

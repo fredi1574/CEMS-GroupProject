@@ -261,6 +261,19 @@ public enum TypeMsg {
     StudentAnswerAdded {
         public String toString() { return "Student final answer is saved";}
     },
+    GetTestByID {
+        public String toString() { return "Get Test information by it's id";}
+    },
+    ImportedTestByID {
+        public String toString() { return "Test information imported";}
+    },
+    AddNewTestOfStudent{
+        public String toString() { return "Student finished his test";}
+    },
+    TestOfStudentSaved{
+        public String toString() { return "Test of student is saved";}
+    },
+
 
 
 

@@ -462,10 +462,40 @@ public class CemsServer extends AbstractServer {
 
                     client.sendToClient(new MsgHandler<>(TypeMsg.StudentAnswerAdded, null));
                     break;
+                case GetTestByID:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String)this.msg.getMsg();
+                    Test testInfo = MysqlConnection.getTestData("SELECT * FROM cems.test WHERE id ='" + obj + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.ImportedTestByID, testInfo));
+                    break;
+                case AddNewTestOfStudent:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = this.msg.getMsg();
+                    if (obj instanceof StudentTest) {
+                        StudentTest newTest = (StudentTest) obj;
+                        String newQuery = "INSERT INTO cems.studentstest (studentID, testID, subjectID, course, " +
+                                "testType, score, fullname, year, semester, session, suspicionOfCheating, " +
+                                "correctAnswers, totalQuestions, lecturerComments, approved) " +
+                                "VALUES ('" + newTest.getStudentID() + "', " +
+                                "'" + newTest.getTestID() + "', " +
+                                "'" + newTest.getSubjectID() + "', " +
+                                "'" + newTest.getCourse() + "', " +
+                                "'" + newTest.getTestType() + "', " +
+                                "'" + newTest.getScore() + "', " +
+                                "'" + newTest.getFullname() + "', " +
+                                "'" + newTest.getYear() + "', " +
+                                "'" + newTest.getSemester() + "', " +
+                                "'" + newTest.getSession() + "', " +
+                                "'" + newTest.getSuspicionOfCheating() + "', " +
+                                "'" + newTest.getCorrectAnswers() + "', " +
+                                "'" + newTest.getTotalQuestions() + "', " +
+                                "'" + newTest.getLecturerComments() + "', " +
+                                "'" + newTest.getApproved() + "') ";
+                        MysqlConnection.update(newQuery);
+                        client.sendToClient(new MsgHandler<>(TypeMsg.TestOfStudentSaved, null));
 
-
-
-
+                    }
+                    break;
             }
 
         } catch (Exception e) {

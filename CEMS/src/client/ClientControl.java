@@ -68,6 +68,10 @@ public class ClientControl implements ChatIF{
 		singleResponse = client.singleQuestion;
 		return singleResponse;
 	}
+	public Object getSingleTest(){
+		singleResponse = client.singleTest;
+		return singleResponse;
+	}
 
 	//Instance methods ************************************************
 

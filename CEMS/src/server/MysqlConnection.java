@@ -14,7 +14,7 @@ import java.util.Objects;
 public class MysqlConnection {
     static Connection conn;
     static String url = "jdbc:mysql://localhost/cems?serverTimezone=IST&allowPublicKeyRetrieval=true&useSSL=false"; // replace
-                                                                                                                    // "mydatabase"
+    // "mydatabase"
     static String username = "root"; // replace with your username
 
 
@@ -182,7 +182,6 @@ public class MysqlConnection {
     }
 
 
-
     public static ArrayList<Course> getCourseTable(String query) {
         Statement stmt = null;
 
@@ -222,8 +221,8 @@ public class MysqlConnection {
             while (rs.next()) {
                 String testNumber = rs.getString("testNumber"); // assuming your table has a column named "id" with type INT
                 String id = rs.getString("id");
-				String testCode = rs.getString("testCode");
-				String author = rs.getString("author");
+                String testCode = rs.getString("testCode");
+                String author = rs.getString("author");
                 String testDuration = rs.getString("testDuration");
                 String courseName = rs.getString("courseName");
                 String subject = rs.getString("subject");
@@ -235,82 +234,81 @@ public class MysqlConnection {
                 String semester = rs.getString("semester");
                 TestTypeEnum testTypeEnum = (Objects.equals(testType, "C") ? TestTypeEnum.C : TestTypeEnum.M);
                 Test test = new Test(testNumber, id, testCode, author, testDuration, courseName,
-                        teacherComment, testTypeEnum, studentComment,subject,year,session,semester);
+                        teacherComment, testTypeEnum, studentComment, subject, year, session, semester);
                 tests.add(test);
 
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(tests);
         return tests;
     }
 
-	public static ArrayList<ActiveTest> getActiveTestsTable(String query) {
-		Statement stmt = null;
+    public static ArrayList<ActiveTest> getActiveTestsTable(String query) {
+        Statement stmt = null;
 
-		try {
-			stmt = conn.createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		ArrayList<ActiveTest> activeTests = new ArrayList<>();
-		try {
-			ResultSet rs = stmt.executeQuery(query);
-			while (rs.next()) {
-				String id = rs.getString("id"); // assuming your table has a column named "id" with type INT
-				String numOfQuestions = rs.getString("numOfQuestions");
-				String testDate = rs.getString("testDate");
-				String startingTime = rs.getString("startingTime");
-				String timeLeft = rs.getString("timeLeft");
+        try {
+            stmt = conn.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ArrayList<ActiveTest> activeTests = new ArrayList<>();
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String id = rs.getString("id"); // assuming your table has a column named "id" with type INT
+                String numOfQuestions = rs.getString("numOfQuestions");
+                String testDate = rs.getString("testDate");
+                String startingTime = rs.getString("startingTime");
+                String timeLeft = rs.getString("timeLeft");
                 String testCode = rs.getString("testCode");
 
-				ActiveTest activeTest = new ActiveTest(id,numOfQuestions,testDate,startingTime,timeLeft,testCode);
-				activeTests.add(activeTest);
+                ActiveTest activeTest = new ActiveTest(id, numOfQuestions, testDate, startingTime, timeLeft, testCode);
+                activeTests.add(activeTest);
 
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return activeTests;
-	}
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return activeTests;
+    }
 
-	public static ArrayList<TestQuestion> getTestQuestionsTable(String query) {
-		Statement stmt = null;
+    public static ArrayList<TestQuestion> getTestQuestionsTable(String query) {
+        Statement stmt = null;
 
-		try {
-			stmt = conn.createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		ArrayList<TestQuestion> testQuestions = new ArrayList<>();
-		try {
-			ResultSet rs = stmt.executeQuery(query);
-			while (rs.next()) {
-				String questionID = rs.getString("questionID"); // assuming your table has a column named "id" with type INT
-				String questionNumber = rs.getString("questionNumber");
-				String points = rs.getString("points");
-				String questionText = rs.getString("questionText");
-				String testID = rs.getString("testID");
-				String subject = rs.getString("subject");
-				String courseName = rs.getString("courseName");
-				String author = rs.getString("author");
+        try {
+            stmt = conn.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ArrayList<TestQuestion> testQuestions = new ArrayList<>();
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String questionID = rs.getString("questionID"); // assuming your table has a column named "id" with type INT
+                String questionNumber = rs.getString("questionNumber");
+                String points = rs.getString("points");
+                String questionText = rs.getString("questionText");
+                String testID = rs.getString("testID");
+                String subject = rs.getString("subject");
+                String courseName = rs.getString("courseName");
+                String author = rs.getString("author");
 
-				TestQuestion testQuestion = new TestQuestion(questionID, questionNumber, Integer.parseInt(points),
-						questionText, testID, subject,courseName, author);
-				testQuestions.add(testQuestion);
+                TestQuestion testQuestion = new TestQuestion(questionID, questionNumber, Integer.parseInt(points),
+                        questionText, testID, subject, courseName, author);
+                testQuestions.add(testQuestion);
 
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return testQuestions;
-	}
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return testQuestions;
+    }
 
-	public static ArrayList<TestRequestForApproval> getRequestsTable(String query) {
-		Statement stmt = null;
-		try {
-			stmt = conn.createStatement();
+    public static ArrayList<TestRequestForApproval> getRequestsTable(String query) {
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -372,7 +370,7 @@ public class MysqlConnection {
                 StudentTest studentTest = new StudentTest(studentID, testID, subjectID, course, grade, fullname, year, semester, session, suspicionOfCheating, correctAnswers, totalQuestions, lecturerComments, approved, testType);
                 list.add(studentTest);
 
-        }
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -486,8 +484,46 @@ public class MysqlConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
+
         return question;
+    }
+
+    public static Test getTestData(String query) {
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Test test = null;
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String testNumber = rs.getString("testNumber"); // assuming your table has a column named "id" with type INT
+                String id = rs.getString("id");
+                String testCode = rs.getString("testCode");
+                String author = rs.getString("author");
+                String testDuration = rs.getString("testDuration");
+                String courseName = rs.getString("courseName");
+                String subject = rs.getString("subject");
+                String teacherComment = rs.getString("teacherComment");
+                String testType = rs.getString("testType");
+                String studentComment = rs.getString("studentComment");
+                String year = rs.getString("year");
+                String session = rs.getString("session");
+                String semester = rs.getString("semester");
+                TestTypeEnum testTypeEnum = (Objects.equals(testType, "C") ? TestTypeEnum.C : TestTypeEnum.M);
+                test = new Test(testNumber, id, testCode, author, testDuration, courseName,
+                        teacherComment, testTypeEnum, studentComment, subject, year, session, semester);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return test;
     }
 }
 	

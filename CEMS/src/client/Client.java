@@ -8,6 +8,7 @@ import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.showReportBy
 import common.ChatIF;
 import common.MsgHandler;
 import entity.Question;
+import entity.Test;
 import entity.User;
 import javafx.fxml.FXMLLoader;
 
@@ -29,6 +30,7 @@ public class Client extends AbstractClient {
     public List<Object> testQuestions;
     public List<Object> activeTests;
     public Object singleQuestion;
+    public Object singleTest;
 
     public static User user;
     public List<Object> requests;
@@ -142,6 +144,12 @@ public class Client extends AbstractClient {
                 break;
             case StudentAnswerAdded:
                 break;
+            case ImportedTestByID:
+                this.singleTest = (Test)messageFromServer.getMsg();
+                break;
+            case TestOfStudentSaved:
+            break;
+
 
 
         }
