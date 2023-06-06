@@ -46,7 +46,7 @@
       </AnchorPane>
       <AnchorPane layoutX="46.0" layoutY="129.0" prefHeight="191.0" prefWidth="428.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
          <children>
-            <Text layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Algebra" wrappingWidth="97.0">
+            <Text fx:id="CourseNameText" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Algebra" wrappingWidth="97.0">
                <font>
                   <Font size="24.0" />
                </font>
@@ -106,14 +106,13 @@
                   </VBox>
                </children>
             </HBox>
-            <Button layoutX="341.0" layoutY="107.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="82.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="Approve ID">
+            <Button layoutX="341.0" layoutY="107.0" mnemonicParsing="false" onAction="#approveID" prefHeight="24.0" prefWidth="82.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="Approve ID">
                <font>
                   <Font size="11.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
-      <Button layoutX="9.0" layoutY="452.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons" />
       <Button layoutX="831.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
       <Button layoutX="794.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
       <AnchorPane layoutX="482.0" layoutY="129.0" prefHeight="118.0" prefWidth="328.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
@@ -122,18 +121,15 @@
                <children>
                   <VBox prefHeight="148.0" prefWidth="294.0">
                      <children>
-                        <Label alignment="BASELINE_CENTER" prefHeight="20.0" prefWidth="97.0" text="Start time:">
-                           <font>
-                              <Font name="Trebuchet MS Bold" size="17.0" />
-                           </font>
-                        </Label>
-                        <HBox prefHeight="18.0" prefWidth="294.0" />
-                        <Label alignment="BASELINE_CENTER" prefHeight="20.0" prefWidth="92.0" text="End time:">
-                           <font>
-                              <Font name="Trebuchet MS Bold" size="17.0" />
-                           </font>
-                        </Label>
-                        <HBox prefHeight="18.0" prefWidth="294.0" />
+                        <HBox prefHeight="31.0" prefWidth="151.0">
+                           <children>
+                              <Label alignment="BASELINE_CENTER" prefHeight="28.0" prefWidth="97.0" text="Start time:">
+                                 <font>
+                                    <Font name="Trebuchet MS Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                           </children></HBox>
+                        <HBox prefHeight="9.0" prefWidth="148.0" />
                         <Label fx:id="TimeRemainingText" alignment="BASELINE_CENTER" prefHeight="20.0" prefWidth="152.0" text="Time remaining:">
                            <font>
                               <Font name="Trebuchet MS Bold" size="17.0" />
@@ -144,8 +140,6 @@
                   <VBox prefHeight="144.0" prefWidth="291.0">
                      <children>
                         <TextField fx:id="StartTimeText" prefHeight="21.0" prefWidth="138.0" />
-                        <HBox prefHeight="9.0" prefWidth="148.0" />
-                        <TextField fx:id="EndTimeText" prefHeight="21.0" prefWidth="138.0" />
                         <HBox prefHeight="9.0" prefWidth="148.0" />
                         <TextField fx:id="TimeRem" prefHeight="21.0" prefWidth="148.0" />
                      </children>
@@ -168,11 +162,15 @@
             <TextArea fx:id="TestComments" prefHeight="76.0" prefWidth="753.0" text="Test's comments" />
          </children>
       </VBox>
-      <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="807.0" layoutY="462.0" onDragDetected="#NextBtn">
-         <image>
-            <Image url="@../../images/next.png" />
-         </image>
-      </ImageView>
       <Label layoutX="814.0" layoutY="502.0" prefHeight="18.0" prefWidth="31.0" text="Next" />
+      <Button fx:id="btnN" layoutX="799.0" layoutY="454.0" mnemonicParsing="false" onAction="#NextBtn" prefHeight="53.0" prefWidth="53.0" styleClass="subButtons">
+         <graphic>
+            <ImageView fitHeight="45.0" fitWidth="45.0">
+               <image>
+                  <Image url="@../../images/next.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
