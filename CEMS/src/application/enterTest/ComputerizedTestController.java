@@ -51,8 +51,7 @@ public class ComputerizedTestController {
     private Text fullNameText;
     @FXML
     private AnchorPane header;
-    @FXML
-    private Button btnN;
+
 
     public void initialize() {
         // Enables dragging and dropping of the application window using the header pane
@@ -73,12 +72,13 @@ public class ComputerizedTestController {
         ClientUI.chat.accept(checkStudentRegistered);
         StudentCourse verifyStudent = (StudentCourse)ClientUI.chat.getUserAndCourse();
         if (verifyStudent!=null){
-            showError.showInfoPopup("Student is assigned to the test \nPlease click the NEXT button to enter the test");
-            btnN.setDisable(false);
+            showError.showInfoPopup("Student is assigned to the test \nAfter clicking OK the test will start automatically");
+            ScreenManager.goToNewScreen(event, PathConstants.StartComputerizedTestPath);
         }
         else {
             showError.showInfoPopup("Student is not assigned to the test! \nPlease try again");
         }
+
 
     }
     private Test getTestData()
@@ -91,7 +91,9 @@ public class ComputerizedTestController {
     private void setData(){
         Test test = getTestData();
         TestIdText.setText(test.getId());
+        TestIdText.setDisable(true);
         TestComments.setText(test.getStudentComments());
+        TestComments.setDisable(true);
         CourseNameText.setText(test.getCourseName());
         startTimer(test);
         MsgHandler getActiveTestTable = new MsgHandler(TypeMsg.GetActiveTests, null);
@@ -101,15 +103,9 @@ public class ComputerizedTestController {
             if (activeTest.getId().equals(test.getId()))
             {
                 NumberText.setText(activeTest.getNumOfQuestions());
+                NumberText.setDisable(true);
             }
         }
-        btnN.setDisable(true);
-
-
-
-    }
-    public void NextBtn(ActionEvent event) {//Next to see questions in exam
-        ScreenManager.goToNewScreen(event, PathConstants.StartComputerizedTestPath);
     }
     public void LogOut(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
@@ -127,6 +123,7 @@ public class ComputerizedTestController {
         remainingMinutes =  Integer.parseInt(test.getTestDuration());
         int totalSeconds = remainingMinutes * 60;
         TimeRem.setText(formatTime(totalSeconds));
+        TimeRem.setDisable(true);
     }
     private String formatTime(int seconds) {
         int hours = seconds / 3600;

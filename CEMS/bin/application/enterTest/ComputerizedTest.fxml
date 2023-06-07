@@ -106,11 +106,6 @@
                   </VBox>
                </children>
             </HBox>
-            <Button layoutX="342.0" layoutY="107.0" mnemonicParsing="false" onAction="#approveID" prefHeight="24.0" prefWidth="82.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="Approve ID">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Button>
          </children>
       </AnchorPane>
       <Button layoutX="831.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
@@ -139,15 +134,15 @@
             <TextArea fx:id="TestComments" prefHeight="76.0" prefWidth="753.0" text="Test's comments" />
          </children>
       </VBox>
-      <Label layoutX="799.0" layoutY="501.0" prefHeight="18.0" prefWidth="61.0" text="Start Test" />
-      <Button fx:id="btnN" layoutX="799.0" layoutY="454.0" mnemonicParsing="false" onAction="#NextBtn" prefHeight="53.0" prefWidth="53.0" styleClass="subButtons">
-         <graphic>
-            <ImageView fitHeight="45.0" fitWidth="45.0">
-               <image>
-                  <Image url="@../../images/next.png" />
-               </image>
-            </ImageView>
-         </graphic>
+      <Button layoutX="692.0" layoutY="471.0" mnemonicParsing="false" onAction="#approveID" prefHeight="32.0" prefWidth="152.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="Approve ID ">
+         <font>
+            <Font size="11.0" />
+         </font>
       </Button>
+      <Text layoutX="50.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The test will begin automatically after clicking &quot;Approve ID&quot;" wrappingWidth="752.52734375">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
