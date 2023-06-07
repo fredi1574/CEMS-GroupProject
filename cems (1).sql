@@ -52,13 +52,12 @@ DROP TABLE IF EXISTS `aftertestinfo`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `aftertestinfo` (
   `testID` varchar(45) NOT NULL,
-  `date` varchar(45) NOT NULL,
   `allotedTime` int DEFAULT NULL,
   `actualTime` int DEFAULT NULL,
   `totalFinished` int DEFAULT NULL,
   `totalForcedFinished` int DEFAULT NULL,
   `totalStudents` int DEFAULT NULL,
-  PRIMARY KEY (`testID`,`date`)
+  PRIMARY KEY (`testID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -68,6 +67,7 @@ CREATE TABLE `aftertestinfo` (
 
 LOCK TABLES `aftertestinfo` WRITE;
 /*!40000 ALTER TABLE `aftertestinfo` DISABLE KEYS */;
+INSERT INTO `aftertestinfo` VALUES ('010101',0,0,1,0,5);
 /*!40000 ALTER TABLE `aftertestinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,6 +93,7 @@ CREATE TABLE `answersofstudent` (
 
 LOCK TABLES `answersofstudent` WRITE;
 /*!40000 ALTER TABLE `answersofstudent` DISABLE KEYS */;
+INSERT INTO `answersofstudent` VALUES (4,'010101','3333',2),(4,'010101','889',3);
 /*!40000 ALTER TABLE `answersofstudent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,6 +181,30 @@ INSERT INTO `question` VALUES ('010102','01','Algebra','STAVVVV',2,'a a','SADAS'
 UNLOCK TABLES;
 
 --
+-- Table structure for table `studentscourse`
+--
+
+DROP TABLE IF EXISTS `studentscourse`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `studentscourse` (
+  `studentID` varchar(45) NOT NULL,
+  `course` varchar(45) NOT NULL,
+  PRIMARY KEY (`studentID`,`course`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `studentscourse`
+--
+
+LOCK TABLES `studentscourse` WRITE;
+/*!40000 ALTER TABLE `studentscourse` DISABLE KEYS */;
+INSERT INTO `studentscourse` VALUES ('4','Algebra');
+/*!40000 ALTER TABLE `studentscourse` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `studentstest`
 --
 
@@ -212,7 +237,7 @@ CREATE TABLE `studentstest` (
 
 LOCK TABLES `studentstest` WRITE;
 /*!40000 ALTER TABLE `studentstest` DISABLE KEYS */;
-INSERT INTO `studentstest` VALUES ('4','01','01','Algebra','M','90','Noa Krispin','2020','A','A',NULL,NULL,NULL,NULL,NULL),('4','02','01','Hedva','C','99','Noa Krispin','2019','A','A',NULL,NULL,NULL,NULL,NULL),('4','03','01','Hedva','C','30','Noa Krispin','2021','B','B',NULL,NULL,NULL,NULL,NULL),('4','22222','02','Phyton','C','100','Noa Krispin',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('4','333','01','Algebra','C','50','Noa Krispin','2022','B','B',NULL,NULL,NULL,NULL,NULL),('5','02','01','Hedva','C','8','AbedTayer','2019','A','A',NULL,NULL,NULL,NULL,NULL),('5','2213312','01','Algebra','C','100','Abed Tayer','2020','C','B',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `studentstest` VALUES ('4','01','01','Algebra','M','90','Noa Krispin','2020','A','A',NULL,NULL,NULL,NULL,NULL),('4','010101','Math','Algebra','C','75','Noa Krispin','2019','B','A','NO','1','2','','N'),('4','02','01','Hedva','C','99','Noa Krispin','2019','A','A',NULL,NULL,NULL,NULL,NULL),('4','03','01','Hedva','C','30','Noa Krispin','2021','B','B',NULL,NULL,NULL,NULL,NULL),('4','22222','02','Phyton','C','100','Noa Krispin',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('4','333','01','Algebra','C','50','Noa Krispin','2022','B','B',NULL,NULL,NULL,NULL,NULL),('5','02','01','Hedva','C','8','AbedTayer','2019','A','A',NULL,NULL,NULL,NULL,NULL),('5','2213312','01','Algebra','C','100','Abed Tayer','2020','C','B',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `studentstest` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -271,7 +296,7 @@ CREATE TABLE `test` (
 
 LOCK TABLES `test` WRITE;
 /*!40000 ALTER TABLE `test` DISABLE KEYS */;
-INSERT INTO `test` VALUES ('01','010101','3','b b','Math','Algebra','hey	','C','null','2019','B','A','abc3'),('2','02','60','b b','Math','Hedva','Lecturer note 1','C','Student Note 1','2020','B','A','a82e'),('013','03','180','b b','Math','Hedva','asdasd','C','asdasd','2022','A','A','6543'),('01','050301','','null','Biology','Anatomy','null','C','null','2020','A','A',NULL);
+INSERT INTO `test` VALUES ('01','010101','146','b b','Math','Algebra','hey	','C','null','2019','B','A','ABC3'),('2','02','60','b b','Math','Hedva','Lecturer note 1','C','Student Note 1','2020','B','A','a82e'),('013','03','180','b b','Math','Hedva','asdasd','C','asdasd','2022','A','A','6543'),('01','050301','','null','Biology','Anatomy','null','C','null','2020','A','A',NULL);
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -313,7 +338,7 @@ DROP TABLE IF EXISTS `testrequest`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `testrequest` (
-  `newDuration` varchar(45) DEFAULT NULL,
+  `newDuration` int DEFAULT NULL,
   `explanation` varchar(45) DEFAULT NULL,
   `id` varchar(45) NOT NULL,
   `subject` varchar(45) DEFAULT NULL,
@@ -329,7 +354,6 @@ CREATE TABLE `testrequest` (
 
 LOCK TABLES `testrequest` WRITE;
 /*!40000 ALTER TABLE `testrequest` DISABLE KEYS */;
-INSERT INTO `testrequest` VALUES ('48','dsfsdf','21','01','Algebra','May Caspi');
 /*!40000 ALTER TABLE `testrequest` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -372,4 +396,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-05 21:48:23
+-- Dump completed on 2023-06-07 14:46:01
