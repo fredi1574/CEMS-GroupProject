@@ -504,8 +504,18 @@ public class CemsServer extends AbstractServer {
                     StudentCourse isRegistered = MysqlConnection.checkRegistered("SELECT * FROM studentscourse WHERE studentID = '" + studentID + "' AND course = '" + courseName + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.StudentVerified, isRegistered));
                     break;
-
-
+                case IcreaseStudentsEnteringTest:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String)this.msg.getMsg();
+                    MysqlConnection.update("UPDATE aftertestinfo SET totalStudents = totalStudents + 1 WHERE testID = '" + obj + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.TotalStudentsInTestIncreased, null));
+                    break;
+                case IcreaseStudentsFinishedTest:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String)this.msg.getMsg();
+                    MysqlConnection.update("UPDATE aftertestinfo SET totalFinished = totalFinished + 1 WHERE testID = '" + obj + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.StudentsFinishedTestIncreased, null));
+                    break;
             }
 
         } catch (Exception e) {

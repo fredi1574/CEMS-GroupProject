@@ -76,6 +76,8 @@ public class QuestionsComputerizedTestAnswerController {
 
     public void initialize() throws SQLException {
         // Enables dragging and dropping of the application window using the header pane
+        MsgHandler totalStudentIncrease = new MsgHandler(TypeMsg.IcreaseStudentsEnteringTest, EnterCodePopUpController.testID);
+        ClientUI.chat.accept(totalStudentIncrease);
         ScreenManager.dragAndDrop(header);
         fullNameText.setText(Client.user.getFullName());
         fetchCourseNameAndTestId();
@@ -205,8 +207,11 @@ public class QuestionsComputerizedTestAnswerController {
             saveMarkingWithValidation();
             if (selectedCount <= 1) {
                 saveFinalAnswers();
+                MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, EnterCodePopUpController.testID);
+                ClientUI.chat.accept(finshedStudentsIncrease);
+                ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
             }
-            ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
+
         }
         saveMarkingWithValidation();
         fetchQuestion();

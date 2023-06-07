@@ -321,6 +321,30 @@ public enum TypeMsg {
             return "Student id's is verified";
         }
     },
+    IcreaseStudentsEnteringTest{
+        public String toString() {
+            return "Student is taking a test";
+        }
+
+    },
+    TotalStudentsInTestIncreased{
+        public String toString() {
+            return "Student is taking a test";
+        }
+
+    },
+    IcreaseStudentsFinishedTest{
+        public String toString() {
+            return "Student finished test";
+        }
+
+    },
+    StudentsFinishedTestIncreased{
+        public String toString() {
+            return "Student is taking a test";
+        }
+
+    },
 
 
 }

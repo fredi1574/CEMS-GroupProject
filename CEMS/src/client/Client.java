@@ -147,15 +147,17 @@ public class Client extends AbstractClient {
             case StudentAnswerAdded:
                 break;
             case ImportedTestByID:
-                this.singleTest = (Test)messageFromServer.getMsg();
+                this.singleTest = (Test) messageFromServer.getMsg();
                 break;
             case TestOfStudentSaved:
                 break;
             case StudentVerified:
-                this.UserAndCourse = (StudentCourse)messageFromServer.getMsg();
+                this.UserAndCourse = (StudentCourse) messageFromServer.getMsg();
                 break;
-
-
+            case TotalStudentsInTestIncreased:
+                break;
+            case StudentsFinishedTestIncreased:
+                break;
 
         }
 
