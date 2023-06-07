@@ -357,6 +357,18 @@ public enum TypeMsg {
         }
 
     },
+    GetsubjectNametoID{
+        public String toString() {
+            return "get subject id";
+        }
+
+    },
+    ImportedSubjectIDfromName{
+        public String toString() {
+            return "subject ID imported";
+        }
+
+    },
 
 
 

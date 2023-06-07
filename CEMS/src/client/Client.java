@@ -8,10 +8,7 @@ import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGrap
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.showReportByLecturerController;
 import common.ChatIF;
 import common.MsgHandler;
-import entity.Question;
-import entity.StudentCourse;
-import entity.Test;
-import entity.User;
+import entity.*;
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
@@ -33,6 +30,7 @@ public class Client extends AbstractClient {
     public List<Object> activeTests;
     public Object singleQuestion;
     public Object singleTest;
+    public Object singleSubject;
     public Object UserAndCourse;
 
     public static User user;
@@ -163,6 +161,9 @@ public class Client extends AbstractClient {
                 break;
             case TestDurationChanged:
                 StudentInTest.showNotificationAndChangeDuration((Integer)messageFromServer.getMsg());
+                break;
+            case ImportedSubjectIDfromName:
+                this.singleSubject = (Subject)messageFromServer.getMsg();
                 break;
         }
 

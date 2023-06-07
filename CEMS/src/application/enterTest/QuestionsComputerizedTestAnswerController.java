@@ -250,7 +250,7 @@ public class QuestionsComputerizedTestAnswerController {
 
     public void saveStudentsTest(int score, int correctAnswers, int totalQuestions) {
         Test test = getTestData();
-        StudentTest StudentsCopy = new StudentTest(Client.user.getId(), test.getId(), test.getSubject(), test.getCourseName(), Integer.toString(score),
+        StudentTest StudentsCopy = new StudentTest(Client.user.getId(), test.getId(), test.getSubjectID(), test.getCourseName(), Integer.toString(score),
                 Client.user.getFullName(), test.getYear(), test.getSemester(), test.getSession(), CheatingSuspicion.NO, Integer.toString(correctAnswers),
                 Integer.toString(totalQuestions), "", ApprovalStatus.N, test.getTestType());
         MsgHandler AddNewTest = new MsgHandler(TypeMsg.AddNewTestOfStudent, StudentsCopy);

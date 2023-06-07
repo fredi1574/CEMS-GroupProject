@@ -355,12 +355,11 @@ public class MysqlConnection {
                 String subjectID = rs.getString("subjectID");
                 String course = rs.getString("course");
                 TestTypeEnum testType = TestTypeEnum.valueOf(rs.getString("testType")); // Convert the string value to the enum
-                String grade = rs.getString("grade"); // Assuming "grade" represents the grade
+                String grade = rs.getString("score"); // Assuming "grade" represents the grade
                 String fullname = rs.getString("fullname");
                 String year = rs.getString("year");
                 String semester = rs.getString("semester");
                 String session = rs.getString("session");
-
                 CheatingSuspicion suspicionOfCheating = CheatingSuspicion.valueOf(rs.getString("suspicionOfCheating")); // Assuming "suspicionOfCheating" is a string representation of the enum value
                 String correctAnswers = rs.getString("correctAnswers");
                 String totalQuestions = rs.getString("totalQuestions");
@@ -553,6 +552,27 @@ public class MysqlConnection {
         }
 
         return getUser;
+    }
+    public static Subject SubjectName(String query) {
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Subject subject = null;
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String subjectID = rs.getString("subjectID"); // assuming your table has a column named "id" with type INT
+                String subjectName = rs.getString("subjectName");
+                subject = new Subject(subjectID,subjectName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return subject;
     }
 }
 	

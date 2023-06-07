@@ -91,7 +91,7 @@ public class ComputerizedTestController {
     private void setData(){
         Test test = getTestData();
         TestIdText.setText(test.getId());
-        TestComments.setText(test.getTeacherComments());
+        TestComments.setText(test.getStudentComments());
         CourseNameText.setText(test.getCourseName());
         startTimer(test);
         MsgHandler getActiveTestTable = new MsgHandler(TypeMsg.GetActiveTests, null);

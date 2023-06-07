@@ -1,5 +1,10 @@
 package entity;
+
 import java.util.UUID;
+
+import client.ClientUI;
+import common.MsgHandler;
+import common.TypeMsg;
 import javafx.collections.ObservableList;
 
 import java.io.Serializable;
@@ -22,9 +27,9 @@ public class Test extends Observable implements Serializable {
     private ObservableList<TestQuestion> questions;
 
     //constructor for fully created test
-        public Test(String testNumber, String id, String testCode, String author, String testDuration,  String courseName,
-                String teacherComments, TestTypeEnum TestType, String studentComments,  String subject,
-                String year,String session,String semester) {
+    public Test(String testNumber, String id, String testCode, String author, String testDuration, String courseName,
+                String teacherComments, TestTypeEnum TestType, String studentComments, String subject,
+                String year, String session, String semester) {
         this.id = id;
         this.testNumber = testNumber;
         this.testCode = testCode;
@@ -36,7 +41,7 @@ public class Test extends Observable implements Serializable {
         this.studentComments = studentComments;
         this.subject = subject;
         this.year = year;
-        this.session= session;
+        this.session = session;
         this.semester = semester;
         this.testCode = testCode;
     }
@@ -44,12 +49,21 @@ public class Test extends Observable implements Serializable {
     public void setStudentComments(String studentComments) {
         this.studentComments = studentComments;
     }
+
     public String getYear() {
         return year;
     }
 
     public void setYear(String year) {
         this.year = year;
+    }
+
+    public String getSubjectID() {
+        MsgHandler subject = new MsgHandler(TypeMsg.GetsubjectNametoID, getSubject());
+        ClientUI.chat.accept(subject);
+        Subject newSubject = (Subject)ClientUI.chat.getSubjectID();
+        return newSubject.getSubjectID();
+
     }
 
     public String getSemester() {
@@ -92,8 +106,15 @@ public class Test extends Observable implements Serializable {
     public void setTestNumber(String testNumber) {
         this.testNumber = testNumber;
     }
-    public String getTestCode() { return testCode; }
-    public void setTestCode(String testCode) { this.testCode = testCode; }
+
+    public String getTestCode() {
+        return testCode;
+    }
+
+    public void setTestCode(String testCode) {
+        this.testCode = testCode;
+    }
+
     public String getAuthor() {
         return author;
     }

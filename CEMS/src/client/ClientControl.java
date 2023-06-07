@@ -76,6 +76,10 @@ public class ClientControl implements ChatIF{
 		singleResponse = client.UserAndCourse;
 		return singleResponse;
 	}
+	public Object getSubjectID(){
+		singleResponse = client.singleSubject;
+		return singleResponse;
+	}
 
 	//Instance methods ************************************************
 

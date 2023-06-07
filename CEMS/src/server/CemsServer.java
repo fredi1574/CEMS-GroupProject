@@ -364,11 +364,7 @@ public class CemsServer extends AbstractServer {
                                         "WHERE ls.id = '" + headID + "' AND st.studentID = '" + studentsID + "'"
                         );
 
-                        if (studentInfo != null) {
-                            client.sendToClient(new MsgHandler<>(TypeMsg.StudentReportImported, studentInfo));
-                        } else {
-                            client.sendToClient(new MsgHandler<>(TypeMsg.StudentReportImported, null));
-                        }
+                        client.sendToClient(new MsgHandler<>(TypeMsg.StudentReportImported, studentInfo));
                     }
                     break;
                 case GetUser:
@@ -525,6 +521,12 @@ public class CemsServer extends AbstractServer {
 
                     sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationChanged, Integer.parseInt(addedTime)));
                     break;
+                case GetsubjectNametoID:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String)this.msg.getMsg();
+                    Subject subjectName = MysqlConnection.SubjectName("SELECT * FROM subject WHERE subjectName = '" + obj +"'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.ImportedSubjectIDfromName,subjectName));
+
             }
 
         } catch (Exception e) {
