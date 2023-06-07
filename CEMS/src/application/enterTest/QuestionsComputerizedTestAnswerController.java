@@ -1,9 +1,5 @@
 package application.enterTest;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import client.ClientUI;
@@ -13,7 +9,6 @@ import entity.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -27,8 +22,6 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import util.*;
-
-import javax.swing.*;
 
 import static application.enterTest.EnterCodePopUpController.testID;
 
@@ -66,17 +59,19 @@ public class QuestionsComputerizedTestAnswerController {
     private Label timerLabel;
     @FXML
     private ProgressIndicator points;
-    private final Map<Integer, Integer> markings = new HashMap<>();
+    private static final Map<Integer, Integer> markings = new HashMap<>();
     private int currentQuestionIndex = 0;
     private int remainingMinutes;
     private int grade;
     private int correctAnswers;
     private int numberOfQuestions;
+    static int totalQuestions;
     private static int selectedCount = 0;
     private static ObservableList<TestQuestion> testQuestions;
 
 
     public void initialize() throws SQLException {
+
         // Enables dragging and dropping of the application window using the header pane
         MsgHandler totalStudentIncrease = new MsgHandler(TypeMsg.IcreaseStudentsEnteringTest, EnterCodePopUpController.testID);
         ClientUI.chat.accept(totalStudentIncrease);
@@ -86,11 +81,19 @@ public class QuestionsComputerizedTestAnswerController {
         fetchQuestion();
         fetchTestDuration();  // Call fetchTestDuration() before startTimer()
         startTimer();
+        initializeMapWithZeros();
 
     }
+    private static void initializeMapWithZeros() {
+        for (int i = 0 ; i < totalQuestions ;i++){
+            markings.put(i,0);
+        }
+    }
+
     public void showNotificationAndChangeDuration(int newDuration){
         int remainingSeconds = remainingMinutes * 60;  // Convert remaining minutes to seconds
         seconds[0] += newDuration * 60;  // Add the new duration in seconds
+        showError.showInfoPopup("Test time increased by"+ newDuration + "minutes");
     }
 
     private void saveMarkingWithValidation() {
@@ -131,7 +134,7 @@ public class QuestionsComputerizedTestAnswerController {
         MsgHandler getQuestionInformation = new MsgHandler(TypeMsg.GetTestQuestionsById, EnterCodePopUpController.testID);
         ClientUI.chat.accept(getQuestionInformation);
         testQuestions = FXCollections.observableArrayList((List) ClientUI.chat.getTestQuestions());
-        int totalQuestions = testQuestions.size();
+        totalQuestions = testQuestions.size();
         if (currentQuestionIndex < 1) {
             previousButton.setDisable(true);
         } else {
