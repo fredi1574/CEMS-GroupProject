@@ -16,7 +16,7 @@ import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.*;
 import javafx.util.Duration;
 
 import java.util.*;
@@ -24,9 +24,6 @@ import java.util.*;
 import client.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import util.*;
@@ -74,39 +71,21 @@ public class QuestionsComputerizedTestAnswerController {
     private int correctAnswers;
     private int numberOfQuestions;
     private static int selectedCount = 0;
-    private static boolean moreThanOneAnswer;
     private static ObservableList<TestQuestion> testQuestions;
-    private Connection connection;
-    private PreparedStatement statement;
-    private ResultSet resultSet;
+
 
     public void initialize() throws SQLException {
         // Enables dragging and dropping of the application window using the header pane
         ScreenManager.dragAndDrop(header);
         fullNameText.setText(Client.user.getFullName());
         fetchCourseNameAndTestId();
-        connectToDatabase();
         fetchQuestion();
         fetchTestDuration();  // Call fetchTestDuration() before startTimer()
         startTimer();
 
     }
 
-    private void connectToDatabase() {
-        // Establish database connection
-        String url = "jdbc:mysql://localhost:3306/cems?serverTimezone=UTC";
-        String username = "root";
-        String password = "Aa123456";
-
-        try {
-            connection = DriverManager.getConnection(url, username, password);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle connection error
-        }
-    }
-
-    private void saveMarkingWithValidation() throws SQLException {
+    private void saveMarkingWithValidation() {
         CheckBox[] checkboxes = {answer1CheckBox, answer2CheckBox, answer3CheckBox, answer4CheckBox};
 
         int marking = 0;
@@ -222,12 +201,15 @@ public class QuestionsComputerizedTestAnswerController {
 
     @FXML
     public void SubmitTest(ActionEvent event) throws SQLException {
-        saveMarkingWithValidation();
-        if (selectedCount <= 1) {
-            saveFinalAnswers();
+        if (showError.showConfirmationPopup("Are you sure you want to submit the test?\nYou won't be able to make further changes")) {
+            saveMarkingWithValidation();
+            if (selectedCount <= 1) {
+                saveFinalAnswers();
+            }
+            ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
         }
-
-        ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
+        saveMarkingWithValidation();
+        fetchQuestion();
     }
 
     public void saveFinalAnswers() {
@@ -265,22 +247,8 @@ public class QuestionsComputerizedTestAnswerController {
 
     private void fetchTestDuration() {
         Test test = getTestData();
-
-        try {
-            String testDurationQuery = "SELECT testDuration FROM test WHERE id = ?";
-            PreparedStatement durationStatement = connection.prepareStatement(testDurationQuery);
-            durationStatement.setString(1, "010101");
-            ResultSet durationResultSet = durationStatement.executeQuery();
-
-            if (durationResultSet.next()) {
-                String testDuration = durationResultSet.getString("testDuration");
-                testDurationMinutes = Integer.parseInt(testDuration);
-                remainingMinutes = testDurationMinutes;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle database error
-        }
+        testDurationMinutes = Integer.parseInt(test.getTestDuration());
+        remainingMinutes = testDurationMinutes;
     }
 
     private void startTimer() {

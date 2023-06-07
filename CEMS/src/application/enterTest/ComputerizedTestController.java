@@ -7,6 +7,9 @@ import common.TypeMsg;
 import entity.ActiveTest;
 import entity.StudentCourse;
 import entity.Test;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,22 +20,19 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import util.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ComputerizedTestController {
-    @FXML
-    private TextField EndTimeText;
+    private  int remainingMinutes;
 
     @FXML
     private Text CourseNameText;
     @FXML
     private TextField NumberText;
-
-    @FXML
-    private TextField StartTimeText;
 
     @FXML
     private TextField StudentIDText;
@@ -93,7 +93,7 @@ public class ComputerizedTestController {
         TestIdText.setText(test.getId());
         TestComments.setText(test.getTeacherComments());
         CourseNameText.setText(test.getCourseName());
-        TimeRem.setText(test.getTestDuration());
+        startTimer(test);
         MsgHandler getActiveTestTable = new MsgHandler(TypeMsg.GetActiveTests, null);
         ClientUI.chat.accept(getActiveTestTable);
         ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTests());
@@ -101,7 +101,6 @@ public class ComputerizedTestController {
             if (activeTest.getId().equals(test.getId()))
             {
                 NumberText.setText(activeTest.getNumOfQuestions());
-                StartTimeText.setText(activeTest.getStartingTime());
             }
         }
         btnN.setDisable(true);
@@ -123,6 +122,17 @@ public class ComputerizedTestController {
     @FXML
     public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
+    }
+    private void startTimer(Test test) {
+        remainingMinutes =  Integer.parseInt(test.getTestDuration());
+        int totalSeconds = remainingMinutes * 60;
+        TimeRem.setText(formatTime(totalSeconds));
+    }
+    private String formatTime(int seconds) {
+        int hours = seconds / 3600;
+        int minutes = (seconds % 3600) / 60;
+        int secs = seconds % 60;
+        return String.format("%02d:%02d:%02d", hours, minutes, secs);
     }
 
 }
