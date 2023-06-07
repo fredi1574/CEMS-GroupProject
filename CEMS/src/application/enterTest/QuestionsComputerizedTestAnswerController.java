@@ -50,6 +50,8 @@ public class QuestionsComputerizedTestAnswerController {
     @FXML
     private CheckBox answer1CheckBox;
     @FXML
+    private static int[] seconds;
+    @FXML
     private CheckBox answer2CheckBox;
     @FXML
     private CheckBox answer3CheckBox;
@@ -85,6 +87,10 @@ public class QuestionsComputerizedTestAnswerController {
         fetchTestDuration();  // Call fetchTestDuration() before startTimer()
         startTimer();
 
+    }
+    public void showNotificationAndChangeDuration(int newDuration){
+        int remainingSeconds = remainingMinutes * 60;  // Convert remaining minutes to seconds
+        seconds[0] += newDuration * 60;  // Add the new duration in seconds
     }
 
     private void saveMarkingWithValidation() {
@@ -258,7 +264,7 @@ public class QuestionsComputerizedTestAnswerController {
 
     private void startTimer() {
         int totalSeconds = remainingMinutes * 60;
-        final int[] seconds = {totalSeconds};  // Create a final array to hold the remaining seconds
+        seconds = new int[]{totalSeconds};  // Create a final array to hold the remaining seconds
 
         timer = new Timeline(
                 new KeyFrame(Duration.seconds(1), event -> {

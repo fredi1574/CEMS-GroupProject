@@ -1,5 +1,6 @@
 package client;
 
+import application.enterTest.QuestionsComputerizedTestAnswerController;
 import application.viewReportsScreen.ViewReportsController;
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.openReportByCourseController;
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.openReportByLecturerController;
@@ -42,6 +43,7 @@ public class Client extends AbstractClient {
     public static openReportByLecturerController HODPopenReporLecturerController = new openReportByLecturerController();
     public static openReportByCourseController HODPopenReportCourseController = new openReportByCourseController();
     public static ViewReportsController LectureReportsController = new ViewReportsController();
+    public static QuestionsComputerizedTestAnswerController StudentInTest = new QuestionsComputerizedTestAnswerController();
 
     //constructor
     public Client(String host, int port, ChatIF clientUI) {
@@ -160,6 +162,7 @@ public class Client extends AbstractClient {
             case StudentsFinishedTestIncreased:
                 break;
             case TestDurationChanged:
+                StudentInTest.showNotificationAndChangeDuration((Integer)messageFromServer.getMsg());
                 break;
         }
 
