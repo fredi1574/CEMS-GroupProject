@@ -345,6 +345,19 @@ public enum TypeMsg {
         }
 
     },
+    changeTestDuration{
+        public String toString() {
+            return "Head Of Department want to change test duration";
+        }
+
+    },
+    TestDurationChanged{
+        public String toString() {
+            return "test's duration was changed";
+        }
+
+    },
+
 
 
 }

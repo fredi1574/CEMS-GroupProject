@@ -35,6 +35,7 @@ public class Client extends AbstractClient {
     public Object UserAndCourse;
 
     public static User user;
+
     public List<Object> requests;
     public static openReportByStudentController HODPstudentReportcontroller = new openReportByStudentController();
     public static showReportByLecturerController HODPshowReportByLecturerController = new showReportByLecturerController();
@@ -158,7 +159,8 @@ public class Client extends AbstractClient {
                 break;
             case StudentsFinishedTestIncreased:
                 break;
-
+            case TestDurationChanged:
+                break;
         }
 
     }

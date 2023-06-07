@@ -516,6 +516,15 @@ public class CemsServer extends AbstractServer {
                     MysqlConnection.update("UPDATE aftertestinfo SET totalFinished = totalFinished + 1 WHERE testID = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.StudentsFinishedTestIncreased, null));
                     break;
+                case changeTestDuration:
+                    this.msg = (MsgHandler<Object>) msg;
+                    List<Object> TestChangement = (List<Object>) this.msg.getMsg();
+                    String testID = (String) TestChangement.get(0);
+                    String addedTime = (String) TestChangement.get(1);
+                    MysqlConnection.update("UPDATE test SET testDuration = testDuration + '" + Integer.parseInt(addedTime) + "' WHERE id = '" + testID + "'");
+
+                    client.sendToClient(new MsgHandler<>(TypeMsg.TestDurationChanged, null));
+                    break;
             }
 
         } catch (Exception e) {

@@ -15,6 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import util.*;
 
+import java.util.ArrayList;
+
 public class viewRequestController {
 
     @FXML
@@ -45,9 +47,10 @@ public class viewRequestController {
 
     @FXML
     void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+        ExitButton.closePopUp(event);
 
     }
+
     public void initialize() {
         ScreenManager.dragAndDrop(header);
     }
@@ -63,12 +66,18 @@ public class viewRequestController {
         CourseText.setText(request.getCourse());
         LecturerText.setText(request.getAuthor());
         RequestText.setText(request.getExplanation());
-        TimeExtentionDurationText.setText(request.getExplanation());
+        TimeExtentionDurationText.setText(request.getNewDuration());
        testIDText.setText(request.getId());
     }
     @FXML
     public void approveRequest(ActionEvent event) {
+        String AddedTime = TimeExtentionDurationText.getText();
+        ArrayList<String> ChangeTestDurationArr = new ArrayList<>();
+        ChangeTestDurationArr.add(testIDText.getText());
+        ChangeTestDurationArr.add(AddedTime);
         if (showError.showConfirmationPopup("Are you sure you want to approve this request?")) {
+            MsgHandler changeDuration = new MsgHandler(TypeMsg.changeTestDuration,ChangeTestDurationArr);
+            ClientUI.chat.accept(changeDuration);
             MsgHandler approveRequest = new MsgHandler(TypeMsg.ApproveRequestByHeadOfDepartment, (String) testIDText.getText());
             ClientUI.chat.accept(approveRequest);
             reloadPage(approveBtn);

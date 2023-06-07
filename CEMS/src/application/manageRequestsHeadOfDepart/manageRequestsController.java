@@ -22,6 +22,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import util.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class manageRequestsController {
@@ -71,9 +72,16 @@ public class manageRequestsController {
         int selectedRequestIndex = RequestsDBTableView.getSelectionModel().getFocusedIndex();
         if (selectedRequestIndex != -1) {
             String requestToApprove = RequestsDBTableView.getItems().get(selectedRequestIndex).getId();
+            String AddedTime = RequestsDBTableView.getItems().get(selectedRequestIndex).getNewDuration();
+            ArrayList<String> ChangeTestDurationArr = new ArrayList<>();
+            ChangeTestDurationArr.add(requestToApprove);
+            ChangeTestDurationArr.add(AddedTime);
             if (showError.showConfirmationPopup("Are you sure you want to approve this request?")) {
+                MsgHandler changeDuration = new MsgHandler(TypeMsg.changeTestDuration,ChangeTestDurationArr);
+                ClientUI.chat.accept(changeDuration);
                 MsgHandler approveRequest = new MsgHandler(TypeMsg.ApproveRequestByHeadOfDepartment,requestToApprove);
                 ClientUI.chat.accept(approveRequest);
+
                 reloadPage(approveBtn);
                 //TODO: return to the lecturer with the approval
             }
