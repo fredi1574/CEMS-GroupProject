@@ -85,7 +85,7 @@
    <Separator layoutY="450.0" prefHeight="1.0" prefWidth="790.0" />
    <TableView fx:id="activeTestsTableView" layoutX="808.0" layoutY="179.0" prefHeight="230.0" prefWidth="260.0" />
    <Separator layoutX="790.0" layoutY="101.0" orientation="VERTICAL" prefHeight="729.0" prefWidth="6.0" />
-   <Label layoutX="808.0" layoutY="150.0" prefHeight="27.0" prefWidth="175.0" text="Tests in progress:">
+   <Label layoutX="808.0" layoutY="150.0" prefHeight="27.0" prefWidth="260.0" text="Tests in progress:">
       <font>
          <Font name="System Bold" size="18.0" />
       </font>
@@ -119,4 +119,10 @@
          </ImageView>
       </graphic>
    </Button>
+   <TableView fx:id="approvedTestsTableView" layoutX="808.0" layoutY="486.0" prefHeight="230.0" prefWidth="260.0" />
+   <Label layoutX="808.0" layoutY="456.0" prefHeight="27.0" prefWidth="260.0" text="Approved Tests:">
+      <font>
+         <Font name="System Bold" size="18.0" />
+      </font>
+   </Label>
 </AnchorPane>

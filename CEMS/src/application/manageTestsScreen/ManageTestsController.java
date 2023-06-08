@@ -41,6 +41,8 @@ public class ManageTestsController {
     private TableView<Test> testApprovalTableView;
     @FXML
     private TableView<ActiveTest> activeTestsTableView;
+    @FXML
+    private TableView<Test> approvedTestsTableView; //contains every test that has been verified by the lecturer
     public StateManagement stateManagement;
     Test testRowData;
     ActiveTest activeTestRowData;
@@ -136,68 +138,11 @@ public class ManageTestsController {
                 return;
             }
         }
-
-        //load test's course
-        String subjectID = testRowData.getId().substring(0,2);
-        String courseID = testRowData.getId().substring(2,4);
-        Course testCourse = new Course(subjectID,courseID, testRowData.getSubject(), testRowData.getCourseName());
-
-        MsgHandler getTestQuestions = new MsgHandler(TypeMsg.GetTestQuestions, testRowData);
-        ClientUI.chat.accept(getTestQuestions);
-        stateManagement.setCourse(testCourse);
-
-        //load test's questions
-        ObservableList<TestQuestion> testQuestions = FXCollections.observableArrayList((List) ClientUI.chat.getTestQuestions());
-        for (TestQuestion question: testQuestions) {
-            stateManagement.setTestQuestions(question);
-        }
-
-        //load test's other data
-        stateManagement.setTestID(testRowData.getId());
-        stateManagement.setTestNum(testRowData.getTestNumber());
-        stateManagement.setTestDuration(testRowData.getTestDuration());
-        stateManagement.setYear(testRowData.getYear());
-        stateManagement.setSession(testRowData.getSession());
-        stateManagement.setSemester(testRowData.getSemester());
-        stateManagement.setStudentComment(testRowData.getStudentComments().equals("null") ? "" : testRowData.getStudentComments());
-        stateManagement.setTeacherComment(testRowData.getTeacherComments().equals("null") ? "" : testRowData.getTeacherComments());
-
-        //when an existing test is opened, no points are available
-        stateManagement.totalRemainingPoints = 0;
+        loadTestState(testRowData);
 
         ScreenManager.goToNewScreen(event,PathConstants.createNewTestPath);
     }
 
-    /**
-     * Deletes the selected test from the manageTests table.
-     *
-     * @param event The event triggered by clicking the "Delete" button.
-     */
-    public void deleteTest(ActionEvent event) {
-        if (testRowData == null) {
-            showError.showErrorPopup("Select a test to delete");
-            return;
-        }
-        int selectedTestIndex = testsFromDBTableView.getSelectionModel().getFocusedIndex();
-        if (selectedTestIndex != -1) {
-            Test testToDelete = testsFromDBTableView.getItems().get(selectedTestIndex);
-            if (showError.showConfirmationPopup("Are you sure you want to delete this test?")) {
-                MsgHandler deleteTestMsg = new MsgHandler(TypeMsg.DeleteTest, testToDelete);
-                ClientUI.chat.accept(deleteTestMsg);
-
-                reloadPage();
-            }
-        }
-    }
-
-    /**
-     * Reloads the manage tests page.
-     */
-    private void reloadPage() {
-        Stage currentStage = (Stage) deleteBtn.getScene().getWindow();
-        currentStage.close();
-        ScreenManager.showStage(PathConstants.manageTestsPath, PathConstants.iconPath);
-    }
 
     /**
      * view the selected active test's current progress and info
@@ -228,44 +173,80 @@ public class ManageTestsController {
                 .filter(test -> test.getId().equals(activeTestRowData.getId()))
                 .findFirst()
                 .orElse(null);
+        if (matchingTestFromDB != null)
+            loadTestState(matchingTestFromDB);
 
-        //TODO: seperate method for stateManagement loading
+        ScreenManager.popUpScreen(PathConstants.viewActiveTestPath);
+    }
 
+    /**
+     * loads a given test's data into StateManagement
+     * @param test the test we wish to load
+     */
+    public void loadTestState(Test test) {
         //load test's course
-        String subjectID = matchingTestFromDB.getId().substring(0,2);
-        String courseID = matchingTestFromDB.getId().substring(2,4);
-        Course testCourse = new Course(subjectID,courseID, matchingTestFromDB.getSubject(), matchingTestFromDB.getCourseName());
-
-        MsgHandler getTestQuestions = new MsgHandler(TypeMsg.GetTestQuestions, matchingTestFromDB);
-        ClientUI.chat.accept(getTestQuestions);
+        String subjectID = test.getId().substring(0,2);
+        String courseID = test.getId().substring(2,4);
+        Course testCourse = new Course(subjectID,courseID, test.getSubject(), test.getCourseName());
         stateManagement.setCourse(testCourse);
 
         //load test's questions
+        MsgHandler getTestQuestions = new MsgHandler(TypeMsg.GetTestQuestions, test);
+        ClientUI.chat.accept(getTestQuestions);
+
         ObservableList<TestQuestion> testQuestions = FXCollections.observableArrayList((List) ClientUI.chat.getTestQuestions());
         for (TestQuestion question: testQuestions) {
             stateManagement.setTestQuestions(question);
         }
 
         //load test's other data
-        stateManagement.setTestID(matchingTestFromDB.getId());
-        stateManagement.setTestNum(matchingTestFromDB.getTestNumber());
-        stateManagement.setTestDuration(matchingTestFromDB.getTestDuration());
-        stateManagement.setYear(matchingTestFromDB.getYear());
-        stateManagement.setSession(matchingTestFromDB.getSession());
-        stateManagement.setSemester(matchingTestFromDB.getSemester());
-        stateManagement.setTestCode(matchingTestFromDB.getTestCode());
-        stateManagement.setStudentComment(matchingTestFromDB.getStudentComments().equals("null") ? "" : matchingTestFromDB.getStudentComments());
-        stateManagement.setTeacherComment(matchingTestFromDB.getTeacherComments().equals("null") ? "" : matchingTestFromDB.getTeacherComments());
+        stateManagement.setTestID(test.getId());
+        stateManagement.setTestNum(test.getTestNumber());
+        stateManagement.setTestDuration(test.getTestDuration());
+        stateManagement.setYear(test.getYear());
+        stateManagement.setSession(test.getSession());
+        stateManagement.setSemester(test.getSemester());
+        stateManagement.setTestCode(test.getTestCode());
+        stateManagement.setStudentComment(test.getStudentComments().equals("null") ? "" : test.getStudentComments());
+        stateManagement.setTeacherComment(test.getTeacherComments().equals("null") ? "" : test.getTeacherComments());
 
         //when an existing test is opened, no points are available
         stateManagement.totalRemainingPoints = 0;
-
-        ScreenManager.popUpScreen(PathConstants.viewActiveTestPath);
     }
 
     public void viewTestResults(ActionEvent actionEvent) {
     }
 
+    /**
+     * Reloads the manage tests page.
+     */
+    private void reloadPage() {
+        Stage currentStage = (Stage) deleteBtn.getScene().getWindow();
+        currentStage.close();
+        ScreenManager.showStage(PathConstants.manageTestsPath, PathConstants.iconPath);
+    }
+
+    /**
+     * Deletes the selected test from the manageTests table.
+     *
+     * @param event The event triggered by clicking the "Delete" button.
+     */
+    public void deleteTest(ActionEvent event) {
+        if (testRowData == null) {
+            showError.showErrorPopup("Select a test to delete");
+            return;
+        }
+        int selectedTestIndex = testsFromDBTableView.getSelectionModel().getFocusedIndex();
+        if (selectedTestIndex != -1) {
+            Test testToDelete = testsFromDBTableView.getItems().get(selectedTestIndex);
+            if (showError.showConfirmationPopup("Are you sure you want to delete this test?")) {
+                MsgHandler deleteTestMsg = new MsgHandler(TypeMsg.DeleteTest, testToDelete);
+                ClientUI.chat.accept(deleteTestMsg);
+
+                reloadPage();
+            }
+        }
+    }
 
     public void LogOut(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.loginPath);

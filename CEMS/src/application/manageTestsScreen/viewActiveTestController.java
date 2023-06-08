@@ -162,6 +162,8 @@ public class viewActiveTestController {
         lockTestLabel.setVisible(true);
         unlockBtn.setVisible(false);
         unlockTestLabel.setVisible(false);
+
+        //TODO: unlock the active test for all clients through the DB
     }
 
     public void sendExtraTimeRequest(ActionEvent actionEvent) {

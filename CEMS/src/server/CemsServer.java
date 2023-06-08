@@ -420,6 +420,7 @@ public class CemsServer extends AbstractServer {
                 case GetActiveTests:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
+
                     ArrayList<ActiveTest> activeTestsList = MysqlConnection.getActiveTestsTable("select * from cems.activetest;");
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetActiveTestsResponse, activeTestsList));
                     break;
@@ -433,6 +434,17 @@ public class CemsServer extends AbstractServer {
 
                     MysqlConnection.update(updateRemainingTimeQuery);
                     client.sendToClient(new MsgHandler<>(TypeMsg.UpdateRemainingTimeResponse, null));
+                    break;
+                case GetRemainingTime:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (ActiveTest) this.msg.getMsg();
+                    this.activeTest = (ActiveTest) obj;
+
+                    ArrayList<ActiveTest> updatedTimeLeft = MysqlConnection.getActiveTestsTable("SELECT timeLeft FROM activetest WHERE id = '" + activeTest.getId() + "'");
+                    //TODO: RETURN STRING TIMELEFT INSTEAD OF WHOLE ARRAY
+                    client.sendToClient(new MsgHandler<>(TypeMsg.GetRemainingTimeResponse, updatedTimeLeft));
+                    break;
+                default:
                     break;
                 case getQuestionAndAnswerFromTest:
                     this.msg = (MsgHandler<Object>) msg;
@@ -528,7 +540,6 @@ public class CemsServer extends AbstractServer {
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedSubjectIDfromName,subjectName));
 
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
