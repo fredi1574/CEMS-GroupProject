@@ -20,6 +20,7 @@ import java.util.List;
 
 //test
 public class Client extends AbstractClient {
+    public List<Object> studentTests;
     private ChatIF clientUI;
     private boolean waitResponse = false;
     public static MsgHandler<Object> messageFromServer;
@@ -175,8 +176,10 @@ public class Client extends AbstractClient {
             case ExtraTimeRequested:
                 break;
 
-                                  }
-
+            case ImportedStudentTests:
+                this.studentTests = (List<Object>) messageFromServer.getMsg();
+                break;
+        }
     }
 
 

@@ -37,6 +37,7 @@ public class mainMenuStudentController {
      */
     public void ViewTests(ActionEvent event) {
         // TODO: Implement the logic to navigate to the view tests screen
+        ScreenManager.goToNewScreen(event, PathConstants.ViewTestsStudent);
     }
 
     /**
