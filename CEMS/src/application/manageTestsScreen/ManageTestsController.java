@@ -16,6 +16,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import util.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 
@@ -213,6 +215,22 @@ public class ManageTestsController {
         stateManagement.totalRemainingPoints = 0;
     }
 
+    public void activateTest(ActionEvent actionEvent) {
+
+        //setting the activeTest data
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+        //TODO: get questions amount
+        ActiveTest testToActivate = new ActiveTest(
+                testRowData.getId(),
+                testRowData.getQuestions().size(),
+                currentDate.toString(),
+                currentTime.toString(),
+                testRowData.getTestCode()
+        );
+
+        MsgHandler addNewActiveTest = new MsgHandler(TypeMsg.AddNewActiveTest,testToActivate);
+    }
     public void viewTestResults(ActionEvent actionEvent) {
     }
 

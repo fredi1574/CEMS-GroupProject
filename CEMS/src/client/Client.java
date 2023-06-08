@@ -160,6 +160,8 @@ public class Client extends AbstractClient {
             case ImportedSubjectIDfromName:
                 this.singleSubject = (Subject)messageFromServer.getMsg();
                 break;
+            case AddNewActiveTestResponse:
+                break;
         }
 
     }

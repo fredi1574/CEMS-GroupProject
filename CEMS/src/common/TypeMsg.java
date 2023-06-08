@@ -313,55 +313,64 @@ public enum TypeMsg {
             return "Student id's is verified";
         }
     },
-    IcreaseStudentsEnteringTest{
+    IcreaseStudentsEnteringTest {
         public String toString() {
             return "Student is taking a test";
         }
 
     },
-    TotalStudentsInTestIncreased{
+    TotalStudentsInTestIncreased {
         public String toString() {
             return "Student is taking a test";
         }
 
     },
-    IcreaseStudentsFinishedTest{
+    IcreaseStudentsFinishedTest {
         public String toString() {
             return "Student finished test";
         }
 
     },
-    StudentsFinishedTestIncreased{
+    StudentsFinishedTestIncreased {
         public String toString() {
             return "Student is taking a test";
         }
 
     },
-    changeTestDuration{
+    changeTestDuration {
         public String toString() {
             return "Head Of Department want to change test duration";
         }
 
     },
-    TestDurationChanged{
+    TestDurationChanged {
         public String toString() {
             return "test's duration was changed";
         }
 
     },
-    GetsubjectNametoID{
+    GetsubjectNametoID {
         public String toString() {
             return "get subject id";
         }
 
     },
-    ImportedSubjectIDfromName{
+    ImportedSubjectIDfromName {
         public String toString() {
             return "subject ID imported";
         }
 
     },
-
+    AddNewActiveTest {
+        public String toString() {
+            return "Lecturer wants to activate a test";
+        }
+    },
+    AddNewActiveTestResponse {
+        public String toString() {
+            return "Server activated the test";
+        }
+    }
 
 
 }
