@@ -54,17 +54,17 @@ public class CreateTestController {
 
         nameAuthor.setText(Client.user.getFullName());
 
-        MsgHandler getTableCourse = new MsgHandler(TypeMsg.GetCourseTable, Client.user.getId());
+        MsgHandler getTableCourse = new MsgHandler(TypeMsg.importCourses, Client.user.getUserName());
         ClientUI.chat.accept(getTableCourse);
         List<Object> courseObjectsList = ClientUI.chat.getCourses();
 
-        ObservableList<Course> questionList = FXCollections.observableArrayList((List) courseObjectsList);
+        ObservableList<Course> courses = FXCollections.observableArrayList((List) courseObjectsList);
 
         ObservableList<String> columnList = FXCollections.observableArrayList();
         //TODO: fix the names of the table columns
         columnList.addAll("Course Name", "Subject Name");
         TableManager.createTable(courseTableView, columnList);
-        TableManager.importData(courseTableView, questionList);
+        TableManager.importData(courseTableView, courses);
         //TableManager.addDoubleClickFunctionality(courseTableView,"ManageQuestionsScreen/UpdateQuestion.fxml",true);
 
 

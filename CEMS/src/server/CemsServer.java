@@ -208,12 +208,12 @@ public class CemsServer extends AbstractServer {
 
                 case importCourses:
                     this.msg = (MsgHandler<Object>) msg;
-                    this.obj = this.msg.getMsg();
+                    this.obj = (String) this.msg.getMsg();
                     ArrayList<Course> importCourses = MysqlConnection.getCourseList("SELECT * " +
                             "FROM course AS c " +
                             "JOIN lecturersubject AS ls ON c.subjectID = ls.subjectID " +
                             "JOIN user AS u ON ls.id = u.id " +
-                            "WHERE u.username = '" + obj.toString() + "'");
+                            "WHERE u.username = '" + obj + "'");
 
                     client.sendToClient(new MsgHandler<>(TypeMsg.CoursesimportSuccess, importCourses));
                     break;
@@ -246,16 +246,6 @@ public class CemsServer extends AbstractServer {
                     } catch (Exception ignored) {
                     }
                     client.sendToClient(new MsgHandler<>(TypeMsg.QuestionAddedSuccessfuly, null));
-                    break;
-
-                case GetCourseTable:
-                    this.msg = (MsgHandler<Object>) msg;
-                    this.obj = (String) this.msg.getMsg();
-
-                    ArrayList<Course> courseList = MysqlConnection.getCourseTable("SELECT * FROM cems.course WHERE subjectID = " +
-                            "(SELECT subjectid FROM cems.lecturersubject WHERE id = " + obj + ")");
-                    ;
-                    client.sendToClient(new MsgHandler<>(TypeMsg.CourseTableResponse, courseList));
                     break;
 
                 case GetAllTestsTable:
@@ -428,12 +418,12 @@ public class CemsServer extends AbstractServer {
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (ActiveTest) this.msg.getMsg();
                     this.activeTest = (ActiveTest) obj;
-                    String updateRemainingTimeQuery = "UPDATE cems.activetest SET " +
-                            " timeLeft='" + activeTest.getTimeLeft() + "'" +
-                            " WHERE id='" + activeTest.getId() + "'";
-
-                    MysqlConnection.update(updateRemainingTimeQuery);
-                    client.sendToClient(new MsgHandler<>(TypeMsg.UpdateRemainingTimeResponse, null));
+//                    String updateRemainingTimeQuery = "UPDATE cems.activetest SET " +
+//                            " timeLeft='" + activeTest.getTimeLeft() + "'" +
+//                            " WHERE id='" + activeTest.getId() + "'";
+//
+//                    MysqlConnection.update(updateRemainingTimeQuery);
+//                    client.sendToClient(new MsgHandler<>(TypeMsg.UpdateRemainingTimeResponse, null));
                     break;
                 case GetRemainingTime:
                     this.msg = (MsgHandler<Object>) msg;

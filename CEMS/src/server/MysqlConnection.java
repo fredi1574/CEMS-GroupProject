@@ -182,31 +182,6 @@ public class MysqlConnection {
     }
 
 
-    public static ArrayList<Course> getCourseTable(String query) {
-        Statement stmt = null;
-
-        try {
-            stmt = conn.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        ArrayList<Course> courses = new ArrayList<>();
-        try {
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                String subjectID = rs.getString("subjectID"); // assuming your table has a column named "id" with type INT
-                String courseID = rs.getString("courseID");
-                String subjectName = rs.getString("subjectName");
-                String courseName = rs.getString("courseName");
-                Course course = new Course(subjectID, courseID, subjectName, courseName);
-                courses.add(course);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return courses;
-    }
-
     public static ArrayList<Test> getTestTable(String query) {
         Statement stmt = null;
 
@@ -257,13 +232,12 @@ public class MysqlConnection {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 String id = rs.getString("id"); // assuming your table has a column named "id" with type INT
-                String numOfQuestions = rs.getString("numOfQuestions");
+                int numOfQuestions = rs.getInt("numOfQuestions");
                 String testDate = rs.getString("testDate");
                 String startingTime = rs.getString("startingTime");
-                String timeLeft = rs.getString("timeLeft");
                 String testCode = rs.getString("testCode");
 
-                ActiveTest activeTest = new ActiveTest(id, numOfQuestions, testDate, startingTime, timeLeft, testCode);
+                ActiveTest activeTest = new ActiveTest(id, numOfQuestions, testDate, startingTime, testCode);
                 activeTests.add(activeTest);
 
             }

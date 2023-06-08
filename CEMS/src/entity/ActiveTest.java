@@ -8,39 +8,41 @@ import java.util.Observable;
  */
 public class ActiveTest extends Observable implements Serializable {
     private String id;
-    private String numOfQuestions;
+    private int numOfQuestions;
     private String testDate;
     private String startingTime;
-    private String timeLeft;
     private String testCode;
 
-    public ActiveTest(String id, String numOfQuestions, String testDate, String startingTime, String timeLeft,String testCode) {
+    public ActiveTest(String id, int numOfQuestions, String testDate, String startingTime, String testCode) {
         this.id = id;
         this.numOfQuestions = numOfQuestions;
         this.testDate = testDate;
         this.startingTime = startingTime;
-        this.timeLeft = timeLeft;
         this.testCode = testCode;
     }
 
     public String getId() {
         return id;
     }
-    public String getTestCode(){return testCode; }
+
+    public String getTestCode() {
+        return testCode;
+    }
+
+    public void setTestCode(String numOfQuestions) {
+        this.testCode = testCode;
+    }
 
     public void setId(String id) {
         this.id = id;
     }
 
-    public String getNumOfQuestions() {
+    public int getNumOfQuestions() {
         return numOfQuestions;
     }
 
-    public void setNumOfQuestions(String numOfQuestions) {
+    public void setNumOfQuestions(int numOfQuestions) {
         this.numOfQuestions = numOfQuestions;
-    }
-    public void setTestCode(String numOfQuestions) {
-        this.testCode = testCode;
     }
 
     public String getTestDate() {
@@ -59,13 +61,6 @@ public class ActiveTest extends Observable implements Serializable {
         this.startingTime = startingTime;
     }
 
-    public String getTimeLeft() {
-        return timeLeft;
-    }
-
-    public void setTimeLeft(String timeLeft) {
-        this.timeLeft = timeLeft;
-    }
 
 }
 

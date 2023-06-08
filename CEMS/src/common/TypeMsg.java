@@ -80,14 +80,6 @@ public enum TypeMsg {
         public String toString() {
             return "import subjects Successfully";
         }
-    }, GetCourseTable {
-        public String toString() {
-            return "User Asked The Courses";
-        }
-    }, CourseTableResponse {
-        public String toString() {
-            return "Here is the course table";
-        }
     }, GetAllTestsTable {
         public String toString() {
             return "User requested the table of every test in the DB";

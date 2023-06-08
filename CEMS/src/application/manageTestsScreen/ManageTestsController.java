@@ -100,7 +100,7 @@ public class ManageTestsController {
         ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTests());
 
         ObservableList<String> columns = FXCollections.observableArrayList();
-        columns.addAll("ID", "Starting Time", "Time Left");
+        columns.addAll("ID", "Starting Time", "Test Code");
         TableManager.createTable(activeTestsTableView, columns);
         TableManager.importData(activeTestsTableView, activeTests);
 
@@ -162,7 +162,6 @@ public class ManageTestsController {
                 activeTestRowData.getNumOfQuestions(),
                 activeTestRowData.getTestDate(),
                 activeTestRowData.getStartingTime(),
-                activeTestRowData.getTimeLeft(),
                 activeTestRowData.getTestCode()
         );
         stateManagement.setCurrentActivetest(curActiveTest);

@@ -91,11 +91,6 @@ public class Client extends AbstractClient {
             case SubjectsimportSuccess:
                 this.subjects = (List<Object>) messageFromServer.getMsg();
                 break;
-
-            case CourseTableResponse:
-                courses = (ArrayList<Object>) ((MsgHandler<Object>) messageFromServer).getMsg();
-                this.courses = (List<Object>) messageFromServer.getMsg();
-                break;
             case GetAllTestsTableResponse:
                 this.tests = (List<Object>) messageFromServer.getMsg();
                 break;

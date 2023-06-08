@@ -66,13 +66,13 @@ public class viewActiveTestController {
         courseNameLabel.setText(stateManagement.course.getCourseName());
         subjecteNameLabel.setText(stateManagement.course.getSubjectName());
         testCodeTextField.setText(stateManagement.getTestCode());
-        numOfQuestionsTextField.setText(stateManagement.getCurrentActivetest().getNumOfQuestions());
+        numOfQuestionsTextField.setText(String.valueOf(stateManagement.getCurrentActivetest().getNumOfQuestions()));
         testDateTextField.setText(stateManagement.getCurrentActivetest().getTestDate());
         testDurationTextField.setText(stateManagement.getTestDuration());
         startingTimeTextField.setText(stateManagement.getCurrentActivetest().getStartingTime());
 
-        updateRemainingTestTime();
-        startTimer();
+        //updateRemainingTestTime();
+        //startTimer();
     }
 
     /**
@@ -147,7 +147,6 @@ public class viewActiveTestController {
         //gets the updated number of remaining minutes at the time of the test being locked
         updateRemainingTestTime();
         String updatedTimeLeft = Integer.toString(remainingSeconds/60);
-        stateManagement.getCurrentActivetest().setTimeLeft(updatedTimeLeft);
 
         MsgHandler updateRemainingTime = new MsgHandler(TypeMsg.UpdateRemainingTime, stateManagement.getCurrentActivetest());
         ClientUI.chat.accept(updateRemainingTime);
