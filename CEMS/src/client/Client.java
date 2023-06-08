@@ -9,7 +9,6 @@ import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.showReportBy
 import common.ChatIF;
 import common.MsgHandler;
 import entity.*;
-import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -161,6 +160,10 @@ public class Client extends AbstractClient {
                 this.singleSubject = (Subject)messageFromServer.getMsg();
                 break;
             case AddNewActiveTestResponse:
+                break;
+            case AddNewAfterTestInfoResponse:
+                break;
+            case AddTimeRequestResponse:
                 break;
         }
 

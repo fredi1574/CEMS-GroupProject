@@ -13,11 +13,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import util.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 
@@ -26,6 +28,8 @@ import java.util.List;
  */
 public class ManageTestsController {
     public TextField searchField;
+    @FXML
+    private Text usernameText;
 
     @FXML
     private AnchorPane header;
@@ -52,6 +56,9 @@ public class ManageTestsController {
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
+        usernameText.setText(Client.user.getFullName());
+
+        stateManagement = StateManagement.getInstance();
 
         displayDbTestsTable();
         displayActiveTestsTable();
@@ -126,7 +133,6 @@ public class ManageTestsController {
      * @param event the event that triggered the method
      */
     public void editTest(ActionEvent event) {
-        stateManagement = StateManagement.getInstance();
 
         if (testRowData == null) {
             showError.showErrorPopup("Select a test to edit");
@@ -151,7 +157,6 @@ public class ManageTestsController {
      * @param actionEvent the event that triggered the method
      */
     public void viewTestInProgress(ActionEvent actionEvent) {
-        stateManagement = StateManagement.getInstance();
 
         if (activeTestRowData == null) {
             showError.showErrorPopup("Select a test to view");
@@ -178,6 +183,50 @@ public class ManageTestsController {
             loadTestState(matchingTestFromDB);
 
         ScreenManager.popUpScreen(PathConstants.viewActiveTestPath);
+    }
+
+
+    /**
+     * adds the selected test to the activetest table
+     * @param actionEvent the event that triggered the method
+     */
+    public void activateTest(ActionEvent actionEvent) {
+
+        if (testRowData == null) {
+            showError.showErrorPopup("Select a test to activate");
+            return;
+        }
+
+        if (showError.showConfirmationPopup("Are you sure you want to activate the test?")) {
+
+            loadTestState(testRowData); //loads the details of the relevant test
+
+            //setting the activeTest data
+            LocalDate currentDate = LocalDate.now();
+            LocalTime currentTime = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);;
+            ActiveTest testToActivate = new ActiveTest(
+                    stateManagement.getTestID(),
+                    stateManagement.getTestQuestions().size(),
+                    currentDate.toString(),
+                    currentTime.toString(),
+                    stateManagement.getTestCode()
+            );
+
+            //adds a row to the activetest table
+            MsgHandler addNewActiveTest = new MsgHandler(TypeMsg.AddNewActiveTest, testToActivate);
+            ClientUI.chat.accept(addNewActiveTest);
+
+            //adds a row to the aftertestinfo table
+            String[] infoArray = {testRowData.getId(),testToActivate.getTestDate(),testRowData.getTestDuration()};
+            MsgHandler addNewAfterTestInfo = new MsgHandler(TypeMsg.AddNewAfterTestInfo, infoArray);
+            ClientUI.chat.accept(addNewAfterTestInfo);
+
+            reloadPage();
+
+        }
+    }
+
+    public void viewTestResults(ActionEvent actionEvent) {
     }
 
     /**
@@ -213,25 +262,6 @@ public class ManageTestsController {
 
         //when an existing test is opened, no points are available
         stateManagement.totalRemainingPoints = 0;
-    }
-
-    public void activateTest(ActionEvent actionEvent) {
-
-        //setting the activeTest data
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
-        //TODO: get questions amount
-        ActiveTest testToActivate = new ActiveTest(
-                testRowData.getId(),
-                testRowData.getQuestions().size(),
-                currentDate.toString(),
-                currentTime.toString(),
-                testRowData.getTestCode()
-        );
-
-        MsgHandler addNewActiveTest = new MsgHandler(TypeMsg.AddNewActiveTest,testToActivate);
-    }
-    public void viewTestResults(ActionEvent actionEvent) {
     }
 
     /**

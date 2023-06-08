@@ -6,6 +6,7 @@ import common.MsgHandler;
 import common.TypeMsg;
 import entity.ActiveTest;
 import entity.StateManagement;
+import entity.TestRequestForApproval;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,7 +39,8 @@ public class viewActiveTestController {
     public TextField numOfQuestionsTextField;
     public TextField testCodeTextField;
     public Label timeLeftLabel;
-    public TextArea testCommentsTextArea;
+    public TextArea requestMessageTextArea;
+    public TextField timeToAddTextField;
     public TextField testDateTextField;
     public TextField testDurationTextField;
     public TextField startingTimeTextField;
@@ -136,8 +138,6 @@ public class viewActiveTestController {
      * @param actionEvent the event that triggered the method
      */
     public void lockTest(ActionEvent actionEvent) {
-        timer.pause();
-
         //switches the visible buttons
         lockBtn.setVisible(false);
         lockTestLabel.setVisible(false);
@@ -145,17 +145,15 @@ public class viewActiveTestController {
         unlockTestLabel.setVisible(true);
 
         //gets the updated number of remaining minutes at the time of the test being locked
-        updateRemainingTestTime();
-        String updatedTimeLeft = Integer.toString(remainingSeconds/60);
-
-        MsgHandler updateRemainingTime = new MsgHandler(TypeMsg.UpdateRemainingTime, stateManagement.getCurrentActivetest());
-        ClientUI.chat.accept(updateRemainingTime);
+//        updateRemainingTestTime();
+//        String updatedTimeLeft = Integer.toString(remainingSeconds/60);
+//
+//        MsgHandler updateRemainingTime = new MsgHandler(TypeMsg.UpdateRemainingTime, stateManagement.getCurrentActivetest());
+//        ClientUI.chat.accept(updateRemainingTime);
 
     }
 
     public void unlockTest(ActionEvent actionEvent) {
-        timer.play();
-
         //switches the visible buttons
         lockBtn.setVisible(true);
         lockTestLabel.setVisible(true);
@@ -166,7 +164,17 @@ public class viewActiveTestController {
     }
 
     public void sendExtraTimeRequest(ActionEvent actionEvent) {
+        TestRequestForApproval request = new TestRequestForApproval(
+                stateManagement.getTestID(),
+                stateManagement.getCourse().getSubjectID(),
+                stateManagement.getCourse().getCourseName(),
+                timeToAddTextField.getText(),
+                requestMessageTextArea.getText(),
+                Client.user.getFullName()
+        );
 
+        MsgHandler extraTimeMsg = new MsgHandler(TypeMsg.AddTimeRequest,request);
+        ClientUI.chat.accept(extraTimeMsg);
     }
     public void LogOut(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.loginPath);

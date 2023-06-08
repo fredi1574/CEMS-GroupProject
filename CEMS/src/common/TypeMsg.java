@@ -370,6 +370,26 @@ public enum TypeMsg {
         public String toString() {
             return "Server activated the test";
         }
+    },
+    AddNewAfterTestInfo {
+        public String toString() {
+            return "Lecturer wants to add initial information a test";
+        }
+    },
+    AddNewAfterTestInfoResponse {
+        public String toString() {
+            return "Server added initial test information";
+        }
+    },
+    AddTimeRequest {
+        public String toString() {
+            return "Lecturer wants to send a request";
+        }
+    },
+    AddTimeRequestResponse {
+        public String toString() {
+            return "Server sent the request";
+        }
     }
 
 
