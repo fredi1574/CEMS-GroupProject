@@ -380,6 +380,16 @@ public class CemsServer extends AbstractServer {
 
                     MysqlConnection.update(updateRemainingTimeQuery);
                     client.sendToClient(new MsgHandler<>(TypeMsg.UpdateRemainingTimeResponse, null));
+                    break;
+                case GetRemainingTime:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (ActiveTest) this.msg.getMsg();
+                    this.activeTest = (ActiveTest) obj;
+
+                    ArrayList<ActiveTest> updatedTimeLeft = MysqlConnection.getActiveTestsTable("SELECT timeLeft FROM activetest WHERE id = '" + activeTest.getId() + "'");
+                    //TODO: RETURN STRING TIMELEFT INSTEAD OF WHOLE ARRAY
+                    client.sendToClient(new MsgHandler<>(TypeMsg.GetRemainingTimeResponse, updatedTimeLeft));
+                    break;
                 default:
                     break;
             }
