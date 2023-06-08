@@ -381,6 +381,16 @@ public enum TypeMsg {
         }
 
     },
+    TestDurationApprovedPopLecturer{
+        public String toString() {
+            return "Approved time change popup";
+        }
+    },
+    TestDurationDeclinedPopLecturer{
+        public String toString() {
+            return "Declined time change popup";
+        }
+    }
 
 
 

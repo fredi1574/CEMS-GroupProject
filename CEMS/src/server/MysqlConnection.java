@@ -260,10 +260,10 @@ public class MysqlConnection {
                 String numOfQuestions = rs.getString("numOfQuestions");
                 String testDate = rs.getString("testDate");
                 String startingTime = rs.getString("startingTime");
-                String timeLeft = rs.getString("timeLeft");
+               // String timeLeft = rs.getString("timeLeft");
                 String testCode = rs.getString("testCode");
 
-                ActiveTest activeTest = new ActiveTest(id, numOfQuestions, testDate, startingTime, timeLeft, testCode);
+                ActiveTest activeTest = new ActiveTest(id, numOfQuestions, testDate, startingTime,testCode);
                 activeTests.add(activeTest);
 
             }

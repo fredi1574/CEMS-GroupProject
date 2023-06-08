@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import util.*;
 import javafx.animation.Timeline;
 import javafx.animation.Animation;
@@ -29,6 +30,16 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class viewActiveTestController {
+    @FXML
+    private Pane requestDeclinedPane;
+
+    @FXML
+    private Label requestPendingText;
+    @FXML
+    private Pane requestApprovedPane;
+
+    @FXML
+    private Button extraTimeBtn;
     @FXML
     public TextField testIdTextField;
     public Label courseNameLabel;
@@ -53,6 +64,7 @@ public class viewActiveTestController {
     private Timeline timer;
     private int testDurationMinutes;
     private int remainingSeconds;
+    static boolean requestSent;
 
     public StateManagement stateManagement;
 
@@ -70,64 +82,64 @@ public class viewActiveTestController {
         testDurationTextField.setText(stateManagement.getTestDuration());
         startingTimeTextField.setText(stateManagement.getCurrentActivetest().getStartingTime());
 
-        updateRemainingTestTime();
-        startTimer();
+        //updateRemainingTestTime();
+        //startTimer();
     }
 
     /**
      * calculates the remaining time for the test based on the test's start time and duration
      */
-    private void updateRemainingTestTime() {
-        int testDurationInSeconds = Integer.parseInt(stateManagement.getTestDuration()) * 60;
-
-        // Calculate the remaining seconds based on the current time and the test's starting time
-        LocalTime  startTime = LocalTime.parse(stateManagement.getCurrentActivetest().getStartingTime());
-        LocalTime endTime = startTime.plus(testDurationInSeconds,ChronoUnit.SECONDS);
-        LocalTime currentTime = LocalTime.now();
-        remainingSeconds = (int) ChronoUnit.SECONDS.between(currentTime,endTime);
-        if (remainingSeconds < 0) {
-            remainingSeconds = 0;
-        }
-    }
+//    private void updateRemainingTestTime() {
+//        int testDurationInSeconds = Integer.parseInt(stateManagement.getTestDuration()) * 60;
+//
+//        // Calculate the remaining seconds based on the current time and the test's starting time
+//        LocalTime  startTime = LocalTime.parse(stateManagement.getCurrentActivetest().getStartingTime());
+//        LocalTime endTime = startTime.plus(testDurationInSeconds,ChronoUnit.SECONDS);
+//        LocalTime currentTime = LocalTime.now();
+//        remainingSeconds = (int) ChronoUnit.SECONDS.between(currentTime,endTime);
+//        if (remainingSeconds < 0) {
+//            remainingSeconds = 0;
+//        }
+//    }
 
     /**
      * updates the timer object to correctly display a test's remaining time
      */
-    private void startTimer() {
-        int totalSeconds = remainingSeconds;
-        final int[] seconds = { totalSeconds };  // Create a final array to hold the remaining seconds
-
-        timer = new Timeline(
-                new KeyFrame(Duration.seconds(1), event -> {
-                    seconds[0]--;  // Decrement the remaining seconds
-                    if (seconds[0] <= 0) {
-                        // Timer has ended, perform necessary actions
-                        timer.stop();
-                        // Additional logic...
-                    } else {
-                        // Update the timer display on the screen
-                        timeLeftLabel.setText(formatTime(seconds[0]));
-                    }
-                })
-        );
-        timer.setCycleCount(Animation.INDEFINITE);
-        timer.play();
-
-        // Update the timer label immediately
-        timeLeftLabel.setText(formatTime(seconds[0]));
-    }
-
-    /**
-     * formats the time  as a hh:mm:ss string
-     * @param seconds time in seconds
-     * @return the formatted string
-     */
-    private String formatTime(int seconds) {
-        int hours = seconds / 3600;
-        int minutes = (seconds % 3600) / 60;
-        int secs = seconds % 60;
-        return String.format("%02d:%02d:%02d", hours, minutes, secs);
-    }
+//    private void startTimer() {
+//        int totalSeconds = remainingSeconds;
+//        final int[] seconds = { totalSeconds };  // Create a final array to hold the remaining seconds
+//
+//        timer = new Timeline(
+//                new KeyFrame(Duration.seconds(1), event -> {
+//                    seconds[0]--;  // Decrement the remaining seconds
+//                    if (seconds[0] <= 0) {
+//                        // Timer has ended, perform necessary actions
+//                        timer.stop();
+//                        // Additional logic...
+//                    } else {
+//                        // Update the timer display on the screen
+//                        timeLeftLabel.setText(formatTime(seconds[0]));
+//                    }
+//                })
+//        );
+//        timer.setCycleCount(Animation.INDEFINITE);
+//        timer.play();
+//
+//        // Update the timer label immediately
+//        timeLeftLabel.setText(formatTime(seconds[0]));
+//    }
+//
+//    /**
+//     * formats the time  as a hh:mm:ss string
+//     * @param seconds time in seconds
+//     * @return the formatted string
+//     */
+//    private String formatTime(int seconds) {
+//        int hours = seconds / 3600;
+//        int minutes = (seconds % 3600) / 60;
+//        int secs = seconds % 60;
+//        return String.format("%02d:%02d:%02d", hours, minutes, secs);
+//    }
 
     /**
      * locks the test for all clients - the timer is stopped and the timeLeft value
@@ -144,14 +156,22 @@ public class viewActiveTestController {
         unlockTestLabel.setVisible(true);
 
         //gets the updated number of remaining minutes at the time of the test being locked
-        updateRemainingTestTime();
-        String updatedTimeLeft = Integer.toString(remainingSeconds/60);
-        stateManagement.getCurrentActivetest().setTimeLeft(updatedTimeLeft);
-
-        MsgHandler updateRemainingTime = new MsgHandler(TypeMsg.UpdateRemainingTime, stateManagement.getCurrentActivetest());
-        ClientUI.chat.accept(updateRemainingTime);
+//        updateRemainingTestTime();
+//        String updatedTimeLeft = Integer.toString(remainingSeconds/60);
+//        stateManagement.getCurrentActivetest().setTimeLeft(updatedTimeLeft);
+//
+//        MsgHandler updateRemainingTime = new MsgHandler(TypeMsg.UpdateRemainingTime, stateManagement.getCurrentActivetest());
+//        ClientUI.chat.accept(updateRemainingTime);
 
     }
+    public void showRequestDeclinedPopUp() {
+        showError.showInfoPopup("Time change request was declined");
+
+    }
+    public void showRequestApprovedPopUp() {
+        showError.showInfoPopup("Time change request was approved");
+    }
+
 
     public void unlockTest(ActionEvent actionEvent) {
         timer.play();
@@ -170,6 +190,9 @@ public class viewActiveTestController {
         MsgHandler newRequest = new MsgHandler(TypeMsg.RequestExtraTime, request);
         ClientUI.chat.accept(newRequest);
         showError.showInfoPopup("Request was sent to the Head Of Department");
+        extraTimeBtn.setDisable(true);
+        requestSent = true;
+
 
 
     }
@@ -183,7 +206,7 @@ public class viewActiveTestController {
     }
     @FXML
     private void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+        ExitButton.closePopUp(event);
     }
 
     @FXML

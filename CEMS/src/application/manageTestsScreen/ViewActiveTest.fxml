@@ -90,7 +90,7 @@
             </padding>
         </Label>
     </AnchorPane>
-    <Button layoutX="752.0" layoutY="602.0" mnemonicParsing="false" onAction="#sendExtraTimeRequest" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
+    <Button fx:id="extraTimeBtn" layoutX="752.0" layoutY="602.0" mnemonicParsing="false" onAction="#sendExtraTimeRequest" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
         <graphic>
             <ImageView fitHeight="45.0" fitWidth="45.0">
                 <Image url="@../../images/AddTime.png" />
@@ -100,36 +100,6 @@
     <Label layoutX="732.0" layoutY="654.0" prefHeight="18.0" prefWidth="103.0" text="Request Extra Time" />
     <Button layoutX="831.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
     <Button layoutX="794.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
-    <AnchorPane layoutX="482.0" layoutY="286.0" prefHeight="121.0" prefWidth="328.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
-        <HBox layoutX="14.0" layoutY="8.0" prefHeight="104.0" prefWidth="299.0">
-            <VBox prefHeight="98.0" prefWidth="329.0">
-                <Label alignment="TOP_LEFT" prefHeight="30.0" prefWidth="152.0" text="Time Left:">
-                    <font>
-                        <Font name="Trebuchet MS Bold" size="17.0" />
-                    </font>
-                </Label>
-            </VBox>
-            <VBox alignment="CENTER_RIGHT" prefHeight="144.0" prefWidth="291.0">
-            <Label fx:id="timeLeftLabel" alignment="TOP_CENTER" prefHeight="30.0" prefWidth="126.0" text="0:00">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-                <HBox alignment="TOP_RIGHT">
-                    <VBox>
-                        <Button fx:id="lockBtn" mnemonicParsing="false" onAction="#lockTest" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
-                            <graphic>
-                                <ImageView fitHeight="45.0" fitWidth="45.0">
-                                    <Image url="@../../images/Lock.png" />
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Label fx:id="lockTestLabel" alignment="CENTER" prefHeight="18.0" prefWidth="61.0" text="Lock Test" />
-                    </VBox>
-                </HBox>
-            </VBox>
-        </HBox>
-    </AnchorPane>
     <VBox layoutX="46.0" layoutY="421.0" prefHeight="154.0" prefWidth="754.0">
       <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="754.0">
          <children>
@@ -210,12 +180,5 @@
             </VBox>
         </HBox>
     </AnchorPane>
-         <Button fx:id="unlockBtn" layoutX="732.0" layoutY="325.0" mnemonicParsing="false" onAction="#unlockTest" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons" visible="false">
-             <graphic>
-                 <ImageView fitHeight="45.0" fitWidth="45.0">
-                     <Image url="@../../images/Unlock.png" />
-                 </ImageView>
-             </graphic>
-         </Button>
          <Label fx:id="unlockTestLabel" alignment="CENTER" layoutX="728.0" layoutY="380.0" prefHeight="18.0" prefWidth="72.0" text="Unlock Test" visible="false" />
 </AnchorPane>

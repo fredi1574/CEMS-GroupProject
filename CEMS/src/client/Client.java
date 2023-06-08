@@ -1,6 +1,7 @@
 package client;
 
 import application.enterTest.QuestionsComputerizedTestAnswerController;
+import application.manageTestsScreen.viewActiveTestController;
 import application.viewReportsScreen.ViewReportsController;
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.openReportByCourseController;
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.openReportByLecturerController;
@@ -8,6 +9,7 @@ import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGrap
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.showReportByLecturerController;
 import common.ChatIF;
 import common.MsgHandler;
+import common.TypeMsg;
 import entity.*;
 import javafx.fxml.FXMLLoader;
 
@@ -42,6 +44,7 @@ public class Client extends AbstractClient {
     public static openReportByCourseController HODPopenReportCourseController = new openReportByCourseController();
     public static ViewReportsController LectureReportsController = new ViewReportsController();
     public static QuestionsComputerizedTestAnswerController StudentInTest = new QuestionsComputerizedTestAnswerController();
+    public static viewActiveTestController activeTestController = new viewActiveTestController();
 
     //constructor
     public Client(String host, int port, ChatIF clientUI) {
@@ -162,12 +165,17 @@ public class Client extends AbstractClient {
             case TestDurationChanged:
                 StudentInTest.showNotificationAndChangeDuration((Integer)messageFromServer.getMsg());
                 break;
+            case TestDurationApprovedPopLecturer:
+                activeTestController.showRequestApprovedPopUp();
+            case TestDurationDeclinedPopLecturer:
+                activeTestController.showRequestDeclinedPopUp();
             case ImportedSubjectIDfromName:
                 this.singleSubject = (Subject)messageFromServer.getMsg();
                 break;
             case ExtraTimeRequested:
                 break;
-        }
+
+                                  }
 
     }
 

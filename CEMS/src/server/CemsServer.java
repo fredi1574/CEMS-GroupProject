@@ -347,6 +347,7 @@ public class CemsServer extends AbstractServer {
                     String declinedRequest = "DELETE FROM cems.testrequest WHERE id='" + obj + "'";
                     MysqlConnection.update(declinedRequest);
                     client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsDeclined, null));
+                    sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationDeclinedPopLecturer,null));
                     break;
                 case GetStudentReport:
                     this.msg = (MsgHandler<Object>) msg;
@@ -423,17 +424,17 @@ public class CemsServer extends AbstractServer {
                     ArrayList<ActiveTest> activeTestsList = MysqlConnection.getActiveTestsTable("select * from cems.activetest;");
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetActiveTestsResponse, activeTestsList));
                     break;
-                case UpdateRemainingTime:
-                    this.msg = (MsgHandler<Object>) msg;
-                    this.obj = (ActiveTest) this.msg.getMsg();
-                    this.activeTest = (ActiveTest) obj;
-                    String updateRemainingTimeQuery = "UPDATE cems.activetest SET " +
-                            " timeLeft='" + activeTest.getTimeLeft() + "'" +
-                            " WHERE id='" + activeTest.getId() + "'";
-
-                    MysqlConnection.update(updateRemainingTimeQuery);
-                    client.sendToClient(new MsgHandler<>(TypeMsg.UpdateRemainingTimeResponse, null));
-                    break;
+//                case UpdateRemainingTime:
+//                    this.msg = (MsgHandler<Object>) msg;
+//                    this.obj = (ActiveTest) this.msg.getMsg();
+//                    this.activeTest = (ActiveTest) obj;
+//                    String updateRemainingTimeQuery = "UPDATE cems.activetest SET " +
+//                            " timeLeft='" + activeTest.getTimeLeft() + "'" +
+//                            " WHERE id='" + activeTest.getId() + "'";
+//
+//                    MysqlConnection.update(updateRemainingTimeQuery);
+//                    client.sendToClient(new MsgHandler<>(TypeMsg.UpdateRemainingTimeResponse, null));
+                   // break;
                 case getQuestionAndAnswerFromTest:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
@@ -520,6 +521,7 @@ public class CemsServer extends AbstractServer {
                     MysqlConnection.update("UPDATE test SET testDuration = testDuration + '" + Integer.parseInt(addedTime) + "' WHERE id = '" + testID + "'");
 
                     sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationChanged, Integer.parseInt(addedTime)));
+                    sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationApprovedPopLecturer,null));
                     break;
                 case GetsubjectNametoID:
                     this.msg = (MsgHandler<Object>) msg;

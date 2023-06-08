@@ -98,11 +98,11 @@ public class ManageTestsController {
         ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTests());
 
         ObservableList<String> columns = FXCollections.observableArrayList();
-        columns.addAll("ID", "Starting Time", "Time Left");
+        columns.addAll("ID", "Starting Time");
         TableManager.createTable(activeTestsTableView, columns);
         TableManager.importData(activeTestsTableView, activeTests);
 
-        double[] activeTestsMultipliers = {0.22, 0.39,0.39};
+        double[] activeTestsMultipliers = {0.40, 0.60};
         TableManager.resizeColumns(activeTestsTableView, activeTestsMultipliers);
 
         //makes the elements in the database questions table clickable
@@ -217,7 +217,7 @@ public class ManageTestsController {
                 activeTestRowData.getNumOfQuestions(),
                 activeTestRowData.getTestDate(),
                 activeTestRowData.getStartingTime(),
-                activeTestRowData.getTimeLeft(),
+               // activeTestRowData.getTimeLeft(),
                 activeTestRowData.getTestCode()
         );
         stateManagement.setCurrentActivetest(curActiveTest);

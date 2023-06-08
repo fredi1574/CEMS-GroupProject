@@ -11,16 +11,14 @@ public class ActiveTest extends Observable implements Serializable {
     private String numOfQuestions;
     private String testDate;
     private String startingTime;
-    private String timeLeft;
     private String testCode;
 
-    public ActiveTest(String id, String numOfQuestions, String testDate, String startingTime, String timeLeft,String testCode) {
+    public ActiveTest(String id, String numOfQuestions, String testDate, String startingTime, String testCode) {
         this.id = id;
         this.numOfQuestions = numOfQuestions;
         this.testDate = testDate;
         this.startingTime = startingTime;
-        this.timeLeft = timeLeft;
-        this.testCode = testCode;
+        this.testCode = this.testCode;
     }
 
     public String getId() {
@@ -57,14 +55,6 @@ public class ActiveTest extends Observable implements Serializable {
 
     public void setStartingTime(String startingTime) {
         this.startingTime = startingTime;
-    }
-
-    public String getTimeLeft() {
-        return timeLeft;
-    }
-
-    public void setTimeLeft(String timeLeft) {
-        this.timeLeft = timeLeft;
     }
 
 }
