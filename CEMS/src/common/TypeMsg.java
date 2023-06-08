@@ -369,6 +369,18 @@ public enum TypeMsg {
         }
 
     },
+    RequestExtraTime{
+        public String toString() {
+            return "Lecturer requested extra time in test";
+        }
+
+    },
+    ExtraTimeRequested{
+        public String toString() {
+            return "Lecturer requested extra time in test";
+        }
+
+    },
 
 
 

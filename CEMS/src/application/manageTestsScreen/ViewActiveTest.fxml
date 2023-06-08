@@ -138,7 +138,7 @@
                   <Font name="Trebuchet MS Bold" size="17.0" />
                </font>
             </Label>
-            <TextField prefHeight="26.0" prefWidth="147.0" translateX="10.0" />
+            <TextField fx:id="extraTimeTextField" prefHeight="26.0" prefWidth="147.0" translateX="10.0" />
          </children>
       </HBox>
         <HBox>

@@ -166,6 +166,7 @@ public class StateManagement {
         this.currentActivetest = currentActivetest;
     }
 
+
     /**
      * resets all test-state related data
      * used when a new test has been created

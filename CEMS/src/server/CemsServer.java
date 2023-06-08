@@ -526,6 +526,22 @@ public class CemsServer extends AbstractServer {
                     this.obj = (String)this.msg.getMsg();
                     Subject subjectName = MysqlConnection.SubjectName("SELECT * FROM subject WHERE subjectName = '" + obj +"'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedSubjectIDfromName,subjectName));
+                case RequestExtraTime:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = this.msg.getMsg();
+                    if (obj instanceof TestRequestForApproval) {
+                        TestRequestForApproval newRequest = (TestRequestForApproval) obj;
+                        String newQuery = "INSERT INTO cems.testrequest (newDuration, explanation, id, subject,course,author) " +
+                                "VALUES ('" + newRequest.getNewDuration() + "', " +
+                                "'" + newRequest.getExplanation() + "', " +
+                                "'" + newRequest.getId() + "', " +
+                                "'" + newRequest.getSubject() + "', " +
+                                "'" + newRequest.getCourse() + "', " +
+                                "'" + newRequest.getAuthor() + "') ";
+                        MysqlConnection.update(newQuery);
+                        client.sendToClient(new MsgHandler<>(TypeMsg.ExtraTimeRequested, null));
+                    }
+                    break;
 
             }
 

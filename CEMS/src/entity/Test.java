@@ -63,7 +63,6 @@ public class Test extends Observable implements Serializable {
         ClientUI.chat.accept(subject);
         Subject newSubject = (Subject)ClientUI.chat.getSubjectID();
         return newSubject.getSubjectID();
-
     }
 
     public String getSemester() {

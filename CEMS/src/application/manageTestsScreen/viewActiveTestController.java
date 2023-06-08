@@ -6,6 +6,7 @@ import common.MsgHandler;
 import common.TypeMsg;
 import entity.ActiveTest;
 import entity.StateManagement;
+import entity.TestRequestForApproval;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,10 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import util.ExitButton;
-import util.MinimizeButton;
-import util.PathConstants;
-import util.ScreenManager;
+import util.*;
 import javafx.animation.Timeline;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -42,6 +40,7 @@ public class viewActiveTestController {
     public TextField testDateTextField;
     public TextField testDurationTextField;
     public TextField startingTimeTextField;
+    public TextField extraTimeTextField;
 
     public Button lockBtn;
     public Label lockTestLabel;
@@ -164,7 +163,14 @@ public class viewActiveTestController {
         unlockTestLabel.setVisible(false);
     }
 
+    @FXML
     public void sendExtraTimeRequest(ActionEvent actionEvent) {
+        TestRequestForApproval request = new TestRequestForApproval(testIdTextField.getText(),stateManagement.course.getSubjectID(),
+                courseNameLabel.getText(),extraTimeTextField.getText(),testCommentsTextArea.getText(),Client.user.getFullName());
+        MsgHandler newRequest = new MsgHandler(TypeMsg.RequestExtraTime, request);
+        ClientUI.chat.accept(newRequest);
+        showError.showInfoPopup("Request was sent to the Head Of Department");
+
 
     }
     public void LogOut(ActionEvent event) {

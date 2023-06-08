@@ -9,9 +9,11 @@ import entity.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.util.*;
@@ -255,7 +257,6 @@ public class QuestionsComputerizedTestAnswerController {
                 Integer.toString(totalQuestions), "", ApprovalStatus.N, test.getTestType());
         MsgHandler AddNewTest = new MsgHandler(TypeMsg.AddNewTestOfStudent, StudentsCopy);
         ClientUI.chat.accept(AddNewTest);
-
     }
 
 
@@ -275,6 +276,15 @@ public class QuestionsComputerizedTestAnswerController {
                     if (seconds[0] <= 0) {
                         // Timer has ended, perform necessary actions
                         timer.stop();
+                            saveFinalAnswers();
+
+
+                        Platform.runLater(() -> {
+                            showError.showInfoPopup("Test is over");
+                            Stage currentStage = (Stage) header.getScene().getWindow();
+                            currentStage.close();
+                            ScreenManager.showStage(PathConstants.mainMenuStudentPath,PathConstants.iconPath);
+                        });
                         // Additional logic...
                     } else {
                         // Update the timer display on the screen
