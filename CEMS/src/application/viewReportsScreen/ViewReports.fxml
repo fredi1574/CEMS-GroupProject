@@ -45,7 +45,7 @@
     </Button>
     <Label layoutX="35.0" layoutY="501.0" text="Back" />
     <TableView fx:id="reportsTableView" layoutX="27.0" layoutY="172.0" prefHeight="266.0" prefWidth="755.0" />
-    <Button layoutX="682.0" layoutY="463.0" mnemonicParsing="false" onAction="#showReports" prefHeight="28.0" prefWidth="100.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="Show Report" />
+    <Button layoutX="682.0" layoutY="463.0" mnemonicParsing="false" onAction="#showReport" prefHeight="28.0" prefWidth="100.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="Show Report" />
     <Button layoutX="773.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
     <Button layoutX="737.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
     <HBox alignment="CENTER" layoutX="26.0" layoutY="95.0" prefHeight="61.0" prefWidth="755.0" spacing="20.0">

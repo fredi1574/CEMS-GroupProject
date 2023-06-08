@@ -5,14 +5,13 @@ import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
-import entity.*;
+import entity.StudentTest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
@@ -20,31 +19,27 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import util.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
-
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ViewReportsController {
 
+    private static ObservableList<StudentTest> listOfTestsNoDuplicates;
+    private static ObservableList<StudentTest> FullListOfTests;
     @FXML
     private AnchorPane header;
-
     @FXML
     private ComboBox<String> yearComboBox;
     @FXML
     private ComboBox<String> semesterComboBox;
     @FXML
     private ComboBox<String> subjectComboBox;
-
     @FXML
     private TableView<StudentTest> reportsTableView;
     @FXML
     private Text usernameText;
-    private static ObservableList<StudentTest> listOfTestsNoDuplicates;
-    private static ObservableList<StudentTest> FulllistOfTests;
     private FilteredList<StudentTest> filteredData;
 
 
@@ -67,7 +62,7 @@ public class ViewReportsController {
         // Creates the report table with the correct data
         TableManager.createTable(reportsTableView, columnList);
         TableManager.importData(reportsTableView, listOfTestsNoDuplicates);
-        TableManager.addDoubleClickFunctionality(reportsTableView, PathConstants.viewGraphPath, this::setFunctions);
+        TableManager.addDoubleClickFunctionality(reportsTableView, PathConstants.viewGraphPath, this::viewReport);
         double[] multipliers = {0.07, 0.1, 0.2, 0.525, 0.1};
         TableManager.resizeColumns(reportsTableView, multipliers);
 
@@ -78,9 +73,11 @@ public class ViewReportsController {
 
 
     }
-    public ObservableList<StudentTest> getListOfTests(){
-        return FulllistOfTests;
+
+    public ObservableList<StudentTest> getListOfTests() {
+        return FullListOfTests;
     }
+
     private void filterTable() {
         String selectedYear = yearComboBox.getValue();
         String selectedSemester = semesterComboBox.getValue();
@@ -98,12 +95,12 @@ public class ViewReportsController {
     }
 
 
-    public void setFunctions(String relativePath) {
+    public void viewReport(String relativePath) {
         ViewGraphController controller = new ViewGraphController();
         StudentTest rowData = reportsTableView.getSelectionModel().getSelectedItem();
         controller.setReport(rowData);
         controller.setViewReport((Stage) header.getScene().getWindow());
-        showReports();
+        showReport();
     }
 
     public void goBackToPreviousScreen(ActionEvent event) {
@@ -121,11 +118,11 @@ public class ViewReportsController {
                 uniqueTests.add(test);
             }
         }
-        listOfTestsNoDuplicates = FXCollections.observableArrayList((List)uniqueTests);
-        FulllistOfTests = FXCollections.observableArrayList((List)Tests);
+        listOfTestsNoDuplicates = FXCollections.observableArrayList((List) uniqueTests);
+        FullListOfTests = FXCollections.observableArrayList((List) Tests);
     }
 
-    public void showReports() {
+    public void showReport() {
         ViewGraphController controller = new ViewGraphController();
         StudentTest rowData = reportsTableView.getSelectionModel().getSelectedItem();
         controller.setReport(rowData);
