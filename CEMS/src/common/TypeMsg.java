@@ -381,17 +381,6 @@ public enum TypeMsg {
             return "Server added initial test information";
         }
     },
-    AddTimeRequest {
-        public String toString() {
-            return "Lecturer wants to send a request";
-        }
-    },
-    AddTimeRequestResponse {
-        public String toString() {
-            return "Server sent the request";
-        }
-    }
-
 
 }
 

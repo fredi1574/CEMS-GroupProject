@@ -310,23 +310,6 @@ public class CemsServer extends AbstractServer {
                         client.sendToClient(new MsgHandler<>(TypeMsg.AddNewTestQuestionsResponse, null));
                         break;
                     }
-                case AddTimeRequest:
-                    this.msg = (MsgHandler<Object>) msg;
-                    this.obj = (TestRequestForApproval) this.msg.getMsg();
-                    TestRequestForApproval request = (TestRequestForApproval) obj;
-
-                    String newRequestQuery = "INSERT INTO cems.testrequest (newDuration,explanation,id,subject, " +
-                            "course,author) " +
-                            "VALUES ('" + request.getNewDuration() + "', " +
-                            "'" + request.getExplanation() + "', " +
-                            "'" + request.getId() + "', " +
-                            "'" + request.getSubject() + "', " +
-                            "'" + request.getCourse() + "', " +
-                            "'" + request.getAuthor() + "') ";
-
-                    MysqlConnection.update(newRequestQuery);
-                    client.sendToClient(new MsgHandler<>(TypeMsg.AddTimeRequestResponse, null));
-                    break;
                 case GetRequestsBySubject:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();

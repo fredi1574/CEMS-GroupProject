@@ -163,8 +163,6 @@ public class Client extends AbstractClient {
                 break;
             case AddNewAfterTestInfoResponse:
                 break;
-            case AddTimeRequestResponse:
-                break;
         }
 
     }

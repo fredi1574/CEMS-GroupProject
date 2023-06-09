@@ -163,18 +163,11 @@ public class viewActiveTestController {
         //TODO: unlock the active test for all clients through the DB
     }
 
+    /**
+     * sends a request for the needed amount of extra time to the head of department
+     * @param actionEvent the event that triggered the method
+     */
     public void sendExtraTimeRequest(ActionEvent actionEvent) {
-        TestRequestForApproval request = new TestRequestForApproval(
-                stateManagement.getTestID(),
-                stateManagement.getCourse().getSubjectID(),
-                stateManagement.getCourse().getCourseName(),
-                timeToAddTextField.getText(),
-                requestMessageTextArea.getText(),
-                Client.user.getFullName()
-        );
-
-        MsgHandler extraTimeMsg = new MsgHandler(TypeMsg.AddTimeRequest,request);
-        ClientUI.chat.accept(extraTimeMsg);
     }
     public void LogOut(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.loginPath);
