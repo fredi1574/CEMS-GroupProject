@@ -295,12 +295,12 @@ public class QuestionsComputerizedTestAnswerController {
 
     public void saveStudentsTest(int score, int correctAnswers, int totalQuestions) {
         Test test = getTestData();
-        double testDuration = Double.parseDouble(test.getTestDuration()) - timer.getCurrentTime().toMinutes();
-        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
-        String formattedTestDuration = decimalFormat.format(testDuration);
+        int timeInSeconds = seconds[0];
+        int testDuration = (Integer.parseInt(test.getTestDuration())*60) - timeInSeconds;
+        String decimalFormat = formatTime(testDuration);
         StudentTest StudentsCopy = new StudentTest(Client.user.getId(), test.getId(), test.getSubjectID(), test.getCourseName(), Integer.toString(score),
                 Client.user.getFullName(), test.getYear(), test.getSemester(), test.getSession(), CheatingSuspicion.NO, Integer.toString(correctAnswers),
-                Integer.toString(totalQuestions), "", ApprovalStatus.NO, test.getTestType(),formattedTestDuration);
+                Integer.toString(totalQuestions), "", ApprovalStatus.NO, test.getTestType(),decimalFormat);
         MsgHandler AddNewTest = new MsgHandler(TypeMsg.AddNewTestOfStudent, StudentsCopy);
         ClientUI.chat.accept(AddNewTest);
     }
@@ -322,19 +322,22 @@ public class QuestionsComputerizedTestAnswerController {
                     if (seconds[0] <= 0) {
                         // Timer has ended, perform necessary actions
                         timer.stop();
+                        Stage currentStage = (Stage) header.getScene().getWindow();
+                        if (currentStage.isShowing()) {
                             saveFinalAnswers();
-                        if (checkLockTest()){
-                            saveAfterTestInfoAndDeleteFromActive();
-                        }
-
-                        Platform.runLater(() -> {
-                            Stage currentStage = (Stage) header.getScene().getWindow();
-                            if (currentStage.isShowing()) {
-                                showError.showInfoPopup("Test is over");
-                                currentStage.close();
-                                ScreenManager.showStage(PathConstants.mainMenuStudentPath, PathConstants.iconPath);
+                            if (checkLockTest()) {
+                                saveAfterTestInfoAndDeleteFromActive();
                             }
-                        });
+
+                            Platform.runLater(() -> {
+
+                                if (currentStage.isShowing()) {
+                                    showError.showInfoPopup("Test is over");
+                                    currentStage.close();
+                                    ScreenManager.showStage(PathConstants.mainMenuStudentPath, PathConstants.iconPath);
+                                }
+                            });
+                        }
                         // Additional logic...
                     } else {
                         // Update the timer display on the screen
