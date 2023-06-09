@@ -54,6 +54,8 @@ public class ManageTestsController {
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
+        stateManagement = StateManagement.getInstance();
+
         MsgHandler getTestForApproval = new MsgHandler(TypeMsg.GetTestForApproval, null);
         ClientUI.chat.accept(getTestForApproval);
         ObservableList<TestForApproval> testsWaitingApproval = FXCollections.observableArrayList((List) ClientUI.chat.getTestForApproval());
@@ -61,7 +63,6 @@ public class ManageTestsController {
         testApprovalTableView.setOnMouseClicked((e) -> {
             data = testApprovalTableView.getSelectionModel().getSelectedItem();
         });
-        stateManagement =StateManagement.getInstance();
         stateManagement.setTestForApproval(testsWaitingApproval);
         displayDbTestsTable();
         displayActiveTestsTable();
