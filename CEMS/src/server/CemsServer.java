@@ -253,7 +253,7 @@ public class CemsServer extends AbstractServer {
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
 
-                    ArrayList<Course> courseList = MysqlConnection.getCourseTable("SELECT * FROM cems.course WHERE subjectID = " +
+                    ArrayList<Course> courseList = MysqlConnection.getCourseList("SELECT * FROM cems.course WHERE subjectID = " +
                             "(SELECT subjectid FROM cems.lecturersubject WHERE id = " + obj + ")");
                     ;
                     client.sendToClient(new MsgHandler<>(TypeMsg.CourseTableResponse, courseList));
