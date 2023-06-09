@@ -473,7 +473,7 @@ public class CemsServer extends AbstractServer {
                         StudentTest newTest = (StudentTest) obj;
                         String newQuery = "INSERT INTO cems.studentstest (studentID, testID, subjectID, course, " +
                                 "testType, score, fullname, year, semester, session, suspicionOfCheating, " +
-                                "correctAnswers, totalQuestions, lecturerComments, approved) " +
+                                "correctAnswers, totalQuestions, lecturerComments, approved,testDuration) " +
                                 "VALUES ('" + newTest.getStudentID() + "', " +
                                 "'" + newTest.getTestID() + "', " +
                                 "'" + newTest.getSubjectID() + "', " +
@@ -488,7 +488,8 @@ public class CemsServer extends AbstractServer {
                                 "'" + newTest.getCorrectAnswers() + "', " +
                                 "'" + newTest.getTotalQuestions() + "', " +
                                 "'" + newTest.getLecturerComments() + "', " +
-                                "'" + newTest.getApproved() + "') ";
+                                "'" + newTest.getApproved() + "', " +
+                                "'" + newTest.getTestDuration() + "') ";
                         MysqlConnection.update(newQuery);
                         client.sendToClient(new MsgHandler<>(TypeMsg.TestOfStudentSaved, null));
 

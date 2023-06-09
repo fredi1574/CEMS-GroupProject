@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 import client.Client;
@@ -252,9 +253,12 @@ public class QuestionsComputerizedTestAnswerController {
 
     public void saveStudentsTest(int score, int correctAnswers, int totalQuestions) {
         Test test = getTestData();
+        double testDuration = Double.parseDouble(test.getTestDuration()) - timer.getCurrentTime().toMinutes();
+        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+        String formattedTestDuration = decimalFormat.format(testDuration);
         StudentTest StudentsCopy = new StudentTest(Client.user.getId(), test.getId(), test.getSubjectID(), test.getCourseName(), Integer.toString(score),
                 Client.user.getFullName(), test.getYear(), test.getSemester(), test.getSession(), CheatingSuspicion.NO, Integer.toString(correctAnswers),
-                Integer.toString(totalQuestions), "", ApprovalStatus.NO, test.getTestType());
+                Integer.toString(totalQuestions), "", ApprovalStatus.NO, test.getTestType(),formattedTestDuration);
         MsgHandler AddNewTest = new MsgHandler(TypeMsg.AddNewTestOfStudent, StudentsCopy);
         ClientUI.chat.accept(AddNewTest);
     }

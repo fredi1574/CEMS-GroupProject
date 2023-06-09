@@ -338,9 +338,10 @@ public class MysqlConnection {
                 String correctAnswers = rs.getString("correctAnswers");
                 String totalQuestions = rs.getString("totalQuestions");
                 String lecturerComments = rs.getString("lecturerComments");
+                String TestDuration = rs.getString("testDuration");
                 ApprovalStatus approved = ApprovalStatus.valueOf(rs.getString("approved")); // Assuming "approved" is a string representation of the enum value
 
-                StudentTest studentTest = new StudentTest(studentID, testID, subjectID, course, grade, fullname, year, semester, session, suspicionOfCheating, correctAnswers, totalQuestions, lecturerComments, approved, testType);
+                StudentTest studentTest = new StudentTest(studentID, testID, subjectID, course, grade, fullname, year, semester, session, suspicionOfCheating, correctAnswers, totalQuestions, lecturerComments, approved, testType,TestDuration);
                 list.add(studentTest);
 
             }

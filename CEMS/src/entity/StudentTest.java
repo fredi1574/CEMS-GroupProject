@@ -13,6 +13,7 @@ public class StudentTest  extends Observable implements Serializable {
     private String year;
     private String semester;
     private String session;
+    private String testDuration;
 
     private ApprovalStatus approved;
     private CheatingSuspicion suspicionOfCheating;
@@ -25,7 +26,7 @@ public class StudentTest  extends Observable implements Serializable {
     public StudentTest(String studentID, String testID,
                            String subjectID, String course, String grade, String fullname, String year, String semester,
                            String session, CheatingSuspicion suspicionOfCheating, String correctAnswers, String totalQuestions,
-                           String lecturerComments, ApprovalStatus approved, TestTypeEnum testType) {
+                           String lecturerComments, ApprovalStatus approved, TestTypeEnum testType,String testDuration) {
         // Assign the parameters to the corresponding fields
         this.studentID = studentID;
         this.testID = testID;
@@ -42,9 +43,13 @@ public class StudentTest  extends Observable implements Serializable {
         this.lecturerComments = lecturerComments;
         this.approved = approved;
         this.testType = testType;
+        this.testDuration = testDuration;
     }
     public TestTypeEnum getTestType() {
         return testType;
+    }
+    public String getTestDuration() {
+        return testDuration;
     }
 
     public void setTestType(TestTypeEnum testType) {
