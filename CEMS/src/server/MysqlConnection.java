@@ -257,13 +257,12 @@ public class MysqlConnection {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 String id = rs.getString("id"); // assuming your table has a column named "id" with type INT
-                String numOfQuestions = rs.getString("numOfQuestions");
+                int numOfQuestions = rs.getInt("numOfQuestions");
                 String testDate = rs.getString("testDate");
                 String startingTime = rs.getString("startingTime");
-               // String timeLeft = rs.getString("timeLeft");
                 String testCode = rs.getString("testCode");
 
-                ActiveTest activeTest = new ActiveTest(id, numOfQuestions, testDate, startingTime,testCode);
+                ActiveTest activeTest = new ActiveTest(id, numOfQuestions, testDate, startingTime, testCode);
                 activeTests.add(activeTest);
 
             }

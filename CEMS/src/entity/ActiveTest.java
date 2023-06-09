@@ -8,17 +8,17 @@ import java.util.Observable;
  */
 public class ActiveTest extends Observable implements Serializable {
     private String id;
-    private String numOfQuestions;
+    private int numOfQuestions;
     private String testDate;
     private String startingTime;
     private String testCode;
 
-    public ActiveTest(String id, String numOfQuestions, String testDate, String startingTime, String testCode) {
+    public ActiveTest(String id, int numOfQuestions, String testDate, String startingTime, String testCode) {
         this.id = id;
         this.numOfQuestions = numOfQuestions;
         this.testDate = testDate;
         this.startingTime = startingTime;
-        this.testCode = this.testCode;
+        this.testCode = testCode;
     }
 
     public String getId() {
@@ -30,11 +30,11 @@ public class ActiveTest extends Observable implements Serializable {
         this.id = id;
     }
 
-    public String getNumOfQuestions() {
+    public int getNumOfQuestions() {
         return numOfQuestions;
     }
 
-    public void setNumOfQuestions(String numOfQuestions) {
+    public void setNumOfQuestions(int numOfQuestions) {
         this.numOfQuestions = numOfQuestions;
     }
     public void setTestCode(String numOfQuestions) {

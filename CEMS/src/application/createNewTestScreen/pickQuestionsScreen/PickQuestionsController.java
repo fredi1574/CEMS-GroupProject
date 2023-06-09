@@ -62,10 +62,25 @@ public class PickQuestionsController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         nameAuthor.setText(Client.user.getFullName());
-        MsgHandler getTable = new MsgHandler(TypeMsg.GetAllQuestions, null);
-        ClientUI.chat.accept(getTable);
+
+        stateManagement = StateManagement.getInstance();
+
+        displayQuestionsDBTable();
+        displaySelectedQuestionsTable();
+
+        totalRemainingPointsField.setText(String.valueOf(stateManagement.getTotalRemainingPoints()));
+
+    }
+
+    /**
+     * displays the table containing every question in the database relevant to the lecturer's subject
+     * TODO: check that the list is really specific to the lecturer's subject
+     */
+    private void displayQuestionsDBTable() {
+        MsgHandler questionsDBTable = new MsgHandler(TypeMsg.GetAllQuestions, null);
+        ClientUI.chat.accept(questionsDBTable);
         // creates the question table
-         ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.getAllQuestions());
+        ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.getAllQuestions());
 
         //creates a table of questions the author can see
         ObservableList<String> questionDBTableColumns = FXCollections.observableArrayList();
@@ -77,6 +92,22 @@ public class PickQuestionsController {
         double[] multipliers = {0.15, 0.1, 0.1, 0.13, 0.35, 0.162};
         TableManager.resizeColumns(questionDBTableView, multipliers);
 
+        //makes the elements in the database questions table clickable
+        questionDBTableView.setOnMouseClicked((e) -> {
+            rowData = questionDBTableView.getSelectionModel().getSelectedItem();
+        });
+
+        FilteredList<Question> filteredData = new FilteredList<>(questions, b -> true);
+        TableManager.MakeFilterListForSearch(filteredData, searchField, Question::getQuestionText);
+        SortedList<Question> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(questionDBTableView.comparatorProperty());
+        questionDBTableView.setItems(sortedData);
+    }
+
+    /**
+     * displays the table containing every question selected for the current test
+     */
+    private void displaySelectedQuestionsTable() {
         //creates a table of selected questions
         ObservableList<String> selectedQuestionsTableColumns = FXCollections.observableArrayList();
         selectedQuestionsTableColumns.addAll("Question Number", "Question ID", "Subject", "Course Name", "Question Text", "Author", "Points");
@@ -84,41 +115,21 @@ public class PickQuestionsController {
         selectedQuestions = selectedQuestionsTableView.getItems();
 
         //resizes the columns of the table
-        multipliers = new double[]{0.15, 0.1, 0.1, 0.13, 0.162, 0.162, 0.182};
+        double[] multipliers = {0.15, 0.1, 0.1, 0.13, 0.162, 0.162, 0.182};
         TableManager.resizeColumns(selectedQuestionsTableView, multipliers);
 
-        //makes the elements in the database questions table clickable
-        questionDBTableView.setOnMouseClicked((e) -> {
-            rowData = questionDBTableView.getSelectionModel().getSelectedItem();
-        });
+        //reloads the selected questions table state if questions were added to this test
+        if(stateManagement.getTestQuestions().size() != 0 )
+        {
+            //totalRemainingPoints = stateManagment.getTotalRemainingPoints();
+            TableManager.importData(selectedQuestionsTableView, stateManagement.getTestQuestions());
+        }
 
         //makes the elements in the selected questions table clickable
         selectedQuestionsTableView.setOnMouseClicked((e) -> {
             rowDataForQuestionsSelected = selectedQuestionsTableView.getSelectionModel().getSelectedItem();
         });
-
-        stateManagement = StateManagement.getInstance();
-        //reloads the selected questions table state if questions were added to this test
-        if(stateManagement.getTestQuestions().size() != 0 )
-        {
-           //totalRemainingPoints = stateManagment.getTotalRemainingPoints();
-            TableManager.importData(selectedQuestionsTableView,(ObservableList<TestQuestion>) stateManagement.getTestQuestions());
-        }
-        FilteredList<Question> filteredData = new FilteredList<>(questions, b -> true);
-        TableManager.MakeFilterListForSearch(filteredData, searchField, Question::getQuestionText);
-        SortedList<Question> sortedData = new SortedList<>(filteredData);
-        sortedData.comparatorProperty().bind(questionDBTableView.comparatorProperty());
-        questionDBTableView.setItems(sortedData);
-        totalRemainingPointsField.setText(String.valueOf(stateManagement.getTotalRemainingPoints()));
-
-
-
-
-
-
     }
-
-
 
     /**
      * searches for the given question in the SelectedQuestions table
@@ -151,16 +162,16 @@ public class PickQuestionsController {
             showError.showErrorPopup("Select a question and points first");
             return;
         }
-         if (searchInSelectedQuestionsTable(rowData)) {
-             showError.showErrorPopup("This question already exists. Select another question");
-             return;
-         }
+        if (searchInSelectedQuestionsTable(rowData)) {
+            showError.showErrorPopup("This question already exists. Select another question");
+            return;
+        }
         if (Integer.parseInt(pointsField.getText()) <= 0 || Integer.parseInt(pointsField.getText()) > 100) {
             showError.showErrorPopup("Please select a valid amount of points (1-100)");
             return;
         }
 
-           stateManagement.subtractTotalRemainingPoints(Integer.parseInt(pointsField.getText()));
+        stateManagement.subtractTotalRemainingPoints(Integer.parseInt(pointsField.getText()));
         if (stateManagement.getTotalRemainingPoints() < 0) {
             showError.showErrorPopup("Not enough total points");
             stateManagement.addTotalRemainingPoints(Integer.parseInt(pointsField.getText()));
@@ -239,7 +250,7 @@ public class PickQuestionsController {
      */
     public void goToAddNotes(ActionEvent event){
         stateManagement = StateManagement.getInstance();
-        saveTestQuestionsTable(selectedQuestions);
+        saveTestQuestionsTable();
         ScreenManager.goToNewScreen(event, PathConstants.addChangeNotes);
     }
 
@@ -249,19 +260,19 @@ public class PickQuestionsController {
      */
     public void backToCreateTest(ActionEvent event) {
         stateManagement = StateManagement.getInstance();
-        saveTestQuestionsTable(selectedQuestions);
+        saveTestQuestionsTable();
         ScreenManager.goToNewScreen(event, PathConstants.createNewTestPath);
     }
 
     /**
      * saves the elements of the selected questions table (used when switching screens)
-     * @param questionsList an observable list of all questions in the selected questions table
      */
-    public void saveTestQuestionsTable(ObservableList<TestQuestion> questionsList) {
-        questionsList =  selectedQuestionsTableView.getItems();
-        for (int i = 0 ; i < questionsList.size(); i++) {
-            stateManagement.setTestQuestions(questionsList.get(i));
-        }
+    public void saveTestQuestionsTable() {
+        ObservableList<TestQuestion> selectedQuestionsList = selectedQuestionsTableView.getItems();
+        ObservableList<TestQuestion> testQuestionsState = stateManagement.getTestQuestions();
+
+        //selected questions that are already in the list are filtered out to avoid being added again
+        testQuestionsState.addAll(selectedQuestionsList.filtered(question -> !testQuestionsState.contains(question)));
     }
 
     public void LogOut(ActionEvent event1) {

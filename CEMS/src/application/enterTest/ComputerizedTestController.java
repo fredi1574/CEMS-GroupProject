@@ -102,7 +102,8 @@ public class ComputerizedTestController {
         for (ActiveTest activeTest: activeTests){
             if (activeTest.getId().equals(test.getId()))
             {
-                NumberText.setText(activeTest.getNumOfQuestions());
+                int numOfQuestions = activeTest.getNumOfQuestions();
+                NumberText.setText(String.valueOf(numOfQuestions));
                 NumberText.setDisable(true);
             }
         }

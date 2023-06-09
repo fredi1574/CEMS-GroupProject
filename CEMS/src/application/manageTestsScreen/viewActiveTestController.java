@@ -77,144 +77,139 @@ public class viewActiveTestController {
         courseNameLabel.setText(stateManagement.course.getCourseName());
         subjecteNameLabel.setText(stateManagement.course.getSubjectName());
         testCodeTextField.setText(stateManagement.getTestCode());
-        numOfQuestionsTextField.setText(stateManagement.getCurrentActivetest().getNumOfQuestions());
+        numOfQuestionsTextField.setText(String.valueOf(stateManagement.getCurrentActivetest().getNumOfQuestions()));
         testDateTextField.setText(stateManagement.getCurrentActivetest().getTestDate());
         testDurationTextField.setText(stateManagement.getTestDuration());
         startingTimeTextField.setText(stateManagement.getCurrentActivetest().getStartingTime());
-
-        //updateRemainingTestTime();
-        //startTimer();
     }
 
     /**
      * calculates the remaining time for the test based on the test's start time and duration
      */
-//    private void updateRemainingTestTime() {
-//        int testDurationInSeconds = Integer.parseInt(stateManagement.getTestDuration()) * 60;
-//
-//        // Calculate the remaining seconds based on the current time and the test's starting time
-//        LocalTime  startTime = LocalTime.parse(stateManagement.getCurrentActivetest().getStartingTime());
-//        LocalTime endTime = startTime.plus(testDurationInSeconds,ChronoUnit.SECONDS);
-//        LocalTime currentTime = LocalTime.now();
-//        remainingSeconds = (int) ChronoUnit.SECONDS.between(currentTime,endTime);
-//        if (remainingSeconds < 0) {
-//            remainingSeconds = 0;
-//        }
-//    }
+    private void updateRemainingTestTime() {
+        int testDurationInSeconds = Integer.parseInt(stateManagement.getTestDuration()) * 60;
+
+        // Calculate the remaining seconds based on the current time and the test's starting time
+        LocalTime startTime = LocalTime.parse(stateManagement.getCurrentActivetest().getStartingTime());
+        LocalTime endTime = startTime.plus(testDurationInSeconds, ChronoUnit.SECONDS);
+        LocalTime currentTime = LocalTime.now();
+        remainingSeconds = (int) ChronoUnit.SECONDS.between(currentTime, endTime);
+        if (remainingSeconds < 0) {
+            remainingSeconds = 0;
+        }
+    }
 
     /**
      * updates the timer object to correctly display a test's remaining time
      */
-//    private void startTimer() {
-//        int totalSeconds = remainingSeconds;
-//        final int[] seconds = { totalSeconds };  // Create a final array to hold the remaining seconds
-//
-//        timer = new Timeline(
-//                new KeyFrame(Duration.seconds(1), event -> {
-//                    seconds[0]--;  // Decrement the remaining seconds
-//                    if (seconds[0] <= 0) {
-//                        // Timer has ended, perform necessary actions
-//                        timer.stop();
-//                        // Additional logic...
-//                    } else {
-//                        // Update the timer display on the screen
-//                        timeLeftLabel.setText(formatTime(seconds[0]));
-//                    }
-//                })
-//        );
-//        timer.setCycleCount(Animation.INDEFINITE);
-//        timer.play();
-//
-//        // Update the timer label immediately
-//        timeLeftLabel.setText(formatTime(seconds[0]));
-//    }
-//
-//    /**
-//     * formats the time  as a hh:mm:ss string
-//     * @param seconds time in seconds
-//     * @return the formatted string
-//     */
-//    private String formatTime(int seconds) {
-//        int hours = seconds / 3600;
-//        int minutes = (seconds % 3600) / 60;
-//        int secs = seconds % 60;
-//        return String.format("%02d:%02d:%02d", hours, minutes, secs);
-//    }
+    private void startTimer() {
+        int totalSeconds = remainingSeconds;
+        final int[] seconds = {totalSeconds};  // Create a final array to hold the remaining seconds
+
+        timer = new Timeline(
+                new KeyFrame(Duration.seconds(1), event -> {
+                    seconds[0]--;  // Decrement the remaining seconds
+                    if (seconds[0] <= 0) {
+                        // Timer has ended, perform necessary actions
+                        timer.stop();
+                        // Additional logic...
+                    } else {
+                        // Update the timer display on the screen
+                        timeLeftLabel.setText(formatTime(seconds[0]));
+                    }
+                })
+        );
+        timer.setCycleCount(Animation.INDEFINITE);
+        timer.play();
+
+        // Update the timer label immediately
+        timeLeftLabel.setText(formatTime(seconds[0]));
+    }
+
+    /**
+     * formats the time  as a hh:mm:ss string
+     *
+     * @param seconds time in seconds
+     * @return the formatted string
+     */
+    private String formatTime(int seconds) {
+        int hours = seconds / 3600;
+        int minutes = (seconds % 3600) / 60;
+        int secs = seconds % 60;
+        return String.format("%02d:%02d:%02d", hours, minutes, secs);
+    }
 
     /**
      * locks the test for all clients - the timer is stopped and the timeLeft value
      * in the activeTest table in the DB is updated
      * @param actionEvent the event that triggered the method
      */
-    public void lockTest(ActionEvent actionEvent) {
-        timer.pause();
 
+    /**
+     * locks the test for all clients - the timer is stopped and the timeLeft value
+     * in the activeTest table in the DB is updated
+     *
+     * @param actionEvent the event that triggered the method
+     */
+    public void lockTest(ActionEvent actionEvent) {
         //switches the visible buttons
         lockBtn.setVisible(false);
         lockTestLabel.setVisible(false);
         unlockBtn.setVisible(true);
         unlockTestLabel.setVisible(true);
-
-        //gets the updated number of remaining minutes at the time of the test being locked
-//        updateRemainingTestTime();
-//        String updatedTimeLeft = Integer.toString(remainingSeconds/60);
-//        stateManagement.getCurrentActivetest().setTimeLeft(updatedTimeLeft);
-//
-//        MsgHandler updateRemainingTime = new MsgHandler(TypeMsg.UpdateRemainingTime, stateManagement.getCurrentActivetest());
-//        ClientUI.chat.accept(updateRemainingTime);
-
-    }
-    public void showRequestDeclinedPopUp() {
-        showError.showInfoPopup("Time change request was declined");
-
-    }
-    public void showRequestApprovedPopUp() {
-        showError.showInfoPopup("Time change request was approved");
     }
 
+        public void showRequestDeclinedPopUp () {
+            showError.showInfoPopup("Time change request was declined");
 
-    public void unlockTest(ActionEvent actionEvent) {
-        timer.play();
+        }
 
-        //switches the visible buttons
-        lockBtn.setVisible(true);
-        lockTestLabel.setVisible(true);
-        unlockBtn.setVisible(false);
-        unlockTestLabel.setVisible(false);
+        public void showRequestApprovedPopUp () {
+            showError.showInfoPopup("Time change request was approved");
+        }
 
-        //TODO: unlock the active test for all clients through the DB
+
+        public void unlockTest (ActionEvent actionEvent){
+            //switches the visible buttons
+            lockBtn.setVisible(true);
+            lockTestLabel.setVisible(true);
+            unlockBtn.setVisible(false);
+            unlockTestLabel.setVisible(false);
+
+            //TODO: unlock the active test for all clients through the DB
+        }
+
+        @FXML
+        public void sendExtraTimeRequest (ActionEvent actionEvent){
+            TestRequestForApproval request = new TestRequestForApproval(testIdTextField.getText(), stateManagement.course.getSubjectID(),
+                    courseNameLabel.getText(), extraTimeTextField.getText(), testCommentsTextArea.getText(), Client.user.getFullName());
+            MsgHandler newRequest = new MsgHandler(TypeMsg.RequestExtraTime, request);
+            ClientUI.chat.accept(newRequest);
+            showError.showInfoPopup("Request was sent to the Head Of Department");
+            //extraTimeBtn.setDisable(true);
+            requestSent = true;
+
+
+        }
+
+        public void LogOut (ActionEvent event){
+            ScreenManager.goToNewScreen(event, PathConstants.loginPath);
+        }
+
+        public void back (ActionEvent event){
+            stateManagement.resetInstance();
+            ExitButton.closePopUp(event);
+        }
+
+        @FXML
+        private void closeClient (ActionEvent event){
+            ExitButton.closePopUp(event);
+        }
+
+        @FXML
+        public void minimizeWindow (ActionEvent event){
+            MinimizeButton.minimizeWindow(event);
+        }
+
+
     }
-
-    @FXML
-    public void sendExtraTimeRequest(ActionEvent actionEvent) {
-        TestRequestForApproval request = new TestRequestForApproval(testIdTextField.getText(),stateManagement.course.getSubjectID(),
-                courseNameLabel.getText(),extraTimeTextField.getText(),testCommentsTextArea.getText(),Client.user.getFullName());
-        MsgHandler newRequest = new MsgHandler(TypeMsg.RequestExtraTime, request);
-        ClientUI.chat.accept(newRequest);
-        showError.showInfoPopup("Request was sent to the Head Of Department");
-        extraTimeBtn.setDisable(true);
-        requestSent = true;
-
-
-
-    }
-    public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, PathConstants.loginPath);
-    }
-
-    public void back(ActionEvent event) {
-        stateManagement.resetInstance();
-        ExitButton.closePopUp(event);
-    }
-    @FXML
-    private void closeClient(ActionEvent event) {
-        ExitButton.closePopUp(event);
-    }
-
-    @FXML
-    public void minimizeWindow(ActionEvent event) {
-        MinimizeButton.minimizeWindow(event);
-    }
-
-
-}

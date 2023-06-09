@@ -181,6 +181,11 @@ public class Client extends AbstractClient {
                 break;
             case UpdateTheApproveofLecturerResponse:
                 break;
+            case AddNewActiveTestResponse:
+                break;
+            case AddNewAfterTestInfoResponse:
+                break;
+
 
         }
 

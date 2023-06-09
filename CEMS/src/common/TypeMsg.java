@@ -321,90 +321,118 @@ public enum TypeMsg {
             return "Student id's is verified";
         }
     },
-    IcreaseStudentsEnteringTest{
+    IcreaseStudentsEnteringTest {
         public String toString() {
             return "Student is taking a test";
         }
 
     },
-    TotalStudentsInTestIncreased{
+    TotalStudentsInTestIncreased {
         public String toString() {
             return "Student is taking a test";
         }
 
     },
-    IcreaseStudentsFinishedTest{
+    IcreaseStudentsFinishedTest {
         public String toString() {
             return "Student finished test";
         }
 
     },
-    StudentsFinishedTestIncreased{
+    StudentsFinishedTestIncreased {
         public String toString() {
             return "Student is taking a test";
         }
 
     },
-    changeTestDuration{
+    changeTestDuration {
         public String toString() {
             return "Head Of Department want to change test duration";
         }
 
     },
-    TestDurationChanged{
+    TestDurationChanged {
         public String toString() {
             return "test's duration was changed";
         }
 
     },
-    GetsubjectNametoID{
+    GetsubjectNametoID {
         public String toString() {
             return "get subject id";
         }
 
     },
-    ImportedSubjectIDfromName{
+    ImportedSubjectIDfromName {
         public String toString() {
             return "subject ID imported";
         }
 
     },
-    RequestExtraTime{
+    RequestExtraTime {
         public String toString() {
             return "Lecturer requested extra time in test";
         }
 
     },
-    ExtraTimeRequested{
+    ExtraTimeRequested {
         public String toString() {
             return "Lecturer requested extra time in test";
         }
 
     },
-    TestDurationApprovedPopLecturer{
+    TestDurationApprovedPopLecturer {
         public String toString() {
             return "Approved time change popup";
         }
     },
-    TestDurationDeclinedPopLecturer{
+    TestDurationDeclinedPopLecturer {
         public String toString() {
             return "Declined time change popup";
         }
     },
-    GetTestForApproval{
-        public String toString() { return "User Asked All Test To Do Approve"; }
+    GetTestForApproval {
+        public String toString() {
+            return "User Asked All Test To Do Approve";
+        }
 
     },
-    GetTestForApprovalResponse{
-        public String toString() { return "Server returned the list of tests needed approval"; }
+    GetTestForApprovalResponse {
+        public String toString() {
+            return "Server returned the list of tests needed approval";
+        }
     },
-    UpdateTheApproveofLecturer{
-        public String toString() { return "User asked to update the approv"; }
+    UpdateTheApproveofLecturer {
+        public String toString() {
+            return "User asked to update the approv";
+        }
     },
-    UpdateTheApproveofLecturerResponse{
-        public String toString() { return "Server update your approval"; }
+    UpdateTheApproveofLecturerResponse {
+        public String toString() {
+            return "Server update your approval";
+        }
     },
 
+    AddNewActiveTest {
+        public String toString() {
+            return "Lecturer wants to activate a test";
+        }
+    },
+    AddNewActiveTestResponse {
+        public String toString() {
+            return "Server activated the test";
+        }
+    },
+    AddNewAfterTestInfo {
+        public String toString() {
+            return "Lecturer wants to add initial information a test";
+        }
+    },
+    AddNewAfterTestInfoResponse {
+        public String toString() {
+            return "Server added initial test information";
+        }
+    },
 
 
 }

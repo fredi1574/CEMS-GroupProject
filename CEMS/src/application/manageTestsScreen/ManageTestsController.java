@@ -15,8 +15,11 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import util.*;
-
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+
 
 
 /**
@@ -43,6 +46,8 @@ public class ManageTestsController {
     private TableView<ActiveTest> activeTestsTableView;
     public StateManagement stateManagement;
     Test testRowData;
+    @FXML
+    private TableView<Test> approvedTestsTableView; //contains every test that has been verified by the lecturer
     ActiveTest activeTestRowData;
     TestForApproval data;
 
@@ -79,7 +84,7 @@ public class ManageTestsController {
         TableManager.importData(testsFromDBTableView, dbTests);
         double[] dbTestsMultipliers = {0.1, 0.08, 0.1, 0.1, 0.175, 0.1, 0.1, 0.1, 0.14};
         TableManager.resizeColumns(testsFromDBTableView, dbTestsMultipliers);
-        
+
         ObservableList<String> columnsforAppropval = FXCollections.observableArrayList();
         columnsforAppropval.addAll("Student ID", "Test ID", "Course","Semester", "Session","Grade","Approved");
         TableManager.createTable(testApprovalTableView, columnsforAppropval);
@@ -111,11 +116,11 @@ public class ManageTestsController {
         ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTests());
 
         ObservableList<String> columns = FXCollections.observableArrayList();
-        columns.addAll("ID", "Starting Time");
+        columns.addAll("ID", "Starting Time", "Test Code");
         TableManager.createTable(activeTestsTableView, columns);
         TableManager.importData(activeTestsTableView, activeTests);
 
-        double[] activeTestsMultipliers = {0.40, 0.60};
+        double[] activeTestsMultipliers = {0.22, 0.39,0.39};
         TableManager.resizeColumns(activeTestsTableView, activeTestsMultipliers);
 
         //makes the elements in the database questions table clickable
@@ -149,35 +154,7 @@ public class ManageTestsController {
                 return;
             }
         }
-
-        //load test's course
-        String subjectID = testRowData.getId().substring(0,2);
-        String courseID = testRowData.getId().substring(2,4);
-        Course testCourse = new Course(subjectID,courseID, testRowData.getSubject(), testRowData.getCourseName());
-
-        MsgHandler getTestQuestions = new MsgHandler(TypeMsg.GetTestQuestions, testRowData);
-        ClientUI.chat.accept(getTestQuestions);
-        stateManagement.setCourse(testCourse);
-
-        //load test's questions
-        ObservableList<TestQuestion> testQuestions = FXCollections.observableArrayList((List) ClientUI.chat.getTestQuestions());
-        for (TestQuestion question: testQuestions) {
-            stateManagement.setTestQuestions(question);
-        }
-
-        //load test's other data
-        stateManagement.setTestID(testRowData.getId());
-        stateManagement.setTestNum(testRowData.getTestNumber());
-        stateManagement.setTestDuration(testRowData.getTestDuration());
-        stateManagement.setYear(testRowData.getYear());
-        stateManagement.setSession(testRowData.getSession());
-        stateManagement.setSemester(testRowData.getSemester());
-        stateManagement.setStudentComment(testRowData.getStudentComments().equals("null") ? "" : testRowData.getStudentComments());
-        stateManagement.setTeacherComment(testRowData.getTeacherComments().equals("null") ? "" : testRowData.getTeacherComments());
-
-        //when an existing test is opened, no points are available
-        stateManagement.totalRemainingPoints = 0;
-
+        loadTestState(testRowData);
         ScreenManager.goToNewScreen(event,PathConstants.createNewTestPath);
     }
 
@@ -211,13 +188,78 @@ public class ManageTestsController {
         currentStage.close();
         ScreenManager.showStage(PathConstants.manageTestsPath, PathConstants.iconPath);
     }
+    public void activateTest(ActionEvent actionEvent) {
+
+        if (testRowData == null) {
+            showError.showErrorPopup("Select a test to activate");
+            return;
+        }
+
+        if (showError.showConfirmationPopup("Are you sure you want to activate the test?")) {
+
+            loadTestState(testRowData); //loads the details of the relevant test
+
+            //setting the activeTest data
+            LocalDate currentDate = LocalDate.now();
+            LocalTime currentTime = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);;
+            ActiveTest testToActivate = new ActiveTest(
+                    stateManagement.getTestID(),
+                    stateManagement.getTestQuestions().size(),
+                    currentDate.toString(),
+                    currentTime.toString(),
+                    stateManagement.getTestCode()
+            );
+
+            //adds a row to the activetest table
+            MsgHandler addNewActiveTest = new MsgHandler(TypeMsg.AddNewActiveTest, testToActivate);
+            ClientUI.chat.accept(addNewActiveTest);
+
+            //adds a row to the aftertestinfo table
+            String[] infoArray = {testRowData.getId(),testToActivate.getTestDate(),testRowData.getTestDuration()};
+            MsgHandler addNewAfterTestInfo = new MsgHandler(TypeMsg.AddNewAfterTestInfo, infoArray);
+            ClientUI.chat.accept(addNewAfterTestInfo);
+
+            reloadPage();
+
+        }
+    }
+    public void loadTestState(Test test) {
+        //load test's course
+        String subjectID = test.getId().substring(0,2);
+        String courseID = test.getId().substring(2,4);
+        Course testCourse = new Course(subjectID,courseID, test.getSubject(), test.getCourseName());
+        stateManagement.setCourse(testCourse);
+
+        //load test's questions
+        MsgHandler getTestQuestions = new MsgHandler(TypeMsg.GetTestQuestions, test);
+        ClientUI.chat.accept(getTestQuestions);
+
+        ObservableList<TestQuestion> testQuestions = FXCollections.observableArrayList((List) ClientUI.chat.getTestQuestions());
+        for (TestQuestion question: testQuestions) {
+            stateManagement.setTestQuestions(question);
+        }
+
+        //load test's other data
+        stateManagement.setTestID(test.getId());
+        stateManagement.setTestNum(test.getTestNumber());
+        stateManagement.setTestDuration(test.getTestDuration());
+        stateManagement.setYear(test.getYear());
+        stateManagement.setSession(test.getSession());
+        stateManagement.setSemester(test.getSemester());
+        stateManagement.setTestCode(test.getTestCode());
+        stateManagement.setStudentComment(test.getStudentComments().equals("null") ? "" : test.getStudentComments());
+        stateManagement.setTeacherComment(test.getTeacherComments().equals("null") ? "" : test.getTeacherComments());
+
+        //when an existing test is opened, no points are available
+        stateManagement.totalRemainingPoints = 0;
+    }
+
 
     /**
      * view the selected active test's current progress and info
      * @param actionEvent the event that triggered the method
      */
     public void viewTestInProgress(ActionEvent actionEvent) {
-        stateManagement = StateManagement.getInstance();
 
         if (activeTestRowData == null) {
             showError.showErrorPopup("Select a test to view");
@@ -230,7 +272,6 @@ public class ManageTestsController {
                 activeTestRowData.getNumOfQuestions(),
                 activeTestRowData.getTestDate(),
                 activeTestRowData.getStartingTime(),
-               // activeTestRowData.getTimeLeft(),
                 activeTestRowData.getTestCode()
         );
         stateManagement.setCurrentActivetest(curActiveTest);
@@ -241,41 +282,11 @@ public class ManageTestsController {
                 .filter(test -> test.getId().equals(activeTestRowData.getId()))
                 .findFirst()
                 .orElse(null);
-
-        //TODO: seperate method for stateManagement loading
-
-        //load test's course
-        String subjectID = matchingTestFromDB.getId().substring(0,2);
-        String courseID = matchingTestFromDB.getId().substring(2,4);
-        Course testCourse = new Course(subjectID,courseID, matchingTestFromDB.getSubject(), matchingTestFromDB.getCourseName());
-
-        MsgHandler getTestQuestions = new MsgHandler(TypeMsg.GetTestQuestions, matchingTestFromDB);
-        ClientUI.chat.accept(getTestQuestions);
-        stateManagement.setCourse(testCourse);
-
-        //load test's questions
-        ObservableList<TestQuestion> testQuestions = FXCollections.observableArrayList((List) ClientUI.chat.getTestQuestions());
-        for (TestQuestion question: testQuestions) {
-            stateManagement.setTestQuestions(question);
-        }
-
-        //load test's other data
-        stateManagement.setTestID(matchingTestFromDB.getId());
-        stateManagement.setTestNum(matchingTestFromDB.getTestNumber());
-        stateManagement.setTestDuration(matchingTestFromDB.getTestDuration());
-        stateManagement.setYear(matchingTestFromDB.getYear());
-        stateManagement.setSession(matchingTestFromDB.getSession());
-        stateManagement.setSemester(matchingTestFromDB.getSemester());
-        stateManagement.setTestCode(matchingTestFromDB.getTestCode());
-        stateManagement.setStudentComment(matchingTestFromDB.getStudentComments().equals("null") ? "" : matchingTestFromDB.getStudentComments());
-        stateManagement.setTeacherComment(matchingTestFromDB.getTeacherComments().equals("null") ? "" : matchingTestFromDB.getTeacherComments());
-
-        //when an existing test is opened, no points are available
-        stateManagement.totalRemainingPoints = 0;
+        if (matchingTestFromDB != null)
+            loadTestState(matchingTestFromDB);
 
         ScreenManager.popUpScreen(PathConstants.viewActiveTestPath);
     }
-
     public void viewTestResults(ActionEvent actionEvent) {
         if(data == null){
             showError.showErrorPopup("Must to select tests before");

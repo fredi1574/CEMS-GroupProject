@@ -50,9 +50,9 @@
         <ImageView fitHeight="73.0" fitWidth="196.0" layoutX="14.0" layoutY="7.0" preserveRatio="true">
             <Image url="@../../images/Logo_Transparent_Bright.png" />
         </ImageView>
-       <Button layoutX="1053.0" layoutY="13.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
-       <Button layoutX="1017.0" layoutY="13.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
-        <Text fill="#3b3131" layoutX="1024.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true">
+        <Button layoutX="1053.0" layoutY="13.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
+        <Button layoutX="1017.0" layoutY="13.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
+        <Text fx:id="usernameText" fill="WHITE" layoutX="1024.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true">
             <font>
                 <Font name="Trebuchet MS" size="12.0" />
             </font>
@@ -70,59 +70,71 @@
     <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="34.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@../../images/search.png" />
     </ImageView>
-   <TableView fx:id="testApprovalTableView" layoutX="28.0" layoutY="486.0" prefHeight="230.0" prefWidth="727.0" />
-   <Label layoutX="26.0" layoutY="150.0" prefHeight="27.0" prefWidth="175.0" text="Tests Database:">
-      <font>
-         <Font name="System Bold" size="18.0" />
-      </font>
-   </Label>
-   <Label layoutX="26.0" layoutY="456.0" prefHeight="27.0" prefWidth="248.0" text="Tests waiting for approval:">
-      <font>
-         <Font name="System Bold" size="18.0" />
-      </font>
-   </Label>
-   <Label layoutX="582.0" layoutY="461.0" text="*Double click on a test to view it" />
-   <Separator layoutY="450.0" prefHeight="1.0" prefWidth="790.0" />
-   <TableView fx:id="activeTestsTableView" layoutX="808.0" layoutY="179.0" prefHeight="230.0" prefWidth="260.0" />
-   <Separator layoutX="790.0" layoutY="101.0" orientation="VERTICAL" prefHeight="729.0" prefWidth="6.0" />
-   <Label layoutX="808.0" layoutY="150.0" prefHeight="27.0" prefWidth="260.0" text="Tests in progress:">
-      <font>
-         <Font name="System Bold" size="18.0" />
-      </font>
-   </Label>
-   <Button fx:id="viewTestInProgressBtn" layoutX="808.0" layoutY="416.0" mnemonicParsing="false" onAction="#viewTestInProgress" prefHeight="28.0" prefWidth="106.0" styleClass="regularButtons" text="View Test">
-      <graphic>
-         <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../../images/test_inprogress.png" />
-            </image></ImageView>
-      </graphic>
-   </Button>
-   <Button fx:id="viewTestResultsBtn" layoutX="27.0" layoutY="722.0" mnemonicParsing="false" onAction="#viewTestResults" prefHeight="26.0" prefWidth="160.0" styleClass="regularButtons" text="View Test Results">
-      <graphic>
-         <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../../images/test_results.png" />
-            </image>
-         </ImageView>
-      </graphic>
-   </Button>
-   <Button fx:id="editBtn" alignment="CENTER" layoutX="152.0" layoutY="415.0" mnemonicParsing="false" onAction="#editTest" prefHeight="26.0" prefWidth="98.0" styleClass="regularButtons" text="Edit">
-      <font>
-         <Font name="Franklin Gothic Demi Cond" size="12.0" />
-      </font>
-      <graphic>
-         <ImageView fitHeight="16.0" fitWidth="16.0" translateY="1.0">
-            <image>
-               <Image url="@../../images/test_edit.png" />
-            </image>
-         </ImageView>
-      </graphic>
-   </Button>
-   <TableView fx:id="approvedTestsTableView" layoutX="808.0" layoutY="486.0" prefHeight="230.0" prefWidth="260.0" />
-   <Label layoutX="808.0" layoutY="456.0" prefHeight="27.0" prefWidth="260.0" text="Approved Tests:">
-      <font>
-         <Font name="System Bold" size="18.0" />
-      </font>
-   </Label>
+    <TableView fx:id="testApprovalTableView" layoutX="28.0" layoutY="486.0" prefHeight="230.0" prefWidth="727.0" />
+    <Label layoutX="26.0" layoutY="150.0" prefHeight="27.0" prefWidth="175.0" text="Tests Database:">
+        <font>
+            <Font name="System Bold" size="18.0" />
+        </font>
+    </Label>
+    <Label layoutX="26.0" layoutY="456.0" prefHeight="27.0" prefWidth="248.0" text="Tests waiting for approval:">
+        <font>
+            <Font name="System Bold" size="18.0" />
+        </font>
+    </Label>
+    <Label layoutX="582.0" layoutY="461.0" text="*Double click on a test to view it" />
+    <Separator layoutY="450.0" prefHeight="1.0" prefWidth="790.0" />
+    <TableView fx:id="activeTestsTableView" layoutX="808.0" layoutY="179.0" prefHeight="230.0" prefWidth="260.0" />
+    <Separator layoutX="790.0" layoutY="101.0" orientation="VERTICAL" prefHeight="729.0" prefWidth="6.0" />
+    <Label layoutX="808.0" layoutY="150.0" prefHeight="27.0" prefWidth="260.0" text="Tests in progress:">
+        <font>
+            <Font name="System Bold" size="18.0" />
+        </font>
+    </Label>
+    <Button fx:id="viewTestInProgressBtn" layoutX="808.0" layoutY="416.0" mnemonicParsing="false" onAction="#viewTestInProgress" prefHeight="28.0" prefWidth="106.0" styleClass="regularButtons" text="View Test">
+        <graphic>
+            <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../../images/test_inprogress.png" />
+                </image></ImageView>
+        </graphic>
+    </Button>
+    <Button fx:id="viewTestResultsBtn" layoutX="27.0" layoutY="722.0" mnemonicParsing="false" onAction="#viewTestResults" prefHeight="26.0" prefWidth="160.0" styleClass="regularButtons" text="View Test Results">
+        <graphic>
+            <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../../images/test_results.png" />
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
+    <Button fx:id="editBtn" alignment="CENTER" layoutX="152.0" layoutY="415.0" mnemonicParsing="false" onAction="#editTest" prefHeight="26.0" prefWidth="98.0" styleClass="regularButtons" text="Edit">
+        <font>
+            <Font name="Franklin Gothic Demi Cond" size="12.0" />
+        </font>
+        <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" translateY="1.0">
+                <image>
+                    <Image url="@../../images/test_edit.png" />
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
+    <TableView fx:id="approvedTestsTableView" layoutX="808.0" layoutY="486.0" prefHeight="230.0" prefWidth="260.0" />
+    <Label layoutX="808.0" layoutY="456.0" prefHeight="27.0" prefWidth="260.0" text="Approved Tests:">
+        <font>
+            <Font name="System Bold" size="18.0" />
+        </font>
+    </Label>
+    <Button fx:id="activateTestBtn" alignment="CENTER" layoutX="274.0" layoutY="415.0" mnemonicParsing="false" onAction="#activateTest" prefHeight="26.0" prefWidth="122.0" styleClass="regularButtons" text="Activate Test">
+        <font>
+            <Font name="Franklin Gothic Demi Cond" size="12.0" />
+        </font>
+        <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" translateY="1.0">
+                <image>
+                    <Image url="@../../images/test_activate.png" />
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
 </AnchorPane>
