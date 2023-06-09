@@ -25,9 +25,8 @@ DROP TABLE IF EXISTS `activetest`;
 CREATE TABLE `activetest` (
   `id` varchar(45) NOT NULL,
   `numOfQuestions` int DEFAULT NULL,
-  `testDate` date DEFAULT NULL,
-  `startingTime` time DEFAULT NULL,
-  `timeLeft` int DEFAULT NULL,
+  `testDate` varchar(45) DEFAULT NULL,
+  `startingTime` varchar(45) DEFAULT NULL,
   `testCode` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -39,7 +38,7 @@ CREATE TABLE `activetest` (
 
 LOCK TABLES `activetest` WRITE;
 /*!40000 ALTER TABLE `activetest` DISABLE KEYS */;
-INSERT INTO `activetest` VALUES ('010101',2,'2005-06-20','21:00:00',50,'ABC3');
+INSERT INTO `activetest` VALUES ('010101',3,'2007-06-20','21:00:00','ABC3');
 /*!40000 ALTER TABLE `activetest` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +66,6 @@ CREATE TABLE `aftertestinfo` (
 
 LOCK TABLES `aftertestinfo` WRITE;
 /*!40000 ALTER TABLE `aftertestinfo` DISABLE KEYS */;
-INSERT INTO `aftertestinfo` VALUES ('010101',0,0,1,0,5);
 /*!40000 ALTER TABLE `aftertestinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +91,7 @@ CREATE TABLE `answersofstudent` (
 
 LOCK TABLES `answersofstudent` WRITE;
 /*!40000 ALTER TABLE `answersofstudent` DISABLE KEYS */;
-INSERT INTO `answersofstudent` VALUES (4,'010101','3333',2),(4,'010101','889',3);
+INSERT INTO `answersofstudent` VALUES (4,'010101','010101',4),(4,'010101','010102',2),(4,'010101','010103',0);
 /*!40000 ALTER TABLE `answersofstudent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +174,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES ('010102','01','Algebra','STAVVVV',2,'a a','SADAS','SADSDA','SADASDADS','SDASDA','1'),('010201','01','Hedva','check	',1,'a a','dsads','asddsa','sdaasddssaaasdsd','sadsdasad','1'),('15','Math','Algebra1','What is my name?',123,'May','May	','Noa','Shay','Tiran','1'),('3333','01','Algebra','sdadas',22,'asdsa','dsas','sdasd','saddsa','asds','2'),('889','01','Algebra','check.',1889,'May','check','check','check','check','1'),('928','01','Algebra','MAY',1928,'May','may','may','may','may','2');
+INSERT INTO `question` VALUES ('010101','01','Algebra','How much is 2+2?',1,'b b','1','2','3','4','4'),('010102','01','Algebra','How much is 1+1?',2,'b b','1','2','3','4','2'),('010103','01','Algebra','How much is 10-10?',3,'b b','10','5','0','12','3'),('010204','01','Hedva','How are you?',4,'b b','bad','very bad','no	','ok','2');
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,7 +235,7 @@ CREATE TABLE `studentstest` (
 
 LOCK TABLES `studentstest` WRITE;
 /*!40000 ALTER TABLE `studentstest` DISABLE KEYS */;
-INSERT INTO `studentstest` VALUES ('4','01','01','Algebra','M','90','Noa Krispin','2020','A','A',NULL,NULL,NULL,NULL,NULL),('4','010101','Math','Algebra','C','75','Noa Krispin','2019','B','A','NO','1','2','','N'),('4','02','01','Hedva','C','99','Noa Krispin','2019','A','A',NULL,NULL,NULL,NULL,NULL),('4','03','01','Hedva','C','30','Noa Krispin','2021','B','B',NULL,NULL,NULL,NULL,NULL),('4','22222','02','Phyton','C','100','Noa Krispin',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('4','333','01','Algebra','C','50','Noa Krispin','2022','B','B',NULL,NULL,NULL,NULL,NULL),('5','02','01','Hedva','C','8','AbedTayer','2019','A','A',NULL,NULL,NULL,NULL,NULL),('5','2213312','01','Algebra','C','100','Abed Tayer','2020','C','B',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `studentstest` VALUES ('4','010101','01','Algebra','C','80','Noa Krispin','2023','B','A','NO','2','3','','N');
 /*!40000 ALTER TABLE `studentstest` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -296,7 +294,7 @@ CREATE TABLE `test` (
 
 LOCK TABLES `test` WRITE;
 /*!40000 ALTER TABLE `test` DISABLE KEYS */;
-INSERT INTO `test` VALUES ('01','010101','146','b b','Math','Algebra','hey	','C','null','2019','B','A','ABC3'),('2','02','60','b b','Math','Hedva','Lecturer note 1','C','Student Note 1','2020','B','A','a82e'),('013','03','180','b b','Math','Hedva','asdasd','C','asdasd','2022','A','A','6543'),('01','050301','','null','Biology','Anatomy','null','C','null','2020','A','A',NULL);
+INSERT INTO `test` VALUES ('01','010101','1','b b','Math','Algebra','hey Lecturer','C','Hey Students','2023','B','A','d97a'),('02','010202','50','b b','Math','Hedva','Bye','C','Hey','2020','A','B','5d18');
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -326,7 +324,7 @@ CREATE TABLE `testquestion` (
 
 LOCK TABLES `testquestion` WRITE;
 /*!40000 ALTER TABLE `testquestion` DISABLE KEYS */;
-INSERT INTO `testquestion` VALUES ('3333','13333',75,'me','010101','Algebra','01','May'),('889','1889',25,'check.','010101','Algebra','01','May'),('928','1928',100,'MAY','050301','Algebra','01','May');
+INSERT INTO `testquestion` VALUES ('010101','1',60,'How much is 2+2?','010101','Algebra','01','b b'),('010102','2',20,'How much is 1+1?','010101','Algebra','01','b b'),('010103','3',20,'How much is 10-10?','010101','Algebra','01','b b'),('010204','4',100,'How are you?','010202','Hedva','01','b b');
 /*!40000 ALTER TABLE `testquestion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -354,6 +352,7 @@ CREATE TABLE `testrequest` (
 
 LOCK TABLES `testrequest` WRITE;
 /*!40000 ALTER TABLE `testrequest` DISABLE KEYS */;
+INSERT INTO `testrequest` VALUES (60,'dsasa','010101','01','Algebra','b b');
 /*!40000 ALTER TABLE `testrequest` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -396,4 +395,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-07 14:46:01
+-- Dump completed on 2023-06-08 20:32:27
