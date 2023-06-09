@@ -163,6 +163,7 @@ public class viewActiveTestController {
 
         public void showRequestDeclinedPopUp () {
             smsEmailPopUpController.SetInfoField("Time change request was declined");
+            ScreenManager.popUpScreen(PathConstants.SmsEmailPopUp);
         }
 
         public void showRequestApprovedPopUp () {

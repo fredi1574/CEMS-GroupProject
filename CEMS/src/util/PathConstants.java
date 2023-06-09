@@ -46,4 +46,5 @@ public class PathConstants {
     public  static final String EnterReportByCoursePath = "/application/viewReportsScreen/ViewSpecificReportHeadOfDepart/openRepoGraphs/openReportByCourse.fxml";
     public  static final String EnterReportByLecturerPath = "/application/viewReportsScreen/ViewSpecificReportHeadOfDepart/openRepoGraphs/openReportByLecturer.fxml";
     public  static final String EnterReportByStudentPath = "/application/viewReportsScreen/ViewSpecificReportHeadOfDepart/openRepoGraphs/openReportByStudent.fxml";
+    public  static final String SmsEmailPopUp = "/application/Simulation/SmsEmailPopUp.fxml";
 }

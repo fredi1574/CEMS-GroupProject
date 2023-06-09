@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import util.ExitButton;
 import util.MinimizeButton;
 import util.ScreenManager;
 
@@ -23,11 +24,14 @@ public class SmsEmailPopUpController {
     @FXML
     private AnchorPane header;
 
-    @FXML
-    void closeClient(ActionEvent event) {
+    public void initialize() {
         ScreenManager.dragAndDrop(header);
         fullNameText.setText(Client.user.getFullName());
         EmailAdressTxt.setText(Client.user.getEmail());
+    }
+    @FXML
+    void closeClient(ActionEvent event) {
+        ExitButton.closePopUp(event);
     }
     public void SetInfoField(String info){
         InfoTextField.setText(info);
