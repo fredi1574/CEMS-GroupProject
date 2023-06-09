@@ -70,6 +70,7 @@ public class QuestionsComputerizedTestAnswerController {
     private int numberOfQuestions;
     static int totalQuestions;
     private static int selectedCount = 0;
+    private static int TotalStudents;
     private static ObservableList<TestQuestion> testQuestions;
 
 
@@ -212,6 +213,44 @@ public class QuestionsComputerizedTestAnswerController {
             fetchQuestion();
         }
     }
+    public boolean checkLockTest(){
+        Test test = getTestData();
+        MsgHandler numberOfRegistered = new MsgHandler(TypeMsg.CountRegisteredStudents,test.getCourseName());
+        ClientUI.chat.accept(numberOfRegistered);
+        int NumberOfRegisteredCounter = (int) (ClientUI.chat.getNumberOfRegistered());
+
+        MsgHandler totalStudentAttended = new MsgHandler(TypeMsg.NumberOfAttendedCounter,test.getId());
+        ClientUI.chat.accept(totalStudentAttended);
+        int NumberOfAttendedCounter = (int) (ClientUI.chat.getNumberOfAttended());
+        if (NumberOfRegisteredCounter - NumberOfAttendedCounter == 0) {
+            TotalStudents = NumberOfAttendedCounter;
+            return true;
+
+        }
+        return false;
+    }
+    public int CalculateTotalForcedFinished(){
+        Test test = getTestData();
+
+        MsgHandler numberOfFinished = new MsgHandler(TypeMsg.CountNumberOfFinished,test.getId());
+        ClientUI.chat.accept(numberOfFinished);
+        int NumberOfFinishedCounter = (int) (ClientUI.chat.getNumberOfFinished());
+        int TotalForcedFinished = TotalStudents - NumberOfFinishedCounter;
+        return TotalForcedFinished;
+
+
+
+    }
+    public void saveAfterTestInfoAndDeleteFromActive(){
+        Test test = getTestData();
+        int totalForcedFinished = CalculateTotalForcedFinished();
+        String[] afterTestInfo = {test.getTestDuration(), String.valueOf(totalForcedFinished), test.getId()};
+        MsgHandler addAfterTestInfo = new MsgHandler(TypeMsg.FinishAfterTestInfo,afterTestInfo);
+        ClientUI.chat.accept(addAfterTestInfo);
+        MsgHandler deleteFromActive = new MsgHandler(TypeMsg.UnActivateTest,test.getId());
+        ClientUI.chat.accept(deleteFromActive);
+
+    }
 
     @FXML
     public void SubmitTest(ActionEvent event) throws SQLException {
@@ -221,6 +260,9 @@ public class QuestionsComputerizedTestAnswerController {
                 saveFinalAnswers();
                 MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, EnterCodePopUpController.testID);
                 ClientUI.chat.accept(finshedStudentsIncrease);
+                if (checkLockTest()){
+                    saveAfterTestInfoAndDeleteFromActive();
+                }
                 ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
             }
 
@@ -281,13 +323,17 @@ public class QuestionsComputerizedTestAnswerController {
                         // Timer has ended, perform necessary actions
                         timer.stop();
                             saveFinalAnswers();
-
+                        if (checkLockTest()){
+                            saveAfterTestInfoAndDeleteFromActive();
+                        }
 
                         Platform.runLater(() -> {
-                            showError.showInfoPopup("Test is over");
                             Stage currentStage = (Stage) header.getScene().getWindow();
-                            currentStage.close();
-                            ScreenManager.showStage(PathConstants.mainMenuStudentPath,PathConstants.iconPath);
+                            if (currentStage.isShowing()) {
+                                showError.showInfoPopup("Test is over");
+                                currentStage.close();
+                                ScreenManager.showStage(PathConstants.mainMenuStudentPath, PathConstants.iconPath);
+                            }
                         });
                         // Additional logic...
                     } else {

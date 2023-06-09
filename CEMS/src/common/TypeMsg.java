@@ -433,9 +433,68 @@ public enum TypeMsg {
             return "Server added initial test information";
         }
     },
+    NumberOfAttendedCounter {
+        public String toString() {
+            return "Request to get number of students who entered a test";
+        }
 
+    },
+    ImportedNumberOfAttendedCounter {
+        public String toString() {
+            return "imported number of students who entered a test";
+        }
 
+    },
+    CountRegisteredStudents {
+        public String toString() {
+            return "Request to get number of students who are assigned to a test (the course)";
+        }
+
+    },
+    ImportedRegisteredStudents {
+        public String toString() {
+            return "Imported number of students who are registered to the test";
+        }
+
+    },
+    FinishAfterTestInfo {
+        public String toString() {
+            return "Test is over, need to save afterTestInfo";
+        }
+
+    },
+    AfterTestRowCompleted {
+        public String toString() {
+            return "After test info saved";
+        }
+
+    },
+    UnActivateTest {
+        public String toString() {
+            return "Test is over, remove from activetest";
+        }
+
+    },
+    CompleteUnactivatingTest {
+        public String toString() {
+            return "Test is no longer active";
+        }
+
+    },
+    CountNumberOfFinished {
+        public String toString() {
+            return "Count number of students who submitted the test";
+        }
+
+    },
+    ImportedNumberOfFinished {
+        public String toString() {
+            return "Imported number of students who submitted the test";
+        }
+
+    },
 }
+
 
 
 

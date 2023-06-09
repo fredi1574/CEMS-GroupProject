@@ -35,6 +35,9 @@ public class Client extends AbstractClient {
     public Object singleSubject;
     public Object UserAndCourse;
     public List<Object> testsForApproval;
+    public Object NumOfRegistered;
+    public Object NumOfFinished;
+    public Object NumOfAttended;
 
     public static User user;
 
@@ -185,6 +188,21 @@ public class Client extends AbstractClient {
                 break;
             case AddNewAfterTestInfoResponse:
                 break;
+            case ImportedNumberOfAttendedCounter:
+                this.NumOfAttended = (Integer)messageFromServer.getMsg();
+                break;
+            case ImportedRegisteredStudents:
+                this.NumOfRegistered = (Integer)messageFromServer.getMsg();
+                break;
+            case  AfterTestRowCompleted:
+                break;
+            case ImportedNumberOfFinished:
+                this.NumOfFinished = (Integer)messageFromServer.getMsg();
+                break;
+            case CompleteUnactivatingTest:
+                break;
+
+
 
 
         }

@@ -38,7 +38,7 @@ CREATE TABLE `activetest` (
 
 LOCK TABLES `activetest` WRITE;
 /*!40000 ALTER TABLE `activetest` DISABLE KEYS */;
-INSERT INTO `activetest` VALUES ('010104',2,'2023-06-09','12:10','4f62'),('010203',1,'2023-06-09','12:02','799A');
+INSERT INTO `activetest` VALUES ('010203',1,'2023-06-09','16:04','799A');
 /*!40000 ALTER TABLE `activetest` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,7 +52,7 @@ DROP TABLE IF EXISTS `aftertestinfo`;
 CREATE TABLE `aftertestinfo` (
   `testID` varchar(45) NOT NULL,
   `testDuration` int DEFAULT NULL,
-  `actualTime` int DEFAULT NULL,
+  `actualDuration` int DEFAULT NULL,
   `totalFinished` int DEFAULT NULL,
   `totalForcedFinished` int DEFAULT NULL,
   `totalStudents` int DEFAULT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE `aftertestinfo` (
 
 LOCK TABLES `aftertestinfo` WRITE;
 /*!40000 ALTER TABLE `aftertestinfo` DISABLE KEYS */;
-INSERT INTO `aftertestinfo` VALUES ('010104',500,NULL,2,NULL,3,'2023-06-09'),('010203',110,NULL,1,NULL,1,'2023-06-09');
+INSERT INTO `aftertestinfo` VALUES ('010104',500,0,1,0,1,'2023-06-09'),('010106',1,1,1,0,1,'2023-06-09'),('010202',50,0,1,0,1,'2023-06-09'),('010203',120,0,3,0,4,'2023-06-09'),('010205',1,2,1,1,2,'2023-06-09');
 /*!40000 ALTER TABLE `aftertestinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +93,7 @@ CREATE TABLE `answersofstudent` (
 
 LOCK TABLES `answersofstudent` WRITE;
 /*!40000 ALTER TABLE `answersofstudent` DISABLE KEYS */;
-INSERT INTO `answersofstudent` VALUES (4,'010104','010103',3);
+INSERT INTO `answersofstudent` VALUES (2,'010205','010204',2),(2,'010205','010205',0),(4,'010104','010103',1),(4,'010106','010103',3),(4,'010202','010204',2),(4,'010203','010103',3),(4,'010205','010204',2),(4,'010205','010205',0),(5,'010202','010204',2),(5,'010203','010103',3),(5,'010205','010204',2),(5,'010205','010205',1);
 /*!40000 ALTER TABLE `answersofstudent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +176,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES ('010101','01','Algebra','How much is 2+2?',1,'b b','1','2','3','4','4'),('010102','01','Algebra','How much is 1+1?',2,'b b','1','2','3','4','2'),('010103','01','Algebra','How much is 10-10?',3,'b b','10','5','0','12','3'),('010204','01','Hedva','How are you?',4,'b b','bad','very bad','no	','ok','2');
+INSERT INTO `question` VALUES ('010101','01','Algebra','How much is 2+2?',1,'b b','1','2','3','4','4'),('010102','01','Algebra','How much is 1+1?',2,'b b','1','2','3','4','2'),('010103','01','Algebra','How much is 10-10?',3,'b b','10','5','0','12','3'),('010204','01','Hedva','How are you?',4,'b b','bad','very bad','no	','ok','2'),('010205','01','Hedva','hola	',5,'a a','hello','hi','amigo','ci','1');
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,7 +200,7 @@ CREATE TABLE `studentscourse` (
 
 LOCK TABLES `studentscourse` WRITE;
 /*!40000 ALTER TABLE `studentscourse` DISABLE KEYS */;
-INSERT INTO `studentscourse` VALUES ('4','Algebra'),('4','Hedva');
+INSERT INTO `studentscourse` VALUES ('4','Algebra'),('4','Hedva'),('5','Hedva');
 /*!40000 ALTER TABLE `studentscourse` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,7 +238,7 @@ CREATE TABLE `studentstest` (
 
 LOCK TABLES `studentstest` WRITE;
 /*!40000 ALTER TABLE `studentstest` DISABLE KEYS */;
-INSERT INTO `studentstest` VALUES ('4','010104','01','Algebra','C','100','Noa Krispin','2025','A','B','NO','1','1','ok','YES','499.99');
+INSERT INTO `studentstest` VALUES ('4','010106','01','Algebra','C','100','Noa Krispin','2020','A','C','NO','1','1','','NO','0.99'),('4','010203','01','Hedva','C','0','Noa Krispin','2024','A','C','NO','0','1','','NO','1.00');
 /*!40000 ALTER TABLE `studentstest` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,7 +297,7 @@ CREATE TABLE `test` (
 
 LOCK TABLES `test` WRITE;
 /*!40000 ALTER TABLE `test` DISABLE KEYS */;
-INSERT INTO `test` VALUES ('01','010101','61','b b','Math','Algebra','hey Lecturer','C','Hey Students','2023','B','A','d97a'),('04','010104','500','b b','Math','Algebra','heyyyy','C','byeeee','2025','A','B','4f62'),('02','010202','50','b b','Math','Hedva','Bye','C','Hey','2020','A','B','5d18'),('03','010203','110','b b','Math','Hedva','null','C','null','2024','A','C','799A');
+INSERT INTO `test` VALUES ('01','010101','61','b b','Math','Algebra','hey Lecturer','C','Hey Students','2023','B','A','d97a'),('04','010104','500','b b','Math','Algebra','heyyyy','C','byeeee','2025','A','B','4f62'),('06','010106','1','b b','Math','Algebra','dfss','C','sdfdfsfds','2020','A','C','019b'),('02','010202','100','b b','Math','Hedva','Bye','C','Hey','2020','A','B','5d18'),('03','010203','1','b b','Math','Hedva','null','C','null','2024','A','C','799A'),('05','010205','1','a a','Math','Hedva','hi','C','bye','2018','A','B','1b1c');
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -327,7 +327,7 @@ CREATE TABLE `testquestion` (
 
 LOCK TABLES `testquestion` WRITE;
 /*!40000 ALTER TABLE `testquestion` DISABLE KEYS */;
-INSERT INTO `testquestion` VALUES ('010101','1',60,'How much is 2+2?','010101','Algebra','01','b b'),('010102','2',20,'How much is 1+1?','010101','Algebra','01','b b'),('010103','3',20,'How much is 10-10?','010101','Algebra','01','b b'),('010103','3',100,'How much is 10-10?','010104','Algebra','01','b b'),('010103','3',100,'How much is 10-10?','010203','Algebra','01','b b'),('010204','4',100,'How are you?','010202','Hedva','01','b b');
+INSERT INTO `testquestion` VALUES ('010101','1',60,'How much is 2+2?','010101','Algebra','01','b b'),('010102','2',20,'How much is 1+1?','010101','Algebra','01','b b'),('010103','3',20,'How much is 10-10?','010101','Algebra','01','b b'),('010103','3',100,'How much is 10-10?','010104','Algebra','01','b b'),('010103','3',100,'How much is 10-10?','010106','Algebra','01','b b'),('010103','3',100,'How much is 10-10?','010203','Algebra','01','b b'),('010204','4',100,'How are you?','010202','Hedva','01','b b'),('010204','4',50,'How are you?','010205','Hedva','01','b b'),('010205','5',50,'hola	','010205','Hedva','01','a a');
 /*!40000 ALTER TABLE `testquestion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -355,7 +355,6 @@ CREATE TABLE `testrequest` (
 
 LOCK TABLES `testrequest` WRITE;
 /*!40000 ALTER TABLE `testrequest` DISABLE KEYS */;
-INSERT INTO `testrequest` VALUES (50,'check?','010202','01','Hedva','b b');
 /*!40000 ALTER TABLE `testrequest` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -398,4 +397,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-09 13:23:14
+-- Dump completed on 2023-06-09 16:47:06

@@ -553,11 +553,9 @@ public class MysqlConnection {
         Statement stmt = null;
         try {
             stmt = conn.createStatement();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         ArrayList<TestForApproval> list = new ArrayList<>();
         try {
             ResultSet rs = stmt.executeQuery(query);
@@ -591,6 +589,65 @@ public class MysqlConnection {
             e.printStackTrace();
         }
         return list;
+    }
+    public static Integer getTotalStudentsInTest(String query) {
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        int totalStudents = 0;
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                totalStudents = rs.getInt("totalStudents");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalStudents;
+    }
+    public static Integer getTotalStudentsRegisteredToTest(String query) {
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        int rowCount = 0;
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            if (rs.next()) { // Move the cursor to the first row
+                rowCount = rs.getInt("row_count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rowCount;
+    }
+    public static Integer getTotalStudentsFinishedTheTest(String query) {
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        int finishedCount = 0;
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            if (rs.next()) { // Move the cursor to the first row
+                finishedCount = rs.getInt("totalFinished");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return finishedCount;
+
     }
 }
 	

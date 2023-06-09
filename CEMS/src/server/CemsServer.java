@@ -581,7 +581,6 @@ public class CemsServer extends AbstractServer {
                 case AddNewActiveTest:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (ActiveTest) this.msg.getMsg();
-
                     ActiveTest newActiveTest = (ActiveTest) obj;
                     String newActiveTestQuery = "INSERT INTO cems.activetest (id, numOfQuestions, testDate, " +
                             "startingTime, testCode) " +
@@ -599,16 +598,53 @@ public class CemsServer extends AbstractServer {
                     this.obj = (String[]) this.msg.getMsg();
                     String[] infoArray = (String[]) obj;
 
-                    String newAfterTestInfoQuery = "INSERT INTO cems.aftertestinfo (testID,date,testDuration,totalFinished,totalStudents) " +
+                    String newAfterTestInfoQuery = "INSERT INTO cems.aftertestinfo (testID,date,testDuration,actualDuration,totalFinished,totalForcedFinished,totalStudents) " +
                             "VALUES ('" + infoArray[0] + "', " +
                             "'" + infoArray[1] + "', " +
                             "'" + infoArray[2] + "', " +
+                            "'" + 0 + "', " +
+                            "'" + 0 + "', " +
                             "'" + 0 + "', " +
                             "'" + 0 + "') ";
 
 
                     MysqlConnection.update(newAfterTestInfoQuery);
                     client.sendToClient(new MsgHandler<>(TypeMsg.AddNewAfterTestInfoResponse, null));
+                    break;
+                case FinishAfterTestInfo:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String[]) this.msg.getMsg();
+                    String[] afterTestInfo = (String[]) obj;
+                   MysqlConnection.update("UPDATE aftertestinfo SET actualDuration = '" + Integer.parseInt(afterTestInfo[0]) +
+                            "', totalForcedFinished = '" + Integer.parseInt(afterTestInfo[1]) +
+                            "' WHERE testID = '" + afterTestInfo[2] + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.AfterTestRowCompleted, null));
+                    break;
+
+                case NumberOfAttendedCounter:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    int totalStudentsInTest = MysqlConnection.getTotalStudentsInTest("SELECT totalStudents FROM aftertestinfo WHERE testID = '" + obj + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.ImportedNumberOfAttendedCounter, totalStudentsInTest));
+                    break;
+                case CountRegisteredStudents:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    int totalStudentsRegistered = MysqlConnection.getTotalStudentsRegisteredToTest("SELECT COUNT(*) AS row_count FROM studentscourse WHERE course = '" + obj + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.ImportedRegisteredStudents, totalStudentsRegistered));
+                    break;
+                case CountNumberOfFinished:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    int totalStudentsFinished = MysqlConnection.getTotalStudentsFinishedTheTest("SELECT totalFinished FROM aftertestinfo WHERE testID = '" + obj + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.ImportedNumberOfFinished, totalStudentsFinished));
+                    break;
+                case UnActivateTest:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    String DeleteActiveTestQuery = "DELETE FROM cems.activetest WHERE id='" + obj + "'";
+                    MysqlConnection.update(DeleteActiveTestQuery);
+                    client.sendToClient(new MsgHandler<>(TypeMsg.CompleteUnactivatingTest, null));
                     break;
 
 

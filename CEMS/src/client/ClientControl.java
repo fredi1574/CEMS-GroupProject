@@ -84,6 +84,18 @@ public class ClientControl implements ChatIF{
 		response = client.testsForApproval;
 		return response;
 	}
+	public Object getNumberOfRegistered(){
+		singleResponse = client.NumOfRegistered;
+		return singleResponse;
+	}
+	public Object getNumberOfAttended(){
+		singleResponse = client.NumOfAttended;
+		return singleResponse;
+	}
+	public Object getNumberOfFinished(){
+		singleResponse = client.NumOfFinished;
+		return singleResponse;
+	}
 
 	//Instance methods ************************************************
 
