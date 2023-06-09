@@ -147,8 +147,7 @@ public class StateManagement {
 
     //adds a single test question to the testQuestions observable list
     public void setTestQuestions(TestQuestion question) {
-        //if(!testQuestions.contains(question))
-        this.testQuestions.add(question);
+            this.testQuestions.add(question);
     }
 
     public Course getCourse() {

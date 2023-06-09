@@ -182,31 +182,6 @@ public class MysqlConnection {
     }
 
 
-    public static ArrayList<Course> getCourseTable(String query) {
-        Statement stmt = null;
-
-        try {
-            stmt = conn.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        ArrayList<Course> courses = new ArrayList<>();
-        try {
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                String subjectID = rs.getString("subjectID"); // assuming your table has a column named "id" with type INT
-                String courseID = rs.getString("courseID");
-                String subjectName = rs.getString("subjectName");
-                String courseName = rs.getString("courseName");
-                Course course = new Course(subjectID, courseID, subjectName, courseName);
-                courses.add(course);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return courses;
-    }
-
     public static ArrayList<Test> getTestTable(String query) {
         Statement stmt = null;
 
