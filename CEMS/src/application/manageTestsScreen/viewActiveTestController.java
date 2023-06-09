@@ -1,5 +1,6 @@
 package application.manageTestsScreen;
 
+import application.Simulation.SmsEmailPopUpController;
 import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
@@ -67,6 +68,7 @@ public class viewActiveTestController {
     static boolean requestSent;
 
     public StateManagement stateManagement;
+    public SmsEmailPopUpController smsEmailPopUpController = new SmsEmailPopUpController();
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
@@ -160,8 +162,8 @@ public class viewActiveTestController {
     }
 
         public void showRequestDeclinedPopUp () {
-            showError.showInfoPopup("Time change request was declined");
-
+            smsEmailPopUpController.SetInfoField("Time change request was declined");
+            ScreenManager.popUpScreen(PathConstants.SmsEmailPopUp);
         }
 
         public void showRequestApprovedPopUp () {

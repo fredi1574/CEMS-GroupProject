@@ -94,7 +94,7 @@ public class manageRequestsController {
         if (selectedRequestIndex != -1) {
             String requestToDecline = RequestsDBTableView.getItems().get(selectedRequestIndex).getId();
             if (showError.showConfirmationPopup("Are you sure you want to decline this request?")) {
-                MsgHandler declineRequest = new MsgHandler(TypeMsg.ApproveRequestByHeadOfDepartment,requestToDecline);
+                MsgHandler declineRequest = new MsgHandler(TypeMsg.DeclineRequestByHeadOfDepartment,requestToDecline);
                 ClientUI.chat.accept(declineRequest);
                 reloadPage(declineBtn);
                 //TODO: return to the lecturer with the approval

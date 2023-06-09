@@ -347,7 +347,7 @@ public class CemsServer extends AbstractServer {
                     this.obj = (String) this.msg.getMsg();
                     String declinedRequest = "DELETE FROM cems.testrequest WHERE id='" + obj + "'";
                     MysqlConnection.update(declinedRequest);
-                    client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsDeclined, null));
+                    //client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsDeclined, null));
                     sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationDeclinedPopLecturer, null));
                     break;
                 case GetStudentReport:

@@ -149,7 +149,7 @@ public class ViewGraphController {
     private int countStudentsInRange(ArrayList<Double> scoreValues, int lowerRange, int upperRange) {
         int count = 0;
         for (double score : scoreValues) {
-            if (score >= lowerRange && score < upperRange) {
+            if (score >= lowerRange && score <= upperRange) {
                 count++;
             }
         }
