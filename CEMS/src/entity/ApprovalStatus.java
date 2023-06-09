@@ -1,6 +1,6 @@
 package entity;
 
 public enum ApprovalStatus {
-    Y,
-    N
+    YES,
+    NO
 }

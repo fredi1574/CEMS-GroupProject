@@ -79,7 +79,7 @@ public class viewTestAwaitingApprovalController {
         studentIDField.setText(testForApproval.getStudentID());
         GradField.setText(testForApproval.getGrade());
         testIDField.setText(testForApproval.getTestID());
-        String yes = testForApproval.getSuspicionOfCheating().equals("Y") ? "Y":"N";
+        String yes = testForApproval.getSuspicionOfCheating().equals("YES") ? "YES":"NO";
         cheatinigField.setText(yes);
         correcAnswerField.setText(testForApproval.getCorrectAnswers());
         totalQuestionsField.setText(testForApproval.getTotalQuestions());
