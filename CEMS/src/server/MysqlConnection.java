@@ -574,5 +574,48 @@ public class MysqlConnection {
         }
         return subject;
     }
+    public static ArrayList<TestForApproval> getTestForApproval(String query) {
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<TestForApproval> list = new ArrayList<>();
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String studentID = rs.getString("studentID");
+                String testID = rs.getString("testID");
+                String subjectID = rs.getString("subjectID");
+                String course = rs.getString("course");
+                String grade = rs.getString("score");
+                String fullname = rs.getString("fullname");
+                String year = rs.getString("year");
+                String semester = rs.getString("semester");
+                String session = rs.getString("session");
+                String suspicionOfCheatingStr = rs.getString("suspicionOfCheating");
+                String correctAnswers = rs.getString("correctAnswers");
+                String totalQuestions = rs.getString("totalQuestions");
+                String lecturerComments = rs.getString("lecturerComments");
+                String approvedStr = rs.getString("approved");
+                String testType = rs.getString("testType");
+                CheatingSuspicion suspicionOfCheating = CheatingSuspicion.valueOf(suspicionOfCheatingStr);
+                ApprovalStatus approved = ApprovalStatus.valueOf(approvedStr);
+                TestTypeEnum testTypeEnum = (Objects.equals(testType, "C") ? TestTypeEnum.C : TestTypeEnum.M);
+                // Create TestForApproval object with all the retrieved values
+                TestForApproval testForApproval = new TestForApproval(studentID, testID, subjectID, course, grade,
+                        fullname, year, semester, session, suspicionOfCheating, correctAnswers,
+                        totalQuestions, lecturerComments, approved,testTypeEnum);
+                list.add(testForApproval);
+            }
+            System.out.println(list.toString());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
 	

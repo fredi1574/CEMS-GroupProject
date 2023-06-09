@@ -34,6 +34,7 @@ public class Client extends AbstractClient {
     public Object singleTest;
     public Object singleSubject;
     public Object UserAndCourse;
+    public List<Object> testsForApproval;
 
     public static User user;
 
@@ -163,19 +164,25 @@ public class Client extends AbstractClient {
             case StudentsFinishedTestIncreased:
                 break;
             case TestDurationChanged:
-                StudentInTest.showNotificationAndChangeDuration((Integer)messageFromServer.getMsg());
+                StudentInTest.showNotificationAndChangeDuration((Integer) messageFromServer.getMsg());
                 break;
             case TestDurationApprovedPopLecturer:
                 activeTestController.showRequestApprovedPopUp();
             case TestDurationDeclinedPopLecturer:
                 activeTestController.showRequestDeclinedPopUp();
             case ImportedSubjectIDfromName:
-                this.singleSubject = (Subject)messageFromServer.getMsg();
+                this.singleSubject = (Subject) messageFromServer.getMsg();
                 break;
             case ExtraTimeRequested:
                 break;
+            case GetTestForApprovalResponse:
+                testsForApproval = (ArrayList<Object>) ((MsgHandler<Object>) messageFromServer).getMsg();
+                this.testsForApproval = (List<Object>) messageFromServer.getMsg();
+                break;
+            case UpdateTheApproveofLecturerResponse:
+                break;
 
-                                  }
+        }
 
     }
 

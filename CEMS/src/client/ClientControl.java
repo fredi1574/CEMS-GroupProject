@@ -80,6 +80,10 @@ public class ClientControl implements ChatIF{
 		singleResponse = client.singleSubject;
 		return singleResponse;
 	}
+	public List<Object> getTestForApproval(){
+		response = client.testsForApproval;
+		return response;
+	}
 
 	//Instance methods ************************************************
 

@@ -38,17 +38,26 @@ public class ManageTestsController {
     @FXML
     private TableView<Test> testsFromDBTableView;
     @FXML
-    private TableView<Test> testApprovalTableView;
+    private TableView<TestForApproval> testApprovalTableView;
     @FXML
     private TableView<ActiveTest> activeTestsTableView;
     public StateManagement stateManagement;
     Test testRowData;
     ActiveTest activeTestRowData;
+    TestForApproval data;
 
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-
+        MsgHandler getTestForApproval = new MsgHandler(TypeMsg.GetTestForApproval, null);
+        ClientUI.chat.accept(getTestForApproval);
+        ObservableList<TestForApproval> testsWaitingApproval = FXCollections.observableArrayList((List) ClientUI.chat.getTestForApproval());
+        TableManager.importData(testApprovalTableView, testsWaitingApproval);
+        testApprovalTableView.setOnMouseClicked((e) -> {
+            data = testApprovalTableView.getSelectionModel().getSelectedItem();
+        });
+        stateManagement =StateManagement.getInstance();
+        stateManagement.setTestForApproval(testsWaitingApproval);
         displayDbTestsTable();
         displayActiveTestsTable();
     }
@@ -264,12 +273,18 @@ public class ManageTestsController {
     }
 
     public void viewTestResults(ActionEvent actionEvent) {
+        if(data == null){
+            showError.showErrorPopup("Must to select tests before");
+            return;
+        }
+        stateManagement.setTestID(data.getTestID());
+        ScreenManager.goToNewScreen(actionEvent,PathConstants.viewTestAwaitingApprovalPath);
     }
-
-
     public void LogOut(ActionEvent event) {
+        StateManagement.resetInstance();
         ScreenManager.goToNewScreen(event, PathConstants.loginPath);
     }
+
 
     public void back(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);

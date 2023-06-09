@@ -390,7 +390,20 @@ public enum TypeMsg {
         public String toString() {
             return "Declined time change popup";
         }
-    }
+    },
+    GetTestForApproval{
+        public String toString() { return "User Asked All Test To Do Approve"; }
+
+    },
+    GetTestForApprovalResponse{
+        public String toString() { return "Server returned the list of tests needed approval"; }
+    },
+    UpdateTheApproveofLecturer{
+        public String toString() { return "User asked to update the approv"; }
+    },
+    UpdateTheApproveofLecturerResponse{
+        public String toString() { return "Server update your approval"; }
+    },
 
 
 

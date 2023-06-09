@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -34,13 +35,13 @@
             <Text fx:id="nameOfuser" fill="WHITE" layoutX="796.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="RIGHT" wrappingWidth="73.13671875" />
          </children>
       </AnchorPane>
-      <TextArea fx:id="teacherComment" layoutX="452.0" layoutY="165.0" prefHeight="111.0" prefWidth="397.0" promptText="Enter notes for lucturers..." wrapText="true" />
-      <Label layoutX="462.0" layoutY="126.0" prefHeight="27.0" prefWidth="176.0" text="Lecturers comments:">
+      <TextArea fx:id="teacherComment" layoutX="31.0" layoutY="416.0" prefHeight="231.0" prefWidth="801.0" promptText="Enter notes for lucturers..." wrapText="true" />
+      <Label layoutX="31.0" layoutY="382.0" prefHeight="27.0" prefWidth="176.0" text="Lecturers comments:">
          <font>
             <Font name="Trebuchet MS Bold" size="17.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="31.0" layoutY="159.0" prefHeight="122.0" prefWidth="293.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
+      <AnchorPane layoutX="91.0" layoutY="171.0" prefHeight="122.0" prefWidth="297.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
          <children>
             <Label layoutX="49.0" layoutY="3.0" prefHeight="55.0" prefWidth="140.0" text="Student ID:">
                <font>
@@ -56,7 +57,7 @@
             <TextField fx:id="testIDField" editable="false" layoutX="147.0" layoutY="64.0" prefHeight="27.0" prefWidth="120.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="31.0" layoutY="370.0" prefHeight="202.0" prefWidth="285.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
+      <AnchorPane layoutX="534.0" layoutY="159.0" prefHeight="202.0" prefWidth="285.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
          <children>
             <Label layoutX="14.0" layoutY="21.0" prefHeight="27.0" prefWidth="186.0" text="Suspicion of cheating:">
                <font>
@@ -84,7 +85,7 @@
             <TextField fx:id="GradField" editable="false" layoutX="200.0" layoutY="155.0" prefHeight="27.0" prefWidth="60.0" />
          </children>
       </AnchorPane>
-      <Button alignment="BASELINE_CENTER" layoutX="777.0" layoutY="651.0" mnemonicParsing="false" onAction="#saveDiscionLecturer" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
+      <Button fx:id="saveDiscionLecturer" alignment="BASELINE_CENTER" layoutX="777.0" layoutY="651.0" mnemonicParsing="false" onAction="#saveDiscionLecturer" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
          <graphic>
             <ImageView fitHeight="34.0" fitWidth="37.0">
                <image>
@@ -112,5 +113,6 @@
             <Font name="Trebuchet MS" size="17.0" />
          </font>
       </Label>
+      <ComboBox fx:id="comboBoxApproval" layoutX="91.0" layoutY="334.0" prefHeight="27.0" prefWidth="193.0" promptText="Select Your Approval" />
    </children>
 </AnchorPane>

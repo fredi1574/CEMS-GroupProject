@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class StateManagement {
+    ObservableList<TestForApproval> testForApproval = FXCollections.observableArrayList();
     //Test parameters
     public Course course;
     public String testNum;
@@ -52,6 +53,14 @@ public class StateManagement {
                 testDuration, course.getCourseName(), getTeacherComment(), testType, getStudentComment(),
                 course.getSubjectName(), year, session, semester);
     }
+    public ObservableList<TestForApproval> getTestForApproval() {
+        return testForApproval;
+    }
+
+    public void setTestForApproval(ObservableList<TestForApproval> testForApproval) {
+        this.testForApproval = testForApproval;
+    }
+
 
 
     public String getYear() {

@@ -26,6 +26,7 @@ public class CemsServer extends AbstractServer {
     Test test;
     ActiveTest activeTest;
     TestQuestion testQuestion;
+    TestForApproval testApprove;
 
     /**
      * Constructs an instance of the echo server.
@@ -544,6 +545,38 @@ public class CemsServer extends AbstractServer {
                         client.sendToClient(new MsgHandler<>(TypeMsg.ExtraTimeRequested, null));
                     }
                     break;
+                case GetTestForApproval:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (Test) this.msg.getMsg();
+                    this.test = (Test) obj;
+                    ArrayList<TestForApproval> testsForApproval = MysqlConnection.getTestForApproval("SELECT * FROM cems.studentstest");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.GetTestForApprovalResponse, testsForApproval));
+                    break;
+                case UpdateTheApproveofLecturer:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = this.msg.getMsg();
+                    if (obj instanceof TestForApproval) {
+                        this.testApprove = (TestForApproval) obj;
+                        String updateQuery = "UPDATE cems.studentstest " +
+                                "SET studentID = '" + testApprove.getStudentID() + "', " +
+                                "subjectID = '" + testApprove.getSubjectID() + "', " +
+                                "course = '" + testApprove.getCourse() + "', " +
+                                "score = '" + testApprove.getGrade() + "', " +
+                                "fullname = '" + testApprove.getFullname() + "', " +
+                                "year = '" + testApprove.getYear() + "', " +
+                                "semester = '" + testApprove.getSemester() + "', " +
+                                "session = '" + testApprove.getSession() + "', " +
+                                "suspicionOfCheating = '" + testApprove.getSuspicionOfCheating() + "', " +
+                                "correctAnswers = '" + testApprove.getCorrectAnswers() + "', " +
+                                "totalQuestions = '" + testApprove.getTotalQuestions() + "', " +
+                                "lecturerComments = '" + testApprove.getLecturerComments() + "', " +
+                                "approved = '" + testApprove.getApproved() + "', " +
+                                "testType = '" + testApprove.getTestType() + "' " +
+                                "WHERE testID = '" + testApprove.getTestID() + "'";
+                        MysqlConnection.update(updateQuery);
+                        client.sendToClient(new MsgHandler<>(TypeMsg.UpdateTheApproveofLecturerResponse, null));
+                        break;
+                    }
 
             }
 
