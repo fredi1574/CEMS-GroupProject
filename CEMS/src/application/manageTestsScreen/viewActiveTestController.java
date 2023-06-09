@@ -197,7 +197,6 @@ public class viewActiveTestController {
         }
 
         public void back (ActionEvent event){
-            stateManagement.resetInstance();
             ExitButton.closePopUp(event);
         }
 
