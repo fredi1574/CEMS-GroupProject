@@ -8,6 +8,7 @@ import common.TypeMsg;
 import entity.ActiveTest;
 import entity.StateManagement;
 import entity.TestRequestForApproval;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -162,9 +163,11 @@ public class viewActiveTestController {
     }
 
         public void showRequestDeclinedPopUp () {
-            showError.showInfoPopup("Time change request was approved");
-            smsEmailPopUpController.SetInfoField("Time change request was declined");
-            ScreenManager.popUpScreen(PathConstants.SmsEmailPopUp);
+            Platform.runLater(() -> {
+                showError.showInfoPopup("Time change request was approved");
+                smsEmailPopUpController.SetInfoField("Time change request was declined");
+                ScreenManager.popUpScreen(PathConstants.SmsEmailPopUp);
+            });
         }
 
         public void showRequestApprovedPopUp () {
