@@ -18,7 +18,7 @@ public class ActiveTest extends Observable implements Serializable {
         this.numOfQuestions = numOfQuestions;
         this.testDate = testDate;
         this.startingTime = startingTime;
-        this.testCode = this.testCode;
+        this.testCode = testCode;
     }
 
     public String getId() {
