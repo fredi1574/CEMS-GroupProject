@@ -140,8 +140,10 @@ public class UpdateQuestionController {
      * Deletes the question from the server.
      */
     public void DeleteQuestion() {
-        MsgHandler deleteQ = new MsgHandler(TypeMsg.DeleteQuestion, AlterQuestion());
-        ClientUI.chat.accept(deleteQ);
+        if (showError.showConfirmationPopup("Are you sure you want to delete this question?")) {
+            MsgHandler deleteQ = new MsgHandler(TypeMsg.DeleteQuestion, AlterQuestion());
+            ClientUI.chat.accept(deleteQ);
+        }
     }
 
     /**

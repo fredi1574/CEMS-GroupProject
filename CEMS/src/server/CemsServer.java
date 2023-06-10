@@ -626,7 +626,8 @@ public class CemsServer extends AbstractServer {
                                 "lecturerComments = '" + testApprove.getLecturerComments() + "', " +
                                 "approved = '" + testApprove.getApproved() + "', " +
                                 "testType = '" + testApprove.getTestType() + "' " +
-                                "WHERE testID = '" + testApprove.getTestID() + "'";
+                                "WHERE testID = '" + testApprove.getTestID() + "'" +
+                                "AND studentID = '" + testApprove.getStudentID() + "'";
                         MysqlConnection.update(updateQuery);
                         client.sendToClient(new MsgHandler<>(TypeMsg.UpdateTheApproveofLecturerResponse, null));
                         break;

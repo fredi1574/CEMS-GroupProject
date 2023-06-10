@@ -1,7 +1,5 @@
 package entity;
 
-import java.util.UUID;
-
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
@@ -10,7 +8,7 @@ import javafx.collections.ObservableList;
 import java.io.Serializable;
 import java.util.Observable;
 
-public class Test extends Observable implements Serializable {
+public class Test extends Observable implements Serializable, UserMadeElement {
     private String id;
     private String testNumber;
     private String testCode;

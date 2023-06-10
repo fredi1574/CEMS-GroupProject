@@ -5,6 +5,7 @@ import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
 import entity.Question;
+import entity.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -32,6 +33,7 @@ public class ManageQuestionsController {
     private TableView<Question> manageQuestionsTableView;
     @FXML
     private Text usernameText;
+    String fullName = Client.user.getFullName();
 
     public static ManageQuestionsController ManageQuestionsControl;
 
@@ -44,22 +46,28 @@ public class ManageQuestionsController {
     @FXML
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        usernameText.setText(Client.user.getFullName());
+        usernameText.setText(fullName);
         MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestionsBySubject, Client.user.getUserName());
         ClientUI.chat.accept(getTable);
 
+        displayQuestions();
+    }
+
+    private void displayQuestions() {
         // Creates the question table
         ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.GetQuestionsBySubject());
+        ObservableList<Question> userQuestions = TableManager.filterByAuthor(questions,fullName);
+
         ObservableList<String> columns = FXCollections.observableArrayList();
         columns.addAll("Question Number", "ID", "Subject", "Course Name", "Question Text", "Author");
         TableManager.createTable(manageQuestionsTableView, columns);
-        TableManager.importData(manageQuestionsTableView, questions);
+        TableManager.importData(manageQuestionsTableView, userQuestions);
         TableManager.addDoubleClickFunctionality(manageQuestionsTableView, PathConstants.updateQuestionPath, this::setFunctions);
         double[] multipliers = {0.15, 0.1, 0.1, 0.13, 0.35, 0.162};
         TableManager.resizeColumns(manageQuestionsTableView, multipliers);
 
         // Filter the results as you search
-        FilteredList<Question> filteredData = new FilteredList<>(questions, b -> true);
+        FilteredList<Question> filteredData = new FilteredList<>(userQuestions, b -> true);
         TableManager.MakeFilterListForSearch(filteredData, searchField, Question::getQuestionText);
 
         SortedList<Question> sortedData = new SortedList<>(filteredData);

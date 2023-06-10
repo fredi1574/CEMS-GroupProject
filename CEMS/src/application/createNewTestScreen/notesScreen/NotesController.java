@@ -142,8 +142,7 @@ public class NotesController {
      */
     public void addAllTestQuestionsToDB() {
         ObservableList<TestQuestion> testQuestions = stateManagement.getTestQuestions();
-        System.out.println("number of test questions: " + stateManagement.getTestQuestions().size());
-        System.out.println("question 1: " + testQuestions.get(0));
+
         for (int i=0; i<stateManagement.getTestQuestions().size(); i++) {
             MsgHandler addNewTestQuestion = new MsgHandler(TypeMsg.AddNewTestQuestion, testQuestions.get(i));
             ClientUI.chat.accept(addNewTestQuestion);
