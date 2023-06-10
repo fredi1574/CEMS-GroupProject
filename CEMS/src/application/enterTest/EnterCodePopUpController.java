@@ -4,10 +4,7 @@ import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
-import entity.ActiveTest;
-import entity.Test;
-import entity.TestTypeEnum;
-import entity.User;
+import entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,7 +22,7 @@ import java.util.List;
 
 public class EnterCodePopUpController {
     public static String testID;
-
+    StateManagement stateManagement = StateManagement.getInstance();
     @FXML
     private AnchorPane header;
     @FXML
@@ -62,6 +59,7 @@ public class EnterCodePopUpController {
             for (ActiveTest activeTest: activeTests) {
                 if (activeTest.getTestCode().equals(codet)) {
                     testExists = true;
+                    stateManagement.setTestCode(codet);
                     testID = activeTest.getId();
                     for (Test test: allTests) {
                         if (testID.equals(test.getId())){
