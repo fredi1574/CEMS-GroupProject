@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class ManualTestController {
-    StateManagement stateManagement =StateManagement.getInstance();
+    StateManagement stateManagement = StateManagement.getInstance();
     Test test;
 
     ActiveTest testActive;

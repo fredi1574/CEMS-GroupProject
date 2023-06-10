@@ -113,16 +113,22 @@ public class ViewReportsController {
     public void setTestsTable(ArrayList<Object> Tests) {
         Set<String> uniqueTestIDs = new HashSet<>();
         List<Object> uniqueTests = new ArrayList<>();
-
+        List<Object> approvedTest = new ArrayList<>();
+        ApprovalStatus approvalStatus;
         for (Object test : Tests) {
             String testID = ((StudentTest) test).getTestID();
             if (!uniqueTestIDs.contains(testID)) {
                 uniqueTestIDs.add(testID);
                 uniqueTests.add(test);
             }
+            if ((((StudentTest) test).getApproved() == ApprovalStatus.YES))//check if null
+            {
+                approvedTest.add(test);
+            }
         }
+
         listOfTestsNoDuplicates = FXCollections.observableArrayList((List)uniqueTests);
-        FulllistOfTests = FXCollections.observableArrayList((List)Tests);
+        FulllistOfTests = FXCollections.observableArrayList((List)approvedTest);
     }
 
     public void showReports() {

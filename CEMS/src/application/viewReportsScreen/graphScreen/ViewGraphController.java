@@ -73,7 +73,9 @@ public class ViewGraphController {
                 }
             }
         }
-        reportCalc(SpecificTestInfo);
+        if (!(SpecificTestInfo.isEmpty())) {
+            reportCalc(SpecificTestInfo);
+        }
         averageText.setText(String.valueOf(averageScore));
         medianText.setText(String.valueOf(medianScore));
         reportGraph.getData().add(series);
