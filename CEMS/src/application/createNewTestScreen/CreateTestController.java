@@ -54,6 +54,11 @@ public class CreateTestController {
 
         nameAuthor.setText(Client.user.getFullName());
 
+        displayCourses();
+        retrieveSavedData();
+    }
+
+    private void displayCourses() {
         MsgHandler getTableCourse = new MsgHandler(TypeMsg.importCourses, Client.user.getUserName());
         ClientUI.chat.accept(getTableCourse);
         List<Object> courseObjectsList = ClientUI.chat.getCourses();
@@ -61,27 +66,21 @@ public class CreateTestController {
         ObservableList<Course> courses = FXCollections.observableArrayList((List) courseObjectsList);
 
         ObservableList<String> columnList = FXCollections.observableArrayList();
-        //TODO: fix the names of the table columns
+
         columnList.addAll("Course Name", "Subject Name");
         TableManager.createTable(courseTableView, columnList);
         TableManager.importData(courseTableView, courses);
-        //TableManager.addDoubleClickFunctionality(courseTableView,"ManageQuestionsScreen/UpdateQuestion.fxml",true);
-
 
         double[] multipliers = {0.7, 0.295};
         TableManager.resizeColumns(courseTableView, multipliers);
 
-        //Adds a colon between the two digits and limits the field to 4 digits
-//        correctDuration(testDurationField);
-
         courseTableView.setOnMouseClicked((e) -> {
-            rowData = (Course) courseTableView.getSelectionModel().getSelectedItem();
-            if(rowData !=null) {
-                setTestData();
-            }
-
+                rowData = (Course) courseTableView.getSelectionModel().getSelectedItem();
+                if (rowData != null) {
+                        setTestData();
+                        stateManagement.clearTestQuestions();
+                }
         });
-        retrieveSavedData();
     }
 
     /**
@@ -225,11 +224,6 @@ public class CreateTestController {
         }
     }
 
-    public void openPreview() {
-        stateManagement = StateManagement.getInstance();
-       // stateManagment.setDataofTest(rowData,testNumberField.getText(),testIDField.getText(),testDurationField.getText());
-        ScreenManager.popUpScreen(PathConstants.testPreviewPath);
-    }
 
     public void LogOut(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.loginPath);

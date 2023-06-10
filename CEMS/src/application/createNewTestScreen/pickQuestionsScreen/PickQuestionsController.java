@@ -41,7 +41,6 @@ public class PickQuestionsController {
     TestQuestion rowDataForQuestionsSelected;
     CreateTestController createTestController = new CreateTestController();
     ObservableList<TestQuestion> selectedQuestions = FXCollections.observableArrayList();
-    private int numQuestionSelectForTest = 0;
     @FXML
     private TextField totalRemainingPointsField;
     @FXML
@@ -56,8 +55,6 @@ public class PickQuestionsController {
     private TableView<Question> questionDBTableView;
     @FXML
     private TableView<TestQuestion> selectedQuestionsTableView;
-    private Stage CreateNewTest;
-    //private int totalRemainingPoints = stateManagment.getTotalRemainingPoints();
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
@@ -74,19 +71,19 @@ public class PickQuestionsController {
 
     /**
      * displays the table containing every question in the database relevant to the lecturer's subject
-     * TODO: check that the list is really specific to the lecturer's subject
      */
     private void displayQuestionsDBTable() {
         MsgHandler questionsDBTable = new MsgHandler(TypeMsg.GetAllQuestions, null);
         ClientUI.chat.accept(questionsDBTable);
         // creates the question table
         ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.getAllQuestions());
+        ObservableList<Question> userQuestions = TableManager.filterByAuthor(questions,Client.user.getFullName());
 
         //creates a table of questions the author can see
         ObservableList<String> questionDBTableColumns = FXCollections.observableArrayList();
         questionDBTableColumns.addAll("Question Number", "ID", "Subject", "Course Name", "Question Text", "Author");
         TableManager.createTable(questionDBTableView, questionDBTableColumns);
-        TableManager.importData(questionDBTableView, questions);
+        TableManager.importData(questionDBTableView, userQuestions);
 
         //resizes the columns of the table
         double[] multipliers = {0.15, 0.1, 0.1, 0.13, 0.35, 0.162};
@@ -97,7 +94,7 @@ public class PickQuestionsController {
             rowData = questionDBTableView.getSelectionModel().getSelectedItem();
         });
 
-        FilteredList<Question> filteredData = new FilteredList<>(questions, b -> true);
+        FilteredList<Question> filteredData = new FilteredList<>(userQuestions, b -> true);
         TableManager.MakeFilterListForSearch(filteredData, searchField, Question::getQuestionText);
         SortedList<Question> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(questionDBTableView.comparatorProperty());
@@ -226,7 +223,6 @@ public class PickQuestionsController {
         } else if (rowDataForQuestionsSelected != null) {
             selectedQuestionsTableView.getItems().remove(rowDataForQuestionsSelected);
             stateManagement.getTestQuestions().remove(rowDataForQuestionsSelected);
-            numQuestionSelectForTest--;
             selectedQuestionsTableView.getSelectionModel().clearSelection();
             stateManagement.addTotalRemainingPoints(rowDataForQuestionsSelected.getPoints());
             totalRemainingPointsField.setText(String.valueOf(stateManagement.getTotalRemainingPoints()));

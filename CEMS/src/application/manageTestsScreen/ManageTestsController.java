@@ -16,11 +16,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import util.*;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-
 
 
 /**
@@ -54,24 +54,22 @@ public class ManageTestsController {
     ActiveTest activeTestRowData;
     TestForApproval testForApprovalRowData;
 
+    String fullName = Client.user.getFullName();
+
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        usernameText.setText(Client.user.getFullName());
+        usernameText.setText(fullName);
 
         stateManagement = StateManagement.getInstance();
 
-        MsgHandler getTestForApproval = new MsgHandler(TypeMsg.GetTestForApproval, null);
-        ClientUI.chat.accept(getTestForApproval);
-        ObservableList<TestForApproval> testsWaitingApproval = FXCollections.observableArrayList((List) ClientUI.chat.getTestForApproval());
-        TableManager.importData(testApprovalTableView, testsWaitingApproval);
-        testApprovalTableView.setOnMouseClicked((e) -> {
-            testForApprovalRowData = testApprovalTableView.getSelectionModel().getSelectedItem();
-        });
-        stateManagement.setTestForApproval(testsWaitingApproval);
+
         displayDbTestsTable();
+        displayApprovalTestsTable();
         displayActiveTestsTable();
+
     }
+
 
     /**
      * fetches the tests table from the database
@@ -83,16 +81,17 @@ public class ManageTestsController {
         ClientUI.chat.accept(getDbTestTable);
 
         ObservableList<Test> dbTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
+        ObservableList<Test> userDBTests = TableManager.filterByAuthor(dbTests,fullName);
 
         ObservableList<String> columns = FXCollections.observableArrayList();
         columns.addAll("Test Number", "ID", "Test Code", "Subject", "Course Name", "Year", "Semester", "Session", "Author");
         TableManager.createTable(testsFromDBTableView, columns);
-        TableManager.importData(testsFromDBTableView, dbTests);
+        TableManager.importData(testsFromDBTableView, userDBTests);
         double[] dbTestsMultipliers = {0.1, 0.08, 0.1, 0.1, 0.175, 0.1, 0.1, 0.1, 0.14};
         TableManager.resizeColumns(testsFromDBTableView, dbTestsMultipliers);
 
         ObservableList<String> columnsforAppropval = FXCollections.observableArrayList();
-        columnsforAppropval.addAll("Student ID", "Test ID", "Course","Semester", "Session","Grade","Approved");
+        columnsforAppropval.addAll("Student ID", "Test ID", "Course", "Semester", "Session", "Grade", "Approved");
         TableManager.createTable(testApprovalTableView, columnsforAppropval);
         double[] approvalTestsMultipliers = {0.15, 0.14, 0.15, 0.15, 0.175, 0.12, 0.11};
         TableManager.resizeColumns(testApprovalTableView, approvalTestsMultipliers);
@@ -103,12 +102,33 @@ public class ManageTestsController {
         });
 
         //filter tests by course name
-        FilteredList<Test> filteredData = new FilteredList<>(dbTests, b -> true);
+        FilteredList<Test> filteredData = new FilteredList<>(userDBTests, b -> true);
         TableManager.MakeFilterListForSearch(filteredData, searchField, Test::getCourseName);
 
         SortedList<Test> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(testsFromDBTableView.comparatorProperty());
         testsFromDBTableView.setItems(sortedData);
+    }
+
+    private void displayApprovalTestsTable() {
+        MsgHandler getTestForApproval = new MsgHandler(TypeMsg.GetTestForApproval, null);
+        ClientUI.chat.accept(getTestForApproval);
+
+        ObservableList<TestForApproval> studentTests = FXCollections.observableArrayList((List) ClientUI.chat.getTestForApproval());
+        ObservableList<TestForApproval> filteredTests = FXCollections.observableArrayList();
+
+        //filter out tests that were already approved
+        for (TestForApproval test : studentTests) {
+            if (test.getApproved() == ApprovalStatus.NO) {
+                filteredTests.add(test);
+            }
+        }
+
+        TableManager.importData(testApprovalTableView, filteredTests);
+        testApprovalTableView.setOnMouseClicked((e) -> {
+            testForApprovalRowData = testApprovalTableView.getSelectionModel().getSelectedItem();
+        });
+        stateManagement.setTestForApproval(filteredTests);
     }
 
     /**
@@ -126,7 +146,7 @@ public class ManageTestsController {
         TableManager.createTable(activeTestsTableView, columns);
         TableManager.importData(activeTestsTableView, activeTests);
 
-        double[] activeTestsMultipliers = {0.22, 0.39,0.39};
+        double[] activeTestsMultipliers = {0.22, 0.39, 0.39};
         TableManager.resizeColumns(activeTestsTableView, activeTestsMultipliers);
 
         //makes the elements in the database questions table clickable
@@ -143,6 +163,7 @@ public class ManageTestsController {
      * switches to the edit test screen (identical to stage 1 of test creation)
      * the relevant fields in stateManagement are updated with the values
      * of the test that was selected
+     *
      * @param event the event that triggered the method
      */
     public void editTest(ActionEvent event) {
@@ -162,7 +183,7 @@ public class ManageTestsController {
         }
         loadTestState(testRowData);
         stateManagement.setPreviousScreenPath(PathConstants.manageTestsPath);
-        ScreenManager.goToNewScreen(event,PathConstants.createNewTestPath);
+        ScreenManager.goToNewScreen(event, PathConstants.createNewTestPath);
     }
 
     /**
@@ -195,6 +216,7 @@ public class ManageTestsController {
         currentStage.close();
         ScreenManager.showStage(PathConstants.manageTestsPath, PathConstants.iconPath);
     }
+
     public void activateTest(ActionEvent actionEvent) {
 
         if (testRowData == null) {
@@ -208,7 +230,8 @@ public class ManageTestsController {
 
             //setting the activeTest data
             LocalDate currentDate = LocalDate.now();
-            LocalTime currentTime = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);;
+            LocalTime currentTime = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
+            ;
             ActiveTest testToActivate = new ActiveTest(
                     stateManagement.getTestID(),
                     stateManagement.getTestQuestions().size(),
@@ -222,7 +245,7 @@ public class ManageTestsController {
             ClientUI.chat.accept(addNewActiveTest);
 
             //adds a row to the aftertestinfo table
-            String[] infoArray = {testRowData.getId(),testToActivate.getTestDate(),testRowData.getTestDuration()};
+            String[] infoArray = {testRowData.getId(), testToActivate.getTestDate(), testRowData.getTestDuration()};
             MsgHandler addNewAfterTestInfo = new MsgHandler(TypeMsg.AddNewAfterTestInfo, infoArray);
             ClientUI.chat.accept(addNewAfterTestInfo);
 
@@ -230,11 +253,12 @@ public class ManageTestsController {
 
         }
     }
+
     public void loadTestState(Test test) {
         //load test's course
-        String subjectID = test.getId().substring(0,2);
-        String courseID = test.getId().substring(2,4);
-        Course testCourse = new Course(subjectID,courseID, test.getSubject(), test.getCourseName());
+        String subjectID = test.getId().substring(0, 2);
+        String courseID = test.getId().substring(2, 4);
+        Course testCourse = new Course(subjectID, courseID, test.getSubject(), test.getCourseName());
         stateManagement.setCourse(testCourse);
 
         //load test's questions
@@ -242,7 +266,7 @@ public class ManageTestsController {
         ClientUI.chat.accept(getTestQuestions);
 
         ObservableList<TestQuestion> testQuestions = FXCollections.observableArrayList((List) ClientUI.chat.getTestQuestions());
-        for (TestQuestion question: testQuestions) {
+        for (TestQuestion question : testQuestions) {
             stateManagement.setTestQuestions(question);
         }
 
@@ -264,6 +288,7 @@ public class ManageTestsController {
 
     /**
      * view the selected active test's current progress and info
+     *
      * @param actionEvent the event that triggered the method
      */
     public void viewTestInProgress(ActionEvent actionEvent) {
@@ -297,17 +322,19 @@ public class ManageTestsController {
 
     /**
      * opens a test approval screen for the selected test
+     *
      * @param actionEvent the event that triggered the method
      */
     public void viewTestResults(ActionEvent actionEvent) {
-        if(testForApprovalRowData == null){
+        if (testForApprovalRowData == null) {
             showError.showErrorPopup("Select a test to approve");
             return;
         }
         stateManagement.setTestID(testForApprovalRowData.getTestID());
         stateManagement.setStudentID(testForApprovalRowData.getStudentID());
-        ScreenManager.goToNewScreen(actionEvent,PathConstants.viewTestAwaitingApprovalPath);
+        ScreenManager.goToNewScreen(actionEvent, PathConstants.viewTestAwaitingApprovalPath);
     }
+
     public void LogOut(ActionEvent event) {
         StateManagement.resetInstance();
         ScreenManager.goToNewScreen(event, PathConstants.loginPath);

@@ -152,6 +152,9 @@ public class StateManagement {
     public void setTestQuestions(TestQuestion question) {
         this.testQuestions.add(question);
     }
+    public void clearTestQuestions() {
+        this.testQuestions.clear();
+    }
 
     public Course getCourse() {
         return course;
