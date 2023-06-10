@@ -392,6 +392,7 @@ public class CemsServer extends AbstractServer {
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
                     sendToAllClients(new MsgHandler<>(TypeMsg.RequestIsDeclined,obj));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsDeclined,null));
                     break;
                 case GetStudentReport:
                     this.msg = (MsgHandler<Object>) msg;
@@ -408,7 +409,6 @@ public class CemsServer extends AbstractServer {
                                         "JOIN user u ON u.id = st.studentID " +
                                         "WHERE ls.id = '" + headID + "' AND st.studentID = '" + studentsID + "'"
                         );
-
                         client.sendToClient(new MsgHandler<>(TypeMsg.StudentReportImported, studentInfo));
                     }
                     break;

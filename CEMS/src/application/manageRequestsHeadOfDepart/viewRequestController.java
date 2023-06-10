@@ -70,8 +70,8 @@ public class viewRequestController {
        testIDText.setText(request.getId());
     }
     public void deleteRequest(String request){
-        MsgHandler approveRequest = new MsgHandler(TypeMsg.ApproveRequestByHeadOfDepartment,request);
-        ClientUI.chat.accept(approveRequest);
+        MsgHandler delete = new MsgHandler(TypeMsg.DeleteRequest,request);
+        ClientUI.chat.accept(delete);
 
     }
     @FXML

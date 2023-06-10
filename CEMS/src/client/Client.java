@@ -123,6 +123,8 @@ public class Client extends AbstractClient {
                 break;
             case RequestIsApproved://check delete
                 break;
+            case RequestIsDeclined://check delete
+                break;
             case RequestIsDeclinedToLecturer://check delete
                 activeTestController.showRequestDeclinedPopUp();
               break;
