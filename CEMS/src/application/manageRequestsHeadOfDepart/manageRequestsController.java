@@ -67,21 +67,28 @@ public class manageRequestsController {
         controller.setManage((Stage) header.getScene().getWindow());
 
     }
+    public void deleteRequest(String request){
+        MsgHandler approveRequest = new MsgHandler(TypeMsg.ApproveRequestByHeadOfDepartment,request);
+        ClientUI.chat.accept(approveRequest);
+
+    }
     @FXML
     public void approveRequest(ActionEvent event) {
         int selectedRequestIndex = RequestsDBTableView.getSelectionModel().getFocusedIndex();
         if (selectedRequestIndex != -1) {
             String requestToApprove = RequestsDBTableView.getItems().get(selectedRequestIndex).getId();
             String AddedTime = RequestsDBTableView.getItems().get(selectedRequestIndex).getNewDuration();
+            String requestAuthor = RequestsDBTableView.getItems().get(selectedRequestIndex).getAuthor();
             ArrayList<String> ChangeTestDurationArr = new ArrayList<>();
             ChangeTestDurationArr.add(requestToApprove);
             ChangeTestDurationArr.add(AddedTime);
+            ChangeTestDurationArr.add(requestAuthor);
             if (showError.showConfirmationPopup("Are you sure you want to approve this request?")) {
                 MsgHandler changeDuration = new MsgHandler(TypeMsg.changeTestDuration,ChangeTestDurationArr);
                 ClientUI.chat.accept(changeDuration);
-                MsgHandler approveRequest = new MsgHandler(TypeMsg.ApproveRequestByHeadOfDepartment,requestToApprove);
+                MsgHandler approveRequest = new MsgHandler(TypeMsg.ApproveRequestByHeadOfDepartment,requestAuthor);
                 ClientUI.chat.accept(approveRequest);
-
+                deleteRequest(requestToApprove);
                 reloadPage(approveBtn);
                 //TODO: return to the lecturer with the approval
             }
@@ -94,7 +101,8 @@ public class manageRequestsController {
         if (selectedRequestIndex != -1) {
             String requestToDecline = RequestsDBTableView.getItems().get(selectedRequestIndex).getId();
             if (showError.showConfirmationPopup("Are you sure you want to decline this request?")) {
-                MsgHandler declineRequest = new MsgHandler(TypeMsg.DeclineRequestByHeadOfDepartment,requestToDecline);
+                deleteRequest(requestToDecline);
+                MsgHandler declineRequest = new MsgHandler(TypeMsg.DeclineRequestByHeadOfDepartment,RequestsDBTableView.getItems().get(selectedRequestIndex).getAuthor());
                 ClientUI.chat.accept(declineRequest);
                 reloadPage(declineBtn);
                 //TODO: return to the lecturer with the approval

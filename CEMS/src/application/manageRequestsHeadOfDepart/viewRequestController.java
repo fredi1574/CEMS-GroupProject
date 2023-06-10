@@ -69,6 +69,11 @@ public class viewRequestController {
         TimeExtentionDurationText.setText(request.getNewDuration());
        testIDText.setText(request.getId());
     }
+    public void deleteRequest(String request){
+        MsgHandler approveRequest = new MsgHandler(TypeMsg.ApproveRequestByHeadOfDepartment,request);
+        ClientUI.chat.accept(approveRequest);
+
+    }
     @FXML
     public void approveRequest(ActionEvent event) {
         String AddedTime = TimeExtentionDurationText.getText();
@@ -78,8 +83,9 @@ public class viewRequestController {
         if (showError.showConfirmationPopup("Are you sure you want to approve this request?")) {
             MsgHandler changeDuration = new MsgHandler(TypeMsg.changeTestDuration,ChangeTestDurationArr);
             ClientUI.chat.accept(changeDuration);
-            MsgHandler approveRequest = new MsgHandler(TypeMsg.ApproveRequestByHeadOfDepartment, (String) testIDText.getText());
+            MsgHandler approveRequest = new MsgHandler(TypeMsg.ApproveRequestByHeadOfDepartment, (String) LecturerText.getText());
             ClientUI.chat.accept(approveRequest);
+            deleteRequest((String) testIDText.getText());
             reloadPage(approveBtn);
             //TODO: return to the lecturer with the approval
         }
@@ -89,8 +95,9 @@ public class viewRequestController {
     @FXML
     public void declineRequest(ActionEvent event) {
         if (showError.showConfirmationPopup("Are you sure you want to decline this request?")) {
-            MsgHandler declineRequest = new MsgHandler(TypeMsg.ApproveRequestByHeadOfDepartment, (String) testIDText.getText());
+            MsgHandler declineRequest = new MsgHandler(TypeMsg.ApproveRequestByHeadOfDepartment,LecturerText.getText());
             ClientUI.chat.accept(declineRequest);
+            deleteRequest((String) testIDText.getText());
             //TODO: return to the lecturer with the decline
             reloadPage(declineBtn);
         }

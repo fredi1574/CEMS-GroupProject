@@ -112,6 +112,14 @@ public enum TypeMsg {
         public String toString() {
             return "Lecturer asked to save the questions of test";
         }
+    }, DeleteRequest {
+        public String toString() {
+            return "Deleting request for time change";
+        }
+    }, DeleteRequestCompleted {
+        public String toString() {
+            return "request for time change was deleted";
+        }
     }, AddNewTestQuestionsResponse {
         public String toString() {
             return "The Questions is s saved";
@@ -409,7 +417,7 @@ public enum TypeMsg {
     },
     UpdateTheApproveofLecturer {
         public String toString() {
-            return "User asked to update the approv";
+            return "User asked to update the approve";
         }
     },
     UpdateTheApproveofLecturerResponse {

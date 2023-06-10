@@ -121,9 +121,9 @@ public class Client extends AbstractClient {
                 requests = (ArrayList<Object>) ((MsgHandler<Object>) messageFromServer).getMsg();
                 this.requests = (List<Object>) messageFromServer.getMsg();
                 break;
-            case RequestIsApproved:
+            case RequestIsApproved://check delete
                 break;
-            case RequestIsDeclinedToLecturer:
+            case RequestIsDeclinedToLecturer://check delete
                 activeTestController.showRequestDeclinedPopUp();
               break;
             case StudentReportImported:
@@ -201,6 +201,8 @@ public class Client extends AbstractClient {
                 this.NumOfFinished = (Integer) messageFromServer.getMsg();
                 break;
             case CompleteUnactivatingTest:
+                break;
+            case DeleteRequestCompleted:
                 break;
 
 

@@ -170,7 +170,10 @@ public class viewActiveTestController {
         }
 
         public void showRequestApprovedPopUp () {
-            showError.showInfoPopup("Time change request was approved");
+            Platform.runLater(() -> {
+                smsEmailPopUpController.SetInfoField("Time change request was approved",Client.user.getFullName(),Client.user.getEmail());
+                ScreenManager.popUpScreen(PathConstants.SmsEmailPopUp);
+            });
         }
 
 

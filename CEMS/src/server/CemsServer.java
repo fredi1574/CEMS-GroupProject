@@ -120,10 +120,12 @@ public class CemsServer extends AbstractServer {
         System.out.println(messageFromServerToAll.getType().toString());
         switch (messageFromServerToAll.getType()) {
             case RequestIsDeclined:
+                this.msg = (MsgHandler<Object>) msg;
+                this.obj = (String) this.msg.getMsg();
                 for (int i = 0; i < clientThreadList.length; i++) {
                     ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
-                    String name = (String) client.getInfo(client.getName());
-                    if (name.contains("Lecturer")) {
+                    String name = client.getName();
+                    if (name.equals(obj)) {
                         try {
                             client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsDeclinedToLecturer, "Time Request Declined"));
                         } catch (IOException e) {
@@ -132,6 +134,23 @@ public class CemsServer extends AbstractServer {
                     }
 
                 }
+                break;
+            case RequestIsApproved:
+                this.msg = (MsgHandler<Object>) msg;
+                this.obj = (String) this.msg.getMsg();
+                for (int i = 0; i < clientThreadList.length; i++) {
+                    ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
+                    String name = client.getName();
+                    if (name.equals(obj)) {
+                        try {
+                            client.sendToClient(new MsgHandler<>(TypeMsg.TestDurationApprovedPopLecturer, "Time Request Approved"));
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+                break;
+
 
 
         }
@@ -204,8 +223,9 @@ public class CemsServer extends AbstractServer {
                     String Password = (String) details.get(1);
                     Object user = MysqlConnection.authenticateUser(Username, Password);
                     if (user instanceof User) {
-                        client.setName(Username);
-                        client.setInfo(client.getName(), ((User) user).getRole());
+                        String fullname = ((User) user).getFullName();
+                        client.setName(fullname);
+                        client.setInfo(client.getName(),((User) user).getRole());
                     }
                     client.sendToClient(new MsgHandler<>(TypeMsg.LoginResponse, user));
                     break;
@@ -352,17 +372,27 @@ public class CemsServer extends AbstractServer {
                 case ApproveRequestByHeadOfDepartment:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
-                    String approvedRequest = "DELETE FROM cems.testrequest WHERE id='" + obj + "'";
-                    MysqlConnection.update(approvedRequest);
+                    sendToAllClients(new MsgHandler<>(TypeMsg.RequestIsApproved, obj));
+                    break;
+                case changeTestDuration:
+                    this.msg = (MsgHandler<Object>) msg;
+                    List<Object> TestChangement = (List<Object>) this.msg.getMsg();
+                    String testID = (String) TestChangement.get(0);
+                    String addedTime = (String) TestChangement.get(1);
+                    MysqlConnection.update("UPDATE test SET testDuration = testDuration + '" + Integer.parseInt(addedTime) + "' WHERE id = '" + testID + "'");
+                    sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationChanged, Integer.parseInt(addedTime)));
+                    break;
+                case DeleteRequest:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    String deleteRequest = "DELETE FROM cems.testrequest WHERE id='" + obj + "'";
+                    MysqlConnection.update(deleteRequest);
                     client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsApproved, null));
                     break;
                 case DeclineRequestByHeadOfDepartment:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
-                    String declinedRequest = "DELETE FROM cems.testrequest WHERE id='" + obj + "'";
-                    MysqlConnection.update(declinedRequest);
-                    //client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsDeclined, null));
-                    sendToAllClients(new MsgHandler<>(TypeMsg.RequestIsDeclined, "Time Request Declined"));
+                    sendToAllClients(new MsgHandler<>(TypeMsg.RequestIsDeclined,obj));
                     break;
                 case GetStudentReport:
                     this.msg = (MsgHandler<Object>) msg;
@@ -529,16 +559,7 @@ public class CemsServer extends AbstractServer {
                     MysqlConnection.update("UPDATE aftertestinfo SET totalFinished = totalFinished + 1 WHERE testID = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.StudentsFinishedTestIncreased, null));
                     break;
-                case changeTestDuration:
-                    this.msg = (MsgHandler<Object>) msg;
-                    List<Object> TestChangement = (List<Object>) this.msg.getMsg();
-                    String testID = (String) TestChangement.get(0);
-                    String addedTime = (String) TestChangement.get(1);
-                    MysqlConnection.update("UPDATE test SET testDuration = testDuration + '" + Integer.parseInt(addedTime) + "' WHERE id = '" + testID + "'");
 
-                    sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationChanged, Integer.parseInt(addedTime)));
-                    sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationApprovedPopLecturer, null));
-                    break;
                 case GetsubjectNametoID:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
