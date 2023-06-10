@@ -13,6 +13,11 @@ import util.ScreenManager;
 
 import javafx.scene.text.Text;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class MainMenuController {
     @FXML
     private Text usernameText;
@@ -29,6 +34,7 @@ public class MainMenuController {
      */
     public void initialize() {
         usernameText.setText(Client.user.getFullName());
+        detectCopying();
         ScreenManager.dragAndDrop(header);
         backPane.setVisible(false);
         if (Client.user.getRole().equals("Head of Department/Lecturer")) {
@@ -79,7 +85,46 @@ public class MainMenuController {
         ScreenManager.goToNewScreen(event, PathConstants.addQuestionPath);
     }
 
+    public void detectCopying() {
+        String url = "jdbc:mysql://localhost:3306/cems?serverTimezone=UTC&useSSL=false";
+        String username = "root";
+        String password = "Aa123456";
 
+        String testID = "010103";
+
+        try {
+            // Connect to the database
+            Connection connection = DriverManager.getConnection(url, username, password);
+
+            // Create the SQL query
+            String query = "UPDATE studentstest st " +
+                    "SET st.suspicionOfCheating = 'YES' " +
+                    "WHERE st.testID = '" + testID + "' " +
+                    "AND st.score != '100' " +
+                    "AND EXISTS (" +
+                    "SELECT as1.studentID " +
+                    "FROM answersofstudent as1 " +
+                    "JOIN answersofstudent as2 ON as1.questionID = as2.questionID " +
+                    "AND as1.studentsAnswer != as2.studentsAnswer " +
+                    "WHERE as1.studentID = st.studentID " +
+                    "AND as1.testID = st.testID" +
+                    ")";
+
+            // Create a statement
+            Statement statement = connection.createStatement();
+
+            // Execute the query
+            int rowsAffected = statement.executeUpdate(query);
+
+            System.out.println("Rows affected: " + rowsAffected);
+
+            // Close the statement and connection
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * Closes the application.
      * @param event The event triggered by the close button click.
