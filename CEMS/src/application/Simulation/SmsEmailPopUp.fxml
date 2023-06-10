@@ -25,7 +25,7 @@
             </Pane>
             <Button layoutX="479.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
             <Button layoutX="443.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
-            <Text fx:id="fullNameText" fill="#306ebd" layoutX="293.0" layoutY="57.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Simulation" wrappingWidth="130.48748779296875">
+            <Text fill="#306ebd" layoutX="287.0" layoutY="42.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Simulation" wrappingWidth="130.48748779296875">
                <font>
                   <Font name="Tahoma" size="23.0" />
                </font>
@@ -35,12 +35,17 @@
                   <Font size="13.0" />
                </font>
             </Text>
-            <Text fx:id="EmailAdressTxt" layoutX="293.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0521234567">
+            <Text fx:id="EmailAdressTxt" layoutX="293.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="email">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
             <TextField fx:id="InfoTextField" layoutX="293.0" layoutY="122.0" prefHeight="115.0" prefWidth="205.0" />
+            <Text fx:id="fullNameText" fill="#306ebd" layoutX="287.0" layoutY="70.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.48748779296875">
+               <font>
+                  <Font name="Tahoma" size="14.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </center>
