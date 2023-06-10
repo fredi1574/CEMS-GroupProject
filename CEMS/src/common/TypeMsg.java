@@ -153,7 +153,12 @@ public enum TypeMsg {
     },
     RequestIsDeclined {
         public String toString() {
-            return "The request has declined";
+            return "Time Request Declined";
+        }
+    },
+    RequestIsDeclinedToLecturer {
+        public String toString() {
+            return "Time Request Declined";
         }
     },
     GetStudentReport {

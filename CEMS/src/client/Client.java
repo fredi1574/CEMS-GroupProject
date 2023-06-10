@@ -123,8 +123,9 @@ public class Client extends AbstractClient {
                 break;
             case RequestIsApproved:
                 break;
-            case RequestIsDeclined:
-                break;
+            case RequestIsDeclinedToLecturer:
+                activeTestController.showRequestDeclinedPopUp();
+              break;
             case StudentReportImported:
                 HODPstudentReportcontroller.reportCalc((ArrayList<Object>) messageFromServer.getMsg());
                 break;
@@ -189,24 +190,21 @@ public class Client extends AbstractClient {
             case AddNewAfterTestInfoResponse:
                 break;
             case ImportedNumberOfAttendedCounter:
-                this.NumOfAttended = (Integer)messageFromServer.getMsg();
+                this.NumOfAttended = (Integer) messageFromServer.getMsg();
                 break;
             case ImportedRegisteredStudents:
-                this.NumOfRegistered = (Integer)messageFromServer.getMsg();
+                this.NumOfRegistered = (Integer) messageFromServer.getMsg();
                 break;
-            case  AfterTestRowCompleted:
+            case AfterTestRowCompleted:
                 break;
             case ImportedNumberOfFinished:
-                this.NumOfFinished = (Integer)messageFromServer.getMsg();
+                this.NumOfFinished = (Integer) messageFromServer.getMsg();
                 break;
             case CompleteUnactivatingTest:
                 break;
 
 
-
-
         }
-
     }
 
 

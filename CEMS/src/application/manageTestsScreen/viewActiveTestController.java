@@ -40,7 +40,7 @@ public class viewActiveTestController {
     private Pane requestApprovedPane;
 
     @FXML
-    private Button extraTimeBtn;
+    private static Button extraTimeBtn;
     @FXML
     public TextField testIdTextField;
     public Label courseNameLabel;
@@ -162,6 +162,7 @@ public class viewActiveTestController {
     }
 
         public void showRequestDeclinedPopUp () {
+            showError.showInfoPopup("Time change request was approved");
             smsEmailPopUpController.SetInfoField("Time change request was declined");
             ScreenManager.popUpScreen(PathConstants.SmsEmailPopUp);
         }

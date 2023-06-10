@@ -23,18 +23,21 @@ public class SmsEmailPopUpController {
 
     @FXML
     private AnchorPane header;
+    private static String infoText;
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         fullNameText.setText(Client.user.getFullName());
         EmailAdressTxt.setText(Client.user.getEmail());
+        InfoTextField.setText(infoText);
     }
     @FXML
     void closeClient(ActionEvent event) {
         ExitButton.closePopUp(event);
     }
     public void SetInfoField(String info){
-        InfoTextField.setText(info);
+        infoText = info;
+
     }
 
 

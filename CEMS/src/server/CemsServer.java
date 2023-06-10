@@ -27,6 +27,7 @@ public class CemsServer extends AbstractServer {
     ActiveTest activeTest;
     TestQuestion testQuestion;
     TestForApproval testApprove;
+    public static MsgHandler<Object> messageFromServerToAll;
 
     /**
      * Constructs an instance of the echo server.
@@ -111,19 +112,32 @@ public class CemsServer extends AbstractServer {
 
     }
 
-    //	@Override
-//	protected void clientConnected(ConnectionToClient client) {
-//		updateClientList(client,"Connected");
-//		try {
-//			 client.sendToClient(new common.MsgHandler(common.TypeMsg.Connected, null));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	@Override
-//	synchronized protected void clientDisconnected(ConnectionToClient client) {
-//		updateClientList(client,"Disconnected");
-//	}
+    @Override
+    public void sendToAllClients(Object msg) {
+        Thread[] clientThreadList = getClientConnections();
+        messageFromServerToAll = (MsgHandler<Object>) msg;
+        System.out.println("handleMessageFromServer ");
+        System.out.println(messageFromServerToAll.getType().toString());
+        switch (messageFromServerToAll.getType()) {
+            case RequestIsDeclined:
+                for (int i = 0; i < clientThreadList.length; i++) {
+                    ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
+                    String name = (String) client.getInfo(client.getName());
+                    if (name.contains("Lecturer")) {
+                        try {
+                            client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsDeclinedToLecturer, "Time Request Declined"));
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+
+                }
+
+
+        }
+
+    }
+
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
         MsgHandler<Object> messageFromClient = (MsgHandler<Object>) msg;
@@ -348,7 +362,7 @@ public class CemsServer extends AbstractServer {
                     String declinedRequest = "DELETE FROM cems.testrequest WHERE id='" + obj + "'";
                     MysqlConnection.update(declinedRequest);
                     //client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsDeclined, null));
-                    sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationDeclinedPopLecturer, null));
+                    sendToAllClients(new MsgHandler<>(TypeMsg.RequestIsDeclined, "Time Request Declined"));
                     break;
                 case GetStudentReport:
                     this.msg = (MsgHandler<Object>) msg;
@@ -615,7 +629,7 @@ public class CemsServer extends AbstractServer {
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String[]) this.msg.getMsg();
                     String[] afterTestInfo = (String[]) obj;
-                   MysqlConnection.update("UPDATE aftertestinfo SET actualDuration = '" + Integer.parseInt(afterTestInfo[0]) +
+                    MysqlConnection.update("UPDATE aftertestinfo SET actualDuration = '" + Integer.parseInt(afterTestInfo[0]) +
                             "', totalForcedFinished = '" + Integer.parseInt(afterTestInfo[1]) +
                             "' WHERE testID = '" + afterTestInfo[2] + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.AfterTestRowCompleted, null));
