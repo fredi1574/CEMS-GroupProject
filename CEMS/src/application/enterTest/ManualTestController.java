@@ -34,6 +34,7 @@ public class ManualTestController {
     @FXML
     private Text addtionalTimeForSubmitTEXT;
     private boolean isSubmit = true;
+    private boolean forText = true;
     private boolean notUpload = true;
     private boolean isTimerRunning;
     private int totalSecondsRemaining;
@@ -129,7 +130,8 @@ public class ManualTestController {
         if (totalSecondsRemaining <= 0) {
             if(isSubmit){
                 totalSecondsRemaining = 60;
-                addtionalTimeForSubmitTEXT.setText("** You have only one minutes to submit know **");
+                addtionalTimeForSubmitTEXT.setText("*You have only one minutes left to submitedd test*");
+                isSubmit = false;
             }else
                 stopTimer();
         }
@@ -138,6 +140,7 @@ public class ManualTestController {
         if (timerThread != null) {
             isTimerRunning = false;
             notUpload = false;
+            forText = false;
             try {
                 timerThread.join(); // Wait for the thread to finish
             } catch (InterruptedException e) {
@@ -170,8 +173,8 @@ public class ManualTestController {
                 SubmissionStatusText.setText("The solve is submitedd file : " + selectedFile.getName());
             }
         }else {
+
             showError.showErrorPopup("Can not do upload now the time is finished");
-            return;
         }
     }
     @FXML
@@ -207,19 +210,24 @@ public class ManualTestController {
 
     @FXML
     void onSaveButton(ActionEvent event) {
-        if(SubmissionStatusText.getText().isEmpty()){
-            if(showError.showConfirmationPopup("Are you sure want to save not submit yet")){
-                StateManagement.resetInstance();
-                ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
-            }else
-                return;
-        } else if(showError.showConfirmationPopup("Are you sure want to save your test")){
-            StateManagement.resetInstance();
-            ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
+        if(forText) {
+            if (FileSubmissionsText.getText().isEmpty()) {
+                if (showError.showConfirmationPopup("Are you sure want to save not submit yet")) {
+                    StateManagement.resetInstance();
+                    ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
+                }
+            }
+            else {
+                if (showError.showConfirmationPopup("Are you sure want to save your test")) {
+                    StateManagement.resetInstance();
+                    ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
+                } else
+                    return;
+            }
+
         }else
-                return;
-
-
+            showError.showInfoPopup("Sorry for you dont have time to submitedd");
+        ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
     }
     @FXML
     public void minimizeWindow(ActionEvent event) {

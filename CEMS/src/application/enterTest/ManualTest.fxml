@@ -134,7 +134,7 @@
             </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="522.0" layoutY="301.0" prefHeight="70.0" prefWidth="334.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
+      <AnchorPane layoutX="520.0" layoutY="322.0" prefHeight="70.0" prefWidth="334.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
          <children>
             <Label alignment="BASELINE_CENTER" layoutX="10.0" layoutY="27.0" prefHeight="20.0" prefWidth="142.0" text="Test durations :">
                <font>
@@ -144,7 +144,7 @@
             <TextField fx:id="durationTime" layoutX="158.0" layoutY="23.0" prefHeight="21.0" prefWidth="148.0" />
          </children>
       </AnchorPane>
-      <Text fx:id="addtionalTimeForSubmitTEXT" fill="#e10000" layoutX="525.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="328.0">
+      <Text fx:id="addtionalTimeForSubmitTEXT" fill="#e10000" layoutX="513.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="361.0">
          <font>
             <Font size="15.0" />
          </font>
