@@ -176,8 +176,10 @@ public class Client extends AbstractClient {
                 break;
             case TestDurationApprovedPopLecturer:
                 activeTestController.showRequestApprovedPopUp();
+                break;
             case TestDurationDeclinedPopLecturer:
                 activeTestController.showRequestDeclinedPopUp();
+                break;
             case ImportedSubjectIDfromName:
                 this.singleSubject = (Subject) messageFromServer.getMsg();
                 break;

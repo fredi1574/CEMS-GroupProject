@@ -97,7 +97,14 @@ public class QuestionsComputerizedTestAnswerController {
     public void showNotificationAndChangeDuration(int newDuration){
         int remainingSeconds = remainingMinutes * 60;  // Convert remaining minutes to seconds
         seconds[0] += newDuration * 60;  // Add the new duration in seconds
-        showError.showInfoPopup("Test time increased by"+ newDuration + "minutes");
+        Stage currentStage = (Stage) header.getScene().getWindow();
+        if (currentStage.isShowing()) {
+            Platform.runLater(() -> {
+
+                showError.showInfoPopup("Test time increased by" + newDuration + "minutes");
+            });
+        }
+
     }
 
     private void saveMarkingWithValidation() {

@@ -149,6 +149,7 @@ public class CemsServer extends AbstractServer {
                         }
                     }
                 }
+                break;
             case TestDurationChanged:
                 this.msg = (MsgHandler<Object>) msg;
                 this.obj = this.msg.getMsg();
