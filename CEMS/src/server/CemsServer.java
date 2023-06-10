@@ -211,7 +211,6 @@ public class CemsServer extends AbstractServer {
                     this.obj = (Question) this.msg.getMsg();
                     this.question = (Question) obj;
                     String DeleteQuestionQuery = "DELETE FROM cems.question WHERE id='" + question.getId() + "'";
-                    ;
                     MysqlConnection.update(DeleteQuestionQuery);
                     client.sendToClient(new MsgHandler<>(TypeMsg.QuestionDeleted, null));
                     break;
@@ -387,7 +386,7 @@ public class CemsServer extends AbstractServer {
                     this.obj = (String) this.msg.getMsg();
                     String deleteRequest = "DELETE FROM cems.testrequest WHERE id='" + obj + "'";
                     MysqlConnection.update(deleteRequest);
-                    client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsApproved, null));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.DeleteRequestCompleted, null));
                     break;
                 case DeclineRequestByHeadOfDepartment:
                     this.msg = (MsgHandler<Object>) msg;

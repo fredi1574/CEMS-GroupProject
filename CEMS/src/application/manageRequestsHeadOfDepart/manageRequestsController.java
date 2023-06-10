@@ -68,8 +68,8 @@ public class manageRequestsController {
 
     }
     public void deleteRequest(String request){
-        MsgHandler approveRequest = new MsgHandler(TypeMsg.ApproveRequestByHeadOfDepartment,request);
-        ClientUI.chat.accept(approveRequest);
+        MsgHandler delete = new MsgHandler(TypeMsg.DeleteRequest,request);
+        ClientUI.chat.accept(delete);
 
     }
     @FXML
@@ -101,9 +101,9 @@ public class manageRequestsController {
         if (selectedRequestIndex != -1) {
             String requestToDecline = RequestsDBTableView.getItems().get(selectedRequestIndex).getId();
             if (showError.showConfirmationPopup("Are you sure you want to decline this request?")) {
-                deleteRequest(requestToDecline);
                 MsgHandler declineRequest = new MsgHandler(TypeMsg.DeclineRequestByHeadOfDepartment,RequestsDBTableView.getItems().get(selectedRequestIndex).getAuthor());
                 ClientUI.chat.accept(declineRequest);
+                deleteRequest(requestToDecline);
                 reloadPage(declineBtn);
                 //TODO: return to the lecturer with the approval
             }
