@@ -172,6 +172,8 @@ public class Client extends AbstractClient {
             case TestDurationChanged:
                 StudentInTest.showNotificationAndChangeDuration((Integer) messageFromServer.getMsg());
                 break;
+            case changeTestDurationAnswer:
+                break;
             case TestDurationApprovedPopLecturer:
                 activeTestController.showRequestApprovedPopUp();
             case TestDurationDeclinedPopLecturer:

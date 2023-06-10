@@ -149,8 +149,24 @@ public class CemsServer extends AbstractServer {
                         }
                     }
                 }
-                break;
+            case TestDurationChanged:
+                this.msg = (MsgHandler<Object>) msg;
+                this.obj = this.msg.getMsg();
+                if (obj instanceof Integer) {
+                    for (int i = 0; i < clientThreadList.length; i++) {
+                        ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
+                        String name = (String) client.getInfo(client.getName());
+                        if (name.equals("Student")) {
+                            try {
+                                client.sendToClient(new MsgHandler<>(TypeMsg.TestDurationChanged, obj));
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+                }
 
+                break;
 
 
         }
@@ -224,7 +240,7 @@ public class CemsServer extends AbstractServer {
                     if (user instanceof User) {
                         String fullname = ((User) user).getFullName();
                         client.setName(fullname);
-                        client.setInfo(client.getName(),((User) user).getRole());
+                        client.setInfo(client.getName(), ((User) user).getRole());
                     }
                     client.sendToClient(new MsgHandler<>(TypeMsg.LoginResponse, user));
                     break;
@@ -372,6 +388,7 @@ public class CemsServer extends AbstractServer {
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
                     sendToAllClients(new MsgHandler<>(TypeMsg.RequestIsApproved, obj));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsApproved, null));
                     break;
                 case changeTestDuration:
                     this.msg = (MsgHandler<Object>) msg;
@@ -380,6 +397,7 @@ public class CemsServer extends AbstractServer {
                     String addedTime = (String) TestChangement.get(1);
                     MysqlConnection.update("UPDATE test SET testDuration = testDuration + '" + Integer.parseInt(addedTime) + "' WHERE id = '" + testID + "'");
                     sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationChanged, Integer.parseInt(addedTime)));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.changeTestDurationAnswer, null));
                     break;
                 case DeleteRequest:
                     this.msg = (MsgHandler<Object>) msg;
@@ -391,8 +409,8 @@ public class CemsServer extends AbstractServer {
                 case DeclineRequestByHeadOfDepartment:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
-                    sendToAllClients(new MsgHandler<>(TypeMsg.RequestIsDeclined,obj));
-                    client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsDeclined,null));
+                    sendToAllClients(new MsgHandler<>(TypeMsg.RequestIsDeclined, obj));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsDeclined, null));
                     break;
                 case GetStudentReport:
                     this.msg = (MsgHandler<Object>) msg;

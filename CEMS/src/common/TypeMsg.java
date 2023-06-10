@@ -364,6 +364,12 @@ public enum TypeMsg {
         }
 
     },
+    changeTestDurationAnswer{
+        public String toString() {
+            return "Change of test duration succeeded";
+        }
+
+    },
     TestDurationChanged {
         public String toString() {
             return "test's duration was changed";
