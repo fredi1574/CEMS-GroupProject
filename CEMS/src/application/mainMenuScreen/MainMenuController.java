@@ -97,18 +97,28 @@ public class MainMenuController {
             Connection connection = DriverManager.getConnection(url, username, password);
 
             // Create the SQL query
-            String query = "UPDATE studentstest st " +
-                    "SET st.suspicionOfCheating = 'YES' " +
-                    "WHERE st.testID = '" + testID + "' " +
-                    "AND st.score != '100' " +
-                    "AND EXISTS (" +
-                    "SELECT as1.studentID " +
-                    "FROM answersofstudent as1 " +
-                    "JOIN answersofstudent as2 ON as1.questionID = as2.questionID " +
-                    "AND as1.studentsAnswer != as2.studentsAnswer " +
-                    "WHERE as1.studentID = st.studentID " +
-                    "AND as1.testID = st.testID" +
-                    ")";
+            String query = "UPDATE studentstest AS st "
+                    + "SET st.suspicionOfCheating = 'YES' "
+                    + "WHERE st.testID = '" + testID + "' "
+                    + "AND st.score != '100' "
+                    + "AND EXISTS ( "
+                    + "    SELECT 1 "
+                    + "    FROM answersofstudent AS aos1 "
+                    + "    INNER JOIN question AS q1 ON aos1.questionID = q1.id "
+                    + "    WHERE aos1.studentID = st.studentID "
+                    + "        AND aos1.testID = st.testID "
+                    + "        AND q1.correctAnswer != aos1.studentsAnswer "
+                    + "        AND NOT EXISTS ( "
+                    + "            SELECT 1 "
+                    + "            FROM answersofstudent AS aos2 "
+                    + "            INNER JOIN question AS q2 ON aos2.questionID = q2.id "
+                    + "            WHERE aos2.studentID = st.studentID "
+                    + "                AND aos2.testID = st.testID "
+                    + "                AND aos2.questionID <> aos1.questionID "
+                    + "                AND (q2.correctAnswer = aos2.studentsAnswer "
+                    + "                    OR q1.correctAnswer != aos2.studentsAnswer) "
+                    + "        ) "
+                    + ")";
 
             // Create a statement
             Statement statement = connection.createStatement();
