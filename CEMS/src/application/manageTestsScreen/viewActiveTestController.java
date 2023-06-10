@@ -164,7 +164,7 @@ public class viewActiveTestController {
 
         public void showRequestDeclinedPopUp () {
             Platform.runLater(() -> {
-                smsEmailPopUpController.SetInfoField("Time change request was declined",Client.user.getFullName());
+                smsEmailPopUpController.SetInfoField("Time change request was declined",Client.user.getFullName(),Client.user.getEmail());
                 ScreenManager.popUpScreen(PathConstants.SmsEmailPopUp);
             });
         }
