@@ -188,7 +188,7 @@ public class CreateTestController {
 
     public void BackToMenu(ActionEvent event) {
         stateManagement.resetInstance();
-        ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
+        ScreenManager.goToNewScreen(event, stateManagement.getPreviousScreenPath());
     }
 
 

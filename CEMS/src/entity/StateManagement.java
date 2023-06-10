@@ -3,6 +3,7 @@ package entity;
 import client.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import util.PathConstants;
 
 public class StateManagement {
     ObservableList<TestForApproval> testForApproval = FXCollections.observableArrayList();
@@ -22,6 +23,7 @@ public class StateManagement {
     public ActiveTest currentActivetest;
     public int totalRemainingPoints;
     public TestTypeEnum testType = TestTypeEnum.C;
+    public String previousScreenPath = PathConstants.mainMenuPath;
 
     private static StateManagement instance = null;
 
@@ -53,6 +55,7 @@ public class StateManagement {
                 testDuration, course.getCourseName(), getTeacherComment(), testType, getStudentComment(),
                 course.getSubjectName(), year, session, semester);
     }
+
     public ObservableList<TestForApproval> getTestForApproval() {
         return testForApproval;
     }
@@ -60,7 +63,6 @@ public class StateManagement {
     public void setTestForApproval(ObservableList<TestForApproval> testForApproval) {
         this.testForApproval = testForApproval;
     }
-
 
 
     public String getYear() {
@@ -147,7 +149,7 @@ public class StateManagement {
 
     //adds a single test question to the testQuestions observable list
     public void setTestQuestions(TestQuestion question) {
-            this.testQuestions.add(question);
+        this.testQuestions.add(question);
     }
 
     public Course getCourse() {
@@ -174,6 +176,13 @@ public class StateManagement {
         this.currentActivetest = currentActivetest;
     }
 
+    public String getPreviousScreenPath() {
+        return previousScreenPath;
+    }
+
+    public void setPreviousScreenPath(String previousScreenPath) {
+        this.previousScreenPath = previousScreenPath;
+    }
 
     /**
      * resets all test-state related data

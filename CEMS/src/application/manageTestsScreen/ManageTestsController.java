@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import util.*;
 import java.time.LocalDate;
@@ -44,6 +45,8 @@ public class ManageTestsController {
     private TableView<TestForApproval> testApprovalTableView;
     @FXML
     private TableView<ActiveTest> activeTestsTableView;
+    @FXML
+    private Text usernameText;
     public StateManagement stateManagement;
     Test testRowData;
     @FXML
@@ -54,6 +57,8 @@ public class ManageTestsController {
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
+        usernameText.setText(Client.user.getFullName());
+
         stateManagement = StateManagement.getInstance();
 
         MsgHandler getTestForApproval = new MsgHandler(TypeMsg.GetTestForApproval, null);
@@ -156,6 +161,7 @@ public class ManageTestsController {
             }
         }
         loadTestState(testRowData);
+        stateManagement.setPreviousScreenPath(PathConstants.manageTestsPath);
         ScreenManager.goToNewScreen(event,PathConstants.createNewTestPath);
     }
 

@@ -5,16 +5,14 @@ import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
 import entity.ApprovalStatus;
+import entity.CheatingSuspicion;
 import entity.StateManagement;
 import entity.TestForApproval;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import util.*;
@@ -22,69 +20,96 @@ import util.*;
 public class viewTestAwaitingApprovalController {
 
     @FXML
-    private TextField GradField;
+    private TextField gradeField;
 
-    @FXML
-    private TextField cheatinigField;
-    @FXML
-    private TextField correcAnswerField;
     @FXML
     private AnchorPane header;
     @FXML
-    private Text nameOfuser;
+    private Text usernameText;
     public StateManagement stateManagement;
+
     @FXML
-    private Button saveDiscionLecturer;
+    private Label studentIDLabel;
+
     @FXML
-    private TextField studentIDField;
+    private Label testIDLabel;
+
+    @FXML
+    private Label totalQuestionsLabel;
+
+    @FXML
+    private Label correctAnswersLabel;
+
+    @FXML
+    private ComboBox<String> cheatingComboBox;
 
     @FXML
     private TextArea teacherComment;
 
-    @FXML
-    private TextField testIDField;
-    private TestForApproval test;
+    private TestForApproval selectedTest;
 
     private boolean isSelected = false;
     private int indexOfTest;
-    @FXML
-    private TextField totalQuestionsField;
+
     @FXML
     private ComboBox<String> comboBoxApproval;
-    ObservableList<TestForApproval> testForApprovals;
+    ObservableList<TestForApproval> testsForApproval;
+
     public void initialize() {
-        nameOfuser.setText(Client.user.getFullName());
-        stateManagement =  StateManagement.getInstance();
-        testForApprovals = stateManagement.getTestForApproval();
-        for(int i=0; i <testForApprovals.size();i++){
-            if(stateManagement.getTestID().equals(testForApprovals.get(i).getTestID())){
-                test = stateManagement.getTestForApproval().get(i);
+        ScreenManager.dragAndDrop(header);
+        usernameText.setText(Client.user.getFullName());
+
+        stateManagement = StateManagement.getInstance();
+
+        testsForApproval = stateManagement.getTestForApproval();
+        for (int i = 0; i < testsForApproval.size(); i++) {
+            if (stateManagement.getTestID().equals(testsForApproval.get(i).getTestID())) {
+                selectedTest = stateManagement.getTestForApproval().get(i);
                 indexOfTest = i;
                 break;
             }
         }
-        setAllDataTestForStudent(test);
-        ObservableList<String> approved = FXCollections.observableArrayList("YES","NO");
+        setAllDataTestForStudent(selectedTest);
+
+        setComboboxes();
+
+
+    }
+
+    private void setComboboxes() {
+        ObservableList<String> approved = FXCollections.observableArrayList("YES", "NO");
         comboBoxApproval.setItems(approved);
 
         comboBoxApproval.setOnAction(event1 -> {
             String selectedItem = comboBoxApproval.getValue();
             ApprovalStatus approvedTheLecturer = ApprovalStatus.valueOf(selectedItem);
-            isSelected =true;
-            test.setApproved(approvedTheLecturer);
+            isSelected = true;
+            selectedTest.setApproved(approvedTheLecturer);
         });
 
-    }
-    void setAllDataTestForStudent(TestForApproval testForApproval){
-        studentIDField.setText(testForApproval.getStudentID());
-        GradField.setText(testForApproval.getGrade());
-        testIDField.setText(testForApproval.getTestID());
-        String yes = testForApproval.getSuspicionOfCheating().equals("YES") ? "YES":"NO";
-        cheatinigField.setText(yes);
-        correcAnswerField.setText(testForApproval.getCorrectAnswers());
-        totalQuestionsField.setText(testForApproval.getTotalQuestions());
+        //the two possible suspicion states in the combobox
+        ObservableList<String> suspicionStates = FXCollections.observableArrayList("YES", "NO");
+        cheatingComboBox.setItems(suspicionStates);
 
+        //makes the combobox functional
+        cheatingComboBox.setOnAction(event -> {
+            String selectedItem = cheatingComboBox.getValue();
+            CheatingSuspicion selectedState = CheatingSuspicion.valueOf(selectedItem);
+            isSelected = true;
+            selectedTest.setSuspicionOfCheating(selectedState);
+        });
     }
+
+    void setAllDataTestForStudent(TestForApproval testForApproval) {
+        studentIDLabel.setText(testForApproval.getStudentID());
+        gradeField.setText(testForApproval.getGrade());
+        testIDLabel.setText(testForApproval.getTestID());
+        String cheatingState = testForApproval.getSuspicionOfCheating().equals(CheatingSuspicion.YES) ? "YES" : "NO";
+        cheatingComboBox.setValue(cheatingState);
+        correctAnswersLabel.setText(testForApproval.getCorrectAnswers());
+        totalQuestionsLabel.setText(testForApproval.getTotalQuestions());
+    }
+
     @FXML
     void BackTOManageTest(ActionEvent event) {
         StateManagement.resetInstance();
@@ -100,19 +125,23 @@ public class viewTestAwaitingApprovalController {
     void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
+
     @FXML
-    void saveDiscionLecturer(ActionEvent event) {
-        if(!teacherComment.getText().isEmpty()) {
-            test.setLecturerComments(teacherComment.getText());
+    void saveDecisionLecturer(ActionEvent event) {
+        if (!teacherComment.getText().isEmpty()) {
+            selectedTest.setLecturerComments(teacherComment.getText());
         }
-        if(!isSelected){
-            showError.showErrorPopup("Must to select if you approve the test or not !");
+        if (!isSelected) {
+            showError.showErrorPopup("Select if you approve the test or not before saving!");
             return;
         }
         isSelected = false;
-        if( showError.showConfirmationPopup("Are You Sure Want to Save it !")) {
-            stateManagement.getTestForApproval().set(indexOfTest, test);
-            MsgHandler updateTheApproval = new MsgHandler(TypeMsg.UpdateTheApproveofLecturer, test);
+        if (showError.showConfirmationPopup("Are You sure You want to approve the test?")) {
+            selectedTest.setGrade(gradeField.getText());
+
+            stateManagement.getTestForApproval().set(indexOfTest, selectedTest);
+
+            MsgHandler updateTheApproval = new MsgHandler(TypeMsg.UpdateTheApproveofLecturer, selectedTest);
             ClientUI.chat.accept(updateTheApproval);
             ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
         }
