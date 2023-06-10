@@ -97,17 +97,18 @@ public class MainMenuController {
             Connection connection = DriverManager.getConnection(url, username, password);
 
             // Create the SQL query
-            String query = "UPDATE studentstest st " +
+            String query = "UPDATE studentstest AS st " +
                     "SET st.suspicionOfCheating = 'YES' " +
-                    "WHERE st.testID = '" + testID + "' " +
-                    "AND st.score != '100' " +
-                    "AND EXISTS (" +
-                    "SELECT as1.studentID " +
-                    "FROM answersofstudent as1 " +
-                    "JOIN answersofstudent as2 ON as1.questionID = as2.questionID " +
-                    "AND as1.studentsAnswer != as2.studentsAnswer " +
-                    "WHERE as1.studentID = st.studentID " +
-                    "AND as1.testID = st.testID" +
+                    "WHERE st.studentID IN (" +
+                    "    SELECT ans1.studentID " +
+                    "    FROM answersofstudent AS ans1 " +
+                    "    INNER JOIN answersofstudent AS ans2 ON ans1.testID = ans2.testID AND ans1.questionID = ans2.questionID " +
+                    "    INNER JOIN question AS q ON ans1.questionID = q.id " +
+                    "    WHERE ans1.studentsAnswer != q.correctAnswer " +
+                    "        AND ans1.studentsAnswer = ans2.studentsAnswer " +
+                    "        AND ans1.testID = '" + testID + "' " +
+                    "    GROUP BY ans1.studentID " +
+                    "    HAVING COUNT(DISTINCT ans1.questionID) >= 2" +
                     ")";
 
             // Create a statement
