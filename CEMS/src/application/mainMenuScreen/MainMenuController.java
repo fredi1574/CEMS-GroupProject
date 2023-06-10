@@ -99,16 +99,17 @@ public class MainMenuController {
             // Create the SQL query
             String query = "UPDATE studentstest AS st " +
                     "SET st.suspicionOfCheating = 'YES' " +
-                    "WHERE st.studentID IN (" +
+                    "WHERE st.testID = '" + testID + "' " +
+                    "AND st.score != '100' " +
+                    "AND EXISTS (" +
                     "    SELECT ans1.studentID " +
                     "    FROM answersofstudent AS ans1 " +
                     "    INNER JOIN answersofstudent AS ans2 ON ans1.testID = ans2.testID AND ans1.questionID = ans2.questionID " +
                     "    INNER JOIN question AS q ON ans1.questionID = q.id " +
                     "    WHERE ans1.studentsAnswer != q.correctAnswer " +
                     "        AND ans1.studentsAnswer = ans2.studentsAnswer " +
-                    "        AND ans1.testID = '" + testID + "' " +
-                    "    GROUP BY ans1.studentID " +
-                    "    HAVING COUNT(DISTINCT ans1.questionID) >= 2" +
+                    "        AND ans1.studentID = st.studentID " +
+                    "        AND ans1.testID = st.testID" +
                     ")";
 
             // Create a statement
