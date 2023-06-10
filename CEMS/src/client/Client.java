@@ -136,14 +136,13 @@ public class Client extends AbstractClient {
                 break;
             case ImportedTestsByLecturer:
                 HODPopenReporLecturerController.reportCalc((ArrayList<Object>) messageFromServer.getMsg());
-
                 break;
             case ImportedTestsByCourse:
                 HODPopenReportCourseController.reportCalc((ArrayList<Object>) messageFromServer.getMsg());
                 break;
             case ImportedTestsByLecturerForLecturerReport:
                 LectureReportsController.setTestsTable((ArrayList<Object>) messageFromServer.getMsg());
-
+                break;
             case GetTestQuestionsResponse:
                 testQuestions = (List<Object>) messageFromServer.getMsg();
                 break;
