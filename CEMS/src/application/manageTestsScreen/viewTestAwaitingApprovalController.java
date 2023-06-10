@@ -39,9 +39,8 @@ public class viewTestAwaitingApprovalController {
 
     @FXML
     private Label correctAnswersLabel;
-
     @FXML
-    private ComboBox<String> cheatingComboBox;
+    private Label cheatingLabel;
 
     @FXML
     private TextArea teacherComment;
@@ -63,7 +62,8 @@ public class viewTestAwaitingApprovalController {
 
         testsForApproval = stateManagement.getTestForApproval();
         for (int i = 0; i < testsForApproval.size(); i++) {
-            if (stateManagement.getTestID().equals(testsForApproval.get(i).getTestID())) {
+            if (stateManagement.getTestID().equals(testsForApproval.get(i).getTestID()) &&
+                stateManagement.getStudentID().equals(testsForApproval.get(i).getStudentID())) {
                 selectedTest = stateManagement.getTestForApproval().get(i);
                 indexOfTest = i;
                 break;
@@ -71,12 +71,12 @@ public class viewTestAwaitingApprovalController {
         }
         setAllDataTestForStudent(selectedTest);
 
-        setComboboxes();
+        setCombobox();
 
 
     }
 
-    private void setComboboxes() {
+    private void setCombobox() {
         ObservableList<String> approved = FXCollections.observableArrayList("YES", "NO");
         comboBoxApproval.setItems(approved);
 
@@ -87,17 +87,6 @@ public class viewTestAwaitingApprovalController {
             selectedTest.setApproved(approvedTheLecturer);
         });
 
-        //the two possible suspicion states in the combobox
-        ObservableList<String> suspicionStates = FXCollections.observableArrayList("YES", "NO");
-        cheatingComboBox.setItems(suspicionStates);
-
-        //makes the combobox functional
-        cheatingComboBox.setOnAction(event -> {
-            String selectedItem = cheatingComboBox.getValue();
-            CheatingSuspicion selectedState = CheatingSuspicion.valueOf(selectedItem);
-            isSelected = true;
-            selectedTest.setSuspicionOfCheating(selectedState);
-        });
     }
 
     void setAllDataTestForStudent(TestForApproval testForApproval) {
@@ -105,7 +94,7 @@ public class viewTestAwaitingApprovalController {
         gradeField.setText(testForApproval.getGrade());
         testIDLabel.setText(testForApproval.getTestID());
         String cheatingState = testForApproval.getSuspicionOfCheating().equals(CheatingSuspicion.YES) ? "YES" : "NO";
-        cheatingComboBox.setValue(cheatingState);
+        cheatingLabel.setText(cheatingState);
         correctAnswersLabel.setText(testForApproval.getCorrectAnswers());
         totalQuestionsLabel.setText(testForApproval.getTotalQuestions());
     }
@@ -147,6 +136,10 @@ public class viewTestAwaitingApprovalController {
         }
     }
 
+    public void LogOut(ActionEvent event) {
+        StateManagement.resetInstance();
+        ScreenManager.goToNewScreen(event, PathConstants.loginPath);
+    }
 }
 
 

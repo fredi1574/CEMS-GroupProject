@@ -119,12 +119,6 @@
             </ImageView>
         </graphic>
     </Button>
-    <TableView fx:id="approvedTestsTableView" layoutX="808.0" layoutY="486.0" prefHeight="230.0" prefWidth="260.0" />
-    <Label layoutX="808.0" layoutY="456.0" prefHeight="27.0" prefWidth="260.0" text="Approved Tests:">
-        <font>
-            <Font name="System Bold" size="18.0" />
-        </font>
-    </Label>
     <Button fx:id="activateTestBtn" alignment="CENTER" layoutX="274.0" layoutY="415.0" mnemonicParsing="false" onAction="#activateTest" prefHeight="26.0" prefWidth="122.0" styleClass="regularButtons" text="Activate Test">
         <font>
             <Font name="Franklin Gothic Demi Cond" size="12.0" />

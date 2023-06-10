@@ -52,7 +52,7 @@ public class ManageTestsController {
     @FXML
     private TableView<Test> approvedTestsTableView; //contains every test that has been verified by the lecturer
     ActiveTest activeTestRowData;
-    TestForApproval data;
+    TestForApproval testForApprovalRowData;
 
 
     public void initialize() {
@@ -66,7 +66,7 @@ public class ManageTestsController {
         ObservableList<TestForApproval> testsWaitingApproval = FXCollections.observableArrayList((List) ClientUI.chat.getTestForApproval());
         TableManager.importData(testApprovalTableView, testsWaitingApproval);
         testApprovalTableView.setOnMouseClicked((e) -> {
-            data = testApprovalTableView.getSelectionModel().getSelectedItem();
+            testForApprovalRowData = testApprovalTableView.getSelectionModel().getSelectedItem();
         });
         stateManagement.setTestForApproval(testsWaitingApproval);
         displayDbTestsTable();
@@ -294,12 +294,18 @@ public class ManageTestsController {
 
         ScreenManager.popUpScreen(PathConstants.viewActiveTestPath);
     }
+
+    /**
+     * opens a test approval screen for the selected test
+     * @param actionEvent the event that triggered the method
+     */
     public void viewTestResults(ActionEvent actionEvent) {
-        if(data == null){
-            showError.showErrorPopup("Must to select tests before");
+        if(testForApprovalRowData == null){
+            showError.showErrorPopup("Select a test to approve");
             return;
         }
-        stateManagement.setTestID(data.getTestID());
+        stateManagement.setTestID(testForApprovalRowData.getTestID());
+        stateManagement.setStudentID(testForApprovalRowData.getStudentID());
         ScreenManager.goToNewScreen(actionEvent,PathConstants.viewTestAwaitingApprovalPath);
     }
     public void LogOut(ActionEvent event) {

@@ -37,15 +37,20 @@
                   <Font name="Trebuchet MS" size="12.0" />
                </font>
             </Text>
+            <Button layoutX="773.0" layoutY="64.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" styleClass="pageHeaderBtn" text="Logout">
+               <font>
+                  <Font name="Franklin Gothic Demi Cond" size="14.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
-      <TextArea fx:id="teacherComment" layoutX="31.0" layoutY="416.0" prefHeight="231.0" prefWidth="801.0" promptText="Enter notes for lucturers..." wrapText="true" />
-      <Label layoutX="31.0" layoutY="382.0" prefHeight="27.0" prefWidth="176.0" text="Lecturer's Comments:">
+      <TextArea fx:id="teacherComment" layoutX="32.0" layoutY="366.0" prefHeight="210.0" prefWidth="802.0" promptText="Enter notes for lucturers..." wrapText="true" />
+      <Label layoutX="32.0" layoutY="332.0" prefHeight="27.0" prefWidth="176.0" text="Lecturer's Comments:">
          <font>
             <Font name="Trebuchet MS Bold" size="17.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="39.0" layoutY="171.0" prefHeight="122.0" prefWidth="297.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
+      <AnchorPane layoutX="78.0" layoutY="130.0" prefHeight="122.0" prefWidth="298.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
          <children>
             <Label layoutX="34.0" layoutY="14.0" prefHeight="55.0" prefWidth="140.0" text="Student ID:">
                <font>
@@ -69,7 +74,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="432.0" layoutY="152.0" prefHeight="202.0" prefWidth="308.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
+      <AnchorPane layoutX="469.0" layoutY="130.0" prefHeight="202.0" prefWidth="308.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
          <children>
             <Label layoutX="14.0" layoutY="21.0" prefHeight="27.0" prefWidth="186.0" text="Suspicion of cheating:">
                <font>
@@ -102,10 +107,14 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <ComboBox fx:id="cheatingComboBox" layoutX="203.0" layoutY="21.0" prefHeight="27.0" prefWidth="82.0" promptText="yes/no" />
+            <Label fx:id="cheatingLabel" layoutX="200.0" layoutY="22.0" prefHeight="18.0" prefWidth="63.0" text="NO">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-      <Button fx:id="saveDecisionLecturer" alignment="BASELINE_CENTER" layoutX="777.0" layoutY="651.0" mnemonicParsing="false" onAction="#saveDecisionLecturer" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
+      <Button fx:id="saveDecisionLecturer" alignment="BASELINE_CENTER" layoutX="777.0" layoutY="653.0" mnemonicParsing="false" onAction="#saveDecisionLecturer" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
          <graphic>
             <ImageView fitHeight="34.0" fitWidth="37.0">
                <image>
@@ -114,7 +123,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="15.0" layoutY="651.0" mnemonicParsing="false" onAction="#BackTOManageTest" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
+      <Button layoutX="15.0" layoutY="653.0" mnemonicParsing="false" onAction="#BackTOManageTest" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
          <graphic>
             <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -124,7 +133,7 @@
          </graphic>
       </Button>
       <Label fx:id="testIDLabel1" layoutX="32.0" layoutY="707.0" prefHeight="18.0" prefWidth="26.0" text="Back" />
-      <ComboBox fx:id="comboBoxApproval" layoutX="91.0" layoutY="309.0" prefHeight="27.0" prefWidth="193.0" promptText="Select Your Approval" />
+      <ComboBox fx:id="comboBoxApproval" layoutX="640.0" layoutY="600.0" prefHeight="27.0" prefWidth="193.0" promptText="Select Your Approval" />
       <Label fx:id="testIDLabel11" layoutX="795.0" layoutY="707.0" prefHeight="18.0" prefWidth="26.0" text="Save" />
    </children>
 </AnchorPane>

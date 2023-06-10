@@ -216,7 +216,6 @@ public class AddAQuestionController {
         selectedCourse = getSelectedID(Course, CourseCombo, coursesList);
         newQuestionNumber = correctQuestionNumber(findFirstFreeIndex(questions));
         QuestionID = ((Subject.substring(Subject.indexOf("-") + 1)) + selectedCourse + newQuestionNumber);
-        System.out.println(QuestionID);
         questionNumber.setText(newQuestionNumber);
         questionID.setText(QuestionID);
         questionID.setDisable(true);

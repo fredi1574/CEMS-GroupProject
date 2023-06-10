@@ -584,7 +584,6 @@ public class MysqlConnection {
                         totalQuestions, lecturerComments, approved,testTypeEnum);
                 list.add(testForApproval);
             }
-            System.out.println(list.toString());
         } catch (SQLException e) {
             e.printStackTrace();
         }

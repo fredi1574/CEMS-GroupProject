@@ -15,6 +15,7 @@ public class StateManagement {
     public String session;
     public String semester;
     public String testID;
+    public String studentID;
     public String studentComment;
     public String teacherComment;
     public String testDuration;
@@ -182,6 +183,14 @@ public class StateManagement {
 
     public void setPreviousScreenPath(String previousScreenPath) {
         this.previousScreenPath = previousScreenPath;
+    }
+
+    public String getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(String studentID) {
+        this.studentID = studentID;
     }
 
     /**
