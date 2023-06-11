@@ -52,6 +52,7 @@ public class Client extends AbstractClient {
     public static viewActiveTestController activeTestController = new viewActiveTestController();
     public static mainMenuStudentController menuStudentController = new mainMenuStudentController();
 
+
     //constructor
     public Client(String host, int port, ChatIF clientUI) {
         super(host, port);
@@ -218,6 +219,9 @@ public class Client extends AbstractClient {
             case StudentsTestIsApprvoedResponse:
                 break;
 
+            case GetActiveTestsByLecturerResponse:
+                this.activeTests = (List<Object>) messageFromServer.getMsg();
+                break;
 
 
         }
