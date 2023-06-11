@@ -73,6 +73,7 @@ public class QuestionsComputerizedTestAnswerController {
     private static int TotalStudents;
     private static String testid;
     private static ObservableList<TestQuestion> testQuestions;
+    private static Test test;
 
 
     public void initialize() throws SQLException {
@@ -129,7 +130,7 @@ public class QuestionsComputerizedTestAnswerController {
         }
     }
 
-    private static Test getTestData() {
+    private Test getTestData() {
         MsgHandler getTestInformation = new MsgHandler(TypeMsg.GetTestByID, testid);
         ClientUI.chat.accept(getTestInformation);
         Test test = (Test) ClientUI.chat.getSingleTest();
@@ -252,7 +253,6 @@ public class QuestionsComputerizedTestAnswerController {
     }
 
     public void saveAfterTestInfoAndDeleteFromActive() {
-        Test test = getTestData();
         int totalForcedFinished = CalculateTotalForcedFinished();
         String[] afterTestInfo = {test.getTestDuration(), String.valueOf(totalForcedFinished), test.getId()};
         MsgHandler addAfterTestInfo = new MsgHandler(TypeMsg.FinishAfterTestInfo, afterTestInfo);
