@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="521.0" prefWidth="807.0" styleClass="backgroundColor" stylesheets="@../../util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.viewTestsStudent.viewTestStudentController">
+<AnchorPane prefHeight="521.0" prefWidth="807.0" styleClass="backgroundColor" stylesheets="@../../util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.viewTestsStudent.ViewTestStudentController">
    <children>
       <AnchorPane fx:id="header" prefHeight="92.0" prefWidth="807.0" styleClass="pageHeader">
          <children>
@@ -53,12 +53,11 @@
          </graphic>
       </Button>
       <Label layoutX="35.0" layoutY="501.0" text="Back" />
-      <TableView fx:id="reportsTableView" layoutX="27.0" layoutY="172.0" prefHeight="266.0" prefWidth="755.0" />
+      <TableView fx:id="testsTableView" layoutX="27.0" layoutY="172.0" prefHeight="266.0" prefWidth="755.0" />
       <Button layoutX="773.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
       <Button layoutX="737.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
       <HBox alignment="CENTER" layoutX="26.0" layoutY="95.0" prefHeight="61.0" prefWidth="755.0" spacing="20.0">
          <children>
-            <ComboBox fx:id="subjectComboBox" prefHeight="40.0" prefWidth="200.0" promptText="Select Subject" />
             <ComboBox fx:id="yearComboBox" prefHeight="40.0" prefWidth="200.0" promptText="Select Year">
                <HBox.margin>
                   <Insets />
@@ -69,7 +68,9 @@
                   <Insets />
                </HBox.margin>
             </ComboBox>
+            <ComboBox fx:id="courseComboBox" prefHeight="40.0" prefWidth="200.0" promptText="Select Course" />
          </children>
       </HBox>
+      <Button layoutX="692.0" layoutY="473.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="100.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="View Test" />
    </children>
 </AnchorPane>
