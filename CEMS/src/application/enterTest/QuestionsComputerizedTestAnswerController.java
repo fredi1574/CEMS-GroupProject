@@ -71,13 +71,16 @@ public class QuestionsComputerizedTestAnswerController {
     static int totalQuestions;
     private static int selectedCount = 0;
     private static int TotalStudents;
+    private static String testid;
     private static ObservableList<TestQuestion> testQuestions;
 
 
     public void initialize() throws SQLException {
 
         // Enables dragging and dropping of the application window using the header pane
+        testid = EnterCodePopUpController.testID;
         MsgHandler totalStudentIncrease = new MsgHandler(TypeMsg.IcreaseStudentsEnteringTest, EnterCodePopUpController.testID);
+
         ClientUI.chat.accept(totalStudentIncrease);
         ScreenManager.dragAndDrop(header);
         fullNameText.setText(Client.user.getFullName());
@@ -126,8 +129,8 @@ public class QuestionsComputerizedTestAnswerController {
         }
     }
 
-    private Test getTestData() {
-        MsgHandler getTestInformation = new MsgHandler(TypeMsg.GetTestByID, EnterCodePopUpController.testID);
+    private static Test getTestData() {
+        MsgHandler getTestInformation = new MsgHandler(TypeMsg.GetTestByID, testid);
         ClientUI.chat.accept(getTestInformation);
         Test test = (Test) ClientUI.chat.getSingleTest();
         return test;
