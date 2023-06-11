@@ -88,20 +88,21 @@ public class QuestionsComputerizedTestAnswerController {
         initializeMapWithZeros();
 
     }
+
     private static void initializeMapWithZeros() {
-        for (int i = 0 ; i < totalQuestions ;i++){
-            markings.put(i,0);
+        for (int i = 0; i < totalQuestions; i++) {
+            markings.put(i, 0);
         }
     }
 
-    public void showNotificationAndChangeDuration(int newDuration){
+    public void showNotificationAndChangeDuration(int newDuration) {
         int remainingSeconds = remainingMinutes * 60;  // Convert remaining minutes to seconds
         seconds[0] += newDuration * 60;  // Add the new duration in seconds
         Stage currentStage = (Stage) header.getScene().getWindow();
-            Platform.runLater(() -> {
+        Platform.runLater(() -> {
 
-                showError.showInfoPopup("Test time increased by" + newDuration + "minutes");
-            });
+            showError.showInfoPopup("Test time increased by" + newDuration + "minutes");
+        });
 
     }
 
@@ -218,13 +219,14 @@ public class QuestionsComputerizedTestAnswerController {
             fetchQuestion();
         }
     }
-    public boolean checkLockTest(){
+
+    public boolean checkLockTest() {
         Test test = getTestData();
-        MsgHandler numberOfRegistered = new MsgHandler(TypeMsg.CountRegisteredStudents,test.getCourseName());
+        MsgHandler numberOfRegistered = new MsgHandler(TypeMsg.CountRegisteredStudents, test.getCourseName());
         ClientUI.chat.accept(numberOfRegistered);
         int NumberOfRegisteredCounter = (int) (ClientUI.chat.getNumberOfRegistered());
 
-        MsgHandler totalStudentAttended = new MsgHandler(TypeMsg.NumberOfAttendedCounter,test.getId());
+        MsgHandler totalStudentAttended = new MsgHandler(TypeMsg.NumberOfAttendedCounter, test.getId());
         ClientUI.chat.accept(totalStudentAttended);
         int NumberOfAttendedCounter = (int) (ClientUI.chat.getNumberOfAttended());
         if (NumberOfRegisteredCounter - NumberOfAttendedCounter == 0) {
@@ -234,25 +236,26 @@ public class QuestionsComputerizedTestAnswerController {
         }
         return false;
     }
-    public int CalculateTotalForcedFinished(){
+
+    public int CalculateTotalForcedFinished() {
         Test test = getTestData();
 
-        MsgHandler numberOfFinished = new MsgHandler(TypeMsg.CountNumberOfFinished,test.getId());
+        MsgHandler numberOfFinished = new MsgHandler(TypeMsg.CountNumberOfFinished, test.getId());
         ClientUI.chat.accept(numberOfFinished);
         int NumberOfFinishedCounter = (int) (ClientUI.chat.getNumberOfFinished());
         int TotalForcedFinished = TotalStudents - NumberOfFinishedCounter;
         return TotalForcedFinished;
 
 
-
     }
-    public void saveAfterTestInfoAndDeleteFromActive(){
+
+    public void saveAfterTestInfoAndDeleteFromActive() {
         Test test = getTestData();
         int totalForcedFinished = CalculateTotalForcedFinished();
         String[] afterTestInfo = {test.getTestDuration(), String.valueOf(totalForcedFinished), test.getId()};
-        MsgHandler addAfterTestInfo = new MsgHandler(TypeMsg.FinishAfterTestInfo,afterTestInfo);
+        MsgHandler addAfterTestInfo = new MsgHandler(TypeMsg.FinishAfterTestInfo, afterTestInfo);
         ClientUI.chat.accept(addAfterTestInfo);
-        MsgHandler deleteFromActive = new MsgHandler(TypeMsg.UnActivateTest,test.getId());
+        MsgHandler deleteFromActive = new MsgHandler(TypeMsg.UnActivateTest, test.getId());
         ClientUI.chat.accept(deleteFromActive);
 
     }
@@ -265,7 +268,7 @@ public class QuestionsComputerizedTestAnswerController {
                 saveFinalAnswers();
                 MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, EnterCodePopUpController.testID);
                 ClientUI.chat.accept(finshedStudentsIncrease);
-                if (checkLockTest()){
+                if (checkLockTest()) {
                     saveAfterTestInfoAndDeleteFromActive();
                 }
                 ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
@@ -297,34 +300,28 @@ public class QuestionsComputerizedTestAnswerController {
         saveStudentsTest(grade, correctAnswers, numberOfQuestions);
 
     }
+
     public void lockTest() {
         timer.stop();
-        MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, EnterCodePopUpController.testID);
-//        ClientUI.chat.accept(finshedStudentsIncrease);
-//        saveAfterTestInfoAndDeleteFromActive();
-        Stage currentStage = (Stage) header.getScene().getWindow();
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Test Lock");
             alert.setHeaderText(null);
             alert.setContentText("Test was locked by lecturer\nTest is over");
             alert.showAndWait();
-//            showError.showInfoPopup("Test was locked by lecturer\nTest is over");
-//            if (currentStage.isShowing()) {
-//                currentStage.close();
-//                ScreenManager.showStage(PathConstants.mainMenuStudentPath, PathConstants.iconPath);
-//            }
+            ScreenManager.showStage(PathConstants.mainMenuStudentPath, PathConstants.iconPath);
         });
     }
 
-    public void saveStudentsTest(int score, int correctAnswers, int totalQuestions) {
+
+        public void saveStudentsTest(int score, int correctAnswers, int totalQuestions) {
         Test test = getTestData();
         int timeInSeconds = seconds[0];
-        int testDuration = (Integer.parseInt(test.getTestDuration())*60) - timeInSeconds;
+        int testDuration = (Integer.parseInt(test.getTestDuration()) * 60) - timeInSeconds;
         String decimalFormat = formatTime(testDuration);
         StudentTest StudentsCopy = new StudentTest(Client.user.getId(), test.getId(), test.getSubjectID(), test.getCourseName(), Integer.toString(score),
                 Client.user.getFullName(), test.getYear(), test.getSemester(), test.getSession(), CheatingSuspicion.NO, Integer.toString(correctAnswers),
-                Integer.toString(totalQuestions), "", ApprovalStatus.NO, test.getTestType(),decimalFormat);
+                Integer.toString(totalQuestions), "", ApprovalStatus.NO, test.getTestType(), decimalFormat);
         MsgHandler AddNewTest = new MsgHandler(TypeMsg.AddNewTestOfStudent, StudentsCopy);
         ClientUI.chat.accept(AddNewTest);
     }
