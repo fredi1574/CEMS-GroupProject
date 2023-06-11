@@ -168,7 +168,7 @@ public class CemsServer extends AbstractServer {
                 }
 
                 break;
-            case StudentsTestIsApprvoed:
+            case StudentsTestIsApprvoedToAllClients:
                 this.msg = (MsgHandler<Object>) msg;
                 this.obj = this.msg.getMsg();
                 for (int i = 0; i < clientThreadList.length; i++) {
@@ -727,7 +727,7 @@ public class CemsServer extends AbstractServer {
                     this.obj = (String) this.msg.getMsg();
                     String idTofullName = "SELECT fullName FROM user WHERE id = '" + obj + "'";
                     MysqlConnection.getIDreturnFullname(idTofullName);
-                    sendToAllClients(new MsgHandler<>(TypeMsg.StudentsTestIsApprvoed, idTofullName));
+                    sendToAllClients(new MsgHandler<>(TypeMsg.StudentsTestIsApprvoedToAllClients, idTofullName));
                     client.sendToClient(new MsgHandler<>(TypeMsg.StudentsTestIsApprvoedResponse, null));
                     break;
 

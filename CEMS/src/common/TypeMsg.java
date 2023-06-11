@@ -527,6 +527,12 @@ public enum TypeMsg {
             return "Lecturer approved a test of a student";
         }
     },
+    StudentsTestIsApprvoedToAllClients{
+        public String toString() {
+            return "find Students to Send SMS about approved test";
+        }
+    },
+
     PopupTestApprove{
         public String toString() {
             return "Student received an sms of approved test";
