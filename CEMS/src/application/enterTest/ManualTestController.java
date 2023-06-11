@@ -4,9 +4,7 @@ import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
-import entity.ActiveTest;
-import entity.StateManagement;
-import entity.Test;
+import entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -130,6 +128,16 @@ public class ManualTestController {
             });
             timerThread.start();
         }
+    }
+    public void saveStudentsTest(int score, int correctAnswers, int totalQuestions) {
+        int timeInSeconds = totalSecondsRemaining;
+        int testDuration = (Integer.parseInt(test.getTestDuration()) * 60) - timeInSeconds;
+        String decimalFormat = formatTime(testDuration);
+        StudentTest StudentsCopy = new StudentTest(Client.user.getId(), test.getId(), test.getSubjectID(), test.getCourseName(), Integer.toString(score),
+                Client.user.getFullName(), test.getYear(), test.getSemester(), test.getSession(), CheatingSuspicion.NO, Integer.toString(correctAnswers),
+                Integer.toString(totalQuestions), "", ApprovalStatus.YES, test.getTestType(),decimalFormat);
+        MsgHandler AddNewTest = new MsgHandler(TypeMsg.AddNewTestOfStudent, StudentsCopy);
+        ClientUI.chat.accept(AddNewTest);
     }
 
     private void decreaseTimeByOneSecond() {
@@ -263,7 +271,6 @@ public class ManualTestController {
 
     @FXML
     void onSaveButton(ActionEvent event) {
-        Stage currentStage = (Stage) header.getScene().getWindow();
         if (forText) {
             if (FileSubmissionsText.getText().isEmpty()) {
                 if (showError.showConfirmationPopup("Are you sure want to save not submit yet")) {
@@ -273,6 +280,7 @@ public class ManualTestController {
                     if (checkLockTest()) {
                         saveAfterTestInfoAndDeleteFromActive();
                     }
+                    saveStudentsTest(0, 0, 0);
                     ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
                 } else {
                     return;
@@ -285,7 +293,7 @@ public class ManualTestController {
                     if (checkLockTest()) {
                         saveAfterTestInfoAndDeleteFromActive();
                     }
-
+                    saveStudentsTest(100, 5, 5);
                     ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
                 } else
                     return;
@@ -296,6 +304,7 @@ public class ManualTestController {
             if (checkLockTest()) {
                 saveAfterTestInfoAndDeleteFromActive();
             }
+            saveStudentsTest(75, 3, 5);
             ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
         }
     }
