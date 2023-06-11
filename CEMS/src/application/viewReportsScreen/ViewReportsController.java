@@ -118,11 +118,14 @@ public class ViewReportsController {
         for (Object test : Tests) {
             String testID = ((StudentTest) test).getTestID();
             if (!uniqueTestIDs.contains(testID)) {
-                uniqueTestIDs.add(testID);
-                uniqueTests.add(test);
+                if ((((StudentTest) test).getApproved() == ApprovalStatus.YES)) {
+                    uniqueTestIDs.add(testID);
+                    uniqueTests.add(test);
+
+                }
+
             }
-            if ((((StudentTest) test).getApproved() == ApprovalStatus.YES))//check if null
-            {
+            if ((((StudentTest) test).getApproved() == ApprovalStatus.YES)) {//get rid of duplicate if
                 approvedTest.add(test);
             }
         }

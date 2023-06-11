@@ -15,8 +15,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import util.*;
 import javafx.scene.control.TextField;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -55,6 +57,7 @@ public class ManualTestController {
     private TextField durationTime;
     @FXML
     private Text fullNameText;
+    private static int TotalStudents;
 
 
     public void initialize() {
@@ -69,33 +72,38 @@ public class ManualTestController {
         MsgHandler getAllTestTable = new MsgHandler(TypeMsg.GetAllTestsTable, null);
         ClientUI.chat.accept(getAllTestTable);
         ObservableList<Test> allTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
-        for(int i=0;i<allTests.size();i++){
-            if(stateManagement.getTestCode().equals(allTests.get(i).getTestCode())){
+        for (int i = 0; i < allTests.size(); i++) {
+            if (stateManagement.getTestCode().equals(allTests.get(i).getTestCode())) {
                 test = allTests.get(i);
+                MsgHandler totalStudentIncrease = new MsgHandler(TypeMsg.IcreaseStudentsEnteringTest, test.getId());
+                ClientUI.chat.accept(totalStudentIncrease);
                 break;
             }
+
         }
-        for(int i=0; i<activeTests.size(); i++){
-            if(test.getTestCode().equals(activeTests.get(i).getTestCode())){
+        for (int i = 0; i < activeTests.size(); i++) {
+            if (test.getTestCode().equals(activeTests.get(i).getTestCode())) {
                 testActive = activeTests.get(i);
                 StartTimeText.setText(testActive.getStartingTime());
                 FinishedTime(test);
                 break;
             }
 
+
         }
-        if(test == null){
+        if (test == null) {
             showError.showErrorPopup("No Test Now");
             return;
         }
 
 
     }
+
     private String formatTime(int seconds) {
         int hours = seconds / 3600;
         int minutes = (seconds % 3600) / 60;
         int secs = seconds % 60;
-        return String.format("%02d:%02d:%02d", hours, minutes, secs);
+        return String.format("%02d:%02d:%02d", hours, minutes,secs);
     }
 
 
@@ -127,15 +135,20 @@ public class ManualTestController {
     private void decreaseTimeByOneSecond() {
         totalSecondsRemaining--;
         durationTime.setText(formatTime(totalSecondsRemaining));
-        if (totalSecondsRemaining <= 0) {
-            if(isSubmit){
-                totalSecondsRemaining = 60;
+        if (totalSecondsRemaining == 59) {
+            if (isSubmit) {
+                totalSecondsRemaining--;
                 addtionalTimeForSubmitTEXT.setText("*You have only one minutes left to submitedd test*");
                 isSubmit = false;
-            }else
+            } else {
                 stopTimer();
+                if (checkLockTest()) {
+                    saveAfterTestInfoAndDeleteFromActive();
+                }
+            }
         }
     }
+
     private void stopTimer() {
         if (timerThread != null) {
             isTimerRunning = false;
@@ -149,34 +162,35 @@ public class ManualTestController {
             timerThread = null;
         }
     }
-    void FinishedTime(Test test){
-        int hour = Integer.parseInt(StartTimeText.getText().substring(0,2));
-        int min = Integer.parseInt(StartTimeText.getText().substring(3,5));
-        int sec = Integer.parseInt(StartTimeText.getText().substring(6,8));
-        int durationTime = Integer.parseInt(test.getTestDuration());
-        if(durationTime + min >= 60){
-            hour += (durationTime + min) / 60;
-            min  +=  (durationTime + min) % 60;
-        }else
-            min  +=  durationTime + min % 60;
 
-        EndTimeText.setText(String.format("%02d:%02d:%02d", hour, min, sec));
+    void FinishedTime(Test test) {
+        int hour = Integer.parseInt(StartTimeText.getText().substring(0, 2));
+        int min = Integer.parseInt(StartTimeText.getText().substring(3, 5));
+        int durationTime = Integer.parseInt(test.getTestDuration());
+        if (durationTime + min >= 60) {
+            hour += (durationTime + min) / 60;
+            min += (durationTime + min) % 60;
+        } else
+            min += durationTime % 60;
+
+        EndTimeText.setText(String.format("%02d:%02d", hour, min));
     }
 
     @FXML
     public void uploadFileBTN(ActionEvent event) {
-        if(notUpload) {
+        if (notUpload) {
             FileChooser fc = new FileChooser();
             selectedFile = fc.showOpenDialog(null);
             if (selectedFile != null) {
                 FileSubmissionsText.setText(selectedFile.getName());
                 SubmissionStatusText.setText("The solve is submitedd file : " + selectedFile.getName());
             }
-        }else {
+        } else {
 
             showError.showErrorPopup("Can not do upload now the time is finished");
         }
     }
+
     @FXML
     public void DownloadFileBTN(ActionEvent event) {
         try {
@@ -199,10 +213,49 @@ public class ManualTestController {
             ex.printStackTrace();
         }
     }
+
+    public int CalculateTotalForcedFinished() {
+
+        MsgHandler numberOfFinished = new MsgHandler(TypeMsg.CountNumberOfFinished, test.getId());
+        ClientUI.chat.accept(numberOfFinished);
+        int NumberOfFinishedCounter = (int) (ClientUI.chat.getNumberOfFinished());
+        int TotalForcedFinished = TotalStudents - NumberOfFinishedCounter;
+        return TotalForcedFinished;
+
+
+    }
+
+    public boolean checkLockTest() {
+        MsgHandler numberOfRegistered = new MsgHandler(TypeMsg.CountRegisteredStudents, test.getCourseName());
+        ClientUI.chat.accept(numberOfRegistered);
+        int NumberOfRegisteredCounter = (int) (ClientUI.chat.getNumberOfRegistered());
+
+        MsgHandler totalStudentAttended = new MsgHandler(TypeMsg.NumberOfAttendedCounter, test.getId());
+        ClientUI.chat.accept(totalStudentAttended);
+        int NumberOfAttendedCounter = (int) (ClientUI.chat.getNumberOfAttended());
+        if (NumberOfRegisteredCounter - NumberOfAttendedCounter == 0) {
+            TotalStudents = NumberOfAttendedCounter;
+            return true;
+
+        }
+        return false;
+    }
+
+    public void saveAfterTestInfoAndDeleteFromActive() {
+        int totalForcedFinished = CalculateTotalForcedFinished();
+        String[] afterTestInfo = {test.getTestDuration(), String.valueOf(totalForcedFinished), test.getId()};
+        MsgHandler addAfterTestInfo = new MsgHandler(TypeMsg.FinishAfterTestInfo, afterTestInfo);
+        ClientUI.chat.accept(addAfterTestInfo);
+        MsgHandler deleteFromActive = new MsgHandler(TypeMsg.UnActivateTest, test.getId());
+        ClientUI.chat.accept(deleteFromActive);
+
+    }
+
     @FXML
     public void LogOut(ActionEvent event) {
         LogOut.logOutToLoginScreen(event);
     }
+
     @FXML
     private void closeClient(ActionEvent event) {
         ExitButton.closeClient(event);
@@ -210,25 +263,43 @@ public class ManualTestController {
 
     @FXML
     void onSaveButton(ActionEvent event) {
-        if(forText) {
+        Stage currentStage = (Stage) header.getScene().getWindow();
+        if (forText) {
             if (FileSubmissionsText.getText().isEmpty()) {
                 if (showError.showConfirmationPopup("Are you sure want to save not submit yet")) {
                     StateManagement.resetInstance();
+                    MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, test.getId());
+                    ClientUI.chat.accept(finshedStudentsIncrease);
+                    if (checkLockTest()) {
+                        saveAfterTestInfoAndDeleteFromActive();
+                    }
                     ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
+                } else {
+                    return;
                 }
-            }
-            else {
+            } else {
                 if (showError.showConfirmationPopup("Are you sure want to save your test")) {
                     StateManagement.resetInstance();
+                    MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, test.getId());
+                    ClientUI.chat.accept(finshedStudentsIncrease);
+                    if (checkLockTest()) {
+                        saveAfterTestInfoAndDeleteFromActive();
+                    }
+
                     ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
                 } else
                     return;
             }
 
-        }else
-            showError.showInfoPopup("Sorry for you dont have time to submitedd");
-        ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
+        } else {
+            showError.showInfoPopup("Sorry for you dont have time to submit");
+            if (checkLockTest()) {
+                saveAfterTestInfoAndDeleteFromActive();
+            }
+            ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
+        }
     }
+
     @FXML
     public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
