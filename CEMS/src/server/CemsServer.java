@@ -703,18 +703,17 @@ public class CemsServer extends AbstractServer {
                 case DetectedCheating:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
-                    String[] afterTestInfoo = (String[]) obj;
-                     String QueryOfCheating = "UPDATE studentstest " +
+                     String QueryOfCheating = "UPDATE cems.studentstest " +
                              "SET suspicionOfCheating = 'YES' " +
                              "WHERE EXISTS (" +
                              "    SELECT 1 " +
-                             "    FROM answersofstudent a1 " +
-                             "    JOIN answersofstudent a2 ON a1.testID = a2.testID " +
+                             "    FROM cems.answersofstudent a1 " +
+                             "    JOIN cems.answersofstudent a2 ON a1.testID = a2.testID " +
                              "        AND a1.questionID = a2.questionID " +
                              "        AND a1.studentsAnswer = a2.studentsAnswer " +
                              "        AND a1.studentID <> a2.studentID " +
-                             "    WHERE a1.testID = '"+afterTestInfoo[2]+"'" +
-                             "      AND a1.studentID = studentstest.studentID" +
+                             "    WHERE a1.testID = "+obj+
+                             "      AND a1.studentID = cems.studentstest.studentID" +
                              ") " +
                              "AND score < 100";
                     MysqlConnection.update(QueryOfCheating);
