@@ -299,7 +299,6 @@ public class QuestionsComputerizedTestAnswerController {
     }
     public void lockTest() {
         timer.stop();
-        saveMarkingWithValidation();
         saveFinalAnswers();
         MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, EnterCodePopUpController.testID);
         ClientUI.chat.accept(finshedStudentsIncrease);
