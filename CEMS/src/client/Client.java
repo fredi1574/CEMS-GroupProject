@@ -1,6 +1,7 @@
 package client;
 
 import application.enterTest.QuestionsComputerizedTestAnswerController;
+import application.mainMenuScreen.mainMenuStudentController;
 import application.manageTestsScreen.viewActiveTestController;
 import application.viewReportsScreen.ViewReportsController;
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.openReportByCourseController;
@@ -49,6 +50,7 @@ public class Client extends AbstractClient {
     public static ViewReportsController LectureReportsController = new ViewReportsController();
     public static QuestionsComputerizedTestAnswerController StudentInTest = new QuestionsComputerizedTestAnswerController();
     public static viewActiveTestController activeTestController = new viewActiveTestController();
+    public static mainMenuStudentController menuStudentController = new mainMenuStudentController();
 
     //constructor
     public Client(String host, int port, ChatIF clientUI) {
@@ -210,6 +212,12 @@ public class Client extends AbstractClient {
                 break;
             case IsLoggedValueChanged:
                 break;
+            case PopupTestApprove:
+                menuStudentController.showTestApprovedPopUp();
+                break;
+            case StudentsTestIsApprvoedResponse:
+                break;
+
 
 
         }

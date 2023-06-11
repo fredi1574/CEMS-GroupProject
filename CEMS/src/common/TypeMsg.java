@@ -521,6 +521,22 @@ public enum TypeMsg {
         public String toString() {
             return "Loggedin value changed";
         }
+    },
+    StudentsTestIsApprvoed{
+        public String toString() {
+            return "Lecturer approved a test of a student";
+        }
+    },
+    PopupTestApprove{
+        public String toString() {
+            return "Student received an sms of approved test";
+        }
+    },
+    StudentsTestIsApprvoedResponse
+    {
+        public String toString() {
+        return "Test Approved";
+    }
     }
 }
 

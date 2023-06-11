@@ -1,6 +1,8 @@
 package application.mainMenuScreen;
 
+import application.Simulation.SmsEmailPopUpController;
 import client.Client;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
@@ -12,6 +14,7 @@ public class mainMenuStudentController {
     private AnchorPane header;
     @FXML
     private Text fullNameText;
+    SmsEmailPopUpController smsEmailPopUpController = new SmsEmailPopUpController();
 
     /**
      * Initializes the main menu screen for the student.
@@ -21,6 +24,13 @@ public class mainMenuStudentController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         fullNameText.setText(Client.user.getFullName());
+    }
+    public void showTestApprovedPopUp () {
+        Platform.runLater(() -> {
+
+            smsEmailPopUpController.SetInfoField("Your test was approved by the lecturer!\nEnter View Tests to see more information",Client.user.getFullName(),Client.user.getEmail());
+            ScreenManager.popUpScreen(PathConstants.SmsEmailPopUp);
+        });
     }
 
     /**

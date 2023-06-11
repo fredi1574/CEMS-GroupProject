@@ -168,6 +168,20 @@ public class CemsServer extends AbstractServer {
                 }
 
                 break;
+            case StudentsTestIsApprvoed:
+                this.msg = (MsgHandler<Object>) msg;
+                this.obj = this.msg.getMsg();
+                for (int i = 0; i < clientThreadList.length; i++) {
+                    ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
+                    String name = client.getName();
+                    if (name.equals(obj)) {
+                        try {
+                            client.sendToClient(new MsgHandler<>(TypeMsg.PopupTestApprove, "Test is Approved"));
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
 
 
         }
@@ -708,7 +722,14 @@ public class CemsServer extends AbstractServer {
                     MysqlConnection.update(changeLoginValue);
                     client.sendToClient(new MsgHandler<>(TypeMsg.IsLoggedValueChanged, null));
                     break;
-
+                case StudentsTestIsApprvoed:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    String idTofullName = "SELECT fullName FROM user WHERE id = '" + obj + "'";
+                    MysqlConnection.getIDreturnFullname(idTofullName);
+                    sendToAllClients(new MsgHandler<>(TypeMsg.StudentsTestIsApprvoed, obj));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.StudentsTestIsApprvoedResponse, null));
+                    break;
 
 
             }

@@ -132,7 +132,11 @@ public class viewTestAwaitingApprovalController {
 
             MsgHandler updateTheApproval = new MsgHandler(TypeMsg.UpdateTheApproveofLecturer, selectedTest);
             ClientUI.chat.accept(updateTheApproval);
+            MsgHandler sendPopUpToStudent = new MsgHandler(TypeMsg.StudentsTestIsApprvoed, studentIDLabel.getText());
+            ClientUI.chat.accept(sendPopUpToStudent);
             ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
+
+
         }
     }
 

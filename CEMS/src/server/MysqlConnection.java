@@ -650,5 +650,24 @@ public class MysqlConnection {
         return finishedCount;
 
     }
+    public static String getIDreturnFullname(String query) {
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String fullName = null;
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            if (rs.next()) { // Move the cursor to the first row
+                fullName = rs.getString("fullName");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return fullName;
+    }
 }
 	
