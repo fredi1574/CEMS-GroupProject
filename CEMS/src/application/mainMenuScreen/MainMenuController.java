@@ -99,6 +99,7 @@ public class MainMenuController {
                 "        AND a1.studentsAnswer = a2.studentsAnswer " +
                 "        AND a1.studentID <> a2.studentID " +
                 "    WHERE a1.testID = ? " +
+                "      AND a1.studentID = studentstest.studentID" +
                 ") " +
                 "AND score < 100";
 
@@ -111,6 +112,7 @@ public class MainMenuController {
 
             // Set the test ID parameters
             statement.setString(1, testID);
+
 
 
             // Execute the update statement
