@@ -726,8 +726,8 @@ public class CemsServer extends AbstractServer {
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
                     String idTofullName = "SELECT fullName FROM user WHERE id = '" + obj + "'";
-                    MysqlConnection.getIDreturnFullname(idTofullName);
-                    sendToAllClients(new MsgHandler<>(TypeMsg.StudentsTestIsApprvoedToAllClients, idTofullName));
+                    String fullname = MysqlConnection.getIDreturnFullname(idTofullName);
+                    sendToAllClients(new MsgHandler<>(TypeMsg.StudentsTestIsApprvoedToAllClients, fullname));
                     client.sendToClient(new MsgHandler<>(TypeMsg.StudentsTestIsApprvoedResponse, null));
                     break;
 
