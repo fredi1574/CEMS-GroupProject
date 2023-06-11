@@ -708,7 +708,7 @@ public class CemsServer extends AbstractServer {
                         "WHERE EXISTS (" +
                         "    SELECT 1 " +
                         "    FROM answersofstudent a1 " +
-                        "    JOIN answersofstudent a2 ON a1." + obj + " = a2." + obj + " " +
+                             "    JOIN answersofstudent a2 ON a1.testID = a2.testID " +
                         "        AND a1.questionID = a2.questionID " +
                         "        AND a1.studentsAnswer = a2.studentsAnswer " +
                         "        AND a1.studentID <> a2.studentID " +
