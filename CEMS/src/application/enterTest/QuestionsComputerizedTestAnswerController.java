@@ -57,7 +57,7 @@ public class QuestionsComputerizedTestAnswerController {
     private Button myButton;
     @FXML
     private Button previousButton;
-    private Timeline timer;
+    private static Timeline timer;
     @FXML
     private Label timerLabel;
     @FXML
