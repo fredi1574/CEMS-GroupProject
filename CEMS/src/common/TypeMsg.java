@@ -512,6 +512,17 @@ public enum TypeMsg {
         }
 
     },
+    DetectedCheating{
+        public String toString() {
+            return "User Asked to update student and test have cheating";
+        }
+    },
+    DetectedCheatingResponse{
+        public String toString() {
+            return "the test have cheating updating";
+        }
+
+    },
 }
 
 

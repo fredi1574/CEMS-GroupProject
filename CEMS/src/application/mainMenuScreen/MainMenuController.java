@@ -86,7 +86,6 @@ public class MainMenuController {
         String url = "jdbc:mysql://localhost:3306/cems?serverTimezone=UTC&useSSL=false";
         String username = "root";
         String password = "Aa123456";
-
         String testID = "010203";
 
         String updateQuery = "UPDATE studentstest " +
@@ -104,26 +103,20 @@ public class MainMenuController {
                 "AND score < 100";
 
         try {
+
             // Establish the JDBC connection
             Connection connection = DriverManager.getConnection(url, username, password);
-
             // Create a PreparedStatement object
             PreparedStatement statement = connection.prepareStatement(updateQuery);
-
             // Set the test ID parameters
             statement.setString(1, testID);
-
-
-
             // Execute the update statement
             int rowsAffected = statement.executeUpdate();
-
             if (rowsAffected > 0) {
                 System.out.println("Suspicion of cheating updated for " + rowsAffected + " students.");
             } else {
                 System.out.println("No students found with identical answers on the test.");
             }
-
             // Close the resources
             statement.close();
             connection.close();

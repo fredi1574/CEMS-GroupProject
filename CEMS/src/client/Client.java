@@ -208,7 +208,8 @@ public class Client extends AbstractClient {
                 break;
             case DeleteRequestCompleted:
                 break;
-
+            case DetectedCheatingResponse:
+                break;
 
         }
     }

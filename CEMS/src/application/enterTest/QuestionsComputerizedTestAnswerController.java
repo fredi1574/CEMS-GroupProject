@@ -259,6 +259,8 @@ public class QuestionsComputerizedTestAnswerController {
         ClientUI.chat.accept(addAfterTestInfo);
         MsgHandler deleteFromActive = new MsgHandler(TypeMsg.UnActivateTest,test.getId());
         ClientUI.chat.accept(deleteFromActive);
+        MsgHandler cheatingTest = new MsgHandler(TypeMsg.DetectedCheating,test.getId());
+        ClientUI.chat.accept(cheatingTest);
 
     }
 
