@@ -13,10 +13,7 @@ import util.ScreenManager;
 
 import javafx.scene.text.Text;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class MainMenuController {
     @FXML
@@ -92,33 +89,40 @@ public class MainMenuController {
 
         String testID = "010203";
 
+        String updateQuery = "UPDATE studentstest " +
+                "SET suspicionOfCheating = 'YES' " +
+                "WHERE EXISTS (" +
+                "    SELECT 1 " +
+                "    FROM answersofstudent a1 " +
+                "    JOIN answersofstudent a2 ON a1.testID = a2.testID " +
+                "        AND a1.questionID = a2.questionID " +
+                "        AND a1.studentsAnswer = a2.studentsAnswer " +
+                "        AND a1.studentID <> a2.studentID " +
+                "    WHERE a1.testID = ? " +
+                ") " +
+                "AND score < 100";
+
         try {
-            // Connect to the database
+            // Establish the JDBC connection
             Connection connection = DriverManager.getConnection(url, username, password);
 
-            // Create the SQL query
-            String query = "UPDATE studentstest AS st " +
-                    "SET st.suspicionOfCheating = 'YES' " +
-                    "WHERE st.testID = '" + testID + "' " +
-                    "AND st.score != '100' " +
-                    "AND EXISTS (" +
-                    "SELECT ans1.studentID " +
-                    "FROM answersofstudent AS ans1 " +
-                    "JOIN answersofstudent AS ans2 ON ans1.questionID = ans2.questionID " +
-                    "AND ans1.studentsAnswer != ans2.studentsAnswer " +
-                    "WHERE ans1.studentID = st.studentID " +
-                    "AND ans1.testID = st.testID" +
-                    ")";
+            // Create a PreparedStatement object
+            PreparedStatement statement = connection.prepareStatement(updateQuery);
 
-            // Create a statement
-            Statement statement = connection.createStatement();
+            // Set the test ID parameters
+            statement.setString(1, testID);
 
-            // Execute the query
-            int rowsAffected = statement.executeUpdate(query);
 
-            System.out.println("Rows affected: " + rowsAffected);
+            // Execute the update statement
+            int rowsAffected = statement.executeUpdate();
 
-            // Close the statement and connection
+            if (rowsAffected > 0) {
+                System.out.println("Suspicion of cheating updated for " + rowsAffected + " students.");
+            } else {
+                System.out.println("No students found with identical answers on the test.");
+            }
+
+            // Close the resources
             statement.close();
             connection.close();
         } catch (SQLException e) {
