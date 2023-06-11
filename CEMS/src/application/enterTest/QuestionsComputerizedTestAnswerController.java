@@ -98,7 +98,6 @@ public class QuestionsComputerizedTestAnswerController {
     public void showNotificationAndChangeDuration(int newDuration) {
         int remainingSeconds = remainingMinutes * 60;  // Convert remaining minutes to seconds
         seconds[0] += newDuration * 60;  // Add the new duration in seconds
-        Stage currentStage = (Stage) header.getScene().getWindow();
         Platform.runLater(() -> {
 
             showError.showInfoPopup("Test time increased by" + newDuration + "minutes");
@@ -303,18 +302,15 @@ public class QuestionsComputerizedTestAnswerController {
 
     public void lockTest() {
         timer.stop();
+        saveAfterTestInfoAndDeleteFromActive();
         Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Test Lock");
-            alert.setHeaderText(null);
-            alert.setContentText("Test was locked by lecturer\nTest is over");
-            alert.showAndWait();
-            ScreenManager.showStage(PathConstants.mainMenuStudentPath, PathConstants.iconPath);
+
+            showError.showInfoPopup("Test was locked by lecturer\nPlease click the Submit button to exit the test.");
+
         });
     }
 
-
-        public void saveStudentsTest(int score, int correctAnswers, int totalQuestions) {
+    public void saveStudentsTest(int score, int correctAnswers, int totalQuestions) {
         Test test = getTestData();
         int timeInSeconds = seconds[0];
         int testDuration = (Integer.parseInt(test.getTestDuration()) * 60) - timeInSeconds;
