@@ -299,18 +299,21 @@ public class QuestionsComputerizedTestAnswerController {
     }
     public void lockTest() {
         timer.stop();
-        saveFinalAnswers();
         MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, EnterCodePopUpController.testID);
-        ClientUI.chat.accept(finshedStudentsIncrease);
-        saveAfterTestInfoAndDeleteFromActive();
+//        ClientUI.chat.accept(finshedStudentsIncrease);
+//        saveAfterTestInfoAndDeleteFromActive();
         Stage currentStage = (Stage) header.getScene().getWindow();
         Platform.runLater(() -> {
-
-            showError.showInfoPopup("Test was locked by lecturer\nTest is over");
-            if (currentStage.isShowing()) {
-                currentStage.close();
-                ScreenManager.showStage(PathConstants.mainMenuStudentPath, PathConstants.iconPath);
-            }
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Test Lock");
+            alert.setHeaderText(null);
+            alert.setContentText("Test was locked by lecturer\nTest is over");
+            alert.showAndWait();
+//            showError.showInfoPopup("Test was locked by lecturer\nTest is over");
+//            if (currentStage.isShowing()) {
+//                currentStage.close();
+//                ScreenManager.showStage(PathConstants.mainMenuStudentPath, PathConstants.iconPath);
+//            }
         });
     }
 
