@@ -714,6 +714,12 @@ public class CemsServer extends AbstractServer {
                              "        AND a1.studentID <> a2.studentID " +
                              "    WHERE a1.testID = "+obj+
                              "      AND a1.studentID = cems.studentstest.studentID" +
+                             "    GROUP BY a1.testID, a1.studentID " +
+                             "    HAVING COUNT(DISTINCT a1.questionID) = " +
+                             "           (SELECT COUNT(DISTINCT questionID) " +
+                             "            FROM cems.answersofstudent " +
+                             "            WHERE testID = "+obj+
+                             "              AND studentID = a1.studentID)" +
                              ") " +
                              "AND score < 100";
                     MysqlConnection.update(QueryOfCheating);
