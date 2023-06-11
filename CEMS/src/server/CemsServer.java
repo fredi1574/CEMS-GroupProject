@@ -703,7 +703,7 @@ public class CemsServer extends AbstractServer {
                 case DetectedCheating:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = (String) this.msg.getMsg();
-                     String QueryOfCheating = "UPDATE studentstest " +
+                     String QueryOfCheating = "UPDATE cems.studentstest " +
                         "SET suspicionOfCheating = 'YES' " +
                         "WHERE EXISTS (" +
                         "    SELECT 1 " +
@@ -719,7 +719,6 @@ public class CemsServer extends AbstractServer {
                     MysqlConnection.update(QueryOfCheating);
                     client.sendToClient(new MsgHandler<>(TypeMsg.DetectedCheatingResponse, null));
                     break;
-
             }
 
         } catch (
