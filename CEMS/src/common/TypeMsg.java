@@ -364,7 +364,7 @@ public enum TypeMsg {
         }
 
     },
-    changeTestDurationAnswer{
+    changeTestDurationAnswer {
         public String toString() {
             return "Change of test duration succeeded";
         }
@@ -523,37 +523,56 @@ public enum TypeMsg {
         }
 
     },
-    ChangeIsLoggedValue{
+    ChangeIsLoggedValue {
         public String toString() {
             return "Change is Logged in value";
         }
     },
-    IsLoggedValueChanged{
+    IsLoggedValueChanged {
         public String toString() {
             return "Loggedin value changed";
         }
     },
-    StudentsTestIsApprvoed{
+    StudentsTestIsApprvoed {
         public String toString() {
             return "Lecturer approved a test of a student";
         }
     },
-    StudentsTestIsApprvoedToAllClients{
+    StudentsTestIsApprvoedToAllClients {
         public String toString() {
             return "find Students to Send SMS about approved test";
         }
     },
 
-    PopupTestApprove{
+    PopupTestApprove {
         public String toString() {
             return "Student received an sms of approved test";
         }
     },
-    StudentsTestIsApprvoedResponse
-    {
+    StudentsTestIsApprvoedResponse {
         public String toString() {
-        return "Test Approved";
-    }
+            return "Test Approved";
+        }
+    },
+    LecturerCllickedLockTest {
+        public String toString() {
+            return "Lecturer wants to lock a test";
+        }
+    },
+    LecturerCllickedLockTestResponse {
+        public String toString() {
+            return "Test is locked";
+        }
+    },
+    LockTestForStudentByLecturer {
+        public String toString() {
+            return "Test of student has stopped by lecturer";
+        }
+    },
+    TestIsForcedLocked {
+        public String toString() {
+            return "Locking test succeed";
+        }
     }
 }
 

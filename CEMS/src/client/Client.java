@@ -222,6 +222,13 @@ public class Client extends AbstractClient {
             case GetActiveTestsByLecturerResponse:
                 this.activeTests = (List<Object>) messageFromServer.getMsg();
                 break;
+            case LecturerCllickedLockTestResponse:
+                break;
+            case TestIsForcedLocked:
+                StudentInTest.lockTest();
+                break;
+
+
 
 
         }

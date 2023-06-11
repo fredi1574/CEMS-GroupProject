@@ -197,12 +197,4 @@
             </VBox>
         </HBox>
     </AnchorPane>
-    <Button fx:id="unlockBtn" layoutX="610.0" layoutY="292.0" mnemonicParsing="false" onAction="#unlockTest" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons" visible="false">
-        <graphic>
-            <ImageView fitHeight="45.0" fitWidth="45.0">
-                <Image url="@../../images/Lock.png" />
-            </ImageView>
-        </graphic>
-    </Button>
-    <Label fx:id="unlockTestLabel" alignment="CENTER" layoutX="607.0" layoutY="355.0" prefHeight="18.0" prefWidth="72.0" text="Unlock Test" visible="false" />
 </AnchorPane>

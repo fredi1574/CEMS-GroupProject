@@ -182,6 +182,19 @@ public class CemsServer extends AbstractServer {
                         }
                     }
                 }
+                break;
+            case LockTestForStudentByLecturer:
+                for (int i = 0; i < clientThreadList.length; i++) {
+                    ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
+                    String name = (String) client.getInfo(client.getName());
+                    if (name.equals("Student")) {
+                        try {
+                            client.sendToClient(new MsgHandler<>(TypeMsg.TestIsForcedLocked, null));
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
 
 
         }
@@ -627,8 +640,8 @@ public class CemsServer extends AbstractServer {
                     this.obj = (String) this.msg.getMsg();
                     ArrayList<TestForApproval> testsForApproval = MysqlConnection.getTestForApproval(
                             "SELECT st.* FROM cems.studentstest AS st " +
-                            "JOIN test AS t ON st.testId = t.id " +
-                            "WHERE t.author = '" + obj + "'");
+                                    "JOIN test AS t ON st.testId = t.id " +
+                                    "WHERE t.author = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetTestForApprovalResponse, testsForApproval));
                     break;
                 case UpdateTheApproveofLecturer:
@@ -741,9 +754,10 @@ public class CemsServer extends AbstractServer {
                     sendToAllClients(new MsgHandler<>(TypeMsg.StudentsTestIsApprvoedToAllClients, fullname));
                     client.sendToClient(new MsgHandler<>(TypeMsg.StudentsTestIsApprvoedResponse, null));
                     break;
-
-
-
+                case LecturerCllickedLockTest:
+                    sendToAllClients(new MsgHandler<>(TypeMsg.LockTestForStudentByLecturer, null));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.LecturerCllickedLockTestResponse, null));
+                    break;
             }
 
         } catch (

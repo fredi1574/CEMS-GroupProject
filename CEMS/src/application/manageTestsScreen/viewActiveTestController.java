@@ -156,10 +156,13 @@ public class viewActiveTestController {
      */
     public void lockTest(ActionEvent actionEvent) {
         //switches the visible buttons
-        lockBtn.setVisible(false);
-        lockTestLabel.setVisible(false);
-        unlockBtn.setVisible(true);
-        unlockTestLabel.setVisible(true);
+        if(showError.showConfirmationPopup("Are you sure you want to lock the test?\nPlease notice that test will become inactive")){
+            MsgHandler lockTest = new MsgHandler(TypeMsg.LecturerCllickedLockTest, null);
+            ClientUI.chat.accept(lockTest);
+            back(actionEvent);
+        }
+
+
     }
 
         public void showRequestDeclinedPopUp () {
@@ -174,17 +177,6 @@ public class viewActiveTestController {
                 smsEmailPopUpController.SetInfoField("Time change request was approved",Client.user.getFullName(),Client.user.getEmail());
                 ScreenManager.popUpScreen(PathConstants.SmsEmailPopUp);
             });
-        }
-
-
-        public void unlockTest (ActionEvent actionEvent){
-            //switches the visible buttons
-            lockBtn.setVisible(true);
-            lockTestLabel.setVisible(true);
-            unlockBtn.setVisible(false);
-            unlockTestLabel.setVisible(false);
-
-            //TODO: unlock the active test for all clients through the DB
         }
 
         @FXML
