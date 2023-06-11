@@ -64,6 +64,10 @@ public class ClientControl implements ChatIF{
 		response = client.activeTests;
 		return response;
 	}
+	public List<Object> GetActiveTestsByLecturer() {
+		response = client.activeTests;
+		return response;
+	}
 	public Object getSingleQuestion() {
 		singleResponse = client.singleQuestion;
 		return singleResponse;

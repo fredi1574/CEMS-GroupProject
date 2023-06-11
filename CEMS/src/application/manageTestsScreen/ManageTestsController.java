@@ -111,7 +111,7 @@ public class ManageTestsController {
     }
 
     private void displayApprovalTestsTable() {
-        MsgHandler getTestForApproval = new MsgHandler(TypeMsg.GetTestForApproval, null);
+        MsgHandler getTestForApproval = new MsgHandler(TypeMsg.GetTestForApproval, fullName);
         ClientUI.chat.accept(getTestForApproval);
 
         ObservableList<TestForApproval> studentTests = FXCollections.observableArrayList((List) ClientUI.chat.getTestForApproval());
@@ -136,10 +136,11 @@ public class ManageTestsController {
      */
     private void displayActiveTestsTable() {
 
-        MsgHandler getActiveTestsTable = new MsgHandler(TypeMsg.GetActiveTests, Client.user.getUserName());
+        MsgHandler getActiveTestsTable = new MsgHandler(TypeMsg.GetActiveTestsByLecturer, fullName);
         ClientUI.chat.accept(getActiveTestsTable);
 
-        ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTests());
+        ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.GetActiveTestsByLecturer());
+        //ObservableList<ActiveTest> userActiveTests = TableManager.filterByAuthor(activeTests,fullName);
 
         ObservableList<String> columns = FXCollections.observableArrayList();
         columns.addAll("ID", "Starting Time", "Test Code");
@@ -317,7 +318,8 @@ public class ManageTestsController {
         if (matchingTestFromDB != null)
             loadTestState(matchingTestFromDB);
 
-        ScreenManager.popUpScreen(PathConstants.viewActiveTestPath);
+        //ScreenManager.popUpScreen(PathConstants.viewActiveTestPath);
+        ScreenManager.goToNewScreen(actionEvent,PathConstants.viewActiveTestPath);
     }
 
     /**

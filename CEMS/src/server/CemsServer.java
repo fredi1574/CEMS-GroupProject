@@ -487,6 +487,15 @@ public class CemsServer extends AbstractServer {
                     ArrayList<ActiveTest> activeTestsList = MysqlConnection.getActiveTestsTable("select * from cems.activetest;");
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetActiveTestsResponse, activeTestsList));
                     break;
+                case GetActiveTestsByLecturer:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    ArrayList<ActiveTest> lecturerActiveTestsList = MysqlConnection.getActiveTestsTable(
+                            "SELECT at.* FROM cems.activetest AS at " +
+                                    "JOIN test AS t ON at.id = t.id " +
+                                    "WHERE t.author = '" + obj + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.GetActiveTestsByLecturerResponse, lecturerActiveTestsList));
+                    break;
 //                case UpdateRemainingTime:
 //                    this.msg = (MsgHandler<Object>) msg;
 //                    this.obj = (ActiveTest) this.msg.getMsg();
@@ -601,9 +610,11 @@ public class CemsServer extends AbstractServer {
                     break;
                 case GetTestForApproval:
                     this.msg = (MsgHandler<Object>) msg;
-                    this.obj = (Test) this.msg.getMsg();
-                    this.test = (Test) obj;
-                    ArrayList<TestForApproval> testsForApproval = MysqlConnection.getTestForApproval("SELECT * FROM cems.studentstest");
+                    this.obj = (String) this.msg.getMsg();
+                    ArrayList<TestForApproval> testsForApproval = MysqlConnection.getTestForApproval(
+                            "SELECT st.* FROM cems.studentstest AS st " +
+                            "JOIN test AS t ON st.testId = t.id " +
+                            "WHERE t.author = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetTestForApprovalResponse, testsForApproval));
                     break;
                 case UpdateTheApproveofLecturer:
@@ -700,6 +711,7 @@ public class CemsServer extends AbstractServer {
                     MysqlConnection.update(DeleteActiveTestQuery);
                     client.sendToClient(new MsgHandler<>(TypeMsg.CompleteUnactivatingTest, null));
                     break;
+
 
 
             }

@@ -205,7 +205,9 @@ public class viewActiveTestController {
         }
 
         public void back (ActionEvent event){
-            ExitButton.closePopUp(event);
+            StateManagement.resetInstance();
+            ScreenManager.goToNewScreen(event,PathConstants.manageTestsPath);
+        //ExitButton.closePopUp(event);
         }
 
         @FXML

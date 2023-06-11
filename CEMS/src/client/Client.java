@@ -50,6 +50,7 @@ public class Client extends AbstractClient {
     public static QuestionsComputerizedTestAnswerController StudentInTest = new QuestionsComputerizedTestAnswerController();
     public static viewActiveTestController activeTestController = new viewActiveTestController();
 
+
     //constructor
     public Client(String host, int port, ChatIF clientUI) {
         super(host, port);
@@ -207,6 +208,9 @@ public class Client extends AbstractClient {
             case CompleteUnactivatingTest:
                 break;
             case DeleteRequestCompleted:
+                break;
+            case GetActiveTestsByLecturerResponse:
+                this.activeTests = (List<Object>) messageFromServer.getMsg();
                 break;
 
 
