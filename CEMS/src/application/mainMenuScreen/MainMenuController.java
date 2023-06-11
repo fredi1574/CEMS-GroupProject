@@ -6,10 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import util.ExitButton;
-import util.MinimizeButton;
-import util.PathConstants;
-import util.ScreenManager;
+import util.*;
 
 import javafx.scene.text.Text;
 
@@ -44,7 +41,7 @@ public class MainMenuController {
      * @param event The event triggered by the logout button click.
      */
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, PathConstants.loginPath);
+        LogOut.logOutToLoginScreen(event);
     }
 
     /**

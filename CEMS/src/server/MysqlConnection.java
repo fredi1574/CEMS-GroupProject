@@ -153,7 +153,7 @@ public class MysqlConnection {
 
     public static Object authenticateUser(String username, String password) {
         try {
-            PreparedStatement statement = conn.prepareStatement("SELECT id, firstName, lastName, email, role FROM user WHERE username = ? AND password = ?");
+            PreparedStatement statement = conn.prepareStatement("SELECT id, firstName, lastName, email, role, isLoggedIn FROM user WHERE username = ? AND password = ?");
             statement.setString(1, username);
             statement.setString(2, password);
 
@@ -165,9 +165,10 @@ public class MysqlConnection {
                     String lastName = resultSet.getString("lastName");
                     String email = resultSet.getString("email");
                     String role = resultSet.getString("role");
+                    int IsLoggedIn = resultSet.getInt("isLoggedIn");
 
                     // Create a new ConcreteUser object with the retrieved details
-                    User user = new User(id, firstName, lastName, username, password, email, role);
+                    User user = new User(id, firstName, lastName, username, password, email, role,IsLoggedIn);
                     // Set the authenticated user
 
                     return user;
@@ -393,10 +394,11 @@ public class MysqlConnection {
                 String lastName = rs.getString("lastName");
                 String email = rs.getString("email");
                 String role = rs.getString("role");
+                int IsLoggedIn = rs.getInt("isLoggedIn");
 
 
                 // Create a new ConcreteUser object with the retrieved details
-                User user = new User(id, firstName, lastName, "username", "password", email, role);
+                User user = new User(id, firstName, lastName, "username", "password", email, role,IsLoggedIn);
                 // Set the authenticated user
                 getUsers.add(user);
 

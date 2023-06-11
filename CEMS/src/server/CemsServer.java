@@ -700,6 +700,15 @@ public class CemsServer extends AbstractServer {
                     MysqlConnection.update(DeleteActiveTestQuery);
                     client.sendToClient(new MsgHandler<>(TypeMsg.CompleteUnactivatingTest, null));
                     break;
+                case ChangeIsLoggedValue:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String[]) this.msg.getMsg();
+                    String[] LoginValues = (String[]) obj;
+                    String changeLoginValue = "UPDATE user SET isLoggedIn = '" + Integer.parseInt(LoginValues[1]) + "' WHERE id = '" + LoginValues[0] + "'";
+                    MysqlConnection.update(changeLoginValue);
+                    client.sendToClient(new MsgHandler<>(TypeMsg.IsLoggedValueChanged, null));
+                    break;
+
 
 
             }

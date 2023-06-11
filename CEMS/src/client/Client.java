@@ -208,6 +208,8 @@ public class Client extends AbstractClient {
                 break;
             case DeleteRequestCompleted:
                 break;
+            case IsLoggedValueChanged:
+                break;
 
 
         }

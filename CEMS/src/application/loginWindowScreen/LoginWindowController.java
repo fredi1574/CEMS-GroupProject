@@ -57,6 +57,13 @@ public class LoginWindowController {
         // Authenticate user and retrieve their role
         try {
             if (Client.user.getRole() != null) {
+                if (Client.user.getIsLoggedIn() == 1) {
+                    showError.showErrorPopup("User is already logged in");
+                    return;
+                }
+                // String[] LoginValues = {Client.user.getId(),"1"};
+                //MsgHandler changeLoggedInValue = new MsgHandler(TypeMsg.ChangeIsLoggedValue, LoginValues);
+                //ClientUI.chat.accept(changeLoggedInValue);
                 // Redirect to the appropriate screen based on the user's role
                 switch (Client.user.getRole()) {
                     case "Student":

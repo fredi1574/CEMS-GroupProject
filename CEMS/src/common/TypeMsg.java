@@ -512,6 +512,16 @@ public enum TypeMsg {
         }
 
     },
+    ChangeIsLoggedValue{
+        public String toString() {
+            return "Change is Logged in value";
+        }
+    },
+    IsLoggedValueChanged{
+        public String toString() {
+            return "Loggedin value changed";
+        }
+    }
 }
 
 
