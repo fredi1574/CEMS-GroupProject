@@ -74,6 +74,7 @@ public class QuestionsComputerizedTestAnswerController {
     private static String testid;
     private static ObservableList<TestQuestion> testQuestions;
     private static Test test;
+    private static int TotalForcedFinished;
 
 
     public void initialize() throws SQLException {
@@ -133,7 +134,7 @@ public class QuestionsComputerizedTestAnswerController {
     private Test getTestData() {
         MsgHandler getTestInformation = new MsgHandler(TypeMsg.GetTestByID, testid);
         ClientUI.chat.accept(getTestInformation);
-        Test test = (Test) ClientUI.chat.getSingleTest();
+        test = (Test) ClientUI.chat.getSingleTest();
         return test;
     }
 
@@ -241,12 +242,10 @@ public class QuestionsComputerizedTestAnswerController {
     }
 
     public int CalculateTotalForcedFinished() {
-        Test test = getTestData();
-
         MsgHandler numberOfFinished = new MsgHandler(TypeMsg.CountNumberOfFinished, test.getId());
         ClientUI.chat.accept(numberOfFinished);
         int NumberOfFinishedCounter = (int) (ClientUI.chat.getNumberOfFinished());
-        int TotalForcedFinished = TotalStudents - NumberOfFinishedCounter;
+        TotalForcedFinished = TotalStudents - NumberOfFinishedCounter;
         return TotalForcedFinished;
 
 
