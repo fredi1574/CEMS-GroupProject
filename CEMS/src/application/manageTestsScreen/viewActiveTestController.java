@@ -159,6 +159,8 @@ public class viewActiveTestController {
         if(showError.showConfirmationPopup("Are you sure you want to lock the test?\nPlease notice that test will become inactive")){
             MsgHandler lockTest = new MsgHandler(TypeMsg.LecturerCllickedLockTest, null);
             ClientUI.chat.accept(lockTest);
+            MsgHandler deleteFromActive = new MsgHandler(TypeMsg.UnActivateTest,testIdTextField.getText());
+            ClientUI.chat.accept(deleteFromActive);
             back(actionEvent);
         }
 
