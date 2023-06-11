@@ -640,8 +640,9 @@ public class CemsServer extends AbstractServer {
                     this.obj = (String) this.msg.getMsg();
                     ArrayList<TestForApproval> testsForApproval = MysqlConnection.getTestForApproval(
                             "SELECT st.* FROM cems.studentstest AS st " +
-                                    "JOIN test AS t ON st.testId = t.id " +
-                                    "WHERE t.author = '" + obj + "'");
+                            "JOIN test AS t ON st.testId = t.id " +
+                            "LEFT JOIN activetest AS at ON t.id = at.id " +
+                            "WHERE t.author = '" + obj + "' AND at.id IS NULL");
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetTestForApprovalResponse, testsForApproval));
                     break;
                 case UpdateTheApproveofLecturer:
