@@ -15,7 +15,7 @@
 
 <AnchorPane prefHeight="782.0" prefWidth="805.0" stylesheets="@../../util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.manageQuestionsScreen.ViewQuestionController">
     <AnchorPane fx:id="header" prefHeight="115.0" prefWidth="810.0" style="-fx-border-color: #1d416e; -fx-border-width: 4 3 0 3;" styleClass="pageHeader">
-        <Label alignment="CENTER" layoutX="17.0" layoutY="8.0" prefHeight="91.0" prefWidth="785.0" text="View Question" textAlignment="CENTER" textFill="#fafafa">
+        <Label alignment="CENTER" layoutX="17.0" layoutY="8.0" prefHeight="91.0" prefWidth="785.0" style="-fx-font-weight: Bold;" text="View Question" textAlignment="CENTER" textFill="#fafafa">
             <font>
                 <Font name="Trebuchet MS" size="40.0" />
             </font>

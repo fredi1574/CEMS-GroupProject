@@ -19,12 +19,12 @@
    <children>
       <AnchorPane prefHeight="96.0" prefWidth="800.0" style="-fx-border-color: #1d416e; -fx-border-width: 3 3 0 3;" styleClass="pageHeader">
          <children>
-            <Label alignment="CENTER" layoutX="302.0" layoutY="11.0" prefHeight="47.0" prefWidth="224.0" text="Report For:" textFill="#fafafa">
+            <Label alignment="CENTER" layoutX="295.0" layoutY="10.0" prefHeight="47.0" prefWidth="224.0" style="-fx-font-weight: Bold;" text="Report For:" textFill="#fafafa">
                <font>
                   <Font name="Trebuchet MS" size="40.0" />
                </font>
             </Label>
-            <ImageView fitHeight="86.0" fitWidth="240.0" layoutX="22.0" layoutY="9.0">
+            <ImageView fitHeight="75.0" fitWidth="195.0" layoutX="8.0" layoutY="12.0" preserveRatio="true">
                <image>
                   <Image url="@../../../../images/Logo_Transparent_Bright.png" />
                </image>

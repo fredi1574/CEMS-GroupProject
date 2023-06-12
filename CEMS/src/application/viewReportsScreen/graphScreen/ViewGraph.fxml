@@ -16,12 +16,12 @@
 
 <AnchorPane prefHeight="524.0" prefWidth="799.0" styleClass="backgroundColor" stylesheets="@../../../util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.viewReportsScreen.graphScreen.ViewGraphController">
     <AnchorPane fx:id="header" prefHeight="105.0" prefWidth="800.0" style="-fx-border-color: #1d416e; -fx-border-width: 3 3 0 3;" styleClass="pageHeader">
-        <Label alignment="CENTER" layoutX="342.0" layoutY="17.0" prefHeight="27.0" prefWidth="128.0" text="Report" textFill="#fafafa">
+        <Label alignment="CENTER" layoutX="336.0" layoutY="17.0" prefHeight="27.0" prefWidth="128.0" style="-fx-font-weight: Bold;" text="Report" textFill="#fafafa">
             <font>
                 <Font name="Trebuchet MS" size="40.0" />
             </font>
         </Label>
-        <ImageView fitHeight="86.0" fitWidth="240.0" layoutX="22.0" layoutY="9.0">
+        <ImageView fitHeight="80.0" fitWidth="204.0" layoutX="13.0" layoutY="14.0" preserveRatio="true">
             <Image url="@../../../images/Logo_Transparent_Bright.png" />
         </ImageView>
         <Button layoutX="761.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closePopUp" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />

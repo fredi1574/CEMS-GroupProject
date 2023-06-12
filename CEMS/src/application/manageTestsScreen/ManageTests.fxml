@@ -34,7 +34,7 @@
     </Button>
     <TableView fx:id="testsFromDBTableView" layoutX="27.0" layoutY="179.0" prefHeight="230.0" prefWidth="727.0" />
     <AnchorPane fx:id="header" prefHeight="100.0" prefWidth="1095.0" styleClass="pageHeader">
-        <Label layoutX="380.0" layoutY="12.0" prefHeight="82.0" prefWidth="335.0" styleClass="pageHeader" text=" Tests Managment " textFill="#fafafa" AnchorPane.leftAnchor="380.0" AnchorPane.rightAnchor="380.0">
+        <Label layoutX="371.0" layoutY="8.0" prefHeight="82.0" prefWidth="352.0" style="-fx-font-weight: Bold;" styleClass="pageHeader" text=" Tests Managment " textFill="#fafafa" AnchorPane.leftAnchor="371.0" AnchorPane.rightAnchor="372.0">
             <font>
                 <Font name="Trebuchet MS" size="40.0" />
             </font>

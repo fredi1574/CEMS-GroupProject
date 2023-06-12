@@ -18,12 +18,12 @@
    <children>
       <AnchorPane fx:id="header" prefHeight="105.0" prefWidth="800.0" style="-fx-border-color: #1d416e; -fx-border-width: 3 3 0 3;" styleClass="pageHeader">
          <children>
-            <Label alignment="CENTER" layoutX="302.0" layoutY="19.0" prefHeight="47.0" prefWidth="208.0" text="Report For:" textFill="#fafafa">
+            <Label alignment="CENTER" layoutX="288.0" layoutY="19.0" prefHeight="47.0" prefWidth="224.0" style="-fx-font-weight: Bold;" text="Report For:" textFill="#fafafa">
                <font>
                   <Font name="Trebuchet MS" size="40.0" />
                </font>
             </Label>
-            <ImageView fitHeight="86.0" fitWidth="240.0" layoutX="22.0" layoutY="9.0">
+            <ImageView fitHeight="73.0" fitWidth="196.0" layoutX="14.0" layoutY="16.0" preserveRatio="true">
                <image>
                   <Image url="@../../../../images/Logo_Transparent_Bright.png" />
                </image>

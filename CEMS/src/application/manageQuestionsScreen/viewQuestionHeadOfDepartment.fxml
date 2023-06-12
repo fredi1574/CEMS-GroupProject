@@ -17,7 +17,7 @@
       <TableView fx:id="manageQuestionsTableView" layoutX="27.0" layoutY="198.0" prefHeight="257.0" prefWidth="752.0" />
       <AnchorPane fx:id="header" prefHeight="100.0" prefWidth="806.0" styleClass="pageHeader">
          <children>
-            <Label layoutX="287.0" layoutY="8.0" prefHeight="81.0" prefWidth="316.0" styleClass="pageHeader" text=" View Questions " textFill="#fafafa" AnchorPane.leftAnchor="287.0" AnchorPane.rightAnchor="203.0">
+            <Label layoutX="246.0" layoutY="9.0" prefHeight="82.0" prefWidth="313.0" style="-fx-font-weight: Bold;" styleClass="pageHeader" text=" View Questions " textFill="#fafafa" AnchorPane.leftAnchor="246.0" AnchorPane.rightAnchor="247.0">
                <font>
                   <Font name="Trebuchet MS" size="40.0" />
                </font>

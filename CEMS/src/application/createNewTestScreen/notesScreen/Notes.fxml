@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="607.0" prefWidth="846.0" styleClass="backgroundColor" stylesheets="@../../../util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.createNewTestScreen.notesScreen.NotesController">
     <AnchorPane fx:id="header" layoutX="-2.0" layoutY="-4.0" prefHeight="103.0" prefWidth="854.0" styleClass="pageHeader">
-        <Label alignment="CENTER" layoutX="183.0" layoutY="6.0" prefHeight="91.0" prefWidth="501.0" style="-fx-text-fill: #e6eef7;" text="Add Notes" textFill="#fafafa">
+        <Label alignment="CENTER" layoutX="176.0" layoutY="6.0" prefHeight="91.0" prefWidth="501.0" style="-fx-text-fill: #e6eef7;" text="Add Notes" textFill="#fafafa">
             <font>
                 <Font name="Trebuchet MS Bold" size="40.0" />
             </font>
@@ -23,7 +23,7 @@
         <ImageView layoutX="735.0" layoutY="55.0">
             <Image url="@../../../images/avatar.png" />
         </ImageView>
-        <ImageView fitHeight="82.0" fitWidth="210.0" layoutX="14.0" layoutY="11.0" preserveRatio="true">
+        <ImageView fitHeight="77.0" fitWidth="202.0" layoutX="11.0" layoutY="14.0" preserveRatio="true">
             <Image url="@../../../images/Logo_Transparent_Bright.png" />
         </ImageView>
       <Text fx:id="nameAuthor" fill="WHITE" layoutX="751.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="88.0">

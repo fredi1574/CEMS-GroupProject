@@ -17,7 +17,7 @@
 
 <AnchorPane prefHeight="742.0" prefWidth="842.0" styleClass="backgroundColor" stylesheets="@../../../util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.createNewTestScreen.pickQuestionsScreen.PickQuestionsController">
     <AnchorPane fx:id="header" prefHeight="101.0" prefWidth="842.0" styleClass="pageHeader">
-        <Label alignment="CENTER" layoutX="173.0" layoutY="14.0" prefHeight="54.0" prefWidth="481.0" style="-fx-font-weight: bold;" text="Pick Questions" textFill="#fafafa">
+        <Label alignment="CENTER" layoutX="180.0" layoutY="14.0" prefHeight="54.0" prefWidth="481.0" style="-fx-font-weight: bold;" text="Pick Questions" textFill="#fafafa">
             <font>
                 <Font name="Trebuchet MS" size="40.0" />
             </font>
@@ -32,7 +32,7 @@
                 <Font name="Franklin Gothic Demi Cond" size="14.0" />
             </font>
         </Button>
-        <ImageView fitHeight="78.0" fitWidth="201.0" layoutX="28.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="78.0" fitWidth="201.0" layoutX="12.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../../images/Logo_Transparent_Bright.png" />
         </ImageView>
       <Text fx:id="nameAuthor" fill="WHITE" layoutX="720.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="115.0">
