@@ -185,18 +185,25 @@ public class CemsServer extends AbstractServer {
                 }
                 break;
             case LockTestForStudentByLecturer:
+                this.msg = (MsgHandler<Object>) msg;
+                this.obj = this.msg.getMsg();
                 for (int i = 0; i < clientThreadList.length; i++) {
                     ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
                     String name = (String) client.getInfo(client.getName());
-                    if (name.equals("Student")) {
-                        try {
-                            client.sendToClient(new MsgHandler<>(TypeMsg.TestIsForcedLockedComputrized, null));
-                            client.sendToClient(new MsgHandler<>(TypeMsg.TestIsForcedLockedManual, null));
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
+                    //if (name.equals("Student")) {
+                        if (obj instanceof TestTypeEnum) {
+                            try {
+                                if (obj.equals(TestTypeEnum.C)) {
+                                    client.sendToClient(new MsgHandler<>(TypeMsg.TestIsForcedLockedComputrized, null));
+                                } else {
+                                    client.sendToClient(new MsgHandler<>(TypeMsg.TestIsForcedLockedManual, null));
+                                }
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                     }
-                }
+                //}
 
 
         }
@@ -783,7 +790,10 @@ public class CemsServer extends AbstractServer {
                     client.sendToClient(new MsgHandler<>(TypeMsg.StudentsTestIsApprvoedResponse, null));
                     break;
                 case LecturerCllickedLockTest:
-                    sendToAllClients(new MsgHandler<>(TypeMsg.LockTestForStudentByLecturer, null));
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    TestTypeEnum testTypeString  = MysqlConnection.getTestType("SELECT testType FROM test WHERE id = '" + obj + "'");
+                    sendToAllClients(new MsgHandler<>(TypeMsg.LockTestForStudentByLecturer, testTypeString));
                     client.sendToClient(new MsgHandler<>(TypeMsg.LecturerCllickedLockTestResponse, null));
                     break;
             }

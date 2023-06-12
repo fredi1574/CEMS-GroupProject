@@ -143,11 +143,6 @@
             </Label>
          </children>
       </AnchorPane>
-      <Text fx:id="addtionalTimeForSubmitTEXT" fill="#e10000" layoutX="513.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="361.0">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
       <Button fx:id="saveButton" alignment="BASELINE_CENTER" layoutX="799.0" layoutY="434.0" mnemonicParsing="false" onAction="#onSaveButton" prefHeight="33.0" prefWidth="53.0" styleClass="subButtons">
          <graphic>
             <ImageView fitHeight="39.0" fitWidth="39.0" preserveRatio="true">
@@ -157,6 +152,6 @@
             </ImageView>
          </graphic>
       </Button>
-      <Text fx:id="durationChangeddText" layoutX="530.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="130.93670654296875" />
+      <Text fx:id="durationChangeddText" layoutX="530.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93670654296875" />
    </children>
 </AnchorPane>

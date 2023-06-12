@@ -650,6 +650,26 @@ public class MysqlConnection {
         return finishedCount;
 
     }
+    public static TestTypeEnum getTestType(String query) {
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        int finishedCount = 0;
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            if (rs.next()) { // Move the cursor to the first row
+                String testTypeString = rs.getString("testType");
+                return TestTypeEnum.valueOf(testTypeString);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // or throw an exception if the test id is not found
+    }
     public static String getIDreturnFullname(String query) {
         Statement stmt = null;
         try {
