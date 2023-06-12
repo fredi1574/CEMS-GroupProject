@@ -58,7 +58,7 @@ public class ManualTestController {
     private TextField SubmissionStatusText;
     @FXML
     private static int[] seconds;
-    private static Timeline timer;
+    public static Timeline timerC;
     @FXML
     private Label timerLabel;
 
@@ -125,12 +125,12 @@ public class ManualTestController {
         int totalSeconds = remainingMinutes * 60;
         seconds = new int[]{totalSeconds};  // Create a final array to hold the remaining seconds
 
-        timer = new Timeline(
+        timerC = new Timeline(
                 new KeyFrame(Duration.seconds(1), event -> {
                     seconds[0]--;  // Decrement the remaining seconds
                     if (seconds[0] <= 0) {
                         // Timer has ended, perform necessary actions
-                        timer.stop();
+                        timerC.stop();
                         Stage currentStage = (Stage) header.getScene().getWindow();
                         if (currentStage.isShowing()) {
                             if (checkLockTest()) {
@@ -153,17 +153,17 @@ public class ManualTestController {
                     }
                 })
         );
-        timer.setCycleCount(Animation.INDEFINITE);
-        timer.play();
+        timerC.setCycleCount(Animation.INDEFINITE);
+        timerC.play();
 
         // Update the timer label immediately
         timerLabel.setText(formatTime(seconds[0]));
     }
 
     public void lockTest() {
-        timer.stop();
         Platform.runLater(() -> {
             showError.showInfoPopup("Test is locked\nPlease submit the test and exit");
+            timerC.stop();
         });
         testIsLockedManual = true;
 
