@@ -208,8 +208,12 @@ public class QuestionsComputerizedTestAnswerController {
 
     @FXML
     public void handlePreviousButtonClick() throws SQLException {
+
         saveMarkingWithValidation();
-        if (selectedCount <= 1) {
+        if(TestIsLocked)
+            showError.showErrorPopup("Test is locked\nPlease press submit to exit the test");
+
+        else if (selectedCount <= 1) {
             currentQuestionIndex -= 1; // Go back two questions (currentQuestionIndex - 1)
             fetchQuestion();
         }
@@ -218,7 +222,9 @@ public class QuestionsComputerizedTestAnswerController {
     @FXML
     public void handleButtonClick() throws SQLException {
         saveMarkingWithValidation();
-        if (selectedCount <= 1) {
+        if(TestIsLocked)
+            showError.showErrorPopup("Test is locked\nPlease press submit to exit the test");
+        else if (selectedCount <= 1) {
             currentQuestionIndex++;
             fetchQuestion();
         }
@@ -268,7 +274,7 @@ public class QuestionsComputerizedTestAnswerController {
             saveMarkingWithValidation();
             if (selectedCount <= 1) {
                 saveFinalAnswers();
-                if(!(TestIsLocked = true)) {
+                if(!(TestIsLocked)) {
                     MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, EnterCodePopUpController.testID);
                     ClientUI.chat.accept(finshedStudentsIncrease);
                 }
