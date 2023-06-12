@@ -113,8 +113,6 @@ public class ManualTestController {
         checkLockThread.start();
     }
 
-
-    }
     public void lockTest() {
         Platform.runLater(() -> {
 
