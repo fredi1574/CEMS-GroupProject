@@ -161,9 +161,10 @@ public class ManualTestController {
     }
 
     public void lockTest() {
+        timerC.stop();
         Platform.runLater(() -> {
             showError.showInfoPopup("Test is locked\nPlease submit the test and exit");
-            timerC.stop();
+
         });
         testIsLockedManual = true;
 

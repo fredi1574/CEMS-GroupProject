@@ -75,8 +75,7 @@ public class QuestionsComputerizedTestAnswerController {
     private static int selectedCount = 0;
     private static int TotalStudents;
     private static ObservableList<TestQuestion> testQuestions;
-
-
+    private static boolean testIsLockedComputrized;
     public void initialize() throws SQLException {
 
         // Enables dragging and dropping of the application window using the header pane
@@ -241,7 +240,6 @@ public class QuestionsComputerizedTestAnswerController {
     }
     public int CalculateTotalForcedFinished(){
         Test test = getTestData();
-
         MsgHandler numberOfFinished = new MsgHandler(TypeMsg.CountNumberOfFinished,test.getId());
         ClientUI.chat.accept(numberOfFinished);
         int NumberOfFinishedCounter = (int) (ClientUI.chat.getNumberOfFinished());
@@ -253,11 +251,22 @@ public class QuestionsComputerizedTestAnswerController {
     }
     public void saveAfterTestInfoAndDeleteFromActive(){
         Test test = getTestData();
-        int totalForcedFinished = CalculateTotalForcedFinished();
+        int totalForcedFinished;
+        if (testIsLockedComputrized) {
+            MsgHandler totalStudentAttended = new MsgHandler(TypeMsg.NumberOfAttendedCounter, test.getId());
+            ClientUI.chat.accept(totalStudentAttended);
+            int NumberOfAttendedCounter = (int) (ClientUI.chat.getNumberOfAttended());
+            MsgHandler numberOfFinished = new MsgHandler(TypeMsg.CountNumberOfFinished, test.getId());
+            ClientUI.chat.accept(numberOfFinished);
+            int NumberOfFinishedCounter = (int) (ClientUI.chat.getNumberOfFinished());
+            totalForcedFinished = NumberOfAttendedCounter - NumberOfFinishedCounter;
+        } else {
+            totalForcedFinished = CalculateTotalForcedFinished();
+        }
         String[] afterTestInfo = {test.getTestDuration(), String.valueOf(totalForcedFinished), test.getId()};
-        MsgHandler addAfterTestInfo = new MsgHandler(TypeMsg.FinishAfterTestInfo,afterTestInfo);
+        MsgHandler addAfterTestInfo = new MsgHandler(TypeMsg.FinishAfterTestInfo, afterTestInfo);
         ClientUI.chat.accept(addAfterTestInfo);
-        MsgHandler deleteFromActive = new MsgHandler(TypeMsg.UnActivateTest,test.getId());
+        MsgHandler deleteFromActive = new MsgHandler(TypeMsg.UnActivateTest, test.getId());
         ClientUI.chat.accept(deleteFromActive);
 
     }
@@ -268,11 +277,15 @@ public class QuestionsComputerizedTestAnswerController {
             saveMarkingWithValidation();
             if (selectedCount <= 1) {
                 saveFinalAnswers();
-                MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, EnterCodePopUpController.testID);
-                ClientUI.chat.accept(finshedStudentsIncrease);
-                if (checkLockTest()){
+                if (!testIsLockedComputrized) {
+                    MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, EnterCodePopUpController.testID);
+                    ClientUI.chat.accept(finshedStudentsIncrease);
+                }
+
+                if (checkLockTest() || (testIsLockedComputrized)){
                     saveAfterTestInfoAndDeleteFromActive();
                 }
+                testIsLockedComputrized = false;
                 ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
             }
 
@@ -285,7 +298,6 @@ public class QuestionsComputerizedTestAnswerController {
         int i = 0;
         numberOfQuestions = testQuestions.size();
         for (TestQuestion answer : testQuestions) {
-
             AnswerOfStudent answerForSpecificQ = new AnswerOfStudent(Client.user.getId(), testID, testQuestions.get(i).getQuestionID(), markings.get(i));
             MsgHandler addAnswerOfTestFromStudent = new MsgHandler(TypeMsg.AddStudentAnswer, (AnswerOfStudent) answerForSpecificQ);
             ClientUI.chat.accept(addAnswerOfTestFromStudent);
@@ -303,13 +315,13 @@ public class QuestionsComputerizedTestAnswerController {
 
     }
     public void lockTest() {
-
+        timer.stop();
         Platform.runLater(() -> {
 
             showError.showInfoPopup("Test was locked by lecturer\nPlease press submit to exit the test");
 
         });
-        seconds[0] = 0;
+        testIsLockedComputrized = true;
     }
 
     public void saveStudentsTest(int score, int correctAnswers, int totalQuestions) {
@@ -344,7 +356,7 @@ public class QuestionsComputerizedTestAnswerController {
                         Stage currentStage = (Stage) header.getScene().getWindow();
                         if (currentStage.isShowing()) {
                             saveFinalAnswers();
-                            if (checkLockTest()) {
+                            if (checkLockTest()|| (testIsLockedComputrized)) {
                                 saveAfterTestInfoAndDeleteFromActive();
                             }
 

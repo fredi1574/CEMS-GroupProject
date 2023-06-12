@@ -232,10 +232,10 @@ public class Client extends AbstractClient {
             case LecturerCllickedLockTestResponse:
                 break;
             case TestIsForcedLockedManual:
-                StudentInTest.lockTest();
+                manualTest.lockTest();
                 break;
             case TestIsForcedLockedComputrized:
-                manualTest.lockTest();
+                StudentInTest.lockTest();
                 break;
 
 
