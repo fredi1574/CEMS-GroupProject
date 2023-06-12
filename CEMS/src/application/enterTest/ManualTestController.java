@@ -94,14 +94,6 @@ public class ManualTestController {
             showError.showErrorPopup("No Test Now");
             return;
         }
-        while (true){
-            if (testIsLockedManual) {
-                testIsLocked();
-                break;
-            }
-
-        }
-
     }
 
     public void lockTest() {
@@ -111,6 +103,8 @@ public class ManualTestController {
 
         });
         testIsLockedManual = true;
+        ScreenManager.showStage(PathConstants.mainMenuStudentPath, PathConstants.iconPath);
+
     }
     // Method to set the isActive flag and stop the checkLockThread
     public void testIsLocked(){
@@ -118,7 +112,6 @@ public class ManualTestController {
         testIsLockedManual = false;
         // Set the controller as inactive to stop the checkLockThread
         Stage currentStage = (Stage) header.getScene().getWindow();
-        currentStage.close();
         ScreenManager.showStage(PathConstants.mainMenuStudentPath, PathConstants.iconPath);
 
     }
