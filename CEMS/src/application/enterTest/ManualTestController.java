@@ -128,6 +128,7 @@ public class ManualTestController {
 
     public void testIsLocked(){
         saveAfterTestInfoAndDeleteFromActive();
+        testIsLockedManual = false;
         // Set the controller as inactive to stop the checkLockThread
         Stage currentStage = (Stage) header.getScene().getWindow();
         currentStage.close();
