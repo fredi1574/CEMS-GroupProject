@@ -110,7 +110,7 @@ public class ManualTestController {
 
             showError.showInfoPopup("Test time increased by" + newDuration + "minutes");
         });
-        totalSecondsRemaining = (totalSecondsRemaining + newDuration) * 60;  // Convert remaining minutes to seconds
+        formatTime(totalSecondsRemaining = (totalSecondsRemaining + newDuration) * 60);  // Convert remaining minutes to seconds
     }
 
     private String formatTime(int seconds) {
@@ -188,16 +188,16 @@ public class ManualTestController {
     }
 
     void FinishedTime(Test test) {
-        int hour = Integer.parseInt(StartTimeText.getText().substring(0, 2));
-        int min = Integer.parseInt(StartTimeText.getText().substring(3, 5));
-        int durationTime = Integer.parseInt(test.getTestDuration());
-        if (durationTime + min >= 60) {
-            hour += (durationTime + min) / 60;
-            min += (durationTime + min) % 60;
-        } else
-            min += durationTime % 60;
+            int hour = Integer.parseInt(StartTimeText.getText().substring(0, 2));
+            int min = Integer.parseInt(StartTimeText.getText().substring(3, 5));
+            int durationTime = Integer.parseInt(test.getTestDuration());
 
-        EndTimeText.setText(String.format("%02d:%02d", hour, min));
+            int totalMinutes = min + durationTime;
+            hour += totalMinutes / 60;
+            min = totalMinutes % 60;
+
+            EndTimeText.setText(String.format("%02d:%02d", hour, min));
+
     }
 
     @FXML

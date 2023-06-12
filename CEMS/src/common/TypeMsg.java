@@ -370,7 +370,18 @@ public enum TypeMsg {
         }
 
     },
-    TestDurationChanged {
+    TestDurationChanged{
+        public String toString() {
+            return "test's duration was changed message sent";
+        }
+    },
+    TestDurationChangedComputerized {
+        public String toString() {
+            return "test's duration was changed";
+        }
+
+    },
+    TestDurationChangedManual {
         public String toString() {
             return "test's duration was changed";
         }

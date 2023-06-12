@@ -172,8 +172,10 @@ public class Client extends AbstractClient {
                 break;
             case StudentsFinishedTestIncreased:
                 break;
-            case TestDurationChanged:
+            case TestDurationChangedComputerized:
                 StudentInTest.showNotificationAndChangeDuration((Integer) messageFromServer.getMsg());
+                break;
+            case TestDurationChangedManual:
                 manualTest.showNotificationAndChangeDuration((Integer) messageFromServer.getMsg());
                 break;
             case changeTestDurationAnswer:
