@@ -5,16 +5,21 @@ import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
 import entity.*;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import util.*;
 import javafx.scene.control.TextField;
 
@@ -51,13 +56,18 @@ public class ManualTestController {
 
     @FXML
     private TextField SubmissionStatusText;
-
     @FXML
-    private TextField durationTime;
+    private static int[] seconds;
+    private static Timeline timer;
+    @FXML
+    private Label timerLabel;
+
     @FXML
     private Text fullNameText;
     private static int TotalStudents;
     private static boolean testIsLockedManual;
+    private int remainingMinutes;
+    private int testDurationMinutes;
 
     public void initialize() {
 
@@ -94,6 +104,57 @@ public class ManualTestController {
             showError.showErrorPopup("No Test Now");
             return;
         }
+        fetchTestDuration();
+
+    }
+
+    private String formatTime(int seconds) {
+        int hours = seconds / 3600;
+        int minutes = (seconds % 3600) / 60;
+        int secs = seconds % 60;
+        return String.format("%02d:%02d:%02d", hours, minutes, secs);
+    }
+    private void fetchTestDuration() {
+        testDurationMinutes = Integer.parseInt(test.getTestDuration());
+        remainingMinutes = testDurationMinutes;
+    }
+    private void startTimer() {
+        int totalSeconds = remainingMinutes * 60;
+        seconds = new int[]{totalSeconds};  // Create a final array to hold the remaining seconds
+
+        timer = new Timeline(
+                new KeyFrame(Duration.seconds(1), event -> {
+                    seconds[0]--;  // Decrement the remaining seconds
+                    if (seconds[0] <= 0) {
+                        // Timer has ended, perform necessary actions
+                        timer.stop();
+                        Stage currentStage = (Stage) header.getScene().getWindow();
+                        if (currentStage.isShowing()) {
+                            if (checkLockTest()) {
+                                saveAfterTestInfoAndDeleteFromActive();
+                            }
+
+                            Platform.runLater(() -> {
+
+                                if (currentStage.isShowing()) {
+                                    showError.showInfoPopup("Test is over");
+                                    currentStage.close();
+                                    ScreenManager.showStage(PathConstants.mainMenuStudentPath, PathConstants.iconPath);
+                                }
+                            });
+                        }
+                        // Additional logic...
+                    } else {
+                        // Update the timer display on the screen
+                        timerLabel.setText(formatTime(seconds[0]));
+                    }
+                })
+        );
+        timer.setCycleCount(Animation.INDEFINITE);
+        timer.play();
+
+        // Update the timer label immediately
+        timerLabel.setText(formatTime(seconds[0]));
     }
 
     public void lockTest() {
@@ -103,53 +164,30 @@ public class ManualTestController {
 
         });
         testIsLockedManual = true;
-        totalSecondsRemaining = 0;
+        timer.stop();
 
     }
 
     // Method to set the isActive flag and stop the checkLockThread
     public void showNotificationAndChangeDuration(int newDuration) {
+        int remainingSeconds = remainingMinutes * 60;  // Convert remaining minutes to seconds
+        seconds[0] += newDuration * 60;  // Add the new duration in seconds
         Platform.runLater(() -> {
 
             showError.showInfoPopup("Test time increased by " + newDuration + " minutes");
         });
-        formatTime(totalSecondsRemaining = (totalSecondsRemaining + (newDuration * 60)));  // Convert remaining minutes to seconds
     }
+    void FinishedTime(Test test) {
+        int hour = Integer.parseInt(StartTimeText.getText().substring(0, 2));
+        int min = Integer.parseInt(StartTimeText.getText().substring(3, 5));
+        int durationTime = Integer.parseInt(test.getTestDuration());
 
-    private String formatTime(int seconds) {
-        int hours = seconds / 3600;
-        int minutes = (seconds % 3600) / 60;
-        int secs = seconds % 60;
-        return String.format("%02d:%02d:%02d", hours, minutes, secs);
+        int totalMinutes = min + durationTime;
+        hour += totalMinutes / 60;
+        min = totalMinutes % 60;
 
-    }
+        EndTimeText.setText(String.format("%02d:%02d", hour, min));
 
-
-    private void startTimer(int minutesRemaining) {
-        totalSecondsRemaining = minutesRemaining * 60;
-        durationTime.setText(formatTime(totalSecondsRemaining));
-        durationTime.setDisable(true);
-
-        if (timerThread == null || !isTimerRunning) {
-            timerThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    isTimerRunning = true;
-                    if (totalSecondsRemaining == 0)
-                        stopTimer();
-                    while (totalSecondsRemaining > 0) {
-                        try {
-                            Thread.sleep(1000); // Wait for 1 second
-                            decreaseTimeByOneSecond();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    isTimerRunning = false;
-                }
-            });
-            timerThread.start();
-        }
     }
 
     public void saveStudentsTest(int score, int correctAnswers, int totalQuestions) {
@@ -163,50 +201,6 @@ public class ManualTestController {
         ClientUI.chat.accept(AddNewTest);
     }
 
-    private void decreaseTimeByOneSecond() {
-        totalSecondsRemaining--;
-        durationTime.setText(formatTime(totalSecondsRemaining));
-        if (totalSecondsRemaining == 60) {
-            if (isSubmit) {
-                totalSecondsRemaining = 60;
-                addtionalTimeForSubmitTEXT.setText("*You have only one minutes left to submitedd test*");
-                durationTime.setText(formatTime(totalSecondsRemaining));
-                isSubmit = false;
-            } else {
-                stopTimer();
-                if (checkLockTest()) {
-                    saveAfterTestInfoAndDeleteFromActive();
-                }
-            }
-        }
-    }
-
-    private void stopTimer() {
-        if (timerThread != null) {
-            isTimerRunning = false;
-            notUpload = false;
-            forText = false;
-            try {
-                timerThread.join(); // Wait for the thread to finish
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            timerThread = null;
-        }
-    }
-
-    void FinishedTime(Test test) {
-        int hour = Integer.parseInt(StartTimeText.getText().substring(0, 2));
-        int min = Integer.parseInt(StartTimeText.getText().substring(3, 5));
-        int durationTime = Integer.parseInt(test.getTestDuration());
-
-        int totalMinutes = min + durationTime;
-        hour += totalMinutes / 60;
-        min = totalMinutes % 60;
-
-        EndTimeText.setText(String.format("%02d:%02d", hour, min));
-
-    }
 
     @FXML
     public void uploadFileBTN(ActionEvent event) {
@@ -232,7 +226,7 @@ public class ManualTestController {
             fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Word Files", "*.docx"));
             File downloadedFile = fc.showSaveDialog(null);// UserController.currentStage
             System.out.println("Downloaded");
-            startTimer(Integer.parseInt(test.getTestDuration()));
+            startTimer();
             if (downloadedFile == null)
                 return;
             File ManualTest = new File(downloadedFile.getAbsolutePath());
