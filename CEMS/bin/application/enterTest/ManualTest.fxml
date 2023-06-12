@@ -136,7 +136,7 @@
                   <Font name="Trebuchet MS Bold" size="17.0" />
                </font>
             </Label>
-            <TextField fx:id="durationTime" layoutX="158.0" layoutY="23.0" prefHeight="21.0" prefWidth="148.0" />
+            <TextField fx:id="timerLabel" layoutX="158.0" layoutY="23.0" prefHeight="21.0" prefWidth="148.0" />
          </children>
       </AnchorPane>
       <Text fx:id="addtionalTimeForSubmitTEXT" fill="#e10000" layoutX="513.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="361.0">

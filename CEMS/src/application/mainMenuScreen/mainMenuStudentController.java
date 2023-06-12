@@ -18,6 +18,7 @@ public class mainMenuStudentController {
 
     /**
      * Initializes the main menu screen for the student.
+     *
      * Enables dragging and dropping of the application window using the header pane.
      * Sets the full name of the authenticated user.
      */
