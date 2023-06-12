@@ -103,18 +103,10 @@ public class ManualTestController {
 
         });
         testIsLockedManual = true;
-        ScreenManager.showStage(PathConstants.mainMenuStudentPath, PathConstants.iconPath);
+        formatTime(totalSecondsRemaining = 0);
 
     }
     // Method to set the isActive flag and stop the checkLockThread
-    public void testIsLocked(){
-        saveAfterTestInfoAndDeleteFromActive();
-        testIsLockedManual = false;
-        // Set the controller as inactive to stop the checkLockThread
-        Stage currentStage = (Stage) header.getScene().getWindow();
-        ScreenManager.showStage(PathConstants.mainMenuStudentPath, PathConstants.iconPath);
-
-    }
     public void showNotificationAndChangeDuration(int newDuration){
         Platform.runLater(() -> {
 
@@ -124,10 +116,16 @@ public class ManualTestController {
     }
 
     private String formatTime(int seconds) {
+        if (seconds == 0){
+            durationTime.setText("00:00:00");
+            return "0";
+        }
+        else{
         int hours = seconds / 3600;
         int minutes = (seconds % 3600) / 60;
         int secs = seconds % 60;
         return String.format("%02d:%02d:%02d", hours, minutes,secs);
+        }
     }
 
 
@@ -309,6 +307,7 @@ public class ManualTestController {
 
                     if (checkLockTest() || (testIsLockedManual)) {
                         saveAfterTestInfoAndDeleteFromActive();
+
                     }
                     saveStudentsTest(0, 0, 0);
                     ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
