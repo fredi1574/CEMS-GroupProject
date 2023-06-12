@@ -98,12 +98,12 @@ public class ManualTestController {
 
     }
     public void lockTest() {
-        totalSecondsRemaining = 0;
         Platform.runLater(() -> {
 
             showError.showInfoPopup("Test was locked by lecturer\nPlease press submit to exit the test");
 
         });
+        totalSecondsRemaining = 0;
     }
     public void showNotificationAndChangeDuration(int newDuration){
         Platform.runLater(() -> {
