@@ -100,22 +100,6 @@ public class viewTestAwaitingApprovalController {
     }
 
     @FXML
-    void BackTOManageTest(ActionEvent event) {
-        StateManagement.resetInstance();
-        ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
-    }
-
-    @FXML
-    void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
-    }
-
-    @FXML
-    void minimizeWindow(ActionEvent event) {
-        MinimizeButton.minimizeWindow(event);
-    }
-
-    @FXML
     void saveDecisionLecturer(ActionEvent event) {
         if (!teacherComment.getText().isEmpty()) {
             selectedTest.setLecturerComments(teacherComment.getText());
@@ -134,10 +118,25 @@ public class viewTestAwaitingApprovalController {
             ClientUI.chat.accept(updateTheApproval);
             MsgHandler sendPopUpToStudent = new MsgHandler(TypeMsg.StudentsTestIsApprvoed, studentIDLabel.getText());
             ClientUI.chat.accept(sendPopUpToStudent);
+
+            StateManagement.resetInstance();
             ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
-
-
         }
+    }
+    @FXML
+    void BackTOManageTest(ActionEvent event) {
+        StateManagement.resetInstance();
+        ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
+    }
+
+    @FXML
+    void closeClient(ActionEvent event) {
+        ExitButton.closeClient(event);
+    }
+
+    @FXML
+    void minimizeWindow(ActionEvent event) {
+        MinimizeButton.minimizeWindow(event);
     }
 
     public void LogOut(ActionEvent event) {

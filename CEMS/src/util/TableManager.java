@@ -1,6 +1,5 @@
 package util;
 
-import entity.UserMadeElement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -128,23 +127,5 @@ public class TableManager {
             column.prefWidthProperty().bind(tableView.widthProperty().multiply(multipliers[index]));
             index++;
         }
-    }
-
-    /**
-     * filters the given list by elements matching the given author name
-     * @param list a generic list of user-made objects (tests or questions)
-     * @param fullName the name of the author
-     * @return a list of elements written by the author
-     */
-    public static <T extends UserMadeElement> ObservableList<T> filterByAuthor(ObservableList<T> list , String fullName) {
-        ObservableList<T> filteredList = FXCollections.observableArrayList();
-
-        //filter objects by current user's full name
-        for (T elem : list) {
-            if (elem.getAuthor().equals(fullName)) {
-                filteredList.add(elem);
-            }
-        }
-        return filteredList;
     }
 }

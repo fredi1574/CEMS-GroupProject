@@ -605,6 +605,24 @@ public enum TypeMsg {
         public String toString() {
             return "Locking test succeed";
         }
+    }, GetQuestionsByLecturer {
+        public String toString() {
+            return "User asked for the list of questions written by him";
+        }
+    },
+    GetQuestionsByLecturerResponse {
+        public String toString() {
+            return "Server returned a list of questions written by the user";
+        }
+    },GetTestsByLecturer {
+        public String toString() {
+            return "User asked for the list of tests written by him";
+        }
+    },
+    GetTestsByLecturerResponse {
+        public String toString() {
+            return "Server returned a list of tests written by the user";
+        }
     },
 }
 

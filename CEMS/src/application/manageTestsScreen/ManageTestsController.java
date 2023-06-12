@@ -21,6 +21,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -77,16 +78,15 @@ public class ManageTestsController {
      */
     private void displayDbTestsTable() {
 
-        MsgHandler getDbTestTable = new MsgHandler(TypeMsg.GetTestsBySubject, Client.user.getUserName());
+        MsgHandler getDbTestTable = new MsgHandler(TypeMsg.GetTestsByLecturer, Client.user.getFullName());
         ClientUI.chat.accept(getDbTestTable);
 
         ObservableList<Test> dbTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
-        ObservableList<Test> userDBTests = TableManager.filterByAuthor(dbTests,fullName);
 
         ObservableList<String> columns = FXCollections.observableArrayList();
         columns.addAll("Test Number", "ID", "Test Code", "Subject", "Course Name", "Year", "Semester", "Session", "Author");
         TableManager.createTable(testsFromDBTableView, columns);
-        TableManager.importData(testsFromDBTableView, userDBTests);
+        TableManager.importData(testsFromDBTableView, dbTests);
         double[] dbTestsMultipliers = {0.1, 0.08, 0.1, 0.1, 0.175, 0.1, 0.1, 0.1, 0.14};
         TableManager.resizeColumns(testsFromDBTableView, dbTestsMultipliers);
 
@@ -102,7 +102,7 @@ public class ManageTestsController {
         });
 
         //filter tests by course name
-        FilteredList<Test> filteredData = new FilteredList<>(userDBTests, b -> true);
+        FilteredList<Test> filteredData = new FilteredList<>(dbTests, b -> true);
         TableManager.MakeFilterListForSearch(filteredData, searchField, Test::getCourseName);
 
         SortedList<Test> sortedData = new SortedList<>(filteredData);
@@ -110,6 +110,10 @@ public class ManageTestsController {
         testsFromDBTableView.setItems(sortedData);
     }
 
+    /**
+     * Displays the tests that were automatically checked and are
+     * ready for approval by the lecturer
+     */
     private void displayApprovalTestsTable() {
         MsgHandler getTestForApproval = new MsgHandler(TypeMsg.GetTestForApproval, fullName);
         ClientUI.chat.accept(getTestForApproval);
@@ -159,6 +163,10 @@ public class ManageTestsController {
         });
     }
 
+    /**
+     * goes to the test creation screen
+     * @param event the event that triggered the method (clicking the "create new test" button)
+     */
     public void createNewTest(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.createNewTestPath);
     }
@@ -221,6 +229,10 @@ public class ManageTestsController {
         ScreenManager.showStage(PathConstants.manageTestsPath, PathConstants.iconPath);
     }
 
+    /**
+     * sets the chosen test as "active" and generates a random test code for it
+     * @param actionEvent the event that triggered the method (clicking the "activate test" button)
+     */
     public void activateTest(ActionEvent actionEvent) {
 
         if (testRowData == null) {
@@ -241,7 +253,8 @@ public class ManageTestsController {
                     stateManagement.getTestQuestions().size(),
                     currentDate.toString(),
                     currentTime.toString(),
-                    stateManagement.getTestCode()
+                    generateTestCode()
+
             );
 
             //adds a row to the activetest table
@@ -258,6 +271,21 @@ public class ManageTestsController {
         }
     }
 
+    /**
+     * Generates a random 4-character string used as the test code
+     * The test code is used by the student to access a test
+     * @return the tet code string
+     */
+    public String generateTestCode(){
+        UUID uuid = UUID.randomUUID();
+        String randomString = uuid.toString().substring(0, 4);
+        return randomString;
+    }
+
+    /**
+     * loads the selected test's details
+     * @param test the selected test
+     */
     public void loadTestState(Test test) {
         //load test's course
         String subjectID = test.getId().substring(0, 2);

@@ -229,6 +229,14 @@ public class CemsServer extends AbstractServer {
                             "WHERE u.username = + '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.QuestionsBySubjectImported, list));
                     break;
+                case GetQuestionsByLecturer:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    ArrayList<Question> questionsByAuthorQuery = MysqlConnection.getQuestionsTable("SELECT obj.* " +
+                            "FROM question obj " +
+                            "WHERE obj.author = '" + obj + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.GetQuestionsByLecturerResponse, questionsByAuthorQuery));
+                    break;
 
                 case EditQuestion:
                     this.msg = (MsgHandler<Object>) msg;
@@ -359,7 +367,14 @@ public class CemsServer extends AbstractServer {
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetTestsBySubjectResponse, testsBySubjectList));
 
                     break;
-
+                case GetTestsByLecturer:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    ArrayList<Test> lecturerTestsList = MysqlConnection.getTestTable(
+                            "SELECT t.* FROM cems.test AS t " +
+                                    "WHERE t.author = '" + obj + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.GetTestsByLecturerResponse, lecturerTestsList));
+                    break;
                 case AddNewTest:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();

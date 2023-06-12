@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
 import java.io.Serializable;
 import java.util.Observable;
 
-public class Test extends Observable implements Serializable, UserMadeElement {
+public class Test extends Observable implements Serializable {
     private String id;
     private String testNumber;
     private String testCode;

@@ -47,27 +47,28 @@ public class ManageQuestionsController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(fullName);
-        MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestionsBySubject, Client.user.getUserName());
-        ClientUI.chat.accept(getTable);
+
 
         displayQuestions();
     }
 
     private void displayQuestions() {
+        MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestionsByLecturer, Client.user.getFullName());
+        ClientUI.chat.accept(getTable);
+
         // Creates the question table
         ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.GetQuestionsBySubject());
-        ObservableList<Question> userQuestions = TableManager.filterByAuthor(questions,fullName);
 
         ObservableList<String> columns = FXCollections.observableArrayList();
         columns.addAll("Question Number", "ID", "Subject", "Course Name", "Question Text", "Author");
         TableManager.createTable(manageQuestionsTableView, columns);
-        TableManager.importData(manageQuestionsTableView, userQuestions);
+        TableManager.importData(manageQuestionsTableView, questions);
         TableManager.addDoubleClickFunctionality(manageQuestionsTableView, PathConstants.updateQuestionPath, this::setFunctions);
         double[] multipliers = {0.15, 0.1, 0.1, 0.13, 0.35, 0.162};
         TableManager.resizeColumns(manageQuestionsTableView, multipliers);
 
         // Filter the results as you search
-        FilteredList<Question> filteredData = new FilteredList<>(userQuestions, b -> true);
+        FilteredList<Question> filteredData = new FilteredList<>(questions, b -> true);
         TableManager.MakeFilterListForSearch(filteredData, searchField, Question::getQuestionText);
 
         SortedList<Question> sortedData = new SortedList<>(filteredData);
