@@ -41,8 +41,6 @@ public class EnterCodePopUpController {
         String codet = CodeText.getText();
         if (codet.isEmpty()) {
             showError.showErrorPopup("Please enter code.");
-        } else if (codet.matches("\\d+")) {
-            showError.showErrorPopup("Code should contain numbers and letters.");
         } else if (codet.length() != 4)
         {
             showError.showErrorPopup("Code should contain 6 numbers.");
