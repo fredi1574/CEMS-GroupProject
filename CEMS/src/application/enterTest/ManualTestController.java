@@ -110,7 +110,7 @@ public class ManualTestController {
 
             showError.showInfoPopup("Test time increased by " + newDuration + " minutes");
         });
-        formatTime(totalSecondsRemaining = (totalSecondsRemaining + newDuration));  // Convert remaining minutes to seconds
+        formatTime(totalSecondsRemaining = (totalSecondsRemaining + (newDuration*60)));  // Convert remaining minutes to seconds
     }
 
     private String formatTime(int seconds) {
