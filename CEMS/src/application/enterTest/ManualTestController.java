@@ -57,7 +57,7 @@ public class ManualTestController {
     @FXML
     private Text fullNameText;
     private static int TotalStudents;
-
+    private static boolean testIsLockedManual;
 
     public void initialize() {
 
@@ -103,7 +103,8 @@ public class ManualTestController {
             showError.showInfoPopup("Test was locked by lecturer\nPlease press save to exit the test");
 
         });
-        formatTime(totalSecondsRemaining = 0);
+        formatTime(totalSecondsRemaining =- totalSecondsRemaining);
+        testIsLockedManual = true;
     }
     public void showNotificationAndChangeDuration(int newDuration){
         Platform.runLater(() -> {
@@ -290,11 +291,14 @@ public class ManualTestController {
     void onSaveButton(ActionEvent event) {
         if (forText) {
             if (FileSubmissionsText.getText().isEmpty()) {
-                if (showError.showConfirmationPopup("Are you sure want to save not submit yet")) {
+                if (showError.showConfirmationPopup("Are you sure want to submit an empty test?")) {
                     StateManagement.resetInstance();
-                    MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, test.getId());
-                    ClientUI.chat.accept(finshedStudentsIncrease);
-                    if (checkLockTest()) {
+                    if (!testIsLockedManual) {
+                        MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, test.getId());
+                        ClientUI.chat.accept(finshedStudentsIncrease);
+                    }
+
+                    if (checkLockTest() || (testIsLockedManual)) {
                         saveAfterTestInfoAndDeleteFromActive();
                     }
                     saveStudentsTest(0, 0, 0);
@@ -305,9 +309,11 @@ public class ManualTestController {
             } else {
                 if (showError.showConfirmationPopup("Are you sure want to save your test")) {
                     StateManagement.resetInstance();
-                    MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, test.getId());
-                    ClientUI.chat.accept(finshedStudentsIncrease);
-                    if (checkLockTest()) {
+                    if (!testIsLockedManual) {
+                        MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, test.getId());
+                        ClientUI.chat.accept(finshedStudentsIncrease);
+                    }
+                    if ((checkLockTest() || (testIsLockedManual))){
                         saveAfterTestInfoAndDeleteFromActive();
                     }
                     saveStudentsTest(100, 5, 5);
@@ -317,8 +323,8 @@ public class ManualTestController {
             }
 
         } else {
-            showError.showInfoPopup("Sorry for you dont have time to submit");
-            if (checkLockTest()) {
+            showError.showInfoPopup("Test is over");
+            if ((checkLockTest() || (testIsLockedManual))) {
                 saveAfterTestInfoAndDeleteFromActive();
             }
             saveStudentsTest(75, 3, 5);
