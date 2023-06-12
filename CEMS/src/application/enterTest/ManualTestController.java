@@ -103,29 +103,25 @@ public class ManualTestController {
 
         });
         testIsLockedManual = true;
-        formatTime(totalSecondsRemaining = 0);
+        totalSecondsRemaining = 0;
 
     }
+
     // Method to set the isActive flag and stop the checkLockThread
-    public void showNotificationAndChangeDuration(int newDuration){
+    public void showNotificationAndChangeDuration(int newDuration) {
         Platform.runLater(() -> {
 
             showError.showInfoPopup("Test time increased by " + newDuration + " minutes");
         });
-        formatTime(totalSecondsRemaining = (totalSecondsRemaining + (newDuration*60)));  // Convert remaining minutes to seconds
+        formatTime(totalSecondsRemaining = (totalSecondsRemaining + (newDuration * 60)));  // Convert remaining minutes to seconds
     }
 
     private String formatTime(int seconds) {
-        if (seconds == 0){
-            durationTime.setText("00:00:00");
-            return "0";
-        }
-        else{
         int hours = seconds / 3600;
         int minutes = (seconds % 3600) / 60;
         int secs = seconds % 60;
-        return String.format("%02d:%02d:%02d", hours, minutes,secs);
-        }
+        return String.format("%02d:%02d:%02d", hours, minutes, secs);
+
     }
 
 
@@ -139,6 +135,8 @@ public class ManualTestController {
                 @Override
                 public void run() {
                     isTimerRunning = true;
+                    if (totalSecondsRemaining == 0)
+                        stopTimer();
                     while (totalSecondsRemaining > 0) {
                         try {
                             Thread.sleep(1000); // Wait for 1 second
@@ -153,13 +151,14 @@ public class ManualTestController {
             timerThread.start();
         }
     }
+
     public void saveStudentsTest(int score, int correctAnswers, int totalQuestions) {
         int timeInSeconds = totalSecondsRemaining;
         int testDuration = (Integer.parseInt(test.getTestDuration()) * 60) - timeInSeconds;
         String decimalFormat = formatTime(testDuration);
         StudentTest StudentsCopy = new StudentTest(Client.user.getId(), test.getId(), test.getSubjectID(), test.getCourseName(), Integer.toString(score),
                 Client.user.getFullName(), test.getYear(), test.getSemester(), test.getSession(), CheatingSuspicion.NO, Integer.toString(correctAnswers),
-                Integer.toString(totalQuestions), "", ApprovalStatus.YES, test.getTestType(),decimalFormat);
+                Integer.toString(totalQuestions), "", ApprovalStatus.YES, test.getTestType(), decimalFormat);
         MsgHandler AddNewTest = new MsgHandler(TypeMsg.AddNewTestOfStudent, StudentsCopy);
         ClientUI.chat.accept(AddNewTest);
     }
@@ -169,7 +168,7 @@ public class ManualTestController {
         durationTime.setText(formatTime(totalSecondsRemaining));
         if (totalSecondsRemaining == 60) {
             if (isSubmit) {
-                totalSecondsRemaining = 60 ;
+                totalSecondsRemaining = 60;
                 addtionalTimeForSubmitTEXT.setText("*You have only one minutes left to submitedd test*");
                 durationTime.setText(formatTime(totalSecondsRemaining));
                 isSubmit = false;
@@ -197,15 +196,15 @@ public class ManualTestController {
     }
 
     void FinishedTime(Test test) {
-            int hour = Integer.parseInt(StartTimeText.getText().substring(0, 2));
-            int min = Integer.parseInt(StartTimeText.getText().substring(3, 5));
-            int durationTime = Integer.parseInt(test.getTestDuration());
+        int hour = Integer.parseInt(StartTimeText.getText().substring(0, 2));
+        int min = Integer.parseInt(StartTimeText.getText().substring(3, 5));
+        int durationTime = Integer.parseInt(test.getTestDuration());
 
-            int totalMinutes = min + durationTime;
-            hour += totalMinutes / 60;
-            min = totalMinutes % 60;
+        int totalMinutes = min + durationTime;
+        hour += totalMinutes / 60;
+        min = totalMinutes % 60;
 
-            EndTimeText.setText(String.format("%02d:%02d", hour, min));
+        EndTimeText.setText(String.format("%02d:%02d", hour, min));
 
     }
 
@@ -275,7 +274,18 @@ public class ManualTestController {
     }
 
     public void saveAfterTestInfoAndDeleteFromActive() {
-        int totalForcedFinished = CalculateTotalForcedFinished();
+        int totalForcedFinished;
+        if (testIsLockedManual) {
+            MsgHandler totalStudentAttended = new MsgHandler(TypeMsg.NumberOfAttendedCounter, test.getId());
+            ClientUI.chat.accept(totalStudentAttended);
+            int NumberOfAttendedCounter = (int) (ClientUI.chat.getNumberOfAttended());
+            MsgHandler numberOfFinished = new MsgHandler(TypeMsg.CountNumberOfFinished, test.getId());
+            ClientUI.chat.accept(numberOfFinished);
+            int NumberOfFinishedCounter = (int) (ClientUI.chat.getNumberOfFinished());
+            totalForcedFinished = NumberOfAttendedCounter - NumberOfFinishedCounter;
+        } else {
+            totalForcedFinished = CalculateTotalForcedFinished();
+        }
         String[] afterTestInfo = {test.getTestDuration(), String.valueOf(totalForcedFinished), test.getId()};
         MsgHandler addAfterTestInfo = new MsgHandler(TypeMsg.FinishAfterTestInfo, afterTestInfo);
         ClientUI.chat.accept(addAfterTestInfo);
@@ -321,7 +331,7 @@ public class ManualTestController {
                         MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, test.getId());
                         ClientUI.chat.accept(finshedStudentsIncrease);
                     }
-                    if ((checkLockTest() || (testIsLockedManual))){
+                    if ((checkLockTest() || (testIsLockedManual))) {
                         saveAfterTestInfoAndDeleteFromActive();
                     }
                     saveStudentsTest(100, 5, 5);
