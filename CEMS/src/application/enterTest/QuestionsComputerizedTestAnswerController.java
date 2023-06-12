@@ -74,7 +74,6 @@ public class QuestionsComputerizedTestAnswerController {
     static int totalQuestions;
     private static int selectedCount = 0;
     private static int TotalStudents;
-    private static boolean TestIsLocked;
     private static ObservableList<TestQuestion> testQuestions;
 
 
@@ -102,10 +101,11 @@ public class QuestionsComputerizedTestAnswerController {
     public void showNotificationAndChangeDuration(int newDuration){
         int remainingSeconds = remainingMinutes * 60;  // Convert remaining minutes to seconds
         seconds[0] += newDuration * 60;  // Add the new duration in seconds
-            Platform.runLater(() -> {
+        Stage currentStage = (Stage) header.getScene().getWindow();
+        Platform.runLater(() -> {
 
-                showError.showInfoPopup("Test time increased by" + newDuration + " minutes");
-            });
+            showError.showInfoPopup("Test time increased by" + newDuration + "minutes");
+        });
 
     }
 
@@ -208,12 +208,8 @@ public class QuestionsComputerizedTestAnswerController {
 
     @FXML
     public void handlePreviousButtonClick() throws SQLException {
-
         saveMarkingWithValidation();
-        if(TestIsLocked)
-            showError.showErrorPopup("Test is locked\nPlease press submit to exit the test");
-
-        else if (selectedCount <= 1) {
+        if (selectedCount <= 1) {
             currentQuestionIndex -= 1; // Go back two questions (currentQuestionIndex - 1)
             fetchQuestion();
         }
@@ -222,9 +218,7 @@ public class QuestionsComputerizedTestAnswerController {
     @FXML
     public void handleButtonClick() throws SQLException {
         saveMarkingWithValidation();
-        if(TestIsLocked)
-            showError.showErrorPopup("Test is locked\nPlease press submit to exit the test");
-        else if (selectedCount <= 1) {
+        if (selectedCount <= 1) {
             currentQuestionIndex++;
             fetchQuestion();
         }
@@ -259,22 +253,11 @@ public class QuestionsComputerizedTestAnswerController {
     }
     public void saveAfterTestInfoAndDeleteFromActive(){
         Test test = getTestData();
-        int totalForcedFinished;
-        if (TestIsLocked) {
-            MsgHandler totalStudentAttended = new MsgHandler(TypeMsg.NumberOfAttendedCounter, test.getId());
-            ClientUI.chat.accept(totalStudentAttended);
-            int NumberOfAttendedCounter = (int) (ClientUI.chat.getNumberOfAttended());
-            MsgHandler numberOfFinished = new MsgHandler(TypeMsg.CountNumberOfFinished, test.getId());
-            ClientUI.chat.accept(numberOfFinished);
-            int NumberOfFinishedCounter = (int) (ClientUI.chat.getNumberOfFinished());
-            totalForcedFinished = NumberOfAttendedCounter - NumberOfFinishedCounter;
-        } else {
-            totalForcedFinished = CalculateTotalForcedFinished();
-        }
+        int totalForcedFinished = CalculateTotalForcedFinished();
         String[] afterTestInfo = {test.getTestDuration(), String.valueOf(totalForcedFinished), test.getId()};
-        MsgHandler addAfterTestInfo = new MsgHandler(TypeMsg.FinishAfterTestInfo, afterTestInfo);
+        MsgHandler addAfterTestInfo = new MsgHandler(TypeMsg.FinishAfterTestInfo,afterTestInfo);
         ClientUI.chat.accept(addAfterTestInfo);
-        MsgHandler deleteFromActive = new MsgHandler(TypeMsg.UnActivateTest, test.getId());
+        MsgHandler deleteFromActive = new MsgHandler(TypeMsg.UnActivateTest,test.getId());
         ClientUI.chat.accept(deleteFromActive);
 
     }
@@ -285,11 +268,9 @@ public class QuestionsComputerizedTestAnswerController {
             saveMarkingWithValidation();
             if (selectedCount <= 1) {
                 saveFinalAnswers();
-                if(!(TestIsLocked)) {
-                    MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, EnterCodePopUpController.testID);
-                    ClientUI.chat.accept(finshedStudentsIncrease);
-                }
-                if ((checkLockTest()) || (TestIsLocked = true)){
+                MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, EnterCodePopUpController.testID);
+                ClientUI.chat.accept(finshedStudentsIncrease);
+                if (checkLockTest()){
                     saveAfterTestInfoAndDeleteFromActive();
                 }
                 ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
@@ -322,13 +303,12 @@ public class QuestionsComputerizedTestAnswerController {
 
     }
     public void lockTest() {
+        timer.stop();
         Platform.runLater(() -> {
 
             showError.showInfoPopup("Test was locked by lecturer\nPlease press submit to exit the test");
 
         });
-        timer.stop();
-        TestIsLocked = true;
     }
 
     public void saveStudentsTest(int score, int correctAnswers, int totalQuestions) {
