@@ -190,7 +190,8 @@ public class CemsServer extends AbstractServer {
                     String name = (String) client.getInfo(client.getName());
                     if (name.equals("Student")) {
                         try {
-                            client.sendToClient(new MsgHandler<>(TypeMsg.TestIsForcedLocked, null));
+                            client.sendToClient(new MsgHandler<>(TypeMsg.TestIsForcedLockedComputrized, null));
+                            client.sendToClient(new MsgHandler<>(TypeMsg.TestIsForcedLockedManual, null));
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }

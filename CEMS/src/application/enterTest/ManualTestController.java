@@ -39,6 +39,7 @@ public class ManualTestController {
     private boolean notUpload = true;
     private boolean isTimerRunning;
     private static int totalSecondsRemaining;
+    private static String durationChanged;
     File selectedFile;
     @FXML
     private TextField EndTimeText;

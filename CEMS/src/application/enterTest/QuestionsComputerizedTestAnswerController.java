@@ -103,7 +103,7 @@ public class QuestionsComputerizedTestAnswerController {
         seconds[0] += newDuration * 60;  // Add the new duration in seconds
             Platform.runLater(() -> {
 
-                showError.showInfoPopup("Test time increased by" + newDuration + "minutes");
+                showError.showInfoPopup("Test time increased by" + newDuration + " minutes");
             });
 
     }

@@ -370,7 +370,7 @@ public enum TypeMsg {
         }
 
     },
-    TestDurationChanged{
+    TestDurationChanged {
         public String toString() {
             return "test's duration was changed message sent";
         }
@@ -523,12 +523,12 @@ public enum TypeMsg {
         }
 
     },
-    DetectedCheating{
+    DetectedCheating {
         public String toString() {
             return "User Asked to update student and test have cheating";
         }
     },
-    DetectedCheatingResponse{
+    DetectedCheatingResponse {
         public String toString() {
             return "the test have cheating updating";
         }
@@ -595,7 +595,17 @@ public enum TypeMsg {
         public String toString() {
             return "Locking test succeed";
         }
-    }
+    },
+    TestIsForcedLockedComputrized {
+        public String toString() {
+            return "Locking test succeed";
+        }
+    },
+    TestIsForcedLockedManual {
+        public String toString() {
+            return "Locking test succeed";
+        }
+    },
 }
 
 
