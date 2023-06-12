@@ -63,7 +63,7 @@ public class ManualTestController {
     private Label timerLabel;
 
     @FXML
-    public Text durationChangeddText;
+    public static Text durationChangeddText;
 
     @FXML
     private Text fullNameText;
