@@ -63,7 +63,7 @@ public class ManualTestController {
     private Label timerLabel;
 
     @FXML
-    public static Text durationChangeddText;
+    public Text durationChangeddText;
 
     @FXML
     private Text fullNameText;
@@ -161,7 +161,9 @@ public class ManualTestController {
     }
 
     public void lockTest() {
-        durationChangeddText.setText("Test is locked\nPlease submit the test and exit");
+        Platform.runLater(() -> {
+            durationChangeddText.setText("Test is locked\nPlease submit the test and exit");
+        });
         testIsLockedManual = true;
         timer.stop();
     }
