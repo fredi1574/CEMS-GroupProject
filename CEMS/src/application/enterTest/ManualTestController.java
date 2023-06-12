@@ -96,10 +96,10 @@ public class ManualTestController {
             return;
         }
         isActive = true;
-
         Thread checkLockThread = new Thread(() -> {
             while (isActive) {
                 if (testIsLockedManual) {
+                    setInactive();
                     Platform.runLater(this::testIsLocked);
                 }
                 try {
@@ -128,7 +128,7 @@ public class ManualTestController {
 
     public void testIsLocked(){
         saveAfterTestInfoAndDeleteFromActive();
-        setInactive(); // Set the controller as inactive to stop the checkLockThread
+        // Set the controller as inactive to stop the checkLockThread
         Stage currentStage = (Stage) header.getScene().getWindow();
         currentStage.close();
         ScreenManager.showStage(PathConstants.mainMenuStudentPath, PathConstants.iconPath);
