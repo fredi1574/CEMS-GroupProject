@@ -1,5 +1,6 @@
 package client;
 
+import application.enterTest.ManualTestController;
 import application.enterTest.QuestionsComputerizedTestAnswerController;
 import application.mainMenuScreen.mainMenuStudentController;
 import application.manageTestsScreen.viewActiveTestController;
@@ -51,6 +52,7 @@ public class Client extends AbstractClient {
     public static QuestionsComputerizedTestAnswerController StudentInTest = new QuestionsComputerizedTestAnswerController();
     public static viewActiveTestController activeTestController = new viewActiveTestController();
     public static mainMenuStudentController menuStudentController = new mainMenuStudentController();
+    public static ManualTestController manualTest = new ManualTestController();
 
 
     //constructor
@@ -172,6 +174,7 @@ public class Client extends AbstractClient {
                 break;
             case TestDurationChanged:
                 StudentInTest.showNotificationAndChangeDuration((Integer) messageFromServer.getMsg());
+                manualTest.showNotificationAndChangeDuration((Integer) messageFromServer.getMsg());
                 break;
             case changeTestDurationAnswer:
                 break;
@@ -228,6 +231,7 @@ public class Client extends AbstractClient {
                 break;
             case TestIsForcedLocked:
                 StudentInTest.lockTest();
+                manualTest.lockTest();
                 break;
 
 

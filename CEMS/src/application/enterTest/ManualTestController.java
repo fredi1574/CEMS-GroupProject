@@ -5,6 +5,7 @@ import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
 import entity.*;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,19 +26,19 @@ import java.util.List;
 
 public class ManualTestController {
     StateManagement stateManagement = StateManagement.getInstance();
-    Test test;
+    private static Test test;
 
     ActiveTest testActive;
     @FXML
     private AnchorPane header;
-    private Thread timerThread;
+    private static Thread timerThread;
     @FXML
     private Text addtionalTimeForSubmitTEXT;
     private boolean isSubmit = true;
     private boolean forText = true;
     private boolean notUpload = true;
     private boolean isTimerRunning;
-    private int totalSecondsRemaining;
+    private static int totalSecondsRemaining;
     File selectedFile;
     @FXML
     private TextField EndTimeText;
@@ -94,6 +95,23 @@ public class ManualTestController {
             return;
         }
 
+
+    }
+    public void lockTest() {
+        stopTimer();
+        FinishedTime(test);
+        Platform.runLater(() -> {
+
+            showError.showInfoPopup("Test was locked by lecturer\nPlease press submit to exit the test");
+
+        });
+    }
+    public void showNotificationAndChangeDuration(int newDuration){
+        totalSecondsRemaining = (totalSecondsRemaining +newDuration) * 60;  // Convert remaining minutes to seconds
+        Platform.runLater(() -> {
+
+            showError.showInfoPopup("Test time increased by" + newDuration + "minutes");
+        });
 
     }
 
