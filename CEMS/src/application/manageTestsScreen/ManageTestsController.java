@@ -84,10 +84,10 @@ public class ManageTestsController {
         ObservableList<Test> dbTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
 
         ObservableList<String> columns = FXCollections.observableArrayList();
-        columns.addAll("Test Number", "ID", "Test Code", "Subject", "Course Name", "Year", "Semester", "Session", "Author");
+        columns.addAll("Test Number", "ID", "Subject", "Course Name", "Year", "Semester", "Session", "Author");
         TableManager.createTable(testsFromDBTableView, columns);
         TableManager.importData(testsFromDBTableView, dbTests);
-        double[] dbTestsMultipliers = {0.1, 0.08, 0.1, 0.1, 0.175, 0.1, 0.1, 0.1, 0.14};
+        double[] dbTestsMultipliers = {0.1, 0.08, 0.1, 0.225, 0.1, 0.1, 0.1, 0.19};
         TableManager.resizeColumns(testsFromDBTableView, dbTestsMultipliers);
 
         ObservableList<String> columnsforAppropval = FXCollections.observableArrayList();

@@ -1,4 +1,6 @@
 package application.createNewTestScreen;
+
+import javafx.scene.control.TextFormatter;
 import javafx.scene.text.Text;
 import client.Client;
 import client.ClientUI;
@@ -30,7 +32,7 @@ public class CreateTestController {
     @FXML
     private TextField sessionTextField;
     @FXML
-    private TextField  yearField;
+    private TextField yearField;
     @FXML
     private AnchorPane header;
     @FXML
@@ -48,15 +50,22 @@ public class CreateTestController {
     private TableView<Course> courseTableView;
 
 
-
     public void initialize() {
         ScreenManager.dragAndDrop(header);
 
         nameAuthor.setText(Client.user.getFullName());
 
+
+        formatField(yearField, true, 4);
+        formatField(testDurationField, true, 4);
+        formatField(semesterTextField, false, 1);
+        formatField(sessionTextField, false, 1);
+
         displayCourses();
         retrieveSavedData();
     }
+
+
 
     private void displayCourses() {
         MsgHandler getTableCourse = new MsgHandler(TypeMsg.importCourses, Client.user.getUserName());
@@ -75,11 +84,11 @@ public class CreateTestController {
         TableManager.resizeColumns(courseTableView, multipliers);
 
         courseTableView.setOnMouseClicked((e) -> {
-                rowData = (Course) courseTableView.getSelectionModel().getSelectedItem();
-                if (rowData != null) {
-                        setTestData();
-                        stateManagement.clearTestQuestions();
-                }
+            rowData = (Course) courseTableView.getSelectionModel().getSelectedItem();
+            if (rowData != null) {
+                setTestData();
+                stateManagement.clearTestQuestions();
+            }
         });
     }
 
@@ -95,7 +104,7 @@ public class CreateTestController {
         List<Object> testTableList = ClientUI.chat.getTests();
 
         String newTestNumber = correctTestNumber(findFirstFreeIndex(testTableList));
-        String testID = rowData.getSubjectID() +rowData.getCourseID() +  newTestNumber;
+        String testID = rowData.getSubjectID() + rowData.getCourseID() + newTestNumber;
 
         testIDField.setText(testID);
         testNumberField.setText(newTestNumber);
@@ -146,6 +155,7 @@ public class CreateTestController {
         }
         throw new IllegalArgumentException("Test number is out of bounds: " + newTestIndex);
     }
+
     @FXML
     public void SaveExam() {
         if (testDurationField.getText().isEmpty()) {
@@ -159,15 +169,14 @@ public class CreateTestController {
     /**
      * retrieves the saved data from stateManagement and updates the fields
      * on the screen
-     *
      */
-    public void retrieveSavedData(){
+    public void retrieveSavedData() {
         stateManagement = StateManagement.getInstance();
-        if(!stateManagement.testID.equals("-1")) {
+        if (!stateManagement.testID.equals("-1")) {
             ObservableList<Course> list = courseTableView.getItems();
             int indexInTable = 0;
-            for(int i=0; i<list.size(); i++){
-                if(list.get(i).getCourseID().equals(stateManagement.getCourse().getCourseID()))
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getCourseID().equals(stateManagement.getCourse().getCourseID()))
                     indexInTable = i;
 
             }
@@ -184,6 +193,29 @@ public class CreateTestController {
         }
     }
 
+    /**
+     * limits the given text field's input
+     * @param fieldName the text field whose inputs we wish to limit
+     * @param numbersOnly text field will only accept numbers if value is true
+     * @param maxInputLength the input length limit
+     */
+    private void formatField(TextField fieldName, boolean numbersOnly, int maxInputLength) {
+        TextFormatter<String> textFormatter = new TextFormatter<>(input -> {
+            if (numbersOnly) {
+                if (input.getControlNewText().matches("\\d*") &&
+                        input.getControlNewText().length() <= maxInputLength) {
+                    return input;
+                }
+            } else {
+                if (input.getControlNewText().length() <= maxInputLength) {
+                    return input;
+                }
+            }
+            return null;
+        });
+
+        fieldName.setTextFormatter(textFormatter);
+    }
 
     public void BackToMenu(ActionEvent event) {
         stateManagement.resetInstance();
@@ -196,24 +228,24 @@ public class CreateTestController {
         try {
             if (!sessionTextField.getText().isEmpty()) {
                 stateManagement.setSession(sessionTextField.getText());
-            }else
+            } else
                 stateManagement.setSession("");
 
             if (!yearField.getText().isEmpty()) {
                 stateManagement.setYear(yearField.getText());
-            }else
+            } else
                 stateManagement.setYear("");
 
             if (!semesterTextField.getText().isEmpty()) {
                 stateManagement.setSemester(semesterTextField.getText());
-            }else
+            } else
                 stateManagement.setSemester("");
 
             if (!testDurationField.getText().isEmpty()) {
                 stateManagement.setTestDuration(testDurationField.getText());
-            }else
+            } else
                 stateManagement.setTestDuration("");
-        }catch(Exception exception){
+        } catch (Exception exception) {
 
         }
         stateManagement.setDataOfTest(rowData, testNumberField.getText(), testIDField.getText());
