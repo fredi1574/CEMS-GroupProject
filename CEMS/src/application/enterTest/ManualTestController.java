@@ -35,9 +35,9 @@ public class ManualTestController {
     @FXML
     private Text addtionalTimeForSubmitTEXT;
     private boolean isSubmit = true;
-    private boolean forText = true;
-    private boolean notUpload = true;
-    private boolean isTimerRunning;
+    private static boolean forText = true;
+    private static boolean notUpload = true;
+    private static boolean  isTimerRunning;
     private static int totalSecondsRemaining;
     private static String durationChanged;
     File selectedFile;
