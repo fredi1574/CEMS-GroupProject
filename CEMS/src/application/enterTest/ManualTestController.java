@@ -99,7 +99,6 @@ public class ManualTestController {
     }
     public void lockTest() {
         stopTimer();
-        FinishedTime(test);
         Platform.runLater(() -> {
 
             showError.showInfoPopup("Test was locked by lecturer\nPlease press submit to exit the test");
@@ -107,12 +106,11 @@ public class ManualTestController {
         });
     }
     public void showNotificationAndChangeDuration(int newDuration){
-        totalSecondsRemaining = (totalSecondsRemaining +newDuration) * 60;  // Convert remaining minutes to seconds
         Platform.runLater(() -> {
 
             showError.showInfoPopup("Test time increased by" + newDuration + "minutes");
         });
-
+        totalSecondsRemaining = (totalSecondsRemaining + newDuration) * 60;  // Convert remaining minutes to seconds
     }
 
     private String formatTime(int seconds) {
