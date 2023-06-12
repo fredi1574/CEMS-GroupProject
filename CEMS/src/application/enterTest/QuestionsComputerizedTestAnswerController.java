@@ -303,12 +303,13 @@ public class QuestionsComputerizedTestAnswerController {
 
     }
     public void lockTest() {
-        timer.stop();
+
         Platform.runLater(() -> {
 
             showError.showInfoPopup("Test was locked by lecturer\nPlease press submit to exit the test");
 
         });
+        seconds[0] = 0;
     }
 
     public void saveStudentsTest(int score, int correctAnswers, int totalQuestions) {
