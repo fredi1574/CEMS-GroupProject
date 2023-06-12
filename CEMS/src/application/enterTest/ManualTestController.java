@@ -94,6 +94,20 @@ public class ManualTestController {
             showError.showErrorPopup("No Test Now");
             return;
         }
+        Thread checkLockThread = new Thread(() -> {
+            while (true) {
+                if (testIsLockedManual) {
+                    Platform.runLater(this::testIsLocked);
+                }
+                try {
+                    Thread.sleep(1000); // Check every 1 second
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        checkLockThread.setDaemon(true);
+        checkLockThread.start();
 
 
     }
@@ -103,8 +117,13 @@ public class ManualTestController {
             showError.showInfoPopup("Test was locked by lecturer\nPlease press save to exit the test");
 
         });
-        formatTime(totalSecondsRemaining =- totalSecondsRemaining);
         testIsLockedManual = true;
+    }
+
+    public void testIsLocked(){
+        saveAfterTestInfoAndDeleteFromActive();
+        StateManagement.resetInstance();
+        ScreenManager.showStage(PathConstants.mainMenuStudentPath,PathConstants.iconPath);
     }
     public void showNotificationAndChangeDuration(int newDuration){
         Platform.runLater(() -> {
