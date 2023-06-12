@@ -37,6 +37,7 @@ public class ManualTestController {
     private boolean isSubmit = true;
     private boolean forText = true;
     private boolean notUpload = true;
+    private boolean isActive;
     private boolean isTimerRunning;
     private static int totalSecondsRemaining;
     File selectedFile;
@@ -94,8 +95,10 @@ public class ManualTestController {
             showError.showErrorPopup("No Test Now");
             return;
         }
+        isActive = true;
+
         Thread checkLockThread = new Thread(() -> {
-            while (true) {
+            while (isActive) {
                 if (testIsLockedManual) {
                     Platform.runLater(this::testIsLocked);
                 }
@@ -108,6 +111,7 @@ public class ManualTestController {
         });
         checkLockThread.setDaemon(true);
         checkLockThread.start();
+    }
 
 
     }
@@ -119,11 +123,18 @@ public class ManualTestController {
         });
         testIsLockedManual = true;
     }
+    // Method to set the isActive flag and stop the checkLockThread
+    public void setInactive() {
+        isActive = false;
+    }
 
     public void testIsLocked(){
         saveAfterTestInfoAndDeleteFromActive();
-        StateManagement.resetInstance();
-        ScreenManager.showStage(PathConstants.mainMenuStudentPath,PathConstants.iconPath);
+        setInactive(); // Set the controller as inactive to stop the checkLockThread
+        Stage currentStage = (Stage) header.getScene().getWindow();
+        currentStage.close();
+        ScreenManager.showStage(PathConstants.mainMenuStudentPath, PathConstants.iconPath);
+
     }
     public void showNotificationAndChangeDuration(int newDuration){
         Platform.runLater(() -> {
