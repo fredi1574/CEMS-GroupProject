@@ -108,9 +108,9 @@ public class ManualTestController {
     public void showNotificationAndChangeDuration(int newDuration){
         Platform.runLater(() -> {
 
-            showError.showInfoPopup("Test time increased by" + newDuration + "minutes");
+            showError.showInfoPopup("Test time increased by " + newDuration + " minutes");
         });
-        formatTime(totalSecondsRemaining = (totalSecondsRemaining + newDuration) * 60);  // Convert remaining minutes to seconds
+        formatTime(totalSecondsRemaining = (totalSecondsRemaining + newDuration));  // Convert remaining minutes to seconds
     }
 
     private String formatTime(int seconds) {
@@ -159,10 +159,11 @@ public class ManualTestController {
     private void decreaseTimeByOneSecond() {
         totalSecondsRemaining--;
         durationTime.setText(formatTime(totalSecondsRemaining));
-        if (totalSecondsRemaining == 59) {
+        if (totalSecondsRemaining == 60) {
             if (isSubmit) {
-                totalSecondsRemaining--;
+                totalSecondsRemaining = 60 ;
                 addtionalTimeForSubmitTEXT.setText("*You have only one minutes left to submitedd test*");
+                durationTime.setText(formatTime(totalSecondsRemaining));
                 isSubmit = false;
             } else {
                 stopTimer();
