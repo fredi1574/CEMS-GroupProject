@@ -63,6 +63,9 @@ public class ManualTestController {
     private Label timerLabel;
 
     @FXML
+    public Text durationChangeddText;
+
+    @FXML
     private Text fullNameText;
     private static int TotalStudents;
     private static boolean testIsLockedManual;
@@ -158,16 +161,10 @@ public class ManualTestController {
     }
 
     public void lockTest() {
-        Platform.runLater(() -> {
-
-            showError.showInfoPopup("Test was locked by lecturer\nPlease press save to exit the test");
-
-        });
+        durationChangeddText.setText("Test is locked\nPlease submit the test and exit");
         testIsLockedManual = true;
         timer.stop();
-
     }
-
     // Method to set the isActive flag and stop the checkLockThread
     public void showNotificationAndChangeDuration(int newDuration) {
         int remainingSeconds = remainingMinutes * 60;  // Convert remaining minutes to seconds

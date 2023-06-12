@@ -259,11 +259,22 @@ public class QuestionsComputerizedTestAnswerController {
     }
     public void saveAfterTestInfoAndDeleteFromActive(){
         Test test = getTestData();
-        int totalForcedFinished = CalculateTotalForcedFinished();
+        int totalForcedFinished;
+        if (TestIsLocked) {
+            MsgHandler totalStudentAttended = new MsgHandler(TypeMsg.NumberOfAttendedCounter, test.getId());
+            ClientUI.chat.accept(totalStudentAttended);
+            int NumberOfAttendedCounter = (int) (ClientUI.chat.getNumberOfAttended());
+            MsgHandler numberOfFinished = new MsgHandler(TypeMsg.CountNumberOfFinished, test.getId());
+            ClientUI.chat.accept(numberOfFinished);
+            int NumberOfFinishedCounter = (int) (ClientUI.chat.getNumberOfFinished());
+            totalForcedFinished = NumberOfAttendedCounter - NumberOfFinishedCounter;
+        } else {
+            totalForcedFinished = CalculateTotalForcedFinished();
+        }
         String[] afterTestInfo = {test.getTestDuration(), String.valueOf(totalForcedFinished), test.getId()};
-        MsgHandler addAfterTestInfo = new MsgHandler(TypeMsg.FinishAfterTestInfo,afterTestInfo);
+        MsgHandler addAfterTestInfo = new MsgHandler(TypeMsg.FinishAfterTestInfo, afterTestInfo);
         ClientUI.chat.accept(addAfterTestInfo);
-        MsgHandler deleteFromActive = new MsgHandler(TypeMsg.UnActivateTest,test.getId());
+        MsgHandler deleteFromActive = new MsgHandler(TypeMsg.UnActivateTest, test.getId());
         ClientUI.chat.accept(deleteFromActive);
 
     }
