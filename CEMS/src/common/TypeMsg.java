@@ -511,6 +511,17 @@ public enum TypeMsg {
             return "Imported number of students who submitted the test";
         }
 
+    },
+    DetectedCheating{
+        public String toString() {
+            return "User Asked to update student and test have cheating";
+        }
+    },
+    DetectedCheatingResponse{
+        public String toString() {
+            return "the test have cheating updating";
+        }
+
     }, GetActiveTestsByLecturer {
         public String toString() {
             return "User asked for the active tests table filtered by user's name";

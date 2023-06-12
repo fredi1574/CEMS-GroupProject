@@ -1,5 +1,7 @@
 package application.enterTest;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import client.ClientUI;
@@ -16,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -87,6 +90,7 @@ public class QuestionsComputerizedTestAnswerController {
         startTimer();
         initializeMapWithZeros();
 
+
     }
     private static void initializeMapWithZeros() {
         for (int i = 0 ; i < totalQuestions ;i++){
@@ -137,6 +141,7 @@ public class QuestionsComputerizedTestAnswerController {
         Test test = getTestData();
         courseNameTestIdText.setText("Course: " + test.getCourseName() + " | Test ID: " + test.getId());
     }
+    // Database connection details
 
 
     private void fetchQuestion() throws SQLException {

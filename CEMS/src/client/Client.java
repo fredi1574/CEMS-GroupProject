@@ -211,6 +211,8 @@ public class Client extends AbstractClient {
                 break;
             case DeleteRequestCompleted:
                 break;
+            case DetectedCheatingResponse:
+                break;
             case IsLoggedValueChanged:
                 break;
             case PopupTestApprove:

@@ -10,6 +10,8 @@ import util.*;
 
 import javafx.scene.text.Text;
 
+import java.sql.*;
+
 public class MainMenuController {
     @FXML
     private Text usernameText;
@@ -26,6 +28,7 @@ public class MainMenuController {
      */
     public void initialize() {
         usernameText.setText(Client.user.getFullName());
+        detectCopying();
         ScreenManager.dragAndDrop(header);
         backPane.setVisible(false);
         if (Client.user.getRole().equals("Head of Department/Lecturer")) {
@@ -76,7 +79,48 @@ public class MainMenuController {
         ScreenManager.goToNewScreen(event, PathConstants.addQuestionPath);
     }
 
+    public void detectCopying() {
+        String url = "jdbc:mysql://localhost:3306/cems?serverTimezone=UTC&useSSL=false";
+        String username = "root";
+        String password = "Aa123456";
+        String testID = "010203";
 
+        String updateQuery = "UPDATE studentstest " +
+                "SET suspicionOfCheating = 'YES' " +
+                "WHERE EXISTS (" +
+                "    SELECT 1 " +
+                "    FROM answersofstudent a1 " +
+                "    JOIN answersofstudent a2 ON a1.testID = a2.testID " +
+                "        AND a1.questionID = a2.questionID " +
+                "        AND a1.studentsAnswer = a2.studentsAnswer " +
+                "        AND a1.studentID <> a2.studentID " +
+                "    WHERE a1.testID = ? " +
+                "      AND a1.studentID = studentstest.studentID" +
+                ") " +
+                "AND score < 100";
+
+        try {
+
+            // Establish the JDBC connection
+            Connection connection = DriverManager.getConnection(url, username, password);
+            // Create a PreparedStatement object
+            PreparedStatement statement = connection.prepareStatement(updateQuery);
+            // Set the test ID parameters
+            statement.setString(1, testID);
+            // Execute the update statement
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Suspicion of cheating updated for " + rowsAffected + " students.");
+            } else {
+                System.out.println("No students found with identical answers on the test.");
+            }
+            // Close the resources
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * Closes the application.
      * @param event The event triggered by the close button click.

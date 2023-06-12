@@ -127,6 +127,9 @@ public class ManageTestsController {
         TableManager.importData(testApprovalTableView, filteredTests);
         testApprovalTableView.setOnMouseClicked((e) -> {
             testForApprovalRowData = testApprovalTableView.getSelectionModel().getSelectedItem();
+            MsgHandler cheatingTest = new MsgHandler(TypeMsg.DetectedCheating,testForApprovalRowData.getTestID());
+            ClientUI.chat.accept(cheatingTest);
+
         });
         stateManagement.setTestForApproval(filteredTests);
     }
