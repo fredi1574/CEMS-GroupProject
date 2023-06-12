@@ -249,7 +249,7 @@ public class ManageTestsController {
             String[] infoArray = {testRowData.getId(), testToActivate.getTestDate(), testRowData.getTestDuration()};
             MsgHandler addNewAfterTestInfo = new MsgHandler(TypeMsg.AddNewAfterTestInfo, infoArray);
             ClientUI.chat.accept(addNewAfterTestInfo);
-
+            StateManagement.resetInstance();
             reloadPage();
 
         }
