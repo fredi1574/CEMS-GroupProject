@@ -74,6 +74,7 @@ public class QuestionsComputerizedTestAnswerController {
     static int totalQuestions;
     private static int selectedCount = 0;
     private static int TotalStudents;
+    private static boolean TestIsLocked;
     private static ObservableList<TestQuestion> testQuestions;
 
 
@@ -267,9 +268,11 @@ public class QuestionsComputerizedTestAnswerController {
             saveMarkingWithValidation();
             if (selectedCount <= 1) {
                 saveFinalAnswers();
-                MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, EnterCodePopUpController.testID);
-                ClientUI.chat.accept(finshedStudentsIncrease);
-                if (checkLockTest()){
+                if(!(TestIsLocked = true)) {
+                    MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, EnterCodePopUpController.testID);
+                    ClientUI.chat.accept(finshedStudentsIncrease);
+                }
+                if ((checkLockTest()) || (TestIsLocked = true)){
                     saveAfterTestInfoAndDeleteFromActive();
                 }
                 ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
@@ -302,12 +305,13 @@ public class QuestionsComputerizedTestAnswerController {
 
     }
     public void lockTest() {
-        timer.stop();
         Platform.runLater(() -> {
 
             showError.showInfoPopup("Test was locked by lecturer\nPlease press submit to exit the test");
 
         });
+        timer.stop();
+        TestIsLocked = true;
     }
 
     public void saveStudentsTest(int score, int correctAnswers, int totalQuestions) {
