@@ -161,11 +161,12 @@ public class ManualTestController {
     }
 
     public void lockTest() {
+        timer.stop();
         Platform.runLater(() -> {
             showError.showInfoPopup("Test is locked\nPlease submit the test and exit");
         });
         testIsLockedManual = true;
-        timer.stop();
+
     }
     // Method to set the isActive flag and stop the checkLockThread
     public void showNotificationAndChangeDuration(int newDuration) {

@@ -190,7 +190,7 @@ public class CemsServer extends AbstractServer {
                 for (int i = 0; i < clientThreadList.length; i++) {
                     ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
                     String name = (String) client.getInfo(client.getName());
-                    //if (name.equals("Student")) {
+                    if (name.equals("Student")) {
                         if (obj instanceof TestTypeEnum) {
                             try {
                                 if (obj.equals(TestTypeEnum.C)) {
@@ -203,7 +203,7 @@ public class CemsServer extends AbstractServer {
                             }
                         }
                     }
-                //}
+                }
 
 
         }
