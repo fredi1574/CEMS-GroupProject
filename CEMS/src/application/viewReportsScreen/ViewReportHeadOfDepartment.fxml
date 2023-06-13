@@ -41,7 +41,6 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <Button layoutX="17.0" layoutY="412.0" mnemonicParsing="false" onAction="#goBackToPreviousScreen" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons" />
       <Label layoutX="36.0" layoutY="458.0" text="Back" />
       <Button layoutX="716.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
       <Button layoutX="683.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />

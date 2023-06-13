@@ -56,7 +56,7 @@ public class viewTestsForHeadOfDepartmentController {
 
         //filter tests by course name
         FilteredList<Test> filteredData = new FilteredList<>(tests, b -> true);
-        TableManager.MakeFilterListForSearch(filteredData, searchField, Test::getCourseName);
+        TableManager.MakeFilterListForSearch(filteredData, searchField, Test::getId);
 
         SortedList<Test> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(manageTestsTableView.comparatorProperty());

@@ -34,7 +34,7 @@
     </Button>
     <TableView fx:id="manageQuestionsTableView" layoutX="27.0" layoutY="163.0" prefHeight="250.0" prefWidth="747.0" />
     <AnchorPane fx:id="header" prefHeight="100.0" prefWidth="806.0" styleClass="pageHeader">
-        <Label layoutX="213.0" layoutY="4.0" prefHeight="81.0" prefWidth="426.0" styleClass="pageHeader" text=" Questions Managment " textFill="#fafafa" AnchorPane.leftAnchor="213.0" AnchorPane.rightAnchor="167.0">
+        <Label layoutX="185.0" layoutY="9.0" prefHeight="82.0" prefWidth="436.0" style="-fx-font-weight: Bold;" styleClass="pageHeader" text=" Questions Managment " textFill="#fafafa" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="185.0">
             <font>
                 <Font name="Trebuchet MS" size="40.0" />
             </font>
@@ -52,7 +52,7 @@
         <ImageView layoutX="714.0" layoutY="45.0">
             <Image url="@../../images/avatar.png" />
         </ImageView>
-        <ImageView fitHeight="73.0" fitWidth="196.0" layoutX="14.0" layoutY="7.0" preserveRatio="true">
+        <ImageView fitHeight="62.0" fitWidth="161.0" layoutX="14.0" layoutY="18.0" preserveRatio="true">
             <Image url="@../../images/Logo_Transparent_Bright.png" />
         </ImageView>
     </AnchorPane>

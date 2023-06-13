@@ -1,6 +1,5 @@
 package application.createNewTestScreen;
 
-import javafx.scene.control.TextFormatter;
 import javafx.scene.text.Text;
 import client.Client;
 import client.ClientUI;
@@ -17,11 +16,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import util.*;
+import static util.TextFormatter.formatField;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 
 public class CreateTestController {
     Course rowData = null;
@@ -54,7 +55,6 @@ public class CreateTestController {
         ScreenManager.dragAndDrop(header);
 
         nameAuthor.setText(Client.user.getFullName());
-
 
         formatField(yearField, true, 4);
         formatField(testDurationField, true, 4);
@@ -193,29 +193,6 @@ public class CreateTestController {
         }
     }
 
-    /**
-     * limits the given text field's input
-     * @param fieldName the text field whose inputs we wish to limit
-     * @param numbersOnly text field will only accept numbers if value is true
-     * @param maxInputLength the input length limit
-     */
-    private void formatField(TextField fieldName, boolean numbersOnly, int maxInputLength) {
-        TextFormatter<String> textFormatter = new TextFormatter<>(input -> {
-            if (numbersOnly) {
-                if (input.getControlNewText().matches("\\d*") &&
-                        input.getControlNewText().length() <= maxInputLength) {
-                    return input;
-                }
-            } else {
-                if (input.getControlNewText().length() <= maxInputLength) {
-                    return input;
-                }
-            }
-            return null;
-        });
-
-        fieldName.setTextFormatter(textFormatter);
-    }
 
     public void BackToMenu(ActionEvent event) {
         stateManagement.resetInstance();

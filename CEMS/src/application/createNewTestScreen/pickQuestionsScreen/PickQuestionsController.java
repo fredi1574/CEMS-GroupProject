@@ -1,6 +1,5 @@
 package application.createNewTestScreen.pickQuestionsScreen;
 import client.Client;
-import entity.Test;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.text.Text;
@@ -15,15 +14,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import util.*;
+import static util.TextFormatter.formatField;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,13 +57,13 @@ public class PickQuestionsController {
         ScreenManager.dragAndDrop(header);
         nameAuthor.setText(Client.user.getFullName());
 
+        formatField(pointsField,true,3);
         stateManagement = StateManagement.getInstance();
 
         displayQuestionsDBTable();
         displaySelectedQuestionsTable();
 
         totalRemainingPointsField.setText(String.valueOf(stateManagement.getTotalRemainingPoints()));
-
     }
 
     /**
@@ -231,12 +228,6 @@ public class PickQuestionsController {
             showError.showErrorPopup("Select Questions To Remove");
         }
         rowDataForQuestionsSelected =null;
-    }
-
-    public void setFunctions(String relativePath) {
-        ScreenElements<Stage, FXMLLoader> screenElements = ScreenManager.popUpScreen(relativePath);
-//        FXMLLoader loader = screenElements.getFXMLLoader();
-
     }
 
     /**

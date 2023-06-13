@@ -17,6 +17,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import util.*;
 
+import static util.TextFormatter.formatField;
+
 public class viewTestAwaitingApprovalController {
 
     @FXML
@@ -57,6 +59,8 @@ public class viewTestAwaitingApprovalController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getFullName());
+
+        formatField(gradeField,true,3);
 
         stateManagement = StateManagement.getInstance();
 

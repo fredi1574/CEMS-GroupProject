@@ -64,7 +64,6 @@ public class ManageTestsController {
 
         stateManagement = StateManagement.getInstance();
 
-
         displayDbTestsTable();
         displayApprovalTestsTable();
         displayActiveTestsTable();
@@ -82,19 +81,13 @@ public class ManageTestsController {
         ClientUI.chat.accept(getDbTestTable);
 
         ObservableList<Test> dbTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
-
         ObservableList<String> columns = FXCollections.observableArrayList();
+
         columns.addAll("Test Number", "ID", "Subject", "Course Name", "Year", "Semester", "Session", "Author");
         TableManager.createTable(testsFromDBTableView, columns);
         TableManager.importData(testsFromDBTableView, dbTests);
         double[] dbTestsMultipliers = {0.1, 0.08, 0.1, 0.225, 0.1, 0.1, 0.1, 0.19};
         TableManager.resizeColumns(testsFromDBTableView, dbTestsMultipliers);
-
-        ObservableList<String> columnsforAppropval = FXCollections.observableArrayList();
-        columnsforAppropval.addAll("Student ID", "Test ID", "Course", "Semester", "Session", "Grade", "Approved");
-        TableManager.createTable(testApprovalTableView, columnsforAppropval);
-        double[] approvalTestsMultipliers = {0.15, 0.14, 0.15, 0.15, 0.175, 0.12, 0.11};
-        TableManager.resizeColumns(testApprovalTableView, approvalTestsMultipliers);
 
         //makes the elements in the database questions table clickable
         testsFromDBTableView.setOnMouseClicked((e) -> {
@@ -107,6 +100,7 @@ public class ManageTestsController {
 
         SortedList<Test> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(testsFromDBTableView.comparatorProperty());
+
         testsFromDBTableView.setItems(sortedData);
     }
 
@@ -128,12 +122,15 @@ public class ManageTestsController {
             }
         }
 
+        ObservableList<String> columnsForAppropval = FXCollections.observableArrayList();
+        columnsForAppropval.addAll("Student ID", "Test ID", "Course", "Semester", "Session", "Grade", "Approved");
+        TableManager.createTable(testApprovalTableView, columnsForAppropval);
         TableManager.importData(testApprovalTableView, filteredTests);
+        double[] approvalTestsMultipliers = {0.15, 0.14, 0.15, 0.15, 0.175, 0.12, 0.11};
+        TableManager.resizeColumns(testApprovalTableView, approvalTestsMultipliers);
+
         testApprovalTableView.setOnMouseClicked((e) -> {
             testForApprovalRowData = testApprovalTableView.getSelectionModel().getSelectedItem();
-            MsgHandler cheatingTest = new MsgHandler(TypeMsg.DetectedCheating,testForApprovalRowData.getTestID());
-            ClientUI.chat.accept(cheatingTest);
-
         });
         stateManagement.setTestForApproval(filteredTests);
     }
@@ -254,7 +251,6 @@ public class ManageTestsController {
                     currentDate.toString(),
                     currentTime.toString(),
                     generateTestCode()
-
             );
 
             //adds a row to the activetest table
