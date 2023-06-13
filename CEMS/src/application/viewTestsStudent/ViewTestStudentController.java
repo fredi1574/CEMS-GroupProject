@@ -26,6 +26,7 @@ import java.util.List;
 public class ViewTestStudentController {
 
     public ObservableList<StudentTest> tests;
+    public ObservableList<StudentTest> approvedTests = FXCollections.observableArrayList();
 
     @FXML
     private AnchorPane header;

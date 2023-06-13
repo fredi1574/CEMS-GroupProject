@@ -137,8 +137,16 @@ public class ViewGraphController {
         }
 
         averageScore = totalScore / numberOfStudentTests;
+
         averageScore = Double.parseDouble(new DecimalFormat("##.##").format(averageScore));
         Collections.sort(scoreValues);
+        ArrayList<String> testAverage = new ArrayList<>();
+
+        testAverage.add(String.valueOf(averageScore));
+        testAverage.add(testID);
+
+        MsgHandler setAverage = new MsgHandler(TypeMsg.SetTestAverage, testAverage);
+        ClientUI.chat.accept(setAverage);
 
         medianScore = (numberOfStudentTests % 2 == 0)
                 ? (scoreValues.get(numberOfStudentTests / 2 - 1) + scoreValues.get(numberOfStudentTests / 2)) / 2.0

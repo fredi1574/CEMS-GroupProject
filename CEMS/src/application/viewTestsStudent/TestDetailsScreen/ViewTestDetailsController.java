@@ -1,6 +1,9 @@
 package application.viewTestsStudent.TestDetailsScreen;
 
 import client.Client;
+import client.ClientUI;
+import common.MsgHandler;
+import common.TypeMsg;
 import entity.StudentTest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

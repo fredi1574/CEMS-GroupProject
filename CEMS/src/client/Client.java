@@ -179,6 +179,19 @@ public class Client extends AbstractClient {
             case ImportedStudentTests:
                 this.studentTests = (List<Object>) messageFromServer.getMsg();
                 break;
+
+            case ImportedStudentCourses:
+                this.courses = (List<Object>) messageFromServer.getMsg();
+                break;
+
+            case ImportedTestsAverage:
+                break;
+
+            case ImportedTestAverage:
+                this.singleTest = (String) messageFromServer.getMsg();
+                break;
+
+
         }
     }
 
