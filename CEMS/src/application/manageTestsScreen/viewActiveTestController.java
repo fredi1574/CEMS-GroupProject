@@ -193,7 +193,7 @@ public class viewActiveTestController {
         }
 
         public void LogOut (ActionEvent event){
-            ScreenManager.goToNewScreen(event, PathConstants.loginPath);
+           LogOut.logOutToLoginScreen(event);
         }
 
         public void back (ActionEvent event){

@@ -262,7 +262,7 @@ public class PickQuestionsController {
     }
 
     public void LogOut(ActionEvent event1) {
-        ScreenManager.goToNewScreen(event1, PathConstants.loginPath);
+        LogOut.logOutToLoginScreen(event1);
     }
 
     public void closeClient(ActionEvent event1) {

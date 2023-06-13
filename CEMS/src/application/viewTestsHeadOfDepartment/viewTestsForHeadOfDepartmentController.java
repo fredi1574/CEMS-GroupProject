@@ -65,7 +65,7 @@ public class viewTestsForHeadOfDepartmentController {
 
     @FXML
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, PathConstants.loginPath);
+       LogOut.logOutToLoginScreen(event);
     }
 
     @FXML

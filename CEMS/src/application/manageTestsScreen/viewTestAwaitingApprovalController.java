@@ -145,7 +145,7 @@ public class viewTestAwaitingApprovalController {
 
     public void LogOut(ActionEvent event) {
         StateManagement.resetInstance();
-        ScreenManager.goToNewScreen(event, PathConstants.loginPath);
+       LogOut.logOutToLoginScreen(event);
     }
 }
 

@@ -120,7 +120,7 @@ public class ManageQuestionsController {
      * @param event The event triggered by clicking the "Logout" button.
      */
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, PathConstants.loginPath);
+       LogOut.logOutToLoginScreen(event);
     }
 
     /**

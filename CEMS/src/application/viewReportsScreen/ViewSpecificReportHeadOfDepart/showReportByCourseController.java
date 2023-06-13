@@ -13,10 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import util.ExitButton;
-import util.MinimizeButton;
-import util.PathConstants;
-import util.ScreenManager;
+import util.*;
 
 import java.util.List;
 
@@ -52,7 +49,7 @@ public class showReportByCourseController {
 
     @FXML
     void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, PathConstants.loginPath);
+       LogOut.logOutToLoginScreen(event);
     }
 
 

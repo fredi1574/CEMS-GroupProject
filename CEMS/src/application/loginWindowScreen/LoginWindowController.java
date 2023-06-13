@@ -61,10 +61,9 @@ public class LoginWindowController {
                     showError.showErrorPopup("User is already logged in");
                     return;
                 }
-                // String[] LoginValues = {Client.user.getId(),"1"};
-                //MsgHandler changeLoggedInValue = new MsgHandler(TypeMsg.ChangeIsLoggedValue, LoginValues);
-                //ClientUI.chat.accept(changeLoggedInValue);
-                // Redirect to the appropriate screen based on the user's role
+                String[] LoginValues = {Client.user.getId(),"1"};
+                MsgHandler changeLoggedInValue = new MsgHandler(TypeMsg.ChangeIsLoggedValue, LoginValues);
+                ClientUI.chat.accept(changeLoggedInValue);
                 switch (Client.user.getRole()) {
                     case "Student":
                         ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);

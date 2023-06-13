@@ -103,6 +103,7 @@ public class ManualTestController {
         fetchTestDuration();
 
     }
+
     private Test getTestData() {
         MsgHandler getTestInformation = new MsgHandler(TypeMsg.GetTestByID, EnterCodePopUpController.testID);
         ClientUI.chat.accept(getTestInformation);
@@ -116,10 +117,12 @@ public class ManualTestController {
         int secs = seconds % 60;
         return String.format("%02d:%02d:%02d", hours, minutes, secs);
     }
+
     private void fetchTestDuration() {
         testDurationMinutes = Integer.parseInt(test.getTestDuration());
         remainingMinutes = testDurationMinutes;
     }
+
     private void startTimer() {
         int totalSeconds = remainingMinutes * 60;
         seconds = new int[]{totalSeconds};  // Create a final array to hold the remaining seconds
@@ -168,6 +171,7 @@ public class ManualTestController {
         testIsLockedManual = true;
 
     }
+
     // Method to set the isActive flag and stop the checkLockThread
     public void showNotificationAndChangeDuration(int newDuration) {
         int remainingSeconds = remainingMinutes * 60;  // Convert remaining minutes to seconds
@@ -177,6 +181,7 @@ public class ManualTestController {
             showError.showInfoPopup("Test time increased by " + newDuration + " minutes");
         });
     }
+
     void FinishedTime(Test test) {
         int hour = Integer.parseInt(StartTimeText.getText().substring(0, 2));
         int min = Integer.parseInt(StartTimeText.getText().substring(3, 5));

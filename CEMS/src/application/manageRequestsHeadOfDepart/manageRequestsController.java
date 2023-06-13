@@ -111,7 +111,7 @@ public class manageRequestsController {
     }
     @FXML
     void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, PathConstants.loginPath);
+       LogOut.logOutToLoginScreen(event);
     }
 
 

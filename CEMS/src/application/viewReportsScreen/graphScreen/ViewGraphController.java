@@ -13,10 +13,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import util.ExitButton;
-import util.MinimizeButton;
-import util.PathConstants;
-import util.ScreenManager;
+import util.*;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -89,7 +86,7 @@ public class ViewGraphController {
         this.reports = reports;
     }
     public void LogOut(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, PathConstants.loginPath);
+       LogOut.logOutToLoginScreen(event);
     }
 
     public void closePopUp(ActionEvent event) {
