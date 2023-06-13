@@ -30,6 +30,8 @@ public class EnterCodePopUpController {
     @FXML
     private TextField CodeText;
     private TestTypeEnum testType;
+    private boolean NotAllowed;
+    private ObservableList<StudentTest> StudentTest;
     public void initialize() {
         // Enables dragging and dropping of the application window using the header pane
         ScreenManager.dragAndDrop(header);
@@ -50,7 +52,6 @@ public class EnterCodePopUpController {
             MsgHandler getActiveTestTable = new MsgHandler(TypeMsg.GetActiveTests, null);
             ClientUI.chat.accept(getActiveTestTable);
             ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTests());
-
             MsgHandler getAllTestTable = new MsgHandler(TypeMsg.GetAllTestsTable, null);
             ClientUI.chat.accept(getAllTestTable);
             ObservableList<Test> allTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
@@ -67,8 +68,22 @@ public class EnterCodePopUpController {
 
                 }
             }
+            MsgHandler getTable = new MsgHandler(TypeMsg.GetStudentsTests, Client.user.getId());
+            ClientUI.chat.accept(getTable);
 
-            if (testExists) {
+            StudentTest = FXCollections.observableArrayList((List) ClientUI.chat.getStudentTests());
+            for (StudentTest specificTest : StudentTest) {
+                if (specificTest.getTestID().equals(testID)) {
+                    NotAllowed = true;
+
+
+                }
+            }
+            if (NotAllowed){
+                showError.showErrorPopup("Student has already attended the test!");
+            }
+
+            else if (testExists) {
                 switch(testType){
                     case C:
                         ScreenManager.goToNewScreen(event, PathConstants.EnterComputerizedTestPath);
