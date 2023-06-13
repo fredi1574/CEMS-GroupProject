@@ -14,7 +14,7 @@
    <children>
       <AnchorPane fx:id="header" prefHeight="92.0" prefWidth="752.0" styleClass="pageHeader">
          <children>
-            <Label layoutX="251.0" layoutY="18.0" prefHeight="54.0" prefWidth="305.0" styleClass="pageHeader" text="Report Selection" textFill="#fafafa">
+            <Label layoutX="218.0" layoutY="19.0" prefHeight="54.0" prefWidth="315.0" style="-fx-font-weight: Bold;" styleClass="pageHeader" text="Report Selection" textFill="#fafafa">
                <font>
                   <Font name="Trebuchet MS" size="40.0" />
                </font>
@@ -34,14 +34,13 @@
                   <Font name="Franklin Gothic Demi Cond" size="14.0" />
                </font>
             </Button>
-            <ImageView fitHeight="80.0" fitWidth="235.0" layoutX="11.0" layoutY="5.0">
+            <ImageView fitHeight="67.0" fitWidth="197.0" layoutX="10.0" layoutY="12.0" preserveRatio="true">
                <image>
                   <Image url="@../../images/Logo_Transparent_Bright.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <Button layoutX="17.0" layoutY="412.0" mnemonicParsing="false" onAction="#goBackToPreviousScreen" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons" />
       <Label layoutX="36.0" layoutY="458.0" text="Back" />
       <Button layoutX="716.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
       <Button layoutX="683.0" layoutY="6.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
@@ -54,7 +53,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <VBox layoutX="217.0" layoutY="90.0" prefHeight="368.0" prefWidth="346.0">
+      <VBox layoutX="203.0" layoutY="92.0" prefHeight="368.0" prefWidth="346.0">
          <children>
             <HBox prefHeight="30.0" prefWidth="200.0" />
             <Button mnemonicParsing="false" onAction="#goToReportByLecturer" prefHeight="60.0" prefWidth="400.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="Show Report by Lecturer " textAlignment="CENTER">

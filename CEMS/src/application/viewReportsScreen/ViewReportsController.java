@@ -137,9 +137,10 @@ public class ViewReportsController {
     public void showReports() {
         ViewGraphController controller = new ViewGraphController();
         StudentTest rowData = reportsTableView.getSelectionModel().getSelectedItem();
-        controller.setReport(rowData);
-        ScreenManager.popUpScreen(PathConstants.viewGraphPath);
-
+        if (rowData != null) {
+            controller.setReport(rowData);
+            ScreenManager.popUpScreen(PathConstants.viewGraphPath);
+        }
     }
 
     public void LogOut(ActionEvent event) {

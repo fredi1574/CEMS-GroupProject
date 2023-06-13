@@ -79,7 +79,7 @@ public class viewActiveTestController {
         testIdTextField.setText(stateManagement.getTestID());
         courseNameLabel.setText(stateManagement.course.getCourseName());
         subjecteNameLabel.setText(stateManagement.course.getSubjectName());
-        testCodeTextField.setText(stateManagement.getTestCode());
+        testCodeTextField.setText(stateManagement.currentActivetest.getTestCode());
         numOfQuestionsTextField.setText(String.valueOf(stateManagement.getCurrentActivetest().getNumOfQuestions()));
         testDateTextField.setText(stateManagement.getCurrentActivetest().getTestDate());
         testDurationTextField.setText(stateManagement.getTestDuration());

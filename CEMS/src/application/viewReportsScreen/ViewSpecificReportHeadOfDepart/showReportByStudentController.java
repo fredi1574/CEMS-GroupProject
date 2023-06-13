@@ -1,28 +1,19 @@
 package application.viewReportsScreen.ViewSpecificReportHeadOfDepart;
 
-import application.manageRequestsHeadOfDepart.viewRequestController;
-import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.openReportByStudentController;
 import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
-import entity.StudentTest;
-import entity.TestRequestForApproval;
-import entity.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import util.*;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import static util.TextFormatter.formatField;
 
 public class showReportByStudentController {
 
@@ -38,6 +29,8 @@ public class showReportByStudentController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getFullName());
+
+        formatField(StudentIDText,true,9);
     }
     @FXML
     void LogOut(ActionEvent event) {

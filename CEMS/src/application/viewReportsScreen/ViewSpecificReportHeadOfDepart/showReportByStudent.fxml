@@ -13,7 +13,7 @@
    <children>
       <AnchorPane fx:id="header" prefHeight="92.0" prefWidth="807.0" styleClass="pageHeader">
          <children>
-            <Label layoutX="261.0" layoutY="18.0" prefHeight="54.0" prefWidth="401.0" styleClass="pageHeader" text="Reports By Student" textFill="#fafafa">
+            <Label layoutX="222.0" layoutY="19.0" prefHeight="54.0" prefWidth="362.0" style="-fx-font-weight: Bold;" styleClass="pageHeader" text="Reports By Student" textFill="#fafafa">
                <font>
                   <Font name="Trebuchet MS" size="40.0" />
                </font>
@@ -28,7 +28,7 @@
                   <Font name="Franklin Gothic Demi Cond" size="14.0" />
                </font>
             </Button>
-            <ImageView fitHeight="80.0" fitWidth="235.0" layoutX="11.0" layoutY="5.0">
+            <ImageView fitHeight="70.0" fitWidth="184.0" layoutY="11.0" preserveRatio="true">
                <image>
                   <Image url="@../../../images/Logo_Transparent_Bright.png" />
                </image>

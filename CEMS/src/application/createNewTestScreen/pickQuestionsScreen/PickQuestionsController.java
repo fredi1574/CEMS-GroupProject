@@ -1,6 +1,5 @@
 package application.createNewTestScreen.pickQuestionsScreen;
 import client.Client;
-import entity.Test;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.text.Text;
@@ -15,15 +14,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import util.*;
+import static util.TextFormatter.formatField;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,30 +57,29 @@ public class PickQuestionsController {
         ScreenManager.dragAndDrop(header);
         nameAuthor.setText(Client.user.getFullName());
 
+        formatField(pointsField,true,3);
         stateManagement = StateManagement.getInstance();
 
         displayQuestionsDBTable();
         displaySelectedQuestionsTable();
 
         totalRemainingPointsField.setText(String.valueOf(stateManagement.getTotalRemainingPoints()));
-
     }
 
     /**
      * displays the table containing every question in the database relevant to the lecturer's subject
      */
     private void displayQuestionsDBTable() {
-        MsgHandler questionsDBTable = new MsgHandler(TypeMsg.GetAllQuestions, null);
+        MsgHandler questionsDBTable = new MsgHandler(TypeMsg.GetQuestionsByLecturer, Client.user.getFullName());
         ClientUI.chat.accept(questionsDBTable);
         // creates the question table
-        ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.getAllQuestions());
-        ObservableList<Question> userQuestions = TableManager.filterByAuthor(questions,Client.user.getFullName());
+        ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.GetQuestionsBySubject());
 
         //creates a table of questions the author can see
         ObservableList<String> questionDBTableColumns = FXCollections.observableArrayList();
         questionDBTableColumns.addAll("Question Number", "ID", "Subject", "Course Name", "Question Text", "Author");
         TableManager.createTable(questionDBTableView, questionDBTableColumns);
-        TableManager.importData(questionDBTableView, userQuestions);
+        TableManager.importData(questionDBTableView, questions);
 
         //resizes the columns of the table
         double[] multipliers = {0.15, 0.1, 0.1, 0.13, 0.35, 0.162};
@@ -94,7 +90,7 @@ public class PickQuestionsController {
             rowData = questionDBTableView.getSelectionModel().getSelectedItem();
         });
 
-        FilteredList<Question> filteredData = new FilteredList<>(userQuestions, b -> true);
+        FilteredList<Question> filteredData = new FilteredList<>(questions, b -> true);
         TableManager.MakeFilterListForSearch(filteredData, searchField, Question::getQuestionText);
         SortedList<Question> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(questionDBTableView.comparatorProperty());
@@ -232,12 +228,6 @@ public class PickQuestionsController {
             showError.showErrorPopup("Select Questions To Remove");
         }
         rowDataForQuestionsSelected =null;
-    }
-
-    public void setFunctions(String relativePath) {
-        ScreenElements<Stage, FXMLLoader> screenElements = ScreenManager.popUpScreen(relativePath);
-//        FXMLLoader loader = screenElements.getFXMLLoader();
-
     }
 
     /**

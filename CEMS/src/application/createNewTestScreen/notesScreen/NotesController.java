@@ -1,5 +1,4 @@
 package application.createNewTestScreen.notesScreen;
-import java.util.UUID;
 
 import client.Client;
 import client.ClientUI;
@@ -39,17 +38,6 @@ public class NotesController {
             studentNote.setText(stateManagement.studentComment);
         if (stateManagement.getTeacherComment() != null)
             teacherNote.setText(stateManagement.teacherComment);
-    }
-
-    /**
-     * Generates a random 4-character string used as the test code
-     * The test code is used by the student to access a test
-     * @return the tet code string
-     */
-    public String generateTestCode(){
-        UUID uuid = UUID.randomUUID();
-        String randomString = uuid.toString().substring(0, 4);
-        return randomString;
     }
 
     /**
@@ -97,8 +85,6 @@ public class NotesController {
         if (!teacherNote.getText().isEmpty()){
             stateManagement.setTeacherComment(teacherNote.getText());
         }
-        //save the testCode for test
-        stateManagement.setTestCode(generateTestCode());
 
         deleteTestIfAlreadyExists();
         addTestToDB();

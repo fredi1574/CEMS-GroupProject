@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.layout.AnchorPane;
 import util.*;
+import static util.TextFormatter.formatField;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -67,6 +68,9 @@ public class AddAQuestionController {
      */
     public void initialize() {
         ScreenManager.dragAndDrop(header);
+
+        formatField(CorrectAnswer,true,1);
+
         usernameText.setText(Client.user.getFullName());
         createSubjectCombo(Client.user.getUserName());
         createCourseCombo(Client.user.getUserName());

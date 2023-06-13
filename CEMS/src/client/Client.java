@@ -237,7 +237,11 @@ public class Client extends AbstractClient {
             case TestIsForcedLockedComputrized:
                 StudentInTest.lockTest();
                 break;
-
+            case GetQuestionsByLecturerResponse:
+                this.questions = (List<Object>) messageFromServer.getMsg();
+                break;
+            case GetTestsByLecturerResponse:
+                this.tests = (List<Object>) messageFromServer.getMsg();
 
 
 
