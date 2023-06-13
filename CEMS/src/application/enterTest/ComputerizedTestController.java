@@ -71,7 +71,10 @@ public class ComputerizedTestController {
         MsgHandler checkStudentRegistered = new MsgHandler(TypeMsg.CheckStudentRegisteredCourse,StudentAndCourse);
         ClientUI.chat.accept(checkStudentRegistered);
         StudentCourse verifyStudent = (StudentCourse)ClientUI.chat.getUserAndCourse();
-        if (verifyStudent!=null){
+        if(!(StudentIDText.getText().equals(Client.user.getId()))){
+            showError.showInfoPopup("Incorrect ID\nPlease try again");
+        }
+        else if (verifyStudent!=null){
             showError.showInfoPopup("Student is assigned to the test \nAfter clicking OK the test will start automatically");
             ScreenManager.goToNewScreen(event, PathConstants.StartComputerizedTestPath);
         }
