@@ -104,7 +104,9 @@ public class CemsServer extends AbstractServer {
      */
     protected void serverStopped() {
         try {
+            super.sendToAllClients(new MsgHandler<>(TypeMsg.ServerStopped, null));
             super.close();
+
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }

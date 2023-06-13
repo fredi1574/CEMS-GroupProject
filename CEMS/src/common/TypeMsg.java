@@ -661,5 +661,15 @@ public enum TypeMsg {
         public String toString() {
             return "Server returned test's average";
         }
+    },
+    ServerStopped {
+        public String toString() {
+            return "Server stopped listening";
+        }
+    },
+    TerminateClient {
+        public String toString() {
+            return "Terminating client";
+        }
     }
 }

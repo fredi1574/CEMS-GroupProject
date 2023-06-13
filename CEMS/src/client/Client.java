@@ -13,7 +13,9 @@ import common.ChatIF;
 import common.MsgHandler;
 import common.TypeMsg;
 import entity.*;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import util.showError;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -75,7 +77,13 @@ public class Client extends AbstractClient {
             case Disconnected:
                 System.exit(0);
                 break;
+            case ServerStopped:
+                Platform.runLater(() -> {
+                    showError.showErrorPopup("Server disconnected\nByebye");
+                    System.exit(-1);
+                });
 
+                break;
             case allQuestionImported:
                 this.allQuestions = (List<Object>) messageFromServer.getMsg();
                 break;
