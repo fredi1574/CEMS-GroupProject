@@ -214,7 +214,7 @@ public class ManualTestController {
             }
         } else {
 
-            showError.showErrorPopup("Can not do upload now the time is finished");
+            showError.showErrorPopup("Can not do upload now the time has finished");
         }
     }
 
