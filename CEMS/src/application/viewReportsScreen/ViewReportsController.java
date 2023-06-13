@@ -103,7 +103,7 @@ public class ViewReportsController {
         StudentTest rowData = reportsTableView.getSelectionModel().getSelectedItem();
         controller.setReport(rowData);
         controller.setViewReport((Stage) header.getScene().getWindow());
-        showReports();
+        showReport();
     }
 
     public void goBackToPreviousScreen(ActionEvent event) {
@@ -134,7 +134,8 @@ public class ViewReportsController {
         FulllistOfTests = FXCollections.observableArrayList((List)approvedTest);
     }
 
-    public void showReports() {
+    @FXML
+    public void showReport() {
         ViewGraphController controller = new ViewGraphController();
         StudentTest rowData = reportsTableView.getSelectionModel().getSelectedItem();
         if (rowData != null) {
@@ -156,4 +157,5 @@ public class ViewReportsController {
     public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
+
 }

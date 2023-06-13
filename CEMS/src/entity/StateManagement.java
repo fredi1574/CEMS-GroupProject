@@ -10,7 +10,6 @@ public class StateManagement {
     //Test parameters
     public Course course;
     public String testNum;
-    public String testCode;
     public String year;
     public String session;
     public String semester;
@@ -25,9 +24,7 @@ public class StateManagement {
     public int totalRemainingPoints;
     public TestTypeEnum testType = TestTypeEnum.C;
     public String previousScreenPath = PathConstants.mainMenuPath;
-
     private static StateManagement instance = null;
-
     public static StateManagement getInstance() {
         if (instance == null) {
             instance = new StateManagement();
@@ -52,7 +49,7 @@ public class StateManagement {
     }
 
     public void SaveTest() {
-        newTest = new Test(testNum, getTestID(), getTestCode(), Client.user.getFullName(),
+        newTest = new Test(testNum, getTestID(), Client.user.getFullName(),
                 testDuration, course.getCourseName(), getTeacherComment(), testType, getStudentComment(),
                 course.getSubjectName(), year, session, semester);
     }
@@ -164,13 +161,6 @@ public class StateManagement {
         this.course = course;
     }
 
-    public String getTestCode() {
-        return testCode;
-    }
-
-    public void setTestCode(String testCode) {
-        this.testCode = testCode;
-    }
 
     public ActiveTest getCurrentActivetest() {
         return currentActivetest;

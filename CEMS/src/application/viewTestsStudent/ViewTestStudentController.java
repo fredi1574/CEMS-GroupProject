@@ -148,7 +148,7 @@ public class ViewTestStudentController {
 
     @FXML
     public void goBackToPreviousScreen(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
+        ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
     }
 
     @FXML

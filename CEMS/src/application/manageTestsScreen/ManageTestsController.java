@@ -305,7 +305,6 @@ public class ManageTestsController {
         stateManagement.setYear(test.getYear());
         stateManagement.setSession(test.getSession());
         stateManagement.setSemester(test.getSemester());
-        stateManagement.setTestCode(test.getTestCode());
         stateManagement.setStudentComment(test.getStudentComments().equals("null") ? "" : test.getStudentComments());
         stateManagement.setTeacherComment(test.getTeacherComments().equals("null") ? "" : test.getTeacherComments());
 

@@ -74,11 +74,6 @@
                </font>
             </Button>
             <HBox prefHeight="30.0" prefWidth="200.0" />
-            <Button mnemonicParsing="false" onAction="#goToReportByStudent" prefHeight="60.0" prefWidth="346.0" style="-fx-background-color: rgba(119, 153, 194, 0.50); -fx-background-radius: 7;" styleClass="regularButtons" text="Show General Report" textAlignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Button>
          </children>
       </VBox>
    </children>

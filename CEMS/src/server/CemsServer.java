@@ -388,7 +388,7 @@ public class CemsServer extends AbstractServer {
                     if (obj instanceof Test) {
                         this.test = (Test) obj;
                         String newQuery = "INSERT INTO cems.test (testNumber, id, testDuration, author, subject, courseName, " +
-                                "teacherComment, testType, studentComment, semester, year, session, testCode) " +
+                                "teacherComment, testType, studentComment, semester, year, session) " +
                                 "VALUES ('" + test.getTestNumber() + "', " +
                                 "'" + test.getId() + "', " +
                                 "'" + test.getTestDuration() + "', " +
@@ -400,8 +400,7 @@ public class CemsServer extends AbstractServer {
                                 "'" + test.getStudentComments() + "', " +
                                 "'" + test.getSemester() + "', " +
                                 "'" + test.getYear() + "', " +
-                                "'" + test.getSession() + "', " +
-                                "'" + test.getTestCode() + "') ";
+                                "'" + test.getSession()+ "') ";
                         MysqlConnection.update(newQuery);
                         client.sendToClient(new MsgHandler<>(TypeMsg.AddNewTestResponse, null));
                     }

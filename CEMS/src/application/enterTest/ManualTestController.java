@@ -80,21 +80,14 @@ public class ManualTestController {
         MsgHandler getActiveTestTable = new MsgHandler(TypeMsg.GetActiveTests, null);
         ClientUI.chat.accept(getActiveTestTable);
         ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTests());
-
+        test = getTestData();
         MsgHandler getAllTestTable = new MsgHandler(TypeMsg.GetAllTestsTable, null);
         ClientUI.chat.accept(getAllTestTable);
         ObservableList<Test> allTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
-        for (int i = 0; i < allTests.size(); i++) {
-            if (stateManagement.getTestCode().equals(allTests.get(i).getTestCode())) {
-                test = allTests.get(i);
-                MsgHandler totalStudentIncrease = new MsgHandler(TypeMsg.IcreaseStudentsEnteringTest, test.getId());
-                ClientUI.chat.accept(totalStudentIncrease);
-                break;
-            }
-
-        }
+        MsgHandler totalStudentIncrease = new MsgHandler(TypeMsg.IcreaseStudentsEnteringTest, test.getId());
+        ClientUI.chat.accept(totalStudentIncrease);
         for (int i = 0; i < activeTests.size(); i++) {
-            if (test.getTestCode().equals(activeTests.get(i).getTestCode())) {
+            if (test.getId().equals(activeTests.get(i).getId())) {
                 testActive = activeTests.get(i);
                 StartTimeText.setText(testActive.getStartingTime());
                 FinishedTime(test);
@@ -109,6 +102,12 @@ public class ManualTestController {
         }
         fetchTestDuration();
 
+    }
+    private Test getTestData() {
+        MsgHandler getTestInformation = new MsgHandler(TypeMsg.GetTestByID, EnterCodePopUpController.testID);
+        ClientUI.chat.accept(getTestInformation);
+        Test test = (Test) ClientUI.chat.getSingleTest();
+        return test;
     }
 
     private String formatTime(int seconds) {
@@ -223,7 +222,7 @@ public class ManualTestController {
         try {
             FileChooser fc = new FileChooser();
             fc.setTitle("Download File");
-            fc.setInitialFileName(test.getTestCode());
+            fc.setInitialFileName(test.getId());
             fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Word Files", "*.docx"));
             File downloadedFile = fc.showSaveDialog(null);// UserController.currentStage
             System.out.println("Downloaded");

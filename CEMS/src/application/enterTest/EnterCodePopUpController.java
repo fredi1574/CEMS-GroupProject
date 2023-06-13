@@ -57,7 +57,6 @@ public class EnterCodePopUpController {
             for (ActiveTest activeTest: activeTests) {
                 if (activeTest.getTestCode().equals(codet)) {
                     testExists = true;
-                    stateManagement.setTestCode(codet);
                     testID = activeTest.getId();
                     for (Test test: allTests) {
                         if (testID.equals(test.getId())){
