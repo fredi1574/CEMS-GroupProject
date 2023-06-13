@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane accessibleRole="HYPERLINK" cache="true" prefHeight="686.0" prefWidth="867.0" styleClass="backgroundColor" stylesheets="@/util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.manageTestsScreen.viewActiveTestController">
+    <AnchorPane fx:id="header" prefHeight="104.0" prefWidth="867.0" styleClass="pageHeader">
+        <ImageView fitHeight="82.0" fitWidth="241.0" layoutX="14.0" layoutY="9.0" preserveRatio="true">
+            <Image url="@/images/Logo_Transparent_Bright.png" />
+        </ImageView>
+        <Label fx:id="activeTestLabel" alignment="CENTER" layoutX="194.0" layoutY="4.0" prefHeight="91.0" prefWidth="501.0" style="-fx-text-fill: #e6eef7;" text="Active Test" textFill="#fafafa">
+            <font>
+                <Font name="Trebuchet MS Bold" size="40.0" />
+            </font>
+        </Label>
+    </AnchorPane>
+    <AnchorPane layoutX="46.0" layoutY="129.0" prefHeight="249.0" prefWidth="428.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
+        <HBox alignment="CENTER" layoutX="55.0" layoutY="87.0" prefHeight="136.0" prefWidth="318.0">
+            <VBox prefHeight="136.0" prefWidth="201.0">
+                <Label alignment="BASELINE_CENTER" prefHeight="27.0" prefWidth="72.0" text="Test ID:">
+                    <font>
+                        <Font name="Trebuchet MS Bold" size="17.0" />
+                    </font>
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </Label>
+                <HBox prefHeight="25.0" prefWidth="202.0" />
+                <Label prefHeight="24.0" prefWidth="137.0" text="Test code:">
+                    <font>
+                        <Font name="Trebuchet MS Bold" size="17.0" />
+                    </font>
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </Label>
+                <HBox prefHeight="25.0" prefWidth="202.0" />
+                <Label alignment="BASELINE_CENTER" prefHeight="20.0" prefWidth="186.0" text="Number of Questions:">
+                    <font>
+                        <Font name="Trebuchet MS Bold" size="17.0" />
+                    </font>
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </Label>
+            </VBox>
+            <VBox prefHeight="111.0" prefWidth="129.0">
+                <TextField fx:id="testIdTextField" editable="false" prefHeight="24.0" prefWidth="127.0" promptText="Test ID" styleClass="scroll-bar">
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </TextField>
+                <HBox prefHeight="25.0" prefWidth="86.0" />
+                <TextField fx:id="testCodeTextField" editable="false" prefHeight="24.0" prefWidth="86.0" promptText="Test Code" styleClass="scroll-bar">
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </TextField>
+                <HBox prefHeight="25.0" prefWidth="86.0" />
+                <TextField fx:id="numOfQuestionsTextField" editable="false" prefHeight="24.0" prefWidth="86.0" promptText="Number Questions" styleClass="scroll-bar">
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </TextField>
+            </VBox>
+        </HBox>
+        <Label fx:id="courseNameLabel" alignment="TOP_LEFT" layoutX="8.0" layoutY="6.0" prefHeight="30.0" prefWidth="419.0" text="Advanced Data Structures">
+            <font>
+                <Font name="Trebuchet MS Bold" size="24.0" />
+            </font>
+            <padding>
+                <Insets left="10.0" />
+            </padding>
+        </Label>
+        <Label fx:id="subjecteNameLabel" alignment="TOP_LEFT" layoutX="8.0" layoutY="43.0" prefHeight="30.0" prefWidth="419.0" text="Software Engineering">
+            <font>
+                <Font name="Trebuchet MS Bold" size="20.0" />
+            </font>
+            <padding>
+                <Insets left="10.0" />
+            </padding>
+        </Label>
+    </AnchorPane>
+    <Button fx:id="extraTimeBtn" layoutX="752.0" layoutY="602.0" mnemonicParsing="false" onAction="#sendExtraTimeRequest" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
+        <graphic>
+            <ImageView fitHeight="45.0" fitWidth="45.0">
+                <Image url="@/images/AddTime.png" />
+            </ImageView>
+        </graphic>
+    </Button>
+    <Label layoutX="732.0" layoutY="654.0" prefHeight="18.0" prefWidth="103.0" text="Request Extra Time" />
+    <Button layoutX="831.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
+    <Button layoutX="794.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
+    <AnchorPane layoutX="482.0" layoutY="280.0" prefHeight="98.0" prefWidth="328.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
+        <children>
+            <Button fx:id="lockBtn" layoutX="128.0" layoutY="12.0" mnemonicParsing="false" onAction="#lockTest" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
+                <graphic>
+                    <ImageView fitHeight="45.0" fitWidth="45.0">
+                        <Image url="@/images/Unlock.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Label fx:id="lockTestLabel" alignment="CENTER" layoutX="129.0" layoutY="75.0" prefHeight="18.0" prefWidth="61.0" text="Lock Test" />
+        </children>
+    </AnchorPane>
+    <VBox layoutX="56.0" layoutY="400.0" prefHeight="196.0" prefWidth="744.0">
+        <Label prefHeight="44.0" prefWidth="166.0" text="Add Extra time:">
+            <font>
+                <Font name="Trebuchet MS Bold" size="17.0" />
+            </font>
+        </Label>
+        <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="744.0">
+            <children>
+                <Label prefHeight="42.0" prefWidth="145.0" text="Added amount:">
+                    <font>
+                        <Font name="Trebuchet MS Bold" size="17.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="extraTimeTextField" prefHeight="27.0" prefWidth="101.0" translateX="10.0" />
+            </children>
+        </HBox>
+        <HBox prefHeight="24.0" prefWidth="744.0">
+            <Label alignment="TOP_LEFT" prefHeight="26.0" prefWidth="223.0" text="Request Message:">
+                <font>
+                    <Font name="Trebuchet MS Bold" size="17.0" />
+                </font>
+            </Label>
+            <Label alignment="BOTTOM_RIGHT" prefHeight="21.0" prefWidth="526.0" text="*Request message will be sent to the head of department" />
+        </HBox>
+        <TextArea fx:id="testCommentsTextArea" prefHeight="76.0" prefWidth="733.0" />
+    </VBox>
+    <Button contentDisplay="CENTER" layoutX="18.0" layoutY="602.0" minWidth="35.0" mnemonicParsing="false" onAction="#back" prefHeight="54.0" prefWidth="54.0" styleClass="subButtons" textFill="#0d0d0d">
+        <graphic>
+            <ImageView fitHeight="36.0" fitWidth="38.0">
+                <Image url="@/images/back.png" />
+            </ImageView>
+        </graphic>
+    </Button>
+    <Label layoutX="33.0" layoutY="655.0" text="Back" />
+    <AnchorPane layoutX="482.0" layoutY="129.0" prefHeight="142.0" prefWidth="331.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
+        <HBox alignment="CENTER" layoutX="17.0" layoutY="14.0" prefHeight="113.0" prefWidth="299.0">
+            <VBox prefHeight="126.0" prefWidth="186.0">
+                <Label alignment="TOP_LEFT" prefHeight="26.0" prefWidth="192.0" text="Test Date:">
+                    <font>
+                        <Font name="Trebuchet MS Bold" size="17.0" />
+                    </font>
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </Label>
+                <HBox prefHeight="25.0" prefWidth="202.0" />
+                <Label alignment="TOP_LEFT" prefHeight="23.0" prefWidth="189.0" text="Test Duration:">
+                    <font>
+                        <Font name="Trebuchet MS Bold" size="17.0" />
+                    </font>
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </Label>
+                <HBox prefHeight="25.0" prefWidth="202.0" />
+                <Label alignment="TOP_LEFT" prefHeight="23.0" prefWidth="189.0" text="Starting Time:">
+                    <font>
+                        <Font name="Trebuchet MS Bold" size="17.0" />
+                    </font>
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </Label>
+            </VBox>
+            <VBox prefHeight="98.0" prefWidth="145.0">
+                <TextField fx:id="testDateTextField" editable="false" prefHeight="24.0" prefWidth="132.0" promptText="Test Date" styleClass="scroll-bar">
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </TextField>
+                <HBox prefHeight="25.0" prefWidth="86.0" />
+                <TextField fx:id="testDurationTextField" editable="false" prefHeight="24.0" prefWidth="127.0" promptText="Test Duration" styleClass="scroll-bar">
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </TextField>
+                <HBox prefHeight="25.0" prefWidth="86.0" />
+                <TextField fx:id="startingTimeTextField" editable="false" prefHeight="24.0" prefWidth="127.0" promptText="Starting Time" styleClass="scroll-bar">
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </TextField>
+            </VBox>
+        </HBox>
+    </AnchorPane>
+</AnchorPane>
