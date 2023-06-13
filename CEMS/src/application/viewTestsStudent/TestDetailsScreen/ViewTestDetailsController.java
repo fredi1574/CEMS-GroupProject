@@ -29,7 +29,7 @@ public class ViewTestDetailsController {
     @FXML
     private TextField grade;
     @FXML
-    private TextField average;
+    private TextField averageField;
     @FXML
     private Label courseTest;
 
@@ -40,7 +40,6 @@ public class ViewTestDetailsController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getFullName());
-
     }
 
     public void setController(Stage viewTestStudent) {
@@ -54,7 +53,12 @@ public class ViewTestDetailsController {
         year.setText(test.getYear());
         session.setText(test.getSession());
         grade.setText(test.getScore());
-//        average.setText(test.getAverage());
+
+        MsgHandler getAverage = new MsgHandler(TypeMsg.GetTestAverage,test.getTestID());
+        ClientUI.chat.accept(getAverage);
+        String average = ((String)ClientUI.chat.getSingleTest());
+
+        averageField.setText(average);
         courseTest.setText(test.getCourse());
     }
 

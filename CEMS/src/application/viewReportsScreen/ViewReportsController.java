@@ -70,8 +70,6 @@ public class ViewReportsController {
         semesterComboBox.valueProperty().addListener((observable, oldValue, newValue) -> filterTable());
         filteredData = new FilteredList<>(listOfTestsNoDuplicates, b -> true);
         reportsTableView.setItems(filteredData);
-
-
     }
 
     public ObservableList<StudentTest> getListOfTests() {

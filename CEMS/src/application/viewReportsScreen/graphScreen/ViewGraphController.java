@@ -1,9 +1,10 @@
 package application.viewReportsScreen.graphScreen;
 
 import application.viewReportsScreen.ViewReportsController;
+import client.ClientUI;
+import common.MsgHandler;
+import common.TypeMsg;
 import entity.StudentTest;
-import javafx.beans.property.DoubleProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +21,6 @@ import util.ScreenManager;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class ViewGraphController {
 

@@ -547,6 +547,32 @@ public class CemsServer extends AbstractServer {
                     ArrayList<StudentTest> studentsTests = MysqlConnection.getStudentInfo("SELECT * FROM cems.studentstest WHERE studentID = '" + obj + "'");
 
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedStudentTests, studentsTests));
+                    break;
+
+                case GetStudentCourses:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    ArrayList<String> studentCourse = MysqlConnection.getStudentsCourses("SELECT course FROM studentscourse WHERE studentID = '" + obj + "'");
+
+                    client.sendToClient(new MsgHandler<>(TypeMsg.ImportedStudentCourses, studentCourse));
+                    break;
+
+                case SetTestAverage:
+                    this.msg = (MsgHandler<Object>) msg;
+                    List<Object> testInfoOfAverage = (List<Object>) this.msg.getMsg();
+                    String id = (String) testInfoOfAverage.get(1);
+                    String testsAvg = (String) testInfoOfAverage.get(0);
+                    MysqlConnection.update("UPDATE aftertestinfo SET average = '" + testsAvg + "' WHERE testID = '" + id + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.ImportedTestsAverage, null));
+                    break;
+
+                case GetTestAverage:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    String testsAverage = MysqlConnection.getStudentsAvg("SELECT average FROM aftertestinfo WHERE testID = '" + obj + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.ImportedTestAverage, testsAverage));
+                    break;
+
             }
 
         } catch (Exception e) {

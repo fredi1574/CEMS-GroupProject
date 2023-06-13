@@ -574,5 +574,45 @@ public class MysqlConnection {
         }
         return subject;
     }
+    public static ArrayList<String> getStudentsCourses(String query) {
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ArrayList<String> courses = new ArrayList<>();
+        String singleCourse = null;
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                singleCourse = rs.getString("course"); ;
+                courses.add(singleCourse);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return courses;
+    }
+    public static String getStudentsAvg(String query) {
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String average = null;
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                average = rs.getString("average");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return average;
+    }
 }
 	

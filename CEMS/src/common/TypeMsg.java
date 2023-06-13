@@ -401,10 +401,33 @@ public enum TypeMsg {
         public String toString() {
             return "Server returned student's tests";
         }
+    },
+    GetStudentCourses {
+        public String toString() {
+            return "Student requested his courses";
+        }
+    }, ImportedStudentCourses {
+        public String toString() {
+            return "Server returned student's courses";
+        }
+    },
+    SetTestAverage {
+        public String toString() {
+            return "Request test's average";
+        }
+    }, ImportedTestsAverage {
+        public String toString() {
+            return "Server returned test's average";
+        }
+    },
+    GetTestAverage {
+        public String toString() {
+            return "Get test's average";
+        }
+    },
+    ImportedTestAverage {
+        public String toString() {
+            return "Server returned test's average";
+        }
     }
 }
-
-
-
-
-

@@ -5,7 +5,7 @@ import client.Client;
 import client.ClientUI;
 import common.MsgHandler;
 import common.TypeMsg;
-import entity.Course;
+import entity.ApprovalStatus;
 import entity.StudentTest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,37 +48,38 @@ public class ViewTestStudentController {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getFullName());
 
-        createCourseComboBox(Client.user.getUserName());
-        bindDataToComboBoxes();
-//        addFiltering();
-
         MsgHandler getTable = new MsgHandler(TypeMsg.GetStudentsTests, Client.user.getId());
         ClientUI.chat.accept(getTable);
 
         tests = FXCollections.observableArrayList((List) ClientUI.chat.getStudentTests());
-
-        buildTable(tests);
-    }
-
-    private void createCourseComboBox(String username) {
-        MsgHandler getSubject = new MsgHandler(TypeMsg.importCourses, username);
-        ClientUI.chat.accept(getSubject);
-
-        List<Object> courseObjectsList = ClientUI.chat.getCourses();
-        ObservableList<Course> courseList = FXCollections.observableArrayList((List) courseObjectsList);
-        ObservableList<String> courseNames = FXCollections.observableArrayList();
-
-        for (Course course : courseList) {
-            String subjectNameAndID = course.getSubjectName() + " - " + course.getCourseID();
-            courseNames.add(subjectNameAndID);
+        for (StudentTest test : tests) {
+            if (test.getApproved().equals(ApprovalStatus.YES)) {
+                approvedTests.add(test);
+            }
         }
 
-        courseComboBox.setItems(courseNames);
+        buildTable(approvedTests);
+
+        createCourseComboBox();
+        bindDataToComboBoxes();
+
+        filteredData = new FilteredList<>(approvedTests, b -> true);
+        addFiltering();
+
+        testsTableView.setItems(filteredData);
+    }
+
+    private void createCourseComboBox() {
+        MsgHandler getCourse = new MsgHandler(TypeMsg.GetStudentCourses, Client.user.getId());
+        ClientUI.chat.accept(getCourse);
+
+        ObservableList<String> courseObjectsList = FXCollections.observableArrayList((List) ClientUI.chat.getCourses());
+        courseComboBox.setItems(courseObjectsList);
     }
 
     public void bindDataToComboBoxes() {
         ObservableList<String> yearList = FXCollections.observableArrayList("2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015");
-        ObservableList<String> semesterList = FXCollections.observableArrayList("A", "B", "Summer");
+        ObservableList<String> semesterList = FXCollections.observableArrayList("A", "B", "C");
 
         // Binds the data into the correct dropdown lists
         yearComboBox.setItems(yearList);
@@ -120,9 +121,11 @@ public class ViewTestStudentController {
         double[] multipliers = {0.1, 0.1, 0.1, 0.594, 0.1};
         TableManager.resizeColumns(testsTableView, multipliers);
     }
-
     public void viewTest(String ignored) {
         StudentTest rowData = testsTableView.getSelectionModel().getSelectedItem();
+
+        MsgHandler getTestDetails = new MsgHandler(TypeMsg.GetTestByID, rowData.getTestID());
+        ClientUI.chat.accept(getTestDetails);
 
         ScreenElements<Stage, FXMLLoader> screenElements = ScreenManager.popUpScreen(PathConstants.viewStudentTestDetails);
         FXMLLoader loader = screenElements.getFXMLLoader();
