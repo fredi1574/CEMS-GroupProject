@@ -153,7 +153,7 @@ public class MysqlConnection {
 
     public static Object authenticateUser(String username, String password) {
         try {
-            PreparedStatement statement = conn.prepareStatement("SELECT id, firstName, lastName, email, role, isLoggedIn FROM user WHERE username = ? AND password = ?");
+            PreparedStatement statement = conn.prepareStatement("SELECT id, firstName, lastName, email, role, isLoggedIn FROM user  WHERE BINARY username = ? AND password = ?");
             statement.setString(1, username);
             statement.setString(2, password);
 
