@@ -100,6 +100,10 @@ public class ClientControl implements ChatIF{
 		singleResponse = client.NumOfFinished;
 		return singleResponse;
 	}
+	public Object getStudentTests(){
+		response = client.studentTests;
+		return response;
+	}
 
 	//Instance methods ************************************************
 

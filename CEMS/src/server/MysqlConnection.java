@@ -236,6 +236,7 @@ public class MysqlConnection {
                 int numOfQuestions = rs.getInt("numOfQuestions");
                 String testDate = rs.getString("testDate");
                 String startingTime = rs.getString("startingTime");
+               // String timeLeft = rs.getString("timeLeft");
                 String testCode = rs.getString("testCode");
 
                 ActiveTest activeTest = new ActiveTest(id, numOfQuestions, testDate, startingTime, testCode);
@@ -688,6 +689,46 @@ public class MysqlConnection {
             e.printStackTrace();
         }
         return fullName;
+    }
+    public static ArrayList<String> getStudentsCourses(String query) {
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ArrayList<String> courses = new ArrayList<>();
+        String singleCourse = null;
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                singleCourse = rs.getString("course"); ;
+                courses.add(singleCourse);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return courses;
+    }
+    public static String getStudentsAvg(String query) {
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String average = null;
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                average = rs.getString("average");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return average;
     }
 }
 	

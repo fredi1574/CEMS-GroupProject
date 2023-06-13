@@ -1,9 +1,10 @@
 package application.viewReportsScreen.graphScreen;
 
 import application.viewReportsScreen.ViewReportsController;
+import client.ClientUI;
+import common.MsgHandler;
+import common.TypeMsg;
 import entity.StudentTest;
-import javafx.beans.property.DoubleProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +21,6 @@ import util.ScreenManager;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class ViewGraphController {
 
@@ -139,8 +139,16 @@ public class ViewGraphController {
         }
 
         averageScore = totalScore / numberOfStudentTests;
+
         averageScore = Double.parseDouble(new DecimalFormat("##.##").format(averageScore));
         Collections.sort(scoreValues);
+        ArrayList<String> testAverage = new ArrayList<>();
+
+        testAverage.add(String.valueOf(averageScore));
+        testAverage.add(testID);
+
+        MsgHandler setAverage = new MsgHandler(TypeMsg.SetTestAverage, testAverage);
+        ClientUI.chat.accept(setAverage);
 
         medianScore = (numberOfStudentTests % 2 == 0)
                 ? (scoreValues.get(numberOfStudentTests / 2 - 1) + scoreValues.get(numberOfStudentTests / 2)) / 2.0

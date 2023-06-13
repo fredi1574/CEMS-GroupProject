@@ -334,31 +334,31 @@ public enum TypeMsg {
             return "Student id's is verified";
         }
     },
-    IcreaseStudentsEnteringTest {
+    IcreaseStudentsEnteringTest{
         public String toString() {
             return "Student is taking a test";
         }
 
     },
-    TotalStudentsInTestIncreased {
+    TotalStudentsInTestIncreased{
         public String toString() {
             return "Student is taking a test";
         }
 
     },
-    IcreaseStudentsFinishedTest {
+    IcreaseStudentsFinishedTest{
         public String toString() {
             return "Student finished test";
         }
 
     },
-    StudentsFinishedTestIncreased {
+    StudentsFinishedTestIncreased{
         public String toString() {
             return "Student is taking a test";
         }
 
     },
-    changeTestDuration {
+    changeTestDuration{
         public String toString() {
             return "Head Of Department want to change test duration";
         }
@@ -387,36 +387,36 @@ public enum TypeMsg {
         }
 
     },
-    GetsubjectNametoID {
+    GetsubjectNametoID{
         public String toString() {
             return "get subject id";
         }
 
     },
-    ImportedSubjectIDfromName {
+    ImportedSubjectIDfromName{
         public String toString() {
             return "subject ID imported";
         }
 
     },
-    RequestExtraTime {
+    RequestExtraTime{
         public String toString() {
             return "Lecturer requested extra time in test";
         }
 
     },
-    ExtraTimeRequested {
+    ExtraTimeRequested{
         public String toString() {
             return "Lecturer requested extra time in test";
         }
 
     },
-    TestDurationApprovedPopLecturer {
+    TestDurationApprovedPopLecturer{
         public String toString() {
             return "Approved time change popup";
         }
     },
-    TestDurationDeclinedPopLecturer {
+    TestDurationDeclinedPopLecturer{
         public String toString() {
             return "Declined time change popup";
         }
@@ -624,10 +624,42 @@ public enum TypeMsg {
             return "Server returned a list of tests written by the user";
         }
     },
+    GetStudentsTests {
+        public String toString() {
+            return "Student requested his tests";
+        }
+    },
+    ImportedStudentTests {
+        public String toString() {
+            return "Server returned student's tests";
+        }
+    },
+    GetStudentCourses {
+        public String toString() {
+            return "Student requested his courses";
+        }
+    }, ImportedStudentCourses {
+        public String toString() {
+            return "Server returned student's courses";
+        }
+    },
+    SetTestAverage {
+        public String toString() {
+            return "Request test's average";
+        }
+    }, ImportedTestsAverage {
+        public String toString() {
+            return "Server returned test's average";
+        }
+    },
+    GetTestAverage {
+        public String toString() {
+            return "Get test's average";
+        }
+    },
+    ImportedTestAverage {
+        public String toString() {
+            return "Server returned test's average";
+        }
+    }
 }
-
-
-
-
-
-

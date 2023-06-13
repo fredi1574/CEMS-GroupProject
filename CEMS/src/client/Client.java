@@ -22,6 +22,7 @@ import java.util.List;
 
 //test
 public class Client extends AbstractClient {
+    public List<Object> studentTests;
     private ChatIF clientUI;
     private boolean waitResponse = false;
     public static MsgHandler<Object> messageFromServer;
@@ -113,6 +114,7 @@ public class Client extends AbstractClient {
                 break;
             case GetTestsBySubjectResponse:
                 this.tests = (List<Object>) messageFromServer.getMsg();
+                System.out.println(tests);
                 break;
 
             case AddNewTestResponse:
@@ -140,6 +142,7 @@ public class Client extends AbstractClient {
                 break;
             case ImportedTestsByLecturer:
                 HODPopenReporLecturerController.reportCalc((ArrayList<Object>) messageFromServer.getMsg());
+
                 break;
             case ImportedTestsByCourse:
                 HODPopenReportCourseController.reportCalc((ArrayList<Object>) messageFromServer.getMsg());
@@ -224,6 +227,21 @@ public class Client extends AbstractClient {
                 menuStudentController.showTestApprovedPopUp();
                 break;
             case StudentsTestIsApprvoedResponse:
+                break;
+
+            case ImportedStudentTests:
+                this.studentTests = (List<Object>) messageFromServer.getMsg();
+                break;
+
+            case ImportedStudentCourses:
+                this.courses = (List<Object>) messageFromServer.getMsg();
+                break;
+
+            case ImportedTestsAverage:
+                break;
+
+            case ImportedTestAverage:
+                this.singleTest = (String) messageFromServer.getMsg();
                 break;
 
             case GetActiveTestsByLecturerResponse:
