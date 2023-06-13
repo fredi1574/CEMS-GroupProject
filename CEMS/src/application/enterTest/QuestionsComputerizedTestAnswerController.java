@@ -208,7 +208,11 @@ public class QuestionsComputerizedTestAnswerController {
     @FXML
     public void handlePreviousButtonClick() throws SQLException {
         saveMarkingWithValidation();
-        if (selectedCount <= 1) {
+        if (testIsLockedComputrized) {
+            showError.showErrorPopup("Test is locked please press submit to enter the test");
+            return;
+        }
+        else if (selectedCount <= 1) {
             currentQuestionIndex -= 1; // Go back two questions (currentQuestionIndex - 1)
             fetchQuestion();
         }
@@ -217,7 +221,11 @@ public class QuestionsComputerizedTestAnswerController {
     @FXML
     public void handleButtonClick() throws SQLException {
         saveMarkingWithValidation();
-        if (selectedCount <= 1) {
+        if (testIsLockedComputrized) {
+            showError.showErrorPopup("Test is locked please press submit to enter the test");
+            return;
+        }
+        else if (selectedCount <= 1) {
             currentQuestionIndex++;
             fetchQuestion();
         }
