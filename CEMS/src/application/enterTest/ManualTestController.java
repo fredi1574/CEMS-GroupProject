@@ -315,6 +315,7 @@ public class ManualTestController {
 
                     }
                     saveStudentsTest(0, 0, 0);
+                    testIsLockedManual = false;
                     ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
                 } else {
                     return;
@@ -330,6 +331,7 @@ public class ManualTestController {
                         saveAfterTestInfoAndDeleteFromActive();
                     }
                     saveStudentsTest(100, 5, 5);
+                    testIsLockedManual = false;
                     ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
                 } else
                     return;
@@ -341,6 +343,7 @@ public class ManualTestController {
                 saveAfterTestInfoAndDeleteFromActive();
             }
             saveStudentsTest(75, 3, 5);
+            testIsLockedManual = false;
             ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
         }
     }
