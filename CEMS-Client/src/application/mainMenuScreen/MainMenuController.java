@@ -1,5 +1,6 @@
 package application.mainMenuScreen;
 
+import Client.ClientUI;
 import Client.ExitButton;
 import Client.LogOut;
 import javafx.event.ActionEvent;
@@ -75,6 +76,8 @@ public class MainMenuController {
     }
 
     public void manageTests(ActionEvent event) {
+        MsgHandler cheatingTest = new MsgHandler(TypeMsg.DetectedCheating,null);
+        ClientUI.chat.accept(cheatingTest);
         ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
     }
 
