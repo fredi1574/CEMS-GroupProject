@@ -34,6 +34,8 @@ public class ManualTestController {
     private static int totalSecondsRemaining;
     @FXML
     private static int[] seconds;
+    @FXML
+    private Text OneMinLeft;
     private static int TotalStudents;
     private static boolean testIsLockedManual;
     @FXML
@@ -62,12 +64,14 @@ public class ManualTestController {
     @FXML
     private Text fullNameText;
     private int remainingMinutes;
+    private boolean ExtraOneMin;
     private int testDurationMinutes;
 
     public void initialize() {
 
         // Enables dragging and dropping of the application window using the header pane
         ScreenManager.dragAndDrop(header);
+        OneMinLeft.setVisible(false);
         fullNameText.setText(Client.user.getFullName());
         MsgHandler getActiveTestTable = new MsgHandler(TypeMsg.GetActiveTests, null);
         ClientUI.chat.accept(getActiveTestTable);
@@ -121,8 +125,15 @@ public class ManualTestController {
 
         timerC = new Timeline(
                 new KeyFrame(Duration.seconds(1), event -> {
-                    seconds[0]--;  // Decrement the remaining seconds
-                    if (seconds[0] <= 0) {
+                    seconds[0]--;
+                    if (seconds[0] == 60)
+                    {
+                        OneMinLeft.setVisible(true);
+                    }// Decrement the remaining seconds
+                    if ((seconds[0] <= 0) && (!ExtraOneMin)){
+                        seconds[0] = 60;
+                    }
+                    else if (seconds[0] <= 0) {
                         // Timer has ended, perform necessary actions
                         timerC.stop();
                         Stage currentStage = (Stage) header.getScene().getWindow();
