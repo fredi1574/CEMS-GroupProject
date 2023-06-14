@@ -1,5 +1,7 @@
 package application.createNewTestScreen.testPreviewScreen;
 
+import Client.ExitButton;
+import Client.LogOut;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;

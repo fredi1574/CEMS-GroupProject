@@ -8,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import util.*;
+import Client.ExitButton;
 
 import java.util.ArrayList;
 import java.util.List;

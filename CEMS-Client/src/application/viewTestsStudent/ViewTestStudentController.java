@@ -18,6 +18,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import util.*;
 import Client.ClientUI;
+import Client.ExitButton;
+import Client.LogOut;
 
 import java.util.List;
 

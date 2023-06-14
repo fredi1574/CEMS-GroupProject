@@ -20,6 +20,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import util.*;
+import Client.ExitButton;
+import Client.LogOut;
 
 import java.sql.SQLException;
 import java.util.Arrays;

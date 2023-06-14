@@ -1,4 +1,6 @@
 package application.createNewTestScreen.pickQuestionsScreen.questionPreviewPopup;
+import Client.ExitButton;
+import Client.LogOut;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;

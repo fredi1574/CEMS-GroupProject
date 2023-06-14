@@ -1,6 +1,5 @@
 package util;
 
-import Client.Client;
 import entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,9 +17,12 @@ public class StateManagement {
     public String studentComment;
     public String teacherComment;
     public String testDuration;
+
+    public String subjectID;
     public Test newTest;
     public ActiveTest currentActivetest;
     public int totalRemainingPoints;
+
     public TestTypeEnum testType = TestTypeEnum.C;
     public String previousScreenPath = PathConstants.mainMenuPath;
     ObservableList<TestForApproval> testForApproval = FXCollections.observableArrayList();
@@ -49,11 +51,11 @@ public class StateManagement {
         this.testNum = testNum;
     }
 
-    public void SaveTest() {
-        newTest = new Test(testNum, getTestID(), Client.user.getFullName(),
-                testDuration, course.getCourseName(), getTeacherComment(), testType, getStudentComment(),
-                course.getSubjectName(), year, session, semester);
-    }
+//    public void SaveTest() {
+//        newTest = new Test(testNum, getTestID(), Client.user.getFullName(),
+//                testDuration, course.getCourseName(), getTeacherComment(), testType, getStudentComment(),
+//                course.getSubjectName(), year, session, semester);
+//    }
 
     public ObservableList<TestForApproval> getTestForApproval() {
         return testForApproval;
@@ -186,6 +188,20 @@ public class StateManagement {
 
     public void setStudentID(String studentID) {
         this.studentID = studentID;
+    }
+
+    public String getSubjectID() {
+        return subjectID;
+    }
+    public void setSubjectID(String subjectID) {
+        this.subjectID = subjectID;
+    }
+    public TestTypeEnum getTestType() {
+        return testType;
+    }
+
+    public void setTestType(TestTypeEnum testType) {
+        this.testType = testType;
     }
 
     /**

@@ -7,6 +7,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import util.*;
+import Client.ExitButton;
+import Client.LogOut;
 
 public class ViewReportHeadOfDepartmentController {
     @FXML

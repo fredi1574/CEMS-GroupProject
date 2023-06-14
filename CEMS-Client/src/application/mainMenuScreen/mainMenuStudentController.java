@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import util.*;
+import Client.ExitButton;
+import Client.LogOut;
 
 public class mainMenuStudentController {
     SmsEmailPopUpController smsEmailPopUpController = new SmsEmailPopUpController();

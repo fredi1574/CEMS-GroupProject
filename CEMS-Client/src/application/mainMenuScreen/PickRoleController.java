@@ -1,5 +1,7 @@
 package application.mainMenuScreen;
 
+import Client.ExitButton;
+import Client.LogOut;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

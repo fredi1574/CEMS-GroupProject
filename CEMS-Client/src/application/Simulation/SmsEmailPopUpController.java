@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import util.ExitButton;
+import Client.ExitButton;
 import util.MinimizeButton;
 import util.ScreenManager;
 

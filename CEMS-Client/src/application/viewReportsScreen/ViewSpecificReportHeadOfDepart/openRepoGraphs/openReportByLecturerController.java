@@ -2,15 +2,13 @@ package application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGra
 
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.showReportByLecturerController;
 import entity.StudentTest;
-import entity.TestTypeEnum;
-import entity.Test;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import util.ExitButton;
+import Client.ExitButton;
 import util.MinimizeButton;
 import util.PathConstants;
 import util.ScreenManager;

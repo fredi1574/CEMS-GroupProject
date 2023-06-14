@@ -20,6 +20,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import util.*;
+import Client.ExitButton;
+import Client.LogOut;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

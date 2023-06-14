@@ -1,6 +1,7 @@
 package application.manageQuestionsScreen;
 
 import Client.ClientUI;
+import Client.ExitButton;
 import entity.Question;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

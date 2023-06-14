@@ -1,6 +1,7 @@
 package application.manageRequestsHeadOfDepart;
 
 import Client.ClientUI;
+import Client.ExitButton;
 import entity.TestRequestForApproval;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

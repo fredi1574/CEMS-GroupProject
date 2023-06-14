@@ -205,9 +205,10 @@ public class MysqlConnection {
                 String year = rs.getString("year");
                 String session = rs.getString("session");
                 String semester = rs.getString("semester");
+                String subjectID = rs.getString("subjectID");
                 TestTypeEnum testTypeEnum = (Objects.equals(testType, "C") ? TestTypeEnum.C : TestTypeEnum.M);
                 Test test = new Test(testNumber, id, author, testDuration, courseName,
-                        teacherComment, testTypeEnum, studentComment, subject, year, session, semester);
+                        teacherComment, testTypeEnum, studentComment, subject, year, session, semester,subjectID);
                 tests.add(test);
 
             }
@@ -488,9 +489,10 @@ public class MysqlConnection {
                 String year = rs.getString("year");
                 String session = rs.getString("session");
                 String semester = rs.getString("semester");
+                String subjectID = rs.getString("subjectID");
                 TestTypeEnum testTypeEnum = (Objects.equals(testType, "C") ? TestTypeEnum.C : TestTypeEnum.M);
                 test = new Test(testNumber, id, author, testDuration, courseName,
-                        teacherComment, testTypeEnum, studentComment, subject, year, session, semester);
+                        teacherComment, testTypeEnum, studentComment, subject, year, session, semester,subjectID);
 
             }
         } catch (SQLException e) {

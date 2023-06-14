@@ -9,7 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="OCSF" />
     <orderEntry type="module" module-name="CEMS-Common" />
-    <orderEntry type="module" module-name="CEMS-Client" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>

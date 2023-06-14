@@ -1,6 +1,5 @@
 package entity;
 
-import Client.ClientUI;
 import javafx.collections.ObservableList;
 import util.MsgHandler;
 import util.TypeMsg;
@@ -21,12 +20,14 @@ public class Test extends Observable implements Serializable {
     private String year;
     private String semester;
     private String session;
+
+    private String subjectID;
     private ObservableList<TestQuestion> questions;
 
     //constructor for fully created test
     public Test(String testNumber, String id, String author, String testDuration, String courseName,
                 String teacherComments, TestTypeEnum TestType, String studentComments, String subject,
-                String year, String session, String semester) {
+                String year, String session, String semester, String subjectID) {
         this.id = id;
         this.testNumber = testNumber;
         this.author = author;
@@ -39,6 +40,7 @@ public class Test extends Observable implements Serializable {
         this.year = year;
         this.session = session;
         this.semester = semester;
+        this.subjectID = subjectID;
 
     }
 
@@ -51,11 +53,13 @@ public class Test extends Observable implements Serializable {
     }
 
     public String getSubjectID() {
-        MsgHandler subject = new MsgHandler(TypeMsg.GetsubjectNametoID, getSubject());
-        ClientUI.chat.accept(subject);
-        Subject newSubject = (Subject) ClientUI.chat.getSubjectID();
-        return newSubject.getSubjectID();
+        return subjectID;
     }
+
+    public void setSubjectID(String subjectID) {
+        this.subjectID = subjectID;
+    }
+
 
     public String getSemester() {
         return semester;

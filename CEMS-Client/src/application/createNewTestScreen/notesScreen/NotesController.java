@@ -12,6 +12,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import Client.ClientUI;
+import Client.ExitButton;
 
 import util.*;
 
@@ -116,8 +117,24 @@ public class NotesController {
      * adds a test to the DB
      */
     public void addTestToDB() {
-        stateManagement.SaveTest();
-        MsgHandler addNewTest = new MsgHandler(TypeMsg.AddNewTest, stateManagement.newTest);
+
+        Test newTest = new Test(
+                stateManagement.getTestNum(),
+                stateManagement.getTestID(),
+                Client.user.getFullName(),
+                stateManagement.getTestDuration(),
+                stateManagement.getCourse().getCourseName(),
+                stateManagement.getTeacherComment(),
+                stateManagement.getTestType(),
+                stateManagement.getStudentComment(),
+                stateManagement.getCourse().getSubjectName(),
+                stateManagement.getYear(),
+                stateManagement.getSession(),
+                stateManagement.getSemester(),
+                stateManagement.getSubjectID()
+        );
+
+        MsgHandler addNewTest = new MsgHandler(TypeMsg.AddNewTest, newTest);
         ClientUI.chat.accept(addNewTest);
     }
 

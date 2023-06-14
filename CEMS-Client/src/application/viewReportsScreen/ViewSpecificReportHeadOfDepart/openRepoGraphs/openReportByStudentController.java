@@ -9,7 +9,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import util.ExitButton;
+import Client.ExitButton;
 import util.MinimizeButton;
 import util.PathConstants;
 import util.ScreenManager;

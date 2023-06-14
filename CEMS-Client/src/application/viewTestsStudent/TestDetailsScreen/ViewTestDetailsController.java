@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import util.*;
+import Client.ExitButton;
 
 public class ViewTestDetailsController {
 

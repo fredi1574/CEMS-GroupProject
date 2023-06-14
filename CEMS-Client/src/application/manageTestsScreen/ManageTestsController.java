@@ -15,6 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import util.*;
+import Client.ExitButton;
+import Client.LogOut;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

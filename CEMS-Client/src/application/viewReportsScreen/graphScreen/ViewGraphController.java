@@ -1,6 +1,8 @@
 package application.viewReportsScreen.graphScreen;
 
 import Client.ClientUI;
+import Client.ExitButton;
+import Client.LogOut;
 import application.viewReportsScreen.ViewReportsController;
 import entity.StudentTest;
 import javafx.collections.ObservableList;

@@ -18,6 +18,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import util.*;
+import Client.ExitButton;
+import Client.LogOut;
 
 import java.util.ArrayList;
 import java.util.List;

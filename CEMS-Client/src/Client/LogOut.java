@@ -1,8 +1,12 @@
-package util;
+package Client;
 
 import Client.Client;
 import Client.ClientUI;
 import javafx.event.ActionEvent;
+import util.MsgHandler;
+import util.PathConstants;
+import util.ScreenManager;
+import util.TypeMsg;
 
 public class LogOut {
 

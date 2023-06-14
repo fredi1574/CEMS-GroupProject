@@ -18,6 +18,8 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import util.*;
 import Client.ClientUI;
+import Client.ExitButton;
+import Client.LogOut;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
