@@ -25,13 +25,9 @@ public class ClientUI extends Application {
 	}
 
 	public static void setChat(String gettxtfield, int i) {
-		try {
-			chat = new ClientControl(gettxtfield,i);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+        chat = new ClientControl(gettxtfield,i);
+
+    }
 	@SuppressWarnings("static-access")
 	private void setStage(Stage stage) {
 		this.stage = stage;

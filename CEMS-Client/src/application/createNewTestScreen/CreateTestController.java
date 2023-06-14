@@ -1,6 +1,9 @@
 package application.createNewTestScreen;
 
 import Client.Client;
+import Client.ClientUI;
+import Client.ExitButton;
+import Client.LogOut;
 import entity.Course;
 import entity.Test;
 import javafx.collections.FXCollections;
@@ -12,9 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import util.*;
-import Client.ClientUI;
-import Client.ExitButton;
-import Client.LogOut;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -82,7 +82,7 @@ public class CreateTestController {
         TableManager.resizeColumns(courseTableView, multipliers);
 
         courseTableView.setOnMouseClicked((e) -> {
-            rowData = (Course) courseTableView.getSelectionModel().getSelectedItem();
+            rowData = courseTableView.getSelectionModel().getSelectedItem();
             if (rowData != null) {
                 stateManagement.setSubjectID(rowData.getSubjectID());
                 setTestData();
@@ -194,36 +194,34 @@ public class CreateTestController {
 
 
     public void BackToMenu(ActionEvent event) {
-        stateManagement.resetInstance();
+        StateManagement.resetInstance();
         ScreenManager.goToNewScreen(event, stateManagement.getPreviousScreenPath());
     }
 
 
     public void goToPickQuestions(ActionEvent event) {
         stateManagement = StateManagement.getInstance();
-        try {
-            if (!sessionTextField.getText().isEmpty()) {
-                stateManagement.setSession(sessionTextField.getText());
-            } else
-                stateManagement.setSession("");
 
-            if (!yearField.getText().isEmpty()) {
-                stateManagement.setYear(yearField.getText());
-            } else
-                stateManagement.setYear("");
+        if (!sessionTextField.getText().isEmpty()) {
+            stateManagement.setSession(sessionTextField.getText());
+        } else
+            stateManagement.setSession("");
 
-            if (!semesterTextField.getText().isEmpty()) {
-                stateManagement.setSemester(semesterTextField.getText());
-            } else
-                stateManagement.setSemester("");
+        if (!yearField.getText().isEmpty()) {
+            stateManagement.setYear(yearField.getText());
+        } else
+            stateManagement.setYear("");
 
-            if (!testDurationField.getText().isEmpty()) {
-                stateManagement.setTestDuration(testDurationField.getText());
-            } else
-                stateManagement.setTestDuration("");
-        } catch (Exception exception) {
+        if (!semesterTextField.getText().isEmpty()) {
+            stateManagement.setSemester(semesterTextField.getText());
+        } else
+            stateManagement.setSemester("");
 
-        }
+        if (!testDurationField.getText().isEmpty()) {
+            stateManagement.setTestDuration(testDurationField.getText());
+        } else
+            stateManagement.setTestDuration("");
+
         stateManagement.setDataOfTest(rowData, testNumberField.getText(), testIDField.getText());
         if (rowData == null) {
             showError.showErrorPopup("Choose subject and course first");

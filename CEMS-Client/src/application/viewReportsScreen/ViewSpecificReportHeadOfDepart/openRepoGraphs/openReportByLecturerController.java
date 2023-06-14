@@ -52,8 +52,7 @@ public class openReportByLecturerController {
         ScreenManager.dragAndDrop(header);
 
     }
-    void LogOut(ActionEvent event) {
-    }
+
     public void reportCalc(ArrayList<Object> testsByLecturer) {
         totalTests = testsByLecturer.size();
         AverageScore = 0;

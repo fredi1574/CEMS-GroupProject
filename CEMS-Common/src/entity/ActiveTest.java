@@ -37,9 +37,6 @@ public class ActiveTest extends Observable implements Serializable {
     public void setNumOfQuestions(int numOfQuestions) {
         this.numOfQuestions = numOfQuestions;
     }
-    public void setTestCode(String numOfQuestions) {
-        this.testCode = testCode;
-    }
 
     public String getTestDate() {
         return testDate;

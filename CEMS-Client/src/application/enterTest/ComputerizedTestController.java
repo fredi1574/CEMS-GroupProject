@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ComputerizedTestController {
-    private  int remainingMinutes;
 
     @FXML
     private Text CourseNameText;
@@ -117,7 +116,7 @@ public class ComputerizedTestController {
         MinimizeButton.minimizeWindow(event);
     }
     private void startTimer(Test test) {
-        remainingMinutes =  Integer.parseInt(test.getTestDuration());
+        int remainingMinutes = Integer.parseInt(test.getTestDuration());
         int totalSeconds = remainingMinutes * 60;
         TimeRem.setText(formatTime(totalSeconds));
         TimeRem.setDisable(true);

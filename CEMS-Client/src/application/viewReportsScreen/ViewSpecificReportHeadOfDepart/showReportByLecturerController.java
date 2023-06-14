@@ -51,7 +51,7 @@ public class showReportByLecturerController {
 
     }
     public void setLecturerCombo(ArrayList<Object> Lecturers){
-        ObservableList lectureList = FXCollections.observableArrayList((List) Lecturers);
+        ObservableList lectureList = FXCollections.observableArrayList(Lecturers);
         LecturerNames = FXCollections.observableArrayList();
         for (Object user : lectureList) {
             if (user instanceof User) {
@@ -72,7 +72,7 @@ public class showReportByLecturerController {
 
     @FXML
     void showReportForSpecificLecturer(ActionEvent event) {
-        chosenLecturer = LecturerCombo.getSelectionModel().getSelectedItem().toString();
+        chosenLecturer = LecturerCombo.getSelectionModel().getSelectedItem();
         MsgHandler getLecutrers = new MsgHandler(TypeMsg.GetTestsByLecutrer,chosenLecturer);
         ClientUI.chat.accept(getLecutrers);
         ScreenManager.goToNewScreen(event, PathConstants.EnterReportByLecturerPath);

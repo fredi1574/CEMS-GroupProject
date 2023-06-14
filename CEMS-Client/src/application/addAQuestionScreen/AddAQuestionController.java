@@ -61,7 +61,6 @@ public class AddAQuestionController {
     private Text usernameText;
     public String newQuestionNumber;
     public String QuestionID;
-    private String selectedCourse;
     public static ObservableList<Course> coursesList;
 
 
@@ -75,7 +74,7 @@ public class AddAQuestionController {
 
         formatField(CorrectAnswer,true,1);
 
-        usernameText.setText(Client.user.getName());;
+        usernameText.setText(Client.user.getName());
         createSubjectCombo(Client.user.getUserName());
         createCourseCombo(Client.user.getUserName());
         questionNumber.setVisible(false);
@@ -221,7 +220,7 @@ public class AddAQuestionController {
         MsgHandler getQuestionTable = new MsgHandler(TypeMsg.GetAllQuestions, null);
         ClientUI.chat.accept(getQuestionTable);
         List<Question> questions = ((List) ClientUI.chat.getAllQuestions());
-        selectedCourse = getSelectedID(Course, CourseCombo, coursesList);
+        String selectedCourse = getSelectedID(CourseCombo, coursesList);
         newQuestionNumber = correctQuestionNumber(findFirstFreeIndex(questions));
         QuestionID = ((Subject.substring(Subject.indexOf("-") + 1)) + selectedCourse + newQuestionNumber);
         questionNumber.setText(newQuestionNumber);
@@ -261,13 +260,12 @@ public class AddAQuestionController {
     /**
      * Retrieves the ID of the selected item from the combo box.
      *
-     * @param choice      The selected item.
      * @param comboBox    The combo box containing the items.
      * @param listToCheck The list to check for the item.
      * @return The ID of the selected item.
      */
-    public String getSelectedID(String choice, ComboBox comboBox, ObservableList<Course> listToCheck) {
-        choice = comboBox.getSelectionModel().getSelectedItem().toString();
+    public String getSelectedID(ComboBox comboBox, ObservableList<Course> listToCheck) {
+        String choice = comboBox.getSelectionModel().getSelectedItem().toString();
         for (Course item : listToCheck) {
             String course = item.getCourseName();
             if (choice.equals(course)) {

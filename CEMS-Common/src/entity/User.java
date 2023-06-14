@@ -51,9 +51,6 @@ public class User implements Serializable {
     public int getIsLoggedIn() {
         return isLoggedIn;
     }
-    public void setIsLoggedIn() {
-        this.isLoggedIn = isLoggedIn;
-    }
 
     public String getFirstName() {
         return firstName;

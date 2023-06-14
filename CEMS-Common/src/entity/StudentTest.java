@@ -3,7 +3,7 @@ package entity;
 import java.io.Serializable;
 import java.util.Observable;
 
-public class StudentTest  extends Observable implements Serializable {
+public class StudentTest extends Test implements Serializable {
     private String studentID;
     private String testID;
     private String subjectID;
@@ -18,15 +18,16 @@ public class StudentTest  extends Observable implements Serializable {
     private ApprovalStatus approved;
     private CheatingSuspicion suspicionOfCheating;
     private String correctAnswers;
-    private String  totalQuestions;
+    private String totalQuestions;
     private String lecturerComments;
 
 
     private TestTypeEnum testType;
+
     public StudentTest(String studentID, String testID,
-                           String subjectID, String course, String grade, String fullname, String year, String semester,
-                           String session, CheatingSuspicion suspicionOfCheating, String correctAnswers, String totalQuestions,
-                           String lecturerComments, ApprovalStatus approved, TestTypeEnum testType,String testDuration) {
+                       String subjectID, String course, String grade, String fullname, String year, String semester,
+                       String session, CheatingSuspicion suspicionOfCheating, String correctAnswers, String totalQuestions,
+                       String lecturerComments, ApprovalStatus approved, TestTypeEnum testType, String testDuration) {
         // Assign the parameters to the corresponding fields
         this.studentID = studentID;
         this.testID = testID;
@@ -45,15 +46,17 @@ public class StudentTest  extends Observable implements Serializable {
         this.testType = testType;
         this.testDuration = testDuration;
     }
+
     public TestTypeEnum getTestType() {
         return testType;
-    }
-    public String getTestDuration() {
-        return testDuration;
     }
 
     public void setTestType(TestTypeEnum testType) {
         this.testType = testType;
+    }
+
+    public String getTestDuration() {
+        return testDuration;
     }
 
     public ApprovalStatus getApproved() {

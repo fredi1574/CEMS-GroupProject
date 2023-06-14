@@ -24,8 +24,7 @@ public class ClientControl implements ChatIF {
  * @param host The host to connect to.
  * @param port The port to connect on.
  */
-	public ClientControl(String host, int port) throws IOException 
-	{
+	public ClientControl(String host, int port) {
 		client= new Client(host, port, this);
 	}
 

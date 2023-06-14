@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 
 public class FileCreator implements Serializable {
 
@@ -65,8 +66,7 @@ public class FileCreator implements Serializable {
     }
 
     public void setMybytearray(byte[] mybytearray) {
-        for (int i = 0; i < mybytearray.length; i++)
-            this.mybytearray[i] = mybytearray[i];
+        System.arraycopy(mybytearray, 0, this.mybytearray, 0, mybytearray.length);
     }
 
     public String getStudentID() {

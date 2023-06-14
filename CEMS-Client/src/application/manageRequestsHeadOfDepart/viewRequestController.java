@@ -82,7 +82,7 @@ public class viewRequestController {
             ClientUI.chat.accept(changeDuration);
             MsgHandler approveRequest = new MsgHandler(TypeMsg.ApproveRequestByHeadOfDepartment, request.getAuthor());
             ClientUI.chat.accept(approveRequest);
-            deleteRequest((String) testIDText.getText());
+            deleteRequest(testIDText.getText());
             reloadPage(approveBtn);
             //TODO: return to the lecturer with the approval
         }
@@ -94,7 +94,7 @@ public class viewRequestController {
         if (showError.showConfirmationPopup("Are you sure you want to decline this request?")) {
             MsgHandler declineRequest = new MsgHandler(TypeMsg.DeclineRequestByHeadOfDepartment,request.getAuthor());
             ClientUI.chat.accept(declineRequest);
-            deleteRequest((String) testIDText.getText());
+            deleteRequest(testIDText.getText());
             //TODO: return to the lecturer with the decline
             reloadPage(declineBtn);
         }

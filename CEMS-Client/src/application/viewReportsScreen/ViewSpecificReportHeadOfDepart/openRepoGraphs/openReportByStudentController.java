@@ -53,7 +53,6 @@ public class openReportByStudentController {
     private static int numberOfStudentTests;
     private static int numberOfCTestTypes;
     private static int numberOfMTestTypes;
-    private static double totalScore;
     private static double highestScore;
     private static double averageScore;
     private static double medianScore;
@@ -81,7 +80,7 @@ public class openReportByStudentController {
         numberOfStudentTests = 0;
         numberOfCTestTypes= 0;
         numberOfMTestTypes= 0;
-        totalScore= 0;
+        double totalScore = 0;
         highestScore= 0;
         averageScore= 0;
         medianScore= 0;
@@ -91,7 +90,7 @@ public class openReportByStudentController {
         for (Object obj : infoOfstudent) {
             if (obj instanceof StudentTest) {
                 studentTest = (StudentTest) obj;
-                fullNameStudent =(String) studentTest.getFullname();
+                fullNameStudent = studentTest.getFullname();
                 double score = Double.parseDouble(studentTest.getScore());
                 totalScore += score;
                 scoreValues.add(score);

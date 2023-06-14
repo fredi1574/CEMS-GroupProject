@@ -50,8 +50,6 @@ public class ManualTestController {
     @FXML
     private Text addtionalTimeForSubmitTEXT;
     private boolean isSubmit = true;
-    private boolean forText = true;
-    private boolean notUpload = true;
     private boolean isTimerRunning;
     @FXML
     private TextField EndTimeText;
@@ -67,7 +65,6 @@ public class ManualTestController {
     private Text fullNameText;
     private int remainingMinutes;
     private boolean ExtraOneMin;
-    private int testDurationMinutes;
 
     public void initialize() {
 
@@ -117,7 +114,7 @@ public class ManualTestController {
     }
 
     private void fetchTestDuration() {
-        testDurationMinutes = Integer.parseInt(test.getTestDuration());
+        int testDurationMinutes = Integer.parseInt(test.getTestDuration());
         remainingMinutes = testDurationMinutes;
     }
 
@@ -215,6 +212,7 @@ public class ManualTestController {
 
     @FXML
     public void uploadFileBTN(ActionEvent event) {
+        boolean notUpload = true;
         if (notUpload) {
             FileChooser fc = new FileChooser();
             selectedFile = fc.showOpenDialog(null);
@@ -311,6 +309,7 @@ public class ManualTestController {
 
     @FXML
     void onSaveButton(ActionEvent event) {
+        boolean forText = true;
         if (forText) {
             if (FileSubmissionsText.getText().isEmpty()) {
                 if (showError.showConfirmationPopup("Are you sure want to submit an empty test?")) {
@@ -322,24 +321,29 @@ public class ManualTestController {
 
                     if (checkLockTest() || (testIsLockedManual)) {
                         saveAfterTestInfoAndDeleteFromActive();
-
                     }
+
                     saveStudentsTest(0, 0, 0);
                     testIsLockedManual = false;
                     ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
                 } else {
                     return;
                 }
-            } else {
+
+            }
+            else {
                 if (showError.showConfirmationPopup("Are you sure want to save your test")) {
                     StateManagement.resetInstance();
+
                     if (!testIsLockedManual) {
                         MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, test.getId());
                         ClientUI.chat.accept(finshedStudentsIncrease);
                     }
+
                     if ((checkLockTest() || (testIsLockedManual))) {
                         saveAfterTestInfoAndDeleteFromActive();
                     }
+
                     saveStudentsTest(100, 5, 5);
                     testIsLockedManual = false;
                     ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);

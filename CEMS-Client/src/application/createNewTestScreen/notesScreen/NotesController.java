@@ -1,7 +1,6 @@
 package application.createNewTestScreen.notesScreen;
 
 import Client.Client;
-import util.StateManagement;
 import entity.Test;
 import entity.TestQuestion;
 import javafx.collections.FXCollections;
@@ -89,7 +88,7 @@ public class NotesController {
         addTestToDB();
         addAllTestQuestionsToDB();
 
-        stateManagement.resetInstance();
+        StateManagement.resetInstance();
 
         ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
     }

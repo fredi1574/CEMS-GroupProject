@@ -87,9 +87,7 @@ public class ManageTestsController {
         TableManager.resizeColumns(testsFromDBTableView, dbTestsMultipliers);
 
         //makes the elements in the database questions table clickable
-        testsFromDBTableView.setOnMouseClicked((e) -> {
-            testRowData = testsFromDBTableView.getSelectionModel().getSelectedItem();
-        });
+        testsFromDBTableView.setOnMouseClicked((e) -> testRowData = testsFromDBTableView.getSelectionModel().getSelectedItem());
 
         //filter tests by course name
         FilteredList<Test> filteredData = new FilteredList<>(dbTests, b -> true);
@@ -198,9 +196,8 @@ public class ManageTestsController {
     /**
      * Deletes the selected test from the manageTests table.
      *
-     * @param event The event triggered by clicking the "Delete" button.
      */
-    public void deleteTest(ActionEvent event) {
+    public void deleteTest() {
         if (testRowData == null) {
             showError.showErrorPopup("Select a test to delete");
             return;
@@ -229,9 +226,8 @@ public class ManageTestsController {
     /**
      * sets the chosen test as "active" and generates a random test code for it
      *
-     * @param actionEvent the event that triggered the method (clicking the "activate test" button)
      */
-    public void activateTest(ActionEvent actionEvent) {
+    public void activateTest() {
         String testCode;
         if (testRowData == null) {
             showError.showErrorPopup("Select a test to activate");
@@ -245,7 +241,7 @@ public class ManageTestsController {
             //setting the activeTest data
             LocalDate currentDate = LocalDate.now();
             LocalTime currentTime = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
-            ;
+
             ActiveTest testToActivate = new ActiveTest(
                     stateManagement.getTestID(),
                     stateManagement.getTestQuestions().size(),

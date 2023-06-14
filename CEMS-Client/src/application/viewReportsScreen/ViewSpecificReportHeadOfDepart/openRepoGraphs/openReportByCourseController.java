@@ -38,7 +38,6 @@ public class openReportByCourseController {
     private Text testsNumberText;
     private static int numberOfStudentTests;
 
-    private static double totalScore;
     private static double highestScore;
     private static double averageScore;
     private static double medianScore;
@@ -61,7 +60,7 @@ public class openReportByCourseController {
     }
     public void reportCalc(ArrayList<Object> infoOfstudent) {
         numberOfStudentTests = 0;
-        totalScore= 0;
+        double totalScore = 0;
         averageScore= 0;
         medianScore= 0;
         series = new XYChart.Series<>();
@@ -70,7 +69,7 @@ public class openReportByCourseController {
         for (Object obj : infoOfstudent) {
             if (obj instanceof StudentTest) {
                 studentTest = (StudentTest) obj;
-                courseName =(String) studentTest.getCourse();
+                courseName = studentTest.getCourse();
                 double score = Double.parseDouble(studentTest.getScore());
                 totalScore += score;
                 scoreValues.add(score);

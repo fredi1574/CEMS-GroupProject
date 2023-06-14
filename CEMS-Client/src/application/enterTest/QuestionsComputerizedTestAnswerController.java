@@ -41,7 +41,6 @@ public class QuestionsComputerizedTestAnswerController {
     private static int TotalStudents;
     private static ObservableList<TestQuestion> testQuestions;
     private static boolean testIsLockedComputrized;
-    private int testDurationMinutes;
     @FXML
     private Text courseNameTestIdText;
     private String testId;
@@ -75,7 +74,6 @@ public class QuestionsComputerizedTestAnswerController {
     private int remainingMinutes;
     private int grade;
     private int correctAnswers;
-    private int numberOfQuestions;
 
     private static void initializeMapWithZeros() {
         for (int i = 0; i < totalQuestions; i++) {
@@ -143,7 +141,7 @@ public class QuestionsComputerizedTestAnswerController {
     // Database connection details
 
 
-    private void fetchQuestion() throws SQLException {
+    private void fetchQuestion() {
         MsgHandler getQuestionInformation = new MsgHandler(TypeMsg.GetTestQuestionsById, testID);
         ClientUI.chat.accept(getQuestionInformation);
         testQuestions = FXCollections.observableArrayList((List) ClientUI.chat.getTestQuestions());
@@ -211,7 +209,6 @@ public class QuestionsComputerizedTestAnswerController {
         saveMarkingWithValidation();
         if (testIsLockedComputrized) {
             showError.showErrorPopup("Test is locked please press submit to enter the test");
-            return;
         } else if (selectedCount <= 1) {
             currentQuestionIndex -= 1; // Go back two questions (currentQuestionIndex - 1)
             fetchQuestion();
@@ -223,7 +220,6 @@ public class QuestionsComputerizedTestAnswerController {
         saveMarkingWithValidation();
         if (testIsLockedComputrized) {
             showError.showErrorPopup("Test is locked please press submit to enter the test");
-            return;
         } else if (selectedCount <= 1) {
             currentQuestionIndex++;
             fetchQuestion();
@@ -302,10 +298,10 @@ public class QuestionsComputerizedTestAnswerController {
 
     public void saveFinalAnswers() {
         int i = 0;
-        numberOfQuestions = testQuestions.size();
+        int numberOfQuestions = testQuestions.size();
         for (TestQuestion answer : testQuestions) {
             AnswerOfStudent answerForSpecificQ = new AnswerOfStudent(Client.user.getId(), testID, testQuestions.get(i).getQuestionID(), markings.get(i));
-            MsgHandler addAnswerOfTestFromStudent = new MsgHandler(TypeMsg.AddStudentAnswer, (AnswerOfStudent) answerForSpecificQ);
+            MsgHandler addAnswerOfTestFromStudent = new MsgHandler(TypeMsg.AddStudentAnswer, answerForSpecificQ);
             ClientUI.chat.accept(addAnswerOfTestFromStudent);
             MsgHandler getCorrectAnswerOfQ = new MsgHandler(TypeMsg.getQuestionAndAnswerFromTest, testQuestions.get(i).getQuestionID());
             ClientUI.chat.accept(getCorrectAnswerOfQ);
@@ -344,7 +340,7 @@ public class QuestionsComputerizedTestAnswerController {
 
     private void fetchTestDuration() {
         Test test = getTestData();
-        testDurationMinutes = Integer.parseInt(test.getTestDuration());
+        int testDurationMinutes = Integer.parseInt(test.getTestDuration());
         remainingMinutes = testDurationMinutes;
     }
 

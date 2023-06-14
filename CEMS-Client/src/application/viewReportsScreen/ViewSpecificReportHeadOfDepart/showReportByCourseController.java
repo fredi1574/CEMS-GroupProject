@@ -41,7 +41,7 @@ public class showReportByCourseController {
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        usernameText.setText(Client.user.getName());;
+        usernameText.setText(Client.user.getName());
         createCourseCombo(Client.user.getUserName());
     }
 
@@ -69,7 +69,7 @@ public class showReportByCourseController {
 
     @FXML
     void showReportForSpecificCourse(ActionEvent event) {
-        String chosenCourse = CourseCombo.getSelectionModel().getSelectedItem().toString();
+        String chosenCourse = CourseCombo.getSelectionModel().getSelectedItem();
         MsgHandler getData = new MsgHandler(TypeMsg.GetTestsByCourse, chosenCourse);
         ClientUI.chat.accept(getData);
         ScreenManager.goToNewScreen(event, PathConstants.EnterReportByCoursePath);

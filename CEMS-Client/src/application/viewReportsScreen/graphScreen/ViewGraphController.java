@@ -1,6 +1,5 @@
 package application.viewReportsScreen.graphScreen;
 
-import Client.Client;
 import Client.ClientUI;
 import Client.ExitButton;
 import Client.LogOut;
@@ -49,13 +48,11 @@ public class ViewGraphController {
 
     @FXML
     private Text testIDtext;
-    private Stage reports;
     @FXML
     private Text DurationText;
     private ViewReportsController VRC = new ViewReportsController();
     private static int numberOfStudentTests;
 
-    private static double totalScore;
     private static double averageScore;
     private static double medianScore;
     private static String CourseYearSession;
@@ -70,10 +67,10 @@ public class ViewGraphController {
 
         ScreenManager.dragAndDrop(header);
         ArrayList<StudentTest> SpecificTestInfo = new ArrayList<>();
-        for (Object obj : infoAboutTest) {
-            if (obj instanceof StudentTest) {
-                if (((StudentTest) obj).getTestID().equals(testID)){
-                    SpecificTestInfo.add((StudentTest) obj);
+        for (StudentTest test : infoAboutTest) {
+            if (test instanceof StudentTest) {
+                if (test.getTestID().equals(testID)){
+                    SpecificTestInfo.add(test);
                 }
             }
         }
@@ -99,7 +96,6 @@ public class ViewGraphController {
 
     }
     public void setViewReport(Stage reports) {
-        this.reports = reports;
     }
     public void LogOut(ActionEvent event) {
        LogOut.logOutToLoginScreen(event);
@@ -115,7 +111,7 @@ public class ViewGraphController {
     }
     public void reportCalc(ArrayList<StudentTest> SpecificTest) {
         numberOfStudentTests = 0;
-        totalScore = 0;
+        double totalScore = 0;
         averageScore = 0;
         medianScore = 0;
         series = new XYChart.Series<>();
@@ -125,15 +121,14 @@ public class ViewGraphController {
         ArrayList<Double> scoreValues = new ArrayList<>();
 
         // Calculate the total score and collect score values
-        for (Object obj : SpecificTest) {
-            if (obj instanceof StudentTest) {
-                studentTest = (StudentTest) obj;
+        for (StudentTest test : SpecificTest) {
+            if (test instanceof StudentTest) {
+                studentTest = test;
                 double score = Double.parseDouble(studentTest.getScore());
                 totalScore += score;
                 scoreValues.add(score);
                 numberOfStudentTests++;
                 String testID = studentTest.getTestID();
-               // series.getData().add(new XYChart.Data<>(testID, score));
             }
         }
 

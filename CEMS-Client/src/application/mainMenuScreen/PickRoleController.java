@@ -45,7 +45,7 @@ public class PickRoleController {
      */
     void logIN(ActionEvent event) {
         if (!RoleComboBox.getSelectionModel().isEmpty()) {
-            String rolePicked = RoleComboBox.getSelectionModel().getSelectedItem().toString();
+            String rolePicked = RoleComboBox.getSelectionModel().getSelectedItem();
             System.out.println(rolePicked);
             switch (rolePicked) {
                 case "Lecturer":

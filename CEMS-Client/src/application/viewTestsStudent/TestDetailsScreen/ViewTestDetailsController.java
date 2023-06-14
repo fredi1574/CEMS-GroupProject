@@ -36,21 +36,15 @@ public class ViewTestDetailsController {
     @FXML
     private TextArea commentsField;
 
-    private StudentTest test;
-
-    private Stage viewTestStudent;
-
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getName());
     }
 
     public void setController(Stage viewTestStudent) {
-        this.viewTestStudent = viewTestStudent;
     }
 
     public void setTest(StudentTest test) {
-        this.test = test;
 
         semester.setText(test.getSemester());
         year.setText(test.getYear());

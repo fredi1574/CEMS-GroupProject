@@ -72,6 +72,29 @@ public class Client extends AbstractClient {
         System.out.println(messageFromServer.getType().toString());
         switch (messageFromServer.getType()) {
             case Connected:
+            case LecturerCllickedLockTestResponse:
+            case ImportedTestsAverage:
+            case StudentsTestIsApprvoedResponse:
+            case IsLoggedValueChanged:
+            case DetectedCheatingResponse:
+            case DeleteRequestCompleted:
+            case CompleteUnactivatingTest:
+            case AfterTestRowCompleted:
+            case AddNewAfterTestInfoResponse:
+            case AddNewActiveTestResponse:
+            case UpdateTheApproveofLecturerResponse:
+            case ExtraTimeRequested:
+            case changeTestDurationAnswer:
+            case StudentsFinishedTestIncreased:
+            case TotalStudentsInTestIncreased:
+            case TestOfStudentSaved:
+            case StudentAnswerAdded:
+            case UpdateRemainingTimeResponse:
+            case AddNewTestQuestionsResponse:
+            case AddNewTestResponse:
+            case QuestionAddedSuccessfuly:
+            case QuestionUpdated:
+            case QuestionDeleted:
                 break;
 
             case Disconnected:
@@ -88,25 +111,19 @@ public class Client extends AbstractClient {
                 this.allQuestions = (List<Object>) messageFromServer.getMsg();
                 break;
 
-            case QuestionDeleted:
-                break;
-
             case LoginResponse:
                 user = (User) messageFromServer.getMsg();
                 break;
 
             case QuestionsBySubjectImported:
+            case GetQuestionsByLecturerResponse:
                 this.questions = (List<Object>) messageFromServer.getMsg();
                 break;
 
             case CoursesimportSuccess:
+
+            case ImportedStudentCourses:
                 this.courses = (List<Object>) messageFromServer.getMsg();
-                break;
-
-            case QuestionUpdated:
-                break;
-
-            case QuestionAddedSuccessfuly:
                 break;
 
             case SubjectsimportSuccess:
@@ -114,10 +131,11 @@ public class Client extends AbstractClient {
                 break;
 
             case CourseTableResponse:
-                courses = (ArrayList<Object>) ((MsgHandler<Object>) messageFromServer).getMsg();
+                courses = (ArrayList<Object>) messageFromServer.getMsg();
                 this.courses = (List<Object>) messageFromServer.getMsg();
                 break;
             case GetAllTestsTableResponse:
+            case GetTestsByLecturerResponse:
                 this.tests = (List<Object>) messageFromServer.getMsg();
                 break;
             case GetTestsBySubjectResponse:
@@ -125,21 +143,15 @@ public class Client extends AbstractClient {
                 System.out.println(tests);
                 break;
 
-            case AddNewTestResponse:
-                break;
-
-            case AddNewTestQuestionsResponse:
-                break;
-
             case RequestImportedSuccessfully:
-                requests = (ArrayList<Object>) ((MsgHandler<Object>) messageFromServer).getMsg();
+                requests = (ArrayList<Object>) messageFromServer.getMsg();
                 this.requests = (List<Object>) messageFromServer.getMsg();
                 break;
             case RequestIsApproved://check delete
-                break;
-            case RequestIsDeclined://check delete
+            case RequestIsDeclined:
                 break;
             case RequestIsDeclinedToLecturer://check delete
+            case TestDurationDeclinedPopLecturer:
                 activeTestController.showRequestDeclinedPopUp();
               break;
             case StudentReportImported:
@@ -148,40 +160,36 @@ public class Client extends AbstractClient {
             case UserImported:
                 HODPshowReportByLecturerController.setLecturerCombo((ArrayList<Object>) messageFromServer.getMsg());
                 break;
+
             case ImportedTestsByLecturer:
                 HODPopenReporLecturerController.reportCalc((ArrayList<Object>) messageFromServer.getMsg());
-
                 break;
+
             case ImportedTestsByCourse:
                 HODPopenReportCourseController.reportCalc((ArrayList<Object>) messageFromServer.getMsg());
                 break;
+
             case ImportedTestsByLecturerForLecturerReport:
                 LectureReportsController.setTestsTable((ArrayList<Object>) messageFromServer.getMsg());
                 break;
+
             case GetTestQuestionsResponse:
                 testQuestions = (List<Object>) messageFromServer.getMsg();
                 break;
+
             case GetActiveTestsResponse:
+
+            case GetActiveTestsByLecturerResponse:
                 this.activeTests = (List<Object>) messageFromServer.getMsg();
                 break;
-            case UpdateRemainingTimeResponse:
-                break;
             case importedQuestionAndAnswerFromTest:
-                this.singleQuestion = (Question) messageFromServer.getMsg();
-                break;
-            case StudentAnswerAdded:
+                this.singleQuestion = messageFromServer.getMsg();
                 break;
             case ImportedTestByID:
-                this.singleTest = (Test) messageFromServer.getMsg();
-                break;
-            case TestOfStudentSaved:
+                this.singleTest = messageFromServer.getMsg();
                 break;
             case StudentVerified:
-                this.UserAndCourse = (StudentCourse) messageFromServer.getMsg();
-                break;
-            case TotalStudentsInTestIncreased:
-                break;
-            case StudentsFinishedTestIncreased:
+                this.UserAndCourse = messageFromServer.getMsg();
                 break;
             case TestDurationChangedComputerized:
                 StudentInTest.showNotificationAndChangeDuration((Integer) messageFromServer.getMsg());
@@ -190,85 +198,41 @@ public class Client extends AbstractClient {
                 manualTest.showNotificationAndChangeDuration((Integer) messageFromServer.getMsg());
 
                 break;
-            case changeTestDurationAnswer:
-                break;
             case TestDurationApprovedPopLecturer:
                 activeTestController.showRequestApprovedPopUp();
                 break;
-            case TestDurationDeclinedPopLecturer:
-                activeTestController.showRequestDeclinedPopUp();
-                break;
             case ImportedSubjectIDfromName:
-                this.singleSubject = (Subject) messageFromServer.getMsg();
-                break;
-            case ExtraTimeRequested:
+                this.singleSubject = messageFromServer.getMsg();
                 break;
             case GetTestForApprovalResponse:
-                testsForApproval = (ArrayList<Object>) ((MsgHandler<Object>) messageFromServer).getMsg();
+                testsForApproval = (ArrayList<Object>) messageFromServer.getMsg();
                 this.testsForApproval = (List<Object>) messageFromServer.getMsg();
                 break;
-            case UpdateTheApproveofLecturerResponse:
-                break;
-            case AddNewActiveTestResponse:
-                break;
-            case AddNewAfterTestInfoResponse:
-                break;
             case ImportedNumberOfAttendedCounter:
-                this.NumOfAttended = (Integer) messageFromServer.getMsg();
+                this.NumOfAttended = messageFromServer.getMsg();
                 break;
             case ImportedRegisteredStudents:
-                this.NumOfRegistered = (Integer) messageFromServer.getMsg();
-                break;
-            case AfterTestRowCompleted:
+                this.NumOfRegistered = messageFromServer.getMsg();
                 break;
             case ImportedNumberOfFinished:
-                this.NumOfFinished = (Integer) messageFromServer.getMsg();
-                break;
-            case CompleteUnactivatingTest:
-                break;
-            case DeleteRequestCompleted:
-                break;
-            case DetectedCheatingResponse:
-                break;
-            case IsLoggedValueChanged:
+                this.NumOfFinished = messageFromServer.getMsg();
                 break;
             case PopupTestApprove:
                 menuStudentController.showTestApprovedPopUp();
-                break;
-            case StudentsTestIsApprvoedResponse:
                 break;
 
             case ImportedStudentTests:
                 this.studentTests = (List<Object>) messageFromServer.getMsg();
                 break;
 
-            case ImportedStudentCourses:
-                this.courses = (List<Object>) messageFromServer.getMsg();
-                break;
-
-            case ImportedTestsAverage:
-                break;
-
             case ImportedTestAverage:
-                this.singleTest = (String) messageFromServer.getMsg();
-                break;
-
-            case GetActiveTestsByLecturerResponse:
-                this.activeTests = (List<Object>) messageFromServer.getMsg();
-                break;
-            case LecturerCllickedLockTestResponse:
+                this.singleTest = messageFromServer.getMsg();
                 break;
             case TestIsForcedLockedManual:
                 manualTest.lockTest();
                 break;
             case TestIsForcedLockedComputrized:
                 StudentInTest.lockTest();
-                break;
-            case GetQuestionsByLecturerResponse:
-                this.questions = (List<Object>) messageFromServer.getMsg();
-                break;
-            case GetTestsByLecturerResponse:
-                this.tests = (List<Object>) messageFromServer.getMsg();
                 break;
             case ImportedAfterTestInfo:
                 this.infoAboutTest = (List<Object>) messageFromServer.getMsg();
@@ -303,7 +267,7 @@ public class Client extends AbstractClient {
     public void quit() {
         try {
             closeConnection();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
         System.exit(0);
     }

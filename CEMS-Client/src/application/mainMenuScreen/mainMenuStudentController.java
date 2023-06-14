@@ -57,15 +57,6 @@ public class mainMenuStudentController {
     }
 
     /**
-     * Navigates to the view reports screen for the student.
-     *
-     * @param event The event triggered by the view reports button click.
-     */
-    public void ViewReports(ActionEvent event) {
-        // TODO: Implement the logic to navigate to the view reports screen
-    }
-
-    /**
      * Logs out the user and navigates back to the login screen.
      *
      * @param event The event triggered by the logout button click.

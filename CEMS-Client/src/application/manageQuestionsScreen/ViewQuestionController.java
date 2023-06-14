@@ -46,8 +46,7 @@ public class ViewQuestionController {
 
     @FXML
     private TextField subjectField;
-    private Question question;
-    private Stage ViewQuestion;
+
     /**
      * Initializes the update question screen.
      * Enables dragging and dropping of the application window using the header pane.
@@ -75,7 +74,6 @@ public class ViewQuestionController {
      * @param ViewQuestion The reference to the view questions stage.
      */
     public void setManage(Stage ViewQuestion) {
-        this.ViewQuestion = ViewQuestion;
     }
 
 
@@ -84,7 +82,6 @@ public class ViewQuestionController {
      * @param question The question object to be displayed and edited.
      */
     public void setQuestion(Question question) {
-        this.question = question;
         subjectField.setText(question.getSubject());
         courseNameField.setText(question.getCourseName());
         questionTextField.setText(question.getQuestionText());

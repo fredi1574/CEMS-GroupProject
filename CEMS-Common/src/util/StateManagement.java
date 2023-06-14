@@ -19,7 +19,6 @@ public class StateManagement {
     public String testDuration;
 
     public String subjectID;
-    public Test newTest;
     public ActiveTest currentActivetest;
     public int totalRemainingPoints;
 
@@ -51,12 +50,6 @@ public class StateManagement {
         this.testNum = testNum;
     }
 
-//    public void SaveTest() {
-//        newTest = new Test(testNum, getTestID(), Client.user.getFullName(),
-//                testDuration, course.getCourseName(), getTeacherComment(), testType, getStudentComment(),
-//                course.getSubjectName(), year, session, semester);
-//    }
-
     public ObservableList<TestForApproval> getTestForApproval() {
         return testForApproval;
     }
@@ -64,7 +57,6 @@ public class StateManagement {
     public void setTestForApproval(ObservableList<TestForApproval> testForApproval) {
         this.testForApproval = testForApproval;
     }
-
 
     public String getYear() {
         return year;

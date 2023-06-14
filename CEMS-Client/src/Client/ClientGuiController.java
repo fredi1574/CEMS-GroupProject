@@ -19,15 +19,10 @@ public class ClientGuiController {
 
     public void logIn(ActionEvent event) {//login button
         String host = IPText.getText();
-//		 	try {
-//				ClientControl client = new ClientControl(host,5555);
-//				client.client.openConnection();
-//			} catch (IOException e2) {
-//				e2.printStackTrace();
-//		}
+
         MsgHandler connectToServer = new MsgHandler(TypeMsg.Connected, null);
         ClientUI.setChat(host, 5555);
-        ClientUI.chat.accept((Object) connectToServer);
+        ClientUI.chat.accept(connectToServer);
 
         ScreenManager.goToNewScreen(event, PathConstants.loginPath);
     }

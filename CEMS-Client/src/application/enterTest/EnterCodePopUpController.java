@@ -72,8 +72,7 @@ public class EnterCodePopUpController {
             for (StudentTest specificTest : StudentTest) {
                 if (specificTest.getTestID().equals(testID)) {
                     NotAllowed = true;
-
-
+                    break;
                 }
             }
             if (NotAllowed) {

@@ -177,7 +177,7 @@ public class PickQuestionsController {
 
         try {
             TableManager.importData(selectedQuestionsTableView, selectedQuestions);
-        } catch (Exception exception) {
+        } catch (Exception ignored) {
         }
         rowData = null; //resets the selected row value after the current one has been added
     }
@@ -196,7 +196,7 @@ public class PickQuestionsController {
     }
 
     public void Deselect(ActionEvent event1) {
-        Question desSelected = (Question) questionDBTableView.getSelectionModel().getSelectedItem();
+        Question desSelected = questionDBTableView.getSelectionModel().getSelectedItem();
         if (desSelected == null)
             showError.showErrorPopup("You Want To Select Before Press Deselect !");
         else {

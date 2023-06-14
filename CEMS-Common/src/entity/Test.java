@@ -1,13 +1,11 @@
 package entity;
 
 import javafx.collections.ObservableList;
-import util.MsgHandler;
-import util.TypeMsg;
 
 import java.io.Serializable;
 import java.util.Observable;
 
-public class Test extends Observable implements Serializable {
+public class Test implements Serializable {
     private String id;
     private String testNumber;
     private String author;
@@ -20,7 +18,6 @@ public class Test extends Observable implements Serializable {
     private String year;
     private String semester;
     private String session;
-
     private String subjectID;
     private ObservableList<TestQuestion> questions;
 

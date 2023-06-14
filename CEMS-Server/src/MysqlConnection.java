@@ -321,9 +321,7 @@ public class MysqlConnection {
         ArrayList<StudentTest> list = new ArrayList<>();
         try {
             ResultSet rs = stmt.executeQuery(query);
-//			if (!(rs.next())){
-//				return null;
-//			}
+
             while (rs.next()) {
                 String studentID = rs.getString("studentID");
                 String testID = rs.getString("testID");
@@ -703,7 +701,7 @@ public class MysqlConnection {
         try {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                singleCourse = rs.getString("course"); ;
+                singleCourse = rs.getString("course");
                 courses.add(singleCourse);
             }
         } catch (SQLException e) {

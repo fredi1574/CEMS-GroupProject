@@ -37,7 +37,7 @@ public class viewQuestionHeadOfDepartmentController {
     @FXML
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        usernameText.setText(Client.user.getName());;
+        usernameText.setText(Client.user.getName());
         MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestionsBySubject, Client.user.getUserName());
         ClientUI.chat.accept(getTable);
 
