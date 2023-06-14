@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -40,7 +41,7 @@
                 <Button layoutX="644.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
             </children>
         </AnchorPane>
-        <VBox alignment="CENTER" layoutX="50.0" layoutY="149.0" prefHeight="209.0" prefWidth="265.0" spacing="20.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
+        <VBox alignment="CENTER" layoutX="50.0" layoutY="143.0" prefHeight="143.0" prefWidth="265.0" spacing="20.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
             <children>
                 <HBox alignment="CENTER" prefHeight="25.0" prefWidth="202.0">
                     <children>
@@ -98,7 +99,7 @@
                 <Insets />
             </opaqueInsets>
         </VBox>
-      <VBox alignment="CENTER" layoutX="406.0" layoutY="154.0" prefHeight="209.0" prefWidth="265.0" spacing="20.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
+      <VBox alignment="CENTER" layoutX="407.0" layoutY="143.0" prefHeight="143.0" prefWidth="265.0" spacing="20.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
          <children>
             <HBox alignment="CENTER" prefHeight="25.0" prefWidth="202.0">
                <children>
@@ -139,10 +140,11 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Label fx:id="courseTest" alignment="CENTER" layoutX="83.0" layoutY="98.0" prefHeight="37.0" prefWidth="564.0" text="Label" textFill="#306ebd">
+      <Label fx:id="courseTest" alignment="CENTER" layoutX="78.0" layoutY="92.0" prefHeight="25.0" prefWidth="564.0" text="Label" textFill="#306ebd">
          <font>
-            <Font name="Trebuchet MS" size="30.0" />
+            <Font name="Trebuchet MS" size="23.0" />
          </font>
       </Label>
+      <TextArea fx:id="commentsField" layoutX="56.0" layoutY="294.0" prefHeight="92.0" prefWidth="608.0" />
     </children>
 </AnchorPane>

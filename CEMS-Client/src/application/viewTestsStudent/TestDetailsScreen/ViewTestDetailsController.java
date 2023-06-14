@@ -1,16 +1,17 @@
 package application.viewTestsStudent.TestDetailsScreen;
 
 import Client.Client;
+import Client.ClientUI;
 import entity.StudentTest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import util.*;
-import Client.ClientUI;
 
 public class ViewTestDetailsController {
 
@@ -31,6 +32,8 @@ public class ViewTestDetailsController {
     private TextField averageField;
     @FXML
     private Label courseTest;
+    @FXML
+    private TextArea commentsField;
 
     private StudentTest test;
 
@@ -52,6 +55,7 @@ public class ViewTestDetailsController {
         year.setText(test.getYear());
         session.setText(test.getSession());
         grade.setText(test.getScore());
+        commentsField.setText(test.getLecturerComments());
 
         MsgHandler getAverage = new MsgHandler(TypeMsg.GetTestAverage, test.getTestID());
         ClientUI.chat.accept(getAverage);
