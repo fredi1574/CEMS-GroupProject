@@ -202,7 +202,7 @@ public class ManualTestController {
     }
 
     public void saveStudentsTest(int score, int correctAnswers, int totalQuestions) {
-        int timeInSeconds = totalSecondsRemaining;
+        int timeInSeconds = seconds[0];
         int testDuration = (Integer.parseInt(test.getTestDuration()) * 60) - timeInSeconds;
         String decimalFormat = formatTime(testDuration);
         StudentTest StudentsCopy = new StudentTest(Client.user.getId(), test.getId(), test.getSubjectID(), test.getCourseName(), Integer.toString(score),
