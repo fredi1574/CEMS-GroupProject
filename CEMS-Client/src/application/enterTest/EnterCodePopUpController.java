@@ -78,6 +78,7 @@ public class EnterCodePopUpController {
             }
             if (NotAllowed) {
                 showError.showErrorPopup("Student has already attended the test!");
+                ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
             } else if (testExists) {
                 switch (testType) {
                     case C:

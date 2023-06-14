@@ -165,6 +165,7 @@ public class CemsServer extends AbstractServer {
                         }
                     }
                 }
+                break;
             case TestDurationChangedManualSendToAll:
                 this.msg = (MsgHandler<Object>) msg;
                 this.obj = this.msg.getMsg();
@@ -182,7 +183,6 @@ public class CemsServer extends AbstractServer {
                         }
                     }
                 }
-
                 break;
             case StudentsTestIsApprvoedToAllClients:
                 this.msg = (MsgHandler<Object>) msg;
