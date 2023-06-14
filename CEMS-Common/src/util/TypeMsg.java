@@ -673,12 +673,12 @@ public enum TypeMsg {
     },
     TestDurationChangedComputrizedSendToAll{
         public String toString() {
-            return "Terminating client";
+            return "Time of Computerized test increased";
         }
     },
     TestDurationChangedManualSendToAll{
         public String toString() {
-            return "Terminating client";
+            return "Time of Manual test increased";
         }
     }
 }
