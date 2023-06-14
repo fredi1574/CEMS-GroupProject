@@ -5,9 +5,9 @@ import application.enterTest.QuestionsComputerizedTestAnswerController;
 import application.mainMenuScreen.mainMenuStudentController;
 import application.manageTestsScreen.viewActiveTestController;
 import application.viewReportsScreen.ViewReportsController;
-import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.openReportByCourseController;
-import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.openReportByLecturerController;
-import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.openReportByStudentController;
+import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.OpenReportByCourseController;
+import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.OpenReportByLecturerController;
+import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.OpenReportByStudentController;
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.showReportByLecturerController;
 import client.AbstractClient;
 import entity.*;
@@ -47,15 +47,15 @@ public class Client extends AbstractClient {
     public static User user;
 
     public List<Object> requests;
-    public static openReportByStudentController HODPstudentReportcontroller = new openReportByStudentController();
-    public static showReportByLecturerController HODPshowReportByLecturerController = new showReportByLecturerController();
-    public static openReportByLecturerController HODPopenReporLecturerController = new openReportByLecturerController();
-    public static openReportByCourseController HODPopenReportCourseController = new openReportByCourseController();
-    public static ViewReportsController LectureReportsController = new ViewReportsController();
-    public static QuestionsComputerizedTestAnswerController StudentInTest = new QuestionsComputerizedTestAnswerController();
-    public static viewActiveTestController activeTestController = new viewActiveTestController();
-    public static mainMenuStudentController menuStudentController = new mainMenuStudentController();
-    public static ManualTestController manualTest = new ManualTestController();
+    public static final OpenReportByStudentController HODPstudentReportcontroller = new OpenReportByStudentController();
+    public static final showReportByLecturerController HODPshowReportByLecturerController = new showReportByLecturerController();
+    public static final OpenReportByLecturerController HODPopenReporLecturerController = new OpenReportByLecturerController();
+    public static final OpenReportByCourseController HODPopenReportCourseController = new OpenReportByCourseController();
+    public static final ViewReportsController LectureReportsController = new ViewReportsController();
+    public static final QuestionsComputerizedTestAnswerController StudentInTest = new QuestionsComputerizedTestAnswerController();
+    public static final viewActiveTestController activeTestController = new viewActiveTestController();
+    public static final mainMenuStudentController menuStudentController = new mainMenuStudentController();
+    public static final ManualTestController manualTest = new ManualTestController();
 
 
     //constructor

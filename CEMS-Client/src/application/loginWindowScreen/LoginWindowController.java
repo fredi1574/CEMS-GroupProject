@@ -101,8 +101,8 @@ public class LoginWindowController {
      * @param event The event triggered by the close button click.
      */
     @FXML
-    private void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    private void closeClient() {
+        ExitButton.closeClient();
     }
 
     /**

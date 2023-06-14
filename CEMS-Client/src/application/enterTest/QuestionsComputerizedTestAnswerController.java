@@ -99,10 +99,7 @@ public class QuestionsComputerizedTestAnswerController {
 
     public void showNotificationAndChangeDuration(int newDuration) {
         seconds[0] += newDuration * 60;  // Add the new duration in seconds
-        Platform.runLater(() -> {
-
-            showError.showInfoPopup("Test time increased by" + newDuration + "minutes");
-        });
+        Platform.runLater(() -> showError.showInfoPopup("Test time increased by" + newDuration + "minutes"));
 
     }
 
@@ -190,8 +187,8 @@ public class QuestionsComputerizedTestAnswerController {
     }
 
     @FXML
-    public void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    public void closeClient() {
+        ExitButton.closeClient();
     }
 
     @FXML
@@ -314,9 +311,7 @@ public class QuestionsComputerizedTestAnswerController {
 
     public void lockTest() {
         timer.stop();
-        Platform.runLater(() -> {
-            showError.showInfoPopup("Test was locked by lecturer\nPlease press submit to exit the test");
-        });
+        Platform.runLater(() -> showError.showInfoPopup("Test was locked by lecturer\nPlease press submit to exit the test"));
         testIsLockedComputrized = true;
     }
 

@@ -86,9 +86,7 @@ public class PickQuestionsController {
         TableManager.resizeColumns(questionDBTableView, multipliers);
 
         //makes the elements in the database questions table clickable
-        questionDBTableView.setOnMouseClicked((e) -> {
-            rowData = questionDBTableView.getSelectionModel().getSelectedItem();
-        });
+        questionDBTableView.setOnMouseClicked((e) -> rowData = questionDBTableView.getSelectionModel().getSelectedItem());
 
         FilteredList<Question> filteredData = new FilteredList<>(questions, b -> true);
         TableManager.MakeFilterListForSearch(filteredData, searchField, Question::getQuestionText);
@@ -118,9 +116,7 @@ public class PickQuestionsController {
         }
 
         //makes the elements in the selected questions table clickable
-        selectedQuestionsTableView.setOnMouseClicked((e) -> {
-            rowDataForQuestionsSelected = selectedQuestionsTableView.getSelectionModel().getSelectedItem();
-        });
+        selectedQuestionsTableView.setOnMouseClicked((e) -> rowDataForQuestionsSelected = selectedQuestionsTableView.getSelectionModel().getSelectedItem());
     }
 
     /**
@@ -266,8 +262,8 @@ public class PickQuestionsController {
         LogOut.logOutToLoginScreen(event1);
     }
 
-    public void closeClient(ActionEvent event1) {
-        ExitButton.closeClient(event1);
+    public void closeClient() {
+        ExitButton.closeClient();
     }
 
     @FXML

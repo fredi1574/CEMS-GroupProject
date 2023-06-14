@@ -26,32 +26,16 @@ public class ActiveTest extends Observable implements Serializable {
     }
     public String getTestCode(){return testCode; }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public int getNumOfQuestions() {
         return numOfQuestions;
-    }
-
-    public void setNumOfQuestions(int numOfQuestions) {
-        this.numOfQuestions = numOfQuestions;
     }
 
     public String getTestDate() {
         return testDate;
     }
 
-    public void setTestDate(String testDate) {
-        this.testDate = testDate;
-    }
-
     public String getStartingTime() {
         return startingTime;
-    }
-
-    public void setStartingTime(String startingTime) {
-        this.startingTime = startingTime;
     }
 
 }

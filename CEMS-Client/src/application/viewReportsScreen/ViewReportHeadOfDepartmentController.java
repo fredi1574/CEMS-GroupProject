@@ -30,8 +30,8 @@ public class ViewReportHeadOfDepartmentController {
     }
 
     @FXML
-    void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    void closeClient() {
+        ExitButton.closeClient();
 
     }
 

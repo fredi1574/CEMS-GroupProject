@@ -34,7 +34,7 @@ public class ManageTestsController {
     Test testRowData;
     ActiveTest activeTestRowData;
     TestForApproval testForApprovalRowData;
-    String fullName = Client.user.getFullName();
+    final String fullName = Client.user.getFullName();
     @FXML
     private AnchorPane header;
     @FXML
@@ -145,9 +145,7 @@ public class ManageTestsController {
         TableManager.resizeColumns(activeTestsTableView, activeTestsMultipliers);
 
         //makes the elements in the database questions table clickable
-        activeTestsTableView.setOnMouseClicked((e) -> {
-            activeTestRowData = activeTestsTableView.getSelectionModel().getSelectedItem();
-        });
+        activeTestsTableView.setOnMouseClicked((e) -> activeTestRowData = activeTestsTableView.getSelectionModel().getSelectedItem());
     }
 
     /**
@@ -366,8 +364,8 @@ public class ManageTestsController {
     }
 
     @FXML
-    private void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    private void closeClient() {
+        ExitButton.closeClient();
     }
 
     @FXML

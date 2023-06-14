@@ -147,8 +147,8 @@ public class ViewReportsController {
     }
 
     @FXML
-    public void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    public void closeClient() {
+        ExitButton.closeClient();
     }
 
     @FXML

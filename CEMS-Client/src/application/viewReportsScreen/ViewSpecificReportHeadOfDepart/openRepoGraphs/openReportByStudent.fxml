@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="header" prefHeight="524.0" prefWidth="799.0" styleClass="backgroundColor" stylesheets="@/util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.openReportByStudentController">
+<AnchorPane fx:id="header" prefHeight="524.0" prefWidth="799.0" styleClass="backgroundColor" stylesheets="@/util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.OpenReportByStudentController">
    <children>
       <AnchorPane prefHeight="96.0" prefWidth="800.0" style="-fx-border-color: #1d416e; -fx-border-width: 3 3 0 3;" styleClass="pageHeader">
          <children>

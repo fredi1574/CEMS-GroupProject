@@ -18,7 +18,7 @@ import Client.ExitButton;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@SuppressWarnings("unchecked")
 public class ComputerizedTestController {
 
     @FXML
@@ -107,8 +107,8 @@ public class ComputerizedTestController {
         ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
     }
 
-    public void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    public void closeClient() {
+        ExitButton.closeClient();
     }
 
     @FXML

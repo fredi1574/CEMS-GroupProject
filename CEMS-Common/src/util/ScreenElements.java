@@ -20,14 +20,6 @@ public class ScreenElements<Stage, FXMLLoader> {
         return stage;
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    public void setfxmlLoader(FXMLLoader fxmlLoader) {
-        this.fxmlLoader = fxmlLoader;
-    }
-
     public FXMLLoader getFXMLLoader() {
         return fxmlLoader;
     }

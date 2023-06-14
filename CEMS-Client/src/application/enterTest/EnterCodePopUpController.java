@@ -62,7 +62,6 @@ public class EnterCodePopUpController {
                             break;
                         }
                     }
-
                 }
             }
             MsgHandler getTable = new MsgHandler(TypeMsg.GetStudentsTests, Client.user.getId());

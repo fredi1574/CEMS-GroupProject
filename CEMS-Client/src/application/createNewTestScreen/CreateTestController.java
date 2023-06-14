@@ -23,7 +23,7 @@ import java.util.Set;
 
 import static util.TextFormatter.formatField;
 
-
+@SuppressWarnings("unchecked")
 public class CreateTestController {
     public StateManagement stateManagement;
     Course rowData = null;
@@ -131,9 +131,7 @@ public class CreateTestController {
             }
         }
 
-        int minIndex = Collections.min(indexSet);
         int maxIndex = Collections.max(indexSet);
-
         for (int i = 1; i <= maxIndex; i++) {
             if (!indexSet.contains(i)) {
                 return i;
@@ -235,8 +233,8 @@ public class CreateTestController {
         LogOut.logOutToLoginScreen(event);
     }
 
-    public void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    public void closeClient() {
+        ExitButton.closeClient();
     }
 
     @FXML

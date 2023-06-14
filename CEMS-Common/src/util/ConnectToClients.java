@@ -10,7 +10,7 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class ConnectToClients implements Serializable {
 
-    private String ip;
+    private final String ip;
     private String host;
     private String status;
 

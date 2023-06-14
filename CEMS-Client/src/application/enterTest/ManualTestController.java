@@ -81,9 +81,9 @@ public class ManualTestController {
         ObservableList<Test> allTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
         MsgHandler totalStudentIncrease = new MsgHandler(TypeMsg.IcreaseStudentsEnteringTest, test.getId());
         ClientUI.chat.accept(totalStudentIncrease);
-        for (int i = 0; i < activeTests.size(); i++) {
-            if (test.getId().equals(activeTests.get(i).getId())) {
-                testActive = activeTests.get(i);
+        for (ActiveTest activeTest : activeTests) {
+            if (test.getId().equals(activeTest.getId())) {
+                testActive = activeTest;
                 StartTimeText.setText(testActive.getStartingTime());
                 FinishedTime(test);
                 break;
@@ -167,22 +167,15 @@ public class ManualTestController {
 
     public void lockTest() {
         timerC.stop();
-        Platform.runLater(() -> {
-            showError.showInfoPopup("Test is locked\nPlease submit the test and exit");
-
-        });
+        Platform.runLater(() -> showError.showInfoPopup("Test is locked\nPlease submit the test and exit"));
         testIsLockedManual = true;
-
     }
 
     // Method to set the isActive flag and stop the checkLockThread
     public void showNotificationAndChangeDuration(int newDuration) {
-        int remainingSeconds = remainingMinutes * 60;  // Convert remaining minutes to seconds
+        int remainingSeconds = remainingMinutes * 60;  // Convert the remaining minutes to seconds
         seconds[0] += newDuration * 60;  // Add the new duration in seconds
-        Platform.runLater(() -> {
-
-            showError.showInfoPopup("Test time increased by " + newDuration + " minutes");
-        });
+        Platform.runLater(() -> showError.showInfoPopup("Test time increased by " + newDuration + " minutes"));
     }
 
     void FinishedTime(Test test) {
@@ -303,8 +296,8 @@ public class ManualTestController {
     }
 
     @FXML
-    private void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    private void closeClient() {
+        ExitButton.closeClient();
     }
 
     @FXML

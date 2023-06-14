@@ -4,23 +4,30 @@ package entity;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    
-    String id, firstName, lastName, userName, password, email,role,phone;
+
+    final String id;
+    final String firstName;
+    final String lastName;
+    final String userName;
+    final String password;
+    final String email;
+    final String role;
+    final String phone;
     int isLoggedIn;
 
 
     /**
      * Constructs a User object with the specified parameters.
-     * 
+     *
      * @param id        the ID of the user
      * @param firstName the first name of the user
      * @param lastName  the last name of the user
      * @param userName  the username of the user
      * @param password  the password of the user
      * @param email     the email address of the user
-     * @param phone the phone number of the user
+     * @param phone     the phone number of the user
      */
-    public User(String id, String firstName, String lastName, String userName, String password, String email, String role,int isLoggedIn,String phone) {
+    public User(String id, String firstName, String lastName, String userName, String password, String email, String role, int isLoggedIn, String phone) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -36,18 +43,21 @@ public class User implements Serializable {
 
     /**
      * Returns the ID of the user.
-     * 
+     *
      * @return the ID of the user
      */
     public String getId() {
         return id;
     }
+
     public String getName() {
         return firstName;
     }
+
     public String getPhone() {
         return phone;
     }
+
     public int getIsLoggedIn() {
         return isLoggedIn;
     }
@@ -59,6 +69,7 @@ public class User implements Serializable {
     public String getLastName() {
         return lastName;
     }
+
     public String getFullName() {
         return firstName + " " + lastName;
     }
@@ -67,8 +78,10 @@ public class User implements Serializable {
         return email;
     }
 
-    public String getRole() {return role;
+    public String getRole() {
+        return role;
     }
+
     public String getUserName() {
         return userName;
     }

@@ -34,8 +34,8 @@ public class PickRoleController {
      * Closes the application.
      * @param event The event triggered by the close button click.
      */
-    void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    void closeClient() {
+        ExitButton.closeClient();
     }
 
     @FXML

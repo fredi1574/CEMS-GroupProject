@@ -26,7 +26,7 @@ import java.util.List;
 public class ViewTestStudentController {
 
     public ObservableList<StudentTest> tests;
-    public ObservableList<StudentTest> approvedTests = FXCollections.observableArrayList();
+    public final ObservableList<StudentTest> approvedTests = FXCollections.observableArrayList();
 
     @FXML
     private AnchorPane header;
@@ -143,8 +143,8 @@ public class ViewTestStudentController {
     }
 
     @FXML
-    void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    void closeClient() {
+        ExitButton.closeClient();
     }
 
     @FXML

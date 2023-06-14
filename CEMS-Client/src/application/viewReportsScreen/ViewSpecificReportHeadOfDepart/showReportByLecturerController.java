@@ -46,8 +46,8 @@ public class showReportByLecturerController {
 
 
     @FXML
-    void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    void closeClient() {
+        ExitButton.closeClient();
 
     }
     public void setLecturerCombo(ArrayList<Object> Lecturers){

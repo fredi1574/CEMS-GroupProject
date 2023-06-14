@@ -12,7 +12,7 @@ import Client.ExitButton;
 import Client.LogOut;
 
 public class mainMenuStudentController {
-    SmsEmailPopUpController smsEmailPopUpController = new SmsEmailPopUpController();
+    final SmsEmailPopUpController smsEmailPopUpController = new SmsEmailPopUpController();
     @FXML
     private AnchorPane header;
     @FXML
@@ -72,8 +72,8 @@ public class mainMenuStudentController {
      * @param event The event triggered by the close button click.
      */
     @FXML
-    private void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    private void closeClient() {
+        ExitButton.closeClient();
     }
 
 

@@ -9,9 +9,8 @@ public class ExitButton {
     /**
      * closes the entire application
      *
-     * @param event the source event that triggered the method
      */
-    public static void closeClient(ActionEvent event) {
+    public static void closeClient() {
         LogOut.logOut();
         System.exit(0);
     }

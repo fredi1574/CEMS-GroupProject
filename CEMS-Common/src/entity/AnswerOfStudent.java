@@ -20,31 +20,16 @@ public class AnswerOfStudent  extends Observable implements Serializable {
         return studentID;
     }
 
-    public void setStudentID(String studentID) {
-        this.studentID = studentID;
-    }
-
     public String getTestID() {
         return testID;
-    }
-
-    public void setTestID(String testID) {
-        this.testID = testID;
     }
 
     public String getQuestionID() {
         return questionID;
     }
 
-    public void setQuestionID(String questionID) {
-        this.questionID = questionID;
-    }
-
     public int getStudentsAnswer() {
         return studentsAnswer;
     }
 
-    public void setStudentsAnswer(int studentsAnswer) {
-        this.studentsAnswer = studentsAnswer;
-    }
 }

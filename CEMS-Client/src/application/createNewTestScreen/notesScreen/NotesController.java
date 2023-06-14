@@ -18,7 +18,7 @@ import util.*;
 import java.util.List;
 
 public class NotesController {
-    public StateManagement stateManagement = StateManagement.getInstance();
+    public final StateManagement stateManagement = StateManagement.getInstance();
     @FXML
     private Text nameAuthor;
     @FXML
@@ -103,9 +103,9 @@ public class NotesController {
         ClientUI.chat.accept(getDbTestTable);
         ObservableList<Test> dbTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
 
-        for (int i = 0; i < dbTests.size(); i++) {
-            if(stateManagement.getTestID().equals(dbTests.get(i).getId())) {
-                MsgHandler clearTestMsg = new MsgHandler(TypeMsg.DeleteTest, dbTests.get(i));
+        for (Test dbTest : dbTests) {
+            if (stateManagement.getTestID().equals(dbTest.getId())) {
+                MsgHandler clearTestMsg = new MsgHandler(TypeMsg.DeleteTest, dbTest);
                 ClientUI.chat.accept(clearTestMsg);
                 break;
             }
@@ -149,8 +149,8 @@ public class NotesController {
         }
     }
     @FXML
-    void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    void closeClient() {
+        ExitButton.closeClient();
     }
 
     @FXML

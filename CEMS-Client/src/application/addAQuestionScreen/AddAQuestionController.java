@@ -37,8 +37,6 @@ public class AddAQuestionController {
     @FXML
     private TextField questionID;
     @FXML
-    private TableView<String> courseTableView;
-    @FXML
     private TextArea answer1;
 
     @FXML
@@ -79,13 +77,9 @@ public class AddAQuestionController {
         createCourseCombo(Client.user.getUserName());
         questionNumber.setVisible(false);
         questionID.setVisible(false);
-        subjectCombo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            checkFieldsAndExecuteActions();
-        });
+        subjectCombo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> checkFieldsAndExecuteActions());
 
-        CourseCombo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            checkFieldsAndExecuteActions();
-        });
+        CourseCombo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> checkFieldsAndExecuteActions());
 
         checkFieldsAndExecuteActions();
     }
@@ -245,9 +239,7 @@ public class AddAQuestionController {
             indexSet.add(Integer.parseInt(question.getQuestionNumber()));
         }
 
-        int minIndex = Collections.min(indexSet);
         int maxIndex = Collections.max(indexSet);
-
         for (int i = 1; i <= maxIndex; i++) {
             if (!indexSet.contains(i)) {
                 return i;
@@ -323,8 +315,8 @@ public class AddAQuestionController {
     * Closes the application.
     * @param event The event triggered by the close button click.
     */
-    public void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    public void closeClient() {
+        ExitButton.closeClient();
     }
 
 }

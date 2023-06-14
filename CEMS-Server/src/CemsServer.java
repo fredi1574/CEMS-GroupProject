@@ -16,12 +16,11 @@ public class CemsServer extends AbstractServer {
     // This holds the list of the connected clients to the server and their status
     static ObservableList<ConnectToClients> clientList = FXCollections.observableArrayList();
     //Constructors ****************************************************
-    public String passwordSQL;
+    public final String passwordSQL;
     Object obj;
     MsgHandler<Object> msg;
     Question question;
     Test test;
-    ActiveTest activeTest;
     TestQuestion testQuestion;
     TestForApproval testApprove;
 
@@ -76,10 +75,6 @@ public class CemsServer extends AbstractServer {
         return clientList;
     }
 
-    public static void setClientList(ObservableList<ConnectToClients> clientList) {
-        CemsServer.clientList = clientList;
-    }
-
     /**
      * This method overrides the one in the superclass.  Called
      * when the server starts listening for connections.
@@ -121,8 +116,8 @@ public class CemsServer extends AbstractServer {
             case RequestIsDeclined:
                 this.msg = (MsgHandler<Object>) msg;
                 this.obj = this.msg.getMsg();
-                for (int i = 0; i < clientThreadList.length; i++) {
-                    ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
+                for (Thread thread : clientThreadList) {
+                    ConnectionToClient client = (ConnectionToClient) thread;
                     String name = client.getName();
                     if (name.equals(obj)) {
                         try {
@@ -137,8 +132,8 @@ public class CemsServer extends AbstractServer {
             case RequestIsApproved:
                 this.msg = (MsgHandler<Object>) msg;
                 this.obj = this.msg.getMsg();
-                for (int i = 0; i < clientThreadList.length; i++) {
-                    ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
+                for (Thread thread : clientThreadList) {
+                    ConnectionToClient client = (ConnectionToClient) thread;
                     String name = client.getName();
                     if (name.equals(obj)) {
                         try {
@@ -153,8 +148,8 @@ public class CemsServer extends AbstractServer {
                 this.msg = (MsgHandler<Object>) msg;
                 this.obj = this.msg.getMsg();
                 if (obj instanceof Integer) {
-                    for (int i = 0; i < clientThreadList.length; i++) {
-                        ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
+                    for (Thread thread : clientThreadList) {
+                        ConnectionToClient client = (ConnectionToClient) thread;
                         String name = (String) client.getInfo(client.getName());
                         if (name.equals("Student")) {
                             try {
@@ -171,8 +166,8 @@ public class CemsServer extends AbstractServer {
                 this.msg = (MsgHandler<Object>) msg;
                 this.obj = this.msg.getMsg();
                 if (obj instanceof Integer) {
-                    for (int i = 0; i < clientThreadList.length; i++) {
-                        ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
+                    for (Thread thread : clientThreadList) {
+                        ConnectionToClient client = (ConnectionToClient) thread;
                         String name = (String) client.getInfo(client.getName());
                         if (name.equals("Student")) {
                             try {
@@ -188,8 +183,8 @@ public class CemsServer extends AbstractServer {
             case StudentsTestIsApprvoedToAllClients:
                 this.msg = (MsgHandler<Object>) msg;
                 this.obj = this.msg.getMsg();
-                for (int i = 0; i < clientThreadList.length; i++) {
-                    ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
+                for (Thread thread : clientThreadList) {
+                    ConnectionToClient client = (ConnectionToClient) thread;
                     String name = client.getName();
                     if (name.equals(obj)) {
                         try {
@@ -203,8 +198,8 @@ public class CemsServer extends AbstractServer {
             case LockTestForStudentByLecturer:
                 this.msg = (MsgHandler<Object>) msg;
                 this.obj = this.msg.getMsg();
-                for (int i = 0; i < clientThreadList.length; i++) {
-                    ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
+                for (Thread thread : clientThreadList) {
+                    ConnectionToClient client = (ConnectionToClient) thread;
                     String name = (String) client.getInfo(client.getName());
                     if (name.equals("Student")) {
                         if (obj instanceof TestTypeEnum) {
@@ -235,7 +230,7 @@ public class CemsServer extends AbstractServer {
             switch (messageFromClient.getType()) {
                 case Connected:
                     updateClientList(client, "Connected");
-                    client.sendToClient(new MsgHandler(TypeMsg.Connected, null));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.Connected, null));
                     break;
 
                 case Disconnected:
@@ -418,7 +413,7 @@ public class CemsServer extends AbstractServer {
                                 "'" + test.getSemester() + "', " +
                                 "'" + test.getYear() + "', " +
                                 "'" + test.getSession() + "', " +
-                                "'" + test.getSubjectID()+ "') ";
+                                "'" + test.getSubjectID() + "') ";
                         MysqlConnection.update(newQuery);
                         client.sendToClient(new MsgHandler<>(TypeMsg.AddNewTestResponse, null));
                     }

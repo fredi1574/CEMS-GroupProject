@@ -7,14 +7,12 @@ import java.util.List;
 
 public class ClientControl implements ChatIF {
 
-	public static int DEFAULT_PORT ;
-
 	//Instance variables **********************************************
 
 	/**
 	 * The instance of the client that created this ConsoleChat.
 	 */
-	Client client;
+	final Client client;
 
 //Constructors ****************************************************
 
@@ -79,10 +77,7 @@ public class ClientControl implements ChatIF {
 		singleResponse = client.UserAndCourse;
 		return singleResponse;
 	}
-	public Object getSubjectID(){
-		singleResponse = client.singleSubject;
-		return singleResponse;
-	}
+
 	public List<Object> getTestForApproval(){
 		response = client.testsForApproval;
 		return response;

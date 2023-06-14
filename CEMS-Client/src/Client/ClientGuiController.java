@@ -7,19 +7,19 @@ import javafx.scene.layout.AnchorPane;
 import util.*;
 
 public class ClientGuiController {
-    static ClientGuiController mainClient;
     @FXML
     private TextField IPText;
     @FXML
     private AnchorPane header;
 
-    public void Close(ActionEvent e) {
+    public void Close() {
         System.exit(0);
     }
 
     public void logIn(ActionEvent event) {//login button
         String host = IPText.getText();
 
+        @SuppressWarnings("unchecked")
         MsgHandler connectToServer = new MsgHandler(TypeMsg.Connected, null);
         ClientUI.setChat(host, 5555);
         ClientUI.chat.accept(connectToServer);

@@ -93,8 +93,8 @@ public class viewQuestionHeadOfDepartmentController {
      * @param event The event triggered by clicking the close button.
      */
     @FXML
-    public void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    public void closeClient() {
+        ExitButton.closeClient();
     }
 
     /**

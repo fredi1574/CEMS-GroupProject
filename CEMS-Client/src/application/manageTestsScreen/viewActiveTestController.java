@@ -45,7 +45,7 @@ public class viewActiveTestController {
     public Button unlockBtn;
     public Label unlockTestLabel;
     public StateManagement stateManagement;
-    public SmsEmailPopUpController smsEmailPopUpController = new SmsEmailPopUpController();
+    public final SmsEmailPopUpController smsEmailPopUpController = new SmsEmailPopUpController();
     @FXML
     private Pane requestDeclinedPane;
     @FXML

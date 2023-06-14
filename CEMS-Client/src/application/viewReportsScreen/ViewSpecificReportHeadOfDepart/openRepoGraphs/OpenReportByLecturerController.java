@@ -16,8 +16,7 @@ import util.ScreenManager;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class openReportByLecturerController {
-
+public class OpenReportByLecturerController {
 
     @FXML
     private Text averageText;
@@ -113,8 +112,8 @@ public class openReportByLecturerController {
 
 
     @FXML
-    void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    void closeClient() {
+        ExitButton.closeClient();
     }
 
     @FXML

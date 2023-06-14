@@ -75,8 +75,8 @@ public class viewTestsForHeadOfDepartmentController {
     }
 
     @FXML
-    public void closeClient(ActionEvent event) {
-        ExitButton.closeClient(event);
+    public void closeClient() {
+        ExitButton.closeClient();
     }
 
 
