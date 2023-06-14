@@ -40,12 +40,6 @@ public class ManageTestsController {
     @FXML
     private Button deleteBtn;
     @FXML
-    private Button viewTestResultsBtn;
-    @FXML
-    private Button viewTestInProgressBtn;
-    @FXML
-    private Button editBtn;
-    @FXML
     private TableView<Test> testsFromDBTableView;
     @FXML
     private TableView<TestForApproval> testApprovalTableView;
@@ -53,8 +47,7 @@ public class ManageTestsController {
     private TableView<ActiveTest> activeTestsTableView;
     @FXML
     private Text usernameText;
-    @FXML
-    private TableView<Test> approvedTestsTableView; //contains every test that has been verified by the lecturer
+
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
@@ -74,7 +67,7 @@ public class ManageTestsController {
      */
     private void displayDbTestsTable() {
 
-        MsgHandler getDbTestTable = new MsgHandler(TypeMsg.GetTestsByLecturer, Client.user.getFullName());
+        MsgHandler<Test> getDbTestTable = new MsgHandler(TypeMsg.GetTestsByLecturer, Client.user.getFullName());
         ClientUI.chat.accept(getDbTestTable);
 
         ObservableList<Test> dbTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
@@ -104,7 +97,7 @@ public class ManageTestsController {
      * ready for approval by the lecturer
      */
     private void displayApprovalTestsTable() {
-        MsgHandler getTestForApproval = new MsgHandler(TypeMsg.GetTestForApproval, fullName);
+        MsgHandler<String> getTestForApproval = new MsgHandler<>(TypeMsg.GetTestForApproval, fullName);
         ClientUI.chat.accept(getTestForApproval);
 
         ObservableList<TestForApproval> studentTests = FXCollections.observableArrayList((List) ClientUI.chat.getTestForApproval());
@@ -125,7 +118,7 @@ public class ManageTestsController {
         TableManager.resizeColumns(testApprovalTableView, approvalTestsMultipliers);
         testApprovalTableView.setOnMouseClicked((e) -> {
             testForApprovalRowData = testApprovalTableView.getSelectionModel().getSelectedItem();
-            MsgHandler cheatingTest = new MsgHandler(TypeMsg.DetectedCheating,testForApprovalRowData.getTestID());
+            MsgHandler<String> cheatingTest = new MsgHandler(TypeMsg.DetectedCheating,testForApprovalRowData.getTestID());
             ClientUI.chat.accept(cheatingTest);
 
         });
