@@ -152,6 +152,6 @@
             </ImageView>
          </graphic>
       </Button>
-      <Text fx:id="durationChangeddText" fill="RED" layoutX="523.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="**Only one minute left**" wrappingWidth="328.0000000000001" />
+      <Text fx:id="OneMinLeft" fill="RED" layoutX="523.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="**Only one minute left**" wrappingWidth="328.0000000000001" />
    </children>
 </AnchorPane>

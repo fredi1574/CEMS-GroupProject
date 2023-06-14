@@ -126,11 +126,12 @@ public class ManualTestController {
         timerC = new Timeline(
                 new KeyFrame(Duration.seconds(1), event -> {
                     seconds[0]--;
-                    if (seconds[0] == 60)
+                    if (seconds[0] == 59)
                     {
                         OneMinLeft.setVisible(true);
                     }// Decrement the remaining seconds
                     if ((seconds[0] <= 0) && (!ExtraOneMin)){
+                        ExtraOneMin = true;
                         seconds[0] = 60;
                     }
                     else if (seconds[0] <= 0) {
