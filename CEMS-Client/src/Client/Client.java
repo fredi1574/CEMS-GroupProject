@@ -24,7 +24,7 @@ import java.util.List;
 //test
 public class Client extends AbstractClient {
     public List<Object> studentTests;
-    private ChatIF clientUI;
+    private final ChatIF clientUI;
     private boolean waitResponse = false;
     public static MsgHandler<Object> messageFromServer;
     public List<Object> questions;
@@ -65,6 +65,7 @@ public class Client extends AbstractClient {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void handleMessageFromServer(Object msg) {
         waitResponse = false;
         messageFromServer = (MsgHandler<Object>) msg;
@@ -102,7 +103,7 @@ public class Client extends AbstractClient {
                 break;
             case ServerStopped:
                 Platform.runLater(() -> {
-                    showError.showErrorPopup("Server disconnected\nByebye");
+                    showError.showErrorPopup("Server disconnected\nBye-bye");
                     System.exit(-1);
                 });
 
@@ -186,6 +187,7 @@ public class Client extends AbstractClient {
                 this.singleQuestion = messageFromServer.getMsg();
                 break;
             case ImportedTestByID:
+            case ImportedTestAverage:
                 this.singleTest = messageFromServer.getMsg();
                 break;
             case StudentVerified:
@@ -225,9 +227,6 @@ public class Client extends AbstractClient {
                 this.studentTests = (List<Object>) messageFromServer.getMsg();
                 break;
 
-            case ImportedTestAverage:
-                this.singleTest = messageFromServer.getMsg();
-                break;
             case TestIsForcedLockedManual:
                 manualTest.lockTest();
                 break;
@@ -237,13 +236,8 @@ public class Client extends AbstractClient {
             case ImportedAfterTestInfo:
                 this.infoAboutTest = (List<Object>) messageFromServer.getMsg();
                 break;
-
-
-
-
         }
     }
-
 
     public void handleMessageFromClientUI(Object message) {
         try {

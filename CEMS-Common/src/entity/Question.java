@@ -6,17 +6,17 @@ import java.util.Observable;
 public class Question extends Observable implements Serializable {
     //TODO: fix selected property support (used in checkboxes)
     //private BooleanProperty selected = new SimpleBooleanProperty(false);
-    private String id;
-    private String questionNumber;
-    private String subject;
-    private String courseName;
-    private String questionText;
-    private String author;
-    private String answer1;
-    private String answer2;
-    private String answer3;
-    private String answer4;
-    private String correctAnswer;
+    private final String id;
+    private final String questionNumber;
+    private final String subject;
+    private final String courseName;
+    private final String questionText;
+    private final String author;
+    private final String answer1;
+    private final String answer2;
+    private final String answer3;
+    private final String answer4;
+    private final String correctAnswer;
 
     public Question(String questionNumber,
                     String questionId,String questionText, String questionWrittenBy,String subject,String course_name,

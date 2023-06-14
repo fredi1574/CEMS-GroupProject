@@ -111,6 +111,7 @@ public class CemsServer extends AbstractServer {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void sendToAllClients(Object msg) {
         Thread[] clientThreadList = getClientConnections();
         messageFromServerToAll = (MsgHandler<Object>) msg;

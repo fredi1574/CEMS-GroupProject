@@ -15,7 +15,7 @@ public class FileCreator implements Serializable {
     private String examDate;
     private int size = 0;
     public byte[] mybytearray;
-    private String userType = null;
+    private final String userType = null;
 
     /**
      * Initializes the byte array with the given size.

@@ -2,6 +2,8 @@ package application.enterTest;
 
 import Client.Client;
 import Client.ClientUI;
+import Client.ExitButton;
+import Client.LogOut;
 import entity.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -20,8 +22,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import util.*;
-import Client.ExitButton;
-import Client.LogOut;
 
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -144,18 +144,13 @@ public class QuestionsComputerizedTestAnswerController {
     private void fetchQuestion() {
         MsgHandler getQuestionInformation = new MsgHandler(TypeMsg.GetTestQuestionsById, testID);
         ClientUI.chat.accept(getQuestionInformation);
+
         testQuestions = FXCollections.observableArrayList((List) ClientUI.chat.getTestQuestions());
         totalQuestions = testQuestions.size();
-        if (currentQuestionIndex < 1) {
-            previousButton.setDisable(true);
-        } else {
-            previousButton.setDisable(false);
-        }
-        if (currentQuestionIndex == totalQuestions - 1) {
-            myButton.setDisable(true);
-        } else {
-            myButton.setDisable(false);
-        }
+
+        previousButton.setDisable(currentQuestionIndex < 1);
+        myButton.setDisable(currentQuestionIndex == totalQuestions - 1);
+
         if (currentQuestionIndex < totalQuestions) {
             TestQuestion question = testQuestions.get(currentQuestionIndex);
             MsgHandler getQuestionAndAnswer = new MsgHandler(TypeMsg.getQuestionAndAnswerFromTest, question.getQuestionID());

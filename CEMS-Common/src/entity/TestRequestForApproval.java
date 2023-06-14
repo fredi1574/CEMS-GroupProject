@@ -3,14 +3,14 @@ package entity;
 import java.io.Serializable;
 import java.util.Observable;
 
-public class TestRequestForApproval extends Observable implements Serializable {
+public class TestRequestForApproval implements Serializable {
 	
 	private String newDuration;
 	private String explanation;
 	private String id;
 	private String subject;
 	private String course;
-	private String author;
+	private final String author;
 	/**
 	 * Constructs an ExamRequestForApproval object with the specified parameters.
 	 * 

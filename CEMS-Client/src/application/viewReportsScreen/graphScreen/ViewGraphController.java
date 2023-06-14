@@ -50,7 +50,7 @@ public class ViewGraphController {
     private Text testIDtext;
     @FXML
     private Text DurationText;
-    private ViewReportsController VRC = new ViewReportsController();
+    private final ViewReportsController VRC = new ViewReportsController();
     private static int numberOfStudentTests;
 
     private static double averageScore;

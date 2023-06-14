@@ -6,10 +6,10 @@ import java.util.Observable;
 
 public class Course extends Observable implements Serializable {
 
-    private String subjectID;
-    private String courseID;
-    private String subjectName;
-    private String courseName;
+    private final String subjectID;
+    private final String courseID;
+    private final String subjectName;
+    private final String courseName;
 
     /**
      * Constructs a Course object with the specified parameters.

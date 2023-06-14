@@ -3,7 +3,7 @@ package entity;
 import java.io.Serializable;
 import java.util.Observable;
 
-public class TestForApproval  extends Observable implements Serializable {
+public class TestForApproval implements Serializable {
     private String studentID;
     private String testID;
     private String subjectID;

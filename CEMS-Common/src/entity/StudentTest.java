@@ -3,7 +3,7 @@ package entity;
 import java.io.Serializable;
 import java.util.Observable;
 
-public class StudentTest extends Test implements Serializable {
+public class StudentTest extends Observable implements Serializable {
     private String studentID;
     private String testID;
     private String subjectID;
@@ -13,7 +13,7 @@ public class StudentTest extends Test implements Serializable {
     private String year;
     private String semester;
     private String session;
-    private String testDuration;
+    private final String testDuration;
 
     private ApprovalStatus approved;
     private CheatingSuspicion suspicionOfCheating;
