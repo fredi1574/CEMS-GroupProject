@@ -4,6 +4,7 @@ import Client.Client;
 import Client.ClientUI;
 import entity.ApprovalStatus;
 import entity.CheatingSuspicion;
+import javafx.stage.Stage;
 import util.StateManagement;
 import entity.TestForApproval;
 import javafx.collections.FXCollections;
@@ -76,6 +77,11 @@ public class viewTestAwaitingApprovalController {
         setCombobox();
 
 
+    }
+    private void reloadPage() {
+        Stage currentStage = (Stage) header.getScene().getWindow();
+        currentStage.close();
+        ScreenManager.showStage(PathConstants.manageTestsPath, PathConstants.iconPath);
     }
 
     private void setCombobox() {
