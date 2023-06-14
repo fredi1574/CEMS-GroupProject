@@ -38,6 +38,7 @@ CREATE TABLE `activetest` (
 
 LOCK TABLES `activetest` WRITE;
 /*!40000 ALTER TABLE `activetest` DISABLE KEYS */;
+INSERT INTO `activetest` VALUES ('010204',4,'2023-06-14','13:11','6cc0');
 /*!40000 ALTER TABLE `activetest` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,6 +69,7 @@ CREATE TABLE `aftertestinfo` (
 
 LOCK TABLES `aftertestinfo` WRITE;
 /*!40000 ALTER TABLE `aftertestinfo` DISABLE KEYS */;
+INSERT INTO `aftertestinfo` VALUES ('010101',20,20,2,0,2,'2023-06-14',NULL,'100.0'),('010204',54,0,0,0,0,'2023-06-14',NULL,NULL);
 /*!40000 ALTER TABLE `aftertestinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,6 +239,7 @@ CREATE TABLE `studentstest` (
 
 LOCK TABLES `studentstest` WRITE;
 /*!40000 ALTER TABLE `studentstest` DISABLE KEYS */;
+INSERT INTO `studentstest` VALUES ('4','010101','01','Algebra','M','100','Noa Krispin','2020','A','B','NO','5','5','','YES','00:20:00'),('5','010101','01','Algebra','M','100','Abed Tayer','2020','A','B','NO','5','5','','YES','00:20:00');
 /*!40000 ALTER TABLE `studentstest` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,6 +287,7 @@ CREATE TABLE `test` (
   `year` varchar(45) DEFAULT NULL,
   `semester` varchar(45) DEFAULT NULL,
   `session` varchar(45) DEFAULT NULL,
+  `subjectID` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`,`subject`,`courseName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -294,7 +298,7 @@ CREATE TABLE `test` (
 
 LOCK TABLES `test` WRITE;
 /*!40000 ALTER TABLE `test` DISABLE KEYS */;
-INSERT INTO `test` VALUES ('01','010101','20','b b','Math','Algebra','null','M','null','2020','A','B'),('02','010202','20','b b','Math','Hedva','null','C','null','2020','A','B'),('03','010203','20','b b','Math','Hedva','null','C','null','2020','A','B');
+INSERT INTO `test` VALUES ('01','010101','20','b b','Math','Algebra','null','M','null','2020','A','B','01'),('02','010202','20','b b','Math','Hedva','null','C','null','2020','A','B','01'),('03','010203','20','b b','Math','Hedva','null','C','null','2020','A','B','01'),('04','010204','54','a a','Math','Hedva','null','C','null','2022','H','H','01'),('05','010205','12','a a','Math','Hedva','null','C','null','2222','B','B',NULL);
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -324,7 +328,7 @@ CREATE TABLE `testquestion` (
 
 LOCK TABLES `testquestion` WRITE;
 /*!40000 ALTER TABLE `testquestion` DISABLE KEYS */;
-INSERT INTO `testquestion` VALUES ('010102','2',50,'How much is 1+1?','010205','Algebra','01','b b'),('010103','3',100,'How much is 10-10?','010101','Algebra','01','b b'),('010103','3',100,'How much is 10-10?','010203','Algebra','01','b b'),('010204','4',100,'The answer is 2','010201','Hedva','01','b b'),('010204','4',100,'The answer is 2','010202','Hedva','01','b b'),('010204','4',50,'The answer is 2','010205','Hedva','01','b b');
+INSERT INTO `testquestion` VALUES ('010102','2',50,'How much is 1+1?','010205','Algebra','01','b b'),('010103','3',100,'How much is 10-10?','010101','Algebra','01','b b'),('010103','3',100,'How much is 10-10?','010203','Algebra','01','b b'),('010106','6',25,'What is the value of x in the equation 2x + 5 = 15?','010204','Algebra','01','a a'),('010106','6',100,'What is the value of x in the equation 2x + 5 = 15?','010205','Algebra','01','a a'),('010107','7',25,'Which of the following expressions is equivalent to 3(x - 2)?','010204','Algebra','01','a a'),('010204','4',100,'The answer is 2','010201','Hedva','01','b b'),('010204','4',100,'The answer is 2','010202','Hedva','01','b b'),('010204','4',50,'The answer is 2','010205','Hedva','01','b b'),('010205','5',25,'The answer is 1','010204','Hedva','01','a a'),('010210','10',25,'The answer is 4','010204','Hedva','01','a a');
 /*!40000 ALTER TABLE `testquestion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -396,4 +400,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-13 17:03:38
+-- Dump completed on 2023-06-14 14:19:39
