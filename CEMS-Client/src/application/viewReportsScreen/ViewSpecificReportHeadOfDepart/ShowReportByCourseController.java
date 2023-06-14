@@ -16,7 +16,7 @@ import Client.LogOut;
 
 import java.util.List;
 
-public class showReportByCourseController {
+public class ShowReportByCourseController {
     ObservableList<Course> coursesList;
     @FXML
     private Text usernameText;

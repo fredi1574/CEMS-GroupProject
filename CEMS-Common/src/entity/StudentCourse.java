@@ -6,11 +6,6 @@ public class StudentCourse  implements Serializable {
     private String studentID;
     private String course;
 
-    // Constructors
-    public StudentCourse() {
-        // Default constructor
-    }
-
     public StudentCourse(String studentID, String course) {
         this.studentID = studentID;
         this.course = course;

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import static util.TextFormatter.formatField;
 
-public class showReportByStudentController {
+public class ShowReportByStudentController {
 
     @FXML
     private Text usernameText;

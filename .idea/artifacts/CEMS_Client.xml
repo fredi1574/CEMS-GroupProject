@@ -1,0 +1,15 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CEMS-Client">
+    <output-path>$PROJECT_DIR$/classes/artifacts/CEMS_Client</output-path>
+    <root id="archive" name="CEMS-Client.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="OCSF" />
+      <element id="module-output" name="CEMS-Common" />
+      <element id="module-output" name="CEMS-Server" />
+      <element id="module-output" name="CEMS-Client" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/CEMS-Server/lib/mysql-connector-java-8.0.13.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -11,8 +11,6 @@ import Client.ExitButton;
 import Client.LogOut;
 
 public class ViewReportHeadOfDepartmentController {
-    @FXML
-    private ComboBox<?> RoleCombo;
 
     @FXML
     private AnchorPane header;

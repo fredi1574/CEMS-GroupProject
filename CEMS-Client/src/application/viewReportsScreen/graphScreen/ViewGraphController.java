@@ -128,7 +128,6 @@ public class ViewGraphController {
                 totalScore += score;
                 scoreValues.add(score);
                 numberOfStudentTests++;
-                String testID = studentTest.getTestID();
             }
         }
 

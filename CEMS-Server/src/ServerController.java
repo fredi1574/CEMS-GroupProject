@@ -145,7 +145,7 @@ public class ServerController {
     }
 
     @FXML
-    void ImportData(ActionEvent event) {
+    void ImportData() {
         MysqlConnection.connectToDb(this.txtPassword.getText());
     }
 

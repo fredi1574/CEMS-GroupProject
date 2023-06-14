@@ -14,7 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import util.*;
 import Client.ClientUI;
@@ -24,7 +23,7 @@ import Client.LogOut;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
-public class viewActiveTestController {
+public class ViewActiveTestController {
     static boolean requestSent;
     @FXML
     private static Button extraTimeBtn;
@@ -42,20 +41,11 @@ public class viewActiveTestController {
     public TextField extraTimeTextField;
     public Button lockBtn;
     public Label lockTestLabel;
-    public Button unlockBtn;
-    public Label unlockTestLabel;
     public StateManagement stateManagement;
     public final SmsEmailPopUpController smsEmailPopUpController = new SmsEmailPopUpController();
     @FXML
-    private Pane requestDeclinedPane;
-    @FXML
-    private Label requestPendingText;
-    @FXML
-    private Pane requestApprovedPane;
-    @FXML
     private AnchorPane header;
     private Timeline timer;
-    private int testDurationMinutes;
     private int remainingSeconds;
 
     public void initialize() {
@@ -192,8 +182,8 @@ public class viewActiveTestController {
     }
 
     @FXML
-    private void closeClient(ActionEvent event) {
-        ExitButton.closePopUp(event);
+    private void closeClient() {
+        ExitButton.closeClient();
     }
 
     @FXML

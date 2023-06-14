@@ -10,7 +10,7 @@ import util.*;
 import Client.ExitButton;
 import Client.LogOut;
 
-public class mainMenuHeadOfDepartmentController {
+public class MainMenuHeadOfDepartmentController {
 
     @FXML
     private AnchorPane header;

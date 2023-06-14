@@ -11,7 +11,7 @@ import util.*;
 import Client.ExitButton;
 import Client.LogOut;
 
-public class mainMenuStudentController {
+public class MainMenuStudentController {
     final SmsEmailPopUpController smsEmailPopUpController = new SmsEmailPopUpController();
     @FXML
     private AnchorPane header;

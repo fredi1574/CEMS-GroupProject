@@ -14,7 +14,7 @@ import util.*;
 
 import java.util.ArrayList;
 
-public class viewRequestController {
+public class ViewRequestController {
 
     @FXML
     private Button approveBtn;
@@ -51,13 +51,16 @@ public class viewRequestController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
     }
+
     public void setManage(Stage manageRequests) {
         this.manageRequests = manageRequests;
     }
+
     @FXML
     public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
+
     public void setRequest(TestRequestForApproval request) {
         this.request = request;
         CourseText.setText(request.getCourse());
@@ -66,40 +69,45 @@ public class viewRequestController {
         TimeExtentionDurationText.setText(request.getNewDuration());
         testIDText.setText(request.getId());
     }
-    public void deleteRequest(String request){
-        MsgHandler delete = new MsgHandler(TypeMsg.DeleteRequest,request);
+
+    public void deleteRequest(String request) {
+        MsgHandler delete = new MsgHandler(TypeMsg.DeleteRequest, request);
         ClientUI.chat.accept(delete);
 
     }
+
     @FXML
-    public void approveRequest(ActionEvent event) {
+    public void approveRequest() {
         String AddedTime = TimeExtentionDurationText.getText();
+
         ArrayList<String> ChangeTestDurationArr = new ArrayList<>();
+
         ChangeTestDurationArr.add(testIDText.getText());
         ChangeTestDurationArr.add(AddedTime);
+
         if (showError.showConfirmationPopup("Are you sure you want to approve this request?")) {
-            MsgHandler changeDuration = new MsgHandler(TypeMsg.changeTestDuration,ChangeTestDurationArr);
+            MsgHandler changeDuration = new MsgHandler(TypeMsg.changeTestDuration, ChangeTestDurationArr);
             ClientUI.chat.accept(changeDuration);
+
             MsgHandler approveRequest = new MsgHandler(TypeMsg.ApproveRequestByHeadOfDepartment, request.getAuthor());
             ClientUI.chat.accept(approveRequest);
+
             deleteRequest(testIDText.getText());
             reloadPage(approveBtn);
-            //TODO: return to the lecturer with the approval
         }
-
-
     }
+
     @FXML
-    public void declineRequest(ActionEvent event) {
+    public void declineRequest() {
         if (showError.showConfirmationPopup("Are you sure you want to decline this request?")) {
-            MsgHandler declineRequest = new MsgHandler(TypeMsg.DeclineRequestByHeadOfDepartment,request.getAuthor());
+            MsgHandler declineRequest = new MsgHandler(TypeMsg.DeclineRequestByHeadOfDepartment, request.getAuthor());
             ClientUI.chat.accept(declineRequest);
+
             deleteRequest(testIDText.getText());
-            //TODO: return to the lecturer with the decline
             reloadPage(declineBtn);
         }
-
     }
+
     private void reloadPage(Button button) {
         Stage currentStage = (Stage) button.getScene().getWindow();
         currentStage.close();

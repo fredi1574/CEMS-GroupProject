@@ -15,9 +15,8 @@ import Client.ExitButton;
 import Client.LogOut;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class showReportByLecturerController {
+public class ShowReportByLecturerController {
 
     @FXML
     private ComboBox<String> LecturerCombo;
@@ -28,7 +27,6 @@ public class showReportByLecturerController {
     @FXML
     private Text usernameText;
     private static ObservableList<String> LecturerNames;
-    private static ArrayList<String> LecturersID;
     public static String chosenLecturer;
     public void initialize() {
         ScreenManager.dragAndDrop(header);

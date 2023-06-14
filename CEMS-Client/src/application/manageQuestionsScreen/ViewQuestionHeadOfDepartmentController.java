@@ -21,7 +21,7 @@ import Client.LogOut;
 
 import java.util.List;
 
-public class viewQuestionHeadOfDepartmentController {
+public class ViewQuestionHeadOfDepartmentController {
 
     @FXML
     private AnchorPane header;

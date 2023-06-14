@@ -2,13 +2,13 @@ package Client;
 
 import application.enterTest.ManualTestController;
 import application.enterTest.QuestionsComputerizedTestAnswerController;
-import application.mainMenuScreen.mainMenuStudentController;
-import application.manageTestsScreen.viewActiveTestController;
+import application.mainMenuScreen.MainMenuStudentController;
+import application.manageTestsScreen.ViewActiveTestController;
 import application.viewReportsScreen.ViewReportsController;
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.OpenReportByCourseController;
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.OpenReportByLecturerController;
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.OpenReportByStudentController;
-import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.showReportByLecturerController;
+import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.ShowReportByLecturerController;
 import client.AbstractClient;
 import entity.*;
 import javafx.application.Platform;
@@ -48,13 +48,13 @@ public class Client extends AbstractClient {
 
     public List<Object> requests;
     public static final OpenReportByStudentController HODPstudentReportcontroller = new OpenReportByStudentController();
-    public static final showReportByLecturerController HODPshowReportByLecturerController = new showReportByLecturerController();
+    public static final ShowReportByLecturerController HODPshowReportByLecturerController = new ShowReportByLecturerController();
     public static final OpenReportByLecturerController HODPopenReporLecturerController = new OpenReportByLecturerController();
     public static final OpenReportByCourseController HODPopenReportCourseController = new OpenReportByCourseController();
     public static final ViewReportsController LectureReportsController = new ViewReportsController();
     public static final QuestionsComputerizedTestAnswerController StudentInTest = new QuestionsComputerizedTestAnswerController();
-    public static final viewActiveTestController activeTestController = new viewActiveTestController();
-    public static final mainMenuStudentController menuStudentController = new mainMenuStudentController();
+    public static final ViewActiveTestController activeTestController = new ViewActiveTestController();
+    public static final MainMenuStudentController menuStudentController = new MainMenuStudentController();
     public static final ManualTestController manualTest = new ManualTestController();
 
 

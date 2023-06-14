@@ -36,8 +36,6 @@ public class ViewReportsController {
     @FXML
     private ComboBox<String> semesterComboBox;
     @FXML
-    private ComboBox<String> subjectComboBox;
-    @FXML
     private TableView<StudentTest> reportsTableView;
     @FXML
     private Text usernameText;
@@ -96,7 +94,7 @@ public class ViewReportsController {
     }
 
 
-    public void setFunctions(String relativePath) {
+    public void setFunctions(String ignored) {
         ViewGraphController controller = new ViewGraphController();
         StudentTest rowData = reportsTableView.getSelectionModel().getSelectedItem();
         controller.setReport(rowData);

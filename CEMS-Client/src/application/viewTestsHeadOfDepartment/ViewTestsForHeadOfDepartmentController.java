@@ -9,7 +9,6 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -20,7 +19,7 @@ import Client.LogOut;
 
 import java.util.List;
 
-public class viewTestsForHeadOfDepartmentController {
+public class ViewTestsForHeadOfDepartmentController {
 
     @FXML
     private AnchorPane header;
@@ -30,11 +29,7 @@ public class viewTestsForHeadOfDepartmentController {
     @FXML
     private TextField searchField;
     @FXML
-    private ComboBox<String> SelectCourseCombo;
-    @FXML
     private TableView<Test> manageTestsTableView;
-    @FXML
-    private TableView<Test> testApprovalTableView;
 
     @FXML
     public void initialize() {
@@ -44,7 +39,6 @@ public class viewTestsForHeadOfDepartmentController {
         ClientUI.chat.accept(getTestTable);
 
         //fetches the tests table from the database
-//        ArrayList<Object> testTableList = ClientUI.chat.getTests();
         ObservableList<Test> tests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
         ObservableList<String> columns = FXCollections.observableArrayList();
         columns.addAll("Test Number", "ID", "Subject", "Course Name", "Year", "Semester", "Session", "Author");

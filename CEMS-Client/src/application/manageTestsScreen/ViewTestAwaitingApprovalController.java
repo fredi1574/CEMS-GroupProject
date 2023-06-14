@@ -2,87 +2,72 @@ package application.manageTestsScreen;
 
 import Client.Client;
 import Client.ClientUI;
+import Client.ExitButton;
+import Client.LogOut;
 import entity.ApprovalStatus;
 import entity.CheatingSuspicion;
-import javafx.stage.Stage;
 import entity.TestForApproval;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import util.*;
-import Client.ExitButton;
-import Client.LogOut;
 
 import static util.TextFormatter.formatField;
 
-public class viewTestAwaitingApprovalController {
+public class ViewTestAwaitingApprovalController {
 
+    public StateManagement stateManagement;
+    ObservableList<TestForApproval> testsForApproval;
     @FXML
     private TextField gradeField;
-
     @FXML
     private AnchorPane header;
     @FXML
     private Text usernameText;
-    public StateManagement stateManagement;
-
     @FXML
     private Label studentIDLabel;
-
     @FXML
     private Label testIDLabel;
-
     @FXML
     private Label totalQuestionsLabel;
-
     @FXML
     private Label correctAnswersLabel;
     @FXML
     private Label cheatingLabel;
-
     @FXML
     private TextArea teacherComment;
-
     private TestForApproval selectedTest;
-
     private boolean isSelected = false;
     private int indexOfTest;
-
     @FXML
     private ComboBox<String> comboBoxApproval;
-    ObservableList<TestForApproval> testsForApproval;
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getName());
 
-        formatField(gradeField,true,3);
+        formatField(gradeField, true, 3);
 
         stateManagement = StateManagement.getInstance();
 
         testsForApproval = stateManagement.getTestForApproval();
         for (int i = 0; i < testsForApproval.size(); i++) {
             if (stateManagement.getTestID().equals(testsForApproval.get(i).getTestID()) &&
-                stateManagement.getStudentID().equals(testsForApproval.get(i).getStudentID())) {
+                    stateManagement.getStudentID().equals(testsForApproval.get(i).getStudentID())) {
                 selectedTest = stateManagement.getTestForApproval().get(i);
                 indexOfTest = i;
                 break;
             }
         }
         setAllDataTestForStudent(selectedTest);
-
         setCombobox();
-
-
-    }
-    private void reloadPage() {
-        Stage currentStage = (Stage) header.getScene().getWindow();
-        currentStage.close();
-        ScreenManager.showStage(PathConstants.manageTestsPath, PathConstants.iconPath);
     }
 
     private void setCombobox() {
@@ -132,6 +117,7 @@ public class viewTestAwaitingApprovalController {
             ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
         }
     }
+
     @FXML
     void BackTOManageTest(ActionEvent event) {
         StateManagement.resetInstance();
@@ -150,7 +136,7 @@ public class viewTestAwaitingApprovalController {
 
     public void LogOut(ActionEvent event) {
         StateManagement.resetInstance();
-       LogOut.logOutToLoginScreen(event);
+        LogOut.logOutToLoginScreen(event);
     }
 }
 

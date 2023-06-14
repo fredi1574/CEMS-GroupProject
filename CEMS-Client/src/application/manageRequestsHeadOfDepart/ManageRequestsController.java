@@ -20,7 +20,7 @@ import Client.LogOut;
 import java.util.ArrayList;
 import java.util.List;
 
-public class manageRequestsController {
+public class ManageRequestsController {
 
     @FXML
     private Text usernameText;
@@ -30,7 +30,7 @@ public class manageRequestsController {
 
     @FXML
     private TableView<TestRequestForApproval> RequestsDBTableView;
-    public static manageRequestsController ManageQuestionsControl;
+    public static ManageRequestsController ManageQuestionsControl;
     @FXML
     private Button approveBtn;
 
@@ -56,7 +56,7 @@ public class manageRequestsController {
     public void setFunctions(String relativePath) {
         ScreenElements<Stage, FXMLLoader> screenElements = ScreenManager.popUpScreen(relativePath);
         FXMLLoader loader = screenElements.getFXMLLoader();
-        viewRequestController controller = loader.getController();
+        ViewRequestController controller = loader.getController();
         TestRequestForApproval rowData = RequestsDBTableView.getSelectionModel().getSelectedItem();
         controller.setRequest(rowData);
         controller.setManage((Stage) header.getScene().getWindow());

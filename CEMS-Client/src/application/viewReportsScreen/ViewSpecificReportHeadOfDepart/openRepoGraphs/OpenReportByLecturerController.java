@@ -1,6 +1,6 @@
 package application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs;
 
-import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.showReportByLecturerController;
+import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.ShowReportByLecturerController;
 import entity.StudentTest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -40,7 +40,7 @@ public class OpenReportByLecturerController {
     private static int totalTests;
     private static double medianScore;
     private static int AverageScore;
-    public static showReportByLecturerController takeChosenfromController= new showReportByLecturerController();
+    public static ShowReportByLecturerController takeChosenfromController= new ShowReportByLecturerController();
     @FXML
     public void initialize() {
         testsNumberText.setText(String.valueOf(totalTests));

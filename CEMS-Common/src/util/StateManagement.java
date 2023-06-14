@@ -192,10 +192,6 @@ public class StateManagement {
         return testType;
     }
 
-    public void setTestType(TestTypeEnum testType) {
-        this.testType = testType;
-    }
-
     /**
      * resets all test-state related data
      * used when a new test has been created

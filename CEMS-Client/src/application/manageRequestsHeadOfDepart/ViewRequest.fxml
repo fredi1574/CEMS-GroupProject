@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="485.0" prefWidth="810.0" stylesheets="@/util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.manageRequestsHeadOfDepart.viewRequestController">
+<AnchorPane prefHeight="485.0" prefWidth="810.0" stylesheets="@/util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.manageRequestsHeadOfDepart.ViewRequestController">
    <children>
       <AnchorPane fx:id="header" prefHeight="115.0" prefWidth="810.0" style="-fx-border-color: #1d416e; -fx-border-width: 4 3 0 3;" styleClass="pageHeader">
          <children>
