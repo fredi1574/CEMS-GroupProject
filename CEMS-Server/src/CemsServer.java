@@ -404,7 +404,7 @@ public class CemsServer extends AbstractServer {
                     if (obj instanceof Test) {
                         this.test = (Test) obj;
                         String newQuery = "INSERT INTO cems.test (testNumber, id, testDuration, author, subject, courseName, " +
-                                "teacherComment, testType, studentComment, semester, year, session) " +
+                                "teacherComment, testType, studentComment, semester, year, session, subjectID) " +
                                 "VALUES ('" + test.getTestNumber() + "', " +
                                 "'" + test.getId() + "', " +
                                 "'" + test.getTestDuration() + "', " +
@@ -416,7 +416,8 @@ public class CemsServer extends AbstractServer {
                                 "'" + test.getStudentComments() + "', " +
                                 "'" + test.getSemester() + "', " +
                                 "'" + test.getYear() + "', " +
-                                "'" + test.getSession() + "') ";
+                                "'" + test.getSession() + "', " +
+                                "'" + test.getSubjectID()+ "') ";
                         MysqlConnection.update(newQuery);
                         client.sendToClient(new MsgHandler<>(TypeMsg.AddNewTestResponse, null));
                     }
@@ -736,14 +737,15 @@ public class CemsServer extends AbstractServer {
                     this.obj = (String[]) this.msg.getMsg();
                     String[] infoArray = (String[]) obj;
 
-                    String newAfterTestInfoQuery = "INSERT INTO cems.aftertestinfo (testID,date,testDuration,actualDuration,totalFinished,totalForcedFinished,totalStudents) " +
+                    String newAfterTestInfoQuery = "INSERT INTO cems.aftertestinfo (testID,date,testDuration,actualDuration,totalFinished,totalForcedFinished,totalStudents,testCode) " +
                             "VALUES ('" + infoArray[0] + "', " +
                             "'" + infoArray[1] + "', " +
                             "'" + infoArray[2] + "', " +
                             "'" + 0 + "', " +
                             "'" + 0 + "', " +
                             "'" + 0 + "', " +
-                            "'" + 0 + "') ";
+                            "'" + 0 + "', " +
+                            "'" + infoArray[3] + "') ";
 
 
                     MysqlConnection.update(newAfterTestInfoQuery);

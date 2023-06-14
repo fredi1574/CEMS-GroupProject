@@ -102,6 +102,38 @@
                 </Label>
             <Text fx:id="averageText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
             </HBox>
+         <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="200.0">
+            <children>
+               <Label prefHeight="24.0" prefWidth="90.0" text="Finished:" textFill="#7799c2">
+                  <font>
+                     <Font name="Trebuchet MS Bold" size="17.0" />
+                  </font>
+                  <padding>
+                     <Insets left="10.0" />
+                  </padding>
+                  <HBox.margin>
+                     <Insets right="2.0" />
+                  </HBox.margin>
+               </Label>
+               <Text fx:id="finishedText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            </children>
+         </HBox>
+         <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="200.0">
+            <children>
+               <Label prefHeight="24.0" prefWidth="149.0" text="Forced Finished:" textFill="#7799c2">
+                  <font>
+                     <Font name="Trebuchet MS Bold" size="17.0" />
+                  </font>
+                  <padding>
+                     <Insets left="10.0" />
+                  </padding>
+                  <HBox.margin>
+                     <Insets right="2.0" />
+                  </HBox.margin>
+               </Label>
+               <Text fx:id="ForcedFinsihedText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            </children>
+         </HBox>
         </VBox>
         <BarChart fx:id="reportGraph" animated="false" layoutX="168.0" layoutY="39.0" legendSide="LEFT" legendVisible="false" prefHeight="385.0" prefWidth="625.0" title="Grades distribution">
             <xAxis>

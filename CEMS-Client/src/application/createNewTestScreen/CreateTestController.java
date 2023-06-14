@@ -84,6 +84,7 @@ public class CreateTestController {
         courseTableView.setOnMouseClicked((e) -> {
             rowData = (Course) courseTableView.getSelectionModel().getSelectedItem();
             if (rowData != null) {
+                stateManagement.setSubjectID(rowData.getSubjectID());
                 setTestData();
                 stateManagement.clearTestQuestions();
             }

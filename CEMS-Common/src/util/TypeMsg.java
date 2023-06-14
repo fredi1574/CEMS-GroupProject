@@ -680,5 +680,15 @@ public enum TypeMsg {
         public String toString() {
             return "Time of Manual test increased";
         }
+    },
+    getTestAfterTestInfo{
+        public String toString() {
+            return "get after test info";
+        }
+    },
+    ImportedTestAfterTestInfo{
+        public String toString() {
+            return "Imported after test info";
+        }
     }
 }

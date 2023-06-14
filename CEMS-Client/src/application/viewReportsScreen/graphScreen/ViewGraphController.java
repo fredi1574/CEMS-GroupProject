@@ -20,7 +20,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ViewGraphController {
+    @FXML
+    private Text finishedText;
 
+    @FXML
+    private Text ForcedFinsihedText;
 
     @FXML
     private Text NumberText;
@@ -80,6 +84,7 @@ public class ViewGraphController {
         CourseYearSessionText.setText(CourseYearSession);
         semesterText.setText(semester);
         testIDtext.setText(testID);
+
 
     }
     public void setViewReport(Stage reports) {

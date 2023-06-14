@@ -232,7 +232,7 @@ public class ManageTestsController {
      * @param actionEvent the event that triggered the method (clicking the "activate test" button)
      */
     public void activateTest(ActionEvent actionEvent) {
-
+        String testCode;
         if (testRowData == null) {
             showError.showErrorPopup("Select a test to activate");
             return;
@@ -251,7 +251,7 @@ public class ManageTestsController {
                     stateManagement.getTestQuestions().size(),
                     currentDate.toString(),
                     currentTime.toString(),
-                    generateTestCode()
+                    testCode = generateTestCode()
             );
 
             //adds a row to the activetest table
@@ -259,7 +259,7 @@ public class ManageTestsController {
             ClientUI.chat.accept(addNewActiveTest);
 
             //adds a row to the aftertestinfo table
-            String[] infoArray = {testRowData.getId(), testToActivate.getTestDate(), testRowData.getTestDuration()};
+            String[] infoArray = {testRowData.getId(), testToActivate.getTestDate(), testRowData.getTestDuration(),testCode};
             MsgHandler addNewAfterTestInfo = new MsgHandler(TypeMsg.AddNewAfterTestInfo, infoArray);
             ClientUI.chat.accept(addNewAfterTestInfo);
             StateManagement.resetInstance();
