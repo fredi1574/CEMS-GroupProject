@@ -32,7 +32,7 @@ public class mainMenuStudentController {
     public void showTestApprovedPopUp() {
         Platform.runLater(() -> {
 
-            smsEmailPopUpController.SetInfoField("Your test was approved by the lecturer!\nEnter View Tests to see more information", Client.user.getFullName(), Client.user.getEmail());
+            smsEmailPopUpController.SetInfoField("Your test was approved by the lecturer!\nEnter View Tests to see more information", Client.user.getFullName(), Client.user.getEmail(), Client.user.getPhone());
             ScreenManager.popUpScreen(PathConstants.SmsEmailPopUp);
         });
     }

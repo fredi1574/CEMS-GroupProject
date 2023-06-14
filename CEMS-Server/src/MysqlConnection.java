@@ -151,7 +151,7 @@ public class MysqlConnection {
 
     public static Object authenticateUser(String username, String password) {
         try {
-            PreparedStatement statement = conn.prepareStatement("SELECT id, firstName, lastName, email, role, isLoggedIn FROM user  WHERE BINARY username = ? AND password = ?");
+            PreparedStatement statement = conn.prepareStatement("SELECT id, firstName, lastName, email, role, isLoggedIn,phoneNumber FROM user  WHERE BINARY username = ? AND password = ?");
             statement.setString(1, username);
             statement.setString(2, password);
 
@@ -164,9 +164,10 @@ public class MysqlConnection {
                     String email = resultSet.getString("email");
                     String role = resultSet.getString("role");
                     int IsLoggedIn = resultSet.getInt("isLoggedIn");
+                    String phone = resultSet.getString("phoneNumber");
 
                     // Create a new ConcreteUser object with the retrieved details
-                    User user = new User(id, firstName, lastName, username, password, email, role,IsLoggedIn);
+                    User user = new User(id, firstName, lastName, username, password, email, role,IsLoggedIn,phone);
                     // Set the authenticated user
 
                     return user;
@@ -394,10 +395,11 @@ public class MysqlConnection {
                 String email = rs.getString("email");
                 String role = rs.getString("role");
                 int IsLoggedIn = rs.getInt("isLoggedIn");
+                String phone = rs.getString("phoneNumber");
 
 
                 // Create a new ConcreteUser object with the retrieved details
-                User user = new User(id, firstName, lastName, "username", "password", email, role,IsLoggedIn);
+                User user = new User(id, firstName, lastName, "username", "password", email, role,IsLoggedIn,phone);
                 // Set the authenticated user
                 getUsers.add(user);
 

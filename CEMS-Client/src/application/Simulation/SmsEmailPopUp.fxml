@@ -30,7 +30,7 @@
                   <Font name="Tahoma" size="23.0" />
                </font>
             </Text>
-            <Text layoutX="293.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0521234567">
+            <Text fx:id="phoneNumberText" layoutX="293.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0521234567">
                <font>
                   <Font size="13.0" />
                </font>

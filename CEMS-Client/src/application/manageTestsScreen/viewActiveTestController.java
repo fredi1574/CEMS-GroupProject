@@ -154,14 +154,16 @@ public class viewActiveTestController {
 
     public void showRequestDeclinedPopUp() {
         Platform.runLater(() -> {
-            smsEmailPopUpController.SetInfoField("Time change request was declined", Client.user.getFullName(), Client.user.getEmail());
+            smsEmailPopUpController.SetInfoField("Time change request was declined", Client.user.getFullName(), Client.user.getEmail(),
+                    Client.user.getPhone());
             ScreenManager.popUpScreen(PathConstants.SmsEmailPopUp);
         });
     }
 
     public void showRequestApprovedPopUp() {
         Platform.runLater(() -> {
-            smsEmailPopUpController.SetInfoField("Time change request was approved", Client.user.getFullName(), Client.user.getEmail());
+            smsEmailPopUpController.SetInfoField("Time change request was approved", Client.user.getFullName(), Client.user.getEmail(),
+                    Client.user.getPhone());
             ScreenManager.popUpScreen(PathConstants.SmsEmailPopUp);
         });
     }

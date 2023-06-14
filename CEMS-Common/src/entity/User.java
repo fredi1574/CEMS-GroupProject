@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 public class User implements Serializable {
     
-    String id, firstName, lastName, userName, password, email,role;
+    String id, firstName, lastName, userName, password, email,role,phone;
     int isLoggedIn;
 
 
@@ -18,8 +18,9 @@ public class User implements Serializable {
      * @param userName  the username of the user
      * @param password  the password of the user
      * @param email     the email address of the user
+     * @param phone the phone number of the user
      */
-    public User(String id, String firstName, String lastName, String userName, String password, String email, String role,int isLoggedIn) {
+    public User(String id, String firstName, String lastName, String userName, String password, String email, String role,int isLoggedIn,String phone) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,6 +29,7 @@ public class User implements Serializable {
         this.email = email;
         this.role = role;
         this.isLoggedIn = isLoggedIn;
+        this.phone = phone;
     }
 
     // Getters and Setters
@@ -39,6 +41,9 @@ public class User implements Serializable {
      */
     public String getId() {
         return id;
+    }
+    public String getPhone() {
+        return phone;
     }
     public int getIsLoggedIn() {
         return isLoggedIn;
