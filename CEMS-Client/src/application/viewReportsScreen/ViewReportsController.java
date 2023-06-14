@@ -47,7 +47,7 @@ public class ViewReportsController {
     @FXML
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        usernameText.setText(Client.user.getFullName());
+        usernameText.setText(Client.user.getName());
         MsgHandler getTable = new MsgHandler(TypeMsg.GetTestsByLecutrerForLecturerReport, Client.user.getFullName());
         ClientUI.chat.accept(getTable);
         // Temporary lists, for presentation

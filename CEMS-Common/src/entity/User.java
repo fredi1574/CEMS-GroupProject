@@ -42,6 +42,9 @@ public class User implements Serializable {
     public String getId() {
         return id;
     }
+    public String getName() {
+        return firstName;
+    }
     public String getPhone() {
         return phone;
     }

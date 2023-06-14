@@ -89,7 +89,7 @@ public class QuestionsComputerizedTestAnswerController {
         MsgHandler totalStudentIncrease = new MsgHandler(TypeMsg.IcreaseStudentsEnteringTest, testID);
         ClientUI.chat.accept(totalStudentIncrease);
         ScreenManager.dragAndDrop(header);
-        fullNameText.setText(Client.user.getFullName());
+        fullNameText.setText(Client.user.getName());
         fetchCourseNameAndTestId();
         fetchQuestion();
         fetchTestDuration();  // Call fetchTestDuration() before startTimer()

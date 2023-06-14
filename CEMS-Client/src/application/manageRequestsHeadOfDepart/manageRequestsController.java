@@ -40,7 +40,7 @@ public class manageRequestsController {
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        usernameText.setText(Client.user.getFullName());
+        usernameText.setText(Client.user.getName());
         MsgHandler getTable = new MsgHandler(TypeMsg.GetRequestsBySubject, Client.user.getUserName());
         ClientUI.chat.accept(getTable);
 

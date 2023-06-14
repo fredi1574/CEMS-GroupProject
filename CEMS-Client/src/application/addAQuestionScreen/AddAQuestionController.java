@@ -75,7 +75,7 @@ public class AddAQuestionController {
 
         formatField(CorrectAnswer,true,1);
 
-        usernameText.setText(Client.user.getFullName());
+        usernameText.setText(Client.user.getName());;
         createSubjectCombo(Client.user.getUserName());
         createCourseCombo(Client.user.getUserName());
         questionNumber.setVisible(false);
@@ -197,7 +197,7 @@ public class AddAQuestionController {
                 questionNumber.getText(),
                 QuestionID,
                 questionTextField.getText(),
-                usernameText.getText(),
+                Client.user.getFullName(),
                 Subject.substring(Subject.indexOf("-") + 1),
                 Course,
                 answer1.getText(),

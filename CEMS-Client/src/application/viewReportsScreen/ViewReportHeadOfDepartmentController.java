@@ -21,7 +21,7 @@ public class ViewReportHeadOfDepartmentController {
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        FullNameText.setText(Client.user.getFullName());
+        FullNameText.setText(Client.user.getName());
     }
 
     @FXML

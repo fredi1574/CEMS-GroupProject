@@ -74,7 +74,7 @@ public class ManualTestController {
         // Enables dragging and dropping of the application window using the header pane
         ScreenManager.dragAndDrop(header);
         OneMinLeft.setVisible(false);
-        fullNameText.setText(Client.user.getFullName());
+        fullNameText.setText(Client.user.getName());
         MsgHandler getActiveTestTable = new MsgHandler(TypeMsg.GetActiveTests, null);
         ClientUI.chat.accept(getActiveTestTable);
         ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTests());

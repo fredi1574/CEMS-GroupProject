@@ -54,7 +54,7 @@ public class CreateTestController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
 
-        nameAuthor.setText(Client.user.getFullName());
+        nameAuthor.setText(Client.user.getName());
 
         formatField(yearField, true, 4);
         formatField(testDurationField, true, 4);

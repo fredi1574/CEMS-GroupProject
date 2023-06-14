@@ -28,7 +28,7 @@ public class showReportByStudentController {
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        usernameText.setText(Client.user.getFullName());
+        usernameText.setText(Client.user.getName());
 
         formatField(StudentIDText, true, 9);
     }

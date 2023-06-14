@@ -55,7 +55,7 @@ public class PickQuestionsController {
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        nameAuthor.setText(Client.user.getFullName());
+        nameAuthor.setText(Client.user.getName());
 
         formatField(pointsField, true, 3);
         stateManagement = StateManagement.getInstance();

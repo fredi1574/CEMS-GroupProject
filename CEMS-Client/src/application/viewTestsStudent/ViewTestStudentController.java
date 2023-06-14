@@ -47,7 +47,7 @@ public class ViewTestStudentController {
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        usernameText.setText(Client.user.getFullName());
+        usernameText.setText(Client.user.getName());
 
         MsgHandler getTable = new MsgHandler(TypeMsg.GetStudentsTests, Client.user.getId());
         ClientUI.chat.accept(getTable);

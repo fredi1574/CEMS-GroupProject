@@ -49,7 +49,7 @@ public class ComputerizedTestController {
     public void initialize() {
         // Enables dragging and dropping of the application window using the header pane
         ScreenManager.dragAndDrop(header);
-        fullNameText.setText(Client.user.getFullName());
+        fullNameText.setText(Client.user.getName());
         setData();
     }
     @FXML

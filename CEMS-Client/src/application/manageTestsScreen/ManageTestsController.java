@@ -58,7 +58,7 @@ public class ManageTestsController {
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        usernameText.setText(fullName);
+        usernameText.setText(Client.user.getName());
 
         stateManagement = StateManagement.getInstance();
 

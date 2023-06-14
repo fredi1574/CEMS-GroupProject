@@ -39,7 +39,7 @@ public class viewTestsForHeadOfDepartmentController {
     @FXML
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        usernameText.setText(Client.user.getFullName());
+        usernameText.setText(Client.user.getName());
         MsgHandler getTestTable = new MsgHandler(TypeMsg.GetAllTestsTable, null);
         ClientUI.chat.accept(getTestTable);
 

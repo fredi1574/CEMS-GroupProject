@@ -31,7 +31,7 @@ public class NotesController {
     public void initialize(){
         ScreenManager.dragAndDrop(header);
 
-        nameAuthor.setText(Client.user.getFullName());
+        nameAuthor.setText(Client.user.getName());
 
         if(stateManagement.getStudentComment() != null)
             studentNote.setText(stateManagement.studentComment);

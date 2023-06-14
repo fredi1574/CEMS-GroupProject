@@ -32,7 +32,7 @@ public class showReportByLecturerController {
     public static String chosenLecturer;
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        usernameText.setText(Client.user.getFullName());
+        usernameText.setText(Client.user.getName());
         MsgHandler getLecutrers = new MsgHandler(TypeMsg.GetUser,Client.user.getId());
         ClientUI.chat.accept(getLecutrers);
         LecturerCombo.setItems(LecturerNames);

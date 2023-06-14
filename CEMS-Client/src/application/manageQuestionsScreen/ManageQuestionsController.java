@@ -45,7 +45,7 @@ public class ManageQuestionsController {
     @FXML
     public void initialize() {
         ScreenManager.dragAndDrop(header);
-        usernameText.setText(fullName);
+        usernameText.setText(Client.user.getName());
 
         displayQuestions();
     }
