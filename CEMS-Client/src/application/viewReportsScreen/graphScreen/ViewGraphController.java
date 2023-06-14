@@ -1,5 +1,6 @@
 package application.viewReportsScreen.graphScreen;
 
+import Client.Client;
 import Client.ClientUI;
 import Client.ExitButton;
 import Client.LogOut;
@@ -49,6 +50,8 @@ public class ViewGraphController {
     @FXML
     private Text testIDtext;
     private Stage reports;
+    @FXML
+    private Text DurationText;
     private ViewReportsController VRC = new ViewReportsController();
     private static int numberOfStudentTests;
 
@@ -84,6 +87,14 @@ public class ViewGraphController {
         CourseYearSessionText.setText(CourseYearSession);
         semesterText.setText(semester);
         testIDtext.setText(testID);
+        MsgHandler getInfoAfterTest = new MsgHandler(TypeMsg.getTestAfterTestInfo, testIDtext.getText());
+        ClientUI.chat.accept(getInfoAfterTest);
+        ArrayList<String> AddionalInformation = (ArrayList)ClientUI.chat.getInfoAboutTest();
+        DurationText.setText(AddionalInformation.get(0));
+        finishedText.setText(AddionalInformation.get(1));
+        ForcedFinsihedText.setText(AddionalInformation.get(2));
+
+
 
 
     }
@@ -161,7 +172,13 @@ public class ViewGraphController {
     private int countStudentsInRange(ArrayList<Double> scoreValues, int lowerRange, int upperRange) {
         int count = 0;
         for (double score : scoreValues) {
-            if (score >= lowerRange && score <= upperRange) {
+            if (score == 100){
+                if (score >= lowerRange && score <= upperRange) {
+                    count++;
+                }
+            }
+
+            else if (score >= lowerRange && score < upperRange) {
                 count++;
             }
         }

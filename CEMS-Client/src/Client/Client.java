@@ -34,6 +34,7 @@ public class Client extends AbstractClient {
     public List<Object> tests;
     public List<Object> testQuestions;
     public List<Object> activeTests;
+    public List<Object> infoAboutTest;
     public Object singleQuestion;
     public Object singleTest;
     public Object singleSubject;
@@ -268,6 +269,11 @@ public class Client extends AbstractClient {
                 break;
             case GetTestsByLecturerResponse:
                 this.tests = (List<Object>) messageFromServer.getMsg();
+                break;
+            case ImportedAfterTestInfo:
+                this.infoAboutTest = (List<Object>) messageFromServer.getMsg();
+                break;
+
 
 
 

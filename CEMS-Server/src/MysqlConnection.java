@@ -728,5 +728,30 @@ public class MysqlConnection {
         }
         return average;
     }
+    public static ArrayList<String> getAfterTestInfo(String query) {
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<String> list = new ArrayList<>();
+        try {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String actualDuration = rs.getString("actualDuration"); // assuming your table has a column named "id" with type INT
+                String totalFinished = rs.getString("totalFinished");
+                String totalForcedFinished = rs.getString("totalForcedFinished");
+                list.add(actualDuration);
+                list.add(totalFinished);
+                list.add(totalForcedFinished);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
 	

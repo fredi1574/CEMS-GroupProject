@@ -686,7 +686,7 @@ public enum TypeMsg {
             return "get after test info";
         }
     },
-    ImportedTestAfterTestInfo{
+    ImportedAfterTestInfo{
         public String toString() {
             return "Imported after test info";
         }

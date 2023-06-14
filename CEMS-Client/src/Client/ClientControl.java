@@ -104,6 +104,11 @@ public class ClientControl implements ChatIF {
 		response = client.studentTests;
 		return response;
 	}
+	public Object getInfoAboutTest(){
+		response = client.infoAboutTest;
+		return response;
+	}
+
 
 	//Instance methods ************************************************
 

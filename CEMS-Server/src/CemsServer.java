@@ -866,6 +866,13 @@ public class CemsServer extends AbstractServer {
                     String testsAverage = MysqlConnection.getStudentsAvg("SELECT average FROM aftertestinfo WHERE testID = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedTestAverage, testsAverage));
                     break;
+                case getTestAfterTestInfo:
+                    this.msg = (MsgHandler<Object>) msg;
+                    this.obj = (String) this.msg.getMsg();
+                    ArrayList<String> afterTestInfoForReports = MysqlConnection.getAfterTestInfo("SELECT * FROM aftertestinfo WHERE testID = '" + obj + "'");
+                    client.sendToClient(new MsgHandler<>(TypeMsg.ImportedAfterTestInfo, afterTestInfoForReports));
+                    break;
+
 
             }
 
