@@ -670,5 +670,15 @@ public enum TypeMsg {
         public String toString() {
             return "Terminating client";
         }
+    },
+    TestDurationChangedComputrizedSendToAll{
+        public String toString() {
+            return "Terminating client";
+        }
+    },
+    TestDurationChangedManualSendToAll{
+        public String toString() {
+            return "Terminating client";
+        }
     }
 }

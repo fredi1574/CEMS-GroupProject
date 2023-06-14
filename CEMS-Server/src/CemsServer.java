@@ -148,7 +148,24 @@ public class CemsServer extends AbstractServer {
                     }
                 }
                 break;
-            case TestDurationChanged:
+            case TestDurationChangedComputrizedSendToAll:
+                this.msg = (MsgHandler<Object>) msg;
+                this.obj = this.msg.getMsg();
+                if (obj instanceof Integer) {
+                    for (int i = 0; i < clientThreadList.length; i++) {
+                        ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
+                        String name = (String) client.getInfo(client.getName());
+                        if (name.equals("Student")) {
+                            try {
+                                client.sendToClient(new MsgHandler<>(TypeMsg.TestDurationChangedComputerized, obj));
+
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+                }
+            case TestDurationChangedManualSendToAll:
                 this.msg = (MsgHandler<Object>) msg;
                 this.obj = this.msg.getMsg();
                 if (obj instanceof Integer) {
@@ -158,7 +175,7 @@ public class CemsServer extends AbstractServer {
                         if (name.equals("Student")) {
                             try {
                                 client.sendToClient(new MsgHandler<>(TypeMsg.TestDurationChangedManual, obj));
-                                client.sendToClient(new MsgHandler<>(TypeMsg.TestDurationChangedComputerized, obj));
+
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
@@ -445,7 +462,14 @@ public class CemsServer extends AbstractServer {
                     String testID = (String) TestChangement.get(0);
                     String addedTime = (String) TestChangement.get(1);
                     MysqlConnection.update("UPDATE test SET testDuration = testDuration + '" + Integer.parseInt(addedTime) + "' WHERE id = '" + testID + "'");
-                    sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationChanged, Integer.parseInt(addedTime)));
+                    TestTypeEnum getType = MysqlConnection.getTestType("SELECT testType FROM test WHERE id = '" + testID + "'");
+                    if (getType instanceof TestTypeEnum) {
+                        if (getType.equals(TestTypeEnum.C)) {
+                            sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationChangedComputrizedSendToAll, Integer.parseInt(addedTime)));
+                        } else {
+                            sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationChangedManualSendToAll, Integer.parseInt(addedTime)));
+                        }
+                    }
                     client.sendToClient(new MsgHandler<>(TypeMsg.changeTestDurationAnswer, null));
                     break;
                 case DeleteRequest:
