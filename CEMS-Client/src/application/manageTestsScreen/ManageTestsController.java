@@ -118,8 +118,8 @@ public class ManageTestsController {
         TableManager.resizeColumns(testApprovalTableView, approvalTestsMultipliers);
         testApprovalTableView.setOnMouseClicked((e) -> {
             testForApprovalRowData = testApprovalTableView.getSelectionModel().getSelectedItem();
-            MsgHandler<String> cheatingTest = new MsgHandler(TypeMsg.DetectedCheating,testForApprovalRowData.getTestID());
-            ClientUI.chat.accept(cheatingTest);
+//            MsgHandler<String> cheatingTest = new MsgHandler(TypeMsg.DetectedCheating,testForApprovalRowData.getTestID());
+//            ClientUI.chat.accept(cheatingTest);
 
         });
         stateManagement.setTestForApproval(filteredTests);
