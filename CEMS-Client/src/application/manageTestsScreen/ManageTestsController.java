@@ -289,6 +289,7 @@ public class ManageTestsController {
         }
 
         //load test's other data
+        stateManagement.setTestType(test.getTestType());
         stateManagement.setTestID(test.getId());
         stateManagement.setTestNum(test.getTestNumber());
         stateManagement.setTestDuration(test.getTestDuration());
