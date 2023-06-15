@@ -22,7 +22,7 @@ public class StateManagement {
     public ActiveTest currentActivetest;
     public int totalRemainingPoints;
 
-    public TestTypeEnum testType = TestTypeEnum.C;
+    public TestTypeEnum testType;
     public String previousScreenPath = PathConstants.mainMenuPath;
     ObservableList<TestForApproval> testForApproval = FXCollections.observableArrayList();
     ObservableList<TestQuestion> testQuestions = FXCollections.observableArrayList();
@@ -134,6 +134,9 @@ public class StateManagement {
 
     public void setTestDuration(String testDuration) {
         this.testDuration = testDuration;
+    }
+    public void setTestType(TestTypeEnum testType) {
+        this.testType = testType;
     }
 
     public ObservableList<TestQuestion> getTestQuestions() {

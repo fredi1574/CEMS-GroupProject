@@ -6,16 +6,20 @@ import Client.ExitButton;
 import Client.LogOut;
 import entity.Course;
 import entity.Test;
+import entity.TestTypeEnum;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import util.*;
 
+import javax.swing.*;
+import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -49,13 +53,16 @@ public class CreateTestController {
     private TextField testDurationField;
     @FXML
     private TableView<Course> courseTableView;
+    @FXML
+    private ComboBox<TestTypeEnum> TypeTestCombo;
 
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
 
         nameAuthor.setText(Client.user.getName());
-
+        ObservableList<TestTypeEnum> Types = FXCollections.observableArrayList(TestTypeEnum.C,TestTypeEnum.M); //may's change
+        TypeTestCombo.setItems(Types);//may's change
         formatField(yearField, true, 4);
         formatField(testDurationField, true, 4);
         formatField(semesterTextField, false, 1);
@@ -187,6 +194,7 @@ public class CreateTestController {
             yearField.setText(stateManagement.getYear());
             sessionTextField.setText(stateManagement.getSession());
             semesterTextField.setText(stateManagement.getSemester());
+            TypeTestCombo.valueProperty().set(stateManagement.getTestType()); //returns null
         }
     }
 
@@ -204,6 +212,10 @@ public class CreateTestController {
             stateManagement.setSession(sessionTextField.getText());
         } else
             stateManagement.setSession("");
+        if (!TypeTestCombo.getSelectionModel().isEmpty()) { //may's change
+            stateManagement.setTestType(TypeTestCombo.getValue());
+        } else
+            stateManagement.setTestType(null);
 
         if (!yearField.getText().isEmpty()) {
             stateManagement.setYear(yearField.getText());

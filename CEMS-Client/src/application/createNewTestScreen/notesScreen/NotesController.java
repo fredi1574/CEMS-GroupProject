@@ -65,7 +65,7 @@ public class NotesController {
     @FXML
     void createTest(ActionEvent event){
         if(stateManagement.semester == ""||stateManagement.year == "" ||stateManagement.session ==""
-                || stateManagement.testDuration == ""){
+                || stateManagement.testDuration == ""|| stateManagement.testType == null){
             showError.showErrorPopup("Go to page 1 and complete the data of test");
             return;
         }
