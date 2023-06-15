@@ -11,6 +11,7 @@ import util.TypeMsg;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;
 public class LoginWindowControllerTest {
    private LoginWindowController loginWindowController;
@@ -24,21 +25,21 @@ public class LoginWindowControllerTest {
     }
 
     /**
-     * Functionality:
-     * input:
-     * expected :
+     * Functionality: Test whether the method returns false when the username is empty and the password is entered.
+     * input: userName = "", password = "4"
+     * expected: false
      */
     @Test
     public void Login_EnterPasswordButNotUser(){
-
         userName = "";
         password = "4";
         assertFalse(loginWindowController.isNotEmptyUser(userName,password));
     }
+
     /**
-     * Functionality:
-     * input:
-     * expected :
+     * Functionality: Test whether the method returns false when the username is entered and the password is empty.
+     * input: userName = "Yuival", password = ""
+     * expected: false
      */
     @Test
     public void Login_EnterUserButNotPassword(){
@@ -46,10 +47,11 @@ public class LoginWindowControllerTest {
         password = "";
         assertFalse(loginWindowController.isNotEmptyUser(userName,password));
     }
+
     /**
-     * Functionality:
-     * input:
-     * expected :
+     * Functionality: Test whether the method returns false when both the username and password are empty.
+     * input: userName = "", password = ""
+     * expected: false
      */
     @Test
     public void Login_NotEnterUserAndNotPassword(){
@@ -57,10 +59,11 @@ public class LoginWindowControllerTest {
         password = "";
         assertFalse(loginWindowController.isNotEmptyUser(userName,password));
     }
+
     /**
-     * Functionality:
-     * input:
-     * expected :
+     * Functionality: Test whether the method returns true when both the username and password are entered.
+     * input: userName = "AbedTayer", password = "a"
+     * expected: true
      */
     @Test
     public void Login_EnterUserAndPassword(){
