@@ -71,7 +71,7 @@ public class ViewTestAwaitingApprovalController {
     }
 
     private void setCombobox() {
-        ObservableList<String> approved = FXCollections.observableArrayList("YES", "NO");
+        ObservableList<String> approved = FXCollections.observableArrayList("YES");
         comboBoxApproval.setItems(approved);
 
         comboBoxApproval.setOnAction(event1 -> {
