@@ -134,7 +134,6 @@ public class ViewTestStudentController {
         ViewTestDetailsController controller = loader.getController();
 
         controller.setTest(rowData);
-        controller.setController((Stage) header.getScene().getWindow());
     }
 
     @FXML

@@ -11,9 +11,7 @@
     <AnchorPane fx:id="header" layoutY="-4.0" prefHeight="91.0" prefWidth="808.0" styleClass="pageHeader">
         <ImageView fitHeight="75.0" fitWidth="200.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true"
                    preserveRatio="true">
-            <image>
-                <Image url="@/images/Logo_Transparent_Bright.png"/>
-            </image>
+            <Image url="@/images/Logo_Transparent_Bright.png"/>
         </ImageView>
         <Label alignment="CENTER" layoutX="1.0" layoutY="20.0" prefHeight="54.0" prefWidth="807.0"
                style="-fx-font-weight: bold;" text="Add a new question" textAlignment="CENTER" textFill="#fafafa">
@@ -38,42 +36,40 @@
         </Text>
     </AnchorPane>
     <AnchorPane layoutY="87.0" prefHeight="117.0" prefWidth="808.0" styleClass="backgroundColor">
-        <children>
-            <ComboBox fx:id="subjectCombo" layoutX="252.0" layoutY="25.0" prefWidth="150.0"/>
-            <Label layoutX="104.0" layoutY="22.0" prefHeight="33.0" prefWidth="92.0" text="Subject:">
-                <font>
-                    <Font name="Trebuchet MS Bold" size="15.0"/>
-                </font>
-            </Label>
-            <Label layoutX="463.0" layoutY="22.0" prefHeight="33.0" prefWidth="92.0" text="Course:">
-                <font>
-                    <Font name="Trebuchet MS Bold" size="15.0"/>
-                </font>
-            </Label>
-            <ComboBox fx:id="CourseCombo" layoutX="576.0" layoutY="25.0" prefWidth="150.0"/>
-            <Label layoutX="104.0" layoutY="58.0" prefHeight="33.0" prefWidth="132.0" text="Question Number:">
-                <font>
-                    <Font name="Trebuchet MS Bold" size="15.0"/>
-                </font>
-            </Label>
-            <TextField fx:id="questionNumber" layoutX="252.0" layoutY="63.0" prefHeight="24.0" prefWidth="150.0"
-                       style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;">
-                <padding>
-                    <Insets left="10.0"/>
-                </padding>
-            </TextField>
-            <Label layoutX="463.0" layoutY="57.0" prefHeight="33.0" prefWidth="92.0" text="Question ID:">
-                <font>
-                    <Font name="Trebuchet MS Bold" size="15.0"/>
-                </font>
-            </Label>
-            <TextField fx:id="questionID" layoutX="577.0" layoutY="63.0" prefHeight="24.0" prefWidth="150.0"
-                       style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;">
-                <padding>
-                    <Insets left="10.0"/>
-                </padding>
-            </TextField>
-        </children>
+        <ComboBox fx:id="subjectComboBox" layoutX="252.0" layoutY="25.0" prefWidth="150.0"/>
+        <Label layoutX="104.0" layoutY="22.0" prefHeight="33.0" prefWidth="92.0" text="Subject:">
+            <font>
+                <Font name="Trebuchet MS Bold" size="15.0"/>
+            </font>
+        </Label>
+        <Label layoutX="463.0" layoutY="22.0" prefHeight="33.0" prefWidth="92.0" text="Course:">
+            <font>
+                <Font name="Trebuchet MS Bold" size="15.0"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="CourseComboBox" layoutX="576.0" layoutY="25.0" prefWidth="150.0"/>
+        <Label layoutX="104.0" layoutY="58.0" prefHeight="33.0" prefWidth="132.0" text="Question Number:">
+            <font>
+                <Font name="Trebuchet MS Bold" size="15.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="questionNumber" layoutX="252.0" layoutY="63.0" prefHeight="24.0" prefWidth="150.0"
+                   style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;">
+            <padding>
+                <Insets left="10.0"/>
+            </padding>
+        </TextField>
+        <Label layoutX="463.0" layoutY="57.0" prefHeight="33.0" prefWidth="92.0" text="Question ID:">
+            <font>
+                <Font name="Trebuchet MS Bold" size="15.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="questionID" layoutX="577.0" layoutY="63.0" prefHeight="24.0" prefWidth="150.0"
+                   style="-fx-background-color: #dae5f3; -fx-border-color: #7799c2; -fx-border-radius: 3;">
+            <padding>
+                <Insets left="10.0"/>
+            </padding>
+        </TextField>
     </AnchorPane>
     <Separator layoutY="192.0" prefHeight="14.0" prefWidth="808.0"/>
     <AnchorPane layoutX="-2.0" layoutY="203.0" minHeight="0.0" minWidth="0.0" prefHeight="522.0" prefWidth="807.0">
@@ -153,7 +149,7 @@
         </graphic>
     </Button>
     <Label layoutX="35.0" layoutY="782.0" text="Back"/>
-    <Button fx:id="saveBtn" alignment="BASELINE_CENTER" layoutX="729.0" layoutY="732.0" mnemonicParsing="false"
+    <Button alignment="BASELINE_CENTER" layoutX="729.0" layoutY="732.0" mnemonicParsing="false"
             onAction="#saveData" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
         <graphic>
             <ImageView fitHeight="39.0" fitWidth="39.0" preserveRatio="true">

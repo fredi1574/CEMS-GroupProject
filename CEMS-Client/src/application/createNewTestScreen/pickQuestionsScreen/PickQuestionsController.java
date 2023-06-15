@@ -191,7 +191,7 @@ public class PickQuestionsController {
         testQuestions.setTestID(stateManagement.getTestID());
     }
 
-    public void Deselect(ActionEvent event1) {
+    public void Deselect() {
         Question desSelected = questionDBTableView.getSelectionModel().getSelectedItem();
         if (desSelected == null)
             showError.showErrorPopup("You Want To Select Before Press Deselect !");
@@ -204,10 +204,8 @@ public class PickQuestionsController {
 
     /**
      * removes the selected question from the selected questions table
-     *
-     * @param event the event that triggered teh method (clicking the remove button)
      */
-    public void removeSelectedQuestion(ActionEvent event) {
+    public void removeSelectedQuestion() {
         ObservableList<TestQuestion> data = selectedQuestionsTableView.getItems();
         if (data == null) {
             showError.showErrorPopup("You Dont Have Any Questions to Remove");

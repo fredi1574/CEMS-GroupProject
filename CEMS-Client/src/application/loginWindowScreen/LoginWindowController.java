@@ -97,8 +97,6 @@ public class LoginWindowController {
     /**
      * Event handler for close button click.
      * Closes the application window.
-     *
-     * @param event The event triggered by the close button click.
      */
     @FXML
     private void closeClient() {

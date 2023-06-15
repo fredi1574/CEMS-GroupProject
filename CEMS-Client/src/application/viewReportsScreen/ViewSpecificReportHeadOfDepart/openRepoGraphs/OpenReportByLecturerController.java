@@ -40,13 +40,13 @@ public class OpenReportByLecturerController {
     private static int totalTests;
     private static double medianScore;
     private static int AverageScore;
-    public static ShowReportByLecturerController takeChosenfromController= new ShowReportByLecturerController();
+    public static final ShowReportByLecturerController takeChosenfromController= new ShowReportByLecturerController();
     @FXML
     public void initialize() {
         testsNumberText.setText(String.valueOf(totalTests));
         medianText.setText(String.valueOf(medianScore));
         averageText.setText(String.valueOf(AverageScore));
-        studentsNameLabel.setText(takeChosenfromController.chosenLecturer);
+        studentsNameLabel.setText(ShowReportByLecturerController.chosenLecturer);
         reportGraph.getData().add(series);
         ScreenManager.dragAndDrop(header);
 
@@ -57,7 +57,7 @@ public class OpenReportByLecturerController {
         AverageScore = 0;
         medianScore = 0;
         int totalScoreSum = 0;
-        StudentTest studentTest = null;
+        StudentTest studentTest;
         series = new XYChart.Series<>();
         // Create a map to store course-wise score sum and count
         Map<String, Double> courseScoreSumMap = new HashMap<>();

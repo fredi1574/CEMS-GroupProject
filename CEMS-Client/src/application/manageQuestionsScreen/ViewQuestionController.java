@@ -69,13 +69,6 @@ public class ViewQuestionController {
         correctAnswer.setDisable(true);
 
     }
-    /**
-     * Sets the reference to the manage questions stage.
-     * @param ViewQuestion The reference to the view questions stage.
-     */
-    public void setManage(Stage ViewQuestion) {
-    }
-
 
     /**
      * Sets the question data in the update question screen.

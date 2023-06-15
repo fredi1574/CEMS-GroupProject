@@ -3,8 +3,8 @@ package util;
 import java.io.Serializable;
 
 /**
- * This class is a class that stores the connect clients to our server
- * each time a client connects\disconnects to our server we will display his IP,Host,Connection Status
+ * This class is a class that stores the connected clients to our server
+ * each time a client connects\disconnects to our server we will display his IP, Host, Connection Status,
  * so we need to save the Clients data with this Entity
  **/
 @SuppressWarnings("serial")
@@ -20,7 +20,7 @@ public class ConnectToClients implements Serializable {
         this.status = status;
     }
 
-    //NOTE: for whatever reason capitalizing 'Ip' breaks the function...
+    //NOTE: for whatever reason, capitalizing 'Ip' breaks the function...
     public String getIp() {
         return ip;
     }

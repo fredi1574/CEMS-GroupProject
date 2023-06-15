@@ -11,129 +11,128 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="739.0" prefWidth="873.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;" styleClass="backgroundColor" stylesheets="@/util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.manageTestsScreen.ViewTestAwaitingApprovalController">
-   <children>
-      <AnchorPane fx:id="header" prefHeight="103.0" prefWidth="873.0" styleClass="pageHeader">
-         <children>
-            <Label alignment="CENTER" layoutX="183.0" layoutY="6.0" prefHeight="91.0" prefWidth="501.0" style="-fx-text-fill: #e6eef7;" text="Test Approval" textFill="#fafafa">
-               <font>
-                  <Font name="Trebuchet MS Bold" size="40.0" />
-               </font>
-            </Label>
-            <Button layoutX="794.0" layoutY="12.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
-            <Button layoutX="828.0" layoutY="12.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
-            <ImageView layoutX="778.0" layoutY="43.0">
-               <image>
-                  <Image url="@/images/avatar.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="82.0" fitWidth="210.0" layoutX="14.0" layoutY="11.0" preserveRatio="true">
-               <image>
-                  <Image url="@/images/Logo_Transparent_Bright.png" />
-               </image>
-            </ImageView>
-            <Text fx:id="usernameText" fill="WHITE" layoutX="802.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="May Caspi" underline="true">
-               <font>
-                  <Font name="Trebuchet MS" size="12.0" />
-               </font>
-            </Text>
-            <Button layoutX="773.0" layoutY="64.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="82.0" styleClass="pageHeaderBtn" text="Logout">
-               <font>
-                  <Font name="Franklin Gothic Demi Cond" size="14.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
-      <TextArea fx:id="teacherComment" layoutX="32.0" layoutY="366.0" prefHeight="210.0" prefWidth="802.0" promptText="Enter notes for lucturers..." wrapText="true" />
-      <Label layoutX="32.0" layoutY="332.0" prefHeight="27.0" prefWidth="176.0" text="Lecturer's Comments:">
+<AnchorPane prefHeight="739.0" prefWidth="873.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;"
+            styleClass="backgroundColor" stylesheets="@/util/style.css" xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="application.manageTestsScreen.ViewTestAwaitingApprovalController">
+   <AnchorPane fx:id="header" prefHeight="103.0" prefWidth="873.0" styleClass="pageHeader">
+      <Label alignment="CENTER" layoutX="183.0" layoutY="6.0" prefHeight="91.0" prefWidth="501.0"
+             style="-fx-text-fill: #e6eef7;" text="Test Approval" textFill="#fafafa">
          <font>
-            <Font name="Trebuchet MS Bold" size="17.0" />
+            <Font name="Trebuchet MS Bold" size="40.0"/>
          </font>
       </Label>
-      <AnchorPane layoutX="78.0" layoutY="130.0" prefHeight="122.0" prefWidth="298.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
-         <children>
-            <Label layoutX="34.0" layoutY="14.0" prefHeight="55.0" prefWidth="140.0" text="Student ID:">
-               <font>
-                  <Font name="Trebuchet MS Bold" size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="34.0" layoutY="75.0" prefHeight="27.0" prefWidth="82.0" text=" Test ID:">
-               <font>
-                  <Font name="Trebuchet MS Bold" size="17.0" />
-               </font>
-            </Label>
-            <Label fx:id="testIDLabel" layoutX="143.0" layoutY="76.0" prefHeight="18.0" prefWidth="120.0" text="010101">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="studentIDLabel" layoutX="143.0" layoutY="29.0" prefHeight="18.0" prefWidth="120.0" text="1111">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="469.0" layoutY="130.0" prefHeight="202.0" prefWidth="308.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
-         <children>
-            <Label layoutX="14.0" layoutY="21.0" prefHeight="27.0" prefWidth="186.0" text="Suspicion of cheating:">
-               <font>
-                  <Font name="Trebuchet MS Bold" size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="65.0" prefHeight="27.0" prefWidth="140.0" text="Total Questions:">
-               <font>
-                  <Font name="Trebuchet MS Bold" size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="108.0" prefHeight="27.0" prefWidth="139.0" text="Correct Answers:">
-               <font>
-                  <Font name="Trebuchet MS Bold" size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="155.0" prefHeight="27.0" prefWidth="139.0" text="Grade:">
-               <font>
-                  <Font name="Trebuchet MS Bold" size="17.0" />
-               </font>
-            </Label>
-            <TextField fx:id="gradeField" layoutX="203.0" layoutY="155.0" prefHeight="27.0" prefWidth="82.0" />
-            <Label fx:id="totalQuestionsLabel" layoutX="200.0" layoutY="66.0" prefHeight="18.0" prefWidth="82.0" text="10">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="correctAnswersLabel" layoutX="203.0" layoutY="108.0" prefHeight="26.0" prefWidth="82.0" text="9">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="cheatingLabel" layoutX="200.0" layoutY="22.0" prefHeight="18.0" prefWidth="63.0" text="NO">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <Button fx:id="saveDecisionLecturer" alignment="BASELINE_CENTER" layoutX="777.0" layoutY="653.0" mnemonicParsing="false" onAction="#saveDecisionLecturer" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
-         <graphic>
-            <ImageView fitHeight="34.0" fitWidth="37.0">
-               <image>
-                  <Image url="@/images/Save.png" />
-               </image>
-            </ImageView>
-         </graphic>
+      <Button layoutX="794.0" layoutY="12.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
+              onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_"/>
+      <Button layoutX="828.0" layoutY="12.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
+              onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X"/>
+      <ImageView layoutX="778.0" layoutY="43.0">
+         <Image url="@/images/avatar.png"/>
+      </ImageView>
+      <ImageView fitHeight="82.0" fitWidth="210.0" layoutX="14.0" layoutY="11.0" preserveRatio="true">
+         <Image url="@/images/Logo_Transparent_Bright.png"/>
+      </ImageView>
+      <Text fx:id="usernameText" fill="WHITE" layoutX="802.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0"
+            text="May Caspi" underline="true">
+         <font>
+            <Font name="Trebuchet MS" size="12.0"/>
+         </font>
+      </Text>
+      <Button layoutX="773.0" layoutY="64.0" minWidth="36.0" mnemonicParsing="false" onAction="#LogOut"
+              prefHeight="26.0" prefWidth="82.0" styleClass="pageHeaderBtn" text="Logout">
+         <font>
+            <Font name="Franklin Gothic Demi Cond" size="14.0"/>
+         </font>
       </Button>
-      <Button layoutX="15.0" layoutY="653.0" mnemonicParsing="false" onAction="#BackTOManageTest" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
-         <graphic>
-            <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@/images/back.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Label fx:id="testIDLabel1" layoutX="32.0" layoutY="707.0" prefHeight="18.0" prefWidth="26.0" text="Back" />
-      <ComboBox fx:id="comboBoxApproval" layoutX="640.0" layoutY="600.0" prefHeight="27.0" prefWidth="193.0" promptText="Select Your Approval" />
-      <Label fx:id="testIDLabel11" layoutX="795.0" layoutY="707.0" prefHeight="18.0" prefWidth="26.0" text="Save" />
-   </children>
+   </AnchorPane>
+   <TextArea fx:id="teacherComment" layoutX="32.0" layoutY="366.0" prefHeight="210.0" prefWidth="802.0"
+             promptText="Enter notes for lecturers..." wrapText="true"/>
+   <Label layoutX="32.0" layoutY="332.0" prefHeight="27.0" prefWidth="176.0" text="Lecturer's Comments:">
+      <font>
+         <Font name="Trebuchet MS Bold" size="17.0"/>
+      </font>
+   </Label>
+   <AnchorPane layoutX="78.0" layoutY="130.0" prefHeight="122.0" prefWidth="298.0"
+               style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
+      <Label layoutX="34.0" layoutY="14.0" prefHeight="55.0" prefWidth="140.0" text="Student ID:">
+         <font>
+            <Font name="Trebuchet MS Bold" size="17.0"/>
+         </font>
+      </Label>
+      <Label layoutX="34.0" layoutY="75.0" prefHeight="27.0" prefWidth="82.0" text=" Test ID:">
+         <font>
+            <Font name="Trebuchet MS Bold" size="17.0"/>
+         </font>
+      </Label>
+      <Label fx:id="testIDLabel" layoutX="143.0" layoutY="76.0" prefHeight="18.0" prefWidth="120.0" text="010101">
+         <font>
+            <Font size="16.0"/>
+         </font>
+      </Label>
+      <Label fx:id="studentIDLabel" layoutX="143.0" layoutY="29.0" prefHeight="18.0" prefWidth="120.0" text="1111">
+         <font>
+            <Font size="16.0"/>
+         </font>
+      </Label>
+   </AnchorPane>
+   <AnchorPane layoutX="469.0" layoutY="130.0" prefHeight="202.0" prefWidth="308.0"
+               style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
+      <Label layoutX="14.0" layoutY="21.0" prefHeight="27.0" prefWidth="186.0" text="Suspicion of cheating:">
+         <font>
+            <Font name="Trebuchet MS Bold" size="17.0"/>
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="65.0" prefHeight="27.0" prefWidth="140.0" text="Total Questions:">
+         <font>
+            <Font name="Trebuchet MS Bold" size="17.0"/>
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="108.0" prefHeight="27.0" prefWidth="139.0" text="Correct Answers:">
+         <font>
+            <Font name="Trebuchet MS Bold" size="17.0"/>
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="155.0" prefHeight="27.0" prefWidth="139.0" text="Grade:">
+         <font>
+            <Font name="Trebuchet MS Bold" size="17.0"/>
+         </font>
+      </Label>
+      <TextField fx:id="gradeField" layoutX="203.0" layoutY="155.0" prefHeight="27.0" prefWidth="82.0"/>
+      <Label fx:id="totalQuestionsLabel" layoutX="200.0" layoutY="66.0" prefHeight="18.0" prefWidth="82.0" text="10">
+         <font>
+            <Font size="16.0"/>
+         </font>
+      </Label>
+      <Label fx:id="correctAnswersLabel" layoutX="203.0" layoutY="108.0" prefHeight="26.0" prefWidth="82.0" text="9">
+         <font>
+            <Font size="16.0"/>
+         </font>
+      </Label>
+      <Label fx:id="cheatingLabel" layoutX="200.0" layoutY="22.0" prefHeight="18.0" prefWidth="63.0" text="NO">
+         <font>
+            <Font size="16.0"/>
+         </font>
+      </Label>
+   </AnchorPane>
+   <Button fx:id="saveDecisionLecturer" alignment="BASELINE_CENTER" layoutX="777.0" layoutY="653.0"
+           mnemonicParsing="false" onAction="#saveDecisionLecturer" prefHeight="54.0" prefWidth="63.0"
+           styleClass="subButtons">
+      <graphic>
+         <ImageView fitHeight="34.0" fitWidth="37.0">
+            <Image url="@/images/Save.png"/>
+         </ImageView>
+      </graphic>
+   </Button>
+   <Button layoutX="15.0" layoutY="653.0" mnemonicParsing="false" onAction="#BackTOManageTest" prefHeight="54.0"
+           prefWidth="63.0" styleClass="subButtons">
+      <graphic>
+         <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@/images/back.png"/>
+         </ImageView>
+      </graphic>
+   </Button>
+   <Label fx:id="testIDLabel1" layoutX="32.0" layoutY="707.0" prefHeight="18.0" prefWidth="26.0" text="Back"/>
+   <ComboBox fx:id="comboBoxApproval" layoutX="640.0" layoutY="600.0" prefHeight="27.0" prefWidth="193.0"
+             promptText="Select Your Approval"/>
+   <Label fx:id="testIDLabel11" layoutX="795.0" layoutY="707.0" prefHeight="18.0" prefWidth="26.0" text="Save"/>
 </AnchorPane>

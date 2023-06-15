@@ -40,7 +40,7 @@ public class ServerGUI extends Application {
      * @param password the DB password
      */
     public static void runServer(String IP, String port, String DBName, String username, String password) {
-        int Port = 0; // Port to listen on
+        int Port; // Port to listen on
 
         try {
             Port = Integer.parseInt(port); // Set port to 5555

@@ -77,34 +77,6 @@ public class TableManager {
         }));
     }
 
-    /**
-     * adds a checkbox for every element in the given table
-     *
-     * @param tableView the relevant table object
-     */
-    public static <T> void addCheckBoxesToTable(TableView<T> tableView) {
-        TableColumn<T, Boolean> checkboxColumn = new TableColumn<>("Select");
-        checkboxColumn.setCellValueFactory(new PropertyValueFactory<>("selected"));
-        checkboxColumn.setCellFactory(CheckBoxTableCell.forTableColumn(checkboxColumn));
-//        checkboxColumn.prefWidthProperty().bind(tableView.widthProperty().multiply(0.1));
-        tableView.getColumns().add(0, checkboxColumn);
-
-        //TODO: alternative and probably better way to implement check boxes
-        //        questionCheckBoxColumn.setCellFactory(column -> new TableCell<>() {
-//            private final CheckBox checkBox = new CheckBox();
-//
-//            @Override
-//            protected void updateItem(CheckBox item, boolean empty) {
-//                super.updateItem(item, empty);
-//                if (empty) {
-//                    setGraphic(null);
-//                } else {
-//                    setGraphic(checkBox);
-//                }
-//            }
-//        });
-    }
-
     public static <T> void addDoubleClickFunctionality(TableView<T> tableView, String relativePath, Consumer<String> setFunctionsFunction) {
         tableView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && !tableView.getSelectionModel().isEmpty()) { //check whether the event was double click and the row contains a question

@@ -68,7 +68,7 @@ public class ManageRequestsController {
 
     }
     @FXML
-    public void approveRequest(ActionEvent event) {
+    public void approveRequest() {
         int selectedRequestIndex = RequestsDBTableView.getSelectionModel().getFocusedIndex();
         if (selectedRequestIndex != -1) {
             String requestToApprove = RequestsDBTableView.getItems().get(selectedRequestIndex).getId();
@@ -91,7 +91,7 @@ public class ManageRequestsController {
 
     }
     @FXML
-    public void declineRequest(ActionEvent event) {
+    public void declineRequest() {
         int selectedRequestIndex = RequestsDBTableView.getSelectionModel().getFocusedIndex();
         if (selectedRequestIndex != -1) {
             String requestToDecline = RequestsDBTableView.getItems().get(selectedRequestIndex).getId();

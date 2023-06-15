@@ -25,7 +25,7 @@ public class StateManagement {
     public TestTypeEnum testType;
     public String previousScreenPath = PathConstants.mainMenuPath;
     ObservableList<TestForApproval> testForApproval = FXCollections.observableArrayList();
-    ObservableList<TestQuestion> testQuestions = FXCollections.observableArrayList();
+    final ObservableList<TestQuestion> testQuestions = FXCollections.observableArrayList();
 
     private StateManagement() {
 

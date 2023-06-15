@@ -119,7 +119,7 @@ public class UpdateQuestionController {
      * @return The altered question object.
      */
     public Question AlterQuestion(){
-        Question alteredQuestion = new Question(
+        return new Question(
                 questionNumberField.getText(),
                 question.getId(),
                 questionTextField.getText(),
@@ -132,7 +132,6 @@ public class UpdateQuestionController {
                 answer4.getText(),
                 correctAnswer.getText()
         );
-        return alteredQuestion;
     }
 
     /**

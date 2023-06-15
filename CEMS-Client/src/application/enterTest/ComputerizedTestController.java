@@ -80,8 +80,7 @@ public class ComputerizedTestController {
     {
         MsgHandler getTestInformation = new MsgHandler(TypeMsg.GetTestByID, EnterCodePopUpController.testID);
         ClientUI.chat.accept(getTestInformation);
-        Test test = (Test) ClientUI.chat.getSingleTest();
-        return test;
+        return (Test) ClientUI.chat.getSingleTest();
     }
     private void setData(){
         Test test = getTestData();

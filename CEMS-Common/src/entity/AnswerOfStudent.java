@@ -3,11 +3,11 @@ package entity;
 import java.io.Serializable;
 import java.util.Observable;
 
-public class AnswerOfStudent  extends Observable implements Serializable {
-    private String studentID;
-    private String testID;
-    private String questionID;
-    private int studentsAnswer;
+public class AnswerOfStudent implements Serializable {
+    private final String studentID;
+    private final String testID;
+    private final String questionID;
+    private final int studentsAnswer;
 
     public AnswerOfStudent (String studentID, String testID, String questionID, int studentsAnswer) {
         this.studentID = studentID;

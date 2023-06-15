@@ -107,7 +107,7 @@ public class ViewActiveTestController {
     }
 
     /**
-     * formats the time  as a hh:mm:ss string
+     * formats the time as a hh:mm:ss string
      *
      * @param seconds time in seconds
      * @return the formatted string
@@ -120,7 +120,7 @@ public class ViewActiveTestController {
     }
 
     /**
-     * locks the test for all clients - the timer is stopped and the timeLeft value
+     * locks the test for all clients - the timer is stopped, and the timeLeft value
      * in the activeTest table in the DB is updated
      * @param actionEvent the event that triggered the method
      */
@@ -159,7 +159,7 @@ public class ViewActiveTestController {
     }
 
     @FXML
-    public void sendExtraTimeRequest(ActionEvent actionEvent) {
+    public void sendExtraTimeRequest() {
         TestRequestForApproval request = new TestRequestForApproval(testIdTextField.getText(), stateManagement.course.getSubjectID(),
                 courseNameLabel.getText(), extraTimeTextField.getText(), testCommentsTextArea.getText(), Client.user.getFullName());
         MsgHandler newRequest = new MsgHandler(TypeMsg.RequestExtraTime, request);

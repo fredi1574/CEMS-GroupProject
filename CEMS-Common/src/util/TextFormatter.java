@@ -7,7 +7,7 @@ public class TextFormatter {
      * limits the given text field's input
      *
      * @param fieldName      the text field whose inputs we wish to limit
-     * @param numbersOnly    text field will only accept numbers if value is true
+     * @param numbersOnly    text field will only accept numbers if the value is true
      * @param maxInputLength the input length limit
      */
     public static void formatField(TextField fieldName, boolean numbersOnly, int maxInputLength) {

@@ -58,15 +58,15 @@ public class OpenReportByCourseController {
         courseNameLabel.setText(courseName);
 
     }
-    public void reportCalc(ArrayList<Object> infoOfstudent) {
+    public void reportCalc(ArrayList<Object> infoOfStudent) {
         numberOfStudentTests = 0;
         double totalScore = 0;
         averageScore= 0;
         medianScore= 0;
         series = new XYChart.Series<>();
-        StudentTest studentTest = null;
+        StudentTest studentTest;
         ArrayList<Double> scoreValues = new ArrayList<>();
-        for (Object obj : infoOfstudent) {
+        for (Object obj : infoOfStudent) {
             if (obj instanceof StudentTest) {
                 studentTest = (StudentTest) obj;
                 courseName = studentTest.getCourse();

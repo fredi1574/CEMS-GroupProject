@@ -117,11 +117,9 @@
         <Label layoutX="110.0" layoutY="295.0" prefHeight="17.0" prefWidth="184.0" text="*Please select the correct answer" />
       <Button fx:id="deleteBtn" layoutX="669.0" layoutY="616.0" mnemonicParsing="false" onAction="#onDeleteButtonClicked" prefHeight="54.0" prefWidth="63.0" styleClass="subButtons">
          <graphic>
-            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@/images/delete.png" />
-               </image>
-            </ImageView>
+             <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                 <Image url="@/images/delete.png"/>
+             </ImageView>
          </graphic></Button>
       <Label layoutX="14.0" layoutY="605.0" prefHeight="46.0" prefWidth="77.0" text="Correct Answer:" wrapText="true">
          <font>

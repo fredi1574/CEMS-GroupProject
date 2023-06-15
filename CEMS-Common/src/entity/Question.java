@@ -3,7 +3,7 @@ package entity;
 import java.io.Serializable;
 import java.util.Observable;
 
-public class Question extends Observable implements Serializable {
+public class Question implements Serializable {
     //TODO: fix selected property support (used in checkboxes)
     //private BooleanProperty selected = new SimpleBooleanProperty(false);
     private final String id;

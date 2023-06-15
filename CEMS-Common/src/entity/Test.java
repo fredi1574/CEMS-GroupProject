@@ -3,7 +3,6 @@ package entity;
 import javafx.collections.ObservableList;
 
 import java.io.Serializable;
-import java.util.Observable;
 
 public class Test implements Serializable {
     private String id;

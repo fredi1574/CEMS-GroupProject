@@ -28,7 +28,6 @@ public class EnterCodePopUpController {
     private TextField CodeText;
     private TestTypeEnum testType;
     private boolean NotAllowed;
-    private ObservableList<StudentTest> StudentTest;
 
     public void initialize() {
         // Enables dragging and dropping of the application window using the header pane
@@ -67,8 +66,8 @@ public class EnterCodePopUpController {
             MsgHandler getTable = new MsgHandler(TypeMsg.GetStudentsTests, Client.user.getId());
             ClientUI.chat.accept(getTable);
 
-            StudentTest = FXCollections.observableArrayList((List) ClientUI.chat.getStudentTests());
-            for (StudentTest specificTest : StudentTest) {
+            ObservableList<entity.StudentTest> studentTest = FXCollections.observableArrayList((List) ClientUI.chat.getStudentTests());
+            for (StudentTest specificTest : studentTest) {
                 if (specificTest.getTestID().equals(testID)) {
                     NotAllowed = true;
                     break;

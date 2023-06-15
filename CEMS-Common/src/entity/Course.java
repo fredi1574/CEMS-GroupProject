@@ -4,7 +4,7 @@ package entity;
 import java.io.Serializable;
 import java.util.Observable;
 
-public class Course extends Observable implements Serializable {
+public class Course implements Serializable {
 
     private final String subjectID;
     private final String courseID;

@@ -67,9 +67,7 @@ public class MainMenuStudentController {
 
 
     /**
-     * Closes the application.
-     *
-     * @param event The event triggered by the close button click.
+     * Closes the application.*
      */
     @FXML
     private void closeClient() {

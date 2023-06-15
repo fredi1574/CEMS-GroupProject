@@ -2,7 +2,6 @@ package Client;
 
 import util.ChatIF;
 
-import java.io.IOException;
 import java.util.List;
 
 public class ClientControl implements ChatIF {

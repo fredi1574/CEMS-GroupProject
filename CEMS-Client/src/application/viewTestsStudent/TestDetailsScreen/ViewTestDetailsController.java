@@ -41,9 +41,6 @@ public class ViewTestDetailsController {
         usernameText.setText(Client.user.getName());
     }
 
-    public void setController(Stage viewTestStudent) {
-    }
-
     public void setTest(StudentTest test) {
 
         semester.setText(test.getSemester());

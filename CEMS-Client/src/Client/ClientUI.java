@@ -3,8 +3,6 @@ package Client;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class ClientUI extends Application {
 	private static Stage stage;
 	public static ClientControl chat; //only one instance

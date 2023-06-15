@@ -84,8 +84,6 @@ public class MainMenuHeadOfDepartmentController {
 
     /**
      * Closes the application.
-     *
-     * @param event The event triggered by the close button click.
      */
     @FXML
     private void closeClient() {

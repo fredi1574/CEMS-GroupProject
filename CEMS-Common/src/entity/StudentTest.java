@@ -3,13 +3,13 @@ package entity;
 import java.io.Serializable;
 import java.util.Observable;
 
-public class StudentTest extends Observable implements Serializable {
+public class StudentTest implements Serializable {
     private String studentID;
     private String testID;
     private String subjectID;
     private String course;
     private String grade;
-    private String fullname;
+    private String fullName;
     private String year;
     private String semester;
     private String session;
@@ -25,7 +25,7 @@ public class StudentTest extends Observable implements Serializable {
     private TestTypeEnum testType;
 
     public StudentTest(String studentID, String testID,
-                       String subjectID, String course, String grade, String fullname, String year, String semester,
+                       String subjectID, String course, String grade, String fullName, String year, String semester,
                        String session, CheatingSuspicion suspicionOfCheating, String correctAnswers, String totalQuestions,
                        String lecturerComments, ApprovalStatus approved, TestTypeEnum testType, String testDuration) {
         // Assign the parameters to the corresponding fields
@@ -34,7 +34,7 @@ public class StudentTest extends Observable implements Serializable {
         this.subjectID = subjectID;
         this.course = course;
         this.grade = grade;
-        this.fullname = fullname;
+        this.fullName = fullName;
         this.year = year;
         this.semester = semester;
         this.session = session;
@@ -108,11 +108,11 @@ public class StudentTest extends Observable implements Serializable {
     }
 
     public String getFullname() {
-        return fullname;
+        return fullName;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFullname(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getYear() {
@@ -179,7 +179,7 @@ public class StudentTest extends Observable implements Serializable {
                 ", subjectID='" + subjectID + '\'' +
                 ", course='" + course + '\'' +
                 ", grade='" + grade + '\'' +
-                ", fullname='" + fullname + '\'' +
+                ", fullname='" + fullName + '\'' +
                 ", year='" + year + '\'' +
                 ", semester='" + semester + '\'' +
                 ", session='" + session + '\'' +

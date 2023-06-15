@@ -68,7 +68,7 @@ public class MysqlConnection {
         try {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String id = rs.getString("id"); // assuming your table has a column named "id" with type INT
+                String id = rs.getString("id");
                 String subject = rs.getString("subject");
                 String course_name = rs.getString("courseName");
                 String question_text = rs.getString("questionText");
@@ -80,11 +80,10 @@ public class MysqlConnection {
                 String answer4 = rs.getString("answer4");
                 String correctAnswer = rs.getString("correctAnswer");
 
-                // public Question(String questionNumber,String questionId,String questionText,
-                // String questionWrittenBy) {
-                Question qeustion = new Question(question_number, id, question_text, author, subject,
+                Question question = new Question(question_number, id, question_text, author, subject,
                         course_name, answer1, answer2, answer3, answer4, correctAnswer);
-                list.add(qeustion);
+
+                list.add(question);
 
             }
         } catch (SQLException e) {
@@ -107,7 +106,7 @@ public class MysqlConnection {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
 
-                String subjectID = rs.getString("subjectID"); // assuming your table has a column named "id" with type INT
+                String subjectID = rs.getString("subjectID");
                 String courseID = rs.getString("courseID");
                 String subjectName = rs.getString("subjectName");
                 String courseName = rs.getString("courseName");
@@ -136,7 +135,7 @@ public class MysqlConnection {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
 
-                String subjectID = rs.getString("subjectID"); // assuming your table has a column named "id" with type INT
+                String subjectID = rs.getString("subjectID");
                 String subjectName = rs.getString("subjectName");
 
                 Subject subject = new Subject(subjectID, subjectName);
@@ -166,11 +165,7 @@ public class MysqlConnection {
                     int IsLoggedIn = resultSet.getInt("isLoggedIn");
                     String phone = resultSet.getString("phoneNumber");
 
-                    // Create a new ConcreteUser object with the retrieved details
-                    User user = new User(id, firstName, lastName, username, password, email, role,IsLoggedIn,phone);
-                    // Set the authenticated user
-
-                    return user;
+                    return new User(id, firstName, lastName, username, password, email, role, IsLoggedIn, phone);
                 } else {
                     return null;
                 }
@@ -194,7 +189,7 @@ public class MysqlConnection {
         try {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String testNumber = rs.getString("testNumber"); // assuming your table has a column named "id" with type INT
+                String testNumber = rs.getString("testNumber");
                 String id = rs.getString("id");
                 String author = rs.getString("author");
                 String testDuration = rs.getString("testDuration");
@@ -209,7 +204,7 @@ public class MysqlConnection {
                 String subjectID = rs.getString("subjectID");
                 TestTypeEnum testTypeEnum = (Objects.equals(testType, "C") ? TestTypeEnum.C : TestTypeEnum.M);
                 Test test = new Test(testNumber, id, author, testDuration, courseName,
-                        teacherComment, testTypeEnum, studentComment, subject, year, session, semester,subjectID);
+                        teacherComment, testTypeEnum, studentComment, subject, year, session, semester, subjectID);
                 tests.add(test);
 
             }
@@ -231,11 +226,11 @@ public class MysqlConnection {
         try {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String id = rs.getString("id"); // assuming your table has a column named "id" with type INT
+                String id = rs.getString("id");
                 int numOfQuestions = rs.getInt("numOfQuestions");
                 String testDate = rs.getString("testDate");
                 String startingTime = rs.getString("startingTime");
-               // String timeLeft = rs.getString("timeLeft");
+                // String timeLeft = rs.getString("timeLeft");
                 String testCode = rs.getString("testCode");
 
                 ActiveTest activeTest = new ActiveTest(id, numOfQuestions, testDate, startingTime, testCode);
@@ -260,7 +255,7 @@ public class MysqlConnection {
         try {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String questionID = rs.getString("questionID"); // assuming your table has a column named "id" with type INT
+                String questionID = rs.getString("questionID");
                 String questionNumber = rs.getString("questionNumber");
                 String points = rs.getString("points");
                 String questionText = rs.getString("questionText");
@@ -293,7 +288,7 @@ public class MysqlConnection {
         try {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String newDuration = rs.getString("newDuration"); // assuming your table has a column named "id" with type INT
+                String newDuration = rs.getString("newDuration");
                 String explanation = rs.getString("explanation");
                 String id = rs.getString("id");
                 String subject = rs.getString("subject");
@@ -327,24 +322,25 @@ public class MysqlConnection {
                 String testID = rs.getString("testID");
                 String subjectID = rs.getString("subjectID");
                 String course = rs.getString("course");
-                TestTypeEnum testType = TestTypeEnum.valueOf(rs.getString("testType")); // Convert the string value to the enum
-                String grade = rs.getString("score"); // Assuming "grade" represents the grade
-                String fullname = rs.getString("fullname");
+                TestTypeEnum testType = TestTypeEnum.valueOf(rs.getString("testType"));
+                String grade = rs.getString("score");
+                String fullName = rs.getString("fullname");
                 String year = rs.getString("year");
                 String semester = rs.getString("semester");
                 String session = rs.getString("session");
-                CheatingSuspicion suspicionOfCheating = CheatingSuspicion.valueOf(rs.getString("suspicionOfCheating")); // Assuming "suspicionOfCheating" is a string representation of the enum value
+                CheatingSuspicion suspicionOfCheating = CheatingSuspicion.valueOf(rs.getString("suspicionOfCheating"));
                 String correctAnswers = rs.getString("correctAnswers");
                 String totalQuestions = rs.getString("totalQuestions");
                 String lecturerComments = rs.getString("lecturerComments");
                 String TestDuration = rs.getString("testDuration");
-                ApprovalStatus approved = ApprovalStatus.valueOf(rs.getString("approved")); // Assuming "approved" is a string representation of the enum value
+                ApprovalStatus approved = ApprovalStatus.valueOf(rs.getString("approved"));
 
-                StudentTest studentTest = new StudentTest(studentID, testID, subjectID, course, grade, fullname, year, semester, session, suspicionOfCheating, correctAnswers, totalQuestions, lecturerComments, approved, testType,TestDuration);
+                StudentTest studentTest = new StudentTest(studentID, testID, subjectID, course, grade, fullName, year,
+                        semester, session, suspicionOfCheating, correctAnswers, totalQuestions, lecturerComments,
+                        approved, testType, TestDuration);
+
                 list.add(studentTest);
-
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -360,19 +356,19 @@ public class MysqlConnection {
             e.printStackTrace();
         }
 
-        String fullname = null;
+        String fullName = null;
         try {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String first = rs.getString("firstName"); // assuming your table has a column named "id" with type INT
+                String first = rs.getString("firstName");
                 String last = rs.getString("lastName");
-                fullname = first + " " + last;
+                fullName = first + " " + last;
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return fullname;
+        return fullName;
     }
 
     public static ArrayList<User> getUser(String query) {
@@ -397,7 +393,7 @@ public class MysqlConnection {
 
 
                 // Create a new ConcreteUser object with the retrieved details
-                User user = new User(id, firstName, lastName, "username", "password", email, role,IsLoggedIn,phone);
+                User user = new User(id, firstName, lastName, "username", "password", email, role, IsLoggedIn, phone);
                 // Set the authenticated user
                 getUsers.add(user);
 
@@ -409,7 +405,6 @@ public class MysqlConnection {
 
         return getUsers;
     }
-
 
 
     /**
@@ -440,7 +435,7 @@ public class MysqlConnection {
         try {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String id = rs.getString("id"); // assuming your table has a column named "id" with type INT
+                String id = rs.getString("id");
                 String subject = rs.getString("subject");
                 String course_name = rs.getString("courseName");
                 String question_text = rs.getString("questionText");
@@ -477,7 +472,7 @@ public class MysqlConnection {
         try {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String testNumber = rs.getString("testNumber"); // assuming your table has a column named "id" with type INT
+                String testNumber = rs.getString("testNumber");
                 String id = rs.getString("id");
                 String author = rs.getString("author");
                 String testDuration = rs.getString("testDuration");
@@ -492,7 +487,7 @@ public class MysqlConnection {
                 String subjectID = rs.getString("subjectID");
                 TestTypeEnum testTypeEnum = (Objects.equals(testType, "C") ? TestTypeEnum.C : TestTypeEnum.M);
                 test = new Test(testNumber, id, author, testDuration, courseName,
-                        teacherComment, testTypeEnum, studentComment, subject, year, session, semester,subjectID);
+                        teacherComment, testTypeEnum, studentComment, subject, year, session, semester, subjectID);
 
             }
         } catch (SQLException e) {
@@ -501,6 +496,7 @@ public class MysqlConnection {
 
         return test;
     }
+
     public static StudentCourse checkRegistered(String query) {
         Statement stmt = null;
         try {
@@ -529,6 +525,7 @@ public class MysqlConnection {
 
         return getUser;
     }
+
     public static Subject SubjectName(String query) {
         Statement stmt = null;
 
@@ -541,15 +538,16 @@ public class MysqlConnection {
         try {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String subjectID = rs.getString("subjectID"); // assuming your table has a column named "id" with type INT
+                String subjectID = rs.getString("subjectID");
                 String subjectName = rs.getString("subjectName");
-                subject = new Subject(subjectID,subjectName);
+                subject = new Subject(subjectID, subjectName);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return subject;
     }
+
     public static ArrayList<TestForApproval> getTestForApproval(String query) {
         Statement stmt = null;
         try {
@@ -566,7 +564,7 @@ public class MysqlConnection {
                 String subjectID = rs.getString("subjectID");
                 String course = rs.getString("course");
                 String grade = rs.getString("score");
-                String fullname = rs.getString("fullname");
+                String fullName = rs.getString("fullname");
                 String year = rs.getString("year");
                 String semester = rs.getString("semester");
                 String session = rs.getString("session");
@@ -581,8 +579,8 @@ public class MysqlConnection {
                 TestTypeEnum testTypeEnum = (Objects.equals(testType, "C") ? TestTypeEnum.C : TestTypeEnum.M);
                 // Create TestForApproval object with all the retrieved values
                 TestForApproval testForApproval = new TestForApproval(studentID, testID, subjectID, course, grade,
-                        fullname, year, semester, session, suspicionOfCheating, correctAnswers,
-                        totalQuestions, lecturerComments, approved,testTypeEnum);
+                        fullName, year, semester, session, suspicionOfCheating, correctAnswers,
+                        totalQuestions, lecturerComments, approved, testTypeEnum);
                 list.add(testForApproval);
             }
         } catch (SQLException e) {
@@ -590,6 +588,7 @@ public class MysqlConnection {
         }
         return list;
     }
+
     public static Integer getTotalStudentsInTest(String query) {
         Statement stmt = null;
         try {
@@ -610,6 +609,7 @@ public class MysqlConnection {
         }
         return totalStudents;
     }
+
     public static Integer getTotalStudentsRegisteredToTest(String query) {
         Statement stmt = null;
         try {
@@ -629,6 +629,7 @@ public class MysqlConnection {
         }
         return rowCount;
     }
+
     public static Integer getTotalStudentsFinishedTheTest(String query) {
         Statement stmt = null;
         try {
@@ -649,6 +650,7 @@ public class MysqlConnection {
         return finishedCount;
 
     }
+
     public static TestTypeEnum getTestType(String query) {
         Statement stmt = null;
         try {
@@ -669,6 +671,7 @@ public class MysqlConnection {
         }
         return null; // or throw an exception if the test id is not found
     }
+
     public static String getIDreturnFullname(String query) {
         Statement stmt = null;
         try {
@@ -688,6 +691,7 @@ public class MysqlConnection {
         }
         return fullName;
     }
+
     public static ArrayList<String> getStudentsCourses(String query) {
         Statement stmt = null;
 
@@ -697,7 +701,7 @@ public class MysqlConnection {
             e.printStackTrace();
         }
         ArrayList<String> courses = new ArrayList<>();
-        String singleCourse = null;
+        String singleCourse;
         try {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
@@ -709,6 +713,7 @@ public class MysqlConnection {
         }
         return courses;
     }
+
     public static String getStudentsAvg(String query) {
         Statement stmt = null;
 
@@ -728,6 +733,7 @@ public class MysqlConnection {
         }
         return average;
     }
+
     public static ArrayList<String> getAfterTestInfo(String query) {
         Statement stmt = null;
         try {
@@ -741,7 +747,7 @@ public class MysqlConnection {
         try {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String actualDuration = rs.getString("actualDuration"); // assuming your table has a column named "id" with type INT
+                String actualDuration = rs.getString("actualDuration");
                 String totalFinished = rs.getString("totalFinished");
                 String totalForcedFinished = rs.getString("totalForcedFinished");
                 list.add(actualDuration);

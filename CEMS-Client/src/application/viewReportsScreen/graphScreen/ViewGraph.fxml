@@ -35,17 +35,18 @@
     <AnchorPane layoutY="101.0" prefHeight="434.0" prefWidth="800.0" style="-fx-border-color: #1d416e; -fx-border-width: 0 3 3 3;">
         <VBox alignment="CENTER_LEFT" layoutY="26.0" prefHeight="356.0" prefWidth="782.0">
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-            <children>
-               <Label alignment="CENTER" prefHeight="40.0" prefWidth="204.0" text="Number of tests taken:" textFill="#7799c2">
-                  <font>
-                     <Font name="Trebuchet MS Bold" size="17.0" />
-                  </font>
-                  <padding>
-                     <Insets left="10.0" />
-                  </padding>
-               </Label>
-               <Text fx:id="NumberText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="30.5367431640625" />
-            </children></HBox>
+                <Label alignment="CENTER" prefHeight="40.0" prefWidth="204.0" text="Number of tests taken:"
+                       textFill="#7799c2">
+                    <font>
+                        <Font name="Trebuchet MS Bold" size="17.0"/>
+                    </font>
+                    <padding>
+                        <Insets left="10.0"/>
+                    </padding>
+                </Label>
+                <Text fx:id="NumberText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
+                      wrappingWidth="30.5367431640625"/>
+            </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                 <VBox.margin>
                     <Insets />
@@ -102,54 +103,48 @@
                 </Label>
             <Text fx:id="averageText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
             </HBox>
-         <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="200.0">
-            <children>
-               <Label prefHeight="24.0" prefWidth="90.0" text="Finished:" textFill="#7799c2">
-                  <font>
-                     <Font name="Trebuchet MS Bold" size="17.0" />
-                  </font>
-                  <padding>
-                     <Insets left="10.0" />
-                  </padding>
-                  <HBox.margin>
-                     <Insets right="2.0" />
-                  </HBox.margin>
-               </Label>
-               <Text fx:id="finishedText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            </children>
-         </HBox>
-         <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="200.0">
-            <children>
-               <Label prefHeight="24.0" prefWidth="149.0" text="Forced Finished:" textFill="#7799c2">
-                  <font>
-                     <Font name="Trebuchet MS Bold" size="17.0" />
-                  </font>
-                  <padding>
-                     <Insets left="10.0" />
-                  </padding>
-                  <HBox.margin>
-                     <Insets right="2.0" />
-                  </HBox.margin>
-               </Label>
-               <Text fx:id="ForcedFinsihedText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            </children>
-         </HBox>
-         <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="200.0">
-            <children>
-               <Label prefHeight="24.0" prefWidth="90.0" text="Duration" textFill="#7799c2">
-                  <font>
-                     <Font name="Trebuchet MS Bold" size="17.0" />
-                  </font>
-                  <padding>
-                     <Insets left="10.0" />
-                  </padding>
-                  <HBox.margin>
-                     <Insets right="2.0" />
-                  </HBox.margin>
-               </Label>
-               <Text fx:id="DurationText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            </children>
-         </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="200.0">
+                <Label prefHeight="24.0" prefWidth="90.0" text="Finished:" textFill="#7799c2">
+                    <font>
+                        <Font name="Trebuchet MS Bold" size="17.0"/>
+                    </font>
+                    <padding>
+                        <Insets left="10.0"/>
+                    </padding>
+                    <HBox.margin>
+                        <Insets right="2.0"/>
+                    </HBox.margin>
+                </Label>
+                <Text fx:id="finishedText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"/>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="200.0">
+                <Label prefHeight="24.0" prefWidth="149.0" text="Forced Finished:" textFill="#7799c2">
+                    <font>
+                        <Font name="Trebuchet MS Bold" size="17.0"/>
+                    </font>
+                    <padding>
+                        <Insets left="10.0"/>
+                    </padding>
+                    <HBox.margin>
+                        <Insets right="2.0"/>
+                    </HBox.margin>
+                </Label>
+                <Text fx:id="ForcedFinishedText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"/>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="200.0">
+                <Label prefHeight="24.0" prefWidth="90.0" text="Duration" textFill="#7799c2">
+                    <font>
+                        <Font name="Trebuchet MS Bold" size="17.0"/>
+                    </font>
+                    <padding>
+                        <Insets left="10.0"/>
+                    </padding>
+                    <HBox.margin>
+                        <Insets right="2.0"/>
+                    </HBox.margin>
+                </Label>
+                <Text fx:id="DurationText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"/>
+            </HBox>
         </VBox>
         <BarChart fx:id="reportGraph" animated="false" layoutX="168.0" layoutY="39.0" legendSide="LEFT" legendVisible="false" prefHeight="385.0" prefWidth="625.0" title="Grades distribution">
             <xAxis>

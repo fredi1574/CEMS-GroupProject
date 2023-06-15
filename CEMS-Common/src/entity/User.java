@@ -13,7 +13,7 @@ public class User implements Serializable {
     final String email;
     final String role;
     final String phone;
-    int isLoggedIn;
+    final int isLoggedIn;
 
 
     /**

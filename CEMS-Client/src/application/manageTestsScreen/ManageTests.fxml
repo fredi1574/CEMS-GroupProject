@@ -90,44 +90,37 @@
             <Font name="System Bold" size="18.0" />
         </font>
     </Label>
-    <Button fx:id="viewTestInProgressBtn" layoutX="808.0" layoutY="416.0" mnemonicParsing="false" onAction="#viewTestInProgress" prefHeight="28.0" prefWidth="106.0" styleClass="regularButtons" text="View Test">
+    <Button layoutX="808.0" layoutY="416.0" mnemonicParsing="false" onAction="#viewTestInProgress" prefHeight="28.0" prefWidth="106.0" styleClass="regularButtons" text="View Test">
         <graphic>
             <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                    <Image url="@/images/test_inprogress.png" />
-                </image></ImageView>
-        </graphic>
-    </Button>
-    <Button fx:id="viewTestResultsBtn" layoutX="27.0" layoutY="722.0" mnemonicParsing="false" onAction="#viewTestResults" prefHeight="26.0" prefWidth="160.0" styleClass="regularButtons" text="View Test Results">
-        <graphic>
-            <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                    <Image url="@/images/test_results.png" />
-                </image>
+                <Image url="@/images/test_inprogress.png"/>
             </ImageView>
         </graphic>
     </Button>
-    <Button fx:id="editBtn" alignment="CENTER" layoutX="152.0" layoutY="415.0" mnemonicParsing="false" onAction="#editTest" prefHeight="26.0" prefWidth="98.0" styleClass="regularButtons" text="Edit">
+    <Button layoutX="27.0" layoutY="722.0" mnemonicParsing="false" onAction="#viewTestResults" prefHeight="26.0" prefWidth="160.0" styleClass="regularButtons" text="View Test Results">
+        <graphic>
+            <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@/images/test_results.png"/>
+            </ImageView>
+        </graphic>
+    </Button>
+    <Button alignment="CENTER" layoutX="152.0" layoutY="415.0" mnemonicParsing="false" onAction="#editTest" prefHeight="26.0" prefWidth="98.0" styleClass="regularButtons" text="Edit">
         <font>
             <Font name="Franklin Gothic Demi Cond" size="12.0" />
         </font>
         <graphic>
             <ImageView fitHeight="16.0" fitWidth="16.0" translateY="1.0">
-                <image>
-                    <Image url="@/images/test_edit.png" />
-                </image>
+                <Image url="@/images/test_edit.png"/>
             </ImageView>
         </graphic>
     </Button>
-    <Button fx:id="activateTestBtn" alignment="CENTER" layoutX="274.0" layoutY="415.0" mnemonicParsing="false" onAction="#activateTest" prefHeight="26.0" prefWidth="122.0" styleClass="regularButtons" text="Activate Test">
+    <Button alignment="CENTER" layoutX="274.0" layoutY="415.0" mnemonicParsing="false" onAction="#activateTest" prefHeight="26.0" prefWidth="122.0" styleClass="regularButtons" text="Activate Test">
         <font>
             <Font name="Franklin Gothic Demi Cond" size="12.0" />
         </font>
         <graphic>
             <ImageView fitHeight="16.0" fitWidth="16.0" translateY="1.0">
-                <image>
-                    <Image url="@/images/test_activate.png" />
-                </image>
+                <Image url="@/images/test_activate.png"/>
             </ImageView>
         </graphic>
     </Button>

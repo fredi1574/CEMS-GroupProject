@@ -40,7 +40,7 @@ public class QuestionsComputerizedTestAnswerController {
     private static int selectedCount = 0;
     private static int TotalStudents;
     private static ObservableList<TestQuestion> testQuestions;
-    private static boolean testIsLockedComputrized;
+    private static boolean testIsLockedComputerized;
     @FXML
     private Text courseNameTestIdText;
     private String testId;
@@ -81,7 +81,7 @@ public class QuestionsComputerizedTestAnswerController {
         }
     }
 
-    public void initialize() throws SQLException {
+    public void initialize() {
 
         // Enables dragging and dropping of the application window using the header pane
         MsgHandler totalStudentIncrease = new MsgHandler(TypeMsg.IcreaseStudentsEnteringTest, testID);
@@ -127,8 +127,7 @@ public class QuestionsComputerizedTestAnswerController {
     private Test getTestData() {
         MsgHandler getTestInformation = new MsgHandler(TypeMsg.GetTestByID, testID);
         ClientUI.chat.accept(getTestInformation);
-        Test test = (Test) ClientUI.chat.getSingleTest();
-        return test;
+        return (Test) ClientUI.chat.getSingleTest();
     }
 
     private void fetchCourseNameAndTestId() {
@@ -197,9 +196,9 @@ public class QuestionsComputerizedTestAnswerController {
     }
 
     @FXML
-    public void handlePreviousButtonClick() throws SQLException {
+    public void handlePreviousButtonClick() {
         saveMarkingWithValidation();
-        if (testIsLockedComputrized) {
+        if (testIsLockedComputerized) {
             showError.showErrorPopup("Test is locked please press submit to enter the test");
         } else if (selectedCount <= 1) {
             currentQuestionIndex -= 1; // Go back two questions (currentQuestionIndex - 1)
@@ -208,9 +207,9 @@ public class QuestionsComputerizedTestAnswerController {
     }
 
     @FXML
-    public void handleButtonClick() throws SQLException {
+    public void handleButtonClick() {
         saveMarkingWithValidation();
-        if (testIsLockedComputrized) {
+        if (testIsLockedComputerized) {
             showError.showErrorPopup("Test is locked please press submit to enter the test");
         } else if (selectedCount <= 1) {
             currentQuestionIndex++;
@@ -239,14 +238,13 @@ public class QuestionsComputerizedTestAnswerController {
         MsgHandler numberOfFinished = new MsgHandler(TypeMsg.CountNumberOfFinished, test.getId());
         ClientUI.chat.accept(numberOfFinished);
         int NumberOfFinishedCounter = (int) (ClientUI.chat.getNumberOfFinished());
-        int TotalForcedFinished = TotalStudents - NumberOfFinishedCounter;
-        return TotalForcedFinished;
+        return TotalStudents - NumberOfFinishedCounter;
     }
 
     public void saveAfterTestInfoAndDeleteFromActive() {
         Test test = getTestData();
         int totalForcedFinished;
-        if (testIsLockedComputrized) {
+        if (testIsLockedComputerized) {
             MsgHandler totalStudentAttended = new MsgHandler(TypeMsg.NumberOfAttendedCounter, test.getId());
             ClientUI.chat.accept(totalStudentAttended);
             int NumberOfAttendedCounter = (int) (ClientUI.chat.getNumberOfAttended());
@@ -266,20 +264,20 @@ public class QuestionsComputerizedTestAnswerController {
     }
 
     @FXML
-    public void SubmitTest(ActionEvent event) throws SQLException {
+    public void SubmitTest(ActionEvent event) {
         if (showError.showConfirmationPopup("Are you sure you want to submit the test?\nYou won't be able to make further changes")) {
             saveMarkingWithValidation();
             if (selectedCount <= 1) {
                 saveFinalAnswers();
-                if (!testIsLockedComputrized) {
-                    MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, testID);
-                    ClientUI.chat.accept(finshedStudentsIncrease);
+                if (!testIsLockedComputerized) {
+                    MsgHandler finishedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, testID);
+                    ClientUI.chat.accept(finishedStudentsIncrease);
                 }
 
-                if (checkLockTest() || (testIsLockedComputrized)) {
+                if (checkLockTest() || (testIsLockedComputerized)) {
                     saveAfterTestInfoAndDeleteFromActive();
                 }
-                testIsLockedComputrized = false;
+                testIsLockedComputerized = false;
                 ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
             }
 
@@ -312,7 +310,7 @@ public class QuestionsComputerizedTestAnswerController {
     public void lockTest() {
         timer.stop();
         Platform.runLater(() -> showError.showInfoPopup("Test was locked by lecturer\nPlease press submit to exit the test"));
-        testIsLockedComputrized = true;
+        testIsLockedComputerized = true;
     }
 
     public void saveStudentsTest(int score, int correctAnswers, int totalQuestions) {
@@ -330,8 +328,7 @@ public class QuestionsComputerizedTestAnswerController {
 
     private void fetchTestDuration() {
         Test test = getTestData();
-        int testDurationMinutes = Integer.parseInt(test.getTestDuration());
-        remainingMinutes = testDurationMinutes;
+        remainingMinutes = Integer.parseInt(test.getTestDuration());
     }
 
     private void startTimer() {
@@ -347,7 +344,7 @@ public class QuestionsComputerizedTestAnswerController {
                         Stage currentStage = (Stage) header.getScene().getWindow();
                         if (currentStage.isShowing()) {
                             saveFinalAnswers();
-                            if (checkLockTest() || (testIsLockedComputrized)) {
+                            if (checkLockTest() || (testIsLockedComputerized)) {
                                 saveAfterTestInfoAndDeleteFromActive();
                             }
 

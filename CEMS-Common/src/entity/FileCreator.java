@@ -1,15 +1,14 @@
 package entity;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 
 public class FileCreator implements Serializable {
 
     private static final long serialVersionUID = 1843L;
-    private String studentID = null;
-    private String examID = null;
+    private String studentID;
+    private String examID;
     private String fileName = null;
-    private String examType = null;
+    private String examType;
     private String examSubject;
     private String examCourse;
     private String examDate;

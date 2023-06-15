@@ -38,20 +38,32 @@ public class ViewQuestionHeadOfDepartmentController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getName());
+
+        ObservableList<Question> questions = buildTable();
+        filterTable(questions);
+    }
+
+
+
+    private ObservableList<Question> buildTable() {
         MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestionsBySubject, Client.user.getUserName());
         ClientUI.chat.accept(getTable);
 
-        // Creates the question table
         ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.GetQuestionsBySubject());
         ObservableList<String> columns = FXCollections.observableArrayList();
         columns.addAll("Question Number", "ID", "Subject", "Course Name", "Question Text", "Author");
+
         TableManager.createTable(manageQuestionsTableView, columns);
         TableManager.importData(manageQuestionsTableView, questions);
         TableManager.addDoubleClickFunctionality(manageQuestionsTableView, PathConstants.ViewQuestionPath, this::setFunctions);
+
         double[] multipliers = {0.15, 0.1, 0.1, 0.13, 0.35, 0.162};
         TableManager.resizeColumns(manageQuestionsTableView, multipliers);
 
-        // Filter the results as you search
+        return questions;
+    }
+
+    private void filterTable(ObservableList<Question> questions) {
         FilteredList<Question> filteredData = new FilteredList<>(questions, b -> true);
         TableManager.MakeFilterListForSearch(filteredData, searchField, Question::getQuestionText);
 
@@ -66,7 +78,6 @@ public class ViewQuestionHeadOfDepartmentController {
         ViewQuestionController controller = loader.getController();
         Question rowData = manageQuestionsTableView.getSelectionModel().getSelectedItem();
         controller.setQuestion(rowData);
-        controller.setManage((Stage) header.getScene().getWindow());
     }
 
     /**
@@ -90,7 +101,6 @@ public class ViewQuestionHeadOfDepartmentController {
 
     /**
      * Closes the application.
-     * @param event The event triggered by clicking the close button.
      */
     @FXML
     public void closeClient() {

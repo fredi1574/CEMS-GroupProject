@@ -49,7 +49,7 @@ public class ManualTestController {
     private AnchorPane header;
     @FXML
     private Text addtionalTimeForSubmitTEXT;
-    private boolean isSubmit = true;
+    private final boolean isSubmit = true;
     private boolean isTimerRunning;
     @FXML
     private TextField EndTimeText;
@@ -102,8 +102,7 @@ public class ManualTestController {
     private Test getTestData() {
         MsgHandler getTestInformation = new MsgHandler(TypeMsg.GetTestByID, EnterCodePopUpController.testID);
         ClientUI.chat.accept(getTestInformation);
-        Test test = (Test) ClientUI.chat.getSingleTest();
-        return test;
+        return (Test) ClientUI.chat.getSingleTest();
     }
 
     private String formatTime(int seconds) {
@@ -114,8 +113,7 @@ public class ManualTestController {
     }
 
     private void fetchTestDuration() {
-        int testDurationMinutes = Integer.parseInt(test.getTestDuration());
-        remainingMinutes = testDurationMinutes;
+        remainingMinutes = Integer.parseInt(test.getTestDuration());
     }
 
     private void startTimer() {
@@ -204,14 +202,14 @@ public class ManualTestController {
 
 
     @FXML
-    public void uploadFileBTN(ActionEvent event) {
+    public void uploadFileBTN() {
         boolean notUpload = true;
         if (notUpload) {
             FileChooser fc = new FileChooser();
             selectedFile = fc.showOpenDialog(null);
             if (selectedFile != null) {
                 FileSubmissionsText.setText(selectedFile.getName());
-                SubmissionStatusText.setText("The solve is submitedd file : " + selectedFile.getName());
+                SubmissionStatusText.setText("The solve is submitted file : " + selectedFile.getName());
             }
         } else {
 
@@ -220,7 +218,7 @@ public class ManualTestController {
     }
 
     @FXML
-    public void DownloadFileBTN(ActionEvent event) {
+    public void DownloadFileBTN() {
         try {
             FileChooser fc = new FileChooser();
             fc.setTitle("Download File");
@@ -247,8 +245,7 @@ public class ManualTestController {
         MsgHandler numberOfFinished = new MsgHandler(TypeMsg.CountNumberOfFinished, test.getId());
         ClientUI.chat.accept(numberOfFinished);
         int NumberOfFinishedCounter = (int) (ClientUI.chat.getNumberOfFinished());
-        int TotalForcedFinished = TotalStudents - NumberOfFinishedCounter;
-        return TotalForcedFinished;
+        return TotalStudents - NumberOfFinishedCounter;
 
 
     }
@@ -308,8 +305,8 @@ public class ManualTestController {
                 if (showError.showConfirmationPopup("Are you sure want to submit an empty test?")) {
                     StateManagement.resetInstance();
                     if (!testIsLockedManual) {
-                        MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, test.getId());
-                        ClientUI.chat.accept(finshedStudentsIncrease);
+                        MsgHandler finishedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, test.getId());
+                        ClientUI.chat.accept(finishedStudentsIncrease);
                     }
 
                     if (checkLockTest() || (testIsLockedManual)) {
@@ -329,8 +326,8 @@ public class ManualTestController {
                     StateManagement.resetInstance();
 
                     if (!testIsLockedManual) {
-                        MsgHandler finshedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, test.getId());
-                        ClientUI.chat.accept(finshedStudentsIncrease);
+                        MsgHandler finishedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, test.getId());
+                        ClientUI.chat.accept(finishedStudentsIncrease);
                     }
 
                     if ((checkLockTest() || (testIsLockedManual))) {

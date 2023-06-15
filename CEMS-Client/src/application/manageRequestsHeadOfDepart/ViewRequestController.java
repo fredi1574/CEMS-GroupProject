@@ -30,7 +30,7 @@ public class ViewRequestController {
     private TextArea RequestText;
 
     @FXML
-    private TextField TimeExtentionDurationText;
+    private TextField TimeExtensionDurationText;
 
     @FXML
     private AnchorPane header;
@@ -66,7 +66,7 @@ public class ViewRequestController {
         CourseText.setText(request.getCourse());
         LecturerText.setText(request.getAuthor());
         RequestText.setText(request.getExplanation());
-        TimeExtentionDurationText.setText(request.getNewDuration());
+        TimeExtensionDurationText.setText(request.getNewDuration());
         testIDText.setText(request.getId());
     }
 
@@ -78,7 +78,7 @@ public class ViewRequestController {
 
     @FXML
     public void approveRequest() {
-        String AddedTime = TimeExtentionDurationText.getText();
+        String AddedTime = TimeExtensionDurationText.getText();
 
         ArrayList<String> ChangeTestDurationArr = new ArrayList<>();
 

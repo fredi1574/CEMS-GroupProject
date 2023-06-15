@@ -8,8 +8,8 @@ package util;
  * @param <FXMLLoader> the window's FXMLLoader object (a class that loads an object hierarchy from an XML document)
  */
 public class ScreenElements<Stage, FXMLLoader> {
-    private Stage stage;
-    private FXMLLoader fxmlLoader;
+    private final Stage stage;
+    private final FXMLLoader fxmlLoader;
 
     public ScreenElements(Stage stage, FXMLLoader fxmlLoader) {
         this.stage = stage;

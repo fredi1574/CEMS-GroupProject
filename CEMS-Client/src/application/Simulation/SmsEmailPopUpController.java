@@ -12,7 +12,7 @@ import util.ScreenManager;
 public class SmsEmailPopUpController {
 
     @FXML
-    private Text EmailAdressTxt;
+    private Text EmailAddressTxt;
 
     @FXML
     private TextField InfoTextField;
@@ -33,7 +33,7 @@ public class SmsEmailPopUpController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         fullNameText.setText(fullName);
-        EmailAdressTxt.setText(emailAdd);
+        EmailAddressTxt.setText(emailAdd);
         InfoTextField.setText(infoText);
         phoneNumberText.setText(phoneNum);
     }

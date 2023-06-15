@@ -31,8 +31,8 @@ public class ShowReportByLecturerController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getName());
-        MsgHandler getLecutrers = new MsgHandler(TypeMsg.GetUser,Client.user.getId());
-        ClientUI.chat.accept(getLecutrers);
+        MsgHandler getLecturers = new MsgHandler(TypeMsg.GetUser,Client.user.getId());
+        ClientUI.chat.accept(getLecturers);
         LecturerCombo.setItems(LecturerNames);
 
     }
@@ -71,8 +71,8 @@ public class ShowReportByLecturerController {
     @FXML
     void showReportForSpecificLecturer(ActionEvent event) {
         chosenLecturer = LecturerCombo.getSelectionModel().getSelectedItem();
-        MsgHandler getLecutrers = new MsgHandler(TypeMsg.GetTestsByLecutrer,chosenLecturer);
-        ClientUI.chat.accept(getLecutrers);
+        MsgHandler getLecturers = new MsgHandler(TypeMsg.GetTestsByLecutrer,chosenLecturer);
+        ClientUI.chat.accept(getLecturers);
         ScreenManager.goToNewScreen(event, PathConstants.EnterReportByLecturerPath);
     }
 

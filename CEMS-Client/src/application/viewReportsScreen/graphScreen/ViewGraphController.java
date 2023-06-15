@@ -68,7 +68,7 @@ public class ViewGraphController {
         ScreenManager.dragAndDrop(header);
         ArrayList<StudentTest> SpecificTestInfo = new ArrayList<>();
         for (StudentTest test : infoAboutTest) {
-            if (test instanceof StudentTest) {
+            if (test != null) {
                 if (test.getTestID().equals(testID)){
                     SpecificTestInfo.add(test);
                 }
@@ -84,19 +84,16 @@ public class ViewGraphController {
         CourseYearSessionText.setText(CourseYearSession);
         semesterText.setText(semester);
         testIDtext.setText(testID);
+
         MsgHandler getInfoAfterTest = new MsgHandler(TypeMsg.getTestAfterTestInfo, testIDtext.getText());
         ClientUI.chat.accept(getInfoAfterTest);
-        ArrayList<String> AddionalInformation = (ArrayList)ClientUI.chat.getInfoAboutTest();
-        DurationText.setText(AddionalInformation.get(0));
-        finishedText.setText(AddionalInformation.get(1));
-        ForcedFinsihedText.setText(AddionalInformation.get(2));
 
-
-
-
+        ArrayList<String> AdditionalInformation = (ArrayList)ClientUI.chat.getInfoAboutTest();
+        DurationText.setText(AdditionalInformation.get(0));
+        finishedText.setText(AdditionalInformation.get(1));
+        ForcedFinsihedText.setText(AdditionalInformation.get(2));
     }
-    public void setViewReport(Stage reports) {
-    }
+
     public void LogOut(ActionEvent event) {
        LogOut.logOutToLoginScreen(event);
     }
@@ -115,14 +112,14 @@ public class ViewGraphController {
         averageScore = 0;
         medianScore = 0;
         series = new XYChart.Series<>();
-        StudentTest studentTest = null;
+        StudentTest studentTest;
         int[] gradeRanges = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
         ArrayList<Integer> numOfStudentsPerGroup = new ArrayList<>();
         ArrayList<Double> scoreValues = new ArrayList<>();
 
         // Calculate the total score and collect score values
         for (StudentTest test : SpecificTest) {
-            if (test instanceof StudentTest) {
+            if (test != null) {
                 studentTest = test;
                 double score = Double.parseDouble(studentTest.getScore());
                 totalScore += score;

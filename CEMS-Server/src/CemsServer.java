@@ -461,7 +461,7 @@ public class CemsServer extends AbstractServer {
                     String addedTime = (String) TestChangement.get(1);
                     MysqlConnection.update("UPDATE test SET testDuration = testDuration + '" + Integer.parseInt(addedTime) + "' WHERE id = '" + testID + "'");
                     TestTypeEnum getType = MysqlConnection.getTestType("SELECT testType FROM test WHERE id = '" + testID + "'");
-                    if (getType instanceof TestTypeEnum) {
+                    if (getType != null) {
                         if (getType.equals(TestTypeEnum.C)) {
                             sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationChangedComputrizedSendToAll, Integer.parseInt(addedTime)));
                         } else {

@@ -144,11 +144,6 @@ public class ServerController {
         this.btnDisconnect.setDisable(true);
     }
 
-    @FXML
-    void ImportData() {
-        MysqlConnection.connectToDb(this.txtPassword.getText());
-    }
-
     public void Close() { //close button
         ServerGUI.disconnect();
         System.exit(0);

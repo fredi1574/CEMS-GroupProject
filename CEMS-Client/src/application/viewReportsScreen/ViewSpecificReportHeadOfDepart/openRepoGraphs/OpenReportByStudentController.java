@@ -76,7 +76,7 @@ public class OpenReportByStudentController {
     void closeClient() {
         ExitButton.closeClient();
     }
-    public void reportCalc(ArrayList<Object> infoOfstudent) {
+    public void reportCalc(ArrayList<Object> infoOfStudent) {
         numberOfStudentTests = 0;
         numberOfCTestTypes= 0;
         numberOfMTestTypes= 0;
@@ -85,9 +85,9 @@ public class OpenReportByStudentController {
         averageScore= 0;
         medianScore= 0;
         series = new XYChart.Series<>();
-        StudentTest studentTest = null;
+        StudentTest studentTest;
         ArrayList<Double> scoreValues = new ArrayList<>();
-        for (Object obj : infoOfstudent) {
+        for (Object obj : infoOfStudent) {
             if (obj instanceof StudentTest) {
                 studentTest = (StudentTest) obj;
                 fullNameStudent = studentTest.getFullname();

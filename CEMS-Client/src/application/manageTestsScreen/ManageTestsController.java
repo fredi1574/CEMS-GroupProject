@@ -110,17 +110,14 @@ public class ManageTestsController {
             }
         }
 
-        ObservableList<String> columnsForAppropval = FXCollections.observableArrayList();
-        columnsForAppropval.addAll("Student ID", "Test ID", "Course", "Semester", "Session", "Grade", "Approved");
-        TableManager.createTable(testApprovalTableView, columnsForAppropval);
+        ObservableList<String> columnsForApproval = FXCollections.observableArrayList();
+        columnsForApproval.addAll("Student ID", "Test ID", "Course", "Semester", "Session", "Grade", "Approved");
+        TableManager.createTable(testApprovalTableView, columnsForApproval);
         TableManager.importData(testApprovalTableView, filteredTests);
         double[] approvalTestsMultipliers = {0.15, 0.14, 0.15, 0.15, 0.175, 0.12, 0.11};
         TableManager.resizeColumns(testApprovalTableView, approvalTestsMultipliers);
         testApprovalTableView.setOnMouseClicked((e) -> {
             testForApprovalRowData = testApprovalTableView.getSelectionModel().getSelectedItem();
-//            MsgHandler<String> cheatingTest = new MsgHandler(TypeMsg.DetectedCheating,testForApprovalRowData.getTestID());
-//            ClientUI.chat.accept(cheatingTest);
-
         });
         stateManagement.setTestForApproval(filteredTests);
     }
@@ -263,8 +260,7 @@ public class ManageTestsController {
      */
     public String generateTestCode() {
         UUID uuid = UUID.randomUUID();
-        String randomString = uuid.toString().substring(0, 4);
-        return randomString;
+        return uuid.toString().substring(0, 4);
     }
 
     /**
@@ -327,13 +323,10 @@ public class ManageTestsController {
         stateManagement.setCurrentActivetest(curActiveTest);
 
         //gets the matching Test object to the selected active test row
-        Test matchingTestFromDB = testsFromDBTableView.getItems()
+        testsFromDBTableView.getItems()
                 .stream()
                 .filter(test -> test.getId().equals(activeTestRowData.getId()))
-                .findFirst()
-                .orElse(null);
-        if (matchingTestFromDB != null)
-            loadTestState(matchingTestFromDB);
+                .findFirst().ifPresent(this::loadTestState);
 
         //ScreenManager.popUpScreen(PathConstants.viewActiveTestPath);
         ScreenManager.goToNewScreen(actionEvent, PathConstants.viewActiveTestPath);

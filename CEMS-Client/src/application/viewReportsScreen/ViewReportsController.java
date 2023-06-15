@@ -28,7 +28,7 @@ import java.util.Set;
 public class ViewReportsController {
 
     private static ObservableList<StudentTest> listOfTestsNoDuplicates;
-    private static ObservableList<StudentTest> FulllistOfTests;
+    private static ObservableList<StudentTest> fullListOfTests;
     @FXML
     private AnchorPane header;
     @FXML
@@ -74,7 +74,7 @@ public class ViewReportsController {
     }
 
     public ObservableList<StudentTest> getListOfTests() {
-        return FulllistOfTests;
+        return fullListOfTests;
     }
 
     private void filterTable() {
@@ -98,7 +98,6 @@ public class ViewReportsController {
         ViewGraphController controller = new ViewGraphController();
         StudentTest rowData = reportsTableView.getSelectionModel().getSelectedItem();
         controller.setReport(rowData);
-        controller.setViewReport((Stage) header.getScene().getWindow());
         showReport();
     }
 
@@ -110,7 +109,6 @@ public class ViewReportsController {
         Set<String> uniqueTestIDs = new HashSet<>();
         List<Object> uniqueTests = new ArrayList<>();
         List<Object> approvedTest = new ArrayList<>();
-        ApprovalStatus approvalStatus;
         for (Object test : Tests) {
             String testID = ((StudentTest) test).getTestID();
             if (!uniqueTestIDs.contains(testID)) {
@@ -127,7 +125,7 @@ public class ViewReportsController {
         }
 
         listOfTestsNoDuplicates = FXCollections.observableArrayList((List) uniqueTests);
-        FulllistOfTests = FXCollections.observableArrayList((List) approvedTest);
+        fullListOfTests = FXCollections.observableArrayList((List) approvedTest);
     }
 
     @FXML

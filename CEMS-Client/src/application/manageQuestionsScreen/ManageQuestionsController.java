@@ -89,12 +89,10 @@ public class ManageQuestionsController {
     }
 
     /**
-     * Deletes the selected question from the question table.
-     *
-     * @param event The event triggered by clicking the "Delete" button.
+     * Deletes the selected question from the question table.*
      */
     @FXML
-    public void DeleteQuestion(ActionEvent event) {
+    public void DeleteQuestion() {
         int selectedQuestionIndex = manageQuestionsTableView.getSelectionModel().getFocusedIndex();
         if (selectedQuestionIndex != -1) {
             Question questionToDelete = manageQuestionsTableView.getItems().get(selectedQuestionIndex);
@@ -134,7 +132,7 @@ public class ManageQuestionsController {
     }
 
     /**
-     * Navigates to the add question screen.
+     * Navigates to add question screen.
      *
      * @param event The event triggered by clicking the "Add Question" button.
      */
@@ -144,8 +142,6 @@ public class ManageQuestionsController {
 
     /**
      * Closes the application.
-     *
-     * @param event The event triggered by the close button click.
      */
     @FXML
 

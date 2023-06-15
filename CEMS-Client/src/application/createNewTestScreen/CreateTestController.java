@@ -18,8 +18,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import util.*;
 
-import javax.swing.*;
-import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
