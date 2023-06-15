@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@/util/style.css" xmlns="http://javafx.com/javafx/19"
+            fx:controller="application.createNewTestScreen.pickQuestionsScreen.questionPreviewPopup.questionPreviewController">
+    <AnchorPane fx:id="header" layoutY="-2.0" prefHeight="107.0" prefWidth="823.0"
+                style="-fx-border-color: #1d416e; -fx-border-width: 4 3 0 3;" styleClass="pageHeader">
+        <Label alignment="CENTER" layoutX="17.0" layoutY="8.0" prefHeight="91.0" prefWidth="785.0"
+               text="Question Preview" textAlignment="CENTER" textFill="#fafafa">
+            <font>
+                <Font name="Trebuchet MS" size="40.0"/>
+            </font>
+        </Label>
+        <Button layoutX="787.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
+                onAction="#closePopUp" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X"/>
+        <Button layoutX="748.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
+                onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_"/>
+        <ImageView fitHeight="78.0" fitWidth="201.0" layoutX="17.0" layoutY="15.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <Image url="@/images/Logo_Transparent_Bright.png"/>
+        </ImageView>
+    </AnchorPane>
+    <AnchorPane layoutY="103.0" minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="823.0"
+                style="-fx-border-color: #1d416e; -fx-border-width: 0 3 3 3;" styleClass="backgroundColor">
+        <Label layoutX="14.0" layoutY="2.0" prefHeight="34.0" prefWidth="98.0" text="Question ID:">
+            <font>
+                <Font name="Trebuchet MS Bold" size="15.0"/>
+            </font>
+        </Label>
+        <Label layoutX="14.0" layoutY="46.0" prefHeight="34.0" prefWidth="77.0" text="Question:">
+            <font>
+                <Font name="Trebuchet MS Bold" size="15.0"/>
+            </font>
+        </Label>
+        <TextArea editable="false" layoutX="105.0" layoutY="52.0" prefHeight="150.0" prefWidth="626.0"
+                  text="what is 2+2 ?" wrapText="true"/>
+        <Label layoutX="14.0" layoutY="224.0" prefHeight="34.0" prefWidth="77.0" text="Answers:">
+            <font>
+                <Font name="Trebuchet MS Bold" size="15.0"/>
+            </font>
+        </Label>
+        <VBox layoutX="75.0" layoutY="216.0" prefHeight="328.0" prefWidth="669.0">
+            <padding>
+                <Insets top="15.0"/>
+            </padding>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="75.0" prefWidth="669.0">
+                <VBox.margin>
+                    <Insets/>
+                </VBox.margin>
+                <RadioButton disable="true" mnemonicParsing="false">
+                    <HBox.margin>
+                        <Insets right="5.0"/>
+                    </HBox.margin>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="answers"/>
+                    </toggleGroup>
+                </RadioButton>
+                <TextArea editable="false" prefHeight="60.0" prefWidth="626.0" text="0" wrapText="true"/>
+            </HBox>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="75.0" prefWidth="642.0">
+                <RadioButton disable="true" mnemonicParsing="false" toggleGroup="$answers">
+                    <HBox.margin>
+                        <Insets right="5.0"/>
+                    </HBox.margin>
+                </RadioButton>
+                <TextArea editable="false" prefHeight="60.0" prefWidth="626.0" text="1" wrapText="true"/>
+            </HBox>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="75.0" prefWidth="200.0">
+                <RadioButton disable="true" mnemonicParsing="false" toggleGroup="$answers">
+                    <HBox.margin>
+                        <Insets right="5.0"/>
+                    </HBox.margin>
+                </RadioButton>
+                <TextArea editable="false" prefHeight="60.0" prefWidth="626.0" text="2" wrapText="true"/>
+            </HBox>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="75.0" prefWidth="669.0">
+                <RadioButton disable="true" mnemonicParsing="false" toggleGroup="$answers">
+                    <HBox.margin>
+                        <Insets right="5.0"/>
+                    </HBox.margin>
+                </RadioButton>
+                <TextArea editable="false" prefHeight="60.0" prefWidth="626.0"
+                          style="-fx-text-fill: green; -fx-border-color: green; -fx-border-radius: 7;" text="4"
+                          wrapText="true"/>
+            </HBox>
+        </VBox>
+        <TextField editable="false" layoutX="105.0" layoutY="7.0" text="42040"/>
+        <Button layoutX="605.0" layoutY="577.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="63.0"
+                styleClass="subButtons">
+            <graphic>
+                <ImageView fitHeight="33.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@/images/delete.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button layoutX="674.0" layoutY="577.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="63.0"
+                styleClass="subButtons">
+            <graphic>
+                <ImageView fitHeight="40.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@/images/edit.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Label layoutX="696.0" layoutY="629.0" text="Edit"/>
+        <Label layoutX="618.0" layoutY="629.0" text="Delete"/>
+        <Button alignment="BASELINE_CENTER" layoutX="744.0" layoutY="576.0" mnemonicParsing="false" prefHeight="54.0"
+                prefWidth="63.0" styleClass="subButtons">
+            <graphic>
+                <ImageView fitHeight="39.0" fitWidth="39.0" preserveRatio="true">
+                    <Image url="@/images/Save.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Label layoutX="763.0" layoutY="629.0" text="Save"/>
+        <Label layoutX="318.0" layoutY="2.0" prefHeight="34.0" prefWidth="63.0" text="Author:">
+            <font>
+                <Font name="Trebuchet MS Bold" size="15.0"/>
+            </font>
+        </Label>
+        <TextField editable="false" layoutX="379.0" layoutY="7.0" text="Fredi"/>
+        <Separator layoutX="3.0" layoutY="37.0" prefHeight="7.0" prefWidth="817.0"/>
+    </AnchorPane>
+    <Label layoutX="110.0" layoutY="321.0" prefHeight="17.0" prefWidth="184.0"
+           text="*Please select the correct answer"/>
+</AnchorPane>
