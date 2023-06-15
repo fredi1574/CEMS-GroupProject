@@ -19,6 +19,7 @@ public class LoginWindowControllerTest {
     private String password;
     private String role;
     List<String> UserToLogin ;
+
     @Before
     public void setUp() throws Exception {
         loginWindowController = new LoginWindowController();
@@ -38,12 +39,12 @@ public class LoginWindowControllerTest {
 
     /**
      * Functionality: Test whether the method returns false when the username is entered and the password is empty.
-     * input: userName = "Yuival", password = ""
+     * input: userName = "Yuval", password = ""
      * expected: false
      */
     @Test
     public void Login_EnterUserButNotPassword(){
-        userName = "Yuival";
+        userName = "Yuval";
         password = "";
         assertFalse(loginWindowController.isNotEmptyUser(userName,password));
     }
