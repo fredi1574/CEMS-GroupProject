@@ -9,12 +9,14 @@ import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import util.MsgHandler;
+import util.PathConstants;
 
 import java.util.List;
 
 import static javafx.beans.binding.Bindings.when;
 import static jdk.internal.org.objectweb.asm.util.CheckClassAdapter.verify;
 import static org.hamcrest.CoreMatchers.any;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -90,6 +92,82 @@ public class LoginWindowControllerTest {
         userName = "AbedTayer";
         password = "a";
         assertTrue(loginWindowController.isNotEmptyUser(userName, password));
+    }
+    @Test
+    public void testValidStudentLogin() {
+        // Stub implementation for the MysqlConnection class
+        MysqlConnectionStub.setStubbedAuthenticationResult(true);
+
+        // Create an instance of LoginWindowController
+        LoginWindowController controller = new LoginWindowController();
+
+        // Set the username and password for the test case
+        controller.usernameField.setText("student1");
+        controller.passwordField.setText("password123");
+
+        // Call the logIN method
+        controller.logIN(null);  // Pass a mock ActionEvent for testing purposes
+
+        // Assert that the user is redirected to the main menu for students
+        assertEquals(PathConstants.mainMenuStudentPath, ScreenManager.getLastScreen());
+    }
+
+    @Test
+    public void testValidLecturerLogin() {
+        // Stub implementation for the MysqlConnection class
+        MysqlConnectionStub.setStubbedAuthenticationResult(true);
+
+        // Create an instance of LoginWindowController
+        LoginWindowController controller = new LoginWindowController();
+
+        // Set the username and password for the test case
+        controller.usernameField.setText("MayCaspi");
+        controller.passwordField.setText("a");
+
+        // Call the logIN method
+        controller.logIN(null);  // Pass a mock ActionEvent for testing purposes
+
+        // Assert that the user is redirected to the main menu for lecturers
+        assertEquals(PathConstants.mainMenuPath, ScreenManager.getLastScreen());
+    }
+
+    @Test
+    public void testValidHeadOfDepartmentLogin() {
+        // Stub implementation for the MysqlConnection class
+        MysqlConnectionStub.setStubbedAuthenticationResult(true);
+
+        // Create an instance of LoginWindowController
+        LoginWindowController controller = new LoginWindowController();
+
+        // Set the username and password for the test case
+        controller.usernameField.setText("hod1");
+        controller.passwordField.setText("admin123");
+
+        // Call the logIN method
+        controller.logIN(null);  // Pass a mock ActionEvent for testing purposes
+
+        // Assert that the user is redirected to the main menu for heads of department
+        assertEquals(PathConstants.mainMenuHeadOfDepartPath, ScreenManager.getLastScreen());
+    }
+
+    @Test
+    public void testInvalidLogin() {
+        // Stub implementation for the MysqlConnection class
+        MysqlConnectionStub.setStubbedAuthenticationResult(false);
+
+        // Create an instance of LoginWindowController
+        LoginWindowController controller = new LoginWindowController();
+
+        // Set the username and password for the test case
+        controller.usernameField.setText("invaliduser");
+        controller.passwordField.setText("invalidpass");
+
+        // Call the logIN method
+        controller.logIN(null);  // Pass a mock ActionEvent for testing purposes
+
+        // Assert that an error message is displayed
+        // (you need to modify this assertion based on how the showError.showErrorPopup() method works)
+        assertTrue(controller.isErrorMessageDisplayed());
     }
 }
       /*

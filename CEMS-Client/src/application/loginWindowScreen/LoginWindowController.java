@@ -19,9 +19,9 @@ public class LoginWindowController {
     @FXML
     private AnchorPane header;
     @FXML
-    private TextField usernameField;
+    public TextField usernameField;
     @FXML
-    private PasswordField passwordField;
+    public PasswordField passwordField;
 
     /**
      * This method is called when the FXML file is loaded.
