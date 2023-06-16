@@ -3,14 +3,17 @@ package application.loginWindowScreen.JUnitTest;
 import Client.Client;
 import Client.ClientUI;
 import application.loginWindowScreen.LoginWindowController;
+import com.mysql.cj.MysqlConnection;
 import entity.User;
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import util.MsgHandler;
 
 import java.util.List;
 
 import static javafx.beans.binding.Bindings.when;
+import static jdk.internal.org.objectweb.asm.util.CheckClassAdapter.verify;
 import static org.hamcrest.CoreMatchers.any;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,9 +25,22 @@ public class LoginWindowControllerTest {
     private String role;
     List<String> UserToLogin;
 
+    /*
+        @Before
+        public void setUp() throws Exception {
+            loginWindowController = new LoginWindowController();
+        }
 
-    @Before
-    public void setUp() throws Exception {
+     */
+
+    private MysqlConnection mysqlConnection;
+
+    @BeforeEach
+    void setUp() {
+        // Create a stub for the MysqlConnection class
+       // mysqlConnection = mock(MysqlConnection.class);
+
+        // Initialize the LoginWindowController with the stubbed MysqlConnection
         loginWindowController = new LoginWindowController();
     }
 
@@ -76,7 +92,38 @@ public class LoginWindowControllerTest {
         assertTrue(loginWindowController.isNotEmptyUser(userName, password));
     }
 }
-    /*
+      /*
+    @Test
+    void testValidUsernameAndPasswordForStudent() {
+        // Stub the authenticateUser method to return a User object with role "Student"
+        when(mysqlConnection.authenticateUser("student123", "password123"))
+                .thenReturn(new User("1", "John", "Doe", "student123", "password123", "john@example.com", "Student", 0, "123456789"));
+
+        // Call the logIN method with the valid username and password
+        // Note: You may need to mock the necessary dependencies (e.g., showError, ClientUI.chat) for this test case
+        //       in order to focus on testing the login functionality itself.
+        //       Here, we assume those dependencies are properly mocked and accessible.
+        loginWindowController.logIN(new ActionEvent());
+
+        // Verify that the appropriate screen is navigated to based on the user's role
+        // Here, we assume a ScreenManager.goToNewScreen() method to assert the navigation.
+        verify(ScreenManager).goToNewScreen(any(ActionEvent.class), eq(PathConstants.mainMenuStudentPath));
+    }
+
+    @Test
+    void testValidUsernameAndPasswordForLecturer() {
+        // Stub the authenticateUser method to return a User object with role "Lecturer"
+        when(mysqlConnection.authenticateUser("lecturer456", "password456"))
+                .thenReturn(new User("2", "Jane", "Smith", "lecturer456", "password456", "jane@example.com", "Lecturer", 0, "987654321"));
+
+        // Call the logIN method with the valid username and password
+        loginWindowController.logIN(new ActionEvent());
+
+        // Verify that the appropriate screen is navigated to based on the user's role
+        verify(ScreenManager).goToNewScreen(any(ActionEvent.class), eq(PathConstants.mainMenuPath));
+    }
+}
+
     @Test
     public void Login_EnterNullUserAndNullPassword(){
         String expected = "null";
@@ -183,5 +230,5 @@ public class LoginWindowControllerTest {
     }
 
     }
-/*
+
 */
