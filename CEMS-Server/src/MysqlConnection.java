@@ -4,17 +4,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
-
 /**
  * the class contains methods which connect to the CEMS database
  * and perform various queries on the data
  */
 public class MysqlConnection {
-    static Connection conn;
-    static String url = "jdbc:mysql://localhost/cems?serverTimezone=IST&allowPublicKeyRetrieval=true&useSSL=false"; // replace
-    // "mydatabase"
-    static String username = "root"; // replace with your username
 
+    static Connection conn;
+    static String url = "jdbc:mysql://localhost/cems?serverTimezone=IST&allowPublicKeyRetrieval=true&useSSL=false";
+    static String username = "root";
 
     /**
      * This hook method sets up a connection between the Server and the Data base we
@@ -760,4 +758,3 @@ public class MysqlConnection {
         return list;
     }
 }
-	
