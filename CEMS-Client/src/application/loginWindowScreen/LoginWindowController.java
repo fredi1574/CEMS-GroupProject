@@ -1,5 +1,5 @@
 package application.loginWindowScreen;
-
+//import CEMS-Server.MysqlConnection;
 import Client.Client;
 import Client.ClientUI;
 import javafx.event.ActionEvent;
@@ -22,13 +22,34 @@ public class LoginWindowController {
     public TextField usernameField;
     @FXML
     public PasswordField passwordField;
+    private IServerClientCommunication iServerClientCommunication;
+
+
+
+    public void setiServerClientCommunication(IServerClientCommunication iServerClientCommunication) {
+        this.iServerClientCommunication = iServerClientCommunication;
+    }
+
 
     /**
      * This method is called when the FXML file is loaded.
      * It enables dragging and dropping of the application window using the header pane.
      */
-    public void initialize() {
-        ScreenManager.dragAndDrop(header);
+
+    public class LoginServerClientCommunication implements IServerClientCommunication{
+        Client client = new Client("Host", 5555,null);
+        //MysqlConnection.connectToDb("AB12345tre");
+        @Override
+        public short sendToServer(Object msg) {
+            client.handleMessageFromClientUI(msg);
+            return 0;
+        }
+
+        @Override
+        public MsgHandler<Object> getServerMsg() {
+
+            return client.messageFromServer;
+        }
     }
 
     /**
