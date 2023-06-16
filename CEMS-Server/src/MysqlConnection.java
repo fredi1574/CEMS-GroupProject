@@ -38,13 +38,23 @@ public class MysqlConnection {
     }
 
     public static void update(String question) {
-        PreparedStatement stmt;
+        PreparedStatement statement;
         try {
-            stmt = conn.prepareStatement(question);
-            stmt.executeUpdate();
+            statement = conn.prepareStatement(question);
+            statement.executeUpdate();
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
+    }
+
+    private static Statement createStatement() {
+        Statement statement = null;
+        try {
+            statement = conn.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return statement;
     }
 
     /**
@@ -54,17 +64,11 @@ public class MysqlConnection {
      * @return ArrayList of the questions
      */
     public static ArrayList<Question> getQuestionsTable(String query) {
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Statement statement = createStatement();
 
         ArrayList<Question> list = new ArrayList<>();
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 String id = rs.getString("id");
                 String subject = rs.getString("subject");
@@ -91,17 +95,11 @@ public class MysqlConnection {
     }
 
     public static ArrayList<Course> getCourseList(String query) {
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Statement statement = createStatement();
 
         ArrayList<Course> coursesList = new ArrayList<>();
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
 
                 String subjectID = rs.getString("subjectID");
@@ -120,17 +118,11 @@ public class MysqlConnection {
     }
 
     public static ArrayList<Subject> getSubjectList(String query) {
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Statement statement = createStatement();
 
         ArrayList<Subject> subjectsList = new ArrayList<>();
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
 
                 String subjectID = rs.getString("subjectID");
@@ -176,16 +168,11 @@ public class MysqlConnection {
 
 
     public static ArrayList<Test> getTestTable(String query) {
-        Statement stmt = null;
+        Statement statement = createStatement();
 
-        try {
-            stmt = conn.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         ArrayList<Test> tests = new ArrayList<>();
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 String testNumber = rs.getString("testNumber");
                 String id = rs.getString("id");
@@ -213,16 +200,11 @@ public class MysqlConnection {
     }
 
     public static ArrayList<ActiveTest> getActiveTestsTable(String query) {
-        Statement stmt = null;
+        Statement statement = createStatement();
 
-        try {
-            stmt = conn.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         ArrayList<ActiveTest> activeTests = new ArrayList<>();
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 String id = rs.getString("id");
                 int numOfQuestions = rs.getInt("numOfQuestions");
@@ -242,16 +224,11 @@ public class MysqlConnection {
     }
 
     public static ArrayList<TestQuestion> getTestQuestionsTable(String query) {
-        Statement stmt = null;
+        Statement statement = createStatement();
 
-        try {
-            stmt = conn.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         ArrayList<TestQuestion> testQuestions = new ArrayList<>();
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 String questionID = rs.getString("questionID");
                 String questionNumber = rs.getString("questionNumber");
@@ -274,17 +251,11 @@ public class MysqlConnection {
     }
 
     public static ArrayList<TestRequestForApproval> getRequestsTable(String query) {
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Statement statement = createStatement();
 
         ArrayList<TestRequestForApproval> list = new ArrayList<>();
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 String newDuration = rs.getString("newDuration");
                 String explanation = rs.getString("explanation");
@@ -303,17 +274,11 @@ public class MysqlConnection {
     }
 
     public static ArrayList<StudentTest> getStudentInfo(String query) {
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Statement statement = createStatement();
 
         ArrayList<StudentTest> list = new ArrayList<>();
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
 
             while (rs.next()) {
                 String studentID = rs.getString("studentID");
@@ -345,40 +310,12 @@ public class MysqlConnection {
         return list;
     }
 
-    public static String getFullName(String query) {
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        String fullName = null;
-        try {
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                String first = rs.getString("firstName");
-                String last = rs.getString("lastName");
-                fullName = first + " " + last;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return fullName;
-    }
-
     public static ArrayList<User> getUser(String query) {
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Statement statement = createStatement();
+
         ArrayList<User> getUsers = new ArrayList<>();
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 // Retrieve the user details from the database
                 String id = rs.getString("id");
@@ -421,17 +358,11 @@ public class MysqlConnection {
     }
 
     public static Question getQuestionData(String query) {
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Statement statement = createStatement();
 
         Question question = null;
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 String id = rs.getString("id");
                 String subject = rs.getString("subject");
@@ -459,16 +390,11 @@ public class MysqlConnection {
     }
 
     public static Test getTestData(String query) {
-        Statement stmt = null;
+        Statement statement = createStatement();
 
-        try {
-            stmt = conn.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         Test test = null;
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 String testNumber = rs.getString("testNumber");
                 String id = rs.getString("id");
@@ -496,15 +422,11 @@ public class MysqlConnection {
     }
 
     public static StudentCourse checkRegistered(String query) {
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Statement statement = createStatement();
+
         StudentCourse getUser = null;
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 // Retrieve the user details from the database
                 String studentID = rs.getString("studentID");
@@ -525,16 +447,11 @@ public class MysqlConnection {
     }
 
     public static Subject SubjectName(String query) {
-        Statement stmt = null;
+        Statement statement = createStatement();
 
-        try {
-            stmt = conn.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         Subject subject = null;
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 String subjectID = rs.getString("subjectID");
                 String subjectName = rs.getString("subjectName");
@@ -547,15 +464,11 @@ public class MysqlConnection {
     }
 
     public static ArrayList<TestForApproval> getTestForApproval(String query) {
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Statement statement = createStatement();
+
         ArrayList<TestForApproval> list = new ArrayList<>();
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 String studentID = rs.getString("studentID");
                 String testID = rs.getString("testID");
@@ -588,16 +501,11 @@ public class MysqlConnection {
     }
 
     public static Integer getTotalStudentsInTest(String query) {
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
+        Statement statement = createStatement();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         int totalStudents = 0;
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 totalStudents = rs.getInt("totalStudents");
             }
@@ -609,16 +517,11 @@ public class MysqlConnection {
     }
 
     public static Integer getTotalStudentsRegisteredToTest(String query) {
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
+        Statement statement = createStatement();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         int rowCount = 0;
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             if (rs.next()) { // Move the cursor to the first row
                 rowCount = rs.getInt("row_count");
             }
@@ -629,16 +532,11 @@ public class MysqlConnection {
     }
 
     public static Integer getTotalStudentsFinishedTheTest(String query) {
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
+        Statement statement = createStatement();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         int finishedCount = 0;
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             if (rs.next()) { // Move the cursor to the first row
                 finishedCount = rs.getInt("totalFinished");
             }
@@ -650,16 +548,10 @@ public class MysqlConnection {
     }
 
     public static TestTypeEnum getTestType(String query) {
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
+        Statement statement = createStatement();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        int finishedCount = 0;
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             if (rs.next()) { // Move the cursor to the first row
                 String testTypeString = rs.getString("testType");
                 return TestTypeEnum.valueOf(testTypeString);
@@ -671,16 +563,11 @@ public class MysqlConnection {
     }
 
     public static String getIDreturnFullname(String query) {
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
+        Statement statement = createStatement();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         String fullName = null;
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             if (rs.next()) { // Move the cursor to the first row
                 fullName = rs.getString("fullName");
             }
@@ -691,17 +578,12 @@ public class MysqlConnection {
     }
 
     public static ArrayList<String> getStudentsCourses(String query) {
-        Statement stmt = null;
+        Statement statement = createStatement();
 
-        try {
-            stmt = conn.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         ArrayList<String> courses = new ArrayList<>();
         String singleCourse;
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 singleCourse = rs.getString("course");
                 courses.add(singleCourse);
@@ -713,16 +595,11 @@ public class MysqlConnection {
     }
 
     public static String getStudentsAvg(String query) {
-        Statement stmt = null;
+        Statement statement = createStatement();
 
-        try {
-            stmt = conn.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         String average = null;
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 average = rs.getString("average");
             }
@@ -733,17 +610,11 @@ public class MysqlConnection {
     }
 
     public static ArrayList<String> getAfterTestInfo(String query) {
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Statement statement = createStatement();
 
         ArrayList<String> list = new ArrayList<>();
         try {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 String actualDuration = rs.getString("actualDuration");
                 String totalFinished = rs.getString("totalFinished");
