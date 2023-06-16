@@ -163,8 +163,7 @@
    <BarChart fx:id="reportGraph" animated="false" layoutX="221.0" layoutY="110.0" legendSide="LEFT"
              legendVisible="false" prefHeight="410.0" prefWidth="551.0" title="Grades distribution">
       <xAxis>
-         <CategoryAxis label="Test ID" prefHeight="41.0" prefWidth="569.0" side="BOTTOM" tickLabelFill="#306ebd"
-                       fx:id="xAxis"/>
+         <CategoryAxis label="Test ID" prefHeight="41.0" prefWidth="569.0" side="BOTTOM" tickLabelFill="#306ebd"/>
       </xAxis>
       <yAxis>
          <NumberAxis fx:id="YAxis" animated="false" label="Grades" prefHeight="439.0" prefWidth="49.0" side="LEFT"

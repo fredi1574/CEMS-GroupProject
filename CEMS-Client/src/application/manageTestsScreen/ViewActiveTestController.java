@@ -126,7 +126,7 @@ public class ViewActiveTestController {
      */
 
     /**
-     * locks the test for all clients - the timer is stopped and the timeLeft value
+     * locks the test for all clients - the timer is stopped, and the timeLeft value
      * in the activeTest table in the DB is updated
      *
      * @param actionEvent the event that triggered the method
@@ -134,7 +134,7 @@ public class ViewActiveTestController {
     public void lockTest(ActionEvent actionEvent) {
         //switches the visible buttons
         if (showError.showConfirmationPopup("Are you sure you want to lock the test?\nPlease notice that test will become inactive")) {
-            MsgHandler lockTest = new MsgHandler(TypeMsg.LecturerCllickedLockTest, testIdTextField.getText());
+            MsgHandler lockTest = new MsgHandler(TypeMsg.LecturerClickedLockTest, testIdTextField.getText());
             ClientUI.chat.accept(lockTest);
             back(actionEvent);
         }

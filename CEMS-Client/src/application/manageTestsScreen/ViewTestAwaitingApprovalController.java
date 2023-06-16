@@ -108,9 +108,9 @@ public class ViewTestAwaitingApprovalController {
 
             stateManagement.getTestForApproval().set(indexOfTest, selectedTest);
 
-            MsgHandler updateTheApproval = new MsgHandler(TypeMsg.UpdateTheApproveofLecturer, selectedTest);
+            MsgHandler updateTheApproval = new MsgHandler(TypeMsg.UpdateTheApprovalOfLecturer, selectedTest);
             ClientUI.chat.accept(updateTheApproval);
-            MsgHandler sendPopUpToStudent = new MsgHandler(TypeMsg.StudentsTestIsApprvoed, studentIDLabel.getText());
+            MsgHandler sendPopUpToStudent = new MsgHandler(TypeMsg.StudentsTestIsApproved, studentIDLabel.getText());
             ClientUI.chat.accept(sendPopUpToStudent);
 
             StateManagement.resetInstance();

@@ -40,56 +40,61 @@ public class EnterCodePopUpController {
         String codet = CodeText.getText();
         if (codet.isEmpty()) {
             showError.showErrorPopup("Please enter code.");
-        } else if (codet.length() != 4) {
-            showError.showErrorPopup("Code should contain 6 numbers.");
-        } else {
-            // Code is valid
-            boolean testExists = false;
-            MsgHandler getActiveTestTable = new MsgHandler(TypeMsg.GetActiveTests, null);
-            ClientUI.chat.accept(getActiveTestTable);
-            ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTests());
-            MsgHandler getAllTestTable = new MsgHandler(TypeMsg.GetAllTestsTable, null);
-            ClientUI.chat.accept(getAllTestTable);
-            ObservableList<Test> allTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
-            for (ActiveTest activeTest : activeTests) {
-                if (activeTest.getTestCode().equals(codet)) {
-                    testExists = true;
-                    testID = activeTest.getId();
-                    for (Test test : allTests) {
-                        if (testID.equals(test.getId())) {
-                            testType = test.getTestType();
-                            break;
-                        }
+            return;
+        }
+        if (codet.length() != 4) {
+            showError.showErrorPopup("Code should contain 4 numbers.");
+            return;
+        }
+
+        // Code is valid
+        boolean testExists = false;
+        MsgHandler<String> getActiveTestTable = new MsgHandler<>(TypeMsg.GetActiveTests, null);
+        ClientUI.chat.accept(getActiveTestTable);
+        ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTests());
+
+        MsgHandler<String> getAllTestTable = new MsgHandler<>(TypeMsg.GetAllTestsTable, null);
+        ClientUI.chat.accept(getAllTestTable);
+        ObservableList<Test> allTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
+
+        for (ActiveTest activeTest : activeTests) {
+            if (activeTest.getTestCode().equals(codet)) {
+                testExists = true;
+                testID = activeTest.getId();
+                for (Test test : allTests) {
+                    if (testID.equals(test.getId())) {
+                        testType = test.getTestType();
+                        break;
                     }
                 }
             }
-            MsgHandler getTable = new MsgHandler(TypeMsg.GetStudentsTests, Client.user.getId());
-            ClientUI.chat.accept(getTable);
+        }
+        MsgHandler<String> getTable = new MsgHandler<>(TypeMsg.GetStudentsTests, Client.user.getId());
+        ClientUI.chat.accept(getTable);
 
-            ObservableList<entity.StudentTest> studentTest = FXCollections.observableArrayList((List) ClientUI.chat.getStudentTests());
-            for (StudentTest specificTest : studentTest) {
-                if (specificTest.getTestID().equals(testID)) {
-                    NotAllowed = true;
+        ObservableList<StudentTest> studentTest = FXCollections.observableArrayList((List) ClientUI.chat.getStudentTests());
+        for (StudentTest specificTest : studentTest) {
+            if (specificTest.getTestID().equals(testID)) {
+                NotAllowed = true;
+                break;
+            }
+        }
+        if (NotAllowed) {
+            showError.showErrorPopup("Student has already attended the test!");
+            ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
+        } else if (testExists) {
+            switch (testType) {
+                case C:
+                    ScreenManager.goToNewScreen(event, PathConstants.EnterComputerizedTestPath);
                     break;
-                }
+                case M:
+                    ScreenManager.goToNewScreen(event, PathConstants.StartManualTestPath);
             }
-            if (NotAllowed) {
-                showError.showErrorPopup("Student has already attended the test!");
-                ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
-            } else if (testExists) {
-                switch (testType) {
-                    case C:
-                        ScreenManager.goToNewScreen(event, PathConstants.EnterComputerizedTestPath);
-                        break;
-                    case M:
-                        ScreenManager.goToNewScreen(event, PathConstants.StartManualTestPath);
-                }
 
-            } else {
-                // Test with the given code does not exist
-                // Handle the case accordingly
-                showError.showErrorPopup("Test Not found !");
-            }
+        } else {
+            // Test with the given code does not exist
+            // Handle the case accordingly
+            showError.showErrorPopup("Test Not found !");
         }
     }
 

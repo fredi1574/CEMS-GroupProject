@@ -1,7 +1,6 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Observable;
 
 public class Subject implements Serializable {
     private final String subjectID;

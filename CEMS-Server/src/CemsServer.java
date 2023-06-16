@@ -146,7 +146,7 @@ public class CemsServer extends AbstractServer {
                 }
                 break;
 
-            case TestDurationChangedComputrizedSendToAll:
+            case TestDurationChangedComputerizedSendToAll:
                 this.msg = (MsgHandler<Object>) msg;
                 this.obj = this.msg.getMsg();
                 if (obj instanceof Integer) {
@@ -184,7 +184,7 @@ public class CemsServer extends AbstractServer {
                 }
                 break;
 
-            case StudentsTestIsApprvoedToAllClients:
+            case StudentsTestIsApprovedToAllClients:
                 this.msg = (MsgHandler<Object>) msg;
                 this.obj = this.msg.getMsg();
                 for (Thread thread : clientThreadList) {
@@ -210,7 +210,7 @@ public class CemsServer extends AbstractServer {
                         if (obj instanceof TestTypeEnum) {
                             try {
                                 if (obj.equals(TestTypeEnum.C)) {
-                                    client.sendToClient(new MsgHandler<>(TypeMsg.TestIsForcedLockedComputrized, null));
+                                    client.sendToClient(new MsgHandler<>(TypeMsg.TestIsForcedLockedComputerized, null));
                                 } else {
                                     client.sendToClient(new MsgHandler<>(TypeMsg.TestIsForcedLockedManual, null));
                                 }
@@ -465,7 +465,7 @@ public class CemsServer extends AbstractServer {
                     TestTypeEnum getType = MysqlConnection.getTestType("SELECT testType FROM test WHERE id = '" + testID + "'");
                     if (getType != null) {
                         if (getType.equals(TestTypeEnum.C)) {
-                            sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationChangedComputrizedSendToAll, Integer.parseInt(addedTime)));
+                            sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationChangedComputerizedSendToAll, Integer.parseInt(addedTime)));
                         } else {
                             sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationChangedManualSendToAll, Integer.parseInt(addedTime)));
                         }
@@ -520,7 +520,7 @@ public class CemsServer extends AbstractServer {
                     ArrayList<StudentTest> testsList = MysqlConnection.getStudentInfo("SELECT st.* FROM studentstest st JOIN test t ON st.testID = t.id WHERE t.author = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedTestsByLecturer, testsList));
                     break;
-                case GetTestsByLecutrerForLecturerReport:
+                case GetTestsByLecturerForLecturerReport:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
                     ArrayList<StudentTest> testsListforReport = MysqlConnection.getStudentInfo("SELECT st.* FROM studentstest st JOIN test t ON st.testID = t.id WHERE t.author = '" + obj + "'");
@@ -648,11 +648,11 @@ public class CemsServer extends AbstractServer {
                     MysqlConnection.update("UPDATE aftertestinfo SET totalFinished = totalFinished + 1 WHERE testID = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.StudentsFinishedTestIncreased, null));
                     break;
-                case GetsubjectNametoID:
+                case GetSubjectNameToID:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
                     Subject subjectName = MysqlConnection.SubjectName("SELECT * FROM subject WHERE subjectName = '" + obj + "'");
-                    client.sendToClient(new MsgHandler<>(TypeMsg.ImportedSubjectIDfromName, subjectName));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.ImportedSubjectIDFromName, subjectName));
                 case RequestExtraTime:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
@@ -679,7 +679,7 @@ public class CemsServer extends AbstractServer {
                                     "WHERE t.author = '" + obj + "' AND at.id IS NULL");
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetTestForApprovalResponse, testsForApproval));
                     break;
-                case UpdateTheApproveofLecturer:
+                case UpdateTheApprovalOfLecturer:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
                     if (obj instanceof TestForApproval) {
@@ -702,7 +702,7 @@ public class CemsServer extends AbstractServer {
                                 "WHERE testID = '" + testApprove.getTestID() + "'" +
                                 "AND studentID = '" + testApprove.getStudentID() + "'";
                         MysqlConnection.update(updateQuery);
-                        client.sendToClient(new MsgHandler<>(TypeMsg.UpdateTheApproveofLecturerResponse, null));
+                        client.sendToClient(new MsgHandler<>(TypeMsg.UpdateTheApprovalOfLecturerResponse, null));
                         break;
                     }
                 case AddNewActiveTest:
@@ -768,12 +768,12 @@ public class CemsServer extends AbstractServer {
                     int totalStudentsFinished = MysqlConnection.getTotalStudentsFinishedTheTest("SELECT totalFinished FROM aftertestinfo WHERE testID = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedNumberOfFinished, totalStudentsFinished));
                     break;
-                case UnActivateTest:
+                case DeactivateTest:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
                     String DeleteActiveTestQuery = "DELETE FROM cems.activetest WHERE id='" + obj + "'";
                     MysqlConnection.update(DeleteActiveTestQuery);
-                    client.sendToClient(new MsgHandler<>(TypeMsg.CompleteUnactivatingTest, null));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.DeactivatingTestResponse, null));
                     break;
                 case DetectedCheating:
                     this.msg = (MsgHandler<Object>) msg;
@@ -812,23 +812,23 @@ public class CemsServer extends AbstractServer {
                     client.sendToClient(new MsgHandler<>(TypeMsg.IsLoggedValueChanged, null));
                     break;
 
-                case StudentsTestIsApprvoed:
+                case StudentsTestIsApproved:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
                     String idTofullName = "SELECT fullName FROM user WHERE id = '" + obj + "'";
                     String fullname = MysqlConnection.getIDreturnFullname(idTofullName);
-                    sendToAllClients(new MsgHandler<>(TypeMsg.StudentsTestIsApprvoedToAllClients, fullname));
+                    sendToAllClients(new MsgHandler<>(TypeMsg.StudentsTestIsApprovedToAllClients, fullname));
 
-                    client.sendToClient(new MsgHandler<>(TypeMsg.StudentsTestIsApprvoedResponse, null));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.StudentsTestIsApprovedResponse, null));
                     break;
 
-                case LecturerCllickedLockTest:
+                case LecturerClickedLockTest:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
                     TestTypeEnum testTypeString = MysqlConnection.getTestType("SELECT testType FROM test WHERE id = '" + obj + "'");
                     sendToAllClients(new MsgHandler<>(TypeMsg.LockTestForStudentByLecturer, testTypeString));
 
-                    client.sendToClient(new MsgHandler<>(TypeMsg.LecturerCllickedLockTestResponse, null));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.LecturerClickedLockTestResponse, null));
                     break;
 
                 case GetStudentsTests:

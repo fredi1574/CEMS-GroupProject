@@ -116,9 +116,7 @@ public class ManageTestsController {
         TableManager.importData(testApprovalTableView, filteredTests);
         double[] approvalTestsMultipliers = {0.15, 0.14, 0.15, 0.15, 0.175, 0.12, 0.11};
         TableManager.resizeColumns(testApprovalTableView, approvalTestsMultipliers);
-        testApprovalTableView.setOnMouseClicked((e) -> {
-            testForApprovalRowData = testApprovalTableView.getSelectionModel().getSelectedItem();
-        });
+        testApprovalTableView.setOnMouseClicked((e) -> testForApprovalRowData = testApprovalTableView.getSelectionModel().getSelectedItem());
         stateManagement.setTestForApproval(filteredTests);
     }
 

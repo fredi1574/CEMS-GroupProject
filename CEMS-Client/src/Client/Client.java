@@ -73,17 +73,17 @@ public class Client extends AbstractClient {
         System.out.println(messageFromServer.getType().toString());
         switch (messageFromServer.getType()) {
             case Connected:
-            case LecturerCllickedLockTestResponse:
+            case LecturerClickedLockTestResponse:
             case ImportedTestsAverage:
-            case StudentsTestIsApprvoedResponse:
+            case StudentsTestIsApprovedResponse:
             case IsLoggedValueChanged:
             case DetectedCheatingResponse:
-            case DeleteRequestCompleted:
-            case CompleteUnactivatingTest:
+            case DeleteRequestResponse:
+            case DeactivatingTestResponse:
             case AfterTestRowCompleted:
             case AddNewAfterTestInfoResponse:
             case AddNewActiveTestResponse:
-            case UpdateTheApproveofLecturerResponse:
+            case UpdateTheApprovalOfLecturerResponse:
             case ExtraTimeRequested:
             case changeTestDurationAnswer:
             case StudentsFinishedTestIncreased:
@@ -203,7 +203,7 @@ public class Client extends AbstractClient {
             case TestDurationApprovedPopLecturer:
                 activeTestController.showRequestApprovedPopUp();
                 break;
-            case ImportedSubjectIDfromName:
+            case ImportedSubjectIDFromName:
                 this.singleSubject = messageFromServer.getMsg();
                 break;
             case GetTestForApprovalResponse:
@@ -230,7 +230,7 @@ public class Client extends AbstractClient {
             case TestIsForcedLockedManual:
                 manualTest.lockTest();
                 break;
-            case TestIsForcedLockedComputrized:
+            case TestIsForcedLockedComputerized:
                 StudentInTest.lockTest();
                 break;
             case ImportedAfterTestInfo:

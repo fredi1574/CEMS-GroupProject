@@ -1,7 +1,6 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Observable;
 
 public class AnswerOfStudent implements Serializable {
     private final String studentID;

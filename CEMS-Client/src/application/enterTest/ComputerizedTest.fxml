@@ -110,7 +110,7 @@
             onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_"/>
     <AnchorPane layoutX="482.0" layoutY="129.0" prefHeight="91.0" prefWidth="328.0"
                 style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
-        <Label fx:id="TimeRemainingText" alignment="BASELINE_CENTER" layoutX="13.0" layoutY="31.0" prefHeight="20.0"
+        <Label alignment="BASELINE_CENTER" layoutX="13.0" layoutY="31.0" prefHeight="20.0"
                prefWidth="152.0" text="Test's duration">
             <font>
                 <Font name="Trebuchet MS Bold" size="17.0"/>

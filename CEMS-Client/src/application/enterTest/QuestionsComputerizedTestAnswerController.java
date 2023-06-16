@@ -23,7 +23,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import util.*;
 
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -258,7 +257,7 @@ public class QuestionsComputerizedTestAnswerController {
         String[] afterTestInfo = {test.getTestDuration(), String.valueOf(totalForcedFinished), test.getId()};
         MsgHandler addAfterTestInfo = new MsgHandler(TypeMsg.FinishAfterTestInfo, afterTestInfo);
         ClientUI.chat.accept(addAfterTestInfo);
-        MsgHandler deleteFromActive = new MsgHandler(TypeMsg.UnActivateTest, test.getId());
+        MsgHandler deleteFromActive = new MsgHandler(TypeMsg.DeactivateTest, test.getId());
         ClientUI.chat.accept(deleteFromActive);
 
     }

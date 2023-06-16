@@ -217,7 +217,7 @@ public class PickQuestionsController {
             totalRemainingPointsField.setText(String.valueOf(stateManagement.getTotalRemainingPoints()));
             rowData = null;
 
-        } else if (rowDataForQuestionsSelected == null) {
+        } else {
             showError.showErrorPopup("Select Questions To Remove");
         }
         rowDataForQuestionsSelected = null;

@@ -1,7 +1,6 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Observable;
 
 /**
  * Represents an active test entity.

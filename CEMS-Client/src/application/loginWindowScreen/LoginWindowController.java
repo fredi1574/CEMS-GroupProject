@@ -51,7 +51,7 @@ public class LoginWindowController {
         List<String> UserToLogin = new ArrayList<>();
         UserToLogin.add(username);
         UserToLogin.add(password);
-        MsgHandler Login = new MsgHandler(TypeMsg.TryLogin, UserToLogin);
+        MsgHandler<List<String>> Login = new MsgHandler<>(TypeMsg.TryLogin, UserToLogin);
         ClientUI.chat.accept(Login);
         // Authenticate user and retrieve their role
         try {
@@ -61,7 +61,7 @@ public class LoginWindowController {
                     return;
                 }
                 String[] LoginValues = {Client.user.getId(),"1"};
-                MsgHandler changeLoggedInValue = new MsgHandler(TypeMsg.ChangeIsLoggedValue, LoginValues);
+                MsgHandler<String[]> changeLoggedInValue = new MsgHandler<>(TypeMsg.ChangeIsLoggedValue, LoginValues);
                 ClientUI.chat.accept(changeLoggedInValue);
                 switch (Client.user.getRole()) {
                     case "Student":

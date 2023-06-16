@@ -1,6 +1,9 @@
 package application.manageQuestionsScreen;
 
 import Client.Client;
+import Client.ClientUI;
+import Client.ExitButton;
+import Client.LogOut;
 import entity.Question;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,9 +19,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import util.*;
-import Client.ClientUI;
-import Client.ExitButton;
-import Client.LogOut;
 
 import java.util.List;
 
@@ -26,7 +26,6 @@ public class ManageQuestionsController {
 
     public static ManageQuestionsController ManageQuestionsControl;
     public TextField searchField;
-    String fullName = Client.user.getFullName();
     @FXML
     private AnchorPane header;
     @FXML
@@ -51,7 +50,7 @@ public class ManageQuestionsController {
     }
 
     private void displayQuestions() {
-        MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestionsByLecturer, Client.user.getFullName());
+        MsgHandler<String> getTable = new MsgHandler<>(TypeMsg.GetQuestionsByLecturer, Client.user.getFullName());
         ClientUI.chat.accept(getTable);
 
         // Creates the question table
@@ -97,7 +96,7 @@ public class ManageQuestionsController {
         if (selectedQuestionIndex != -1) {
             Question questionToDelete = manageQuestionsTableView.getItems().get(selectedQuestionIndex);
             if (showError.showConfirmationPopup("Are you sure you want to delete this question?")) {
-                MsgHandler deleteQ = new MsgHandler(TypeMsg.DeleteQuestion, questionToDelete);
+                MsgHandler<Question> deleteQ = new MsgHandler<>(TypeMsg.DeleteQuestion, questionToDelete);
                 ClientUI.chat.accept(deleteQ);
                 reloadPage();
             }

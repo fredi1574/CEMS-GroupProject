@@ -14,7 +14,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import util.*;
 import Client.ClientUI;
 import Client.ExitButton;
@@ -46,7 +45,7 @@ public class ViewReportsController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getName());
-        MsgHandler getTable = new MsgHandler(TypeMsg.GetTestsByLecutrerForLecturerReport, Client.user.getFullName());
+        MsgHandler getTable = new MsgHandler(TypeMsg.GetTestsByLecturerForLecturerReport, Client.user.getFullName());
         ClientUI.chat.accept(getTable);
         // Temporary lists, for presentation
         ObservableList<String> yearList = FXCollections.observableArrayList("2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015");

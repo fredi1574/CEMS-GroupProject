@@ -29,28 +29,23 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public class ManualTestController {
     public static Timeline timerC;
     private static Test test;
-    private static Thread timerThread;
-    private static int totalSecondsRemaining;
     @FXML
     private static int[] seconds;
     @FXML
     private Text OneMinLeft;
     private static int TotalStudents;
     private static boolean testIsLockedManual;
-    @FXML
-    public Text durationChangeddText;
+
     StateManagement stateManagement = StateManagement.getInstance();
     ActiveTest testActive;
     File selectedFile;
     @FXML
     private AnchorPane header;
-    @FXML
-    private Text addtionalTimeForSubmitTEXT;
-    private final boolean isSubmit = true;
-    private boolean isTimerRunning;
+
     @FXML
     private TextField EndTimeText;
     @FXML
@@ -78,7 +73,7 @@ public class ManualTestController {
         test = getTestData();
         MsgHandler getAllTestTable = new MsgHandler(TypeMsg.GetAllTestsTable, null);
         ClientUI.chat.accept(getAllTestTable);
-        ObservableList<Test> allTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
+
         MsgHandler totalStudentIncrease = new MsgHandler(TypeMsg.IcreaseStudentsEnteringTest, test.getId());
         ClientUI.chat.accept(totalStudentIncrease);
         for (ActiveTest activeTest : activeTests) {
@@ -171,7 +166,6 @@ public class ManualTestController {
 
     // Method to set the isActive flag and stop the checkLockThread
     public void showNotificationAndChangeDuration(int newDuration) {
-        int remainingSeconds = remainingMinutes * 60;  // Convert the remaining minutes to seconds
         seconds[0] += newDuration * 60;  // Add the new duration in seconds
         Platform.runLater(() -> showError.showInfoPopup("Test time increased by " + newDuration + " minutes"));
     }
@@ -282,7 +276,7 @@ public class ManualTestController {
         String[] afterTestInfo = {test.getTestDuration(), String.valueOf(totalForcedFinished), test.getId()};
         MsgHandler addAfterTestInfo = new MsgHandler(TypeMsg.FinishAfterTestInfo, afterTestInfo);
         ClientUI.chat.accept(addAfterTestInfo);
-        MsgHandler deleteFromActive = new MsgHandler(TypeMsg.UnActivateTest, test.getId());
+        MsgHandler deleteFromActive = new MsgHandler(TypeMsg.DeactivateTest, test.getId());
         ClientUI.chat.accept(deleteFromActive);
 
     }
@@ -337,8 +331,7 @@ public class ManualTestController {
                     saveStudentsTest(100, 5, 5);
                     testIsLockedManual = false;
                     ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
-                } else
-                    return;
+                }
             }
 
         } else {

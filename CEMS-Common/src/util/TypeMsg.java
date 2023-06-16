@@ -2,693 +2,152 @@ package util;
 
 public enum TypeMsg {
 
-    Disconnected {
-        public String toString() {
-            return "Disconnected";
-        }
-    },
-    Connected {
-        public String toString() {
-            return "Connected";
-        }
-    }, GetQuestionsBySubject {
-        public String toString() {
-            return "User asked for table questions of specific Subject";
-        }
-    }, QuestionsBySubjectImported {
-        public String toString() {
-            return "imported all questions of specific subject";
-        }
-    }, GetAllQuestions {
-        public String toString() {
-            return "User asked for all questions";
-        }
-    }, allQuestionImported {
-        public String toString() {
-            return "imported all questions successfully ";
-        }
-    }, TryLogin {
-        public String toString() {
-            return "new user try to login.";
-        }
-    }, LoginResponse {
-        public String toString() {
-            return "User pressed Login";
-        }
+    Disconnected("Disconnected"),
+    Connected("Disconnected"),
+    GetQuestionsBySubject("User asked for table questions of specific Subject"),
+    GetQuestionsBySubjectResponse("Server imported all questions of specific subject"),
+    GetAllQuestions("User asked for all questions"),
+    GetAllQuestionsResponse("Server imported all questions"),
+    TryLogin("User tried to login"),
+    LoginResponse("User has been logged in"),
+    ImportSubjects("import Subjects list for user"),
+    ImportSubjectsResponse("Server imported subjects successfully"),
+    ImportCourses("Import courses list for user"),
+    ImportCoursesResponse("Server imported courses successfully"),
+    EditQuestion("User asked to edit question"),
+    EditQuestionResponse("Server updated the question"),
+    AddNewQuestion("User asked to add a question"),
+    AddNewQuestionResponse("Server added the question"),
+    DeleteQuestion("User asked to delete a question"),
+    DeleteQuestionResponse("Server deleted the question"),
+    GetCourseTable("User asked for a list of courses"),
+    CourseTableResponse("Server returned the course list"),
+    GetAllTestsTable("User requested the table of every test in the DB"),
+    GetAllTestsTableResponse("Server returned the table of every test in the DB"),
+    GetTestsBySubject("User requested the tests table filtered by subject"),
+    GetTestsBySubjectResponse("Server returned the table of tests filtered by subject"),
+    AddNewTestQuestion("Lecturer asked to save the questions of test"),
+    AddNewTestQuestionsResponse("Server saved the test questions"),
+    DeleteRequest("Deleting request for time change"),
+    DeleteRequestResponse("Server deleted the time change request"),
+    AddNewTest("Lecturer asked to save test"),
+    AddNewTestResponse("Server saved the test"),
+    GetRequestsBySubject("Head Of Department wants to import table of requests"),
+    GetRequestsBySubjectResponse("Server returned the request table"),
+    ApproveRequestByHeadOfDepartment ("Head Of Department want to approve a requests"),
+    RequestIsApproved ("The request has been approved"),
+    DeclineRequestByHeadOfDepartment ("Head Of Department want to decline a requests"),
+    RequestIsDeclined ("Time Request Declined"),
+    RequestIsDeclinedToLecturer ("Time Request Declined"),
+    GetStudentReport ("Head of department want to get a report of a student"),
+    StudentReportImported ("Student's report was imported"),
+    GetUser ("Get list of users"),
+    UserImported ("Imported list of users"),
+    GetTestsByLecutrer ("Get list tests made by lecutrer"),
+    ImportedTestsByLecturer ("Imported list of test made by lecturer"),
+    GetTestsByCourse ("Get list tests made by course"),
+    ImportedTestsByCourse ("Imported list of tests by course"),
+    GetTestsByLecturerForLecturerReport("Imported list of tests by lecturer"),
+    ImportedTestsByLecturerForLecturerReport ("Imported list of test made by lecturer"),
+    DeleteTest ("User asked to delete a test"),
+    DeleteTestResponse ("Server deleted the test"),
+    GetTestQuestions ("User asked for the questions of the chosen test"),
+    GetTestQuestionsResponse ("Server returned the list of test questions"),
+    GetActiveTests ("User asked for the active tests table"),
+    GetActiveTestsResponse ("Server returned the active tests table"),
+    GetCorrectAnswer ("Get correct Answer From the data base"),
+    importedCorrectAnswer ("Imported correct answer"),
+    UpdateRemainingTime ("User wants to update the test's remaining time"),
+    UpdateRemainingTimeResponse ("Server updated the test's remaining time"),
+    GetRemainingTime ("User wants to get the test's remaining time"),
+    GetRemainingTimeResponse ("Server returned the test's remaining time"),
+    getQuestionAndAnswerFromTest ("Get Question and it's answers"),
+    importedQuestionAndAnswerFromTest ("Imported Question and it's answers"),
+    GetTestQuestionsById ("User asked for the questions of the chosen test"),
+    AddStudentAnswer ("Student submitted an answer in the test"),
+    StudentAnswerAdded ("Student final answer is saved"),
+    GetTestByID ("Get Test information by it's id"),
+    ImportedTestByID ("Test information imported"),
+    AddNewTestOfStudent ("Student finished his test"),
+    TestOfStudentSaved ("Test of student is saved"),
+    CheckStudentRegisteredCourse ("Check if student is in this course"),
+    StudentVerified ("Student id's is verified"),
+    IcreaseStudentsEnteringTest ("Student is taking a test"),
+    TotalStudentsInTestIncreased ("Student is taking a test"),
+    IcreaseStudentsFinishedTest ("Student finished test"),
+    StudentsFinishedTestIncreased ("Student is taking a test"),
+    changeTestDuration ("Head Of Department want to change test duration"),
+    changeTestDurationAnswer ("Change of test duration succeeded"),
+    TestDurationChanged ("test's duration was changed message sent"),
+    TestDurationChangedComputerized ("test's duration was changed"),
+    TestDurationChangedManual ("test's duration was changed"),
+    GetSubjectNameToID("get subject id"),
+    ImportedSubjectIDFromName("subject ID imported"),
+    RequestExtraTime ("Lecturer requested extra time in test"),
+    ExtraTimeRequested ("Lecturer requested extra time in test"),
+    TestDurationApprovedPopLecturer ("Approved time change popup"),
+    TestDurationDeclinedPopLecturer ("Declined time change popup"),
+    GetTestForApproval ("User Asked All Test To Do Approve"),
+    GetTestForApprovalResponse ("Server returned the list of tests needed approval"),
+    UpdateTheApprovalOfLecturer("User asked to update the approve"),
+    UpdateTheApprovalOfLecturerResponse("Server update your approval"),
+    AddNewActiveTest ("Lecturer wants to activate a test"),
+    AddNewActiveTestResponse ("Server activated the test"),
+    AddNewAfterTestInfo ("Lecturer wants to add initial information a test"),
+    AddNewAfterTestInfoResponse ("Server added initial test information"),
+    NumberOfAttendedCounter ("Request to get number of students who entered a test"),
+    ImportedNumberOfAttendedCounter ("imported number of students who entered a test"),
+    CountRegisteredStudents ("Request to get number of students who are assigned to a test (the course)"),
+    ImportedRegisteredStudents ("Imported number of students who are registered to the test"),
+    FinishAfterTestInfo ("Test is over, need to save afterTestInfo"),
+    AfterTestRowCompleted ("After test info saved"),
+    DeactivateTest("Test is over, remove from activetest"),
+    DeactivatingTestResponse("Test is no longer active"),
+    CountNumberOfFinished ("Count number of students who submitted the test"),
+    ImportedNumberOfFinished ("Imported number of students who submitted the test"),
+    DetectedCheating ("User Asked to update student and test have cheating"),
+    DetectedCheatingResponse("the test have cheating updating"),
+    GetActiveTestsByLecturer("User asked for the active tests table filtered by user's name"),
+    GetActiveTestsByLecturerResponse("Server returned the active tests table filtered by user's name"),
+    ChangeIsLoggedValue("Change is Logged in value"),
+    IsLoggedValueChanged("Logged in value changed"),
+    StudentsTestIsApproved("Lecturer approved a test of a student"),
+    StudentsTestIsApprovedToAllClients("find Students to Send SMS about approved test"),
+    PopupTestApprove("Student received an sms of approved test"),
+    StudentsTestIsApprovedResponse("Test Approved"),
+    LecturerClickedLockTest("Lecturer wants to lock a test"),
+    LecturerClickedLockTestResponse("Test is locked"),
+    LockTestForStudentByLecturer("Test of student has stopped by lecturer"),
+    TestIsForcedLocked("Locking test succeeded"),
+    TestIsForcedLockedComputerized("Locking test succeeded"),
+    TestIsForcedLockedManual("Locking test succeeded"),
+    GetQuestionsByLecturer("User asked for the list of questions written by him"),
+    GetQuestionsByLecturerResponse("Server returned a list of questions written by the user"),
+    GetTestsByLecturer("User asked for the list of tests written by him"),
+    GetTestsByLecturerResponse("Server returned a list of tests written by the user"),
+    GetStudentsTests("Student requested his tests"),
+    ImportedStudentTests("Server returned student's tests"),
+    GetStudentCourses("Student requested his courses"),
+    ImportedStudentCourses("Server returned student's courses"),
+    SetTestAverage("Request test's average"),
+    ImportedTestsAverage("Server returned test's average"),
+    GetTestAverage("Get test's average"),
+    ImportedTestAverage("Server returned test's average"),
+    ServerStopped("Server stopped listening"),
+    TerminateClient("Terminating client"),
+    TestDurationChangedComputerizedSendToAll("Time of Computerized test increased"),
+    TestDurationChangedManualSendToAll("Time of Manual test increased"),
+    getTestAfterTestInfo("get after test info"),
+    ImportedAfterTestInfo("Imported after test info");
 
-    }, importSubjects {
-        public String toString() {
-            return "import Subjects list for user";
-        }
-    }, CoursesimportSuccess {
-        public String toString() {
-            return "import courses Successfully";
-        }
-    }, importCourses {
-        public String toString() {
-            return "import Courses list for user";
-        }
+    private final String message;
 
-    }, EditQuestion {
-        public String toString() {
-            return "User asked to edit question";
-        }
-    }, AddNewQuestion {
-        public String toString() {
-            return "User asked to add a question";
-        }
-    }, QuestionAddedSuccessfuly {
-        public String toString() {
-            return "User added a question";
-        }
+    TypeMsg(String message) {
+        this.message = message;
+    }
 
-    }, DeleteQuestion {
-        public String toString() {
-            return "User asked to delete question";
-        }
-    }, QuestionDeleted {
-        public String toString() {
-            return "User deleted a question";
-        }
-    }, QuestionUpdated {
-        public String toString() {
-            return "User updated a question ";
-        }
-
-    }, SubjectsimportSuccess {
-        public String toString() {
-            return "import subjects Successfully";
-        }
-    }, GetCourseTable {
-        public String toString() {
-            return "User Asked The Courses";
-        }
-    }, CourseTableResponse {
-        public String toString() {
-            return "Here is the course table";
-        }
-    }, GetAllTestsTable {
-        public String toString() {
-            return "User requested the table of every test in the DB";
-        }
-    }, GetAllTestsTableResponse {
-        public String toString() {
-            return "Server returned the table of every test in the DB";
-        }
-    }, GetTestsBySubject {
-        public String toString() {
-            return "User requested the tests table filtered by subject";
-        }
-    }, GetTestsBySubjectResponse {
-        public String toString() {
-            return "Server returned the table of tests filtered by subject";
-        }
-    }, TestTableResponse {
-        public String toString() {
-            return "Here Is The Table Test";
-        }
-    }, AddNewTestQuestion {
-        public String toString() {
-            return "Lecturer asked to save the questions of test";
-        }
-    }, DeleteRequest {
-        public String toString() {
-            return "Deleting request for time change";
-        }
-    }, DeleteRequestCompleted {
-        public String toString() {
-            return "request for time change was deleted";
-        }
-    }, AddNewTestQuestionsResponse {
-        public String toString() {
-            return "The Questions is s saved";
-        }
-    }, AddNewTest {
-        public String toString() {
-            return "Lecturer asked to save test";
-        }
-    }, AddNewTestResponse {
-        public String toString() {
-            return "The test is saved";
-        }
-    },
-    GetRequestsBySubject {
-        public String toString() {
-            return "Head Of Department want to import table of requests";
-        }
-    },
-    RequestImportedSuccessfully {
-        public String toString() {
-            return "Requests table imported successfully";
-        }
-    },
-    ApproveRequestByHeadOfDepartment {
-        public String toString() {
-            return "Head Of Department want to approve a requests";
-        }
-    },
-    RequestIsApproved {
-        public String toString() {
-            return "The request has been approved";
-        }
-    },
-
-    DeclineRequestByHeadOfDepartment {
-        public String toString() {
-            return "Head Of Department want to decline a requests";
-        }
-    },
-    RequestIsDeclined {
-        public String toString() {
-            return "Time Request Declined";
-        }
-    },
-    RequestIsDeclinedToLecturer {
-        public String toString() {
-            return "Time Request Declined";
-        }
-    },
-    GetStudentReport {
-        public String toString() {
-            return "Head of department want to get a report of a student";
-        }
-    },
-    StudentReportImported {
-        public String toString() {
-            return "Student's report was imported";
-        }
-    },
-    GetUser {
-        public String toString() {
-            return "Get list of users";
-        }
-    },
-    UserImported {
-        public String toString() {
-            return "Imported list of users";
-        }
-    },
-    GetTestsByLecutrer {
-        public String toString() {
-            return "Get list tests made by lecutrer";
-        }
-    },
-    ImportedTestsByLecturer {
-        public String toString() {
-            return "Imported list of test made by lecturer";
-        }
-    },
-    GetTestsByCourse {
-        public String toString() {
-            return "Get list tests made by course";
-        }
-    },
-    ImportedTestsByCourse {
-        public String toString() {
-            return "Imported list of tests by course";
-        }
-    },
-    GetTestsByLecutrerForLecturerReport {
-        public String toString() {
-            return "Imported list of tests by lecturer";
-        }
-    },
-    ImportedTestsByLecturerForLecturerReport {
-        public String toString() {
-            return "Imported list of test made by lecturer";
-        }
-    },
-    DeleteTest {
-        public String toString() {
-            return "User asked to delete a test";
-        }
-    },
-    DeleteTestResponse {
-        public String toString() {
-            return "Server deleted the test";
-        }
-    },
-    GetTestQuestions {
-        public String toString() {
-            return "User asked for the questions of the chosen test";
-        }
-    },
-    GetTestQuestionsResponse {
-        public String toString() {
-            return "Server returned the list of test questions";
-        }
-    },
-    GetActiveTests {
-        public String toString() {
-            return "User asked for the active tests table";
-        }
-    },
-    GetActiveTestsResponse {
-        public String toString() {
-            return "Server returned the active tests table";
-        }
-    },
-    GetCorrectAnswer {
-        public String toString() {
-            return "Get correct Answer From the data base";
-        }
-    },
-    importedCorrectAnswer {
-        public String toString() {
-            return "Imported correct answer";
-        }
-    },
-    UpdateRemainingTime {
-        public String toString() {
-            return "User wants to update the test's remaining time";
-        }
-    },
-    UpdateRemainingTimeResponse {
-        public String toString() {
-            return "Server updated the test's remaining time";
-        }
-    },
-    GetRemainingTime {
-        public String toString() {
-            return "User wants to get the test's remaining time";
-        }
-    },
-    GetRemainingTimeResponse {
-        public String toString() {
-            return "Server returned the test's remaining time";
-        }
-    },
-    getQuestionAndAnswerFromTest {
-        public String toString() {
-            return "Get Question and it's answers";
-        }
-    },
-    importedQuestionAndAnswerFromTest {
-        public String toString() {
-            return "Imported Question and it's answers";
-        }
-    },
-    GetTestQuestionsById {
-        public String toString() {
-            return "User asked for the questions of the chosen test";
-        }
-    },
-    AddStudentAnswer {
-        public String toString() {
-            return "Student submitted an answer in the test";
-        }
-    },
-    StudentAnswerAdded {
-        public String toString() {
-            return "Student final answer is saved";
-        }
-    },
-    GetTestByID {
-        public String toString() {
-            return "Get Test information by it's id";
-        }
-    },
-    ImportedTestByID {
-        public String toString() {
-            return "Test information imported";
-        }
-    },
-    AddNewTestOfStudent {
-        public String toString() {
-            return "Student finished his test";
-        }
-    },
-    TestOfStudentSaved {
-        public String toString() {
-            return "Test of student is saved";
-        }
-    },
-    CheckStudentRegisteredCourse {
-        public String toString() {
-            return "Check if student is in this course";
-        }
-    },
-    StudentVerified {
-        public String toString() {
-            return "Student id's is verified";
-        }
-    },
-    IcreaseStudentsEnteringTest {
-        public String toString() {
-            return "Student is taking a test";
-        }
-
-    },
-    TotalStudentsInTestIncreased {
-        public String toString() {
-            return "Student is taking a test";
-        }
-
-    },
-    IcreaseStudentsFinishedTest {
-        public String toString() {
-            return "Student finished test";
-        }
-
-    },
-    StudentsFinishedTestIncreased {
-        public String toString() {
-            return "Student is taking a test";
-        }
-
-    },
-    changeTestDuration {
-        public String toString() {
-            return "Head Of Department want to change test duration";
-        }
-
-    },
-    changeTestDurationAnswer {
-        public String toString() {
-            return "Change of test duration succeeded";
-        }
-
-    },
-    TestDurationChanged {
-        public String toString() {
-            return "test's duration was changed message sent";
-        }
-    },
-    TestDurationChangedComputerized {
-        public String toString() {
-            return "test's duration was changed";
-        }
-
-    },
-    TestDurationChangedManual {
-        public String toString() {
-            return "test's duration was changed";
-        }
-
-    },
-    GetsubjectNametoID {
-        public String toString() {
-            return "get subject id";
-        }
-
-    },
-    ImportedSubjectIDfromName {
-        public String toString() {
-            return "subject ID imported";
-        }
-
-    },
-    RequestExtraTime {
-        public String toString() {
-            return "Lecturer requested extra time in test";
-        }
-
-    },
-    ExtraTimeRequested {
-        public String toString() {
-            return "Lecturer requested extra time in test";
-        }
-
-    },
-    TestDurationApprovedPopLecturer {
-        public String toString() {
-            return "Approved time change popup";
-        }
-    },
-    TestDurationDeclinedPopLecturer {
-        public String toString() {
-            return "Declined time change popup";
-        }
-    },
-    GetTestForApproval {
-        public String toString() {
-            return "User Asked All Test To Do Approve";
-        }
-
-    },
-    GetTestForApprovalResponse {
-        public String toString() {
-            return "Server returned the list of tests needed approval";
-        }
-    },
-    UpdateTheApproveofLecturer {
-        public String toString() {
-            return "User asked to update the approve";
-        }
-    },
-    UpdateTheApproveofLecturerResponse {
-        public String toString() {
-            return "Server update your approval";
-        }
-    },
-
-    AddNewActiveTest {
-        public String toString() {
-            return "Lecturer wants to activate a test";
-        }
-    },
-    AddNewActiveTestResponse {
-        public String toString() {
-            return "Server activated the test";
-        }
-    },
-    AddNewAfterTestInfo {
-        public String toString() {
-            return "Lecturer wants to add initial information a test";
-        }
-    },
-    AddNewAfterTestInfoResponse {
-        public String toString() {
-            return "Server added initial test information";
-        }
-    },
-    NumberOfAttendedCounter {
-        public String toString() {
-            return "Request to get number of students who entered a test";
-        }
-
-    },
-    ImportedNumberOfAttendedCounter {
-        public String toString() {
-            return "imported number of students who entered a test";
-        }
-
-    },
-    CountRegisteredStudents {
-        public String toString() {
-            return "Request to get number of students who are assigned to a test (the course)";
-        }
-
-    },
-    ImportedRegisteredStudents {
-        public String toString() {
-            return "Imported number of students who are registered to the test";
-        }
-
-    },
-    FinishAfterTestInfo {
-        public String toString() {
-            return "Test is over, need to save afterTestInfo";
-        }
-
-    },
-    AfterTestRowCompleted {
-        public String toString() {
-            return "After test info saved";
-        }
-
-    },
-    UnActivateTest {
-        public String toString() {
-            return "Test is over, remove from activetest";
-        }
-
-    },
-    CompleteUnactivatingTest {
-        public String toString() {
-            return "Test is no longer active";
-        }
-
-    },
-    CountNumberOfFinished {
-        public String toString() {
-            return "Count number of students who submitted the test";
-        }
-
-    },
-    ImportedNumberOfFinished {
-        public String toString() {
-            return "Imported number of students who submitted the test";
-        }
-
-    },
-    DetectedCheating {
-        public String toString() {
-            return "User Asked to update student and test have cheating";
-        }
-    },
-    DetectedCheatingResponse {
-        public String toString() {
-            return "the test have cheating updating";
-        }
-
-    }, GetActiveTestsByLecturer {
-        public String toString() {
-            return "User asked for the active tests table filtered by user's name";
-        }
-
-    },
-    GetActiveTestsByLecturerResponse {
-        public String toString() {
-            return "Server returned the active tests table filtered by user's name";
-        }
-
-    },
-    ChangeIsLoggedValue {
-        public String toString() {
-            return "Change is Logged in value";
-        }
-    },
-    IsLoggedValueChanged {
-        public String toString() {
-            return "Loggedin value changed";
-        }
-    },
-    StudentsTestIsApprvoed {
-        public String toString() {
-            return "Lecturer approved a test of a student";
-        }
-    },
-    StudentsTestIsApprvoedToAllClients {
-        public String toString() {
-            return "find Students to Send SMS about approved test";
-        }
-    },
-
-    PopupTestApprove {
-        public String toString() {
-            return "Student received an sms of approved test";
-        }
-    },
-    StudentsTestIsApprvoedResponse {
-        public String toString() {
-            return "Test Approved";
-        }
-    },
-    LecturerCllickedLockTest {
-        public String toString() {
-            return "Lecturer wants to lock a test";
-        }
-    },
-    LecturerCllickedLockTestResponse {
-        public String toString() {
-            return "Test is locked";
-        }
-    },
-    LockTestForStudentByLecturer {
-        public String toString() {
-            return "Test of student has stopped by lecturer";
-        }
-    },
-    TestIsForcedLocked {
-        public String toString() {
-            return "Locking test succeed";
-        }
-    },
-    TestIsForcedLockedComputrized {
-        public String toString() {
-            return "Locking test succeed";
-        }
-    },
-    TestIsForcedLockedManual {
-        public String toString() {
-            return "Locking test succeed";
-        }
-    }, GetQuestionsByLecturer {
-        public String toString() {
-            return "User asked for the list of questions written by him";
-        }
-    },
-    GetQuestionsByLecturerResponse {
-        public String toString() {
-            return "Server returned a list of questions written by the user";
-        }
-    }, GetTestsByLecturer {
-        public String toString() {
-            return "User asked for the list of tests written by him";
-        }
-    },
-    GetTestsByLecturerResponse {
-        public String toString() {
-            return "Server returned a list of tests written by the user";
-        }
-    },
-    GetStudentsTests {
-        public String toString() {
-            return "Student requested his tests";
-        }
-    },
-    ImportedStudentTests {
-        public String toString() {
-            return "Server returned student's tests";
-        }
-    },
-    GetStudentCourses {
-        public String toString() {
-            return "Student requested his courses";
-        }
-    }, ImportedStudentCourses {
-        public String toString() {
-            return "Server returned student's courses";
-        }
-    },
-    SetTestAverage {
-        public String toString() {
-            return "Request test's average";
-        }
-    }, ImportedTestsAverage {
-        public String toString() {
-            return "Server returned test's average";
-        }
-    },
-    GetTestAverage {
-        public String toString() {
-            return "Get test's average";
-        }
-    },
-    ImportedTestAverage {
-        public String toString() {
-            return "Server returned test's average";
-        }
-    },
-    ServerStopped {
-        public String toString() {
-            return "Server stopped listening";
-        }
-    },
-    TerminateClient {
-        public String toString() {
-            return "Terminating client";
-        }
-    },
-    TestDurationChangedComputrizedSendToAll{
-        public String toString() {
-            return "Time of Computerized test increased";
-        }
-    },
-    TestDurationChangedManualSendToAll{
-        public String toString() {
-            return "Time of Manual test increased";
-        }
-    },
-    getTestAfterTestInfo{
-        public String toString() {
-            return "get after test info";
-        }
-    },
-    ImportedAfterTestInfo{
-        public String toString() {
-            return "Imported after test info";
-        }
+    @Override
+    public String toString() {
+        return message;
     }
 }

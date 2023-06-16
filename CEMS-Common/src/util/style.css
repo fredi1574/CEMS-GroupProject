@@ -114,17 +114,17 @@
     -fx-background-radius: 0;
 }
 
-.radio-button .radio {
-    -fx-background-color: transparent;
-    -fx-border-color: #284263;
-    -fx-border-radius: 50px;
-}
+/*.radio-button .radio {*/
+/*    -fx-background-color: transparent;*/
+/*    -fx-border-color: #284263;*/
+/*    -fx-border-radius: 50px;*/
+/*}*/
 
-.radio-button .dot {
-    -fx-mark-highlight-color: #284263;
-    -fx-mark-color: #284263;
-    -fx-background-insets: 0;
-}
+/*.radio-button .dot {*/
+/*    -fx-mark-highlight-color: #284263;*/
+/*    -fx-mark-color: #284263;*/
+/*    -fx-background-insets: 0;*/
+/*}*/
 
 .regularButtons {
     -fx-background-color: transparent;

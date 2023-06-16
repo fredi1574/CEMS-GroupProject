@@ -131,7 +131,7 @@
          </font>
       </Label>
    </AnchorPane>
-   <Button fx:id="saveButton" alignment="BASELINE_CENTER" layoutX="799.0" layoutY="434.0" mnemonicParsing="false"
+   <Button alignment="BASELINE_CENTER" layoutX="799.0" layoutY="434.0" mnemonicParsing="false"
            onAction="#onSaveButton" prefHeight="33.0" prefWidth="53.0" styleClass="subButtons">
       <graphic>
          <ImageView fitHeight="39.0" fitWidth="39.0" preserveRatio="true">
