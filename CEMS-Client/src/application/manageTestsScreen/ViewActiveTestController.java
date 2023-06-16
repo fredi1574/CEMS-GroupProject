@@ -1,6 +1,9 @@
 package application.manageTestsScreen;
 
 import Client.Client;
+import Client.ClientUI;
+import Client.ExitButton;
+import Client.LogOut;
 import application.Simulation.SmsEmailPopUpController;
 import entity.TestRequestForApproval;
 import javafx.animation.Animation;
@@ -16,9 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import util.*;
-import Client.ClientUI;
-import Client.ExitButton;
-import Client.LogOut;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -27,10 +27,11 @@ public class ViewActiveTestController {
     static boolean requestSent;
     @FXML
     private static Button extraTimeBtn;
+    public final SmsEmailPopUpController smsEmailPopUpController = new SmsEmailPopUpController();
     @FXML
     public TextField testIdTextField;
     public Label courseNameLabel;
-    public Label subjecteNameLabel;
+    public Label subjectNameLabel;
     public TextField numOfQuestionsTextField;
     public TextField testCodeTextField;
     public Label timeLeftLabel;
@@ -42,7 +43,6 @@ public class ViewActiveTestController {
     public Button lockBtn;
     public Label lockTestLabel;
     public StateManagement stateManagement;
-    public final SmsEmailPopUpController smsEmailPopUpController = new SmsEmailPopUpController();
     @FXML
     private AnchorPane header;
     private Timeline timer;
@@ -54,9 +54,9 @@ public class ViewActiveTestController {
 
         //sets the relevant field values
         testIdTextField.setText(stateManagement.getTestID());
-        courseNameLabel.setText(stateManagement.course.getCourseName());
-        subjecteNameLabel.setText(stateManagement.course.getSubjectName());
-        testCodeTextField.setText(stateManagement.currentActivetest.getTestCode());
+        courseNameLabel.setText(stateManagement.getCourse().getCourseName());
+        subjectNameLabel.setText(stateManagement.getCourse().getSubjectName());
+        testCodeTextField.setText(stateManagement.getCurrentActivetest().getTestCode());
         numOfQuestionsTextField.setText(String.valueOf(stateManagement.getCurrentActivetest().getNumOfQuestions()));
         testDateTextField.setText(stateManagement.getCurrentActivetest().getTestDate());
         testDurationTextField.setText(stateManagement.getTestDuration());
