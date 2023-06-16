@@ -1,4 +1,4 @@
-package application.loginWindowScreen.JUnitTest;
+package JunitTest;
 
 import entity.User;
 
