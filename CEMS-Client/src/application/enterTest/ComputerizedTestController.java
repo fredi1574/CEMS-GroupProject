@@ -73,9 +73,8 @@ public class ComputerizedTestController {
         else {
             showError.showInfoPopup("Student is not assigned to the test! \nPlease try again");
         }
-
-
     }
+
     private Test getTestData()
     {
         MsgHandler getTestInformation = new MsgHandler(TypeMsg.GetTestByID, EnterCodePopUpController.testID);
@@ -86,7 +85,7 @@ public class ComputerizedTestController {
         Test test = getTestData();
         TestIdText.setText(test.getId());
         TestIdText.setDisable(true);
-        TestComments.setText(test.getStudentComments());
+        TestComments.setText(test.getStudentComments().equals("null") ? "" : test.getStudentComments());
         TestComments.setDisable(true);
         CourseNameText.setText(test.getCourseName());
         startTimer(test);

@@ -73,16 +73,30 @@ public class ManageQuestionsController {
         manageQuestionsTableView.setItems(sortedData);
     }
 
+    @FXML
+    public void callSetFunctions(){
+
+        setFunctions(PathConstants.updateQuestionPath);
+    }
+
     /**
      * Sets the necessary functions for the update question screen.
      *
      * @param relativePath The relative path to the update question screen FXML file.
      */
+
     public void setFunctions(String relativePath) {
+        Question rowData = manageQuestionsTableView.getSelectionModel().getSelectedItem();
+
+        if (rowData == null){
+            showError.showErrorPopup("Select a question to edit");
+            return;
+        }
+
         ScreenElements<Stage, FXMLLoader> screenElements = ScreenManager.popUpScreen(relativePath);
         FXMLLoader loader = screenElements.getFXMLLoader();
         UpdateQuestionController controller = loader.getController();
-        Question rowData = manageQuestionsTableView.getSelectionModel().getSelectedItem();
+
         controller.setQuestion(rowData);
         controller.setManage((Stage) header.getScene().getWindow());
     }

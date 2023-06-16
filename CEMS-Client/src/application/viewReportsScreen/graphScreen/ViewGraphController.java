@@ -12,7 +12,6 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import util.*;
 
 import java.text.DecimalFormat;
@@ -24,7 +23,7 @@ public class ViewGraphController {
     private Text finishedText;
 
     @FXML
-    private Text ForcedFinsihedText;
+    private Text ForcedFinishedText;
 
     @FXML
     private Text NumberText;
@@ -91,7 +90,7 @@ public class ViewGraphController {
         ArrayList<String> AdditionalInformation = (ArrayList)ClientUI.chat.getInfoAboutTest();
         DurationText.setText(AdditionalInformation.get(0));
         finishedText.setText(AdditionalInformation.get(1));
-        ForcedFinsihedText.setText(AdditionalInformation.get(2));
+        ForcedFinishedText.setText(AdditionalInformation.get(2));
     }
 
     public void LogOut(ActionEvent event) {
