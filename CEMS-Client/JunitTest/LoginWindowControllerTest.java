@@ -132,6 +132,11 @@ public class LoginWindowControllerTest {
     }
 
 
+    /**
+     * Functionality: Test whether the isNotEmptyUser method handles the case when both the username and password are null.
+     * Input: userName = null, password = null
+     * Expected result: The method should throw an exception and the expected exception message should be "null"
+     */
     @Test
     public void Login_EnterNullUserAndNullPassword() {
         String expected = "null";
@@ -144,28 +149,38 @@ public class LoginWindowControllerTest {
         }
 
     }
-@Test
-public void Login_Role_WithRoleStudent() throws SQLException {
+    /**
+     * Functionality: Test whether the login method returns the role "Student" when a valid username and password are entered.
+     * Input: Username = "AbedTayer", Password = "a"
+     * Expected result: The role should be "Student"
+     */
+    @Test
+    public void Login_Role_WithRoleStudent() throws SQLException {
 
     // Arrange
-    try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-         PreparedStatement statement = connection.prepareStatement("SELECT id, firstName, lastName, email, role, isLoggedIn,phoneNumber " +
-                 "FROM user  WHERE BINARY username = ? AND password = ?")) {
-        statement.setString(1, "AbedTayer");
-        statement.setString(2, "a");
+      try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+          PreparedStatement statement = connection.prepareStatement("SELECT id, firstName, lastName, email, role, isLoggedIn,phoneNumber " +
+                  "FROM user  WHERE BINARY username = ? AND password = ?")) {
+         statement.setString(1, "AbedTayer");
+         statement.setString(2, "a");
 
-        try (ResultSet resultSet = statement.executeQuery()) {
-            if (resultSet.next()) {
-                String role = resultSet.getString("role");
-                int count = resultSet.getInt(1);
-                assertEquals(role,"Student");
-            }
+         try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                   String role = resultSet.getString("role");
+                  int count = resultSet.getInt(1);
+                 assertEquals(role,"Student");
+              }
 
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
+         }
+      }  catch (SQLException e) {
+          e.printStackTrace();
+      }
 }
+    /**
+     * Functionality: Test whether the login method returns the role "Lecturer" when a valid username and password are entered.
+     * Input: Username = "MayCaspi", Password = "a"
+     * Expected result: The role should be "Lecturer"
+     */
     @Test
     public void Login_Role_WithRoleLecturer() throws SQLException {
 
@@ -187,6 +202,11 @@ public void Login_Role_WithRoleStudent() throws SQLException {
             e.printStackTrace();
         }
     }
+    /**
+     * Functionality: Test whether the login method returns the role "Head of Department/Lecturer" when a valid username and password are entered.
+     * Input: Username = "Fredi Bulshtein", Password = "a"
+     * Expected result: The role should be "Head of Department/Lecturer"
+     */
     @Test
     public void Login_Role_WithRoleHeadOfDepartment() throws SQLException {
 
@@ -208,6 +228,11 @@ public void Login_Role_WithRoleStudent() throws SQLException {
             e.printStackTrace();
         }
     }
+    /**
+     * Functionality: Test whether the login method returns null for the role when an invalid username and password are entered.
+     * Input: Username = "Shome", Password = "a"
+     * Expected result: The role should be null
+     */
     @Test
     public void Login_Role_WithRoleisNull() throws SQLException {
 
@@ -229,6 +254,11 @@ public void Login_Role_WithRoleStudent() throws SQLException {
             e.printStackTrace();
         }
     }
+    /**
+     * Functionality: Test whether the login method successfully finds the user details when a valid username and password are entered.
+     * Input: Username = "AbedTayer", Password = "a"
+     * Expected result: The user details should be found (count != 0)
+     */
     @Test
     public void Login_UserDetailsFoundSuccefully() throws SQLException {
 
@@ -248,6 +278,11 @@ public void Login_Role_WithRoleStudent() throws SQLException {
             e.printStackTrace();
         }
     }
+    /**
+     * Functionality: Test whether the login method does not find the user details when an invalid username and password are entered.
+     * Input: Username = "Sergi", Password = "a"
+     * Expected result: The user details should not be found (count == 0)
+     */
     @Test
     public void Login_UserDetailsNotFoundSuccefully() throws SQLException {
 
