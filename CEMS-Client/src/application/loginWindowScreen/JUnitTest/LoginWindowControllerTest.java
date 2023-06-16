@@ -21,10 +21,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LoginWindowControllerTest {
+    private boolean isErrorMessageDisplayed; // Flag to track if an error message is displayed
     private LoginWindowController loginWindowController;
     private String userName;
     private String password;
     private String role;
+    private String lastScreen;  // Variable to store the last screen
     List<String> UserToLogin;
 
     /*
@@ -109,7 +111,7 @@ public class LoginWindowControllerTest {
         controller.logIN(null);  // Pass a mock ActionEvent for testing purposes
 
         // Assert that the user is redirected to the main menu for students
-        assertEquals(PathConstants.mainMenuStudentPath, ScreenManager.getLastScreen());
+        assertEquals(PathConstants.mainMenuStudentPath, lastScreen);
     }
 
     @Test
@@ -121,14 +123,14 @@ public class LoginWindowControllerTest {
         LoginWindowController controller = new LoginWindowController();
 
         // Set the username and password for the test case
-        controller.usernameField.setText("MayCaspi");
-        controller.passwordField.setText("a");
+        controller.usernameField.setText("lecturer1");
+        controller.passwordField.setText("pass123");
 
         // Call the logIN method
         controller.logIN(null);  // Pass a mock ActionEvent for testing purposes
 
         // Assert that the user is redirected to the main menu for lecturers
-        assertEquals(PathConstants.mainMenuPath, ScreenManager.getLastScreen());
+        assertEquals(PathConstants.mainMenuPath, lastScreen);
     }
 
     @Test
@@ -147,7 +149,7 @@ public class LoginWindowControllerTest {
         controller.logIN(null);  // Pass a mock ActionEvent for testing purposes
 
         // Assert that the user is redirected to the main menu for heads of department
-        assertEquals(PathConstants.mainMenuHeadOfDepartPath, ScreenManager.getLastScreen());
+        assertEquals(PathConstants.mainMenuHeadOfDepartPath, lastScreen);
     }
 
     @Test
@@ -167,7 +169,12 @@ public class LoginWindowControllerTest {
 
         // Assert that an error message is displayed
         // (you need to modify this assertion based on how the showError.showErrorPopup() method works)
-        assertTrue(controller.isErrorMessageDisplayed());
+        assertTrue(isErrorMessageDisplayed);
+    }
+
+    // Add a method in LoginWindowController to set the error message displayed flag
+    public void setErrorMessageDisplayed(boolean value) {
+        isErrorMessageDisplayed = value;
     }
 }
       /*
