@@ -27,8 +27,8 @@ public class LoginWindowControllerTest {
 
     /**
      * Functionality: Test whether the method returns false when the username is empty and the password is entered.
-     * input: userName = "", password = "4"
-     * expected: false
+     * Input: userName = "", password = "4"
+     * Expected result: false
      */
     @Test
     public void Login_EnterPasswordButNotUser(){
@@ -39,8 +39,8 @@ public class LoginWindowControllerTest {
 
     /**
      * Functionality: Test whether the method returns false when the username is entered and the password is empty.
-     * input: userName = "Yuval", password = ""
-     * expected: false
+     * Input: userName = "Yuval", password = ""
+     * Expected result: false
      */
     @Test
     public void Login_EnterUserButNotPassword(){
@@ -51,8 +51,8 @@ public class LoginWindowControllerTest {
 
     /**
      * Functionality: Test whether the method returns false when both the username and password are empty.
-     * input: userName = "", password = ""
-     * expected: false
+     * Input: userName = "", password = ""
+     * Expected result: false
      */
     @Test
     public void Login_NotEnterUserAndNotPassword(){
@@ -63,8 +63,8 @@ public class LoginWindowControllerTest {
 
     /**
      * Functionality: Test whether the method returns true when both the username and password are entered.
-     * input: userName = "AbedTayer", password = "a"
-     * expected: true
+     * Input: userName = "AbedTayer", password = "a"
+     * Expected result: true
      */
     @Test
     public void Login_EnterUserAndPassword(){
