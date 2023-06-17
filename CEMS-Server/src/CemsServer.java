@@ -795,7 +795,7 @@ public class CemsServer extends AbstractServer {
                             "        AND a1.studentsAnswer = a2.studentsAnswer " +
                             "        AND a1.studentID <> a2.studentID " +
                             "    WHERE a1.testID = cems.studentstest.testID" +
-                            "      AND a1.studentID = cems.studentstest.studentID" +
+                            "      AND a1.studentID <> cems.studentstest.studentID" +  // Updated line: Compare all studentIDs
                             "    GROUP BY a1.testID, a1.studentID " +
                             "    HAVING COUNT(DISTINCT a1.questionID) = " +
                             "           (SELECT COUNT(DISTINCT questionID) " +
