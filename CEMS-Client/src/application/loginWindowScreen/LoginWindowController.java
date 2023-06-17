@@ -10,12 +10,13 @@ import javafx.scene.layout.AnchorPane;
 import util.*;
 import Client.ExitButton;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class LoginWindowController {
-
+    private  Connection  connection;
     @FXML
     private AnchorPane header;
     @FXML
@@ -23,6 +24,7 @@ public class LoginWindowController {
     @FXML
     public PasswordField passwordField;
     private IServerClientCommunication iServerClientCommunication;
+
 
 
 
@@ -36,21 +38,7 @@ public class LoginWindowController {
      * It enables dragging and dropping of the application window using the header pane.
      */
 
-    public class LoginServerClientCommunication implements IServerClientCommunication{
-        Client client = new Client("Host", 5555,null);
-        //MysqlConnection.connectToDb("AB12345tre");
-        @Override
-        public short sendToServer(Object msg) {
-            client.handleMessageFromClientUI(msg);
-            return 0;
-        }
 
-        @Override
-        public MsgHandler<Object> getServerMsg() {
-
-            return client.messageFromServer;
-        }
-    }
 
     /**
      * Event handler for login button click.

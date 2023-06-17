@@ -1,13 +1,17 @@
 package JunitTest;
-
+package CEMS-Server;
 import Client.Client;
 import Client.ClientUI;
+import application.loginWindowScreen.IServerClientCommunication;
+import CEMS-Server.loginWindowScreen.IServerClientCommunication;
 import application.loginWindowScreen.LoginWindowController;
 import com.mysql.cj.MysqlConnection;
 import entity.User;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import util.MsgHandler;
 import util.PathConstants;
 import util.TypeMsg;
@@ -16,9 +20,17 @@ import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.*;
 
 public class LoginWindowControllerTest {
+    @Mock
+    private Connection connection;
+    @Mock
+    private PreparedStatement statement;
+    @Mock
+    private ResultSet resultSet;
     private String lastScreen;  // Variable to store the last screen
     List<String> UserToLogin;
 
@@ -33,22 +45,38 @@ public class LoginWindowControllerTest {
 
 
 
-
-
-
-
-
-
-
-
     @BeforeEach
     void setUp() {
+        loginWindowController = new LoginWindowController();
+        MysqlConnection mysqlConnection = new MysqlConnection ();
+
+        // Initialize the mocked dependencies and LoginWindowController
+        Object connection = mock(Connection.class);
+        statement = mock(PreparedStatement.class);
+        resultSet = mock(ResultSet.class);
+        // Assign mock objects to the dependencies
+        loginWindowController = new LoginWindowController();
+        //loginWindowController.setConnection((Connection) connection);
+
         // Create a stub for the MysqlConnection class
         // mysqlConnection = mock(MysqlConnection.class);
 
         // Initialize the LoginWindowController with the stubbed MysqlConnection
-        loginWindowController = new LoginWindowController();
+
     }
+    @Test
+    public void Login_UserDetailsFoundSuccessfully() throws SQLException {
+        // Arrange
+        when(connection.prepareStatement(anyString())).thenReturn(statement);
+        when(statement.executeQuery()).thenReturn(resultSet);
+        when(resultSet.next()).thenReturn(true);
+        when(resultSet.getInt(anyInt())).thenReturn(1);
+        // Act
+      //  boolean result = loginWindowController.authenticateUser("AbedTayer", "a");
+        // Assert
+        //assertTrue(result);
+    }
+
 
     private boolean authenticateUser(String username, String password) {
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -82,6 +110,7 @@ public class LoginWindowControllerTest {
      * Input: userName = "", password = "4"
      * Expected result: false
      */
+
     @Test
     public void Login_EnterPasswordButNotUser() {
         userName = "";
@@ -94,6 +123,7 @@ public class LoginWindowControllerTest {
      * Input: userName = "Yuval", password = ""
      * Expected result: false
      */
+
     @Test
     public void Login_EnterUserButNotPassword() {
         userName = "Yuval";
@@ -106,6 +136,7 @@ public class LoginWindowControllerTest {
      * Input: userName = "", password = ""
      * Expected result: false
      */
+
     @Test
     public void Login_NotEnterUserAndNotPassword() {
         userName = "";
@@ -118,6 +149,7 @@ public class LoginWindowControllerTest {
      * Input: userName = "AbedTayer", password = "a"
      * Expected result: true
      */
+
     @Test
     public void Login_EnterUserAndPassword() {
         userName = "AbedTayer";
@@ -137,6 +169,7 @@ public class LoginWindowControllerTest {
      * Input: userName = null, password = null
      * Expected result: The method should throw an exception and the expected exception message should be "null"
      */
+
     @Test
     public void Login_EnterNullUserAndNullPassword() {
         String expected = "null";
@@ -154,12 +187,14 @@ public class LoginWindowControllerTest {
      * Input: Username = "AbedTayer", Password = "a"
      * Expected result: The role should be "Student"
      */
+
     @Test
     public void Login_Role_WithRoleStudent() throws SQLException {
 
     // Arrange
       try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-          PreparedStatement statement = connection.prepareStatement("SELECT id, firstName, lastName, email, role, isLoggedIn,phoneNumber " +
+          PreparedStatement statement = connection.prepareStatement("SELECT id, firstName," +
+                  " lastName, email, role, isLoggedIn,phoneNumber " +
                   "FROM user  WHERE BINARY username = ? AND password = ?")) {
          statement.setString(1, "AbedTayer");
          statement.setString(2, "a");
@@ -181,12 +216,14 @@ public class LoginWindowControllerTest {
      * Input: Username = "MayCaspi", Password = "a"
      * Expected result: The role should be "Lecturer"
      */
+
     @Test
     public void Login_Role_WithRoleLecturer() throws SQLException {
 
         // Arrange
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("SELECT id, firstName, lastName, email, role, isLoggedIn,phoneNumber " +
+             PreparedStatement statement = connection.prepareStatement("SELECT id, firstName," +
+                     " lastName, email, role, isLoggedIn,phoneNumber " +
                      "FROM user  WHERE BINARY username = ? AND password = ?")) {
             statement.setString(1, "MayCaspi");
             statement.setString(2, "a");
@@ -207,12 +244,14 @@ public class LoginWindowControllerTest {
      * Input: Username = "Fredi Bulshtein", Password = "a"
      * Expected result: The role should be "Head of Department/Lecturer"
      */
+
     @Test
     public void Login_Role_WithRoleHeadOfDepartment() throws SQLException {
 
         // Arrange
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("SELECT id, firstName, lastName, email, role, isLoggedIn,phoneNumber " +
+             PreparedStatement statement = connection.prepareStatement("SELECT id, firstName," +
+                     " lastName, email, role, isLoggedIn,phoneNumber " +
                      "FROM user  WHERE BINARY username = ? AND password = ?")) {
             statement.setString(1, "Fredi Bulshtein");
             statement.setString(2, "a");
@@ -233,12 +272,14 @@ public class LoginWindowControllerTest {
      * Input: Username = "Shome", Password = "a"
      * Expected result: The role should be null
      */
+
     @Test
     public void Login_Role_WithRoleisNull() throws SQLException {
 
         // Arrange
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("SELECT id, firstName, lastName, email, role, isLoggedIn,phoneNumber " +
+             PreparedStatement statement = connection.prepareStatement("SELECT id, firstName," +
+                     " lastName, email, role, isLoggedIn,phoneNumber " +
                      "FROM user  WHERE BINARY username = ? AND password = ?")) {
             statement.setString(1, "Shome");
             statement.setString(2, "a");
@@ -259,12 +300,15 @@ public class LoginWindowControllerTest {
      * Input: Username = "AbedTayer", Password = "a"
      * Expected result: The user details should be found (count != 0)
      */
+
     @Test
     public void Login_UserDetailsFoundSuccefully() throws SQLException {
 
         // Arrange
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM user WHERE username = ? AND password = ?")) {
+             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM user WHERE username = ? AND" +
+                     " password = ?")) {
+
             statement.setString(1, "AbedTayer");
             statement.setString(2, "a");
 
@@ -283,12 +327,14 @@ public class LoginWindowControllerTest {
      * Input: Username = "Sergi", Password = "a"
      * Expected result: The user details should not be found (count == 0)
      */
+
     @Test
     public void Login_UserDetailsNotFoundSuccefully() throws SQLException {
 
         // Arrange
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM user WHERE username = ? AND password = ?")) {
+             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM user WHERE username = ? AND " +
+                     "password = ?")) {
             statement.setString(1, "Sergi");
             statement.setString(2, "a");
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -301,6 +347,5 @@ public class LoginWindowControllerTest {
             e.printStackTrace();
         }
     }
-
-
 }
+
