@@ -17,8 +17,8 @@ public class Test implements Serializable {
     private String year;
     private String semester;
     private String session;
-
     private String subjectID;
+
     private ObservableList<TestQuestion> questions;
 
     //constructor for fully created test
@@ -157,6 +157,4 @@ public class Test implements Serializable {
     public void setSubject(String subject) {
         this.subject = subject;
     }
-
-
 }

@@ -93,9 +93,9 @@ public class Client extends AbstractClient {
             case UpdateRemainingTimeResponse:
             case AddNewTestQuestionsResponse:
             case AddNewTestResponse:
-            case QuestionAddedSuccessfuly:
-            case QuestionUpdated:
-            case QuestionDeleted:
+            case AddNewQuestionResponse:
+            case EditQuestionResponse:
+            case DeleteQuestionResponse:
                 break;
 
             case Disconnected:
@@ -108,7 +108,7 @@ public class Client extends AbstractClient {
                 });
 
                 break;
-            case allQuestionImported:
+            case GetAllQuestionsResponse:
                 this.allQuestions = (List<Object>) messageFromServer.getMsg();
                 break;
 
@@ -116,18 +116,18 @@ public class Client extends AbstractClient {
                 user = (User) messageFromServer.getMsg();
                 break;
 
-            case QuestionsBySubjectImported:
+            case GetQuestionsBySubjectResponse:
             case GetQuestionsByLecturerResponse:
                 this.questions = (List<Object>) messageFromServer.getMsg();
                 break;
 
-            case CoursesimportSuccess:
+            case ImportCoursesResponse:
 
             case ImportedStudentCourses:
                 this.courses = (List<Object>) messageFromServer.getMsg();
                 break;
 
-            case SubjectsimportSuccess:
+            case ImportSubjectsResponse:
                 this.subjects = (List<Object>) messageFromServer.getMsg();
                 break;
 
@@ -144,7 +144,7 @@ public class Client extends AbstractClient {
                 System.out.println(tests);
                 break;
 
-            case RequestImportedSuccessfully:
+            case GetRequestsBySubjectResponse:
                 requests = (ArrayList<Object>) messageFromServer.getMsg();
                 this.requests = (List<Object>) messageFromServer.getMsg();
                 break;

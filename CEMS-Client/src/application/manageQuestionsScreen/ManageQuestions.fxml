@@ -90,9 +90,7 @@
         </font>
         <graphic>
             <ImageView fitHeight="13.0" fitWidth="15.0">
-                <image>
-                    <Image url="@/images/test_edit.png"/>
-                </image>
+                <Image url="@/images/test_edit.png"/>
             </ImageView>
         </graphic>
     </Button>

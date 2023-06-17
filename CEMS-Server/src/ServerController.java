@@ -1,16 +1,16 @@
-import javafx.scene.control.TableView;
-import util.ConnectToClients;
-import util.TableManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import util.ConnectToClients;
 import util.MinimizeButton;
 import util.ScreenManager;
+import util.TableManager;
 
 import java.io.PrintStream;
 import java.net.Inet4Address;
@@ -80,10 +80,9 @@ public class ServerController {
      * calls the server's runServer method
      * (used by the connect button in the server GUI)
      *
-     * @param event the source event that triggered the method
      */
     @FXML
-    void Connection(javafx.event.ActionEvent event) {
+    void Connection() {
 
         ServerGUI.runServer(txtIP.getText(), txtPort.getText(), txtDBname.getText(), txtUsername.getText(), txtPassword.getText());
         btnConnect.setDisable(true);
@@ -96,15 +95,13 @@ public class ServerController {
      * calls the server's disconnect method
      * (used by the disconnect button in the server GUI)
      *
-     * @param event the source event that triggered the method
      */
     @FXML
-    void Disconnection(ActionEvent event) {
+    void Disconnection() {
         ServerGUI.disconnect();
         btnDisconnect.setDisable(true);
         btnConnect.setDisable(false);
         disableDataInput(false);
-
     }
 
     /**

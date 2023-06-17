@@ -384,8 +384,6 @@ public class MysqlConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
         return question;
     }
 
@@ -562,7 +560,7 @@ public class MysqlConnection {
         return null; // or throw an exception if the test id is not found
     }
 
-    public static String getIDreturnFullname(String query) {
+    public static String getIDReturnFullname(String query) {
         Statement statement = createStatement();
 
         String fullName = null;

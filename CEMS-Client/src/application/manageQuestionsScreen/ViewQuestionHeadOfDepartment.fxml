@@ -53,7 +53,7 @@
         </graphic>
     </Button>
     <Label layoutX="28.0" layoutY="515.0" text="Back"/>
-    <Button fx:id="saveBtn" layoutX="743.0" layoutY="464.0" minWidth="29.0" mnemonicParsing="false" prefHeight="54.0"
+    <Button layoutX="743.0" layoutY="464.0" minWidth="29.0" mnemonicParsing="false" prefHeight="54.0"
             prefWidth="54.0" styleClass="subButtons">
         <cursor>
           <Cursor fx:constant="SE_RESIZE"/>

@@ -71,7 +71,7 @@ public class CreateTestController {
     }
 
     private void displayCourses() {
-        MsgHandler getTableCourse = new MsgHandler(TypeMsg.importCourses, Client.user.getUserName());
+        MsgHandler getTableCourse = new MsgHandler(TypeMsg.ImportCourses, Client.user.getUserName());
         ClientUI.chat.accept(getTableCourse);
         List<Object> courseObjectsList = ClientUI.chat.getCourses();
 

@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static entity.TestTypeEnum.C;
+import static util.TypeMsg.*;
+
 @SuppressWarnings("unchecked")
 public class CemsServer extends AbstractServer {
     public static MsgHandler<Object> messageFromServerToAll;
@@ -110,35 +113,48 @@ public class CemsServer extends AbstractServer {
     public void sendToAllClients(Object msg) {
         Thread[] clientThreadList = getClientConnections();
         messageFromServerToAll = (MsgHandler<Object>) msg;
+
         System.out.println("handleMessageFromServer ");
         System.out.println(messageFromServerToAll.getType().toString());
-        switch (messageFromServerToAll.getType()) {
+
+        TypeMsg messageType = messageFromServerToAll.getType();
+
+        switch (messageType) {
             case RequestIsDeclined:
-                this.msg = (MsgHandler<Object>) msg;
-                this.obj = this.msg.getMsg();
-
-                for (Thread thread : clientThreadList) {
-                    ConnectionToClient client = (ConnectionToClient) thread;
-                    String name = client.getName();
-                    if (name.equals(obj)) {
-                        try {
-                            client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsDeclinedToLecturer, "Time Request Declined"));
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                }
-                break;
-
             case RequestIsApproved:
+            case StudentsTestIsApprovedToAllClients:
+            case LockTestForStudentByLecturer:
                 this.msg = (MsgHandler<Object>) msg;
                 this.obj = this.msg.getMsg();
+
                 for (Thread thread : clientThreadList) {
                     ConnectionToClient client = (ConnectionToClient) thread;
                     String name = client.getName();
+
                     if (name.equals(obj)) {
                         try {
-                            client.sendToClient(new MsgHandler<>(TypeMsg.TestDurationApprovedPopLecturer, "Time Request Approved"));
+                            if (messageType == RequestIsDeclined) {
+                                client.sendToClient(new MsgHandler<>(RequestIsDeclinedToLecturer, "Time Request Declined"));
+                                return;
+                            }
+                            if (messageType == RequestIsApproved) {
+                                client.sendToClient(new MsgHandler<>(TestDurationApprovedPopLecturer, "Time Request Approved"));
+                                return;
+                            }
+                            if (messageType == StudentsTestIsApprovedToAllClients) {
+                                client.sendToClient(new MsgHandler<>(PopupTestApprove, "Test is Approved"));
+                                return;
+                            }
+                            if (messageType == LockTestForStudentByLecturer) {
+                                if (obj instanceof TestTypeEnum) {
+                                    if (obj.equals(TestTypeEnum.C)) {
+                                        client.sendToClient(new MsgHandler<>(TestIsForcedLockedComputerized, null));
+                                    } else {
+                                        client.sendToClient(new MsgHandler<>(TestIsForcedLockedManual, null));
+                                    }
+                                    return;
+                                }
+                            }
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -147,73 +163,21 @@ public class CemsServer extends AbstractServer {
                 break;
 
             case TestDurationChangedComputerizedSendToAll:
-                this.msg = (MsgHandler<Object>) msg;
-                this.obj = this.msg.getMsg();
-                if (obj instanceof Integer) {
-                    for (Thread thread : clientThreadList) {
-                        ConnectionToClient client = (ConnectionToClient) thread;
-                        String name = (String) client.getInfo(client.getName());
-                        if (name.equals("Student")) {
-                            try {
-                                client.sendToClient(new MsgHandler<>(TypeMsg.TestDurationChangedComputerized, obj));
-
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                    }
-                }
-                break;
-
             case TestDurationChangedManualSendToAll:
                 this.msg = (MsgHandler<Object>) msg;
                 this.obj = this.msg.getMsg();
+
                 if (obj instanceof Integer) {
+                    TypeMsg clientMessageType = (messageType == TestDurationChangedComputerizedSendToAll)
+                            ? TestDurationChangedComputerized : TestDurationChangedManual;
+
                     for (Thread thread : clientThreadList) {
                         ConnectionToClient client = (ConnectionToClient) thread;
                         String name = (String) client.getInfo(client.getName());
+
                         if (name.equals("Student")) {
                             try {
-                                client.sendToClient(new MsgHandler<>(TypeMsg.TestDurationChangedManual, obj));
-
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                    }
-                }
-                break;
-
-            case StudentsTestIsApprovedToAllClients:
-                this.msg = (MsgHandler<Object>) msg;
-                this.obj = this.msg.getMsg();
-                for (Thread thread : clientThreadList) {
-                    ConnectionToClient client = (ConnectionToClient) thread;
-                    String name = client.getName();
-                    if (name.equals(obj)) {
-                        try {
-                            client.sendToClient(new MsgHandler<>(TypeMsg.PopupTestApprove, "Test is Approved"));
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                }
-                break;
-
-            case LockTestForStudentByLecturer:
-                this.msg = (MsgHandler<Object>) msg;
-                this.obj = this.msg.getMsg();
-                for (Thread thread : clientThreadList) {
-                    ConnectionToClient client = (ConnectionToClient) thread;
-                    String name = (String) client.getInfo(client.getName());
-                    if (name.equals("Student")) {
-                        if (obj instanceof TestTypeEnum) {
-                            try {
-                                if (obj.equals(TestTypeEnum.C)) {
-                                    client.sendToClient(new MsgHandler<>(TypeMsg.TestIsForcedLockedComputerized, null));
-                                } else {
-                                    client.sendToClient(new MsgHandler<>(TypeMsg.TestIsForcedLockedManual, null));
-                                }
+                                client.sendToClient(new MsgHandler<>(clientMessageType, obj));
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
@@ -226,18 +190,19 @@ public class CemsServer extends AbstractServer {
 
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
-        MsgHandler<Object> messageFromClient = (MsgHandler<Object>) msg;
         System.out.println("Message received from " + client);
+        MsgHandler<Object> messageFromClient = (MsgHandler<Object>) msg;
+
         try {
             switch (messageFromClient.getType()) {
                 case Connected:
                     updateClientList(client, "Connected");
-                    client.sendToClient(new MsgHandler<>(TypeMsg.Connected, null));
+                    client.sendToClient(new MsgHandler<>(Connected, null));
                     break;
 
                 case Disconnected:
                     updateClientList(client, "Disconnected");
-                    client.sendToClient(new MsgHandler<>(TypeMsg.Disconnected, null));
+                    client.sendToClient(new MsgHandler<>(Disconnected, null));
                     break;
 
                 case GetQuestionsBySubject:
@@ -248,14 +213,17 @@ public class CemsServer extends AbstractServer {
                             "JOIN lecturersubject ls ON obj.subject = ls.subjectID " +
                             "JOIN user u ON u.id = ls.id " +
                             "WHERE u.username = + '" + obj + "'");
-                    client.sendToClient(new MsgHandler<>(TypeMsg.QuestionsBySubjectImported, list));
+
+                    client.sendToClient(new MsgHandler<>(TypeMsg.GetQuestionsBySubjectResponse, list));
                     break;
+
                 case GetQuestionsByLecturer:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
                     ArrayList<Question> questionsByAuthorQuery = MysqlConnection.getQuestionsTable("SELECT obj.* " +
                             "FROM question obj " +
                             "WHERE obj.author = '" + obj + "'");
+
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetQuestionsByLecturerResponse, questionsByAuthorQuery));
                     break;
 
@@ -277,7 +245,7 @@ public class CemsServer extends AbstractServer {
                                 " WHERE id='" + question.getId() + "'";
 
                         MysqlConnection.update(updateQuery);
-                        client.sendToClient(new MsgHandler<>(TypeMsg.QuestionUpdated, null));
+                        client.sendToClient(new MsgHandler<>(TypeMsg.EditQuestionResponse, null));
                     }
                     break;
 
@@ -287,7 +255,7 @@ public class CemsServer extends AbstractServer {
                     this.question = (Question) obj;
                     String DeleteQuestionQuery = "DELETE FROM cems.question WHERE id='" + question.getId() + "'";
                     MysqlConnection.update(DeleteQuestionQuery);
-                    client.sendToClient(new MsgHandler<>(TypeMsg.QuestionDeleted, null));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.DeleteQuestionResponse, null));
                     break;
 
                 case TryLogin:
@@ -304,7 +272,7 @@ public class CemsServer extends AbstractServer {
                     client.sendToClient(new MsgHandler<>(TypeMsg.LoginResponse, user));
                     break;
 
-                case importSubjects:
+                case ImportSubjects:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
                     ArrayList<Subject> importSubjects = MysqlConnection.getSubjectList("SELECT * " +
@@ -312,10 +280,10 @@ public class CemsServer extends AbstractServer {
                             "JOIN lecturersubject ls ON s.subjectID = ls.subjectID " +
                             "JOIN user u ON u.id = ls.id " +
                             "WHERE u.username = '" + obj.toString() + "'");
-                    client.sendToClient(new MsgHandler<>(TypeMsg.SubjectsimportSuccess, importSubjects));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.ImportSubjectsResponse, importSubjects));
                     break;
 
-                case importCourses:
+                case ImportCourses:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
                     ArrayList<Course> importCourses = MysqlConnection.getCourseList("SELECT * " +
@@ -324,14 +292,15 @@ public class CemsServer extends AbstractServer {
                             "JOIN user AS u ON ls.id = u.id " +
                             "WHERE u.username = '" + obj.toString() + "'");
 
-                    client.sendToClient(new MsgHandler<>(TypeMsg.CoursesimportSuccess, importCourses));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.ImportCoursesResponse, importCourses));
                     break;
 
                 case GetAllQuestions:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
                     ArrayList<Question> allQuestions = MysqlConnection.getQuestionsTable("SELECT * FROM question");
-                    client.sendToClient(new MsgHandler<>(TypeMsg.allQuestionImported, allQuestions));
+
+                    client.sendToClient(new MsgHandler<>(TypeMsg.GetAllQuestionsResponse, allQuestions));
                     break;
 
                 case AddNewQuestion:
@@ -354,7 +323,7 @@ public class CemsServer extends AbstractServer {
                         MysqlConnection.update(newQuery);
                     } catch (Exception ignored) {
                     }
-                    client.sendToClient(new MsgHandler<>(TypeMsg.QuestionAddedSuccessfuly, null));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.AddNewQuestionResponse, null));
                     break;
 
                 case GetCourseTable:
@@ -448,13 +417,13 @@ public class CemsServer extends AbstractServer {
                             "JOIN lecturersubject AS ls ON tr.subject = ls.subjectid " +
                             "JOIN user AS u ON ls.id = u.id " +
                             "WHERE u.username =  + '" + obj + "'");
-                    client.sendToClient(new MsgHandler<>(TypeMsg.RequestImportedSuccessfully, listOfRequests));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.GetRequestsBySubjectResponse, listOfRequests));
                     break;
                 case ApproveRequestByHeadOfDepartment:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    sendToAllClients(new MsgHandler<>(TypeMsg.RequestIsApproved, obj));
-                    client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsApproved, null));
+                    sendToAllClients(new MsgHandler<>(RequestIsApproved, obj));
+                    client.sendToClient(new MsgHandler<>(RequestIsApproved, null));
                     break;
                 case changeTestDuration:
                     this.msg = (MsgHandler<Object>) msg;
@@ -464,7 +433,7 @@ public class CemsServer extends AbstractServer {
                     MysqlConnection.update("UPDATE test SET testDuration = testDuration + '" + Integer.parseInt(addedTime) + "' WHERE id = '" + testID + "'");
                     TestTypeEnum getType = MysqlConnection.getTestType("SELECT testType FROM test WHERE id = '" + testID + "'");
                     if (getType != null) {
-                        if (getType.equals(TestTypeEnum.C)) {
+                        if (getType.equals(C)) {
                             sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationChangedComputerizedSendToAll, Integer.parseInt(addedTime)));
                         } else {
                             sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationChangedManualSendToAll, Integer.parseInt(addedTime)));
@@ -477,13 +446,13 @@ public class CemsServer extends AbstractServer {
                     this.obj = this.msg.getMsg();
                     String deleteRequest = "DELETE FROM cems.testrequest WHERE id='" + obj + "'";
                     MysqlConnection.update(deleteRequest);
-                    client.sendToClient(new MsgHandler<>(TypeMsg.DeleteRequestCompleted, null));
+                    client.sendToClient(new MsgHandler<>(TypeMsg.DeleteRequestResponse, null));
                     break;
                 case DeclineRequestByHeadOfDepartment:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    sendToAllClients(new MsgHandler<>(TypeMsg.RequestIsDeclined, obj));
-                    client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsDeclined, null));
+                    sendToAllClients(new MsgHandler<>(RequestIsDeclined, obj));
+                    client.sendToClient(new MsgHandler<>(RequestIsDeclined, null));
                     break;
                 case GetStudentReport:
                     this.msg = (MsgHandler<Object>) msg;
@@ -816,8 +785,8 @@ public class CemsServer extends AbstractServer {
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
                     String idTofullName = "SELECT fullName FROM user WHERE id = '" + obj + "'";
-                    String fullname = MysqlConnection.getIDreturnFullname(idTofullName);
-                    sendToAllClients(new MsgHandler<>(TypeMsg.StudentsTestIsApprovedToAllClients, fullname));
+                    String fullname = MysqlConnection.getIDReturnFullname(idTofullName);
+                    sendToAllClients(new MsgHandler<>(StudentsTestIsApprovedToAllClients, fullname));
 
                     client.sendToClient(new MsgHandler<>(TypeMsg.StudentsTestIsApprovedResponse, null));
                     break;

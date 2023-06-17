@@ -29,12 +29,12 @@ import static util.TextFormatter.formatField;
 
 public class AddAQuestionController {
     public static ObservableList<Course> coursesList;
-    public ComboBox subjectComboBox;
+    public ComboBox<String> subjectComboBox;
     public String newQuestionNumber;
     public String QuestionID;
 
     @FXML
-    private ComboBox CourseComboBox;
+    private ComboBox<String> CourseComboBox;
     @FXML
     private AnchorPane header;
     @FXML
@@ -97,7 +97,7 @@ public class AddAQuestionController {
      * @param username The username of the user.
      */
     private void createSubjectCombo(String username) {
-        MsgHandler getSubject = new MsgHandler(TypeMsg.importSubjects, username);
+        MsgHandler<String> getSubject = new MsgHandler<>(TypeMsg.ImportSubjects, username);
         ClientUI.chat.accept(getSubject);
 
         List<Object> subjectObjectsList = ClientUI.chat.getSubjects();
@@ -117,8 +117,9 @@ public class AddAQuestionController {
      * @param username The username of the user.
      */
     private void createCourseCombo(String username) {
-        MsgHandler getCourses = new MsgHandler(TypeMsg.importCourses, username);
+        MsgHandler<String> getCourses = new MsgHandler<>(TypeMsg.ImportCourses, username);
         ClientUI.chat.accept(getCourses);
+
         List<Object> courseObjectsList = ClientUI.chat.getCourses();
         coursesList = FXCollections.observableArrayList((List) courseObjectsList);
         ObservableList<String> courseNames = FXCollections.observableArrayList();
@@ -177,8 +178,8 @@ public class AddAQuestionController {
      */
     @FXML
     private void saveData(ActionEvent event) {
-        String Subject = subjectComboBox.getSelectionModel().getSelectedItem().toString();
-        String Course = CourseComboBox.getSelectionModel().getSelectedItem().toString();
+        String Subject = subjectComboBox.getSelectionModel().getSelectedItem();
+        String Course = CourseComboBox.getSelectionModel().getSelectedItem();
         if (!checkValidData()) {
             return;
         }
@@ -195,7 +196,7 @@ public class AddAQuestionController {
                 answer4.getText(),
                 CorrectAnswer.getText()
         );
-        MsgHandler addNewQuestion = new MsgHandler(TypeMsg.AddNewQuestion, newQuestion);
+        MsgHandler<Question> addNewQuestion = new MsgHandler<>(TypeMsg.AddNewQuestion, newQuestion);
         ClientUI.chat.accept(addNewQuestion);
         showError.showInfoPopup("Added question successfully");
         ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
@@ -205,8 +206,8 @@ public class AddAQuestionController {
      * Sets the question ID based on the selected subject and course.
      */
     public void setQuestionID() {
-        String Subject = subjectComboBox.getSelectionModel().getSelectedItem().toString();
-        MsgHandler getQuestionTable = new MsgHandler(TypeMsg.GetAllQuestions, null);
+        String Subject = subjectComboBox.getSelectionModel().getSelectedItem();
+        MsgHandler<String> getQuestionTable = new MsgHandler(TypeMsg.GetAllQuestions, null);
         ClientUI.chat.accept(getQuestionTable);
         List<Question> questions = ((List) ClientUI.chat.getAllQuestions());
         String selectedCourse = getSelectedID(CourseComboBox, coursesList);
@@ -296,20 +297,20 @@ public class AddAQuestionController {
         LogOut.logOutToLoginScreen(event);
     }
 
-    @FXML
     /**
      * Minimizes the application window.
+     *
      * @param event The event triggered by the minimize button click.
      */
+    @FXML
     public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
 
-    @FXML
     /**
      * Closes the application.
-     * @param event The event triggered by the close button click.
      */
+    @FXML
     public void closeClient() {
         ExitButton.closeClient();
     }

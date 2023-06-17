@@ -5,7 +5,8 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" accessibleRole="HYPERLINK" cache="true" prefHeight="807.0" prefWidth="809.0"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" accessibleRole="HYPERLINK" cache="true" prefHeight="807.0"
+            prefWidth="809.0"
             styleClass="backgroundColor" stylesheets="@/util/style.css" xmlns="http://javafx.com/javafx/19"
             fx:controller="application.addAQuestionScreen.AddAQuestionController">
     <AnchorPane fx:id="header" layoutY="-4.0" prefHeight="91.0" prefWidth="808.0" styleClass="pageHeader">

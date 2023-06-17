@@ -26,7 +26,7 @@ public class ShowReportByCourseController {
     private ComboBox<String> CourseCombo;
 
     private void createCourseCombo(String username) {
-        MsgHandler getCourses = new MsgHandler(TypeMsg.importCourses, username);
+        MsgHandler getCourses = new MsgHandler(TypeMsg.ImportCourses, username);
         ClientUI.chat.accept(getCourses);
         List<Object> courseObjectsList = ClientUI.chat.getCourses();
         coursesList = FXCollections.observableArrayList((List) courseObjectsList);
