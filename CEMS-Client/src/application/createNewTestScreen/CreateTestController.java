@@ -54,13 +54,17 @@ public class CreateTestController {
     @FXML
     private ComboBox<TestTypeEnum> TypeTestCombo;
 
-
+    /**
+     * Initializes the CreateTestController.
+     * Sets up the UI components, formats text fields,
+     * displays courses in the table, and retrieves saved data.
+     */
     public void initialize() {
         ScreenManager.dragAndDrop(header);
 
         nameAuthor.setText(Client.user.getName());
-        ObservableList<TestTypeEnum> Types = FXCollections.observableArrayList(TestTypeEnum.C,TestTypeEnum.M); //may's change
-        TypeTestCombo.setItems(Types);//may's change
+        ObservableList<TestTypeEnum> Types = FXCollections.observableArrayList(TestTypeEnum.C,TestTypeEnum.M);
+        TypeTestCombo.setItems(Types);
         formatField(yearField, true, 4);
         formatField(testDurationField, true, 4);
         formatField(semesterTextField, false, 1);
@@ -70,6 +74,11 @@ public class CreateTestController {
         retrieveSavedData();
     }
 
+    /**
+     * Displays the list of courses in the table view.
+     * Retrieves the courses from the server and populates the table.
+     * Sets up event handling for selecting a course.
+     */
     private void displayCourses() {
         MsgHandler getTableCourse = new MsgHandler(TypeMsg.ImportCourses, Client.user.getUserName());
         ClientUI.chat.accept(getTableCourse);
@@ -78,7 +87,6 @@ public class CreateTestController {
         ObservableList<Course> courses = FXCollections.observableArrayList((List) courseObjectsList);
 
         ObservableList<String> columnList = FXCollections.observableArrayList();
-
         columnList.addAll("Course Name", "Subject Name");
         TableManager.createTable(courseTableView, columnList);
         TableManager.importData(courseTableView, courses);
@@ -97,7 +105,7 @@ public class CreateTestController {
     }
 
     /**
-     * sets the initial values of the text fields based on the selected course
+     * Sets the initial values of the text fields based on the selected course.
      */
     public void setTestData() {
         courseIDField.setText(rowData.getCourseID());
@@ -115,15 +123,15 @@ public class CreateTestController {
     }
 
     /**
-     * finds the first free test number in the given table
-     * by scanning the table from its beginning
+     * Finds the first free test number in the given table
+     * by scanning the table from its beginning.
      *
      * @param testTableList the table that will be scanned
      * @return the free index
      */
     public int findFirstFreeIndex(List<Object> testTableList) {
 
-        //if the test table is empty
+        // If the test table is empty
         if (testTableList.isEmpty()) {
             return 1;
         }
@@ -146,7 +154,13 @@ public class CreateTestController {
         return maxIndex + 1;
     }
 
-
+    /**
+     * Corrects the test number format by padding with leading zeros if necessary.
+     *
+     * @param newTestIndex the test index to format
+     * @return the formatted test number
+     * @throws IllegalArgumentException if the test number is out of bounds
+     */
     public String correctTestNumber(int newTestIndex) {
 
         if (newTestIndex >= 0 && newTestIndex < 100) {
@@ -158,6 +172,10 @@ public class CreateTestController {
         throw new IllegalArgumentException("Test number is out of bounds: " + newTestIndex);
     }
 
+    /**
+     * Saves the exam details and performs validation checks.
+     * Displays an error popup if any required field is empty.
+     */
     @FXML
     public void SaveExam() {
         if (testDurationField.getText().isEmpty()) {
@@ -169,8 +187,7 @@ public class CreateTestController {
     }
 
     /**
-     * retrieves the saved data from stateManagement and updates the fields
-     * on the screen
+     * Retrieves the saved data from stateManagement and updates the fields on the screen.
      */
     public void retrieveSavedData() {
         stateManagement = StateManagement.getInstance();
@@ -180,7 +197,6 @@ public class CreateTestController {
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).getCourseID().equals(stateManagement.getCourse().getCourseID()))
                     indexInTable = i;
-
             }
             rowData = stateManagement.course;
             courseTableView.getSelectionModel().select(indexInTable);
@@ -192,17 +208,27 @@ public class CreateTestController {
             yearField.setText(stateManagement.getYear());
             sessionTextField.setText(stateManagement.getSession());
             semesterTextField.setText(stateManagement.getSemester());
-            TypeTestCombo.valueProperty().set(stateManagement.getTestType()); //returns null
+            TypeTestCombo.valueProperty().set(stateManagement.getTestType());
         }
     }
 
-
+    /**
+     * Navigates back to the previous screen.
+     *
+     * @param event the action event
+     */
     public void BackToMenu(ActionEvent event) {
         StateManagement.resetInstance();
         ScreenManager.goToNewScreen(event, stateManagement.getPreviousScreenPath());
     }
 
-
+    /**
+     * Navigates to the pick questions screen.
+     * Validates the input fields and sets the data in the stateManagement object.
+     * Displays an error popup if any required field is empty.
+     *
+     * @param event the action event
+     */
     public void goToPickQuestions(ActionEvent event) {
         stateManagement = StateManagement.getInstance();
 
@@ -210,7 +236,7 @@ public class CreateTestController {
             stateManagement.setSession(sessionTextField.getText());
         } else
             stateManagement.setSession("");
-        if (!TypeTestCombo.getSelectionModel().isEmpty()) { //may's change
+        if (!TypeTestCombo.getSelectionModel().isEmpty()) {
             stateManagement.setTestType(TypeTestCombo.getValue());
         } else
             stateManagement.setTestType(null);
@@ -238,15 +264,27 @@ public class CreateTestController {
         }
     }
 
-
+    /**
+     * Logs out the user and navigates to the login screen.
+     *
+     * @param event the action event
+     */
     public void LogOut(ActionEvent event) {
         LogOut.logOutToLoginScreen(event);
     }
 
+    /**
+     * Closes the client application.
+     */
     public void closeClient() {
         ExitButton.closeClient();
     }
 
+    /**
+     * Minimizes the application window.
+     *
+     * @param event the action event
+     */
     @FXML
     public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);

@@ -148,11 +148,18 @@ public class NotesController {
             ClientUI.chat.accept(addNewTestQuestion);
         }
     }
+    /**
+     * Closes the application.
+     */
     @FXML
     void closeClient() {
         ExitButton.closeClient();
     }
-
+    /**
+     * Minimizes the application window.
+     *
+     * @param event The event triggered by the minimize button click.
+     */
     @FXML
     void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);

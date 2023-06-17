@@ -29,12 +29,25 @@ public class EnterCodePopUpController {
     private TestTypeEnum testType;
     private boolean NotAllowed;
 
+    /**
+     * Initializes the controller.
+     * Enables dragging and dropping of the application window using the header pane.
+     * Sets the full name of the user.
+     */
     public void initialize() {
-        // Enables dragging and dropping of the application window using the header pane
         ScreenManager.dragAndDrop(header);
         fullNameText.setText(Client.user.getName());
     }
 
+    /**
+     * Handles the action of entering the test code.
+     * Validates the code and checks if the test exists and if the student is allowed to take the test.
+     * If Student has already taken the test, an error appears
+     * If the test's code is invalid, an error appears
+     * Based on the test type,Manual or Computerized - navigates to the appropriate screen.
+     *
+     * @param event The action event triggered by the Enter Code button.
+     */
     @FXML
     public void EnterCode(ActionEvent event) {
         String codet = CodeText.getText();
@@ -47,7 +60,6 @@ public class EnterCodePopUpController {
             return;
         }
 
-        // Code is valid
         boolean testExists = false;
         MsgHandler<String> getActiveTestTable = new MsgHandler<>(TypeMsg.GetActiveTests, null);
         ClientUI.chat.accept(getActiveTestTable);
@@ -69,6 +81,7 @@ public class EnterCodePopUpController {
                 }
             }
         }
+
         MsgHandler<String> getTable = new MsgHandler<>(TypeMsg.GetStudentsTests, Client.user.getId());
         ClientUI.chat.accept(getTable);
 
@@ -79,6 +92,7 @@ public class EnterCodePopUpController {
                 break;
             }
         }
+
         if (NotAllowed) {
             showError.showErrorPopup("Student has already attended the test!");
             ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
@@ -89,24 +103,30 @@ public class EnterCodePopUpController {
                     break;
                 case M:
                     ScreenManager.goToNewScreen(event, PathConstants.StartManualTestPath);
+                    break;
             }
-
         } else {
-            // Test with the given code does not exist
-            // Handle the case accordingly
             showError.showErrorPopup("Test Not found !");
         }
     }
 
+    /**
+     * Closes the client application and navigates back to the student's main menu.
+     *
+     * @param event The action event triggered by the Close button.
+     */
     @FXML
     private void closeClient(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
     }
 
-
+    /**
+     * Minimizes the application window.
+     *
+     * @param event The action event triggered by the Minimize button.
+     */
     @FXML
     public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
 }
-

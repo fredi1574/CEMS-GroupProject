@@ -53,6 +53,9 @@ public class PickQuestionsController {
     @FXML
     private TableView<TestQuestion> selectedQuestionsTableView;
 
+    /**
+     * Initializes the controller.
+     */
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         nameAuthor.setText(Client.user.getName());
@@ -67,7 +70,7 @@ public class PickQuestionsController {
     }
 
     /**
-     * displays the table containing every question in the database relevant to the lecturer's subject
+     * Displays the table containing every question in the database relevant to the lecturer's subject.
      */
     private void displayQuestionsDBTable() {
         MsgHandler questionsDBTable = new MsgHandler(TypeMsg.GetQuestionsByLecturer, Client.user.getFullName());
@@ -75,17 +78,17 @@ public class PickQuestionsController {
         // creates the question table
         ObservableList<Question> questions = FXCollections.observableArrayList((List) ClientUI.chat.GetQuestionsBySubject());
 
-        //creates a table of questions the author can see
+        // creates a table of questions the author can see
         ObservableList<String> questionDBTableColumns = FXCollections.observableArrayList();
         questionDBTableColumns.addAll("Question Number", "ID", "Subject", "Course Name", "Question Text", "Author");
         TableManager.createTable(questionDBTableView, questionDBTableColumns);
         TableManager.importData(questionDBTableView, questions);
 
-        //resizes the columns of the table
+        // resizes the columns of the table
         double[] multipliers = {0.15, 0.1, 0.1, 0.13, 0.35, 0.162};
         TableManager.resizeColumns(questionDBTableView, multipliers);
 
-        //makes the elements in the database questions table clickable
+        // makes the elements in the database questions table clickable
         questionDBTableView.setOnMouseClicked((e) -> rowData = questionDBTableView.getSelectionModel().getSelectedItem());
 
         FilteredList<Question> filteredData = new FilteredList<>(questions, b -> true);
@@ -96,36 +99,35 @@ public class PickQuestionsController {
     }
 
     /**
-     * displays the table containing every question selected for the current test
+     * Displays the table containing every question selected for the current test.
      */
     private void displaySelectedQuestionsTable() {
-        //creates a table of selected questions
+        // creates a table of selected questions
         ObservableList<String> selectedQuestionsTableColumns = FXCollections.observableArrayList();
         selectedQuestionsTableColumns.addAll("Question Number", "Question ID", "Subject", "Course Name", "Question Text", "Author", "Points");
         TableManager.createTable(selectedQuestionsTableView, selectedQuestionsTableColumns);
         selectedQuestions = selectedQuestionsTableView.getItems();
 
-        //resizes the columns of the table
+        // resizes the columns of the table
         double[] multipliers = {0.15, 0.1, 0.1, 0.13, 0.162, 0.162, 0.182};
         TableManager.resizeColumns(selectedQuestionsTableView, multipliers);
 
-        //reloads the selected questions table state if questions were added to this test
+        // reloads the selected questions table state if questions were added to this test
         if (stateManagement.getTestQuestions().size() != 0) {
             //totalRemainingPoints = stateManagment.getTotalRemainingPoints();
             TableManager.importData(selectedQuestionsTableView, stateManagement.getTestQuestions());
         }
 
-        //makes the elements in the selected questions table clickable
+        // makes the elements in the selected questions table clickable
         selectedQuestionsTableView.setOnMouseClicked((e) -> rowDataForQuestionsSelected = selectedQuestionsTableView.getSelectionModel().getSelectedItem());
     }
 
     /**
-     * searches for the given question in the SelectedQuestions table
+     * Searches for the given question in the SelectedQuestions table.
      *
      * @param question the question object we wish to find in selectedQuestionsTableView
      * @return true if the question was found, false otherwise
      */
-
     public boolean searchInSelectedQuestionsTable(Question question) {
         for (TestQuestion item : selectedQuestionsTableView.getItems()) {
             // Compare the search term with the values in each cell of the current row
@@ -136,9 +138,8 @@ public class PickQuestionsController {
         return false;
     }
 
-
     /**
-     * adds the selected question to the selected questions table
+     * Adds the selected question to the selected questions table.
      *
      * @param event1 the event that triggered the method
      */
@@ -175,9 +176,12 @@ public class PickQuestionsController {
             TableManager.importData(selectedQuestionsTableView, selectedQuestions);
         } catch (Exception ignored) {
         }
-        rowData = null; //resets the selected row value after the current one has been added
+        rowData = null; // resets the selected row value after the current one has been added
     }
 
+    /**
+     * Sets the data for the TestQuestion object based on the selected question and points.
+     */
     public void setTestQuestionData() {
         testQuestions = new TestQuestion();
         testQuestions.setQuestion(rowData);
@@ -191,6 +195,9 @@ public class PickQuestionsController {
         testQuestions.setTestID(stateManagement.getTestID());
     }
 
+    /**
+     * Deselects the selected question in the questionDBTableView.
+     */
     public void Deselect() {
         Question desSelected = questionDBTableView.getSelectionModel().getSelectedItem();
         if (desSelected == null)
@@ -201,14 +208,13 @@ public class PickQuestionsController {
         }
     }
 
-
     /**
-     * removes the selected question from the selected questions table
+     * Removes the selected question from the selected questions table.
      */
     public void removeSelectedQuestion() {
         ObservableList<TestQuestion> data = selectedQuestionsTableView.getItems();
         if (data == null) {
-            showError.showErrorPopup("You Dont Have Any Questions to Remove");
+            showError.showErrorPopup("You Don't Have Any Questions to Remove");
         } else if (rowDataForQuestionsSelected != null) {
             selectedQuestionsTableView.getItems().remove(rowDataForQuestionsSelected);
             stateManagement.getTestQuestions().remove(rowDataForQuestionsSelected);
@@ -218,13 +224,13 @@ public class PickQuestionsController {
             rowData = null;
 
         } else {
-            showError.showErrorPopup("Select Questions To Remove");
+            showError.showErrorPopup("Select Questions to Remove");
         }
         rowDataForQuestionsSelected = null;
     }
 
     /**
-     * navigates to the third stage of test creation
+     * Navigates to the third stage of test creation.
      *
      * @param event the event that triggered the method (clicking the add comments button)
      */
@@ -235,7 +241,7 @@ public class PickQuestionsController {
     }
 
     /**
-     * navigates back to the first stage of test creation
+     * Navigates back to the first stage of test creation.
      *
      * @param event the event that triggered the method (clicking the back button)
      */
@@ -246,26 +252,39 @@ public class PickQuestionsController {
     }
 
     /**
-     * saves the elements of the selected questions table (used when switching screens)
+     * Saves the elements of the selected questions table (used when switching screens).
      */
     public void saveTestQuestionsTable() {
         ObservableList<TestQuestion> selectedQuestionsList = selectedQuestionsTableView.getItems();
         ObservableList<TestQuestion> testQuestionsState = stateManagement.getTestQuestions();
 
-        //selected questions that are already in the list are filtered out to avoid being added again
+        // Selected questions that are already in the list are filtered out to avoid being added again
         testQuestionsState.addAll(selectedQuestionsList.filtered(question -> !testQuestionsState.contains(question)));
     }
 
-    public void LogOut(ActionEvent event1) {
-        LogOut.logOutToLoginScreen(event1);
+    /**
+     * Logs out the user and navigates back to the login screen.
+     *
+     * @param event the event that triggered the method (clicking the logout button)
+     */
+    public void LogOut(ActionEvent event) {
+        LogOut.logOutToLoginScreen(event);
     }
 
+    /**
+     * Closes the client application.
+     */
     public void closeClient() {
         ExitButton.closeClient();
     }
 
+    /**
+     * Minimizes the application window.
+     *
+     * @param event the event that triggered the method (clicking the minimize button)
+     */
     @FXML
-    public void minimizeWindow(ActionEvent event1) {
-        MinimizeButton.minimizeWindow(event1);
+    public void minimizeWindow(ActionEvent event) {
+        MinimizeButton.minimizeWindow(event);
     }
 }

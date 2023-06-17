@@ -80,7 +80,7 @@ public class AddAQuestionController {
     }
 
     /**
-     * Checks if both subject and course fields are selected,
+     * Checks if both subject and course combo-boxes are selected,
      * and executes actions accordingly.
      */
     private void checkFieldsAndExecuteActions() {
@@ -92,7 +92,7 @@ public class AddAQuestionController {
     }
 
     /**
-     * Retrieves subject information from the server and populates the subject combo box.
+     * Creates Subject combobox according to the data in the DB
      *
      * @param username The username of the user.
      */
@@ -112,7 +112,7 @@ public class AddAQuestionController {
     }
 
     /**
-     * Retrieves course information from the server and populates the course combo box.
+     * Creates Course combobox according to the data in the DB
      *
      * @param username The username of the user.
      */
