@@ -21,7 +21,11 @@ import javafx.stage.Stage;
 import util.*;
 
 import java.util.List;
-
+/**
+ * The controller class for the manage questions screen.
+ * It provides functionality to retrieve and populate questions from the server in a table.
+ * Additionally, it allows for editing and updating of individual questions.
+ */
 public class ManageQuestionsController {
 
     public static ManageQuestionsController ManageQuestionsControl;
@@ -48,6 +52,14 @@ public class ManageQuestionsController {
 
         displayQuestions();
     }
+    /**
+
+     Displays the questions in a table.
+
+     It retrieves the questions from the server and populates the table with the data.
+
+     It also sets up functionality such as double-clicking on a question to navigate to the update question screen.
+     */
 
     private void displayQuestions() {
         MsgHandler<String> getTable = new MsgHandler<>(TypeMsg.GetQuestionsByLecturer, Client.user.getFullName());
@@ -72,6 +84,9 @@ public class ManageQuestionsController {
         sortedData.comparatorProperty().bind(manageQuestionsTableView.comparatorProperty());
         manageQuestionsTableView.setItems(sortedData);
     }
+    /**
+     *Calling method setFunctions
+     */
 
     @FXML
     public void callSetFunctions(){
@@ -118,7 +133,7 @@ public class ManageQuestionsController {
     }
 
     /**
-     * Reloads the manage questions page.
+     * Reloads the page.
      */
     private void reloadPage() {
         Stage currentStage = (Stage) deleteBtn.getScene().getWindow();

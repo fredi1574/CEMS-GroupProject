@@ -22,7 +22,10 @@ import Client.ExitButton;
 import Client.LogOut;
 
 import java.util.List;
-
+/**
+ * Controller for the View Test Student screen.
+ * This screen allows students to view their approved tests and apply filtering based on year, semester, and course.
+ */
 public class ViewTestStudentController {
 
     public ObservableList<StudentTest> tests;
@@ -44,7 +47,11 @@ public class ViewTestStudentController {
     private ComboBox<String> courseComboBox;
 
     private FilteredList<StudentTest> filteredData;
-
+    /**
+     * Initializes the controller.
+     * This method is automatically called after the FXML file has been loaded.
+     * It initializes the UI components, retrieves data from the server, and sets up filtering for the table.
+     */
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getName());
@@ -69,7 +76,9 @@ public class ViewTestStudentController {
 
         testsTableView.setItems(filteredData);
     }
-
+    /**
+     * Creates the course combo box and populates it with the available courses for the student.
+     */
     private void createCourseComboBox() {
         MsgHandler getCourse = new MsgHandler(TypeMsg.GetStudentCourses, Client.user.getId());
         ClientUI.chat.accept(getCourse);
@@ -77,6 +86,10 @@ public class ViewTestStudentController {
         ObservableList<String> courseObjectsList = FXCollections.observableArrayList((List) ClientUI.chat.getCourses());
         courseComboBox.setItems(courseObjectsList);
     }
+
+    /**
+     * Binds data to the year and semester combo boxes.
+     */
 
     public void bindDataToComboBoxes() {
         ObservableList<String> yearList = FXCollections.observableArrayList("2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015");
@@ -86,13 +99,18 @@ public class ViewTestStudentController {
         yearComboBox.setItems(yearList);
         semesterComboBox.setItems(semesterList);
     }
-
+    /**
+     * Adds filtering functionality to the combo boxes.
+     */
     private void addFiltering() {
         yearComboBox.valueProperty().addListener((observable, oldValue, newValue) -> filterTable());
         semesterComboBox.valueProperty().addListener((observable, oldValue, newValue) -> filterTable());
         courseComboBox.valueProperty().addListener((observable, oldValue, newValue) -> filterTable());
     }
 
+    /**
+     * Filters the table based on the selected criteria.
+     */
     private void filterTable() {
         String selectedYear = yearComboBox.getValue();
         String selectedSemester = semesterComboBox.getValue();
@@ -110,7 +128,11 @@ public class ViewTestStudentController {
         sortedData.comparatorProperty().bind(testsTableView.comparatorProperty());
         testsTableView.setItems(sortedData);
     }
-
+    /**
+     * Builds the table with the provided student tests.
+     *
+     * @param tests The list of student tests to display in the table.
+     */
     public void buildTable(ObservableList<StudentTest> tests) {
         ObservableList<String> columns = FXCollections.observableArrayList();
         columns.addAll("Year", "Semester", "Session", "Course", "Score");
@@ -122,7 +144,11 @@ public class ViewTestStudentController {
         double[] multipliers = {0.1, 0.1, 0.1, 0.594, 0.1};
         TableManager.resizeColumns(testsTableView, multipliers);
     }
-
+    /**
+     * Opens the details view for the selected test.
+     *
+     * @param ignored The parameter is ignored.
+     */
     public void viewTest(String ignored) {
         StudentTest rowData = testsTableView.getSelectionModel().getSelectedItem();
 
@@ -135,22 +161,37 @@ public class ViewTestStudentController {
 
         controller.setTest(rowData);
     }
-
+    /**
+     * Logs out the user and navigates to the login screen.
+     *
+     * @param event The action event triggered by the logout button.
+     */
     @FXML
     public void LogOut(ActionEvent event) {
         LogOut.logOutToLoginScreen(event);
     }
-
+    /**
+     * Closes the client application.
+     * This method is called when the user clicks the close button.
+     */
     @FXML
     void closeClient() {
         ExitButton.closeClient();
     }
-
+    /**
+     * Navigates to the previous screen.
+     *
+     * @param event The action event triggered by the back button.
+     */
     @FXML
     public void goBackToPreviousScreen(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
     }
-
+    /**
+     * Minimizes the window.
+     *
+     * @param event The action event triggered by the minimize button.
+     */
     @FXML
     void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);

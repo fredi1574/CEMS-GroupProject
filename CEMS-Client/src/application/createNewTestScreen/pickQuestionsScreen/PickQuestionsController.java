@@ -25,7 +25,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static util.TextFormatter.formatField;
-
+/**
+ * The `PickQuestionsController` class is a controller that manages the "Pick Questions" screen in a test creation application.
+ * This screen allows the user (lecturer) to select questions from a database and add them to a test. The screen displays two tables:
+ * one showing the available questions from the database, and the other displaying the selected questions for the current test.
+ * The class initializes and manages JavaFX components such as text fields, buttons, and table views.
+ */
 public class PickQuestionsController {
     public ArrayList<TestQuestion> questions;
     public StateManagement stateManagement;

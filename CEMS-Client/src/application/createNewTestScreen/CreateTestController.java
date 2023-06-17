@@ -24,7 +24,10 @@ import java.util.List;
 import java.util.Set;
 
 import static util.TextFormatter.formatField;
-
+/**
+ * Controller for the "Create Test" screen.
+ * Manages test creation by setting up test initial details.
+ */
 @SuppressWarnings("unchecked")
 public class CreateTestController {
     public StateManagement stateManagement;

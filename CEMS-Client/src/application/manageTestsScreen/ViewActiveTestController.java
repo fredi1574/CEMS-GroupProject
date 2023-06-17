@@ -23,6 +23,11 @@ import util.*;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Handles the functionality of the active test screen
+ * Displays information about active test
+ * In this screen the lecturer can lock a test and send a time extension request to the Head of Department
+ */
 public class ViewActiveTestController {
     static boolean requestSent;
     @FXML
@@ -48,6 +53,12 @@ public class ViewActiveTestController {
     private Timeline timer;
     private int remainingSeconds;
 
+    /**
+     * Initializes the UI components and sets the relevant field values based on the state management data.
+     * It sets up the drag-and-drop functionality for the header,
+     * retrieves the state management instance,
+     * and populates the text fields and labels with the corresponding data.
+     */
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         stateManagement = StateManagement.getInstance();
@@ -61,49 +72,6 @@ public class ViewActiveTestController {
         testDateTextField.setText(stateManagement.getCurrentActivetest().getTestDate());
         testDurationTextField.setText(stateManagement.getTestDuration());
         startingTimeTextField.setText(stateManagement.getCurrentActivetest().getStartingTime());
-    }
-
-    /**
-     * calculates the remaining time for the test based on the test's start time and duration
-     */
-    private void updateRemainingTestTime() {
-        int testDurationInSeconds = Integer.parseInt(stateManagement.getTestDuration()) * 60;
-
-        // Calculate the remaining seconds based on the current time and the test's starting time
-        LocalTime startTime = LocalTime.parse(stateManagement.getCurrentActivetest().getStartingTime());
-        LocalTime endTime = startTime.plus(testDurationInSeconds, ChronoUnit.SECONDS);
-        LocalTime currentTime = LocalTime.now();
-        remainingSeconds = (int) ChronoUnit.SECONDS.between(currentTime, endTime);
-        if (remainingSeconds < 0) {
-            remainingSeconds = 0;
-        }
-    }
-
-    /**
-     * updates the timer object to correctly display a test's remaining time
-     */
-    private void startTimer() {
-        int totalSeconds = remainingSeconds;
-        final int[] seconds = {totalSeconds};  // Create a final array to hold the remaining seconds
-
-        timer = new Timeline(
-                new KeyFrame(Duration.seconds(1), event -> {
-                    seconds[0]--;  // Decrement the remaining seconds
-                    if (seconds[0] <= 0) {
-                        // Timer has ended, perform necessary actions
-                        timer.stop();
-                        // Additional logic...
-                    } else {
-                        // Update the timer display on the screen
-                        timeLeftLabel.setText(formatTime(seconds[0]));
-                    }
-                })
-        );
-        timer.setCycleCount(Animation.INDEFINITE);
-        timer.play();
-
-        // Update the timer label immediately
-        timeLeftLabel.setText(formatTime(seconds[0]));
     }
 
     /**
@@ -122,12 +90,6 @@ public class ViewActiveTestController {
     /**
      * locks the test for all clients - the timer is stopped, and the timeLeft value
      * in the activeTest table in the DB is updated
-     * @param actionEvent the event that triggered the method
-     */
-
-    /**
-     * locks the test for all clients - the timer is stopped, and the timeLeft value
-     * in the activeTest table in the DB is updated
      *
      * @param actionEvent the event that triggered the method
      */
@@ -142,6 +104,10 @@ public class ViewActiveTestController {
 
     }
 
+    /**
+     * Displays a pop-up indicating that a time change request has been declined.
+     * It sets the appropriate information in the pop-up controller and shows the pop-up screen.
+     */
     public void showRequestDeclinedPopUp() {
         Platform.runLater(() -> {
             smsEmailPopUpController.SetInfoField("Time change request was declined", Client.user.getFullName(), Client.user.getEmail(),
@@ -150,6 +116,10 @@ public class ViewActiveTestController {
         });
     }
 
+    /**
+     * Displays a pop-up indicating that a time change request has been approved.
+     * It sets the appropriate information in the pop-up controller and shows the pop-up screen.
+     */
     public void showRequestApprovedPopUp() {
         Platform.runLater(() -> {
             smsEmailPopUpController.SetInfoField("Time change request was approved", Client.user.getFullName(), Client.user.getEmail(),
@@ -158,6 +128,11 @@ public class ViewActiveTestController {
         });
     }
 
+    /**
+     * Sends a request for extra time for a test.
+     * It creates a TestRequestForApproval object with the necessary information,
+     * sends the request to the server, and displays a notification to the user.
+     */
     @FXML
     public void sendExtraTimeRequest() {
         TestRequestForApproval request = new TestRequestForApproval(testIdTextField.getText(), stateManagement.course.getSubjectID(),
@@ -167,25 +142,33 @@ public class ViewActiveTestController {
         showError.showInfoPopup("Request was sent to the Head Of Department");
         //extraTimeBtn.setDisable(true);
         requestSent = true;
-
-
     }
 
+    /**
+     * Logs out the current user and navigates back to the login screen.
+     *
+     * @param event The action event triggered by the "Logout" button.
+     */
     public void LogOut(ActionEvent event) {
         LogOut.logOutToLoginScreen(event);
     }
 
+    /**
+     * Navigates back to the manage tests screen.
+     * It resets the state management instance and navigates to the specified screen.
+     *
+     * @param event The action event triggered by the "Back" button.
+     */
     public void back(ActionEvent event) {
         StateManagement.resetInstance();
         ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
         //ExitButton.closePopUp(event);
     }
-
-    @FXML
-    private void closeClient() {
-        ExitButton.closeClient();
-    }
-
+    /**
+     * Minimizes the client application window.
+     *
+     * @param event The action event triggered by the "Minimize" button.
+     */
     @FXML
     public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);

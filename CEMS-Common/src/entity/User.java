@@ -1,8 +1,9 @@
 package entity;
 
-
 import java.io.Serializable;
-
+/**
+ * Represents a user.
+ */
 public class User implements Serializable {
 
     final String id;
@@ -15,17 +16,18 @@ public class User implements Serializable {
     final String phone;
     final int isLoggedIn;
 
-
     /**
      * Constructs a User object with the specified parameters.
      *
-     * @param id        the ID of the user
-     * @param firstName the first name of the user
-     * @param lastName  the last name of the user
-     * @param userName  the username of the user
-     * @param password  the password of the user
-     * @param email     the email address of the user
-     * @param phone     the phone number of the user
+     * @param id        The ID of the user.
+     * @param firstName The first name of the user.
+     * @param lastName  The last name of the user.
+     * @param userName  The username of the user.
+     * @param password  The password of the user.
+     * @param email     The email address of the user.
+     * @param role      The role of the user.
+     * @param isLoggedIn The login status of the user.
+     * @param phone     The phone number of the user.
      */
     public User(String id, String firstName, String lastName, String userName, String password, String email, String role, int isLoggedIn, String phone) {
         this.id = id;
@@ -39,58 +41,102 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    // Getters and Setters
-
     /**
-     * Returns the ID of the user.
+     * Retrieves the ID of the user.
      *
-     * @return the ID of the user
+     * @return The ID of the user.
      */
     public String getId() {
         return id;
     }
 
+    /**
+     * Retrieves the first name of the user.
+     *
+     * @return The first name of the user.
+     */
     public String getName() {
         return firstName;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public int getIsLoggedIn() {
-        return isLoggedIn;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
+    /**
+     * Retrieves the last name of the user.
+     *
+     * @return The last name of the user.
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * Retrieves the full name of the user.
+     *
+     * @return The full name of the user.
+     */
     public String getFullName() {
         return firstName + " " + lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
+    /**
+     * Retrieves the username of the user.
+     *
+     * @return The username of the user.
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     * Retrieves the password of the user.
+     *
+     * @return The password of the user.
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Retrieves the email address of the user.
+     *
+     * @return The email address of the user.
+     */
+    public String getEmail() {
+        return email;
+    }
 
+    /**
+     * Retrieves the role of the user.
+     *
+     * @return The role of the user.
+     */
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     * Retrieves the phone number of the user.
+     *
+     * @return The phone number of the user.
+     */
+    public String getPhone() {
+        return phone;
+    }
+
+    /**
+     * Retrieves the login status of the user.
+     *
+     * @return The login status of the user.
+     */
+    public int getIsLoggedIn() {
+        return isLoggedIn;
+    }
+
+    /**
+     * Checks if this User object is equal to another object.
+     *
+     * @param obj The object to compare to.
+     * @return true if the objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof User) {

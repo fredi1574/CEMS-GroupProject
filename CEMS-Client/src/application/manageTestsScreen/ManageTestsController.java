@@ -26,7 +26,10 @@ import java.util.UUID;
 import Client.ClientUI;
 
 /**
- * handles the functionality of the manage tests screen
+ * Handles the functionality of the manage tests screen
+ * Displays table of tests made by the lecturer.
+ * In this screen the lecturer can Activate tests,Delete and edit them.
+ * Once a test is locked, The lecturer can approve the student's tests from the approvals table.
  */
 public class ManageTestsController {
     public TextField searchField;
@@ -48,7 +51,13 @@ public class ManageTestsController {
     @FXML
     private Text usernameText;
 
-
+    /**
+     * Initializes the UI components and displays the relevant tables.
+     * It sets up the drag-and-drop functionality for the header,
+     * sets the username text to the current user's name,
+     * initializes the state management instance,
+     * and displays the tables for the database tests, approval tests, and active tests.
+     */
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getName());
@@ -100,7 +109,7 @@ public class ManageTestsController {
         MsgHandler<String> getTestForApproval = new MsgHandler<>(TypeMsg.GetTestForApproval, fullName);
         ClientUI.chat.accept(getTestForApproval);
 
-        ObservableList<TestForApproval> studentTests = FXCollections.observableArrayList((List) ClientUI.chat.getTestForApproval());
+        ObservableList<TestForApproval> studentTests = FXCollections.observableArrayList((List) ClientUI.chat.getTestsForApproval());
         ObservableList<TestForApproval> filteredTests = FXCollections.observableArrayList();
 
         //filter out tests that were already approved
@@ -128,7 +137,7 @@ public class ManageTestsController {
         MsgHandler getActiveTestsTable = new MsgHandler(TypeMsg.GetActiveTestsByLecturer, fullName);
         ClientUI.chat.accept(getActiveTestsTable);
 
-        ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.GetActiveTestsByLecturer());
+        ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTestsByLecturer());
         //ObservableList<ActiveTest> userActiveTests = TableManager.filterByAuthor(activeTests,fullName);
 
         ObservableList<String> columns = FXCollections.observableArrayList();
@@ -345,25 +354,43 @@ public class ManageTestsController {
         ScreenManager.goToNewScreen(actionEvent, PathConstants.viewTestAwaitingApprovalPath);
     }
 
+    /**
+     * Logs out the current user and navigates back to the login screen.
+     *
+     * @param event The action event triggered by the "Logout" button.
+     */
     public void LogOut(ActionEvent event) {
         StateManagement.resetInstance();
         LogOut.logOutToLoginScreen(event);
     }
 
-
+    /**
+     * Navigates back to the main menu screen.
+     *
+     * @param event The action event triggered by the "Back" button.
+     */
     public void back(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.mainMenuPath);
     }
 
+    /**
+     * Closes the client application.
+     */
     @FXML
     private void closeClient() {
         ExitButton.closeClient();
     }
 
+    /**
+     * Minimizes the client application window.
+     *
+     * @param event The action event triggered by the "Minimize" button.
+     */
     @FXML
     public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
+
 
 
 }

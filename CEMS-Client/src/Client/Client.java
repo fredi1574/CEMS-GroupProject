@@ -21,7 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-//test
+/**
+ * The Client class represents a client that connects to a server and communicates with it.
+ * It extends the AbstractClient class and overrides the handleMessageFromServer method.
+ */
 public class Client extends AbstractClient {
     public List<Object> studentTests;
     private final ChatIF clientUI;
@@ -58,12 +61,22 @@ public class Client extends AbstractClient {
     public static final ManualTestController manualTest = new ManualTestController();
 
 
-    //constructor
+    /**
+     * Constructs a Client object.
+     *
+     * @param host      The host name of the server
+     * @param port      The port number of the server
+     * @param clientUI  The user interface for the client
+     */
     public Client(String host, int port, ChatIF clientUI) {
         super(host, port);
         this.clientUI = clientUI;
     }
-
+    /**
+     * Handles the message received from the server.
+     *
+     * @param msg The message received from the server
+     */
     @Override
     @SuppressWarnings("unchecked")
     protected void handleMessageFromServer(Object msg) {
@@ -238,6 +251,12 @@ public class Client extends AbstractClient {
                 break;
         }
     }
+    /**
+     * Handles a message received from the client's user interface.
+     * This method sends the message to the server and waits for a response.
+     *
+     * @param message The message to be sent to the server.
+     */
 
     public void handleMessageFromClientUI(Object message) {
         try {
@@ -258,6 +277,10 @@ public class Client extends AbstractClient {
         }
     }
 
+    /**
+     * Closes the connection with the server and terminates the client.
+     * This method should be called when the client is quitting or no longer needs to communicate with the server.
+     */
     public void quit() {
         try {
             closeConnection();

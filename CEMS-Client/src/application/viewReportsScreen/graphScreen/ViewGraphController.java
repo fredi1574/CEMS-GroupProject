@@ -17,7 +17,10 @@ import util.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-
+/**
+ * Controller class for the View Graph screen for lecturer report.
+ * Displays a bar chart representing the report data for a specific test.
+ */
 public class ViewGraphController {
     @FXML
     private Text finishedText;
@@ -61,9 +64,11 @@ public class ViewGraphController {
     private static XYChart.Series<String, Number> series;
     private static ObservableList<StudentTest> infoAboutTest;
 
-    //todo: add the value of each bar above it
+    /**
+     * Initializes the View Graph screen.
+     * Sets up the UI components and displays the calculated report data.
+     */
     public void initialize() {
-
         ScreenManager.dragAndDrop(header);
         ArrayList<StudentTest> SpecificTestInfo = new ArrayList<>();
         for (StudentTest test : infoAboutTest) {
@@ -93,18 +98,50 @@ public class ViewGraphController {
         ForcedFinishedText.setText(AdditionalInformation.get(2));
     }
 
+    /**
+     * Logs out the user and navigates back to the login screen.
+     *
+     * @param event The action event triggered by the user.
+     *
+     * This method is called when the user clicks the "Log Out" button.
+     * It logs out the user and navigates back to the login screen.
+     */
     public void LogOut(ActionEvent event) {
-       LogOut.logOutToLoginScreen(event);
+        LogOut.logOutToLoginScreen(event);
     }
 
+    /**
+     * Closes the pop-up window.
+     *
+     * @param event The action event triggered by the user.
+     *
+     * This method is called when the user clicks the "Close" button in the pop-up window.
+     * It closes the pop-up window.
+     */
     public void closePopUp(ActionEvent event) {
         ExitButton.closePopUp(event);
     }
 
+    /**
+     * Minimizes the client application window.
+     *
+     * @param event The action event triggered by the user.
+     *
+     * This method is called when the user clicks the "Minimize" button.
+     * It minimizes the client application window.
+     */
     @FXML
     public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
+
+    /**
+     * Calculates the report data for the specific test.
+     *
+     * @param SpecificTest The list of StudentTest objects for the specific test.
+     *
+     * This method calculates the average score, median score, and creates the data points for the bar chart.
+     */
     public void reportCalc(ArrayList<StudentTest> SpecificTest) {
         numberOfStudentTests = 0;
         double totalScore = 0;
@@ -156,9 +193,16 @@ public class ViewGraphController {
         medianScore = (numberOfStudentTests % 2 == 0)
                 ? (scoreValues.get(numberOfStudentTests / 2 - 1) + scoreValues.get(numberOfStudentTests / 2)) / 2.0
                 : scoreValues.get(numberOfStudentTests / 2);
-
-
     }
+
+    /**
+     * Counts the number of students with scores within a specific range.
+     *
+     * @param scoreValues The list of score values.
+     * @param lowerRange The lower range of the grade.
+     * @param upperRange The upper range of the grade.
+     * @return The count of students within the specified grade range.
+     */
     private int countStudentsInRange(ArrayList<Double> scoreValues, int lowerRange, int upperRange) {
         int count = 0;
         for (double score : scoreValues) {
@@ -167,19 +211,25 @@ public class ViewGraphController {
                     count++;
                 }
             }
-
             else if (score >= lowerRange && score < upperRange) {
                 count++;
             }
         }
         return count;
     }
+
+    /**
+     * Sets the report information for the specific test.
+     *
+     * @param report The StudentTest object representing the specific test.
+     *
+     * This method sets the report information, including the course, year, session, semester, and test ID.
+     */
     public void setReport(StudentTest report)
     {
         CourseYearSession = report.getCourse() + "-" + report.getYear() + report.getSession();
         semester = report.getSemester();
         testID = report.getTestID();
         infoAboutTest = VRC.getListOfTests();
-
     }
 }

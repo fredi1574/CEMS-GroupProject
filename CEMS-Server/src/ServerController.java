@@ -114,10 +114,11 @@ public class ServerController {
         txtUsername.setDisable(Condition);
         txtPassword.setDisable(Condition);
     }
-
     /**
-     * fills the server's table and text fields with initial information
+     * Initializes the controller and sets up the initial state of the GUI.
+     * This method is automatically called when the FXML file is loaded.
      */
+
     @FXML
     public void initialize() {
         ScreenManager.dragAndDrop(header);
@@ -140,12 +141,20 @@ public class ServerController {
         this.txtPassword.setText("");
         this.btnDisconnect.setDisable(true);
     }
-
+    /**
+     * Closes the server application.
+     * This method is called when the close button is clicked.
+     */
     public void Close() { //close button
         ServerGUI.disconnect();
         System.exit(0);
     }
-
+    /**
+     * Minimizes the window.
+     * This method is called when the minimize button is clicked.
+     *
+     * @param event the ActionEvent triggered by the minimize button.
+     */
     public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }

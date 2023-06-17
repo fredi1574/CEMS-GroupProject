@@ -26,6 +26,11 @@ import java.util.Set;
 
 import static util.TextFormatter.formatField;
 
+/**
+
+ The AddAQuestionController class manages the user interface and functionality of the "Add a Question" screen.
+ It allows users to enter question details, validate the data, and save the new question to the database.
+ */
 
 public class AddAQuestionController {
     public static ObservableList<Course> coursesList;

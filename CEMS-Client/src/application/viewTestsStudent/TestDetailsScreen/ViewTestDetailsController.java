@@ -13,6 +13,10 @@ import javafx.scene.text.Text;
 import util.*;
 import Client.ExitButton;
 
+/**
+ * Controller for the View Test Details screen.
+ * This screen displays the details of a specific test, including the year, semester, session, grade, average, comments, and course information.
+ */
 public class ViewTestDetailsController {
 
     @FXML

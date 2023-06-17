@@ -75,7 +75,16 @@ public class TableManager {
             return itemText.toLowerCase().contains(lowerCaseFilter);
         }));
     }
-
+    /**
+     * Adds double-click functionality to a TableView.
+     * When a row in the TableView is double-clicked and not empty,
+     * the provided setFunctionsFunction is invoked with the relativePath parameter.
+     *
+     * @param <T> the type of the TableView items
+     * @param tableView the TableView to add double-click functionality to
+     * @param relativePath the relative path
+     * @param setFunctionsFunction the function to invoke with the relativePath parameter
+     */
     public static <T> void addDoubleClickFunctionality(TableView<T> tableView, String relativePath, Consumer<String> setFunctionsFunction) {
         tableView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && !tableView.getSelectionModel().isEmpty()) { //check whether the event was double click and the row contains a question

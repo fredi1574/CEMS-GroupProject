@@ -11,7 +11,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import util.*;
-
+/**
+* The controller class for updating a question, a user can update and change a question from the DB
+ */
 public class UpdateQuestionController {
 
     @FXML

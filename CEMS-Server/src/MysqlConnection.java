@@ -36,6 +36,11 @@ public class MysqlConnection {
             System.out.println("\n");
         }
     }
+    /**
+     * Executes an SQL update statement.
+     *
+     * @param question the SQL update statement to be executed.
+     */
 
     public static void update(String question) {
         PreparedStatement statement;
@@ -93,7 +98,12 @@ public class MysqlConnection {
         }
         return list;
     }
-
+    /**
+     * gets an array list of the Course from the CEMS database
+     *
+     * @param query the given SELECT query
+     * @return ArrayList of the courses
+     */
     public static ArrayList<Course> getCourseList(String query) {
         Statement statement = createStatement();
 
@@ -116,6 +126,12 @@ public class MysqlConnection {
         }
         return coursesList;
     }
+    /**
+     * gets an array list of the Subjects from the CEMS database
+     *
+     * @param query the given SELECT query
+     * @return ArrayList of the subjects
+     */
 
     public static ArrayList<Subject> getSubjectList(String query) {
         Statement statement = createStatement();
@@ -137,6 +153,13 @@ public class MysqlConnection {
         }
         return subjectsList;
     }
+    /**
+     * Authenticates a user by checking the provided username and password against the database.
+     *
+     * @param username the username of the user to authenticate.
+     * @param password the password of the user to authenticate.
+     * @return a User object if the authentication is successful, or null if the authentication fails.
+     */
 
     public static Object authenticateUser(String username, String password) {
         try {
@@ -198,7 +221,12 @@ public class MysqlConnection {
         }
         return tests;
     }
-
+    /**
+     * Retrieves a list of Test objects from the database based on the provided query.
+     *
+     * @param query the SQL query to retrieve the test records from the database.
+     * @return an ArrayList of Test objects retrieved from the database.
+     */
     public static ArrayList<ActiveTest> getActiveTestsTable(String query) {
         Statement statement = createStatement();
 
@@ -223,6 +251,12 @@ public class MysqlConnection {
         return activeTests;
     }
 
+    /**
+     * Retrieves a list of TestQuestion objects from the database based on the provided query.
+     *
+     * @param query the SQL query to retrieve the test question records from the database.
+     * @return an ArrayList of TestQuestion objects retrieved from the database.
+     */
     public static ArrayList<TestQuestion> getTestQuestionsTable(String query) {
         Statement statement = createStatement();
 
@@ -249,7 +283,12 @@ public class MysqlConnection {
         }
         return testQuestions;
     }
-
+    /**
+     * Retrieves a list of TestRequestForApproval objects from the database based on the provided query.
+     *
+     * @param query the SQL query to retrieve the test request records from the database.
+     * @return an ArrayList of TestRequestForApproval objects retrieved from the database.
+     */
     public static ArrayList<TestRequestForApproval> getRequestsTable(String query) {
         Statement statement = createStatement();
 
@@ -309,6 +348,12 @@ public class MysqlConnection {
         }
         return list;
     }
+    /**
+     * Retrieves a list of StudentTest objects from the database based on the provided query.
+     *
+     * @param query the SQL query to retrieve the student test information from the database.
+     * @return an ArrayList of StudentTest objects retrieved from the database.
+     */
 
     public static ArrayList<User> getUser(String query) {
         Statement statement = createStatement();
@@ -356,6 +401,12 @@ public class MysqlConnection {
             }
         }
     }
+    /**
+     * Retrieves a Question object from the database based on the provided query.
+     *
+     * @param query the SQL query to retrieve the question data from the database.
+     * @return a Question object containing the retrieved question data.
+     */
 
     public static Question getQuestionData(String query) {
         Statement statement = createStatement();
@@ -386,7 +437,12 @@ public class MysqlConnection {
         }
         return question;
     }
-
+    /**
+     * Retrieves a Question object from the database based on the provided query.
+     *
+     * @param query the SQL query to retrieve the question data from the database.
+     * @return a Question object containing the retrieved question data.
+     */
     public static Test getTestData(String query) {
         Statement statement = createStatement();
 
@@ -418,6 +474,13 @@ public class MysqlConnection {
 
         return test;
     }
+    /**
+     * Checks if a student is registered for a specific course based on the provided query.
+     *
+     * @param query the SQL query to check if the student is registered for the course.
+     * @return a StudentCourse object containing the student's ID and the course name if registered,
+     *         or null if not registered.
+     */
 
     public static StudentCourse checkRegistered(String query) {
         Statement statement = createStatement();
@@ -443,6 +506,12 @@ public class MysqlConnection {
 
         return getUser;
     }
+    /**
+     * Retrieves a Subject object from the database based on the provided query.
+     *
+     * @param query the SQL query to retrieve the subject data from the database.
+     * @return a Subject object containing the retrieved subject data.
+     */
 
     public static Subject SubjectName(String query) {
         Statement statement = createStatement();
@@ -460,6 +529,12 @@ public class MysqlConnection {
         }
         return subject;
     }
+    /**
+     * Retrieves a list of TestForApproval objects from the database based on the provided query.
+     *
+     * @param query the SQL query to retrieve the test approval data from the database.
+     * @return an ArrayList of TestForApproval objects containing the retrieved test approval data.
+     */
 
     public static ArrayList<TestForApproval> getTestForApproval(String query) {
         Statement statement = createStatement();
@@ -497,7 +572,12 @@ public class MysqlConnection {
         }
         return list;
     }
-
+    /**
+     * Retrieves the total number of students in a test based on the provided query.
+     *
+     * @param query the SQL query to retrieve the total number of students in the test from the database.
+     * @return the total number of students in the test.
+     */
     public static Integer getTotalStudentsInTest(String query) {
         Statement statement = createStatement();
 
@@ -513,6 +593,12 @@ public class MysqlConnection {
         }
         return totalStudents;
     }
+    /**
+     * Retrieves the total number of students registered to a test based on the provided query.
+     *
+     * @param query the SQL query to retrieve the total number of registered students for the test from the database.
+     * @return the total number of students registered to the test.
+     */
 
     public static Integer getTotalStudentsRegisteredToTest(String query) {
         Statement statement = createStatement();
@@ -528,6 +614,12 @@ public class MysqlConnection {
         }
         return rowCount;
     }
+    /**
+     * Retrieves the total number of students who have finished the test based on the provided query.
+     *
+     * @param query the SQL query to retrieve the total number of students who finished the test from the database.
+     * @return the total number of students who have finished the test.
+     */
 
     public static Integer getTotalStudentsFinishedTheTest(String query) {
         Statement statement = createStatement();
@@ -544,6 +636,13 @@ public class MysqlConnection {
         return finishedCount;
 
     }
+    /**
+     * Retrieves the test type based on the provided query.
+     *
+     * @param query the SQL query to retrieve the test type from the database.
+     * @return the test type as a {@link TestTypeEnum} value, or {@code null} if the test type is not found.
+     */
+
 
     public static TestTypeEnum getTestType(String query) {
         Statement statement = createStatement();
@@ -559,7 +658,12 @@ public class MysqlConnection {
         }
         return null; // or throw an exception if the test id is not found
     }
-
+    /**
+     * Retrieves the full name based on the provided query.
+     *
+     * @param query the SQL query to retrieve the full name from the database.
+     * @return the full name as a {@link String}, or {@code null} if the full name is not found.
+     */
     public static String getIDReturnFullname(String query) {
         Statement statement = createStatement();
 
@@ -574,6 +678,12 @@ public class MysqlConnection {
         }
         return fullName;
     }
+    /**
+     * Retrieves the courses of the students based on the provided query.
+     *
+     * @param query the SQL query to retrieve the student courses from the database.
+     * @return an {@link ArrayList} of student courses as {@link String}s.
+     */
 
     public static ArrayList<String> getStudentsCourses(String query) {
         Statement statement = createStatement();
@@ -591,6 +701,12 @@ public class MysqlConnection {
         }
         return courses;
     }
+    /**
+     * Retrieves the average of students based on the provided query.
+     *
+     * @param query the SQL query to retrieve the average of students from the database.
+     * @return the average value as a {@link String}.
+     */
 
     public static String getStudentsAvg(String query) {
         Statement statement = createStatement();
@@ -606,6 +722,12 @@ public class MysqlConnection {
         }
         return average;
     }
+    /**
+     * Retrieves the information after the test based on the provided query.
+     *
+     * @param query the SQL query to retrieve the information from the database.
+     * @return a list of strings containing the actual duration, total finished count, and total forced finished count.
+     */
 
     public static ArrayList<String> getAfterTestInfo(String query) {
         Statement statement = createStatement();

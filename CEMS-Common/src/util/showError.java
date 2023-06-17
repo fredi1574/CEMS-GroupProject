@@ -3,8 +3,16 @@ package util;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-
+/**
+ * This utility class provides methods for displaying various types of pop-up messages using JavaFX Alert dialogs.
+ */
 public class showError {
+
+    /**
+     * Displays an error pop-up dialog with the specified message.
+     *
+     * @param message the error message to display
+     */
     public static void showErrorPopup(String message) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error");
@@ -12,6 +20,11 @@ public class showError {
         alert.setContentText(message);
         alert.showAndWait();
     }
+    /**
+     * Displays an information pop-up dialog with the specified message.
+     *
+     * @param message the information message to display
+     */
 
     public static void showInfoPopup(String message) {
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -20,6 +33,14 @@ public class showError {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    /**
+     * Displays a confirmation pop-up dialog with the specified message.
+     * The dialog includes "Yes" and "No" buttons, and the method returns true if the "Yes" button is clicked.
+     *
+     * @param message the confirmation message to display
+     * @return true if the "Yes" button is clicked, false otherwise
+     */
 
     public static boolean showConfirmationPopup(String message) {
         Alert alert = new Alert(AlertType.CONFIRMATION);

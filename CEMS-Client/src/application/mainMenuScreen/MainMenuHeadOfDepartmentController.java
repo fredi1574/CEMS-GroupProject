@@ -9,7 +9,9 @@ import javafx.scene.text.Text;
 import util.*;
 import Client.ExitButton;
 import Client.LogOut;
-
+/**
+ * Main menu screen for head of departments
+ */
 public class MainMenuHeadOfDepartmentController {
 
     @FXML
@@ -32,7 +34,11 @@ public class MainMenuHeadOfDepartmentController {
             backPane.setVisible(true);
         }
     }
+    /**
 
+     Navigates back to the pick a role screen. Appears only to users who have two roles - Head Of Department and Lecturers.
+     @param event the ActionEvent triggering the navigation
+     */
     public void backToPickaRole(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.PickRolePath);
     }
@@ -75,6 +81,11 @@ public class MainMenuHeadOfDepartmentController {
     public void viewQuestionsHeadOfDepart(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.ViewQuestionsHeadOfDepartmentPath);
     }
+    /**
+     * Navigates to the manage requests screen for the head of department.
+     *
+     * @param event The event triggered by the view questions button click.
+     */
 
     @FXML
     public void enterManageRequestHeadOfDepart(ActionEvent event) {

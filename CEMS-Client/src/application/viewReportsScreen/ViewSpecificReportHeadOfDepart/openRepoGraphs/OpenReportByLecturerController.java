@@ -15,7 +15,10 @@ import util.ScreenManager;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
+/**
+ * Controller class for the Open Report By Lecturer class.
+ * Displays a bar chart representing the report data for a specific lecturer.
+ */
 public class OpenReportByLecturerController {
 
     @FXML
@@ -28,7 +31,7 @@ public class OpenReportByLecturerController {
     private Text medianText;
 
     @FXML
-    private BarChart<String,Number> reportGraph;
+    private BarChart<String, Number> reportGraph;
 
     @FXML
     private Text studentsNameLabel;
@@ -39,26 +42,38 @@ public class OpenReportByLecturerController {
     private static XYChart.Series<String, Number> series;
     private static int totalTests;
     private static double medianScore;
-    private static int AverageScore;
-    public static final ShowReportByLecturerController takeChosenfromController= new ShowReportByLecturerController();
+    private static int averageScore;
+    public static final ShowReportByLecturerController takeChosenfromController = new ShowReportByLecturerController();
+
+    /**
+     * Initializes the Open Report by Lecturer screen.
+     * Sets up the UI components and displays the calculated report data.
+     */
     @FXML
     public void initialize() {
         testsNumberText.setText(String.valueOf(totalTests));
         medianText.setText(String.valueOf(medianScore));
-        averageText.setText(String.valueOf(AverageScore));
+        averageText.setText(String.valueOf(averageScore));
         studentsNameLabel.setText(ShowReportByLecturerController.chosenLecturer);
         reportGraph.getData().add(series);
         ScreenManager.dragAndDrop(header);
-
     }
 
+    /**
+     * Calculates the report data for tests taken by a specific lecturer.
+     *
+     * @param testsByLecturer The list of tests taken by the lecturer.
+     * This method calculates the total number of tests, average score, median score, and course-wise average scores.
+     * It also creates a series for the bar chart to display the course-wise average scores.
+     */
     public void reportCalc(ArrayList<Object> testsByLecturer) {
         totalTests = testsByLecturer.size();
-        AverageScore = 0;
+        averageScore = 0;
         medianScore = 0;
         int totalScoreSum = 0;
         StudentTest studentTest;
         series = new XYChart.Series<>();
+
         // Create a map to store course-wise score sum and count
         Map<String, Double> courseScoreSumMap = new HashMap<>();
         Map<String, Integer> courseCountMap = new HashMap<>();
@@ -90,7 +105,7 @@ public class OpenReportByLecturerController {
         }
 
         // Calculate the overall average score
-        AverageScore = totalScoreSum / totalTests;
+        averageScore = totalScoreSum / totalTests;
 
         // Calculate the median score
         List<Double> scores = testsByLecturer.stream()
@@ -102,26 +117,37 @@ public class OpenReportByLecturerController {
         medianScore = totalTests % 2 == 0 ?
                 (scores.get(totalTests / 2 - 1) + scores.get(totalTests / 2)) / 2 :
                 scores.get(totalTests / 2);
-
-        System.out.println("Total number of student tests: " + totalTests);
-        System.out.println("Total average score: " + AverageScore);
-        System.out.println("Total median score: " + medianScore);
-        System.out.println("Courses: " + courses);
-        System.out.println("Average scores for each course: " + coursesAverage);
     }
 
-
+    /**
+     * Closes the client application.
+     * This method is called when the user clicks the "Close" button.
+     * It closes the client application.
+     */
     @FXML
     void closeClient() {
         ExitButton.closeClient();
     }
 
+    /**
+     * Minimizes the client application window.
+     *
+     * @param event The action event triggered by the user.
+     * This method is called when the user clicks the "Minimize" button.
+     * It minimizes the client application window.
+     */
     @FXML
     public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
 
-
+    /**
+     * Navigates back to the previous screen.
+     *
+     * @param event The action event triggered by the user.
+     * This method is called when the user clicks the "Back" button.
+     * It navigates back to the View Report Head of Department screen.
+     */
     public void goBackToPreviousScreen(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.ViewReportHeadOfDepartmentPath);
     }

@@ -10,7 +10,9 @@ import javafx.scene.text.Text;
 import util.*;
 import Client.ExitButton;
 import Client.LogOut;
-
+/**
+ * Main menu screen for students
+ */
 public class MainMenuStudentController {
     final SmsEmailPopUpController smsEmailPopUpController = new SmsEmailPopUpController();
     @FXML
@@ -20,7 +22,6 @@ public class MainMenuStudentController {
 
     /**
      * Initializes the main menu screen for the student.
-     * <p>
      * Enables dragging and dropping of the application window using the header pane.
      * Sets the full name of the authenticated user.
      */
@@ -29,6 +30,10 @@ public class MainMenuStudentController {
         fullNameText.setText(Client.user.getFullName());
     }
 
+    /**
+
+     Displays a pop-up notification indicating that a test has been approved.
+     */
     public void showTestApprovedPopUp() {
         Platform.runLater(() -> {
 

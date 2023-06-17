@@ -13,7 +13,11 @@ import javafx.stage.Stage;
 import util.*;
 
 import java.util.ArrayList;
-
+/**
+ * The controller class for the view request controller.
+ * In this screen the head of department can see the full details about the request and its reason
+ * He can approve or decline the request from this screen. The response will be sent to the lecturer who made the request
+ */
 public class ViewRequestController {
 
     @FXML
@@ -42,25 +46,47 @@ public class ViewRequestController {
     private Stage manageRequests;
 
 
+    /**
+     * Closes the pop-up window.
+     *
+     * @param event The action event triggered by the "Close" button.
+     */
     @FXML
     void closeClient(ActionEvent event) {
         ExitButton.closePopUp(event);
-
     }
 
+    /**
+     * Initializes the controller by enabling drag and drop functionality for the header.
+     */
     public void initialize() {
         ScreenManager.dragAndDrop(header);
     }
 
+    /**
+     * Sets the reference to the manage requests stage.
+     *
+     * @param manageRequests The stage representing the manage requests screen.
+     */
     public void setManage(Stage manageRequests) {
         this.manageRequests = manageRequests;
     }
 
+    /**
+     * Minimizes the application window.
+     *
+     * @param event The action event triggered by the "Minimize" button.
+     */
     @FXML
     public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
 
+    /**
+     * Sets the request data to be displayed in the UI.
+     *
+     * @param request The test request to be managed.
+     */
     public void setRequest(TestRequestForApproval request) {
         this.request = request;
         CourseText.setText(request.getCourse());
@@ -70,12 +96,27 @@ public class ViewRequestController {
         testIDText.setText(request.getId());
     }
 
+    /**
+     * Deletes a request by sending a deletion message to the server.
+     *
+     * @param request The request to be deleted.
+     */
     public void deleteRequest(String request) {
         MsgHandler delete = new MsgHandler(TypeMsg.DeleteRequest, request);
         ClientUI.chat.accept(delete);
-
     }
 
+    /**
+     * Approves the selected request by performing the following actions:
+     * - Retrieves the added time from the UI.
+     * - Creates an ArrayList to store the necessary information for changing the test duration.
+     * - Displays a confirmation popup to verify the approval action.
+     * - If the approval is confirmed:
+     *     - Sends a message to change the test duration to the server.
+     *     - Sends a message to approve the request to the server.
+     *     - Deletes the approved request.
+     *     - Reloads the page or performs any necessary actions after the approval.
+     */
     @FXML
     public void approveRequest() {
         String AddedTime = TimeExtensionDurationText.getText();
@@ -97,6 +138,14 @@ public class ViewRequestController {
         }
     }
 
+    /**
+     * Declines the selected request by performing the following actions:
+     * - Displays a confirmation popup to verify the decline action.
+     * - If the decline is confirmed:
+     *     - Sends a message to decline the request to the server.
+     *     - Deletes the declined request.
+     *     - Reloads the page or performs any necessary actions after the decline.
+     */
     @FXML
     public void declineRequest() {
         if (showError.showConfirmationPopup("Are you sure you want to decline this request?")) {
@@ -108,6 +157,11 @@ public class ViewRequestController {
         }
     }
 
+    /**
+     * Reloads the current page by closing the current stage and opening a new stage for the manage requests screen.
+     *
+     * @param button The button that triggers the page reload.
+     */
     private void reloadPage(Button button) {
         Stage currentStage = (Stage) button.getScene().getWindow();
         currentStage.close();

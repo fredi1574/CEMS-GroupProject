@@ -20,7 +20,11 @@ import Client.ExitButton;
 import Client.LogOut;
 
 import java.util.List;
-
+/**
+ * The controller for viewing a table of questions for the head of department.
+ * The head of department can view all the course's questions
+ * in his department
+ */
 public class ViewQuestionHeadOfDepartmentController {
 
     @FXML
@@ -34,6 +38,11 @@ public class ViewQuestionHeadOfDepartmentController {
 
     @FXML
     private Text usernameText;
+
+    /**
+     * Initializes the View Question Head of Department screen.
+     * Sets up the header, username text, and builds the question table.
+     */
     @FXML
     public void initialize() {
         ScreenManager.dragAndDrop(header);
@@ -43,8 +52,11 @@ public class ViewQuestionHeadOfDepartmentController {
         filterTable(questions);
     }
 
-
-
+    /**
+     * Builds the question table by retrieving questions from the server and populating the table with the data.
+     *
+     * @return The observable list of questions used to populate the table.
+     */
     private ObservableList<Question> buildTable() {
         MsgHandler getTable = new MsgHandler(TypeMsg.GetQuestionsBySubject, Client.user.getUserName());
         ClientUI.chat.accept(getTable);
@@ -63,6 +75,11 @@ public class ViewQuestionHeadOfDepartmentController {
         return questions;
     }
 
+    /**
+     * Filters the question table based on the search field input.
+     *
+     * @param questions The observable list of questions used to populate the table.
+     */
     private void filterTable(ObservableList<Question> questions) {
         FilteredList<Question> filteredData = new FilteredList<>(questions, b -> true);
         TableManager.MakeFilterListForSearch(filteredData, searchField, Question::getQuestionText);
@@ -72,6 +89,11 @@ public class ViewQuestionHeadOfDepartmentController {
         manageQuestionsTableView.setItems(sortedData);
     }
 
+    /**
+     * Sets the necessary functions for the update question screen.
+     *
+     * @param relativePath The relative path to the update question screen FXML file.
+     */
     public void setFunctions(String relativePath) {
         ScreenElements<Stage, FXMLLoader> screenElements = ScreenManager.popUpScreen(relativePath);
         FXMLLoader loader = screenElements.getFXMLLoader();
@@ -82,16 +104,17 @@ public class ViewQuestionHeadOfDepartmentController {
 
     /**
      * Logs out the user and navigates to the login screen.
+     *
      * @param event The event triggered by clicking the logout button.
      */
-
     @FXML
     public void LogOut(ActionEvent event) {
-       LogOut.logOutToLoginScreen(event);
+        LogOut.logOutToLoginScreen(event);
     }
 
     /**
      * Navigates back to the previous screen.
+     *
      * @param event The event triggered by clicking the back button.
      */
     @FXML
@@ -109,6 +132,7 @@ public class ViewQuestionHeadOfDepartmentController {
 
     /**
      * Minimizes the application window.
+     *
      * @param event The event triggered by clicking the minimize button.
      */
     @FXML

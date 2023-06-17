@@ -16,7 +16,11 @@ import Client.ExitButton;
 import util.*;
 
 import java.util.List;
-
+/**
+ * The NotesController class manages the notes screen for creating a new test.
+ * It handles Lecturer's inputs and actions related to adding notes for the test.
+ * The lecturer can leave notes for other lecturers and students
+ */
 public class NotesController {
     public final StateManagement stateManagement = StateManagement.getInstance();
     @FXML

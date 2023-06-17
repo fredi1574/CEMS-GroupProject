@@ -18,6 +18,12 @@ import Client.ExitButton;
 
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * Controller for the "Computerized Test" screen.
+ * Manages the validation of student ID, retrieval and display of Computerized test data.
+ * After this the id validation the student can begin his computerized test
+ *
+ */
 
 @SuppressWarnings("unchecked")
 public class ComputerizedTestController {

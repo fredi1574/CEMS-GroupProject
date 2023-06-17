@@ -29,7 +29,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * The ManualTestController class controls the manual test interface for a student.
+ * Once the student downloaded the test file, the counter begins.
+ * The student need to submit the test in order to save data about his test's duration
+ */
 @SuppressWarnings("unchecked")
 public class ManualTestController {
     public static Timeline timerC;
@@ -63,7 +67,10 @@ public class ManualTestController {
     private Text fullNameText;
     private int remainingMinutes;
     private boolean ExtraOneMin;
-
+    /**
+     * Initializes the controller and sets up the initial state of the UI components.
+     * This method is automatically called by JavaFX after the FXML file has been loaded.
+     */
     public void initialize() {
 
         // Enables dragging and dropping of the application window using the header pane
@@ -96,6 +103,11 @@ public class ManualTestController {
         fetchTestDuration();
 
     }
+    /**
+     * Retrieves the test data for the current test.
+     *
+     * @return The Test object containing the test data.
+     */
 
     private Test getTestData() {
         MsgHandler getTestInformation = new MsgHandler(TypeMsg.GetTestByID, EnterCodePopUpController.testID);
@@ -109,11 +121,18 @@ public class ManualTestController {
         int secs = seconds % 60;
         return String.format("%02d:%02d:%02d", hours, minutes, secs);
     }
+    /**
+     * Fetches the test duration from the test data and initializes the remaining minutes variable.
+     */
 
     private void fetchTestDuration() {
         remainingMinutes = Integer.parseInt(test.getTestDuration());
     }
-
+    /**
+     * Starts the timer for the test.
+     * The timer counts down the remaining time in seconds and updates the timer display on the screen.
+     * If the timer reaches 0, it stops and performs necessary actions such as saving final answers and handling test completion.
+     */
     private void startTimer() {
         int totalSeconds = remainingMinutes * 60;
         seconds = new int[]{totalSeconds};  // Create a final array to hold the remaining seconds
@@ -161,6 +180,11 @@ public class ManualTestController {
         // Update the timer label immediately
         timerLabel.setText(formatTime(seconds[0]));
     }
+    /**
+     * Locks the test, preventing further interactions by stopping the timer and displaying a notification to the student.
+     * The {@code testIsLockedComputerized} flag is set to indicate that the test is locked.
+     * The student is informed that the test was locked by the lecturer and is advised to press the submit button to exit the test.
+     */
 
     public void lockTest() {
         timerC.stop();
@@ -168,12 +192,20 @@ public class ManualTestController {
         testIsLockedManual = true;
     }
 
-    // Method to set the isActive flag and stop the checkLockThread
+    /**
+     * Shows a notification about time extension to the student and updates the test duration.
+     *
+     * @param newDuration The new duration to be added to the test duration, in minutes.
+     */
     public void showNotificationAndChangeDuration(int newDuration) {
         seconds[0] += newDuration * 60;  // Add the new duration in seconds
         Platform.runLater(() -> showError.showInfoPopup("Test time increased by " + newDuration + " minutes"));
     }
-
+    /**
+     * Calculates the time the test is due to finish according to it's duration.
+     *
+     * @param test The test details.
+     */
     void FinishedTime(Test test) {
         int hour = Integer.parseInt(StartTimeText.getText().substring(0, 2));
         int min = Integer.parseInt(StartTimeText.getText().substring(3, 5));
@@ -186,6 +218,13 @@ public class ManualTestController {
         EndTimeText.setText(String.format("%02d:%02d", hour, min));
 
     }
+    /**
+     * Saves the student's test results and information.
+     *
+     * @param score           The score achieved by the student in the test.
+     * @param correctAnswers  The number of correct answers given by the student.
+     * @param totalQuestions  The total number of questions in the test.
+     */
 
     public void saveStudentsTest(int score, int correctAnswers, int totalQuestions) {
         int timeInSeconds = seconds[0];
@@ -197,7 +236,9 @@ public class ManualTestController {
         MsgHandler AddNewTest = new MsgHandler(TypeMsg.AddNewTestOfStudent, StudentsCopy);
         ClientUI.chat.accept(AddNewTest);
     }
-
+    /**
+     * Uploading student's test
+     */
 
     @FXML
     public void uploadFileBTN() {
@@ -214,7 +255,9 @@ public class ManualTestController {
             showError.showErrorPopup("Can not upload now, the time has finished");
         }
     }
-
+    /**
+     * Downloading student's test
+     */
     @FXML
     public void DownloadFileBTN() {
         try {
@@ -238,6 +281,14 @@ public class ManualTestController {
             ex.printStackTrace();
         }
     }
+    /**
+     * Calculates the total number of students who have not finished the test forcefully.
+     * Retrieves the test data and the number of finished students from the server.
+     * Subtracts the number of finished students from the total number of students who attended the test
+     * and returns the remaining count, indicating the total number of students who have not finished the test forcefully.
+     *
+     * @return The total number of students who have not finished the test forcefully.
+     */
 
     public int CalculateTotalForcedFinished() {
 
@@ -248,6 +299,17 @@ public class ManualTestController {
 
 
     }
+    /**
+     * Checks if the test is locked based on the number of registered and attended students.
+     * Retrieves the test data and the number of registered and attended students from the server.
+     * If the difference between the number of registered and attended students is zero,
+     * sets the TotalStudents variable to the number of attended students and returns true,
+     * indicating that the test is locked.
+     * Otherwise, returns false.
+     *
+     * @return true if the test is locked, false otherwise.
+     */
+
 
     public boolean checkLockTest() {
         MsgHandler numberOfRegistered = new MsgHandler(TypeMsg.CountRegisteredStudents, test.getCourseName());
@@ -264,6 +326,15 @@ public class ManualTestController {
         }
         return false;
     }
+    /**
+     * Saves the after-test information and deactivates the test.
+     * Retrieves the test data and calculates the total number of students who have not finished the test forcefully.
+     * If the test is computerized and locked, the attended and finished student counters are obtained from the server.
+     * Otherwise, the total number of forced finished students is calculated using the CalculateTotalForcedFinished() method.
+     * The after-test information, including the test duration, total forced finished count, and test ID, is then sent to the server.
+     * Finally, the test is deactivated and removed from the active tests list.
+     */
+
 
     public void saveAfterTestInfoAndDeleteFromActive() {
         int totalForcedFinished;
@@ -287,16 +358,39 @@ public class ManualTestController {
 
     }
 
+    /**
+     * Logs out the user and navigates to the login screen.
+     *
+     * @param event The event triggered by clicking the logout button.
+     */
     @FXML
-    public void LogOut(ActionEvent event) {
+    public void logOut(ActionEvent event) {
         LogOut.logOutToLoginScreen(event);
     }
 
+    /**
+     * Closes the client application.
+     */
     @FXML
-    private void closeClient() {
+    public void closeClient() {
         ExitButton.closeClient();
     }
 
+    /**
+     * Minimizes the client application window.
+     *
+     * @param event The event triggered by clicking the minimize button.
+     */
+    @FXML
+    public void minimizeWindow(ActionEvent event) {
+        MinimizeButton.minimizeWindow(event);
+    }
+
+    /**
+     * Handles the action when the "Save" button is clicked and test is over.
+     *
+     * @param event The action event associated with the button click.
+     */
     @FXML
     void onSaveButton(ActionEvent event) {
         boolean forText = true;
@@ -346,10 +440,6 @@ public class ManualTestController {
         }
     }
 
-    @FXML
-    public void minimizeWindow(ActionEvent event) {
-        MinimizeButton.minimizeWindow(event);
-    }
 
 }
 

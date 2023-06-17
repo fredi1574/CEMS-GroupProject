@@ -11,7 +11,9 @@ import javafx.scene.text.Text;
 import util.*;
 
 import static Client.Client.user;
-
+/**
+ * Main menu screen for lecturers
+ */
 public class MainMenuController {
     @FXML
     private Text usernameText;
@@ -34,7 +36,11 @@ public class MainMenuController {
             backPane.setVisible(true);
         }
     }
+    /**
 
+     Navigates back to the pick a role screen. Appears only to users who have two roles - Head Of Department and Lecturers.
+     @param event the ActionEvent triggering the navigation
+     */
     public void backToPickaRole(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.PickRolePath);
     }
@@ -74,12 +80,22 @@ public class MainMenuController {
     public void CreateNewTest(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.createNewTestPath);
     }
+    /**
+
+     Initiates the process of managing tests and runs cheating detector on finished tests
+     @param event the ActionEvent triggering the management of tests
+     */
 
     public void manageTests(ActionEvent event) {
         MsgHandler<String> cheatingTest = new MsgHandler<>(TypeMsg.DetectedCheating,null);
         ClientUI.chat.accept(cheatingTest);
         ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
     }
+    /**
+
+     Initiates the process of adding a question
+     @param event the ActionEvent triggering the management of tests
+     */
 
     public void addQuestion(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.addQuestionPath);

@@ -20,7 +20,11 @@ import javafx.scene.text.Text;
 import util.*;
 
 import static util.TextFormatter.formatField;
-
+/**
+ * Handles the functionality of the view test waiting for approval screen
+ * Displays information about students test
+ * In this screen the lecturer can change the student's grade, leave comment to the student, and view other details about the test
+ */
 public class ViewTestAwaitingApprovalController {
 
     public StateManagement stateManagement;
@@ -49,6 +53,16 @@ public class ViewTestAwaitingApprovalController {
     @FXML
     private ComboBox<String> comboBoxApproval;
 
+    /**
+     * Initializes the controller.
+     * It sets up the drag-and-drop functionality for the header,
+     * retrieves the current user's name and displays it in the usernameText field,
+     * formats the gradeField,
+     * retrieves the list of tests awaiting approval from the state management,
+     * finds the selected test based on the test ID and student ID,
+     * sets the data of the selected test in the UI elements,
+     * and sets up the combobox for selecting the approval status.
+     */
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getName());
@@ -70,6 +84,11 @@ public class ViewTestAwaitingApprovalController {
         setCombobox();
     }
 
+    /**
+     * Sets up the combobox for selecting the approval status.
+     * It populates the combobox with the options for approval (e.g., "YES"),
+     * and handles the selection event to update the approval status of the selected test.
+     */
     private void setCombobox() {
         ObservableList<String> approved = FXCollections.observableArrayList("YES");
         comboBoxApproval.setItems(approved);
@@ -80,9 +99,13 @@ public class ViewTestAwaitingApprovalController {
             isSelected = true;
             selectedTest.setApproved(approvedTheLecturer);
         });
-
     }
 
+    /**
+     * Sets the data of the selected test in the UI elements.
+     *
+     * @param testForApproval The test for which to display the data.
+     */
     void setAllDataTestForStudent(TestForApproval testForApproval) {
         studentIDLabel.setText(testForApproval.getStudentID());
         gradeField.setText(testForApproval.getGrade());
@@ -93,6 +116,20 @@ public class ViewTestAwaitingApprovalController {
         totalQuestionsLabel.setText(testForApproval.getTotalQuestions());
     }
 
+    /**
+     * Saves the decision made by the lecturer regarding the test approval.
+     * It updates the lecturer's comment if provided,
+     * checks if an approval selection has been made,
+     * confirms the approval with a popup,
+     * updates the grade of the test,
+     * updates the test in the test for approval list in the state management,
+     * sends an update message to the server,
+     * sends a popup message to the student,
+     * resets the state management instance,
+     * and navigates back to the manage tests screen.
+     *
+     * @param event The action event triggered by the "Save Decision" button.
+     */
     @FXML
     void saveDecisionLecturer(ActionEvent event) {
         if (!teacherComment.getText().isEmpty()) {
@@ -118,26 +155,43 @@ public class ViewTestAwaitingApprovalController {
         }
     }
 
+    /**
+     * Navigates back to the manage tests screen.
+     * It resets the state management instance and navigates to the specified screen.
+     *
+     * @param event The action event triggered by the "Back" button.
+     */
     @FXML
     void BackTOManageTest(ActionEvent event) {
         StateManagement.resetInstance();
         ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
     }
 
+    /**
+     * Closes the client application.
+     */
     @FXML
     void closeClient() {
         ExitButton.closeClient();
     }
 
+    /**
+     * Minimizes the client application window.
+     *
+     * @param event The action event triggered by the "Minimize" button.
+     */
     @FXML
     void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
     }
 
+    /**
+     * Logs out the current user and navigates back to the login screen.
+     *
+     * @param event The action event triggered by the "Logout" button.
+     */
     public void LogOut(ActionEvent event) {
         StateManagement.resetInstance();
         LogOut.logOutToLoginScreen(event);
     }
 }
-
-

@@ -2,6 +2,11 @@ package util;
 
 public enum TypeMsg {
 
+    /**
+
+     Enumeration representing different types of messages from server to client, client to server.
+     */
+
     Disconnected("Disconnected"),
     Connected("Disconnected"),
     GetQuestionsBySubject("User asked for table questions of specific Subject"),
@@ -9,7 +14,7 @@ public enum TypeMsg {
     GetAllQuestions("User asked for all questions"),
     GetAllQuestionsResponse("Server imported all questions"),
     TryLogin("User tried to login"),
-    LoginResponse("User has been logged in"),
+    LoginResponse("User pressed Login"),
     ImportSubjects("import Subjects list for user"),
     ImportSubjectsResponse("Server imported subjects successfully"),
     ImportCourses("Import courses list for user"),

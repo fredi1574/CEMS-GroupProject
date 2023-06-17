@@ -9,7 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import util.*;
-
+/**
+ * This screen opens only for users with two roles, The user can choose which menu he wants to open
+ */
 public class PickRoleController {
 
     @FXML

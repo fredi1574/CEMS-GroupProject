@@ -1,5 +1,7 @@
 package util;
-
+/**
+ * This class contains constants that represent various paths used in the application.
+ */
 public class PathConstants {
 
     public static final String iconPath = "images/icon.png";

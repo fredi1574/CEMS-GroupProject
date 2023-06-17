@@ -19,7 +19,6 @@ public class CemsServer extends AbstractServer {
     public static MsgHandler<Object> messageFromServerToAll;
     // This holds the list of the connected clients to the server and their status
     static ObservableList<ConnectToClients> clientList = FXCollections.observableArrayList();
-    //Constructors ****************************************************
     public final String passwordSQL;
     Object obj;
     MsgHandler<Object> msg;
@@ -59,9 +58,6 @@ public class CemsServer extends AbstractServer {
                 System.out.println("Error! Client not found");
             }
         }
-
-        //In both cases of Connect and Disconnected, we will need to add Client into the
-        //list so this function covers both of them simultaneously
         try {
             clientList.add(new ConnectToClients(client.getInetAddress().getHostAddress(),
                     client.getInetAddress().getHostName(), connectionStatus));
@@ -108,6 +104,12 @@ public class CemsServer extends AbstractServer {
         MysqlConnection.closeConnection();
 
     }
+
+    /**
+
+     Sends a message to all connected clients.
+     @param msg The message to send to all clients.
+     */
 
     @Override
     public void sendToAllClients(Object msg) {
@@ -225,6 +227,12 @@ public class CemsServer extends AbstractServer {
 
     }
 
+    /**
+
+     Handles a message received from a client.
+     @param msg the message received from the client
+     @param client the connection to the client
+     */
 
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {

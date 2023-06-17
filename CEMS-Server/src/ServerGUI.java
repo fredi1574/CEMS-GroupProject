@@ -58,6 +58,9 @@ public class ServerGUI extends Application {
         }
     }
 
+    /**
+    Start gui application
+     */
     @Override
     public void start(Stage primaryStage) {
         ScreenManager.showStage(PathConstants.serverPath, PathConstants.serverIcon);

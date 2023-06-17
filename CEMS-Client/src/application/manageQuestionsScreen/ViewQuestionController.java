@@ -7,7 +7,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import util.*;
-
+/**
+ * The controller for viewing a question by head of department. The head of department can view all the course's questions
+ * in his department
+ */
 public class ViewQuestionController {
 
     @FXML

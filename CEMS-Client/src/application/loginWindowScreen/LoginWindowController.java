@@ -12,7 +12,10 @@ import Client.ExitButton;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * The controller class for the login window screen.
+ * This class handles user authentication and navigation to different screens based on the user's role.
+ */
 
 public class LoginWindowController {
 

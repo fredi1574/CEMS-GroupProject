@@ -16,7 +16,11 @@ import javafx.scene.text.Text;
 import util.*;
 
 import java.util.List;
-
+/**
+ * Controller for the "Enter Code" pop-up screen.
+ * Manages the validation of the test code, checking if the test exists and if the student is allowed to take the test,
+ * and navigating to the appropriate screen based on the test type.
+ */
 public class EnterCodePopUpController {
     public static String testID;
     StateManagement stateManagement = StateManagement.getInstance();

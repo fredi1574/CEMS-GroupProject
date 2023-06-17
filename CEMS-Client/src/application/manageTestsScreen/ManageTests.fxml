@@ -81,7 +81,6 @@
             <Font name="System Bold" size="18.0" />
         </font>
     </Label>
-    <Label layoutX="582.0" layoutY="461.0" text="*Double click on a test to view it" />
     <Separator layoutY="450.0" prefHeight="1.0" prefWidth="790.0" />
     <TableView fx:id="activeTestsTableView" layoutX="808.0" layoutY="179.0" prefHeight="230.0" prefWidth="260.0" />
     <Separator layoutX="790.0" layoutY="101.0" orientation="VERTICAL" prefHeight="729.0" prefWidth="6.0" />
@@ -93,14 +92,14 @@
     <Button layoutX="808.0" layoutY="416.0" mnemonicParsing="false" onAction="#viewTestInProgress" prefHeight="28.0" prefWidth="106.0" styleClass="regularButtons" text="View Test">
         <graphic>
             <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                <Image url="@/images/test_inprogress.png"/>
+                <Image url="@/images/test_inprogress.png" />
             </ImageView>
         </graphic>
     </Button>
     <Button layoutX="27.0" layoutY="722.0" mnemonicParsing="false" onAction="#viewTestResults" prefHeight="26.0" prefWidth="160.0" styleClass="regularButtons" text="View Test Results">
         <graphic>
             <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                <Image url="@/images/test_results.png"/>
+                <Image url="@/images/test_results.png" />
             </ImageView>
         </graphic>
     </Button>
@@ -110,7 +109,7 @@
         </font>
         <graphic>
             <ImageView fitHeight="16.0" fitWidth="16.0" translateY="1.0">
-                <Image url="@/images/test_edit.png"/>
+                <Image url="@/images/test_edit.png" />
             </ImageView>
         </graphic>
     </Button>
@@ -120,7 +119,7 @@
         </font>
         <graphic>
             <ImageView fitHeight="16.0" fitWidth="16.0" translateY="1.0">
-                <Image url="@/images/test_activate.png"/>
+                <Image url="@/images/test_activate.png" />
             </ImageView>
         </graphic>
     </Button>
