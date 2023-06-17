@@ -220,7 +220,7 @@ public class ManageTestsController {
             return;
         }
 
-        if (showError.showConfirmationPopup("Are you sure you want to activate the test?")) {
+        if (showError.showConfirmationPopup("Are you sure you want to activate the test?\nAfter activting, the test will be added to the Active Tests table")) {
 
             loadTestState(testRowData); //loads the details of the relevant test
 
