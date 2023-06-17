@@ -44,9 +44,8 @@ public class LoginWindowController {
         String username = usernameField.getText();
         String password = passwordField.getText();
         // Check if username or password fields are empty
-        if (username.isEmpty() || password.isEmpty()) {
+        if(!isNotEmptyUser(username,password)) {
             showError.showErrorPopup("Please enter both username and password.");
-            return;
         }
         List<String> UserToLogin = new ArrayList<>();
         UserToLogin.add(username);
@@ -85,7 +84,12 @@ public class LoginWindowController {
             showError.showErrorPopup("Wrong password or username");
         }
     }
-
+    public boolean isNotEmptyUser(String username, String password) {
+        if (username.isEmpty() || password.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
     /**
      * Event handler for text click.
      * Displays an information dialog with a message to contact the admin for password reset.
