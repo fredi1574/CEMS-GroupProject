@@ -35,9 +35,6 @@ public class ManualTestController {
     public static Timeline timerC;
     private static Test test;
     @FXML
-    private Button uploadBtn;
-
-    @FXML
     private static int[] seconds;
     @FXML
     private Text OneMinLeft;
@@ -169,7 +166,6 @@ public class ManualTestController {
         timerC.stop();
         Platform.runLater(() -> showError.showInfoPopup("Test is locked\nPlease submit the test and exit"));
         testIsLockedManual = true;
-        uploadBtn.setDisable(true);
     }
 
     // Method to set the isActive flag and stop the checkLockThread
