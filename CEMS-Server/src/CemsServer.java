@@ -785,27 +785,26 @@ public class CemsServer extends AbstractServer {
                 case DetectedCheating:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    String QueryOfCheating = "UPDATE cems.studentstest " +
-                            "SET suspicionOfCheating = 'YES' " +
-                            "WHERE EXISTS (" +
-                            "    SELECT 1 " +
-                            "    FROM cems.answersofstudent a1 " +
-                            "    JOIN cems.answersofstudent a2 ON a1.testID = a2.testID " +
-                            "        AND a1.questionID = a2.questionID " +
-                            "        AND a1.studentsAnswer = a2.studentsAnswer " +
-                            "        AND a1.studentID <> a2.studentID " +
-                            "    WHERE a1.testID = cems.studentstest.testID" +
-                            "      AND a1.studentID <> cems.studentstest.studentID" +  // Updated line: Compare all studentIDs
-                            "    GROUP BY a1.testID, a1.studentID " +
-                            "    HAVING COUNT(DISTINCT a1.questionID) = " +
-                            "           (SELECT COUNT(DISTINCT questionID) " +
-                            "            FROM cems.answersofstudent " +
-                            "            WHERE testID = cems.studentstest.testID" +
-                            "              AND studentID = a1.studentID)" +
-                            ") " +
-                            "AND score < 100";
+                    String QueryOfCheating  = "UPDATE cems.studentstest " +
+                        "SET suspicionOfCheating = 'YES' " +
+                        "WHERE EXISTS (" +
+                        "    SELECT 1 " +
+                        "    FROM cems.answersofstudent a1 " +
+                        "    JOIN cems.answersofstudent a2 ON a1.testID = a2.testID " +
+                        "        AND a1.questionID = a2.questionID " +
+                        "        AND a1.studentsAnswer = a2.studentsAnswer " +
+                        "        AND a1.studentID <> a2.studentID " +
+                        "    WHERE a1.testID = cems.studentstest.testID" +
+                        "      AND a1.studentID = cems.studentstest.studentID" +
+                        "    GROUP BY a1.testID, a1.studentID " +
+                        "    HAVING COUNT(DISTINCT a1.questionID) = " +
+                        "           (SELECT COUNT(DISTINCT questionID) " +
+                        "            FROM cems.answersofstudent " +
+                        "            WHERE testID = cems.studentstest.testID" +
+                        "              AND studentID = a1.studentID)" +
+                        ") " +
+                        "AND score < 100";
                     MysqlConnection.update(QueryOfCheating);
-
                     client.sendToClient(new MsgHandler<>(TypeMsg.DetectedCheatingResponse, null));
                     break;
 
