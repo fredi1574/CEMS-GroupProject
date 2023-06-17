@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -39,6 +40,8 @@ public class ManualTestController {
     private Text OneMinLeft;
     private static int TotalStudents;
     private static boolean testIsLockedManual;
+    @FXML
+    private Button downloadBtn;
 
     StateManagement stateManagement = StateManagement.getInstance();
     ActiveTest testActive;
@@ -229,6 +232,7 @@ public class ManualTestController {
             bos.flush();
             fos.flush();
             bos.close();
+            downloadBtn.setDisable(true);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
