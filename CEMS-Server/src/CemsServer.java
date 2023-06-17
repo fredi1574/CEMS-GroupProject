@@ -113,71 +113,51 @@ public class CemsServer extends AbstractServer {
     public void sendToAllClients(Object msg) {
         Thread[] clientThreadList = getClientConnections();
         messageFromServerToAll = (MsgHandler<Object>) msg;
-
         System.out.println("handleMessageFromServer ");
         System.out.println(messageFromServerToAll.getType().toString());
-
-        TypeMsg messageType = messageFromServerToAll.getType();
-
-        switch (messageType) {
+        switch (messageFromServerToAll.getType()) {
             case RequestIsDeclined:
-            case RequestIsApproved:
-            case StudentsTestIsApprovedToAllClients:
-            case LockTestForStudentByLecturer:
                 this.msg = (MsgHandler<Object>) msg;
-                this.obj = this.msg.getMsg();
-
-                for (Thread thread : clientThreadList) {
-                    ConnectionToClient client = (ConnectionToClient) thread;
+                this.obj = (String) this.msg.getMsg();
+                for (int i = 0; i < clientThreadList.length; i++) {
+                    ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
                     String name = client.getName();
-
                     if (name.equals(obj)) {
                         try {
-                            if (messageType == RequestIsDeclined) {
-                                client.sendToClient(new MsgHandler<>(RequestIsDeclinedToLecturer, "Time Request Declined"));
-                                return;
-                            }
-                            if (messageType == RequestIsApproved) {
-                                client.sendToClient(new MsgHandler<>(TestDurationApprovedPopLecturer, "Time Request Approved"));
-                                return;
-                            }
-                            if (messageType == StudentsTestIsApprovedToAllClients) {
-                                client.sendToClient(new MsgHandler<>(PopupTestApprove, "Test is Approved"));
-                                return;
-                            }
-                            if (messageType == LockTestForStudentByLecturer) {
-                                if (obj instanceof TestTypeEnum) {
-                                    if (obj.equals(TestTypeEnum.C)) {
-                                        client.sendToClient(new MsgHandler<>(TestIsForcedLockedComputerized, null));
-                                    } else {
-                                        client.sendToClient(new MsgHandler<>(TestIsForcedLockedManual, null));
-                                    }
-                                    return;
-                                }
-                            }
+                            client.sendToClient(new MsgHandler<>(TypeMsg.RequestIsDeclinedToLecturer, "Time Request Declined"));
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+
+                }
+                break;
+            case RequestIsApproved:
+                this.msg = (MsgHandler<Object>) msg;
+                this.obj = (String) this.msg.getMsg();
+                for (int i = 0; i < clientThreadList.length; i++) {
+                    ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
+                    String name = client.getName();
+                    if (name.equals(obj)) {
+                        try {
+                            client.sendToClient(new MsgHandler<>(TypeMsg.TestDurationApprovedPopLecturer, "Time Request Approved"));
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
                     }
                 }
                 break;
-
             case TestDurationChangedComputerizedSendToAll:
-            case TestDurationChangedManualSendToAll:
                 this.msg = (MsgHandler<Object>) msg;
                 this.obj = this.msg.getMsg();
-
                 if (obj instanceof Integer) {
-                    TypeMsg clientMessageType = (messageType == TestDurationChangedComputerizedSendToAll)
-                            ? TestDurationChangedComputerized : TestDurationChangedManual;
-
-                    for (Thread thread : clientThreadList) {
-                        ConnectionToClient client = (ConnectionToClient) thread;
+                    for (int i = 0; i < clientThreadList.length; i++) {
+                        ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
                         String name = (String) client.getInfo(client.getName());
-
                         if (name.equals("Student")) {
                             try {
-                                client.sendToClient(new MsgHandler<>(clientMessageType, obj));
+                                client.sendToClient(new MsgHandler<>(TypeMsg.TestDurationChangedComputerized, obj));
+
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
@@ -185,8 +165,66 @@ public class CemsServer extends AbstractServer {
                     }
                 }
                 break;
+            case TestDurationChangedManualSendToAll:
+                this.msg = (MsgHandler<Object>) msg;
+                this.obj = this.msg.getMsg();
+                if (obj instanceof Integer) {
+                    for (int i = 0; i < clientThreadList.length; i++) {
+                        ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
+                        String name = (String) client.getInfo(client.getName());
+                        if (name.equals("Student")) {
+                            try {
+                                client.sendToClient(new MsgHandler<>(TypeMsg.TestDurationChangedManual, obj));
+
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+                }
+                break;
+            case StudentsTestIsApprovedToAllClients:
+                this.msg = (MsgHandler<Object>) msg;
+                this.obj = this.msg.getMsg();
+                for (int i = 0; i < clientThreadList.length; i++) {
+                    ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
+                    String name = client.getName();
+                    if (name.equals(obj)) {
+                        try {
+                            client.sendToClient(new MsgHandler<>(TypeMsg.PopupTestApprove, "Test is Approved"));
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+                break;
+            case LockTestForStudentByLecturer:
+                this.msg = (MsgHandler<Object>) msg;
+                this.obj = this.msg.getMsg();
+                for (int i = 0; i < clientThreadList.length; i++) {
+                    ConnectionToClient client = (ConnectionToClient) clientThreadList[i];
+                    String name = (String) client.getInfo(client.getName());
+                    if (name.equals("Student")) {
+                        if (obj instanceof TestTypeEnum) {
+                            try {
+                                if (obj.equals(TestTypeEnum.C)) {
+                                    client.sendToClient(new MsgHandler<>(TypeMsg.TestIsForcedLockedComputerized, null));
+                                } else {
+                                    client.sendToClient(new MsgHandler<>(TypeMsg.TestIsForcedLockedManual, null));
+                                }
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+                }
+                break;
+
+
         }
+
     }
+
 
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
