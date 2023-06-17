@@ -35,6 +35,9 @@ public class ManualTestController {
     public static Timeline timerC;
     private static Test test;
     @FXML
+    private Button uploadBtn;
+
+    @FXML
     private static int[] seconds;
     @FXML
     private Text OneMinLeft;
@@ -129,19 +132,20 @@ public class ManualTestController {
                         ExtraOneMin = true;
                         seconds[0] = 60;
                     }
-                    else if (seconds[0] <= 0) {
+                    else if (seconds[0] <= 0 || (testIsLockedManual)) {
                         // Timer has ended, perform necessary actions
                         timerC.stop();
                         Stage currentStage = (Stage) header.getScene().getWindow();
                         if (currentStage.isShowing()) {
-                            if (checkLockTest()) {
+                            if ((checkLockTest() || (testIsLockedManual))) {
                                 saveAfterTestInfoAndDeleteFromActive();
                             }
 
                             Platform.runLater(() -> {
-
                                 if (currentStage.isShowing()) {
                                     showError.showInfoPopup("Test is over");
+                                    saveStudentsTest(0, 0, 5);
+                                    testIsLockedManual = false;
                                     currentStage.close();
                                     ScreenManager.showStage(PathConstants.mainMenuStudentPath, PathConstants.iconPath);
                                 }
@@ -165,6 +169,7 @@ public class ManualTestController {
         timerC.stop();
         Platform.runLater(() -> showError.showInfoPopup("Test is locked\nPlease submit the test and exit"));
         testIsLockedManual = true;
+        uploadBtn.setDisable(true);
     }
 
     // Method to set the isActive flag and stop the checkLockThread
@@ -210,7 +215,7 @@ public class ManualTestController {
             }
         } else {
 
-            showError.showErrorPopup("Can not do upload now the time has finished");
+            showError.showErrorPopup("Can not upload now, the time has finished");
         }
     }
 
@@ -277,7 +282,8 @@ public class ManualTestController {
         } else {
             totalForcedFinished = CalculateTotalForcedFinished();
         }
-        String[] afterTestInfo = {test.getTestDuration(), String.valueOf(totalForcedFinished), test.getId()};
+        Test updatedTest = getTestData();
+        String[] afterTestInfo = {updatedTest.getTestDuration(), String.valueOf(totalForcedFinished), test.getId()};
         MsgHandler addAfterTestInfo = new MsgHandler(TypeMsg.FinishAfterTestInfo, afterTestInfo);
         ClientUI.chat.accept(addAfterTestInfo);
         MsgHandler deleteFromActive = new MsgHandler(TypeMsg.DeactivateTest, test.getId());
@@ -340,12 +346,7 @@ public class ManualTestController {
 
         } else {
             showError.showInfoPopup("Test is over");
-            if ((checkLockTest() || (testIsLockedManual))) {
-                saveAfterTestInfoAndDeleteFromActive();
-            }
-            saveStudentsTest(75, 3, 5);
-            testIsLockedManual = false;
-            ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
+
         }
     }
 

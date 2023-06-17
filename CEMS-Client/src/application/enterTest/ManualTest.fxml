@@ -46,7 +46,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="59.0" layoutY="218.0" mnemonicParsing="false" onAction="#uploadFileBTN" prefHeight="42.0" prefWidth="160.0" styleClass="regularButtons" text="Upload Test">
+      <Button fx:id="uploadBtn" layoutX="59.0" layoutY="218.0" mnemonicParsing="false" onAction="#uploadFileBTN" prefHeight="42.0" prefWidth="160.0" styleClass="regularButtons" text="Upload Test">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -75,6 +75,11 @@
       </AnchorPane>
       <ImageView fitHeight="40.0" fitWidth="33.2" layoutX="19.0" layoutY="220.0">
          <Image url="@/images/uploadWordIcon.png" />
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="32.3" layoutX="19.0" layoutY="53.0">
+         <image>
+            <Image url="@/images/wordicon .png" />
+         </image>
       </ImageView>
    </AnchorPane>
    <Label layoutX="811.0" layoutY="472.0" prefHeight="18.0" prefWidth="31.0" text=" Save" />
