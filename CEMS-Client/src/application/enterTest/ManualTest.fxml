@@ -46,7 +46,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="uploadBtn" layoutX="59.0" layoutY="218.0" mnemonicParsing="false" onAction="#uploadFileBTN" prefHeight="42.0" prefWidth="160.0" styleClass="regularButtons" text="Upload Test">
+      <Button layoutX="59.0" layoutY="218.0" mnemonicParsing="false" onAction="#uploadFileBTN" prefHeight="42.0" prefWidth="160.0" styleClass="regularButtons" text="Upload Test">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
