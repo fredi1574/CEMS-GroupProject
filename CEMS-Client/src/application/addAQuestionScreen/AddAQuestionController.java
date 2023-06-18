@@ -193,7 +193,7 @@ public class AddAQuestionController {
                 QuestionID,
                 questionTextField.getText(),
                 Client.user.getFullName(),
-                Subject.substring(Subject.indexOf("-") + 1),
+                Subject.substring(Subject.indexOf("-") + 2),
                 Course,
                 answer1.getText(),
                 answer2.getText(),

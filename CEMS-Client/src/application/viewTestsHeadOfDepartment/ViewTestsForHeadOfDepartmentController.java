@@ -49,11 +49,12 @@ public class ViewTestsForHeadOfDepartmentController {
     public void initialize() {
         ScreenManager.dragAndDrop(header);
         usernameText.setText(Client.user.getName());
-        MsgHandler getTestTable = new MsgHandler(TypeMsg.GetAllTestsTable, null);
+        MsgHandler getTestTable = new MsgHandler(TypeMsg.GetTestsBySubject,Client.user.getUserName());
         ClientUI.chat.accept(getTestTable);
 
 // Fetch the tests table from the database
         ObservableList<Test> tests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
+        ObservableList<Test> subjectsTests = FXCollections.observableArrayList();
         ObservableList<String> columns = FXCollections.observableArrayList();
         columns.addAll("Test Number", "ID", "Subject", "Course Name", "Year", "Semester", "Session", "Author");
         TableManager.createTable(manageTestsTableView, columns);
