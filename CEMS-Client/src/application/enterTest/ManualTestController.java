@@ -364,7 +364,7 @@ public class ManualTestController {
      * @param event The event triggered by clicking the logout button.
      */
     @FXML
-    public void logOut(ActionEvent event) {
+    public void LogOut(ActionEvent event) {
         LogOut.logOutToLoginScreen(event);
     }
 
