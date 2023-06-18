@@ -14,95 +14,79 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="524.0" prefWidth="799.0" styleClass="backgroundColor" stylesheets="@/util/style.css"
-            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.OpenReportByLecturerController">
-   <AnchorPane fx:id="header" prefHeight="105.0" prefWidth="800.0"
-               style="-fx-border-color: #1d416e; -fx-border-width: 3 3 0 3;" styleClass="pageHeader">
-      <Label alignment="CENTER" layoutX="288.0" layoutY="19.0" prefHeight="47.0" prefWidth="224.0"
-             style="-fx-font-weight: Bold;" text="Report For:" textFill="#fafafa">
+<AnchorPane prefHeight="524.0" prefWidth="799.0" styleClass="backgroundColor" stylesheets="@/util/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.OpenReportByLecturerController">
+   <AnchorPane fx:id="header" prefHeight="105.0" prefWidth="800.0" style="-fx-border-color: #1d416e; -fx-border-width: 3 3 0 3;" styleClass="pageHeader">
+      <Label alignment="CENTER" layoutX="288.0" layoutY="19.0" prefHeight="47.0" prefWidth="224.0" style="-fx-font-weight: Bold;" text="Report For:" textFill="#fafafa">
          <font>
-            <Font name="Trebuchet MS" size="40.0"/>
+            <Font name="Trebuchet MS" size="40.0" />
          </font>
       </Label>
       <ImageView fitHeight="73.0" fitWidth="196.0" layoutX="14.0" layoutY="16.0" preserveRatio="true">
-         <Image url="@/images/Logo_Transparent_Bright.png"/>
+         <Image url="@/images/Logo_Transparent_Bright.png" />
       </ImageView>
-      <Button layoutX="761.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
-              onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X"/>
-      <Button layoutX="721.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false"
-              onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_"/>
-      <Text fx:id="studentsNameLabel" fill="WHITE" layoutX="288.0" layoutY="93.0" strokeType="OUTSIDE"
-            strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="224.0">
+      <Button layoutX="761.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#closeClient" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="X" />
+      <Button layoutX="721.0" layoutY="8.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="25.0" styleClass="regularButtons" text="_" />
+      <Text fx:id="studentsNameLabel" fill="WHITE" layoutX="288.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="224.0">
          <font>
-            <Font name="System Bold" size="25.0"/>
+            <Font name="System Bold" size="25.0" />
          </font>
       </Text>
    </AnchorPane>
-   <AnchorPane layoutY="101.0" prefHeight="434.0" prefWidth="800.0"
-               style="-fx-border-color: #1d416e; -fx-border-width: 0 3 3 3;">
+   <AnchorPane layoutY="101.0" prefHeight="434.0" prefWidth="800.0" style="-fx-border-color: #1d416e; -fx-border-width: 0 3 3 3;">
       <VBox alignment="CENTER_LEFT" prefHeight="356.0" prefWidth="782.0">
          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-            <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="196.0" text="Total number of tests:"
-                   textFill="#7799c2">
+            <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="247.0" text="Total number of test taken:" textFill="#7799c2">
                <font>
-                  <Font name="Trebuchet MS Bold" size="17.0"/>
+                  <Font name="Trebuchet MS Bold" size="17.0" />
                </font>
                <padding>
-                  <Insets left="10.0"/>
+                  <Insets left="10.0" />
                </padding>
             </Label>
-            <Text fx:id="testsNumberText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
-                  wrappingWidth="30.5367431640625"/>
+            <Text fx:id="testsNumberText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="30.5367431640625" />
          </HBox>
          <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="757.0">
-            <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="79.0" text=" Median:"
-                   textFill="#7799c2">
+            <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="79.0" text=" Median:" textFill="#7799c2">
                <font>
-                  <Font name="Trebuchet MS Bold" size="17.0"/>
+                  <Font name="Trebuchet MS Bold" size="17.0" />
                </font>
                <padding>
-                  <Insets left="10.0"/>
+                  <Insets left="10.0" />
                </padding>
                <HBox.margin>
-                  <Insets right="2.0"/>
+                  <Insets right="2.0" />
                </HBox.margin>
             </Label>
-            <Text fx:id="medianText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"/>
+            <Text fx:id="medianText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
          </HBox>
          <HBox alignment="CENTER_LEFT" prefHeight="96.0" prefWidth="200.0">
-            <Label alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="86.0" text="Average:"
-                   textFill="#7799c2">
+            <Label alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="86.0" text="Average:" textFill="#7799c2">
                <font>
-                  <Font name="Trebuchet MS Bold" size="17.0"/>
+                  <Font name="Trebuchet MS Bold" size="17.0" />
                </font>
                <padding>
-                  <Insets left="10.0"/>
+                  <Insets left="10.0" />
                </padding>
                <HBox.margin>
-                  <Insets right="2.0"/>
+                  <Insets right="2.0" />
                </HBox.margin>
             </Label>
-            <Text fx:id="averageText" strokeType="OUTSIDE" strokeWidth="0.0" text="averageText"/>
+            <Text fx:id="averageText" strokeType="OUTSIDE" strokeWidth="0.0" text="averageText" />
          </HBox>
       </VBox>
-      <BarChart fx:id="reportGraph" animated="false" layoutX="259.0" layoutY="4.0" legendSide="LEFT"
-                legendVisible="false" prefHeight="419.0" prefWidth="534.0" title="Grades distribution">
+      <BarChart fx:id="reportGraph" animated="false" layoutX="259.0" layoutY="4.0" legendSide="LEFT" legendVisible="false" prefHeight="419.0" prefWidth="534.0" title="Grades distribution">
          <xAxis>
-            <CategoryAxis label="Courses" prefHeight="41.0" prefWidth="569.0" side="BOTTOM" tickLabelFill="#306ebd"/>
+            <CategoryAxis label="Courses" prefHeight="41.0" prefWidth="569.0" side="BOTTOM" tickLabelFill="#306ebd" />
          </xAxis>
          <yAxis>
-            <NumberAxis animated="false" label="Average" prefHeight="439.0" prefWidth="49.0" side="LEFT"
-                        tickLabelFill="#306ebd" tickLength="10.0"/>
+            <NumberAxis animated="false" label="Average" prefHeight="439.0" prefWidth="49.0" side="LEFT" tickLabelFill="#306ebd" tickLength="10.0" />
          </yAxis>
       </BarChart>
-      <Label layoutX="24.0" layoutY="409.0" text="Back"/>
-      <Button contentDisplay="CENTER" layoutX="10.0" layoutY="355.0" minWidth="35.0" mnemonicParsing="false"
-              onAction="#goBackToPreviousScreen" prefHeight="54.0" prefWidth="54.0" styleClass="subButtons"
-              textFill="#0d0d0d">
+      <Label layoutX="24.0" layoutY="409.0" text="Back" />
+      <Button contentDisplay="CENTER" layoutX="10.0" layoutY="355.0" minWidth="35.0" mnemonicParsing="false" onAction="#goBackToPreviousScreen" prefHeight="54.0" prefWidth="54.0" styleClass="subButtons" textFill="#0d0d0d">
          <graphic>
             <ImageView fitHeight="36.0" fitWidth="38.0">
-               <Image url="@/images/back.png"/>
+               <Image url="@/images/back.png" />
             </ImageView>
          </graphic>
       </Button>
