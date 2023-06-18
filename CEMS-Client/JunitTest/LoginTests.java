@@ -7,8 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import util.*;
 import Client.ExitButton;
 
@@ -16,6 +16,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -51,13 +53,13 @@ public class LoginTests {
      */
 
 
-
     /**
      * Functionality: Test whether the method returns false when the username is empty and the password is entered.
      * Input: userName = "", password = "4"
      * Expected result: false
      */
-    @Test
+
+    @org.junit.jupiter.api.Test
     public void Login_EnterPasswordButNotUser() {
         userName = "";
         password = "4";
@@ -69,7 +71,8 @@ public class LoginTests {
      * Input: userName = "Yuval", password = ""
      * Expected result: false
      */
-    @Test
+
+    @org.junit.jupiter.api.Test
     public void Login_EnterUserButNotPassword() {
         userName = "Yuval";
         password = "";
@@ -81,7 +84,8 @@ public class LoginTests {
      * Input: userName = "", password = ""
      * Expected result: false
      */
-    @Test
+
+    @org.junit.jupiter.api.Test
     public void Login_NotEnterUserAndNotPassword() {
         userName = "";
         password = "";
@@ -93,7 +97,8 @@ public class LoginTests {
      * Input: userName = "AbedTayer", password = "a"
      * Expected result: true
      */
-    @Test
+
+    @org.junit.jupiter.api.Test
     public void Login_EnterUserAndPassword() {
         userName = "AbedTayer";
         password = "a";
@@ -107,7 +112,13 @@ public class LoginTests {
     }
 
 
-    @Test
+    /**
+     * Functionality: Test whether the isNotEmptyUser method handles the case when both the username and password are null.
+     * Input: userName = null, password = null
+     * Expected result: The method should throw an exception and the expected exception message should be "null"
+     */
+
+    @org.junit.jupiter.api.Test
     public void Login_EnterNullUserAndNullPassword() {
         String expected = "null";
         userName = null;
@@ -119,14 +130,48 @@ public class LoginTests {
         }
 
     }
+    /**
+     * Functionality: Test whether the login method returns the role "Student" when a valid username and password are entered.
+     * Input: Username = "AbedTayer", Password = "a"
+     * Expected result: The role should be "Student"
+     */
 
+    @org.junit.jupiter.api.Test
+    public void Login_Role_WithRoleStudent() throws SQLException {
 
-    @Test
+        // Arrange
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement statement = connection.prepareStatement("SELECT id, firstName," +
+                     " lastName, email, role, isLoggedIn,phoneNumber " +
+                     "FROM user  WHERE BINARY username = ? AND password = ?")) {
+            statement.setString(1, "AbedTayer");
+            statement.setString(2, "a");
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    String role = resultSet.getString("role");
+                    int count = resultSet.getInt(1);
+                    assertEquals(role,"Student");
+                }
+
+            }
+        }  catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    /**
+     * Functionality: Test whether the login method returns the role "Lecturer" when a valid username and password are entered.
+     * Input: Username = "MayCaspi", Password = "a"
+     * Expected result: The role should be "Lecturer"
+     */
+
+    @org.junit.jupiter.api.Test
     public void Login_Role_WithRoleLecturer() throws SQLException {
 
         // Arrange
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("SELECT id, firstName, lastName, email, role, isLoggedIn,phoneNumber " +
+             PreparedStatement statement = connection.prepareStatement("SELECT id, firstName," +
+                     " lastName, email, role, isLoggedIn,phoneNumber " +
                      "FROM user  WHERE BINARY username = ? AND password = ?")) {
             statement.setString(1, "MayCaspi");
             statement.setString(2, "a");
@@ -142,12 +187,19 @@ public class LoginTests {
             e.printStackTrace();
         }
     }
-    @Test
+    /**
+     * Functionality: Test whether the login method returns the role "Head of Department/Lecturer" when a valid username and password are entered.
+     * Input: Username = "Fredi Bulshtein", Password = "a"
+     * Expected result: The role should be "Head of Department/Lecturer"
+     */
+
+    @org.junit.jupiter.api.Test
     public void Login_Role_WithRoleHeadOfDepartment() throws SQLException {
 
         // Arrange
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("SELECT id, firstName, lastName, email, role, isLoggedIn,phoneNumber " +
+             PreparedStatement statement = connection.prepareStatement("SELECT id, firstName," +
+                     " lastName, email, role, isLoggedIn,phoneNumber " +
                      "FROM user  WHERE BINARY username = ? AND password = ?")) {
             statement.setString(1, "Fredi Bulshtein");
             statement.setString(2, "a");
@@ -163,12 +215,19 @@ public class LoginTests {
             e.printStackTrace();
         }
     }
-    @Test
+    /**
+     * Functionality: Test whether the login method returns null for the role when an invalid username and password are entered.
+     * Input: Username = "Shome", Password = "a"
+     * Expected result: The role should be null
+     */
+
+    @org.junit.jupiter.api.Test
     public void Login_Role_WithRoleisNull() throws SQLException {
 
         // Arrange
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("SELECT id, firstName, lastName, email, role, isLoggedIn,phoneNumber " +
+             PreparedStatement statement = connection.prepareStatement("SELECT id, firstName," +
+                     " lastName, email, role, isLoggedIn,phoneNumber " +
                      "FROM user  WHERE BINARY username = ? AND password = ?")) {
             statement.setString(1, "Shome");
             statement.setString(2, "a");
@@ -184,12 +243,20 @@ public class LoginTests {
             e.printStackTrace();
         }
     }
-    @Test
+    /**
+     * Functionality: Test whether the login method successfully finds the user details when a valid username and password are entered.
+     * Input: Username = "AbedTayer", Password = "a"
+     * Expected result: The user details should be found (count != 0)
+     */
+
+    @org.junit.jupiter.api.Test
     public void Login_UserDetailsFoundSuccefully() throws SQLException {
 
         // Arrange
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM user WHERE username = ? AND password = ?")) {
+             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM user WHERE username = ? AND" +
+                     " password = ?")) {
+
             statement.setString(1, "AbedTayer");
             statement.setString(2, "a");
 
@@ -203,12 +270,19 @@ public class LoginTests {
             e.printStackTrace();
         }
     }
+    /**
+     * Functionality: Test whether the login method does not find the user details when an invalid username and password are entered.
+     * Input: Username = "Sergi", Password = "a"
+     * Expected result: The user details should not be found (count == 0)
+     */
+
     @Test
     public void Login_UserDetailsNotFoundSuccefully() throws SQLException {
 
         // Arrange
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM user WHERE username = ? AND password = ?")) {
+             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM user WHERE username = ? AND " +
+                     "password = ?")) {
             statement.setString(1, "Sergi");
             statement.setString(2, "a");
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -221,5 +295,5 @@ public class LoginTests {
             e.printStackTrace();
         }
     }
-
 }
+
