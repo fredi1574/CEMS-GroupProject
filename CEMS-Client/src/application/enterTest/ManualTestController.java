@@ -52,6 +52,8 @@ public class ManualTestController {
     File selectedFile;
     @FXML
     private AnchorPane header;
+    @FXML
+    private Text CourseNameText;
 
     @FXML
     private TextField EndTimeText;
@@ -94,12 +96,12 @@ public class ManualTestController {
                 break;
             }
 
-
         }
         if (test == null) {
-            showError.showErrorPopup("No Test Now");
+            showError.showErrorPopup("No Test Found");
             return;
         }
+        CourseNameText.setText(test.getCourseName());
         fetchTestDuration();
 
     }

@@ -36,7 +36,7 @@
       </Button>
    </AnchorPane>
    <AnchorPane layoutX="42.0" layoutY="153.0" prefHeight="295.0" prefWidth="451.0" style="-fx-background-color: #dae5f3; -fx-background-radius: 15;">
-      <Text layoutX="19.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Algebra" wrappingWidth="97.0">
+      <Text fx:id="CourseNameText" layoutX="19.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Algebra" wrappingWidth="97.0">
          <font>
             <Font size="24.0" />
          </font>
