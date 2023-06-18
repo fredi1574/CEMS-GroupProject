@@ -110,9 +110,6 @@ public class OpenReportByCourseController {
                 ? (scoreValues.get(numberOfStudentTests / 2 - 1) + scoreValues.get(numberOfStudentTests / 2)) / 2.0
                 : scoreValues.get(numberOfStudentTests / 2);
 
-        System.out.println("Total number of student tests: " + numberOfStudentTests);
-        System.out.println("Total average score: " + averageScore);
-        System.out.println("Total median score: " + medianScore);
     }
 
     /**
