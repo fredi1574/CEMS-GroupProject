@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/CEMS-Client/CEMS-Client.iml" filepath="$PROJECT_DIR$/CEMS-Client/CEMS-Client.iml" />
       <module fileurl="file://$PROJECT_DIR$/CEMS-Common/CEMS-Common.iml" filepath="$PROJECT_DIR$/CEMS-Common/CEMS-Common.iml" />
       <module fileurl="file://$PROJECT_DIR$/CEMS-Server/CEMS-Server.iml" filepath="$PROJECT_DIR$/CEMS-Server/CEMS-Server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CEMS-UnitTests/CEMS-UnitTests.iml" filepath="$PROJECT_DIR$/CEMS-UnitTests/CEMS-UnitTests.iml" />
       <module fileurl="file://$PROJECT_DIR$/OCSF/OCSF.iml" filepath="$PROJECT_DIR$/OCSF/OCSF.iml" />
     </modules>
   </component>

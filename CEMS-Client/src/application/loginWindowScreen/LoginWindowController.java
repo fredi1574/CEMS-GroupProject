@@ -2,16 +2,17 @@ package application.loginWindowScreen;
 
 import Client.Client;
 import Client.ClientUI;
+import Client.ExitButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import util.*;
-import Client.ExitButton;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * The controller class for the login window screen.
  * This class handles user authentication and navigation to different screens based on the user's role.
@@ -46,10 +47,13 @@ public class LoginWindowController {
     public void logIN(ActionEvent event) {
         String username = usernameField.getText();
         String password = passwordField.getText();
+
         // Check if username or password fields are empty
-        if(!isNotEmptyUser(username,password)) {
+        if (!isNotEmptyUser(username, password)) {
             showError.showErrorPopup("Please enter both username and password.");
+            return;
         }
+
         List<String> UserToLogin = new ArrayList<>();
         UserToLogin.add(username);
         UserToLogin.add(password);
@@ -62,7 +66,7 @@ public class LoginWindowController {
                     showError.showErrorPopup("User is already logged in");
                     return;
                 }
-                String[] LoginValues = {Client.user.getId(),"1"};
+                String[] LoginValues = {Client.user.getId(), "1"};
                 MsgHandler<String[]> changeLoggedInValue = new MsgHandler<>(TypeMsg.ChangeIsLoggedValue, LoginValues);
                 ClientUI.chat.accept(changeLoggedInValue);
                 switch (Client.user.getRole()) {
@@ -87,12 +91,14 @@ public class LoginWindowController {
             showError.showErrorPopup("Wrong password or username");
         }
     }
+
     public boolean isNotEmptyUser(String username, String password) {
         if (username.isEmpty() || password.isEmpty()) {
             return false;
         }
         return true;
     }
+
     /**
      * Event handler for text click.
      * Displays an information dialog with a message to contact the admin for password reset.

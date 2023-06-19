@@ -5,12 +5,12 @@ import application.enterTest.QuestionsComputerizedTestAnswerController;
 import application.mainMenuScreen.MainMenuStudentController;
 import application.manageTestsScreen.ViewActiveTestController;
 import application.viewReportsScreen.ViewReportsController;
+import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.ShowReportByLecturerController;
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.OpenReportByCourseController;
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.OpenReportByLecturerController;
 import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.openRepoGraphs.OpenReportByStudentController;
-import application.viewReportsScreen.ViewSpecificReportHeadOfDepart.ShowReportByLecturerController;
 import client.AbstractClient;
-import entity.*;
+import entity.User;
 import javafx.application.Platform;
 import util.ChatIF;
 import util.MsgHandler;
@@ -20,16 +20,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * The Client class represents a client that connects to a server and communicates with it.
  * It extends the AbstractClient class and overrides the handleMessageFromServer method.
  */
 public class Client extends AbstractClient {
-    public List<Object> studentTests;
-    private final ChatIF clientUI;
-    private boolean waitResponse = false;
+    public static final OpenReportByStudentController HODPstudentReportcontroller = new OpenReportByStudentController();
+    public static final ShowReportByLecturerController HODPshowReportByLecturerController = new ShowReportByLecturerController();
+    public static final OpenReportByLecturerController HODPopenReporLecturerController = new OpenReportByLecturerController();
+    public static final OpenReportByCourseController HODPopenReportCourseController = new OpenReportByCourseController();
+    public static final ViewReportsController LectureReportsController = new ViewReportsController();
+    public static final QuestionsComputerizedTestAnswerController StudentInTest = new QuestionsComputerizedTestAnswerController();
+    public static final ViewActiveTestController activeTestController = new ViewActiveTestController();
+    public static final MainMenuStudentController menuStudentController = new MainMenuStudentController();
+    public static final ManualTestController manualTest = new ManualTestController();
     public static MsgHandler<Object> messageFromServer;
+    public static User user;
+    private final ChatIF clientUI;
+    public List<Object> studentTests;
     public List<Object> questions;
     public List<Object> subjects;
     public List<Object> courses;
@@ -46,32 +54,21 @@ public class Client extends AbstractClient {
     public Object NumOfRegistered;
     public Object NumOfFinished;
     public Object NumOfAttended;
-
-    public static User user;
-
     public List<Object> requests;
-    public static final OpenReportByStudentController HODPstudentReportcontroller = new OpenReportByStudentController();
-    public static final ShowReportByLecturerController HODPshowReportByLecturerController = new ShowReportByLecturerController();
-    public static final OpenReportByLecturerController HODPopenReporLecturerController = new OpenReportByLecturerController();
-    public static final OpenReportByCourseController HODPopenReportCourseController = new OpenReportByCourseController();
-    public static final ViewReportsController LectureReportsController = new ViewReportsController();
-    public static final QuestionsComputerizedTestAnswerController StudentInTest = new QuestionsComputerizedTestAnswerController();
-    public static final ViewActiveTestController activeTestController = new ViewActiveTestController();
-    public static final MainMenuStudentController menuStudentController = new MainMenuStudentController();
-    public static final ManualTestController manualTest = new ManualTestController();
-
+    private boolean waitResponse = false;
 
     /**
      * Constructs a Client object.
      *
-     * @param host      The host name of the server
-     * @param port      The port number of the server
-     * @param clientUI  The user interface for the client
+     * @param host     The host name of the server
+     * @param port     The port number of the server
+     * @param clientUI The user interface for the client
      */
     public Client(String host, int port, ChatIF clientUI) {
         super(host, port);
         this.clientUI = clientUI;
     }
+
     /**
      * Handles the message received from the server.
      *
@@ -167,7 +164,7 @@ public class Client extends AbstractClient {
             case RequestIsDeclinedToLecturer://check delete
             case TestDurationDeclinedPopLecturer:
                 activeTestController.showRequestDeclinedPopUp();
-              break;
+                break;
             case StudentReportImported:
                 HODPstudentReportcontroller.reportCalc((ArrayList<Object>) messageFromServer.getMsg());
                 break;
@@ -251,6 +248,7 @@ public class Client extends AbstractClient {
                 break;
         }
     }
+
     /**
      * Handles a message received from the client's user interface.
      * This method sends the message to the server and waits for a response.
@@ -288,6 +286,4 @@ public class Client extends AbstractClient {
         }
         System.exit(0);
     }
-
-
 }
