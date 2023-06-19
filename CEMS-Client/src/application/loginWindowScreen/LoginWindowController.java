@@ -2,8 +2,10 @@ package application.loginWindowScreen;
 //import CEMS-Server.MysqlConnection;
 import Client.Client;
 import Client.ClientUI;
+import com.mysql.cj.MysqlConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -24,9 +26,16 @@ public class LoginWindowController {
     @FXML
     public PasswordField passwordField;
     private IServerClientCommunication iServerClientCommunication;
+    private MysqlConnection mysqlConnection;
+    private boolean errorMessageDisplayed;
 
+    public void setMysqlConnection(MysqlConnection mysqlConnection) {
+        this.mysqlConnection = mysqlConnection;
+    }
 
-
+    public boolean isErrorMessageDisplayed() {
+        return errorMessageDisplayed;
+    }
 
     public void setiServerClientCommunication(IServerClientCommunication iServerClientCommunication) {
         this.iServerClientCommunication = iServerClientCommunication;
@@ -100,6 +109,16 @@ public class LoginWindowController {
             return false;
         }
         return true;
+    }
+    public void showErrorPopup(String errorMessage) {
+        // Implement the logic to display an error popup with the provided error message.
+        // You can use JavaFX Alert or any other UI component for displaying the error.
+        // Example:
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(errorMessage);
+        alert.showAndWait();
     }
 
     /**

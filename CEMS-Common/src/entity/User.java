@@ -31,6 +31,9 @@ public class User implements Serializable {
         this.isLoggedIn = isLoggedIn;
         this.phone = phone;
     }
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     // Getters and Setters
 

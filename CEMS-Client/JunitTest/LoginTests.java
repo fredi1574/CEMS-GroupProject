@@ -1,19 +1,9 @@
 
-import Client.Client;
-import Client.ClientUI;
 import application.loginWindowScreen.LoginWindowController;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import util.*;
-import Client.ExitButton;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -294,6 +284,9 @@ public class LoginTests {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static class tests {
     }
 }
 
