@@ -32,7 +32,7 @@ public class LoginTests {
     private String role;
     private static final String DB_URL = "jdbc:mysql://localhost:3306/cems?serverTimezone=UTC&useSSL=false";;
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "AB12345tre";
+    private static final String DB_PASSWORD = "Aa123456";
 
     @BeforeEach
     void setUp() {
