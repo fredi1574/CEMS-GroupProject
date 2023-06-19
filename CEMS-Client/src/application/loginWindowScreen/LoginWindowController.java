@@ -55,6 +55,7 @@ public class LoginWindowController {
         // Check if username or password fields are empty
         if(!isNotEmptyUser(username,password)) {
             showError.showErrorPopup("Please enter both username and password.");
+            return;
         }
         List<String> UserToLogin = new ArrayList<>();
         UserToLogin.add(username);
