@@ -1,15 +1,18 @@
 import Client.Client;
 import Client.ClientUI;
 import application.loginWindowScreen.LoginWindowController;
+import entity.User;
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import util.MsgHandler;
+import util.PathConstants;
 import util.TypeMsg;
 
 import java.util.ArrayList;
@@ -87,4 +90,17 @@ public class tests {
         verify(loginWindowController, times(1)).showErrorPopup("No such role.");
 
     }
+    @Test
+    public void testLogin_Role_WithRoleStudent() {
+        // Arrange
+        String username = "AbedTayer";
+        String password = "a";
+
+        // Mock the behavior of the authenticateUser method
+        when(MysqlConnectionStub.authenticateUser(username, password)).thenReturn(new User("1", "Abed", "Tayer", "username", "password", "email", "Student", 1, "phone"));
+        // Act
+        loginWindowController.logIN(new ActionEvent());
+        // Assert
+    }
+
 }
