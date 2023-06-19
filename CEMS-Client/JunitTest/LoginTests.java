@@ -59,7 +59,7 @@ public class LoginTests {
      * Expected result: false
      */
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void Login_EnterPasswordButNotUser() {
         userName = "";
         password = "4";
@@ -72,7 +72,7 @@ public class LoginTests {
      * Expected result: false
      */
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void Login_EnterUserButNotPassword() {
         userName = "Yuval";
         password = "";
@@ -85,7 +85,7 @@ public class LoginTests {
      * Expected result: false
      */
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void Login_NotEnterUserAndNotPassword() {
         userName = "";
         password = "";
@@ -98,7 +98,7 @@ public class LoginTests {
      * Expected result: true
      */
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void Login_EnterUserAndPassword() {
         userName = "AbedTayer";
         password = "a";
@@ -118,7 +118,7 @@ public class LoginTests {
      * Expected result: The method should throw an exception and the expected exception message should be "null"
      */
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void Login_EnterNullUserAndNullPassword() {
         String expected = "null";
         userName = null;
@@ -136,7 +136,7 @@ public class LoginTests {
      * Expected result: The role should be "Student"
      */
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void Login_Role_WithRoleStudent() throws SQLException {
 
         // Arrange
@@ -165,7 +165,7 @@ public class LoginTests {
      * Expected result: The role should be "Lecturer"
      */
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void Login_Role_WithRoleLecturer() throws SQLException {
 
         // Arrange
@@ -193,7 +193,7 @@ public class LoginTests {
      * Expected result: The role should be "Head of Department/Lecturer"
      */
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void Login_Role_WithRoleHeadOfDepartment() throws SQLException {
 
         // Arrange
@@ -221,7 +221,7 @@ public class LoginTests {
      * Expected result: The role should be null
      */
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void Login_Role_WithRoleisNull() throws SQLException {
 
         // Arrange
@@ -249,7 +249,7 @@ public class LoginTests {
      * Expected result: The user details should be found (count != 0)
      */
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void Login_UserDetailsFoundSuccefully() throws SQLException {
 
         // Arrange
