@@ -8,7 +8,7 @@ import java.util.Objects;
  *
  * @param <Object> The type of the message object.
  */
-public class MsgHandler<Object> implements Serializable {
+public class MsgHandler<Object> implements Serializable, IMsgHandler<Object> {
 
     private TypeMsg type;
     private Object msg;
@@ -48,6 +48,7 @@ public class MsgHandler<Object> implements Serializable {
      *
      * @return The message object.
      */
+    @Override
     public Object getMsg() {
         return msg;
     }
@@ -57,6 +58,7 @@ public class MsgHandler<Object> implements Serializable {
      *
      * @param msg The message object.
      */
+    @Override
     public void setMsg(Object msg) {
         this.msg = msg;
     }
