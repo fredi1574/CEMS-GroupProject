@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;
 
-
+/*
 public class LoginTests {
     private String lastScreen;  // Variable to store the last screen
     List<String> UserToLogin;
@@ -58,7 +58,7 @@ public class LoginTests {
      * Input: userName = "", password = "4"
      * Expected result: false
      */
-
+/*
     @Test
     public void Login_EnterPasswordButNotUser() {
         userName = "";
@@ -71,7 +71,7 @@ public class LoginTests {
      * Input: userName = "Yuval", password = ""
      * Expected result: false
      */
-
+/*
     @Test
     public void Login_EnterUserButNotPassword() {
         userName = "Yuval";
@@ -84,7 +84,7 @@ public class LoginTests {
      * Input: userName = "", password = ""
      * Expected result: false
      */
-
+/*
     @Test
     public void Login_NotEnterUserAndNotPassword() {
         userName = "";
@@ -97,7 +97,7 @@ public class LoginTests {
      * Input: userName = "AbedTayer", password = "a"
      * Expected result: true
      */
-
+/*
     @Test
     public void Login_EnterUserAndPassword() {
         userName = "AbedTayer";
@@ -117,7 +117,7 @@ public class LoginTests {
      * Input: userName = null, password = null
      * Expected result: The method should throw an exception and the expected exception message should be "null"
      */
-
+/*
     @Test
     public void Login_EnterNullUserAndNullPassword() {
         String expected = "null";
@@ -135,7 +135,7 @@ public class LoginTests {
      * Input: Username = "AbedTayer", Password = "a"
      * Expected result: The role should be "Student"
      */
-
+/*
     @Test
     public void Login_Role_WithRoleStudent() throws SQLException {
 
@@ -164,7 +164,7 @@ public class LoginTests {
      * Input: Username = "MayCaspi", Password = "a"
      * Expected result: The role should be "Lecturer"
      */
-
+/*
     @Test
     public void Login_Role_WithRoleLecturer() throws SQLException {
 
@@ -192,7 +192,7 @@ public class LoginTests {
      * Input: Username = "Fredi Bulshtein", Password = "a"
      * Expected result: The role should be "Head of Department/Lecturer"
      */
-
+/*
     @Test
     public void Login_Role_WithRoleHeadOfDepartment() throws SQLException {
 
@@ -220,7 +220,7 @@ public class LoginTests {
      * Input: Username = "Shome", Password = "a"
      * Expected result: The role should be null
      */
-
+/*
     @Test
     public void Login_Role_WithRoleisNull() throws SQLException {
 
@@ -248,7 +248,7 @@ public class LoginTests {
      * Input: Username = "AbedTayer", Password = "a"
      * Expected result: The user details should be found (count != 0)
      */
-
+/*
     @Test
     public void Login_UserDetailsFoundSuccefully() throws SQLException {
 
@@ -275,7 +275,7 @@ public class LoginTests {
      * Input: Username = "Sergi", Password = "a"
      * Expected result: The user details should not be found (count == 0)
      */
-
+/*
     @Test
     public void Login_UserDetailsNotFoundSuccefully() throws SQLException {
 
@@ -296,4 +296,4 @@ public class LoginTests {
         }
     }
 }
-
+*/

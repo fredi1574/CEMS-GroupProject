@@ -1,5 +1,5 @@
 package application.loginWindowScreen;
-//import CEMS-Server.MysqlConnection;
+import entity.IServerClientCommunication;
 import Client.Client;
 import Client.ClientUI;
 import javafx.event.ActionEvent;
@@ -50,11 +50,19 @@ public class LoginWindowController {
      */
     @FXML
     public void logIN(ActionEvent event) {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
+        String username;
+        String password;
+        try {
+             username = usernameField.getText();
+             password = passwordField.getText();
+        } catch(Exception exception){
+            username = "";
+            password = "";
+            }
         // Check if username or password fields are empty
         if(!isNotEmptyUser(username,password)) {
             showError.showErrorPopup("Please enter both username and password.");
+            return;
         }
         List<String> UserToLogin = new ArrayList<>();
         UserToLogin.add(username);
