@@ -1,4 +1,5 @@
 package application.loginWindowScreen;
+import entity.ILoginGetUserInput;
 import entity.IServerClientCommunication;
 import Client.Client;
 import Client.ClientUI;
@@ -9,13 +10,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import util.*;
 import Client.ExitButton;
-
+import Client.ClientControl;
+import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class LoginWindowController {
+
+    ClientControl clientControl = new ClientControl("",0);
     private  Connection  connection;
     @FXML
     private AnchorPane header;
@@ -23,20 +27,89 @@ public class LoginWindowController {
     public TextField usernameField;
     @FXML
     public PasswordField passwordField;
-    private IServerClientCommunication iServerClientCommunication;
 
 
+    private IServerClientCommunication iServerClientCommunication = new LoginServerClientCommunication();
 
+    public LoginWindowController() throws IOException {
+
+    }
 
     public void setiServerClientCommunication(IServerClientCommunication iServerClientCommunication) {
         this.iServerClientCommunication = iServerClientCommunication;
     }
 
+    private ILoginGetUserInput iLoginGetUserInput = new LoginILoginGetUserInput();
 
-    /**
-     * This method is called when the FXML file is loaded.
-     * It enables dragging and dropping of the application window using the header pane.
-     */
+    public void setiLoginGetUserInput(ILoginGetUserInput iLoginGetUserInput) {
+        this.iLoginGetUserInput = iLoginGetUserInput;
+    }
+
+
+    private class LoginServerClientCommunication implements IServerClientCommunication{
+
+        @Override
+        public void sendToServer(Object msg) throws IOException {
+
+            ClientControl.accept(msg);
+
+        }
+
+        @Override
+        public MsgHandler getServerMsg() {
+
+            return ClientControl.getServerMsg();
+        }
+
+        @Override
+        public void popUpError(String msg) {
+            showError.showErrorPopup(msg);
+
+        }
+
+        @Override
+        public void popUpMessage(String msg) {
+            showError.showErrorPopup(msg);
+
+        }
+
+        @Override
+        public Object getUser() {
+            return ClientControl.getUser();
+        }
+
+        @Override
+        public void setUser(Object user) {
+            ClientControl.setUser(user);
+        }
+
+    }
+
+
+    private class LoginILoginGetUserInput implements ILoginGetUserInput {
+
+        @Override
+        public String getUserID() {
+
+            return usernameField.getText();
+        }
+
+        @Override
+        public String getUserPassword() {
+
+            return passwordField.getText();
+        }
+
+        @Override
+        public String getUserRole() {
+            return null;
+        }
+    }
+
+        /**
+         * This method is called when the FXML file is loaded.
+         * It enables dragging and dropping of the application window using the header pane.
+         */
 
 
 
@@ -52,13 +125,8 @@ public class LoginWindowController {
     public void logIN(ActionEvent event) {
         String username;
         String password;
-        try {
              username = usernameField.getText();
              password = passwordField.getText();
-        } catch(Exception exception){
-            username = "";
-            password = "";
-            }
         // Check if username or password fields are empty
         if(!isNotEmptyUser(username,password)) {
             showError.showErrorPopup("Please enter both username and password.");

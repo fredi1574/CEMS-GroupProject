@@ -2,9 +2,20 @@ package entity;
 
 import util.MsgHandler;
 
+import java.io.IOException;
+
 public interface IServerClientCommunication {
 
-    public short sendToServer(Object msg);
+    public void sendToServer(Object msg) throws IOException;
 
     public MsgHandler getServerMsg();
+
+    public void popUpError(String msg);
+
+    public void popUpMessage(String msg);
+
+    public Object getUser();
+
+    public void setUser(Object user);
+
 }

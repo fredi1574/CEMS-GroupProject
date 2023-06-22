@@ -1,6 +1,7 @@
 package Client;
 
 import util.ChatIF;
+import util.MsgHandler;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,13 +9,14 @@ import java.util.List;
 public class ClientControl implements ChatIF {
 
 	public static int DEFAULT_PORT ;
-
+	static Object currentUser;
 	//Instance variables **********************************************
 
 	/**
 	 * The instance of the client that created this ConsoleChat.
 	 */
-	Client client;
+	public static Object serverMsg;
+	static Client client;
 
 //Constructors ****************************************************
 
@@ -31,6 +33,8 @@ public class ClientControl implements ChatIF {
 
 	private List<Object> response;
 	private Object singleResponse;
+
+
 	public   List<Object> GetQuestionsBySubject(){
 		response = client.questions;
 		return  response;
@@ -116,10 +120,22 @@ public class ClientControl implements ChatIF {
 	 * This method waits for input from the console.  Once it is 
 	 * received, it sends it to the client's message handler.
 	 */
-	public void accept(Object str) 
+	public static void accept(Object str)
 	{
 	  client.handleMessageFromClientUI(str);
 	}
+	public static MsgHandler getServerMsg() {
+		serverMsg = client.messageFromServer;
+		return (MsgHandler) serverMsg;
+	}
+	public static Object getUser() {
+
+		return currentUser;
+	}
+	public static void setUser(Object user) {
+		currentUser = user;
+	}
+
 	/**
 	 * This method overrides the method in the util.ChatIF interface.  It
 	 * displays a message onto the screen.
