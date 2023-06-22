@@ -12,10 +12,8 @@ import java.io.IOException;
 import util.MsgHandler;
 import util.TypeMsg;
 
+import static org.junit.Assert.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 class LoginWindowControllerTest {
 
     private class stubServerClientCommunication implements IServerClientCommunication{
@@ -264,6 +262,13 @@ The errorMsg field of iServerClientCommunication should be set to "This user is 
      * Input: userName = null, password = null
      * Expected result: The method should throw an exception and the expected exception message should be "null"
      */
+    @Test
+    public void Login_NullUsernameAndPassword() throws IOException {
+        LoginWindowController myCon = new LoginWindowController();
+        String userName = null;
+        String password = null;
+        assertThrows(Exception.class, () -> myCon.isEmptyDetails(userName, password));
+    }
 
 
 
