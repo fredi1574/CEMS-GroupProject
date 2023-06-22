@@ -131,7 +131,7 @@ The errorMsg field of iServerClientCommunication should be null.
  */
 
     @Test
-    void SuccesFullWithStudent() throws IOException {
+    void Login_Succesfull_WithStudent() throws IOException {
 
             LoginWindowController myCon = new LoginWindowController();
             stubServerClientCommunication iServerClientCommunication = new stubServerClientCommunication();
@@ -184,7 +184,7 @@ The getUser() method of iServerClientCommunication should return null.
 The errorMsg field of iServerClientCommunication should be set to "This user is already logged in".
          */
     @Test
-    public void StudentAlreadyLoggedIn() throws IOException {
+    public void Login_StudentAlreadyLoggedIn() throws IOException {
         LoginWindowController myCon = new LoginWindowController();
         stubServerClientCommunication iServerClientCommunication = new stubServerClientCommunication();
         User myStudent = new User();
