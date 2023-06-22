@@ -135,7 +135,7 @@ public class LoginWindowController {
              username = usernameField.getText();
              password = passwordField.getText();
         // Check if username or password fields are empty
-        if(!isEmptyDetails(username,password)) {
+        if(isEmptyDetails(username,password)) {
             showError.showErrorPopup("Please enter both username and password.");
             return;
         }
@@ -180,10 +180,10 @@ public class LoginWindowController {
     public boolean isEmptyDetails(String username, String password) {
 
         if (username.isEmpty() || password.isEmpty()) {
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
     public boolean isAlreadyLoggedIn(){
         if (iServerClientCommunication.getReturnMsg().getMsg().equals("logged in")) {

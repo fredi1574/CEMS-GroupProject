@@ -109,7 +109,28 @@ class LoginWindowControllerTest {
         }
     }
 
+/*
+// Functionality:
+The functionality being tested is a successful login with a student.
+ This test is likely part of a larger system that handles user logins and verifies the credentials provided by the student.
 
+//input:
+A LoginWindowController object (myCon) used for managing the login process.
+A stubServerClientCommunication object (iServerClientCommunication) representing the communication between the client and server.
+A username (userName) set as "Abed" for the student.
+A password (passWord) set as "a" for the student.
+A role (role) set as "Student" for the student.
+A User object (myStudent) representing the student with the provided username, password, and role.
+An ILoginGetUserInput object (iLoginGetUserInput) created using the provided username and password.
+The iLoginGetUserInput object and iServerClientCommunication object are set in the myCon object.
+The return message of the iServerClientCommunication object is set to a login response message containing the myStudent object.
+
+//expected result:
+The isEmptyDetails(userName, passWord) method of myCon should return false.
+The returned User object obtained from the iServerClientCommunication should have a username matching myStudent.getUserName().
+The returned User object obtained from the iServerClientCommunication should have a password matching myStudent.getPassword().
+The errorMsg field of iServerClientCommunication should be null.
+ */
 
     @Test
     void SuccesFullWithStudent() throws IOException {
@@ -127,7 +148,7 @@ class LoginWindowControllerTest {
             myCon.setiLoginGetUserInput(iLoginGetUserInput);
             myCon.setiServerClientCommunication(iServerClientCommunication);
             iServerClientCommunication.setReturnMsg(new MsgHandler(TypeMsg.LoginResponse,myStudent));
-            assertEquals(myCon.isEmptyDetails(userName,passWord),true);
+            assertEquals(myCon.isEmptyDetails(userName,passWord),false);
             Object msg = iServerClientCommunication.getReturnMsg().getMsg();
             User user = (User)msg;
             assertEquals(((User) msg).getUserName(),myStudent.getUserName());
@@ -143,6 +164,27 @@ class LoginWindowControllerTest {
              */
 
         }
+        /*
+// Functionality:
+The functionality being tested is to check whether a student is already logged in.
+This test is likely part of a larger system that manages user logins and ensures that a student cannot log in multiple times simultaneously.
+
+//input:
+A LoginWindowController object (myCon) used for managing the login process.
+A stubServerClientCommunication object (iServerClientCommunication) representing the communication between the client and server.
+A User object (myStudent) representing the student attempting to log in.
+A username (userName) set as "NoaKrisp" for the student.
+A password (passWord) set as "a" for the student.
+A role (role) set as "Student" for the student.
+An ILoginGetUserInput object (iLoginGetUserInput) created using the provided username and password.
+The iLoginGetUserInput object and iServerClientCommunication object are set in the myCon object.
+
+//expected result:
+The isAlreadyLoggedIn() method of myCon should return false.
+The return message obtained from iServerClientCommunication should be "logged in".
+The getUser() method of iServerClientCommunication should return null.
+The errorMsg field of iServerClientCommunication should be set to "This user is already logged in".
+         */
     @Test
     public void StudentAlreadyLoggedIn() throws IOException {
         LoginWindowController myCon = new LoginWindowController();
@@ -170,13 +212,12 @@ class LoginWindowControllerTest {
  * Input: userName = "", password = "4"
  * Expected result: false
  */
-
     @Test
     public void Login_EnterPasswordButNotUser() throws IOException {
         LoginWindowController myCon = new LoginWindowController();
         String userName = "";
         String password = "4";
-        assertFalse(myCon.isEmptyDetails(userName, password));
+        assertTrue(myCon.isEmptyDetails(userName, password));
     }
 
     /**
@@ -184,13 +225,12 @@ class LoginWindowControllerTest {
      * Input: userName = "Yuval", password = ""
      * Expected result: false
      */
-
     @Test
     public void Login_EnterUserButNotPassword() throws IOException {
         LoginWindowController myCon = new LoginWindowController();
         String userName = "Yuval";
         String password = "";
-        assertFalse(myCon.isEmptyDetails(userName, password));
+        assertTrue(myCon.isEmptyDetails(userName, password));
     }
 
     /**
@@ -198,13 +238,12 @@ class LoginWindowControllerTest {
      * Input: userName = "", password = ""
      * Expected result: false
      */
-
     @Test
     public void Login_NotEnterUserAndNotPassword() throws IOException {
         LoginWindowController myCon = new LoginWindowController();
         String userName = "";
         String password = "";
-         assertFalse(myCon.isEmptyDetails(userName, password));
+        assertTrue(myCon.isEmptyDetails(userName, password));
     }
 
     /**
@@ -212,14 +251,20 @@ class LoginWindowControllerTest {
      * Input: userName = "AbedTayer", password = "a"
      * Expected result: true
      */
-
     @Test
     public void Login_EnterUserAndPassword() throws IOException {
         LoginWindowController myCon = new LoginWindowController();
         String userName = "AbedTayer";
         String password = "a";
-        assertTrue(myCon.isEmptyDetails(userName, password));
+        assertFalse(myCon.isEmptyDetails(userName, password));
     }
+
+    /**
+     * Functionality: Test whether the isNotEmptyUser method handles the case when both the username and password are null.
+     * Input: userName = null, password = null
+     * Expected result: The method should throw an exception and the expected exception message should be "null"
+     */
+
 
 
 }
