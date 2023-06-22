@@ -258,7 +258,7 @@ The errorMsg field of iServerClientCommunication should be set to "This user is 
     }
 
     /**
-     * Functionality: Test whether the isNotEmptyUser method handles the case when both the username and password are null.
+     * Functionality: Test whether the isEmptyDetails method handles the case when both the username and password are null.
      * Input: userName = null, password = null
      * Expected result: The method should throw an exception and the expected exception message should be "null"
      */
