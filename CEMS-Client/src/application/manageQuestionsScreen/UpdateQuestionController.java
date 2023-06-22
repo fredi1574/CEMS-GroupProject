@@ -140,7 +140,7 @@ public class UpdateQuestionController {
      * Deletes the question from the server.
      */
     public void DeleteQuestion() {
-        if (showError.showConfirmationPopup("Are you sure you want to delete this question?")) {
+        if (ShowMessage.showConfirmationPopup("Are you sure you want to delete this question?")) {
             MsgHandler deleteQ = new MsgHandler(TypeMsg.DeleteQuestion, AlterQuestion());
             ClientUI.chat.accept(deleteQ);
         }
@@ -161,11 +161,11 @@ public class UpdateQuestionController {
      */
     private boolean checkValidData() {
         if (!areAllFieldsFilled()) {
-            showError.showErrorPopup("Not all fields are filled!\nno changes were made");
+            ShowMessage.showErrorPopup("Not all fields are filled!\nno changes were made");
             return false;
         }
         if (!correctAnswer.getText().matches("[1-4]")) {
-            showError.showErrorPopup("Choose values from 1 to 4 in Correct Answer field\nno changes were made");
+            ShowMessage.showErrorPopup("Choose values from 1 to 4 in Correct Answer field\nno changes were made");
             return false;
         }
         return true;

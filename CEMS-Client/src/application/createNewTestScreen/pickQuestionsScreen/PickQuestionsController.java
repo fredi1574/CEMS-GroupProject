@@ -152,21 +152,21 @@ public class PickQuestionsController {
     void addSelectedQuestion(ActionEvent event1) {
 
         if (rowData == null || pointsField.getText().isEmpty()) {
-            showError.showErrorPopup("Select a question and points first");
+            ShowMessage.showErrorPopup("Select a question and points first");
             return;
         }
         if (searchInSelectedQuestionsTable(rowData)) {
-            showError.showErrorPopup("This question already exists. Select another question");
+            ShowMessage.showErrorPopup("This question already exists. Select another question");
             return;
         }
         if (Integer.parseInt(pointsField.getText()) <= 0 || Integer.parseInt(pointsField.getText()) > 100) {
-            showError.showErrorPopup("Please select a valid amount of points (1-100)");
+            ShowMessage.showErrorPopup("Please select a valid amount of points (1-100)");
             return;
         }
 
         stateManagement.subtractTotalRemainingPoints(Integer.parseInt(pointsField.getText()));
         if (stateManagement.getTotalRemainingPoints() < 0) {
-            showError.showErrorPopup("Not enough total points");
+            ShowMessage.showErrorPopup("Not enough total points");
             stateManagement.addTotalRemainingPoints(Integer.parseInt(pointsField.getText()));
             return;
         }
@@ -206,7 +206,7 @@ public class PickQuestionsController {
     public void Deselect() {
         Question desSelected = questionDBTableView.getSelectionModel().getSelectedItem();
         if (desSelected == null)
-            showError.showErrorPopup("You Want To Select Before Press Deselect !");
+            ShowMessage.showErrorPopup("You Want To Select Before Press Deselect !");
         else {
             questionDBTableView.getSelectionModel().clearSelection();
             rowData = null;
@@ -219,7 +219,7 @@ public class PickQuestionsController {
     public void removeSelectedQuestion() {
         ObservableList<TestQuestion> data = selectedQuestionsTableView.getItems();
         if (data == null) {
-            showError.showErrorPopup("You Don't Have Any Questions to Remove");
+            ShowMessage.showErrorPopup("You Don't Have Any Questions to Remove");
         } else if (rowDataForQuestionsSelected != null) {
             selectedQuestionsTableView.getItems().remove(rowDataForQuestionsSelected);
             stateManagement.getTestQuestions().remove(rowDataForQuestionsSelected);
@@ -229,7 +229,7 @@ public class PickQuestionsController {
             rowData = null;
 
         } else {
-            showError.showErrorPopup("Select Questions to Remove");
+            ShowMessage.showErrorPopup("Select Questions to Remove");
         }
         rowDataForQuestionsSelected = null;
     }

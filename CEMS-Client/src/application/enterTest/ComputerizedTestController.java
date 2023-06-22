@@ -71,7 +71,7 @@ public class ComputerizedTestController {
     @FXML
     private void approveID(ActionEvent event) {
         if (StudentIDText.getText().isEmpty()) {
-            showError.showErrorPopup("Please enter your ID");
+            ShowMessage.showErrorPopup("Please enter your ID");
             return;
         }
         ArrayList<String> StudentAndCourse = new ArrayList<>();
@@ -81,12 +81,12 @@ public class ComputerizedTestController {
         ClientUI.chat.accept(checkStudentRegistered);
         StudentCourse verifyStudent = (StudentCourse) ClientUI.chat.getUserAndCourse();
         if (!(StudentIDText.getText().equals(Client.user.getId()))) {
-            showError.showInfoPopup("Incorrect ID\nPlease try again");
+            ShowMessage.showInfoPopup("Incorrect ID\nPlease try again");
         } else if (verifyStudent != null) {
-            showError.showInfoPopup("Student is assigned to the test \nAfter clicking OK the test will start automatically");
+            ShowMessage.showInfoPopup("Student is assigned to the test \nAfter clicking OK the test will start automatically");
             ScreenManager.goToNewScreen(event, PathConstants.StartComputerizedTestPath);
         } else {
-            showError.showInfoPopup("Student is not assigned to the test! \nPlease try again");
+            ShowMessage.showInfoPopup("Student is not assigned to the test! \nPlease try again");
         }
     }
 

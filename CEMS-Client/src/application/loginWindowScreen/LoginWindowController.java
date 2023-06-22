@@ -50,7 +50,7 @@ public class LoginWindowController {
 
         // Check if username or password fields are empty
         if (!isNotEmptyUser(username, password)) {
-            showError.showErrorPopup("Please enter both username and password.");
+            ShowMessage.showErrorPopup("Please enter both username and password.");
             return;
         }
 
@@ -63,7 +63,7 @@ public class LoginWindowController {
         try {
             if (Client.user.getRole() != null) {
                 if (Client.user.getIsLoggedIn() == 1) {
-                    showError.showErrorPopup("User is already logged in");
+                    ShowMessage.showErrorPopup("User is already logged in");
                     return;
                 }
                 String[] LoginValues = {Client.user.getId(), "1"};
@@ -83,12 +83,12 @@ public class LoginWindowController {
                         ScreenManager.goToNewScreen(event, PathConstants.PickRolePath);
                         break;
                     default:
-                        showError.showErrorPopup("No such role.");
+                        ShowMessage.showErrorPopup("No such role.");
                         break;
                 }
             }
         } catch (NullPointerException e) {
-            showError.showErrorPopup("Wrong password or username");
+            ShowMessage.showErrorPopup("Wrong password or username");
         }
     }
 
@@ -104,7 +104,7 @@ public class LoginWindowController {
      * Displays an information dialog with a message to contact the admin for password reset.
      */
     public void handleTextClick() {
-        showError.showInfoPopup("To reset password, please contact our admin.");
+        ShowMessage.showInfoPopup("To reset password, please contact our admin.");
     }
 
     /**

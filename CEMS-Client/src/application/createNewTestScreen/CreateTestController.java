@@ -182,10 +182,10 @@ public class CreateTestController {
     @FXML
     public void SaveExam() {
         if (testDurationField.getText().isEmpty()) {
-            showError.showErrorPopup("Please Enter The Duration Time of test!");
+            ShowMessage.showErrorPopup("Please Enter The Duration Time of test!");
         }
         if (rowData == null) {
-            showError.showErrorPopup("Please Press To Select Subject and Course!");
+            ShowMessage.showErrorPopup("Please Press To Select Subject and Course!");
         }
     }
 
@@ -261,7 +261,7 @@ public class CreateTestController {
 
         stateManagement.setDataOfTest(rowData, testNumberField.getText(), testIDField.getText());
         if (rowData == null) {
-            showError.showErrorPopup("Choose subject and course first");
+            ShowMessage.showErrorPopup("Choose subject and course first");
         } else {
             ScreenManager.goToNewScreen(event, PathConstants.pickQuestionsPath);
         }

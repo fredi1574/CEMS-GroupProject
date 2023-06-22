@@ -172,14 +172,14 @@ public class ManageTestsController {
         stateManagement = StateManagement.getInstance();
 
         if (testRowData == null) {
-            showError.showErrorPopup("Select a test to edit");
+            ShowMessage.showErrorPopup("Select a test to edit");
             return;
         }
 
         //prevents an active test from being edited
         for (int i = 0; i < activeTestsTableView.getItems().size(); i++) {
             if (activeTestsTableView.getItems().get(i).getId().equals(testRowData.getId())) {
-                showError.showErrorPopup("Test is currently in process and cannot be edited");
+                ShowMessage.showErrorPopup("Test is currently in process and cannot be edited");
                 return;
             }
         }
@@ -194,13 +194,13 @@ public class ManageTestsController {
      */
     public void deleteTest() {
         if (testRowData == null) {
-            showError.showErrorPopup("Select a test to delete");
+            ShowMessage.showErrorPopup("Select a test to delete");
             return;
         }
         int selectedTestIndex = testsFromDBTableView.getSelectionModel().getFocusedIndex();
         if (selectedTestIndex != -1) {
             Test testToDelete = testsFromDBTableView.getItems().get(selectedTestIndex);
-            if (showError.showConfirmationPopup("Are you sure you want to delete this test?")) {
+            if (ShowMessage.showConfirmationPopup("Are you sure you want to delete this test?")) {
                 MsgHandler deleteTestMsg = new MsgHandler(TypeMsg.DeleteTest, testToDelete);
                 ClientUI.chat.accept(deleteTestMsg);
 
@@ -225,11 +225,11 @@ public class ManageTestsController {
     public void activateTest() {
         String testCode;
         if (testRowData == null) {
-            showError.showErrorPopup("Select a test to activate");
+            ShowMessage.showErrorPopup("Select a test to activate");
             return;
         }
 
-        if (showError.showConfirmationPopup("Are you sure you want to activate the test?\nAfter activting, the test will be added to the Active Tests table")) {
+        if (ShowMessage.showConfirmationPopup("Are you sure you want to activate the test?\nAfter activting, the test will be added to the Active Tests table")) {
 
             loadTestState(testRowData); //loads the details of the relevant test
 
@@ -315,7 +315,7 @@ public class ManageTestsController {
     public void viewTestInProgress(ActionEvent actionEvent) {
 
         if (activeTestRowData == null) {
-            showError.showErrorPopup("Select a test to view");
+            ShowMessage.showErrorPopup("Select a test to view");
             return;
         }
 
@@ -346,7 +346,7 @@ public class ManageTestsController {
      */
     public void viewTestResults(ActionEvent actionEvent) {
         if (testForApprovalRowData == null) {
-            showError.showErrorPopup("Select a test to approve");
+            ShowMessage.showErrorPopup("Select a test to approve");
             return;
         }
         stateManagement.setTestID(testForApprovalRowData.getTestID());

@@ -6,19 +6,22 @@ import javafx.scene.control.ButtonType;
 /**
  * This utility class provides methods for displaying various types of pop-up messages using JavaFX Alert dialogs.
  */
-public class showError {
+public class ShowMessage {
 
     /**
      * Displays an error pop-up dialog with the specified message.
      *
      * @param message the error message to display
+     * @return
      */
-    public static void showErrorPopup(String message) {
+    public static String showErrorPopup(String message) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+
+        return message;
     }
     /**
      * Displays an information pop-up dialog with the specified message.
@@ -26,12 +29,14 @@ public class showError {
      * @param message the information message to display
      */
 
-    public static void showInfoPopup(String message) {
+    public static String showInfoPopup(String message) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+
+        return message;
     }
 
     /**

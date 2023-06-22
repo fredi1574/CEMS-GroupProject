@@ -56,11 +56,11 @@ public class EnterCodePopUpController {
     public void EnterCode(ActionEvent event) {
         String codet = CodeText.getText();
         if (codet.isEmpty()) {
-            showError.showErrorPopup("Please enter code.");
+            ShowMessage.showErrorPopup("Please enter code.");
             return;
         }
         if (codet.length() != 4) {
-            showError.showErrorPopup("Code should contain 4 numbers.");
+            ShowMessage.showErrorPopup("Code should contain 4 numbers.");
             return;
         }
 
@@ -98,7 +98,7 @@ public class EnterCodePopUpController {
         }
 
         if (NotAllowed) {
-            showError.showErrorPopup("Student has already attended the test!");
+            ShowMessage.showErrorPopup("Student has already attended the test!");
             ScreenManager.goToNewScreen(event, PathConstants.mainMenuStudentPath);
         } else if (testExists) {
             switch (testType) {
@@ -110,7 +110,7 @@ public class EnterCodePopUpController {
                     break;
             }
         } else {
-            showError.showErrorPopup("Test Not found !");
+            ShowMessage.showErrorPopup("Test Not found !");
         }
     }
 

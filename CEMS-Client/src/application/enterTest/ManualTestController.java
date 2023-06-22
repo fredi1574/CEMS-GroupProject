@@ -98,7 +98,7 @@ public class ManualTestController {
 
         }
         if (test == null) {
-            showError.showErrorPopup("No Test Found");
+            ShowMessage.showErrorPopup("No Test Found");
             return;
         }
         CourseNameText.setText(test.getCourseName());
@@ -161,7 +161,7 @@ public class ManualTestController {
 
                             Platform.runLater(() -> {
                                 if (currentStage.isShowing()) {
-                                    showError.showInfoPopup("Test is over");
+                                    ShowMessage.showInfoPopup("Test is over");
                                     saveStudentsTest(0, 0, 5);
                                     testIsLockedManual = false;
                                     currentStage.close();
@@ -190,7 +190,7 @@ public class ManualTestController {
 
     public void lockTest() {
         timerC.stop();
-        Platform.runLater(() -> showError.showInfoPopup("Test is locked\nPlease submit the test and exit"));
+        Platform.runLater(() -> ShowMessage.showInfoPopup("Test is locked\nPlease submit the test and exit"));
         testIsLockedManual = true;
     }
 
@@ -201,7 +201,7 @@ public class ManualTestController {
      */
     public void showNotificationAndChangeDuration(int newDuration) {
         seconds[0] += newDuration * 60;  // Add the new duration in seconds
-        Platform.runLater(() -> showError.showInfoPopup("Test time increased by " + newDuration + " minutes"));
+        Platform.runLater(() -> ShowMessage.showInfoPopup("Test time increased by " + newDuration + " minutes"));
     }
     /**
      * Calculates the time the test is due to finish according to it's duration.
@@ -254,7 +254,7 @@ public class ManualTestController {
             }
         } else {
 
-            showError.showErrorPopup("Can not upload now, the time has finished");
+            ShowMessage.showErrorPopup("Can not upload now, the time has finished");
         }
     }
     /**
@@ -398,7 +398,7 @@ public class ManualTestController {
         boolean forText = true;
         if (forText) {
             if (FileSubmissionsText.getText().isEmpty()) {
-                if (showError.showConfirmationPopup("Are you sure want to submit an empty test?")) {
+                if (ShowMessage.showConfirmationPopup("Are you sure want to submit an empty test?")) {
                     StateManagement.resetInstance();
                     if (!testIsLockedManual) {
                         MsgHandler finishedStudentsIncrease = new MsgHandler(TypeMsg.IcreaseStudentsFinishedTest, test.getId());
@@ -418,7 +418,7 @@ public class ManualTestController {
 
             }
             else {
-                if (showError.showConfirmationPopup("Are you sure want to save your test")) {
+                if (ShowMessage.showConfirmationPopup("Are you sure want to save your test")) {
                     StateManagement.resetInstance();
 
                     if (!testIsLockedManual) {
@@ -437,7 +437,7 @@ public class ManualTestController {
             }
 
         } else {
-            showError.showInfoPopup("Test is over");
+            ShowMessage.showInfoPopup("Test is over");
 
         }
     }

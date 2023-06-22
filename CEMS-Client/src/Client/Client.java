@@ -14,7 +14,7 @@ import entity.User;
 import javafx.application.Platform;
 import util.ChatIF;
 import util.MsgHandler;
-import util.showError;
+import util.ShowMessage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -113,7 +113,7 @@ public class Client extends AbstractClient {
                 break;
             case ServerStopped:
                 Platform.runLater(() -> {
-                    showError.showErrorPopup("Server disconnected\nBye-bye");
+                    ShowMessage.showErrorPopup("Server disconnected\nBye-bye");
                     System.exit(-1);
                 });
 

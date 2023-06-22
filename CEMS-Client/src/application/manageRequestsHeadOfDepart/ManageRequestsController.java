@@ -115,7 +115,7 @@ public class ManageRequestsController {
             ChangeTestDurationArr.add(requestToApprove);
             ChangeTestDurationArr.add(AddedTime);
             ChangeTestDurationArr.add(requestAuthor);
-            if (showError.showConfirmationPopup("Are you sure you want to approve this request?")) {
+            if (ShowMessage.showConfirmationPopup("Are you sure you want to approve this request?")) {
                 MsgHandler changeDuration = new MsgHandler(TypeMsg.changeTestDuration,ChangeTestDurationArr);
                 ClientUI.chat.accept(changeDuration);
                 MsgHandler approveRequest = new MsgHandler(TypeMsg.ApproveRequestByHeadOfDepartment,requestAuthor);
@@ -142,7 +142,7 @@ public class ManageRequestsController {
         int selectedRequestIndex = RequestsDBTableView.getSelectionModel().getFocusedIndex();
         if (selectedRequestIndex != -1) {
             String requestToDecline = RequestsDBTableView.getItems().get(selectedRequestIndex).getId();
-            if (showError.showConfirmationPopup("Are you sure you want to decline this request?")) {
+            if (ShowMessage.showConfirmationPopup("Are you sure you want to decline this request?")) {
                 MsgHandler declineRequest = new MsgHandler(TypeMsg.DeclineRequestByHeadOfDepartment,RequestsDBTableView.getItems().get(selectedRequestIndex).getAuthor());
                 ClientUI.chat.accept(declineRequest);
                 deleteRequest(requestToDecline);

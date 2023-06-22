@@ -58,7 +58,7 @@ public class PickRoleController {
                     break;
             }
         } else {
-            showError.showErrorPopup("Please choose a role to login");
+            ShowMessage.showErrorPopup("Please choose a role to login");
         }
     }
 

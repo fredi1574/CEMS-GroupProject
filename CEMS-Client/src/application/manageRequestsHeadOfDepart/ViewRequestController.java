@@ -126,7 +126,7 @@ public class ViewRequestController {
         ChangeTestDurationArr.add(testIDText.getText());
         ChangeTestDurationArr.add(AddedTime);
 
-        if (showError.showConfirmationPopup("Are you sure you want to approve this request?")) {
+        if (ShowMessage.showConfirmationPopup("Are you sure you want to approve this request?")) {
             MsgHandler changeDuration = new MsgHandler(TypeMsg.changeTestDuration, ChangeTestDurationArr);
             ClientUI.chat.accept(changeDuration);
 
@@ -148,7 +148,7 @@ public class ViewRequestController {
      */
     @FXML
     public void declineRequest() {
-        if (showError.showConfirmationPopup("Are you sure you want to decline this request?")) {
+        if (ShowMessage.showConfirmationPopup("Are you sure you want to decline this request?")) {
             MsgHandler declineRequest = new MsgHandler(TypeMsg.DeclineRequestByHeadOfDepartment, request.getAuthor());
             ClientUI.chat.accept(declineRequest);
 

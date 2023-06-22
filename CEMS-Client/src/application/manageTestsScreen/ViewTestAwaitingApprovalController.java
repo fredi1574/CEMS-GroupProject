@@ -136,11 +136,11 @@ public class ViewTestAwaitingApprovalController {
             selectedTest.setLecturerComments(teacherComment.getText());
         }
         if (!isSelected) {
-            showError.showErrorPopup("Select if you approve the test or not before saving!");
+            ShowMessage.showErrorPopup("Select if you approve the test or not before saving!");
             return;
         }
         isSelected = false;
-        if (showError.showConfirmationPopup("Are You sure You want to approve the test?")) {
+        if (ShowMessage.showConfirmationPopup("Are You sure You want to approve the test?")) {
             selectedTest.setGrade(gradeField.getText());
 
             stateManagement.getTestForApproval().set(indexOfTest, selectedTest);

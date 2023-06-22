@@ -104,7 +104,7 @@ public class ManageQuestionsController {
         Question rowData = manageQuestionsTableView.getSelectionModel().getSelectedItem();
 
         if (rowData == null){
-            showError.showErrorPopup("Select a question to edit");
+            ShowMessage.showErrorPopup("Select a question to edit");
             return;
         }
 
@@ -124,7 +124,7 @@ public class ManageQuestionsController {
         int selectedQuestionIndex = manageQuestionsTableView.getSelectionModel().getFocusedIndex();
         if (selectedQuestionIndex != -1) {
             Question questionToDelete = manageQuestionsTableView.getItems().get(selectedQuestionIndex);
-            if (showError.showConfirmationPopup("Are you sure you want to delete this question?")) {
+            if (ShowMessage.showConfirmationPopup("Are you sure you want to delete this question?")) {
                 MsgHandler<Question> deleteQ = new MsgHandler<>(TypeMsg.DeleteQuestion, questionToDelete);
                 ClientUI.chat.accept(deleteQ);
                 reloadPage();

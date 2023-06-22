@@ -2,12 +2,9 @@ package application.manageTestsScreen;
 
 import Client.Client;
 import Client.ClientUI;
-import Client.ExitButton;
 import Client.LogOut;
 import application.Simulation.SmsEmailPopUpController;
 import entity.TestRequestForApproval;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -17,11 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
 import util.*;
-
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 
 /**
  * Handles the functionality of the active test screen
@@ -95,7 +88,7 @@ public class ViewActiveTestController {
      */
     public void lockTest(ActionEvent actionEvent) {
         //switches the visible buttons
-        if (showError.showConfirmationPopup("Are you sure you want to lock the test?\nPlease notice that test will become inactive")) {
+        if (ShowMessage.showConfirmationPopup("Are you sure you want to lock the test?\nPlease notice that test will become inactive")) {
             MsgHandler lockTest = new MsgHandler(TypeMsg.LecturerClickedLockTest, testIdTextField.getText());
             ClientUI.chat.accept(lockTest);
             back(actionEvent);
@@ -139,7 +132,7 @@ public class ViewActiveTestController {
                 courseNameLabel.getText(), extraTimeTextField.getText(), testCommentsTextArea.getText(), Client.user.getFullName());
         MsgHandler newRequest = new MsgHandler(TypeMsg.RequestExtraTime, request);
         ClientUI.chat.accept(newRequest);
-        showError.showInfoPopup("Request was sent to the Head Of Department");
+        ShowMessage.showInfoPopup("Request was sent to the Head Of Department");
         //extraTimeBtn.setDisable(true);
         requestSent = true;
     }

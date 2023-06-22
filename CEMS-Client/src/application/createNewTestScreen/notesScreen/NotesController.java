@@ -1,6 +1,8 @@
 package application.createNewTestScreen.notesScreen;
 
 import Client.Client;
+import Client.ClientUI;
+import Client.ExitButton;
 import entity.Test;
 import entity.TestQuestion;
 import javafx.collections.FXCollections;
@@ -10,18 +12,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import Client.ClientUI;
-import Client.ExitButton;
-
 import util.*;
 
 import java.util.List;
+
 /**
  * The NotesController class manages the notes screen for creating a new test.
  * It handles Lecturer's inputs and actions related to adding notes for the test.
  * The lecturer can leave notes for other lecturers and students
  */
-public class NotesController {
+public class NotesController implements InotesController {
     public final StateManagement stateManagement = StateManagement.getInstance();
     @FXML
     private Text nameAuthor;
@@ -31,12 +31,19 @@ public class NotesController {
     private TextArea teacherNote;
     @FXML
     private AnchorPane header;
-    public void initialize(){
+
+    private InotesController notesController;
+
+    public NotesController(InotesController INC) {
+        this.notesController = INC;
+    }
+
+    public void initialize() {
         ScreenManager.dragAndDrop(header);
 
         nameAuthor.setText(Client.user.getName());
 
-        if(stateManagement.getStudentComment() != null)
+        if (stateManagement.getStudentComment() != null)
             studentNote.setText(stateManagement.studentComment);
         if (stateManagement.getTeacherComment() != null)
             teacherNote.setText(stateManagement.teacherComment);
@@ -44,15 +51,16 @@ public class NotesController {
 
     /**
      * navigates back to the second stage of test creation
+     *
      * @param event the event that triggered the method (clicking the back button)
      */
     @FXML
     void backToPickQuestions(ActionEvent event) {
 
-        if(!studentNote.getText().isEmpty()){
+        if (!studentNote.getText().isEmpty()) {
             stateManagement.setStudentComment(studentNote.getText());
         }
-        if (!teacherNote.getText().isEmpty()){
+        if (!teacherNote.getText().isEmpty()) {
             stateManagement.setTeacherComment(teacherNote.getText());
         }
         ScreenManager.goToNewScreen(event, PathConstants.pickQuestionsPath);
@@ -64,27 +72,25 @@ public class NotesController {
      * - adds a test row to the tests table
      * - adds rows for each selected question to the testQuestion table
      * - calls the resetInstance method to reset all fields in the test creation screens
+     *
      * @param event the event that triggered the method (clicking the submit button)
      */
     @FXML
-    void createTest(ActionEvent event){
-        if(stateManagement.semester.equals("") || stateManagement.year.equals("") || stateManagement.session.equals("")
-                || stateManagement.testDuration.equals("") || stateManagement.testType == null){
-            showError.showErrorPopup("Go to page 1 and complete the data of test");
-            return;
+    public String createTest(ActionEvent event) {
+        if (stateManagement.semester.equals("") || stateManagement.year.equals("") || stateManagement.session.equals("")
+                || stateManagement.testDuration.equals("") || stateManagement.testType == null) {
+            return ShowMessage.showErrorPopup("Go to page 1 and complete the data of test");
         }
-        if(stateManagement.getTestQuestions().size() == 0){
-            showError.showErrorPopup("Select Questions for test from page 2");
-            return;
+        if (stateManagement.getTestQuestions().size() == 0) {
+            return ShowMessage.showErrorPopup("Select Questions for test from page 2");
         }
-        if(stateManagement.getTotalRemainingPoints() > 0){
-            showError.showErrorPopup("Points for the questions do not add up to 100 in page 2");
-            return;
+        if (stateManagement.getTotalRemainingPoints() > 0) {
+            return ShowMessage.showErrorPopup("Points for the questions do not add up to 100 in page 2");
         }
-        if(!studentNote.getText().isEmpty()){
+        if (!studentNote.getText().isEmpty()) {
             stateManagement.setStudentComment(studentNote.getText());
         }
-        if (!teacherNote.getText().isEmpty()){
+        if (!teacherNote.getText().isEmpty()) {
             stateManagement.setTeacherComment(teacherNote.getText());
         }
 
@@ -94,6 +100,12 @@ public class NotesController {
 
         StateManagement.resetInstance();
 
+        replaceScreen(event);
+
+        return ShowMessage.showInfoPopup("Test added successfully");
+    }
+
+    public void replaceScreen(ActionEvent event) {
         ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
     }
 
@@ -102,6 +114,7 @@ public class NotesController {
      * if it does, it gets deleted
      * Used for editing tests (Allows the lecturer to override an existing test's data)
      */
+    @Override
     public void deleteTestIfAlreadyExists() {
         MsgHandler getDbTestTable = new MsgHandler(TypeMsg.GetTestsBySubject, Client.user.getUserName());
         ClientUI.chat.accept(getDbTestTable);
@@ -119,6 +132,7 @@ public class NotesController {
     /**
      * adds a test to the DB
      */
+    @Override
     public void addTestToDB() {
 
         Test newTest = new Test(
@@ -144,14 +158,16 @@ public class NotesController {
     /**
      * adds all the test's questions to the DB
      */
+    @Override
     public void addAllTestQuestionsToDB() {
         ObservableList<TestQuestion> testQuestions = stateManagement.getTestQuestions();
 
-        for (int i=0; i<stateManagement.getTestQuestions().size(); i++) {
+        for (int i = 0; i < stateManagement.getTestQuestions().size(); i++) {
             MsgHandler addNewTestQuestion = new MsgHandler(TypeMsg.AddNewTestQuestion, testQuestions.get(i));
             ClientUI.chat.accept(addNewTestQuestion);
         }
     }
+
     /**
      * Closes the application.
      */
@@ -159,6 +175,7 @@ public class NotesController {
     void closeClient() {
         ExitButton.closeClient();
     }
+
     /**
      * Minimizes the application window.
      *

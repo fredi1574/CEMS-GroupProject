@@ -115,7 +115,7 @@ public class QuestionsComputerizedTestAnswerController {
 
     public void showNotificationAndChangeDuration(int newDuration) {
         seconds[0] += newDuration * 60;  // Add the new duration in seconds
-        Platform.runLater(() -> showError.showInfoPopup("Test time increased by" + newDuration + "minutes"));
+        Platform.runLater(() -> ShowMessage.showInfoPopup("Test time increased by" + newDuration + "minutes"));
 
     }
     /**
@@ -138,7 +138,7 @@ public class QuestionsComputerizedTestAnswerController {
         }
 
         if (selectedCount > 1) {
-            showError.showErrorPopup("Please select only one answer");
+            ShowMessage.showErrorPopup("Please select only one answer");
         } else {
             // Update the marking for the current question
             markings.put(currentQuestionIndex, marking);
@@ -244,7 +244,7 @@ public class QuestionsComputerizedTestAnswerController {
     public void handlePreviousButtonClick() {
         saveMarkingWithValidation();
         if (testIsLockedComputerized) {
-            showError.showErrorPopup("Test is locked please press submit to enter the test");
+            ShowMessage.showErrorPopup("Test is locked please press submit to enter the test");
         } else if (selectedCount <= 1) {
             currentQuestionIndex -= 1; // Go back two questions (currentQuestionIndex - 1)
             fetchQuestion();
@@ -260,7 +260,7 @@ public class QuestionsComputerizedTestAnswerController {
     public void handleButtonClick() {
         saveMarkingWithValidation();
         if (testIsLockedComputerized) {
-            showError.showErrorPopup("Test is locked please press submit to enter the test");
+            ShowMessage.showErrorPopup("Test is locked please press submit to enter the test");
         } else if (selectedCount <= 1) {
             currentQuestionIndex++;
             fetchQuestion();
@@ -348,7 +348,7 @@ public class QuestionsComputerizedTestAnswerController {
 
     @FXML
     public void SubmitTest(ActionEvent event) {
-        if (showError.showConfirmationPopup("Are you sure you want to submit the test?\nYou won't be able to make further changes")) {
+        if (ShowMessage.showConfirmationPopup("Are you sure you want to submit the test?\nYou won't be able to make further changes")) {
             saveMarkingWithValidation();
             if (selectedCount <= 1) {
                 saveFinalAnswers();
@@ -403,7 +403,7 @@ public class QuestionsComputerizedTestAnswerController {
 
     public void lockTest() {
         timer.stop();
-        Platform.runLater(() -> showError.showInfoPopup("Test was locked by lecturer\nPlease press submit to exit the test"));
+        Platform.runLater(() -> ShowMessage.showInfoPopup("Test was locked by lecturer\nPlease press submit to exit the test"));
         testIsLockedComputerized = true;
     }
     /**
@@ -457,7 +457,7 @@ public class QuestionsComputerizedTestAnswerController {
                             Platform.runLater(() -> {
 
                                 if (currentStage.isShowing()) {
-                                    showError.showInfoPopup("Test is over");
+                                    ShowMessage.showInfoPopup("Test is over");
                                     currentStage.close();
                                     ScreenManager.showStage(PathConstants.mainMenuStudentPath, PathConstants.iconPath);
                                 }
