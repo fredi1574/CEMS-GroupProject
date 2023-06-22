@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class ServerGUI extends Application {
     static CemsServer Cems;
-    static ServerController controller;
+    public static MysqlConnection mysqlConnection;
 
     public static void main(String[] args) {
         launch(args);

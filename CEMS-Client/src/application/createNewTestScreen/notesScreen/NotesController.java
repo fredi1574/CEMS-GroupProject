@@ -22,7 +22,7 @@ import java.util.List;
  * The lecturer can leave notes for other lecturers and students
  */
 public class NotesController implements InotesController {
-    public final StateManagement stateManagement = StateManagement.getInstance();
+    public StateManagement stateManagement = StateManagement.getInstance();
     @FXML
     private Text nameAuthor;
     @FXML

@@ -26,6 +26,8 @@ public class CemsServer extends AbstractServer {
     Test test;
     TestQuestion testQuestion;
     TestForApproval testApprove;
+    public static MysqlConnection mysqlConnection;
+
 
     /**
      * Constructs an instance of the echo server.
@@ -80,10 +82,12 @@ public class CemsServer extends AbstractServer {
      * when the server starts listening for connections.
      */
     protected void serverStarted() {
+        mysqlConnection = MysqlConnection.getInstance();
+
         System.out.println("Server Started\n" + "Server listening for connections on port " + getPort());
 
         try {
-            MysqlConnection.connectToDb(passwordSQL);
+            mysqlConnection.connectToDb(passwordSQL);
         } catch (Exception ex) {
             System.out.println("Error! Connection Failed");
         }
@@ -101,7 +105,7 @@ public class CemsServer extends AbstractServer {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        MysqlConnection.closeConnection();
+        mysqlConnection.closeConnection();
 
     }
 
@@ -254,7 +258,7 @@ public class CemsServer extends AbstractServer {
                 case GetQuestionsBySubject:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    ArrayList<Question> list = MysqlConnection.getQuestionsTable("SELECT obj.* " +
+                    ArrayList<Question> list = mysqlConnection.getQuestionsTable("SELECT obj.* " +
                             "FROM question obj " +
                             "JOIN lecturersubject ls ON obj.subject = ls.subjectID " +
                             "JOIN user u ON u.id = ls.id " +
@@ -266,7 +270,7 @@ public class CemsServer extends AbstractServer {
                 case GetQuestionsByLecturer:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    ArrayList<Question> questionsByAuthorQuery = MysqlConnection.getQuestionsTable("SELECT obj.* " +
+                    ArrayList<Question> questionsByAuthorQuery = mysqlConnection.getQuestionsTable("SELECT obj.* " +
                             "FROM question obj " +
                             "WHERE obj.author = '" + obj + "'");
 
@@ -290,7 +294,7 @@ public class CemsServer extends AbstractServer {
                                 " answer4='" + question.getAnswer4() + "'" +
                                 " WHERE id='" + question.getId() + "'";
 
-                        MysqlConnection.update(updateQuery);
+                        mysqlConnection.update(updateQuery);
                         client.sendToClient(new MsgHandler<>(TypeMsg.EditQuestionResponse, null));
                     }
                     break;
@@ -300,7 +304,7 @@ public class CemsServer extends AbstractServer {
                     this.obj = this.msg.getMsg();
                     this.question = (Question) obj;
                     String DeleteQuestionQuery = "DELETE FROM cems.question WHERE id='" + question.getId() + "'";
-                    MysqlConnection.update(DeleteQuestionQuery);
+                    mysqlConnection.update(DeleteQuestionQuery);
                     client.sendToClient(new MsgHandler<>(TypeMsg.DeleteQuestionResponse, null));
                     break;
 
@@ -309,7 +313,7 @@ public class CemsServer extends AbstractServer {
                     List<Object> details = (List<Object>) this.msg.getMsg();
                     String Username = (String) details.get(0);
                     String Password = (String) details.get(1);
-                    Object user = MysqlConnection.authenticateUser(Username, Password);
+                    Object user = mysqlConnection.authenticateUser(Username, Password);
                     if (user instanceof User) {
                         String fullname = ((User) user).getFullName();
                         client.setName(fullname);
@@ -321,7 +325,7 @@ public class CemsServer extends AbstractServer {
                 case ImportSubjects:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    ArrayList<Subject> importSubjects = MysqlConnection.getSubjectList("SELECT * " +
+                    ArrayList<Subject> importSubjects = mysqlConnection.getSubjectList("SELECT * " +
                             "FROM subject s " +
                             "JOIN lecturersubject ls ON s.subjectID = ls.subjectID " +
                             "JOIN user u ON u.id = ls.id " +
@@ -332,7 +336,7 @@ public class CemsServer extends AbstractServer {
                 case ImportCourses:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    ArrayList<Course> importCourses = MysqlConnection.getCourseList("SELECT * " +
+                    ArrayList<Course> importCourses = mysqlConnection.getCourseList("SELECT * " +
                             "FROM course AS c " +
                             "JOIN lecturersubject AS ls ON c.subjectID = ls.subjectID " +
                             "JOIN user AS u ON ls.id = u.id " +
@@ -344,7 +348,7 @@ public class CemsServer extends AbstractServer {
                 case GetAllQuestions:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    ArrayList<Question> allQuestions = MysqlConnection.getQuestionsTable("SELECT * FROM question");
+                    ArrayList<Question> allQuestions = mysqlConnection.getQuestionsTable("SELECT * FROM question");
 
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetAllQuestionsResponse, allQuestions));
                     break;
@@ -366,7 +370,7 @@ public class CemsServer extends AbstractServer {
                                 question.getAnswer3() + "', '" +
                                 question.getCorrectAnswer() + "', '" +
                                 question.getAnswer4() + "')";
-                        MysqlConnection.update(newQuery);
+                        mysqlConnection.update(newQuery);
                     } catch (Exception ignored) {
                     }
                     client.sendToClient(new MsgHandler<>(TypeMsg.AddNewQuestionResponse, null));
@@ -376,7 +380,7 @@ public class CemsServer extends AbstractServer {
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
 
-                    ArrayList<Course> courseList = MysqlConnection.getCourseList("SELECT * FROM cems.course WHERE subjectID = " +
+                    ArrayList<Course> courseList = mysqlConnection.getCourseList("SELECT * FROM cems.course WHERE subjectID = " +
                             "(SELECT subjectid FROM cems.lecturersubject WHERE id = " + obj + ")");
 
                     client.sendToClient(new MsgHandler<>(TypeMsg.CourseTableResponse, courseList));
@@ -386,7 +390,7 @@ public class CemsServer extends AbstractServer {
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
 
-                    ArrayList<Test> allTestsList = MysqlConnection.getTestTable("select * from cems.test;");
+                    ArrayList<Test> allTestsList = mysqlConnection.getTestTable("select * from cems.test;");
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetAllTestsTableResponse, allTestsList));
                     break;
 
@@ -394,7 +398,7 @@ public class CemsServer extends AbstractServer {
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
 
-                    ArrayList<Test> testsBySubjectList = MysqlConnection.getTestTable(
+                    ArrayList<Test> testsBySubjectList = mysqlConnection.getTestTable(
                             "SELECT t.* " +
                                     "FROM cems.test AS t " +
                                     "JOIN lecturersubject ls ON t.subject = (SELECT subjectName FROM subject WHERE subjectID = ls.subjectid) " +
@@ -406,7 +410,7 @@ public class CemsServer extends AbstractServer {
                 case GetTestsByLecturer:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    ArrayList<Test> lecturerTestsList = MysqlConnection.getTestTable(
+                    ArrayList<Test> lecturerTestsList = mysqlConnection.getTestTable(
                             "SELECT t.* FROM cems.test AS t " +
                                     "WHERE t.author = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetTestsByLecturerResponse, lecturerTestsList));
@@ -431,7 +435,7 @@ public class CemsServer extends AbstractServer {
                                 "'" + test.getYear() + "', " +
                                 "'" + test.getSession() + "', " +
                                 "'" + test.getSubjectID() + "') ";
-                        MysqlConnection.update(newQuery);
+                        mysqlConnection.update(newQuery);
                         client.sendToClient(new MsgHandler<>(TypeMsg.AddNewTestResponse, null));
                     }
                     break;
@@ -451,14 +455,14 @@ public class CemsServer extends AbstractServer {
                                 "'" + testQuestion.getCourseName() + "', " +
                                 "'" + testQuestion.getSubject() + "', " +
                                 "'" + testQuestion.getAuthor() + "') ";
-                        MysqlConnection.update(newQuery);
+                        mysqlConnection.update(newQuery);
                         client.sendToClient(new MsgHandler<>(TypeMsg.AddNewTestQuestionsResponse, null));
                         break;
                     }
                 case GetRequestsBySubject:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    ArrayList<TestRequestForApproval> listOfRequests = MysqlConnection.getRequestsTable("SELECT tr.* " +
+                    ArrayList<TestRequestForApproval> listOfRequests = mysqlConnection.getRequestsTable("SELECT tr.* " +
                             "FROM testrequest AS tr " +
                             "JOIN lecturersubject AS ls ON tr.subject = ls.subjectid " +
                             "JOIN user AS u ON ls.id = u.id " +
@@ -476,8 +480,8 @@ public class CemsServer extends AbstractServer {
                     List<Object> TestChangement = (List<Object>) this.msg.getMsg();
                     String testID = (String) TestChangement.get(0);
                     String addedTime = (String) TestChangement.get(1);
-                    MysqlConnection.update("UPDATE test SET testDuration = testDuration + '" + Integer.parseInt(addedTime) + "' WHERE id = '" + testID + "'");
-                    TestTypeEnum getType = MysqlConnection.getTestType("SELECT testType FROM test WHERE id = '" + testID + "'");
+                    mysqlConnection.update("UPDATE test SET testDuration = testDuration + '" + Integer.parseInt(addedTime) + "' WHERE id = '" + testID + "'");
+                    TestTypeEnum getType = mysqlConnection.getTestType("SELECT testType FROM test WHERE id = '" + testID + "'");
                     if (getType != null) {
                         if (getType.equals(C)) {
                             sendToAllClients(new MsgHandler<>(TypeMsg.TestDurationChangedComputerizedSendToAll, Integer.parseInt(addedTime)));
@@ -491,7 +495,7 @@ public class CemsServer extends AbstractServer {
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
                     String deleteRequest = "DELETE FROM cems.testrequest WHERE id='" + obj + "'";
-                    MysqlConnection.update(deleteRequest);
+                    mysqlConnection.update(deleteRequest);
                     client.sendToClient(new MsgHandler<>(TypeMsg.DeleteRequestResponse, null));
                     break;
                 case DeclineRequestByHeadOfDepartment:
@@ -508,7 +512,7 @@ public class CemsServer extends AbstractServer {
                         String studentsID = information.get(0).toString();
                         String headID = information.get(1).toString();
 
-                        ArrayList<StudentTest> studentInfo = MysqlConnection.getStudentInfo(
+                        ArrayList<StudentTest> studentInfo = mysqlConnection.getStudentInfo(
                                 "SELECT st.* " +
                                         "FROM studentstest st " +
                                         "JOIN lecturersubject ls ON st.subjectID = ls.subjectID " +
@@ -521,7 +525,7 @@ public class CemsServer extends AbstractServer {
                 case GetUser:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    ArrayList<User> userLists = MysqlConnection.getUser("SELECT * FROM user u " +
+                    ArrayList<User> userLists = mysqlConnection.getUser("SELECT * FROM user u " +
                             "JOIN lecturersubject ls ON u.id = ls.id " +
                             "WHERE ls.subjectid = (" +
                             "   SELECT subjectid " +
@@ -532,19 +536,19 @@ public class CemsServer extends AbstractServer {
                 case GetTestsByLecutrer:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    ArrayList<StudentTest> testsList = MysqlConnection.getStudentInfo("SELECT st.* FROM studentstest st JOIN test t ON st.testID = t.id WHERE t.author = '" + obj + "'");
+                    ArrayList<StudentTest> testsList = mysqlConnection.getStudentInfo("SELECT st.* FROM studentstest st JOIN test t ON st.testID = t.id WHERE t.author = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedTestsByLecturer, testsList));
                     break;
                 case GetTestsByLecturerForLecturerReport:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    ArrayList<StudentTest> testsListforReport = MysqlConnection.getStudentInfo("SELECT st.* FROM studentstest st JOIN test t ON st.testID = t.id WHERE t.author = '" + obj + "'");
+                    ArrayList<StudentTest> testsListforReport = mysqlConnection.getStudentInfo("SELECT st.* FROM studentstest st JOIN test t ON st.testID = t.id WHERE t.author = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedTestsByLecturerForLecturerReport, testsListforReport));
                     break;
                 case GetTestsByCourse:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    ArrayList<StudentTest> testsListbyCourse = MysqlConnection.getStudentInfo("SELECT st.* FROM studentstest st WHERE st.course = '" + obj + "'");
+                    ArrayList<StudentTest> testsListbyCourse = mysqlConnection.getStudentInfo("SELECT st.* FROM studentstest st WHERE st.course = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedTestsByCourse, testsListbyCourse));
                     break;
 
@@ -553,10 +557,10 @@ public class CemsServer extends AbstractServer {
                     this.obj = this.msg.getMsg();
                     this.test = (Test) obj;
                     String DeleteTestQuery = "DELETE FROM cems.test WHERE id='" + test.getId() + "'";
-                    MysqlConnection.update(DeleteTestQuery);
+                    mysqlConnection.update(DeleteTestQuery);
 
                     String deleteQuestionsQuery = "DELETE FROM cems.testquestion WHERE testID='" + test.getId() + "'";
-                    MysqlConnection.update(deleteQuestionsQuery);
+                    mysqlConnection.update(deleteQuestionsQuery);
                     client.sendToClient(new MsgHandler<>(TypeMsg.DeleteTestResponse, null));
                     break;
                 case GetTestQuestions:
@@ -564,20 +568,20 @@ public class CemsServer extends AbstractServer {
                     this.obj = this.msg.getMsg();
                     if (obj instanceof Test) {
                         this.test = (Test) obj;
-                        ArrayList<TestQuestion> testsQuestionsList = MysqlConnection.getTestQuestionsTable("SELECT * FROM cems.testquestion WHERE testID='" + test.getId() + "'");
+                        ArrayList<TestQuestion> testsQuestionsList = mysqlConnection.getTestQuestionsTable("SELECT * FROM cems.testquestion WHERE testID='" + test.getId() + "'");
                         client.sendToClient(new MsgHandler<>(TypeMsg.GetTestQuestionsResponse, testsQuestionsList));
                     }
                     break;
                 case GetActiveTests:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    ArrayList<ActiveTest> activeTestsList = MysqlConnection.getActiveTestsTable("select * from cems.activetest;");
+                    ArrayList<ActiveTest> activeTestsList = mysqlConnection.getActiveTestsTable("select * from cems.activetest;");
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetActiveTestsResponse, activeTestsList));
                     break;
                 case GetActiveTestsByLecturer:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    ArrayList<ActiveTest> lecturerActiveTestsList = MysqlConnection.getActiveTestsTable(
+                    ArrayList<ActiveTest> lecturerActiveTestsList = mysqlConnection.getActiveTestsTable(
                             "SELECT at.* FROM cems.activetest AS at " +
                                     "JOIN test AS t ON at.id = t.id " +
                                     "WHERE t.author = '" + obj + "'");
@@ -587,20 +591,20 @@ public class CemsServer extends AbstractServer {
                 case getQuestionAndAnswerFromTest:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    Question questionData = MysqlConnection.getQuestionData("SELECT * FROM question WHERE id = '" + obj + "'");
+                    Question questionData = mysqlConnection.getQuestionData("SELECT * FROM question WHERE id = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.importedQuestionAndAnswerFromTest, questionData));
                     break;
                 case GetTestQuestionsById:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    ArrayList<TestQuestion> testsQuestionsList = MysqlConnection.getTestQuestionsTable("SELECT * FROM cems.testquestion WHERE testID='" + obj + "'");
+                    ArrayList<TestQuestion> testsQuestionsList = mysqlConnection.getTestQuestionsTable("SELECT * FROM cems.testquestion WHERE testID='" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.GetTestQuestionsResponse, testsQuestionsList));
                     break;
                 case AddStudentAnswer:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
                     AnswerOfStudent answer = (AnswerOfStudent) obj;
-                    MysqlConnection.update("INSERT INTO cems.answersofstudent (studentID, testID, questionId, studentsAnswer) " +
+                    mysqlConnection.update("INSERT INTO cems.answersofstudent (studentID, testID, questionId, studentsAnswer) " +
                             "VALUES ('" + answer.getStudentID() + "', " +
                             "'" + answer.getTestID() + "', " +
                             "'" + answer.getQuestionID() + "', " +
@@ -611,7 +615,7 @@ public class CemsServer extends AbstractServer {
                 case GetTestByID:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    Test testInfo = MysqlConnection.getTestData("SELECT * FROM cems.test WHERE id ='" + obj + "'");
+                    Test testInfo = mysqlConnection.getTestData("SELECT * FROM cems.test WHERE id ='" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedTestByID, testInfo));
                     break;
                 case AddNewTestOfStudent:
@@ -638,7 +642,7 @@ public class CemsServer extends AbstractServer {
                                 "'" + newTest.getLecturerComments() + "', " +
                                 "'" + newTest.getApproved() + "', " +
                                 "'" + newTest.getTestDuration() + "') ";
-                        MysqlConnection.update(newQuery);
+                        mysqlConnection.update(newQuery);
                         client.sendToClient(new MsgHandler<>(TypeMsg.TestOfStudentSaved, null));
 
                     }
@@ -648,25 +652,25 @@ public class CemsServer extends AbstractServer {
                     List<Object> studentsDetails = (List<Object>) this.msg.getMsg();
                     String studentID = (String) studentsDetails.get(0);
                     String courseName = (String) studentsDetails.get(1);
-                    StudentCourse isRegistered = MysqlConnection.checkRegistered("SELECT * FROM studentscourse WHERE studentID = '" + studentID + "' AND course = '" + courseName + "'");
+                    StudentCourse isRegistered = mysqlConnection.checkRegistered("SELECT * FROM studentscourse WHERE studentID = '" + studentID + "' AND course = '" + courseName + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.StudentVerified, isRegistered));
                     break;
                 case IcreaseStudentsEnteringTest:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    MysqlConnection.update("UPDATE aftertestinfo SET totalStudents = totalStudents + 1 WHERE testID = '" + obj + "'");
+                    mysqlConnection.update("UPDATE aftertestinfo SET totalStudents = totalStudents + 1 WHERE testID = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.TotalStudentsInTestIncreased, null));
                     break;
                 case IcreaseStudentsFinishedTest:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    MysqlConnection.update("UPDATE aftertestinfo SET totalFinished = totalFinished + 1 WHERE testID = '" + obj + "'");
+                    mysqlConnection.update("UPDATE aftertestinfo SET totalFinished = totalFinished + 1 WHERE testID = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.StudentsFinishedTestIncreased, null));
                     break;
                 case GetSubjectNameToID:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    Subject subjectName = MysqlConnection.SubjectName("SELECT * FROM subject WHERE subjectName = '" + obj + "'");
+                    Subject subjectName = mysqlConnection.SubjectName("SELECT * FROM subject WHERE subjectName = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedSubjectIDFromName, subjectName));
                 case RequestExtraTime:
                     this.msg = (MsgHandler<Object>) msg;
@@ -680,14 +684,14 @@ public class CemsServer extends AbstractServer {
                                 "'" + newRequest.getSubject() + "', " +
                                 "'" + newRequest.getCourse() + "', " +
                                 "'" + newRequest.getAuthor() + "') ";
-                        MysqlConnection.update(newQuery);
+                        mysqlConnection.update(newQuery);
                         client.sendToClient(new MsgHandler<>(TypeMsg.ExtraTimeRequested, null));
                     }
                     break;
                 case GetTestForApproval:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    ArrayList<TestForApproval> testsForApproval = MysqlConnection.getTestForApproval(
+                    ArrayList<TestForApproval> testsForApproval = mysqlConnection.getTestForApproval(
                             "SELECT st.* FROM cems.studentstest AS st " +
                                     "JOIN test AS t ON st.testId = t.id " +
                                     "LEFT JOIN activetest AS at ON t.id = at.id " +
@@ -716,7 +720,7 @@ public class CemsServer extends AbstractServer {
                                 "testType = '" + testApprove.getTestType() + "' " +
                                 "WHERE testID = '" + testApprove.getTestID() + "'" +
                                 "AND studentID = '" + testApprove.getStudentID() + "'";
-                        MysqlConnection.update(updateQuery);
+                        mysqlConnection.update(updateQuery);
                         client.sendToClient(new MsgHandler<>(TypeMsg.UpdateTheApprovalOfLecturerResponse, null));
                         break;
                     }
@@ -732,7 +736,7 @@ public class CemsServer extends AbstractServer {
                             "'" + newActiveTest.getStartingTime() + "', " +
                             "'" + newActiveTest.getTestCode() + "') ";
 
-                    MysqlConnection.update(newActiveTestQuery);
+                    mysqlConnection.update(newActiveTestQuery);
                     client.sendToClient(new MsgHandler<>(TypeMsg.AddNewActiveTestResponse, null));
                     break;
 
@@ -752,14 +756,14 @@ public class CemsServer extends AbstractServer {
                             "'" + infoArray[3] + "') ";
 
 
-                    MysqlConnection.update(newAfterTestInfoQuery);
+                    mysqlConnection.update(newAfterTestInfoQuery);
                     client.sendToClient(new MsgHandler<>(TypeMsg.AddNewAfterTestInfoResponse, null));
                     break;
                 case FinishAfterTestInfo:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
                     String[] afterTestInfo = (String[]) obj;
-                    MysqlConnection.update("UPDATE aftertestinfo SET actualDuration = '" + Integer.parseInt(afterTestInfo[0]) +
+                    mysqlConnection.update("UPDATE aftertestinfo SET actualDuration = '" + Integer.parseInt(afterTestInfo[0]) +
                             "', totalForcedFinished = '" + Integer.parseInt(afterTestInfo[1]) +
                             "' WHERE testID = '" + afterTestInfo[2] + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.AfterTestRowCompleted, null));
@@ -768,26 +772,26 @@ public class CemsServer extends AbstractServer {
                 case NumberOfAttendedCounter:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    int totalStudentsInTest = MysqlConnection.getTotalStudentsInTest("SELECT totalStudents FROM aftertestinfo WHERE testID = '" + obj + "'");
+                    int totalStudentsInTest = mysqlConnection.getTotalStudentsInTest("SELECT totalStudents FROM aftertestinfo WHERE testID = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedNumberOfAttendedCounter, totalStudentsInTest));
                     break;
                 case CountRegisteredStudents:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    int totalStudentsRegistered = MysqlConnection.getTotalStudentsRegisteredToTest("SELECT COUNT(*) AS row_count FROM studentscourse WHERE course = '" + obj + "'");
+                    int totalStudentsRegistered = mysqlConnection.getTotalStudentsRegisteredToTest("SELECT COUNT(*) AS row_count FROM studentscourse WHERE course = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedRegisteredStudents, totalStudentsRegistered));
                     break;
                 case CountNumberOfFinished:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    int totalStudentsFinished = MysqlConnection.getTotalStudentsFinishedTheTest("SELECT totalFinished FROM aftertestinfo WHERE testID = '" + obj + "'");
+                    int totalStudentsFinished = mysqlConnection.getTotalStudentsFinishedTheTest("SELECT totalFinished FROM aftertestinfo WHERE testID = '" + obj + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedNumberOfFinished, totalStudentsFinished));
                     break;
                 case DeactivateTest:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
                     String DeleteActiveTestQuery = "DELETE FROM cems.activetest WHERE id='" + obj + "'";
-                    MysqlConnection.update(DeleteActiveTestQuery);
+                    mysqlConnection.update(DeleteActiveTestQuery);
                     client.sendToClient(new MsgHandler<>(TypeMsg.DeactivatingTestResponse, null));
                     break;
                 case DetectedCheating:
@@ -812,7 +816,7 @@ public class CemsServer extends AbstractServer {
                         "              AND studentID = a1.studentID)" +
                         ") " +
                         "AND score < 100";
-                    MysqlConnection.update(QueryOfCheating);
+                    mysqlConnection.update(QueryOfCheating);
                     client.sendToClient(new MsgHandler<>(TypeMsg.DetectedCheatingResponse, null));
                     break;
 
@@ -821,7 +825,7 @@ public class CemsServer extends AbstractServer {
                     this.obj = this.msg.getMsg();
                     String[] LoginValues = (String[]) obj;
                     String changeLoginValue = "UPDATE user SET isLoggedIn = '" + Integer.parseInt(LoginValues[1]) + "' WHERE id = '" + LoginValues[0] + "'";
-                    MysqlConnection.update(changeLoginValue);
+                    mysqlConnection.update(changeLoginValue);
 
                     client.sendToClient(new MsgHandler<>(TypeMsg.IsLoggedValueChanged, null));
                     break;
@@ -830,7 +834,7 @@ public class CemsServer extends AbstractServer {
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
                     String idTofullName = "SELECT fullName FROM user WHERE id = '" + obj + "'";
-                    String fullname = MysqlConnection.getIDReturnFullname(idTofullName);
+                    String fullname = mysqlConnection.getIDReturnFullname(idTofullName);
                     sendToAllClients(new MsgHandler<>(StudentsTestIsApprovedToAllClients, fullname));
 
                     client.sendToClient(new MsgHandler<>(TypeMsg.StudentsTestIsApprovedResponse, null));
@@ -839,7 +843,7 @@ public class CemsServer extends AbstractServer {
                 case LecturerClickedLockTest:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    TestTypeEnum testTypeString = MysqlConnection.getTestType("SELECT testType FROM test WHERE id = '" + obj + "'");
+                    TestTypeEnum testTypeString = mysqlConnection.getTestType("SELECT testType FROM test WHERE id = '" + obj + "'");
                     sendToAllClients(new MsgHandler<>(TypeMsg.LockTestForStudentByLecturer, testTypeString));
 
                     client.sendToClient(new MsgHandler<>(TypeMsg.LecturerClickedLockTestResponse, null));
@@ -848,7 +852,7 @@ public class CemsServer extends AbstractServer {
                 case GetStudentsTests:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    ArrayList<StudentTest> studentsTests = MysqlConnection.getStudentInfo("SELECT * FROM cems.studentstest WHERE studentID = '" + obj + "'");
+                    ArrayList<StudentTest> studentsTests = mysqlConnection.getStudentInfo("SELECT * FROM cems.studentstest WHERE studentID = '" + obj + "'");
 
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedStudentTests, studentsTests));
                     break;
@@ -856,7 +860,7 @@ public class CemsServer extends AbstractServer {
                 case GetStudentCourses:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    ArrayList<String> studentCourse = MysqlConnection.getStudentsCourses("SELECT course FROM studentscourse WHERE studentID = '" + obj + "'");
+                    ArrayList<String> studentCourse = mysqlConnection.getStudentsCourses("SELECT course FROM studentscourse WHERE studentID = '" + obj + "'");
 
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedStudentCourses, studentCourse));
                     break;
@@ -866,14 +870,14 @@ public class CemsServer extends AbstractServer {
                     List<Object> testInfoOfAverage = (List<Object>) this.msg.getMsg();
                     String id = (String) testInfoOfAverage.get(1);
                     String testsAvg = (String) testInfoOfAverage.get(0);
-                    MysqlConnection.update("UPDATE aftertestinfo SET average = '" + testsAvg + "' WHERE testID = '" + id + "'");
+                    mysqlConnection.update("UPDATE aftertestinfo SET average = '" + testsAvg + "' WHERE testID = '" + id + "'");
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedTestsAverage, null));
                     break;
 
                 case GetTestAverage:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    String testsAverage = MysqlConnection.getStudentsAvg("SELECT average FROM aftertestinfo WHERE testID = '" + obj + "'");
+                    String testsAverage = mysqlConnection.getStudentsAvg("SELECT average FROM aftertestinfo WHERE testID = '" + obj + "'");
 
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedTestAverage, testsAverage));
                     break;
@@ -881,7 +885,7 @@ public class CemsServer extends AbstractServer {
                 case getTestAfterTestInfo:
                     this.msg = (MsgHandler<Object>) msg;
                     this.obj = this.msg.getMsg();
-                    ArrayList<String> afterTestInfoForReports = MysqlConnection.getAfterTestInfo("SELECT * FROM aftertestinfo WHERE testID = '" + obj + "'");
+                    ArrayList<String> afterTestInfoForReports = mysqlConnection.getAfterTestInfo("SELECT * FROM aftertestinfo WHERE testID = '" + obj + "'");
 
                     client.sendToClient(new MsgHandler<>(TypeMsg.ImportedAfterTestInfo, afterTestInfoForReports));
                     break;

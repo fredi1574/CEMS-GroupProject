@@ -8,17 +8,32 @@ import java.util.Objects;
  * the class contains methods which connect to the CEMS database
  * and perform various queries on the data
  */
-public class MysqlConnection {
+public class MysqlConnection implements IMysqlConnection {
+
+    private static MysqlConnection mysqlConnection = null;
 
     static Connection conn;
     static String url = "jdbc:mysql://localhost/cems?serverTimezone=IST&allowPublicKeyRetrieval=true&useSSL=false";
     static String username = "root";
 
+    /** Getter of the <code>databaseController</code> (Singleton) instance.
+     *
+     * @return <code>databaseController</code> instance.
+     */
+    public static MysqlConnection getInstance() {
+        if (mysqlConnection == null) {
+            mysqlConnection = new MysqlConnection();
+        }
+        return mysqlConnection;
+    }
+
+    protected MysqlConnection() {}
+
     /**
      * This hook method sets up a connection between the Server and the Data base we
      * connect to the server by passing the DB address, DB username and password
      */
-    public static void connectToDb(String password) {
+    public void connectToDb(String password) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
             System.out.println("Driver definition succeed");
@@ -42,7 +57,7 @@ public class MysqlConnection {
      * @param question the SQL update statement to be executed.
      */
 
-    public static void update(String question) {
+    public void update(String question) {
         PreparedStatement statement;
         try {
             statement = conn.prepareStatement(question);
@@ -52,7 +67,7 @@ public class MysqlConnection {
         }
     }
 
-    private static Statement createStatement() {
+    private Statement createStatement() {
         Statement statement = null;
         try {
             statement = conn.createStatement();
@@ -68,7 +83,7 @@ public class MysqlConnection {
      * @param query the given SELECT query
      * @return ArrayList of the questions
      */
-    public static ArrayList<Question> getQuestionsTable(String query) {
+    public ArrayList<Question> getQuestionsTable(String query) {
         Statement statement = createStatement();
 
         ArrayList<Question> list = new ArrayList<>();
@@ -104,7 +119,7 @@ public class MysqlConnection {
      * @param query the given SELECT query
      * @return ArrayList of the courses
      */
-    public static ArrayList<Course> getCourseList(String query) {
+    public ArrayList<Course> getCourseList(String query) {
         Statement statement = createStatement();
 
         ArrayList<Course> coursesList = new ArrayList<>();
@@ -133,7 +148,7 @@ public class MysqlConnection {
      * @return ArrayList of the subjects
      */
 
-    public static ArrayList<Subject> getSubjectList(String query) {
+    public ArrayList<Subject> getSubjectList(String query) {
         Statement statement = createStatement();
 
         ArrayList<Subject> subjectsList = new ArrayList<>();
@@ -161,7 +176,7 @@ public class MysqlConnection {
      * @return a User object if the authentication is successful, or null if the authentication fails.
      */
 
-    public static Object authenticateUser(String username, String password) {
+    public Object authenticateUser(String username, String password) {
         try {
             PreparedStatement statement = conn.prepareStatement("SELECT id, firstName, lastName, email, role, isLoggedIn,phoneNumber FROM user  WHERE BINARY username = ? AND password = ?");
             statement.setString(1, username);
@@ -190,7 +205,7 @@ public class MysqlConnection {
     }
 
 
-    public static ArrayList<Test> getTestTable(String query) {
+    public ArrayList<Test> getTestTable(String query) {
         Statement statement = createStatement();
 
         ArrayList<Test> tests = new ArrayList<>();
@@ -227,7 +242,7 @@ public class MysqlConnection {
      * @param query the SQL query to retrieve the test records from the database.
      * @return an ArrayList of Test objects retrieved from the database.
      */
-    public static ArrayList<ActiveTest> getActiveTestsTable(String query) {
+    public ArrayList<ActiveTest> getActiveTestsTable(String query) {
         Statement statement = createStatement();
 
         ArrayList<ActiveTest> activeTests = new ArrayList<>();
@@ -257,7 +272,7 @@ public class MysqlConnection {
      * @param query the SQL query to retrieve the test question records from the database.
      * @return an ArrayList of TestQuestion objects retrieved from the database.
      */
-    public static ArrayList<TestQuestion> getTestQuestionsTable(String query) {
+    public ArrayList<TestQuestion> getTestQuestionsTable(String query) {
         Statement statement = createStatement();
 
         ArrayList<TestQuestion> testQuestions = new ArrayList<>();
@@ -289,7 +304,7 @@ public class MysqlConnection {
      * @param query the SQL query to retrieve the test request records from the database.
      * @return an ArrayList of TestRequestForApproval objects retrieved from the database.
      */
-    public static ArrayList<TestRequestForApproval> getRequestsTable(String query) {
+    public ArrayList<TestRequestForApproval> getRequestsTable(String query) {
         Statement statement = createStatement();
 
         ArrayList<TestRequestForApproval> list = new ArrayList<>();
@@ -312,7 +327,7 @@ public class MysqlConnection {
         return list;
     }
 
-    public static ArrayList<StudentTest> getStudentInfo(String query) {
+    public ArrayList<StudentTest> getStudentInfo(String query) {
         Statement statement = createStatement();
 
         ArrayList<StudentTest> list = new ArrayList<>();
@@ -355,7 +370,7 @@ public class MysqlConnection {
      * @return an ArrayList of StudentTest objects retrieved from the database.
      */
 
-    public static ArrayList<User> getUser(String query) {
+    public ArrayList<User> getUser(String query) {
         Statement statement = createStatement();
 
         ArrayList<User> getUsers = new ArrayList<>();
@@ -390,7 +405,7 @@ public class MysqlConnection {
     /**
      * this method closes the connection to the DB and the server
      */
-    public static void closeConnection() {
+    public void closeConnection() {
         if (conn == null)
             System.out.println("Server Connection has been closed");
         else {
@@ -408,7 +423,7 @@ public class MysqlConnection {
      * @return a Question object containing the retrieved question data.
      */
 
-    public static Question getQuestionData(String query) {
+    public Question getQuestionData(String query) {
         Statement statement = createStatement();
 
         Question question = null;
@@ -443,7 +458,7 @@ public class MysqlConnection {
      * @param query the SQL query to retrieve the question data from the database.
      * @return a Question object containing the retrieved question data.
      */
-    public static Test getTestData(String query) {
+    public Test getTestData(String query) {
         Statement statement = createStatement();
 
         Test test = null;
@@ -482,7 +497,7 @@ public class MysqlConnection {
      *         or null if not registered.
      */
 
-    public static StudentCourse checkRegistered(String query) {
+    public StudentCourse checkRegistered(String query) {
         Statement statement = createStatement();
 
         StudentCourse getUser = null;
@@ -513,7 +528,7 @@ public class MysqlConnection {
      * @return a Subject object containing the retrieved subject data.
      */
 
-    public static Subject SubjectName(String query) {
+    public Subject SubjectName(String query) {
         Statement statement = createStatement();
 
         Subject subject = null;
@@ -536,7 +551,7 @@ public class MysqlConnection {
      * @return an ArrayList of TestForApproval objects containing the retrieved test approval data.
      */
 
-    public static ArrayList<TestForApproval> getTestForApproval(String query) {
+    public ArrayList<TestForApproval> getTestForApproval(String query) {
         Statement statement = createStatement();
 
         ArrayList<TestForApproval> list = new ArrayList<>();
@@ -578,7 +593,7 @@ public class MysqlConnection {
      * @param query the SQL query to retrieve the total number of students in the test from the database.
      * @return the total number of students in the test.
      */
-    public static Integer getTotalStudentsInTest(String query) {
+    public Integer getTotalStudentsInTest(String query) {
         Statement statement = createStatement();
 
         int totalStudents = 0;
@@ -600,7 +615,7 @@ public class MysqlConnection {
      * @return the total number of students registered to the test.
      */
 
-    public static Integer getTotalStudentsRegisteredToTest(String query) {
+    public Integer getTotalStudentsRegisteredToTest(String query) {
         Statement statement = createStatement();
 
         int rowCount = 0;
@@ -621,7 +636,7 @@ public class MysqlConnection {
      * @return the total number of students who have finished the test.
      */
 
-    public static Integer getTotalStudentsFinishedTheTest(String query) {
+    public Integer getTotalStudentsFinishedTheTest(String query) {
         Statement statement = createStatement();
 
         int finishedCount = 0;
@@ -644,7 +659,7 @@ public class MysqlConnection {
      */
 
 
-    public static TestTypeEnum getTestType(String query) {
+    public TestTypeEnum getTestType(String query) {
         Statement statement = createStatement();
 
         try {
@@ -664,7 +679,7 @@ public class MysqlConnection {
      * @param query the SQL query to retrieve the full name from the database.
      * @return the full name as a {@link String}, or {@code null} if the full name is not found.
      */
-    public static String getIDReturnFullname(String query) {
+    public String getIDReturnFullname(String query) {
         Statement statement = createStatement();
 
         String fullName = null;
@@ -685,7 +700,7 @@ public class MysqlConnection {
      * @return an {@link ArrayList} of student courses as {@link String}s.
      */
 
-    public static ArrayList<String> getStudentsCourses(String query) {
+    public ArrayList<String> getStudentsCourses(String query) {
         Statement statement = createStatement();
 
         ArrayList<String> courses = new ArrayList<>();
@@ -708,7 +723,7 @@ public class MysqlConnection {
      * @return the average value as a {@link String}.
      */
 
-    public static String getStudentsAvg(String query) {
+    public String getStudentsAvg(String query) {
         Statement statement = createStatement();
 
         String average = null;
@@ -729,7 +744,7 @@ public class MysqlConnection {
      * @return a list of strings containing the actual duration, total finished count, and total forced finished count.
      */
 
-    public static ArrayList<String> getAfterTestInfo(String query) {
+    public ArrayList<String> getAfterTestInfo(String query) {
         Statement statement = createStatement();
 
         ArrayList<String> list = new ArrayList<>();
