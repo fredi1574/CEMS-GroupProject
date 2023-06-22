@@ -4,13 +4,9 @@ import entity.IServerClientCommunication;
 import entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import Client.Client;
+
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 import util.MsgHandler;
@@ -18,18 +14,12 @@ import util.TypeMsg;
 
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 class LoginWindowControllerTest {
+
     private class stubServerClientCommunication implements IServerClientCommunication{
-
         private Object toServerMsg;
-
-        public Object getToServerMsg() {
-            return toServerMsg;
-        }
-
         private MsgHandler returnMsg;
         private String msg;
 
@@ -37,13 +27,17 @@ class LoginWindowControllerTest {
 
         private Object user;
 
+
+
+
+
         @Override
         public void sendToServer(Object msg) {
             toServerMsg=msg;
 
         }
         @Override
-        public MsgHandler getServerMsg() {
+        public MsgHandler getReturnMsg() {
 
             return returnMsg;
         }
@@ -71,13 +65,8 @@ class LoginWindowControllerTest {
             this.returnMsg = returnMsg;
         }
 
-        public void setMsg(String msg) {
-            this.msg = msg;
-        }
 
-        public void setErrorMsg(String errorMsg) {
-            this.errorMsg = errorMsg;
-        }
+
 
     }
 
@@ -91,7 +80,7 @@ class LoginWindowControllerTest {
 
         private String ID;
         private String role;
-
+        private String errorMsg;
         private String password;
 
         public stubILoginGetUserInput(String ID, String password) {
@@ -114,34 +103,37 @@ class LoginWindowControllerTest {
         public String getUserRole() {
             return role;
         }
-
+        @Override
+        public String geteErrorMsg(){
+            return errorMsg;
+        }
     }
 
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
-
-    }
 
     @Test
-    void testIsNotEmptyUser() throws IOException {
+    void SuccesFullWithStudent() throws IOException {
 
             LoginWindowController myCon = new LoginWindowController();
             stubServerClientCommunication iServerClientCommunication = new stubServerClientCommunication();
             String userName = "Abed";
             String passWord = "a";
+            String role = "Student";
             User myStudent = new User();
             myStudent.setUserName(userName);
             myStudent.setPassword(passWord);
+            myStudent.setRole(role);
             ILoginGetUserInput iLoginGetUserInput = new stubILoginGetUserInput(userName,passWord);
             myCon.setiLoginGetUserInput(iLoginGetUserInput);
             myCon.setiServerClientCommunication(iServerClientCommunication);
-            iServerClientCommunication.setReturnMsg(new MsgHandler(TypeMsg.LoginResponse, myStudent));
-            assertEquals(myCon.isNotEmptyUser(userName,passWord),true);
-            /*
-            assertEquals(((ClientMessage)iServerClientCommunication.getToServerMsg()).getType(),ClientMessageType.LOGIN_PERSON);
-            assertEquals(((String[])((ClientMessage)iServerClientCommunication.getToServerMsg()).getMessage())[0],userName);
+            iServerClientCommunication.setReturnMsg(new MsgHandler(TypeMsg.LoginResponse,myStudent));
+            assertEquals(myCon.isEmptyDetails(userName,passWord),true);
+            Object msg = iServerClientCommunication.getReturnMsg().getMsg();
+            User user = (User)msg;
+            assertEquals(((User) msg).getUserName(),myStudent.getUserName());
+            assertEquals(((User) msg).getPassword(),myStudent.getPassword());
+            assertEquals(iServerClientCommunication.errorMsg,null);
+         /*
             assertEquals(((String[])((ClientMessage)iServerClientCommunication.getToServerMsg()).getMessage())[1],passWord);
             assertEquals(iServerClientCommunication.getServerMsg().getType(),ServerMessageTypes.LOGIN_STUDENT);
             assertEquals(iServerClientCommunication.getServerMsg().getMessage(),myStudent);
@@ -152,14 +144,82 @@ class LoginWindowControllerTest {
 
         }
     @Test
-    void testV() {
+    public void StudentAlreadyLoggedIn() throws IOException {
+        LoginWindowController myCon = new LoginWindowController();
+        stubServerClientCommunication iServerClientCommunication = new stubServerClientCommunication();
+        User myStudent = new User();
+        String userName = "NoaKrisp";
+        String passWord = "a";
+        String role = "Student";
+        myStudent.setUserName(userName);
+        myStudent.setPassword(passWord);
+        myStudent.setRole(role);
+        ILoginGetUserInput iLoginGetUserInput = new stubILoginGetUserInput(userName,passWord);
+        myCon.setiLoginGetUserInput(iLoginGetUserInput);
+        myCon.setiServerClientCommunication(iServerClientCommunication);
+        iServerClientCommunication.setReturnMsg(new MsgHandler(TypeMsg.LoginResponse, "logged in"));
+        assertEquals(myCon.isAlreadyLoggedIn(),false);;
+        assertEquals(iServerClientCommunication.getReturnMsg().getMsg(),"logged in");
+        assertEquals(null,iServerClientCommunication.getUser());
+        assertEquals(iServerClientCommunication.errorMsg,"This user is already logged in");
+
 
     }
+/**
+ * Functionality: Test whether the method returns false when the username is empty and the password is entered.
+ * Input: userName = "", password = "4"
+ * Expected result: false
+ */
 
     @Test
-    void testLogIN() {
-        // Test empty username and password fields
-
+    public void Login_EnterPasswordButNotUser() throws IOException {
+        LoginWindowController myCon = new LoginWindowController();
+        String userName = "";
+        String password = "4";
+        assertFalse(myCon.isEmptyDetails(userName, password));
     }
+
+    /**
+     * Functionality: Test whether the method returns false when the username is entered and the password is empty.
+     * Input: userName = "Yuval", password = ""
+     * Expected result: false
+     */
+
+    @Test
+    public void Login_EnterUserButNotPassword() throws IOException {
+        LoginWindowController myCon = new LoginWindowController();
+        String userName = "Yuval";
+        String password = "";
+        assertFalse(myCon.isEmptyDetails(userName, password));
+    }
+
+    /**
+     * Functionality: Test whether the method returns false when both the username and password are empty.
+     * Input: userName = "", password = ""
+     * Expected result: false
+     */
+
+    @Test
+    public void Login_NotEnterUserAndNotPassword() throws IOException {
+        LoginWindowController myCon = new LoginWindowController();
+        String userName = "";
+        String password = "";
+         assertFalse(myCon.isEmptyDetails(userName, password));
+    }
+
+    /**
+     * Functionality: Test whether the method returns true when both the username and password are entered.
+     * Input: userName = "AbedTayer", password = "a"
+     * Expected result: true
+     */
+
+    @Test
+    public void Login_EnterUserAndPassword() throws IOException {
+        LoginWindowController myCon = new LoginWindowController();
+        String userName = "AbedTayer";
+        String password = "a";
+        assertTrue(myCon.isEmptyDetails(userName, password));
+    }
+
 
 }

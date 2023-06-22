@@ -8,7 +8,7 @@ public interface IServerClientCommunication {
 
     public void sendToServer(Object msg) throws IOException;
 
-    public MsgHandler getServerMsg();
+    public MsgHandler getReturnMsg();
 
     public void popUpError(String msg);
 

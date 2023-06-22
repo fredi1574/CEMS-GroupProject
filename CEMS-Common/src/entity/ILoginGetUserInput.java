@@ -5,4 +5,6 @@ public interface ILoginGetUserInput {
 
     public String getUserPassword();
     public String getUserRole();
+
+    String geteErrorMsg();
 }

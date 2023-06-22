@@ -30,7 +30,9 @@ public class LoginWindowController {
 
 
     private IServerClientCommunication iServerClientCommunication = new LoginServerClientCommunication();
-
+    public void initialize() {
+        ScreenManager.dragAndDrop(header);
+    }
     public LoginWindowController() throws IOException {
 
     }
@@ -56,7 +58,7 @@ public class LoginWindowController {
         }
 
         @Override
-        public MsgHandler getServerMsg() {
+        public MsgHandler getReturnMsg() {
 
             return ClientControl.getServerMsg();
         }
@@ -102,6 +104,11 @@ public class LoginWindowController {
 
         @Override
         public String getUserRole() {
+            return Client.user.getRole();
+        }
+
+        @Override
+        public String geteErrorMsg() {
             return null;
         }
     }
@@ -128,7 +135,7 @@ public class LoginWindowController {
              username = usernameField.getText();
              password = passwordField.getText();
         // Check if username or password fields are empty
-        if(!isNotEmptyUser(username,password)) {
+        if(!isEmptyDetails(username,password)) {
             showError.showErrorPopup("Please enter both username and password.");
             return;
         }
@@ -170,13 +177,21 @@ public class LoginWindowController {
         }
     }
 
-    public boolean isNotEmptyUser(String username, String password) {
+    public boolean isEmptyDetails(String username, String password) {
+
         if (username.isEmpty() || password.isEmpty()) {
+            return false;
+        }
+
+        return true;
+    }
+    public boolean isAlreadyLoggedIn(){
+        if (iServerClientCommunication.getReturnMsg().getMsg().equals("logged in")) {
+            iServerClientCommunication.popUpError("This user is already logged in");
             return false;
         }
         return true;
     }
-
     /**
      * Event handler for text click.
      * Displays an information dialog with a message to contact the admin for password reset.
