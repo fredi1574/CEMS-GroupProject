@@ -57,7 +57,7 @@ public class MysqlConnection implements IMysqlConnection {
      * @param question the SQL update statement to be executed.
      */
 
-    public void update(String question) {
+    public Object update(String question) {
         PreparedStatement statement;
         try {
             statement = conn.prepareStatement(question);
@@ -65,6 +65,7 @@ public class MysqlConnection implements IMysqlConnection {
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
+        return null; //USED FOR TESTING
     }
 
     private Statement createStatement() {

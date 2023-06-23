@@ -27,6 +27,9 @@ public class StateManagement {
     public ActiveTest currentActivetest;
     public int totalRemainingPoints;
 
+
+    public String author;
+
     public TestTypeEnum testType;
     public String previousScreenPath = PathConstants.mainMenuPath;
     ObservableList<TestForApproval> testForApproval = FXCollections.observableArrayList();
@@ -391,6 +394,14 @@ public class StateManagement {
      */
     public void setSubjectID(String subjectID) {
         this.subjectID = subjectID;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     /**

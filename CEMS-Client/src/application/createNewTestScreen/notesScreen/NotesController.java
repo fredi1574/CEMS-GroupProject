@@ -22,6 +22,7 @@ import java.util.List;
  * The lecturer can leave notes for other lecturers and students
  */
 public class NotesController implements InotesController {
+    //public class NotesController {
     public StateManagement stateManagement = StateManagement.getInstance();
     @FXML
     private Text nameAuthor;
@@ -91,7 +92,7 @@ public class NotesController implements InotesController {
         }
         notesController.checkNotes();
         notesController.deleteTestIfAlreadyExists();
-        addTestToDB();
+        notesController.addTestToDB();
         notesController.addAllTestQuestionsToDB();
 
         StateManagement.resetInstance();
@@ -120,7 +121,7 @@ public class NotesController implements InotesController {
      * if it does, it gets deleted
      * Used for editing tests (Allows the lecturer to override an existing test's data)
      */
-    @Override
+    //@Override
     public void deleteTestIfAlreadyExists() {
         MsgHandler getDbTestTable = new MsgHandler(TypeMsg.GetTestsBySubject, Client.user.getUserName());
         ClientUI.chat.accept(getDbTestTable);
@@ -138,7 +139,7 @@ public class NotesController implements InotesController {
     /**
      * adds a test to the DB
      */
-    @Override
+    //@Override
     public void addTestToDB() {
 
         Test newTest = new Test(
@@ -163,11 +164,14 @@ public class NotesController implements InotesController {
     public void setTest(Test test){
         this.test = test;
     }
+    public Test getTest() {
+        return test;
+    }
 
     /**
      * adds all the test's questions to the DB
      */
-    @Override
+    //@Override
     public void addAllTestQuestionsToDB() {
         ObservableList<TestQuestion> testQuestions = stateManagement.getTestQuestions();
 

@@ -1,29 +1,25 @@
-import Client.Client;
 import application.createNewTestScreen.notesScreen.InotesController;
 import application.createNewTestScreen.notesScreen.NotesController;
 import entity.Course;
 import entity.TestQuestion;
 import entity.TestTypeEnum;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import util.*;
 import Client.ClientControl;
 
-import javax.swing.plaf.nimbus.State;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+//import static org.mockito.Matchers.anyString;
+//import static org.mockito.Mockito.*;
 
 public class CreateTestClientTest {
 
 
-    public StateManagement stateManagement;
+    public static StateManagement stateManagement;
 
-    private NotesController notesController;
+    private static NotesController notesController;
     private ShowMessage mockedShowMessage;
     private entity.Test test;
     private class ClientConrolStub implements ChatIF{
@@ -39,7 +35,7 @@ public class CreateTestClientTest {
 
         }
     }
-    private ClientControl clientControl;
+    public static ClientControl clientControl;
 
     @BeforeEach
     void setUp() {
@@ -53,7 +49,7 @@ public class CreateTestClientTest {
 
 
     @Test
-    public void test_IncompleteData_should_return_false() {
+    public void CreateTest_IncompleteData_ReturnsMissingDataError() {
         stateManagement = StateManagement.getInstance();
         stateManagement.semester = "";
         stateManagement.year = "";
@@ -66,7 +62,10 @@ public class CreateTestClientTest {
         assertEquals("Go to page 1 and complete the data of test", actualResult);
     }
     @Test
-    public void test_NoQuestions_should_return_false() {
+    /**
+     *
+     */
+    public void CreateTest_NoQuestions_ReturnsMissingQuestionsError() {
         stateManagement = StateManagement.getInstance();
         stateManagement.semester = "A";
         stateManagement.year = "2020";
@@ -78,7 +77,7 @@ public class CreateTestClientTest {
         assertEquals("Select Questions for test from page 2", actualResult);
     }
     @Test
-    public void CreateTest_NotEnoughPoints_should_return_false() {
+    public void CreateTest_NotEnoughPoints_ReturnsNotEnoughPointsError() {
         stateManagement = StateManagement.getInstance();
         stateManagement.semester = "A";
         stateManagement.year = "2020";
@@ -128,33 +127,122 @@ public class CreateTestClientTest {
         stateManagement.setSession(regularTest.getSession());
         stateManagement.setSemester(regularTest.getSemester());
         stateManagement.setSubjectID(subjectID);
+        stateManagement.setAuthor(regularTest.getAuthor());
         TestQuestion question = new TestQuestion("1","1",100,"How are you?","1","Math","Algebra","May Caspi");
         stateManagement.setTestQuestions(question);
         stateManagement.subtractTotalRemainingPoints(100);
         String actualResult = notesController.createTest(new ActionEvent());
         assertEquals("Test added successfully", actualResult);
+        assertEquals(regularTest.getId(),notesController.getTest().getId());
+        assertEquals(regularTest.getAuthor(),notesController.getTest().getAuthor());
+
+    }
+
+    @Test
+    //functionality: createTest() with all the required test details filled
+    //input: Test regularTest
+    //expected result: Test object with all the correct details
+    public void createTest_DuplicateTest_OverridesExistingTest() {
+        stateManagement = StateManagement.getInstance();
+
+        //creating first test
+        entity.Test regularTest = new entity.Test(
+                "20",
+                "010101",
+                "Roman Gury",
+                "10",
+                "Algebra",
+                "abc",
+                TestTypeEnum.C,
+                "def",
+                "Math",
+                "2023",
+                "A",
+                "A",
+                "01"
+        );
+
+        String subjectID = regularTest.getId().substring(0, 2);
+        String courseID = regularTest.getId().substring(2, 4);
+        Course regularTestCourse = new Course(subjectID, courseID, regularTest.getSubject(), regularTest.getCourseName());
+
+        stateManagement.setTestNum(regularTest.getTestNumber());
+        stateManagement.setTestID(regularTest.getId());
+        stateManagement.setTestDuration(regularTest.getTestDuration());
+        stateManagement.setCourse(regularTestCourse);
+        stateManagement.setTestType(regularTest.getTestType());
+        stateManagement.setYear(regularTest.getYear());
+        stateManagement.setSession(regularTest.getSession());
+        stateManagement.setSemester(regularTest.getSemester());
+        stateManagement.setSubjectID(subjectID);
+        stateManagement.setAuthor(regularTest.getAuthor());
+        TestQuestion question = new TestQuestion("1","1",100,"How are you?","1","Math","Algebra","May Caspi");
+        stateManagement.setTestQuestions(question);
+        stateManagement.subtractTotalRemainingPoints(100);
+
+        notesController.createTest(new ActionEvent());
+
+        //creating duplicate test
+        entity.Test duplicateTest = new entity.Test(
+                "20",
+                "010101",
+                "May Caspi",
+                "10",
+                "Algebra",
+                "abcd",
+                TestTypeEnum.C,
+                "defg",
+                "Math",
+                "2023",
+                "A",
+                "A",
+                "01"
+        );
+
+        subjectID = duplicateTest.getId().substring(0, 2);
+        courseID = duplicateTest.getId().substring(2, 4);
+        Course duplicateTestCourse = new Course(subjectID, courseID, duplicateTest.getSubject(), duplicateTest.getCourseName());
+
+        stateManagement.setTestNum(duplicateTest.getTestNumber());
+        stateManagement.setTestID(duplicateTest.getId());
+        stateManagement.setTestDuration(duplicateTest.getTestDuration());
+        stateManagement.setCourse(duplicateTestCourse);
+        stateManagement.setTestType(duplicateTest.getTestType());
+        stateManagement.setYear(duplicateTest.getYear());
+        stateManagement.setSession(duplicateTest.getSession());
+        stateManagement.setSemester(duplicateTest.getSemester());
+        stateManagement.setSubjectID(subjectID);
+        stateManagement.setAuthor(duplicateTest.getAuthor());
+        question = new TestQuestion("1","1",100,"How are you?","1","Math","Algebra","May Caspi");
+        stateManagement.setTestQuestions(question);
+        stateManagement.subtractTotalRemainingPoints(100);
+
+        String actualResult = notesController.createTest(new ActionEvent());
+        assertEquals("Test added successfully", actualResult);
+        assertEquals(regularTest.getId(),notesController.getTest().getId());
+        assertNotEquals(regularTest.getAuthor(),notesController.getTest().getAuthor());
 
     }
 
     public static class NotesControllerStub implements InotesController {
-        public MysqlConnection mysqlConnection;
-        public StateManagement stateManagement;
 
         public NotesControllerStub() {
         }
 
         @Override
         public void deleteTestIfAlreadyExists() {
+            if (notesController.getTest()!=null) {
+                notesController.setTest(null);
+            }
         }
 
         @Override
         public void addTestToDB() {
-            mysqlConnection = MysqlConnection.getInstance();
-            mysqlConnection.connectToDb("Aa123456");
+
             entity.Test newTest = new entity.Test(
                     stateManagement.getTestNum(),
                     stateManagement.getTestID(),
-                    Client.user.getFullName(),
+                    stateManagement.getAuthor(),
                     stateManagement.getTestDuration(),
                     stateManagement.getCourse().getCourseName(),
                     stateManagement.getTeacherComment(),
@@ -166,6 +254,9 @@ public class CreateTestClientTest {
                     stateManagement.getSemester(),
                     stateManagement.getSubjectID()
             );
+
+            //ClientUI.chat.accept(newTest);
+            notesController.setTest(newTest);
 
         }
 
