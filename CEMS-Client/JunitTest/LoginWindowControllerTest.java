@@ -152,14 +152,7 @@ The errorMsg field of iServerClientCommunication should be null.
             assertEquals(((User) msg).getUserName(),myStudent.getUserName());
             assertEquals(((User) msg).getPassword(),myStudent.getPassword());
             assertEquals(iServerClientCommunication.errorMsg,null);
-         /*
-            assertEquals(((String[])((ClientMessage)iServerClientCommunication.getToServerMsg()).getMessage())[1],passWord);
-            assertEquals(iServerClientCommunication.getServerMsg().getType(),ServerMessageTypes.LOGIN_STUDENT);
-            assertEquals(iServerClientCommunication.getServerMsg().getMessage(),myStudent);
-            assertEquals(myStudent,iServerClientCommunication.getUser());
-            assertEquals(iServerClientCommunication.errorMsg,null);
 
-             */
 
         }
         /*
