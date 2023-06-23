@@ -3,6 +3,8 @@ package Client;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class ClientUI extends Application {
 	private static Stage stage;
 	public static ClientControl chat; //only one instance
@@ -38,7 +40,7 @@ public class ClientUI extends Application {
 	 * @param gettxtfield The IP address of the server.
 	 * @param i           The port number to connect to.
 	 */
-	public static void setChat(String gettxtfield, int i) {
+	public static void setChat(String gettxtfield, int i) throws IOException {
 		chat = new ClientControl(gettxtfield, i);
 	}
 

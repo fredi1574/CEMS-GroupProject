@@ -1,8 +1,11 @@
 package application.loginWindowScreen;
 
 import Client.Client;
+import Client.ClientControl;
 import Client.ClientUI;
 import Client.ExitButton;
+import entity.ILoginGetUserInput;
+import entity.IServerClientCommunication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -10,29 +13,41 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import util.*;
 
+import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The controller class for the login window screen.
- * This class handles user authentication and navigation to different screens based on the user's role.
- */
 
 public class LoginWindowController {
 
+
+    @FXML
+    public TextField usernameField;
+    @FXML
+    public PasswordField passwordField;
+    ClientControl clientControl = new ClientControl("", 0);
+    private Connection connection;
     @FXML
     private AnchorPane header;
-    @FXML
-    private TextField usernameField;
-    @FXML
-    private PasswordField passwordField;
+    private IServerClientCommunication iServerClientCommunication = new LoginServerClientCommunication();
+    private ILoginGetUserInput iLoginGetUserInput = new LoginILoginGetUserInput();
 
-    /**
-     * This method is called when the FXML file is loaded.
-     * It enables dragging and dropping of the application window using the header pane.
-     */
+    public LoginWindowController() throws IOException {
+
+
+    }
+
     public void initialize() {
         ScreenManager.dragAndDrop(header);
+    }
+
+    public void setiServerClientCommunication(IServerClientCommunication iServerClientCommunication) {
+        this.iServerClientCommunication = iServerClientCommunication;
+    }
+
+    public void setiLoginGetUserInput(ILoginGetUserInput iLoginGetUserInput) {
+        this.iLoginGetUserInput = iLoginGetUserInput;
     }
 
     /**
@@ -45,19 +60,19 @@ public class LoginWindowController {
      */
     @FXML
     public void logIN(ActionEvent event) {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-
+        String username;
+        String password;
+        username = usernameField.getText();
+        password = passwordField.getText();
         // Check if username or password fields are empty
-        if (!isNotEmptyUser(username, password)) {
+        if (isEmptyDetails(username, password)) {
             ShowMessage.showErrorPopup("Please enter both username and password.");
             return;
         }
-
         List<String> UserToLogin = new ArrayList<>();
         UserToLogin.add(username);
         UserToLogin.add(password);
-        MsgHandler<List<String>> Login = new MsgHandler<>(TypeMsg.TryLogin, UserToLogin);
+        MsgHandler Login = new MsgHandler(TypeMsg.TryLogin, UserToLogin);
         ClientUI.chat.accept(Login);
         // Authenticate user and retrieve their role
         try {
@@ -67,7 +82,7 @@ public class LoginWindowController {
                     return;
                 }
                 String[] LoginValues = {Client.user.getId(), "1"};
-                MsgHandler<String[]> changeLoggedInValue = new MsgHandler<>(TypeMsg.ChangeIsLoggedValue, LoginValues);
+                MsgHandler changeLoggedInValue = new MsgHandler(TypeMsg.ChangeIsLoggedValue, LoginValues);
                 ClientUI.chat.accept(changeLoggedInValue);
                 switch (Client.user.getRole()) {
                     case "Student":
@@ -92,8 +107,26 @@ public class LoginWindowController {
         }
     }
 
-    public boolean isNotEmptyUser(String username, String password) {
+    public boolean isEmptyDetails(String username, String password) {
+
+
         if (username.isEmpty() || password.isEmpty()) {
+            return true;
+        }
+
+
+        return false;
+    }
+
+
+    /**
+     * This method is called when the FXML file is loaded.
+     * It enables dragging and dropping of the application window using the header pane.
+     */
+
+    public boolean isAlreadyLoggedIn() {
+        if (iServerClientCommunication.getReturnMsg().getMsg().equals("logged in")) {
+            iServerClientCommunication.popUpError("This user is already logged in");
             return false;
         }
         return true;
@@ -110,9 +143,11 @@ public class LoginWindowController {
     /**
      * Event handler for close button click.
      * Closes the application window.
+     *
+     * @param event The event triggered by the close button click.
      */
     @FXML
-    private void closeClient() {
+    private void closeClient(ActionEvent event) {
         ExitButton.closeClient();
     }
 
@@ -125,5 +160,82 @@ public class LoginWindowController {
     @FXML
     public void minimizeWindow(ActionEvent event) {
         MinimizeButton.minimizeWindow(event);
+    }
+
+    private class LoginServerClientCommunication implements IServerClientCommunication {
+
+
+        @Override
+        public void sendToServer(Object msg) throws IOException {
+
+            ClientControl.accepted(msg);
+        }
+
+        @Override
+        public MsgHandler getReturnMsg() {
+
+
+            return ClientControl.getServerMsg();
+        }
+
+        @Override
+        public void popUpError(String msg) {
+            ShowMessage.showErrorPopup(msg);
+
+
+        }
+
+
+        @Override
+        public void popUpMessage(String msg) {
+            ShowMessage.showErrorPopup(msg);
+
+
+        }
+
+
+        @Override
+        public Object getUser() {
+            return ClientControl.getUser();
+        }
+
+
+        @Override
+        public void setUser(Object user) {
+            ClientControl.setUser(user);
+        }
+
+
+    }
+
+    private class LoginILoginGetUserInput implements ILoginGetUserInput {
+
+
+        @Override
+        public String getUserID() {
+
+
+            return usernameField.getText();
+        }
+
+
+        @Override
+        public String getUserPassword() {
+
+
+            return passwordField.getText();
+        }
+
+
+        @Override
+        public String getUserRole() {
+            return Client.user.getRole();
+        }
+
+
+        @Override
+        public String geteErrorMsg() {
+            return null;
+        }
     }
 }

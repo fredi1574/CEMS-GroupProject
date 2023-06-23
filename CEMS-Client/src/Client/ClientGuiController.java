@@ -6,6 +6,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import util.*;
 
+import java.io.IOException;
+
 public class ClientGuiController {
     @FXML
     private TextField IPText;
