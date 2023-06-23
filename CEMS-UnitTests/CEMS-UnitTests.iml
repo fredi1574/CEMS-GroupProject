@@ -7,12 +7,13 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="mockito-all-2.0.2-beta" level="project" />
-    <orderEntry type="module" module-name="CEMS-Client" />
-    <orderEntry type="module" module-name="CEMS-Common" />
-    <orderEntry type="module" module-name="CEMS-Server" />
+    <orderEntry type="library" exported="" name="mockito-all-2.0.2-beta1" level="project" />
+    <orderEntry type="module" module-name="CEMS-Client" exported="" />
+    <orderEntry type="module" module-name="CEMS-Common" exported="" />
+    <orderEntry type="module" module-name="CEMS-Server" exported="" />
+    <orderEntry type="module" module-name="OCSF" exported="" />
     <orderEntry type="module-library">
-      <library name="JUnit5.8.1">
+      <library>
         <CLASSES>
           <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.8.1/junit-jupiter-5.8.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.8.1/junit-jupiter-api-5.8.1.jar!/" />

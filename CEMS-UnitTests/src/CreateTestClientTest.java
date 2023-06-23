@@ -1,38 +1,60 @@
+import Client.Client;
 import application.createNewTestScreen.notesScreen.InotesController;
 import application.createNewTestScreen.notesScreen.NotesController;
 import entity.Course;
+import entity.TestQuestion;
 import entity.TestTypeEnum;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import util.ShowMessage;
-import util.StateManagement;
+import util.*;
+import Client.ClientControl;
+
+import javax.swing.plaf.nimbus.State;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class CreateTestClientTest {
 
+
     public StateManagement stateManagement;
+
     private NotesController notesController;
     private ShowMessage mockedShowMessage;
+    private entity.Test test;
+    private class ClientConrolStub implements ChatIF{
+
+        @Override
+        public void accept(Object str) {
+            notesController.setTest(test);
+
+        }
+
+        @Override
+        public void display(String message) {
+
+        }
+    }
+    private ClientControl clientControl;
 
     @BeforeEach
     void setUp() {
 
+        clientControl = new ClientControl(new ClientConrolStub());
         notesController = new NotesController(new NotesControllerStub());
-        mockedShowMessage = mock(ShowMessage.class);
+        //mockedShowMessage = mock(ShowMessage.class);
 
     }
 
+
+
     @Test
     public void test_IncompleteData_should_return_false() {
-        when(mockedShowMessage.showErrorPopup(anyString())).thenReturn("Go to page 1 and complete the data of test");
-
         stateManagement = StateManagement.getInstance();
-        // Test that an error popup is shown if data is incomplete
         stateManagement.semester = "";
         stateManagement.year = "";
         stateManagement.session = "";
@@ -42,6 +64,32 @@ public class CreateTestClientTest {
         String actualResult = notesController.createTest(new ActionEvent());
 
         assertEquals("Go to page 1 and complete the data of test", actualResult);
+    }
+    @Test
+    public void test_NoQuestions_should_return_false() {
+        stateManagement = StateManagement.getInstance();
+        stateManagement.semester = "A";
+        stateManagement.year = "2020";
+        stateManagement.session = "b";
+        stateManagement.testDuration = "10";
+        stateManagement.testType = TestTypeEnum.C;
+        String actualResult = notesController.createTest(new ActionEvent());
+
+        assertEquals("Select Questions for test from page 2", actualResult);
+    }
+    @Test
+    public void CreateTest_NotEnoughPoints_should_return_false() {
+        stateManagement = StateManagement.getInstance();
+        stateManagement.semester = "A";
+        stateManagement.year = "2020";
+        stateManagement.session = "b";
+        stateManagement.testDuration = "10";
+        stateManagement.testType = TestTypeEnum.C;
+        TestQuestion question = new TestQuestion("1","1",50,"How are you?","1","Math","Algebra","May Caspi");
+        stateManagement.setTestQuestions(question);
+        stateManagement.addTotalRemainingPoints(50);
+        String actualResult = notesController.createTest(new ActionEvent());
+        assertEquals("Points for the questions do not add up to 100 in page 2", actualResult);
     }
 
     @Test
@@ -75,20 +123,22 @@ public class CreateTestClientTest {
         stateManagement.setTestID(regularTest.getId());
         stateManagement.setTestDuration(regularTest.getTestDuration());
         stateManagement.setCourse(regularTestCourse);
-        stateManagement.setTeacherComment(regularTest.getTeacherComments());
         stateManagement.setTestType(regularTest.getTestType());
-        stateManagement.setStudentComment(regularTest.getStudentComments());
         stateManagement.setYear(regularTest.getYear());
         stateManagement.setSession(regularTest.getSession());
         stateManagement.setSemester(regularTest.getSemester());
         stateManagement.setSubjectID(subjectID);
-
-        //Client.sendToClient(new MsgHandler<>(TypeMsg.AddNewTestResponse, null));
+        TestQuestion question = new TestQuestion("1","1",100,"How are you?","1","Math","Algebra","May Caspi");
+        stateManagement.setTestQuestions(question);
+        stateManagement.subtractTotalRemainingPoints(100);
+        String actualResult = notesController.createTest(new ActionEvent());
+        assertEquals("Test added successfully", actualResult);
 
     }
 
     public static class NotesControllerStub implements InotesController {
-
+        public MysqlConnection mysqlConnection;
+        public StateManagement stateManagement;
 
         public NotesControllerStub() {
         }
@@ -99,6 +149,24 @@ public class CreateTestClientTest {
 
         @Override
         public void addTestToDB() {
+            mysqlConnection = MysqlConnection.getInstance();
+            mysqlConnection.connectToDb("Aa123456");
+            entity.Test newTest = new entity.Test(
+                    stateManagement.getTestNum(),
+                    stateManagement.getTestID(),
+                    Client.user.getFullName(),
+                    stateManagement.getTestDuration(),
+                    stateManagement.getCourse().getCourseName(),
+                    stateManagement.getTeacherComment(),
+                    stateManagement.getTestType(),
+                    stateManagement.getStudentComment(),
+                    stateManagement.getCourse().getSubjectName(),
+                    stateManagement.getYear(),
+                    stateManagement.getSession(),
+                    stateManagement.getSemester(),
+                    stateManagement.getSubjectID()
+            );
+
         }
 
         @Override
@@ -108,48 +176,10 @@ public class CreateTestClientTest {
         @Override
         public void replaceScreen(ActionEvent event) {
         }
+
+        @Override
+        public void checkNotes() {
+
+        }
     }
 }
-//    @Test
-//    public void testNoQuestionsSelected() {
-//        // Test that an error popup is shown if no questions are selected
-//        stateManagement.semester = "Spring";
-//        stateManagement.year = "2022";
-//        stateManagement.session = "Session 1";
-//        stateManagement.testDuration = "2 hours";
-//        stateManagement.testType = "Midterm";
-//        clickOn("#createTestButton");
-//        assertEquals("Select Questions for test from page 2", showError.getErrorMessage());
-//    }
-//
-//    @Test
-//    public void testPointsDoNotAddUp() {
-//        // Test that an error popup is shown if points do not add up to 100
-//        stateManagement.semester = "Fall";
-//        stateManagement.year = "2021";
-//        stateManagement.session = "Session 2";
-//        stateManagement.testDuration = "1 hour";
-//        stateManagement.testType = "Final";
-//        stateManagement.addTestQuestion(new TestQuestion("Question 1", 50));
-//        stateManagement.addTestQuestion(new TestQuestion("Question 2", 30));
-//        clickOn("#createTestButton");
-//        assertEquals("Points for the questions do not add up to 100 in page 2", showError.getErrorMessage());
-//    }
-//
-//    @Test
-//    public void testStudentAndTeacherComments() {
-//        // Test that student and teacher comments are added if present
-//        stateManagement.semester = "Summer";
-//        stateManagement.year = "2022";
-//        stateManagement.session = "Session 1";
-//        stateManagement.testDuration = "3 hours";
-//        stateManagement.testType = "Final";
-//        stateManagement.addTestQuestion(new TestQuestion("Question 1", 20));
-//        stateManagement.addTestQuestion(new TestQuestion("Question 2", 30));
-//        clickOn("#studentNote").write("This is a student comment");
-//        clickOn("#teacherNote").write("This is a teacher comment");
-//        clickOn("#createTestButton");
-//        assertEquals("This is a student comment", stateManagement.getStudentComment());
-//        assertEquals("This is a teacher comment", stateManagement.getTeacherComment());
-//    }
-//}

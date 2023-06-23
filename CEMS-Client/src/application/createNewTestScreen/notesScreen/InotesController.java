@@ -10,4 +10,5 @@ public interface InotesController {
     void addAllTestQuestionsToDB();
 
     void replaceScreen(ActionEvent event);
+    void checkNotes();
 }

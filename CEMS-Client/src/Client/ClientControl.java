@@ -1,5 +1,6 @@
 package Client;
 
+import application.createNewTestScreen.notesScreen.InotesController;
 import util.ChatIF;
 
 import java.util.List;
@@ -11,7 +12,9 @@ public class ClientControl implements ChatIF {
 	 * The instance of the client that created this ConsoleChat.
 	 */
 	final Client client;
-/**
+	private  ChatIF clientC;
+
+	/**
  * Constructs an instance of the ClientConsole UI.
  *
  * @param host The host to connect to.
@@ -19,6 +22,13 @@ public class ClientControl implements ChatIF {
  */
 	public ClientControl(String host, int port) {
 		client= new Client(host, port, this);
+	}
+
+
+
+	public ClientControl(ChatIF clientC) {
+		this.clientC = clientC;
+		client = new Client("", 5555, this);
 	}
 
 	private List<Object> response;
@@ -206,6 +216,7 @@ public class ClientControl implements ChatIF {
 	 * Waits for input from the console.  Once it is
 	 * received, it sends it to the client's message handler.
 	 */
+	@Override
 	public void accept(Object str) 
 	{
 	  client.handleMessageFromClientUI(str);

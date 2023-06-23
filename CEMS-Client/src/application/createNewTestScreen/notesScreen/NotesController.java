@@ -31,6 +31,7 @@ public class NotesController implements InotesController {
     private TextArea teacherNote;
     @FXML
     private AnchorPane header;
+    private Test test;
 
     private InotesController notesController;
 
@@ -80,14 +81,27 @@ public class NotesController implements InotesController {
     public String createTest(ActionEvent event) {
         if (stateManagement.semester.equals("") || stateManagement.year.equals("") || stateManagement.session.equals("")
                 || stateManagement.testDuration.equals("") || stateManagement.testType == null) {
-            return ShowMessage.showErrorPopup("Go to page 1 and complete the data of test");
+            return ("Go to page 1 and complete the data of test");
         }
         if (stateManagement.getTestQuestions().size() == 0) {
-            return ShowMessage.showErrorPopup("Select Questions for test from page 2");
+            return ("Select Questions for test from page 2");
         }
         if (stateManagement.getTotalRemainingPoints() > 0) {
-            return ShowMessage.showErrorPopup("Points for the questions do not add up to 100 in page 2");
+            return ("Points for the questions do not add up to 100 in page 2");
         }
+        notesController.checkNotes();
+        notesController.deleteTestIfAlreadyExists();
+        addTestToDB();
+        notesController.addAllTestQuestionsToDB();
+
+        StateManagement.resetInstance();
+
+        notesController.replaceScreen(event);
+
+        return ("Test added successfully");
+    }
+    @Override
+    public void checkNotes(){
         if (!studentNote.getText().isEmpty()) {
             stateManagement.setStudentComment(studentNote.getText());
         }
@@ -95,15 +109,6 @@ public class NotesController implements InotesController {
             stateManagement.setTeacherComment(teacherNote.getText());
         }
 
-        deleteTestIfAlreadyExists();
-        addTestToDB();
-        addAllTestQuestionsToDB();
-
-        StateManagement.resetInstance();
-
-        replaceScreen(event);
-
-        return ShowMessage.showInfoPopup("Test added successfully");
     }
 
     public void replaceScreen(ActionEvent event) {
@@ -154,6 +159,9 @@ public class NotesController implements InotesController {
 
         MsgHandler addNewTest = new MsgHandler(TypeMsg.AddNewTest, newTest);
         ClientUI.chat.accept(addNewTest);
+    }
+    public void setTest(Test test){
+        this.test = test;
     }
 
     /**
