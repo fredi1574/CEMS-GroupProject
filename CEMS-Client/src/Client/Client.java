@@ -1,5 +1,6 @@
 package Client;
 
+import application.createNewTestScreen.notesScreen.NotesController;
 import application.enterTest.ManualTestController;
 import application.enterTest.QuestionsComputerizedTestAnswerController;
 import application.mainMenuScreen.MainMenuStudentController;
@@ -15,6 +16,7 @@ import javafx.application.Platform;
 import util.ChatIF;
 import util.MsgHandler;
 import util.ShowMessage;
+import util.TypeMsg;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ public class Client extends AbstractClient {
     public static final ViewActiveTestController activeTestController = new ViewActiveTestController();
     public static final MainMenuStudentController menuStudentController = new MainMenuStudentController();
     public static final ManualTestController manualTest = new ManualTestController();
+    public static final NotesController notesController = new NotesController();
     public static MsgHandler<Object> messageFromServer;
     public static User user;
     private final ChatIF clientUI;
@@ -102,12 +105,12 @@ public class Client extends AbstractClient {
             case StudentAnswerAdded:
             case UpdateRemainingTimeResponse:
             case AddNewTestQuestionsResponse:
-            case AddNewTestResponse:
             case AddNewQuestionResponse:
             case EditQuestionResponse:
             case DeleteQuestionResponse:
                 break;
-
+            case AddNewTestResponse:
+                notesController.setServerResponseMsg(TypeMsg.AddNewTestResponse);
             case Disconnected:
                 System.exit(0);
                 break;

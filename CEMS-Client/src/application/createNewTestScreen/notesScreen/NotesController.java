@@ -34,6 +34,10 @@ public class NotesController implements InotesController {
     private AnchorPane header;
     private Test test;
 
+
+
+    private TypeMsg serverResponseMsg;
+
     private InotesController notesController;
 
     public NotesController(InotesController INC) {
@@ -94,6 +98,8 @@ public class NotesController implements InotesController {
         notesController.deleteTestIfAlreadyExists();
         notesController.addTestToDB();
         notesController.addAllTestQuestionsToDB();
+
+        setServerResponseMsg(TypeMsg.AddNewTestResponse);
 
         StateManagement.resetInstance();
 
@@ -161,12 +167,7 @@ public class NotesController implements InotesController {
         MsgHandler addNewTest = new MsgHandler(TypeMsg.AddNewTest, newTest);
         ClientUI.chat.accept(addNewTest);
     }
-    public void setTest(Test test){
-        this.test = test;
-    }
-    public Test getTest() {
-        return test;
-    }
+
 
     /**
      * adds all the test's questions to the DB
@@ -179,6 +180,20 @@ public class NotesController implements InotesController {
             MsgHandler addNewTestQuestion = new MsgHandler(TypeMsg.AddNewTestQuestion, testQuestions.get(i));
             ClientUI.chat.accept(addNewTestQuestion);
         }
+    }
+
+    public void setTest(Test test){
+        this.test = test;
+    }
+    public Test getTest() {
+        return test;
+    }
+    public TypeMsg getServerResponseMsg() {
+        return serverResponseMsg;
+    }
+
+    public void setServerResponseMsg(TypeMsg serverResponseMsg) {
+        this.serverResponseMsg = serverResponseMsg;
     }
 
     /**
