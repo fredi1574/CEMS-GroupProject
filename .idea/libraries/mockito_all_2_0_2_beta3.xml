@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="mockito-all-2.0.2-beta3">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/CEMS-UnitTests/lib/mockito-all-2.0.2-beta.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
