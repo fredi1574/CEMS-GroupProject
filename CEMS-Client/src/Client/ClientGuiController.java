@@ -28,7 +28,7 @@ public class ClientGuiController {
      *
      * @param event The ActionEvent triggered by the login button.
      */
-    public void logIn(ActionEvent event) {
+    public void logIn(ActionEvent event) throws IOException  {
         String host = IPText.getText();
 
         @SuppressWarnings("unchecked")

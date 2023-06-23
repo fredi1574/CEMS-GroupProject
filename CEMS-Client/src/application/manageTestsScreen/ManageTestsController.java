@@ -109,7 +109,7 @@ public class ManageTestsController {
         MsgHandler<String> getTestForApproval = new MsgHandler<>(TypeMsg.GetTestForApproval, fullName);
         ClientUI.chat.accept(getTestForApproval);
 
-        ObservableList<TestForApproval> studentTests = FXCollections.observableArrayList((List) ClientUI.chat.getTestsForApproval());
+        ObservableList<TestForApproval> studentTests = FXCollections.observableArrayList((List) ClientUI.chat.getTestForApproval());
         ObservableList<TestForApproval> filteredTests = FXCollections.observableArrayList();
 
         //filter out tests that were already approved
@@ -137,7 +137,7 @@ public class ManageTestsController {
         MsgHandler getActiveTestsTable = new MsgHandler(TypeMsg.GetActiveTestsByLecturer, fullName);
         ClientUI.chat.accept(getActiveTestsTable);
 
-        ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.getActiveTestsByLecturer());
+        ObservableList<ActiveTest> activeTests = FXCollections.observableArrayList((List) ClientUI.chat.GetActiveTestsByLecturer());
         //ObservableList<ActiveTest> userActiveTests = TableManager.filterByAuthor(activeTests,fullName);
 
         ObservableList<String> columns = FXCollections.observableArrayList();

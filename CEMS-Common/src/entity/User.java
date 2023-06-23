@@ -6,15 +6,15 @@ import java.io.Serializable;
  */
 public class User implements Serializable {
 
-    final String id;
-    final String firstName;
-    final String lastName;
-    final String userName;
-    final String password;
-    final String email;
-    final String role;
-    final String phone;
-    final int isLoggedIn;
+     String id;
+     String firstName;
+     String lastName;
+     String userName;
+     String password;
+     String email;
+     String role;
+     String phone;
+     int isLoggedIn;
 
     /**
      * Constructs a User object with the specified parameters.
@@ -39,6 +39,9 @@ public class User implements Serializable {
         this.role = role;
         this.isLoggedIn = isLoggedIn;
         this.phone = phone;
+    }
+    public User(){
+
     }
 
     /**

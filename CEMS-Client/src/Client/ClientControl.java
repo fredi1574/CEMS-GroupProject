@@ -24,16 +24,131 @@ public class ClientControl implements ChatIF {
     private Object singleResponse;
 
 
-	/**
- * Constructs an instance of the ClientConsole UI.
- *
- * @param host The host to connect to.
- * @param port The port to connect on.
- */
-	public ClientControl(String host, int port) {
-		client= new Client(host, port, this);
-	}
+    /**
+     * Constructs an instance of the ClientConsole UI.
+     *
+     * @param host The host to connect to.
+     * @param port The port to connect on.
+     */
+    public ClientControl(String host, int port) throws IOException {
+        client = new Client(host, port, this);
+    }
+    public ClientControl(ChatIF clientC) {
+        this.clientC = clientC;
+        client = new Client("", 5555, this);
+    }
 
+    public static MsgHandler getServerMsg() {
+        serverMsg = client.messageFromServer;
+        return (MsgHandler) serverMsg;
+    }
+
+    public static Object getUser() {
+
+        return currentUser;
+    }
+
+    public static void setUser(Object user) {
+        currentUser = user;
+    }
+
+    public List<Object> GetQuestionsBySubject() {
+        response = client.questions;
+        return response;
+    }
+
+    public List<Object> getCourses() {
+        response = client.courses;
+        return response;
+    }
+
+    public List<Object> getSubjects() {
+        response = client.subjects;
+        return response;
+    }
+
+    public List<Object> getTests() {
+        response = client.tests;
+        return response;
+    }
+
+    public List<Object> getAllQuestions() {
+        response = client.allQuestions;
+        return response;
+    }
+
+    public List<Object> getAllRequests() {
+        response = client.requests;
+        return response;
+    }
+
+    public List<Object> getTestQuestions() {
+        response = client.testQuestions;
+        return response;
+    }
+
+    public List<Object> getActiveTests() {
+        response = client.activeTests;
+        return response;
+    }
+
+    public List<Object> GetActiveTestsByLecturer() {
+        response = client.activeTests;
+        return response;
+    }
+
+    public Object getSingleQuestion() {
+        singleResponse = client.singleQuestion;
+        return singleResponse;
+    }
+
+    public Object getSingleTest() {
+        singleResponse = client.singleTest;
+        return singleResponse;
+    }
+
+    public Object getUserAndCourse() {
+        singleResponse = client.UserAndCourse;
+        return singleResponse;
+    }
+
+    public Object getSubjectID() {
+        singleResponse = client.singleSubject;
+        return singleResponse;
+    }
+
+    public List<Object> getTestForApproval() {
+        response = client.testsForApproval;
+        return response;
+    }
+
+    public Object getNumberOfRegistered() {
+        singleResponse = client.NumOfRegistered;
+        return singleResponse;
+    }
+
+    public Object getNumberOfAttended() {
+        singleResponse = client.NumOfAttended;
+        return singleResponse;
+    }
+
+
+    //Instance methods ************************************************
+
+    public Object getNumberOfFinished() {
+        singleResponse = client.NumOfFinished;
+        return singleResponse;
+    }
+
+    public Object getStudentTests() {
+        response = client.studentTests;
+        return response;
+    }
+
+    public Object getInfoAboutTest() {
+        response = client.infoAboutTest;
+        return response;
+    }
 
     /**
      * This method waits for input from the console.  Once it is
