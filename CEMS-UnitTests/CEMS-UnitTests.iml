@@ -7,7 +7,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="mockito-all-2.0.2-beta3" level="project" />
     <orderEntry type="module" module-name="CEMS-Client" />
     <orderEntry type="module" module-name="CEMS-Common" />
     <orderEntry type="module" module-name="CEMS-Server" />
@@ -28,5 +27,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" scope="TEST" name="mockito-all-2.0.2-beta" level="project" />
+    <orderEntry type="library" name="mockito-all-2.0.2-beta" level="project" />
   </component>
 </module>

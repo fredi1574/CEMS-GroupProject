@@ -11,7 +11,7 @@ private MysqlConnection mysqlConnection = MysqlConnection.getInstance() ;
     User userHeadOfDepartment;
     @BeforeEach
     public void setUp(){
-        mysqlConnection.connectToDb("AB12345tre");
+        mysqlConnection.connectToDb("Aa123456");
         userStudent = new User();
         userLecturer  = new User();
         getUserLecturerTryLogIN = new User();
@@ -26,7 +26,7 @@ private MysqlConnection mysqlConnection = MysqlConnection.getInstance() ;
 
         //Lecturer
         userLecturer.setUserName("Darwin");
-        userLecturer.setIsLoggedIn(1);
+        userLecturer.setIsLoggedIn(0);
         userLecturer.setRole("Lecturer");
         userLecturer.setPassword("a");
         userLecturer.setId("11");
@@ -54,8 +54,8 @@ private MysqlConnection mysqlConnection = MysqlConnection.getInstance() ;
     @Test
     public void studentNotFound(){
         Object expected = null;
-        Object actula = mysqlConnection.authenticateUser("sergi","a");
-        assertEquals(actula,expected);
+        Object actual = mysqlConnection.authenticateUser("sergi","a");
+        assertEquals(actual,expected);
     }
          // Abed Tayar is True
          //   Abed Tayer Wrong

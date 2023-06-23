@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LoginWindowControllerTest {
 
-    private class stubServerClientCommunication implements IServerClientCommunication{
+    private class stubServerClientCommunication implements IServerClientCommunication {
         private Object toServerMsg;
         private MsgHandler returnMsg;
         private String msg;
@@ -25,27 +25,27 @@ class LoginWindowControllerTest {
         private Object user;
 
 
-
-
-
         @Override
         public void sendToServer(Object msg) {
-            toServerMsg=msg;
+            toServerMsg = msg;
 
         }
+
         @Override
         public MsgHandler getReturnMsg() {
 
             return returnMsg;
         }
+
         @Override
         public void popUpError(String msg) {
 
-            errorMsg=msg;
+            errorMsg = msg;
         }
+
         @Override
         public void popUpMessage(String msg) {
-            this.msg=msg;
+            this.msg = msg;
         }
 
         @Override
@@ -55,7 +55,7 @@ class LoginWindowControllerTest {
 
         @Override
         public void setUser(Object user) {
-            this.user=user;
+            this.user = user;
         }
 
         public void setReturnMsg(MsgHandler returnMsg) {
@@ -63,16 +63,9 @@ class LoginWindowControllerTest {
         }
 
 
-
-
     }
 
 
-    /**
-     * @author guy, sharon
-     * stub of ILoginGetUserInput
-     * meant to set the input pressed by user.
-     */
     private class stubILoginGetUserInput implements ILoginGetUserInput {
 
         private String ID;
@@ -81,9 +74,10 @@ class LoginWindowControllerTest {
         private String password;
 
         public stubILoginGetUserInput(String ID, String password) {
-            this.ID=ID;
-            this.password=password;
+            this.ID = ID;
+            this.password = password;
         }
+
         @Override
         public String getUserID() {
 
@@ -100,8 +94,9 @@ class LoginWindowControllerTest {
         public String getUserRole() {
             return role;
         }
+
         @Override
-        public String geteErrorMsg(){
+        public String geteErrorMsg() {
             return errorMsg;
         }
     }
@@ -109,7 +104,6 @@ class LoginWindowControllerTest {
 /*
 // Functionality:
 The functionality being tested is a successful login with a student.
- This test is likely part of a larger system that handles user logins and verifies the credentials provided by the student.
 
 //input:
 A LoginWindowController object (myCon) used for managing the login process.
@@ -130,7 +124,7 @@ The errorMsg field of iServerClientCommunication should be null.
  */
 
     @Test
-    void Login_Succesfull_WithStudent() throws IOException {
+    void Login_Successful_WithStudent() throws IOException {
 
         LoginWindowController myCon = new LoginWindowController();
         stubServerClientCommunication iServerClientCommunication = new stubServerClientCommunication();
@@ -141,18 +135,19 @@ The errorMsg field of iServerClientCommunication should be null.
         myStudent.setUserName(userName);
         myStudent.setPassword(passWord);
         myStudent.setRole(role);
-        ILoginGetUserInput iLoginGetUserInput = new stubILoginGetUserInput(userName,passWord);
+        ILoginGetUserInput iLoginGetUserInput = new stubILoginGetUserInput(userName, passWord);
         myCon.setiLoginGetUserInput(iLoginGetUserInput);
         myCon.setiServerClientCommunication(iServerClientCommunication);
-        iServerClientCommunication.setReturnMsg(new MsgHandler(TypeMsg.LoginResponse,myStudent));
-        assertEquals(myCon.isEmptyDetails(userName,passWord),false);
+        iServerClientCommunication.setReturnMsg(new MsgHandler(TypeMsg.LoginResponse, myStudent));
+        assertEquals(myCon.isEmptyDetails(userName, passWord), false);
         Object msg = iServerClientCommunication.getReturnMsg().getMsg();
-        User user = (User)msg;
-        assertEquals(((User) msg).getUserName(),myStudent.getUserName());
-        assertEquals(((User) msg).getPassword(),myStudent.getPassword());
-        assertEquals(iServerClientCommunication.errorMsg,null);
+        User user = (User) msg;
+        assertEquals(user.getUserName(), myStudent.getUserName());
+        assertEquals(user.getPassword(), myStudent.getPassword());
+        assertEquals(iServerClientCommunication.errorMsg, null);
 
     }
+
     /*
 // Functionality:
 The functionality being tested is to check whether a student is already logged in.
@@ -185,17 +180,19 @@ The errorMsg field of iServerClientCommunication should be set to "This user is 
         myStudent.setUserName(userName);
         myStudent.setPassword(passWord);
         myStudent.setRole(role);
-        ILoginGetUserInput iLoginGetUserInput = new stubILoginGetUserInput(userName,passWord);
+        ILoginGetUserInput iLoginGetUserInput = new stubILoginGetUserInput(userName, passWord);
         myCon.setiLoginGetUserInput(iLoginGetUserInput);
         myCon.setiServerClientCommunication(iServerClientCommunication);
         iServerClientCommunication.setReturnMsg(new MsgHandler(TypeMsg.LoginResponse, "logged in"));
-        assertEquals(myCon.isAlreadyLoggedIn(),false);;
-        assertEquals(iServerClientCommunication.getReturnMsg().getMsg(),"logged in");
-        assertEquals(null,iServerClientCommunication.getUser());
-        assertEquals(iServerClientCommunication.errorMsg,"This user is already logged in");
+        assertEquals(myCon.isAlreadyLoggedIn(), false);
+        ;
+        assertEquals(iServerClientCommunication.getReturnMsg().getMsg(), "logged in");
+        assertEquals(null, iServerClientCommunication.getUser());
+        assertEquals(iServerClientCommunication.errorMsg, "This user is already logged in");
 
 
     }
+
     /**
      * Functionality: Test whether the method returns false when the username is empty and the password is entered.
      * Input: userName = "", password = "4"
@@ -260,7 +257,6 @@ The errorMsg field of iServerClientCommunication should be set to "This user is 
         String password = null;
         assertThrows(Exception.class, () -> myCon.isEmptyDetails(userName, password));
     }
-
 
 
 }

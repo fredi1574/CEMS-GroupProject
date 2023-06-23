@@ -1,13 +1,13 @@
+import Client.Client;
 import application.createNewTestScreen.notesScreen.InotesController;
 import application.createNewTestScreen.notesScreen.NotesController;
-import entity.Course;
-import entity.TestQuestion;
-import entity.TestTypeEnum;
+import entity.*;
 import javafx.event.ActionEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import util.ChatIF;
+import util.MsgHandler;
 import util.StateManagement;
 import util.TypeMsg;
 
@@ -21,43 +21,67 @@ import static org.mockito.Mockito.mock;
 
 public class CreateTestServerTest {
 
-    static CemsServer Cems;
+    private class stubServerClientCommunication implements IServerClientCommunication {
+        private Object toServerMsg;
+        private MsgHandler returnMsg;
+        private String msg;
+
+        private String errorMsg;
+
+        private Object user;
+
+
+        @Override
+        public void sendToServer(Object msg) {
+            toServerMsg = msg;
+
+        }
+
+        @Override
+        public MsgHandler getReturnMsg() {
+
+            return returnMsg;
+        }
+
+        @Override
+        public void popUpError(String msg) {
+
+            errorMsg = msg;
+        }
+
+        @Override
+        public void popUpMessage(String msg) {
+            this.msg = msg;
+        }
+
+        @Override
+        public Object getUser() {
+            return user;
+        }
+
+        @Override
+        public void setUser(Object user) {
+            this.user = user;
+        }
+
+        public void setReturnMsg(MsgHandler returnMsg) {
+            this.returnMsg = returnMsg;
+        }
+    }
 
     public static StateManagement stateManagement;
     private static NotesController notesController;
-    private TypeMsg expectedResponseMsg;
-
-    @Mock
-    private Connection mockConnection;
-    @Mock
-    private Statement mockStatement;
-    @Mock
-    private ResultSet mockResultSet;
     private MysqlConnection mysqlConnection;
-
+    private entity.Test regularTest;
 
 
     @BeforeEach
     void setUp() {
         notesController = new NotesController(new NotesControllerStub());
-        Cems = new CemsServer(5555, "Aa123456");
-//        try {
-//            Cems.listen(); // Start listening for connections
-//
-//        } catch (IOException e) {
-//            System.out.println("IO exception");
-//        }
         mysqlConnection = new MysqlConnection();
         mysqlConnection.connectToDb("Aa123456");
 
-    }
-
-    @Test
-    public void createTestSuccess() {
-
-        expectedResponseMsg = TypeMsg.AddNewTestResponse;
-
-        entity.Test regularTest = new entity.Test(
+        regularTest = new entity.Test(
                 "20",
                 "010101",
                 "Roman Gury",
@@ -72,35 +96,32 @@ public class CreateTestServerTest {
                 "A",
                 "01"
         );
-
-        stateManagement = StateManagement.getInstance();
-
-        String subjectID = regularTest.getId().substring(0, 2);
-        String courseID = regularTest.getId().substring(2, 4);
-        Course regularTestCourse = new Course(subjectID, courseID, regularTest.getSubject(), regularTest.getCourseName());
-
-        stateManagement.setTestNum(regularTest.getTestNumber());
-        stateManagement.setTestID(regularTest.getId());
-        stateManagement.setTestDuration(regularTest.getTestDuration());
-        stateManagement.setCourse(regularTestCourse);
-        stateManagement.setTeacherComment(regularTest.getTeacherComments());
-        stateManagement.setTestType(regularTest.getTestType());
-        stateManagement.setStudentComment(regularTest.getStudentComments());
-        stateManagement.setYear(regularTest.getYear());
-        stateManagement.setSession(regularTest.getSession());
-        stateManagement.setSemester(regularTest.getSemester());
-        stateManagement.setSubjectID(subjectID);
-
-        TestQuestion question = new TestQuestion("1","1",100,"How are you?","1","Math","Algebra","May Caspi");
-        stateManagement.setTestQuestions(question);
-        stateManagement.subtractTotalRemainingPoints(100);
-
-        notesController.createTest(new ActionEvent());
-
-        assertEquals(expectedResponseMsg,notesController.getServerResponseMsg());
-        //Client.sendToClient(new MsgHandler<>(TypeMsg.AddNewTestResponse, null));
-
     }
+
+    /**
+     * functionality: server response to successful test creation
+     * input: Test regularTest
+     * expected result: "Server saved the test" response message from the server
+     */
+    @Test
+    public void createTestSuccess() {
+
+        stubServerClientCommunication iServerClientCommunication = new stubServerClientCommunication();
+
+
+        notesController.setTest(regularTest);
+        notesController.setiServerClientCommunication(iServerClientCommunication);
+        iServerClientCommunication.setReturnMsg(new MsgHandler(TypeMsg.AddNewTestResponse, regularTest));
+
+        assertEquals(notesController.getTest(), regularTest);
+
+        Object msg = iServerClientCommunication.getReturnMsg().getMsg();
+        entity.Test test = (entity.Test) msg;
+
+        assertEquals(test.getId(), regularTest.getId());
+        assertEquals(iServerClientCommunication.getReturnMsg().getType(), TypeMsg.AddNewTestResponse);
+    }
+
 
     public static class NotesControllerStub implements InotesController {
 
@@ -109,7 +130,7 @@ public class CreateTestServerTest {
 
         @Override
         public void deleteTestIfAlreadyExists() {
-            if (notesController.getTest()!=null) {
+            if (notesController.getTest() != null) {
                 notesController.setTest(null);
             }
         }

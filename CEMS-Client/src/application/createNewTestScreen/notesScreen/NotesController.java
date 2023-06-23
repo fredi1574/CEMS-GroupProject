@@ -3,6 +3,8 @@ package application.createNewTestScreen.notesScreen;
 import Client.Client;
 import Client.ClientUI;
 import Client.ExitButton;
+import application.loginWindowScreen.LoginWindowController;
+import entity.IServerClientCommunication;
 import entity.Test;
 import entity.TestQuestion;
 import javafx.collections.FXCollections;
@@ -34,11 +36,10 @@ public class NotesController implements InotesController {
     private AnchorPane header;
     private Test test;
 
-
-
     private TypeMsg serverResponseMsg;
-
     private InotesController notesController;
+    private IServerClientCommunication iServerClientCommunication;
+
 
     public NotesController(InotesController INC) {
         this.notesController = INC;
@@ -54,6 +55,10 @@ public class NotesController implements InotesController {
             studentNote.setText(stateManagement.studentComment);
         if (stateManagement.getTeacherComment() != null)
             teacherNote.setText(stateManagement.teacherComment);
+    }
+
+    public void setiServerClientCommunication(IServerClientCommunication iServerClientCommunication) {
+        this.iServerClientCommunication = iServerClientCommunication;
     }
 
     /**

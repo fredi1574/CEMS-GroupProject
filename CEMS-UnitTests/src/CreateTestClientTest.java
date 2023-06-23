@@ -11,8 +11,7 @@ import Client.ClientControl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-//import static org.mockito.Matchers.anyString;
-//import static org.mockito.Mockito.*;
+
 
 public class CreateTestClientTest {
 
@@ -20,7 +19,6 @@ public class CreateTestClientTest {
     public static StateManagement stateManagement;
 
     private static NotesController notesController;
-    private ShowMessage mockedShowMessage;
     private entity.Test test;
     private class ClientControlStub implements ChatIF{
 
@@ -42,16 +40,16 @@ public class CreateTestClientTest {
 
         clientControl = new ClientControl(new ClientControlStub());
         notesController = new NotesController(new NotesControllerStub());
-        //mockedShowMessage = mock(ShowMessage.class);
 
     }
 
 
-
+    /**
+     * functionality: createTest() with missing test data
+     * input: Test testWithMissingData
+     * expected result: Error thrown due to missing test data
+     */
     @Test
-    //functionality: createTest() with missing test data
-    //input: Test testWithMissingData
-    //expected result: Error thrown due to missing test data
     public void CreateTest_IncompleteData_ReturnsMissingDataError() {
         stateManagement = StateManagement.getInstance();
         stateManagement.semester = "";
@@ -95,10 +93,13 @@ public class CreateTestClientTest {
 
         assertEquals("Go to page 1 and complete the data of test", actualResult);
     }
+
+    /**
+     * functionality: createTest() with no questions selected for the test
+     * input: Test testWithNoQuestions
+     * expected result: Error thrown due to missing test questions
+     */
     @Test
-    //functionality: createTest() with no questions selected for the test
-    //input: Test testWithNoQuestions
-    //expected result: Error thrown due to missing test questions
     public void CreateTest_NoQuestions_ReturnsMissingQuestionsError() {
         stateManagement = StateManagement.getInstance();
 
@@ -137,10 +138,13 @@ public class CreateTestClientTest {
 
         assertEquals("Select Questions for test from page 2", actualResult);
     }
+
+    /**
+     * functionality: createTest() with less than 100 points allocated between the test's questions
+     * input: Test testWithNotEnoughPoints
+     * expected result: Error thrown due to insufficient points
+     */
     @Test
-    //functionality: createTest() with less than 100 points allocated between the test's questions
-    //input: Test testWithNotEnoughPoints
-    //expected result: Error thrown due to insufficient points
     public void CreateTest_NotEnoughPoints_ReturnsNotEnoughPointsError() {
         stateManagement = StateManagement.getInstance();
 
@@ -182,10 +186,12 @@ public class CreateTestClientTest {
         assertEquals("Points for the questions do not add up to 100 in page 2", actualResult);
     }
 
+    /**
+     * functionality: createTest() with all the required test details filled
+     * input: Test regularTest
+     * expected result: Test object with all the correct details is created
+     */
     @Test
-    //functionality: createTest() with all the required test details filled
-    //input: Test regularTest
-    //expected result: Test object with all the correct details is created
     public void createTestSuccess() {
         stateManagement = StateManagement.getInstance();
 
@@ -230,10 +236,13 @@ public class CreateTestClientTest {
 
     }
 
+    /**
+     * functionality: createTest() is used twice with duplicate IDs
+     * input: Test regularTest, Test duplicateTest
+     * expected result: duplicateTest is created and overrides regularTest
+     */
     @Test
-    //functionality: createTest() is used twice with duplicate IDs
-    //input: Test regularTest, Test duplicateTest
-    //expected result: duplicateTest is created and overrides regularTest
+
     public void createTest_DuplicateTest_OverridesExistingTest() {
         stateManagement = StateManagement.getInstance();
 
