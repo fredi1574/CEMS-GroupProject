@@ -37,6 +37,7 @@ public class NotesController implements InotesController {
     public NotesController(InotesController INC) {
         this.notesController = INC;
     }
+    public NotesController(){}
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
