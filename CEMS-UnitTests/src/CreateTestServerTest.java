@@ -106,7 +106,6 @@ public class CreateTestServerTest {
 
         stubServerClientCommunication iServerClientCommunication = new stubServerClientCommunication();
 
-
         notesController.setTest(regularTest);
         notesController.setiServerClientCommunication(iServerClientCommunication);
         iServerClientCommunication.setReturnMsg(new MsgHandler(TypeMsg.AddNewTestResponse, regularTest));

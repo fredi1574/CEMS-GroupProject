@@ -110,7 +110,7 @@ public class Client extends AbstractClient {
             case DeleteQuestionResponse:
                 break;
             case AddNewTestResponse:
-                notesController.setServerResponseMsg(TypeMsg.AddNewTestResponse);
+                break;
             case Disconnected:
                 System.exit(0);
                 break;

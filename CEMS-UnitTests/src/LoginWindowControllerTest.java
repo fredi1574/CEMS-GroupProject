@@ -28,7 +28,6 @@ class LoginWindowControllerTest {
         @Override
         public void sendToServer(Object msg) {
             toServerMsg = msg;
-
         }
 
         @Override

@@ -26,15 +26,13 @@ public class LoginWindowController {
     public TextField usernameField;
     @FXML
     public PasswordField passwordField;
-    ClientControl clientControl = new ClientControl("", 0);
     private Connection connection;
     @FXML
     private AnchorPane header;
-    private IServerClientCommunication iServerClientCommunication = new LoginServerClientCommunication();
+    private IServerClientCommunication iServerClientCommunication;
     private ILoginGetUserInput iLoginGetUserInput = new LoginILoginGetUserInput();
 
     public LoginWindowController() throws IOException {
-
 
     }
 
@@ -62,8 +60,8 @@ public class LoginWindowController {
     public void logIN(ActionEvent event) {
         String username;
         String password;
-        username = usernameField.getText();
-        password = passwordField.getText();
+        username = iLoginGetUserInput.getUserID();
+        password =  iLoginGetUserInput.getUserPassword();
         // Check if username or password fields are empty
         if (isEmptyDetails(username, password)) {
             ShowMessage.showErrorPopup("Please enter both username and password.");
@@ -162,51 +160,6 @@ public class LoginWindowController {
         MinimizeButton.minimizeWindow(event);
     }
 
-    private class LoginServerClientCommunication implements IServerClientCommunication {
-
-
-        @Override
-        public void sendToServer(Object msg) throws IOException {
-
-            ClientControl.accepted(msg);
-        }
-
-        @Override
-        public MsgHandler getReturnMsg() {
-
-
-            return ClientControl.getServerMsg();
-        }
-
-        @Override
-        public void popUpError(String msg) {
-            ShowMessage.showErrorPopup(msg);
-
-
-        }
-
-
-        @Override
-        public void popUpMessage(String msg) {
-            ShowMessage.showErrorPopup(msg);
-
-
-        }
-
-
-        @Override
-        public Object getUser() {
-            return ClientControl.getUser();
-        }
-
-
-        @Override
-        public void setUser(Object user) {
-            ClientControl.setUser(user);
-        }
-
-
-    }
 
     private class LoginILoginGetUserInput implements ILoginGetUserInput {
 
@@ -226,12 +179,10 @@ public class LoginWindowController {
             return passwordField.getText();
         }
 
-
         @Override
         public String getUserRole() {
             return Client.user.getRole();
         }
-
 
         @Override
         public String geteErrorMsg() {

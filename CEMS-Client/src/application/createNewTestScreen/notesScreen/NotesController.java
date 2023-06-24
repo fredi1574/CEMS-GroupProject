@@ -23,7 +23,7 @@ import java.util.List;
  * It handles Lecturer's inputs and actions related to adding notes for the test.
  * The lecturer can leave notes for other lecturers and students
  */
-public class NotesController implements InotesController {
+public class NotesController {
     //public class NotesController {
     public StateManagement stateManagement = StateManagement.getInstance();
     @FXML
@@ -44,7 +44,11 @@ public class NotesController implements InotesController {
     public NotesController(InotesController INC) {
         this.notesController = INC;
     }
-    public NotesController(){}
+
+    public NotesController() {
+        this.notesController = new testMethods();
+    }
+
 
     public void initialize() {
         ScreenManager.dragAndDrop(header);
@@ -112,87 +116,15 @@ public class NotesController implements InotesController {
 
         return ("Test added successfully");
     }
-    @Override
-    public void checkNotes(){
-        if (!studentNote.getText().isEmpty()) {
-            stateManagement.setStudentComment(studentNote.getText());
-        }
-        if (!teacherNote.getText().isEmpty()) {
-            stateManagement.setTeacherComment(teacherNote.getText());
-        }
 
-    }
-
-    public void replaceScreen(ActionEvent event) {
-        ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
-    }
-
-    /**
-     * Checks if a test with the current testID already exists in the db
-     * if it does, it gets deleted
-     * Used for editing tests (Allows the lecturer to override an existing test's data)
-     */
-    //@Override
-    public void deleteTestIfAlreadyExists() {
-        MsgHandler getDbTestTable = new MsgHandler(TypeMsg.GetTestsBySubject, Client.user.getUserName());
-        ClientUI.chat.accept(getDbTestTable);
-        ObservableList<Test> dbTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
-
-        for (Test dbTest : dbTests) {
-            if (stateManagement.getTestID().equals(dbTest.getId())) {
-                MsgHandler clearTestMsg = new MsgHandler(TypeMsg.DeleteTest, dbTest);
-                ClientUI.chat.accept(clearTestMsg);
-                break;
-            }
-        }
-    }
-
-    /**
-     * adds a test to the DB
-     */
-    //@Override
-    public void addTestToDB() {
-
-        Test newTest = new Test(
-                stateManagement.getTestNum(),
-                stateManagement.getTestID(),
-                Client.user.getFullName(),
-                stateManagement.getTestDuration(),
-                stateManagement.getCourse().getCourseName(),
-                stateManagement.getTeacherComment(),
-                stateManagement.getTestType(),
-                stateManagement.getStudentComment(),
-                stateManagement.getCourse().getSubjectName(),
-                stateManagement.getYear(),
-                stateManagement.getSession(),
-                stateManagement.getSemester(),
-                stateManagement.getSubjectID()
-        );
-
-        MsgHandler addNewTest = new MsgHandler(TypeMsg.AddNewTest, newTest);
-        ClientUI.chat.accept(addNewTest);
-    }
-
-
-    /**
-     * adds all the test's questions to the DB
-     */
-    //@Override
-    public void addAllTestQuestionsToDB() {
-        ObservableList<TestQuestion> testQuestions = stateManagement.getTestQuestions();
-
-        for (int i = 0; i < stateManagement.getTestQuestions().size(); i++) {
-            MsgHandler addNewTestQuestion = new MsgHandler(TypeMsg.AddNewTestQuestion, testQuestions.get(i));
-            ClientUI.chat.accept(addNewTestQuestion);
-        }
-    }
-
-    public void setTest(Test test){
+    public void setTest(Test test) {
         this.test = test;
     }
+
     public Test getTest() {
         return test;
     }
+
     public TypeMsg getServerResponseMsg() {
         return serverResponseMsg;
     }
@@ -200,6 +132,7 @@ public class NotesController implements InotesController {
     public void setServerResponseMsg(TypeMsg serverResponseMsg) {
         this.serverResponseMsg = serverResponseMsg;
     }
+
 
     /**
      * Closes the application.
@@ -219,4 +152,77 @@ public class NotesController implements InotesController {
         MinimizeButton.minimizeWindow(event);
     }
 
+    class testMethods implements InotesController {
+        /**
+         * Checks if a test with the current testID already exists in the db
+         * if it does, it gets deleted
+         * Used for editing tests (Allows the lecturer to override an existing test's data)
+         */
+        //@Override
+        public void deleteTestIfAlreadyExists() {
+            MsgHandler getDbTestTable = new MsgHandler(TypeMsg.GetTestsBySubject, Client.user.getUserName());
+            ClientUI.chat.accept(getDbTestTable);
+            ObservableList<Test> dbTests = FXCollections.observableArrayList((List) ClientUI.chat.getTests());
+
+            for (Test dbTest : dbTests) {
+                if (stateManagement.getTestID().equals(dbTest.getId())) {
+                    MsgHandler clearTestMsg = new MsgHandler(TypeMsg.DeleteTest, dbTest);
+                    ClientUI.chat.accept(clearTestMsg);
+                    break;
+                }
+            }
+        }
+
+        /**
+         * adds all the test's questions to the DB
+         */
+        //@Override
+        public void addAllTestQuestionsToDB() {
+            ObservableList<TestQuestion> testQuestions = stateManagement.getTestQuestions();
+
+            for (int i = 0; i < stateManagement.getTestQuestions().size(); i++) {
+                MsgHandler addNewTestQuestion = new MsgHandler(TypeMsg.AddNewTestQuestion, testQuestions.get(i));
+                ClientUI.chat.accept(addNewTestQuestion);
+            }
+        }
+        /**
+         * adds a test to the DB
+         */
+        //@Override
+        public void addTestToDB() {
+
+            Test newTest = new Test(
+                    stateManagement.getTestNum(),
+                    stateManagement.getTestID(),
+                    Client.user.getFullName(),
+                    stateManagement.getTestDuration(),
+                    stateManagement.getCourse().getCourseName(),
+                    stateManagement.getTeacherComment(),
+                    stateManagement.getTestType(),
+                    stateManagement.getStudentComment(),
+                    stateManagement.getCourse().getSubjectName(),
+                    stateManagement.getYear(),
+                    stateManagement.getSession(),
+                    stateManagement.getSemester(),
+                    stateManagement.getSubjectID()
+            );
+
+            MsgHandler addNewTest = new MsgHandler(TypeMsg.AddNewTest, newTest);
+            ClientUI.chat.accept(addNewTest);
+        }
+
+        public void replaceScreen(ActionEvent event) {
+            ScreenManager.goToNewScreen(event, PathConstants.manageTestsPath);
+        }
+        @Override
+        public void checkNotes() {
+            if (!studentNote.getText().isEmpty()) {
+                stateManagement.setStudentComment(studentNote.getText());
+            }
+            if (!teacherNote.getText().isEmpty()) {
+                stateManagement.setTeacherComment(teacherNote.getText());
+            }
+
+        }
+    }
 }
