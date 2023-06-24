@@ -247,7 +247,7 @@ The errorMsg field of iServerClientCommunication should be set to "This user is 
         myCon.setiLoginGetUserInput(iLoginGetUserInput);
         myCon.setiServerClientCommunication(iServerClientCommunication);
         iServerClientCommunication.setReturnMsg(new MsgHandler(TypeMsg.LoginResponse, "logged in"));
-        assertEquals(myCon.isAlreadyLoggedIn(), false);
+        assertEquals(myCon.isAlreadyLoggedIn(), true);
         assertEquals(iServerClientCommunication.getReturnMsg().getMsg(), "logged in");
         assertEquals(null, iServerClientCommunication.getUser());
         assertEquals(iServerClientCommunication.errorMsg, "This user is already logged in");

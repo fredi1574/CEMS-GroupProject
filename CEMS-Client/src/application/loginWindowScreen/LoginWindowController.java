@@ -127,9 +127,9 @@ public class LoginWindowController {
     public boolean isAlreadyLoggedIn() {
         if (iServerClientCommunication.getReturnMsg().getMsg().equals("logged in")) {
             iServerClientCommunication.popUpError("This user is already logged in");
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**

@@ -26,7 +26,7 @@ private MysqlConnection mysqlConnection = MysqlConnection.getInstance() ;
 
         //Lecturer
         userLecturer.setUserName("Darwin");
-        userLecturer.setIsLoggedIn(0);
+        userLecturer.setIsLoggedIn(1);
         userLecturer.setRole("Lecturer");
         userLecturer.setPassword("a");
         userLecturer.setId("11");
@@ -48,13 +48,13 @@ private MysqlConnection mysqlConnection = MysqlConnection.getInstance() ;
     /**
 
      Functionality: Test whether the method returns null when the username and password combination is not found in the MySQL database.
-     Input: userName = "sergi", password = "a"
+     Input: userName = "UserName", password = "a"
      Expected result: null
      */
     @Test
     public void Login_studentNotFound(){
         Object expected = null;
-        Object actual = mysqlConnection.authenticateUser("sergi","a");
+        Object actual = mysqlConnection.authenticateUser("UserName","a");
         assertEquals(actual,expected);
     }
          // Abed Tayar is True
