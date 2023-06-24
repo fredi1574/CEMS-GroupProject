@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LoginWindowControllerTest {
 
-    private class stubServerClientCommunication implements IServerClientCommunication {
+    private class stubServerClientCommunication implements IServerClientCommunication { //stub for communication between server and client
         private Object toServerMsg;
         private MsgHandler returnMsg;
         private String msg;
@@ -65,7 +65,8 @@ class LoginWindowControllerTest {
     }
 
 
-    private class stubILoginGetUserInput implements ILoginGetUserInput {
+
+    private class stubILoginGetUserInput implements ILoginGetUserInput { //stub for Login
 
         private String ID;
         private String role;
@@ -99,10 +100,11 @@ class LoginWindowControllerTest {
             return errorMsg;
         }
     }
+
     /**
-     * Functionality: Test whether the method returns false when the username is empty and the password is entered.
+     * Functionality: Test whether the method returns true when the username is empty and the password is entered.
      * Input: userName = "", password = "4"
-     * Expected result: false
+     * Expected result: true
      */
     @Test
     public void Login_EnterPasswordButNotUser() throws IOException {
@@ -113,9 +115,9 @@ class LoginWindowControllerTest {
     }
 
     /**
-     * Functionality: Test whether the method returns false when the username is entered and the password is empty.
+     * Functionality: Test whether the method returns true when the username is entered and the password is empty.
      * Input: userName = "Yuval", password = ""
-     * Expected result: false
+     * Expected result: true
      */
     @Test
     public void Login_EnterUserButNotPassword() throws IOException {
@@ -126,9 +128,9 @@ class LoginWindowControllerTest {
     }
 
     /**
-     * Functionality: Test whether the method returns false when both the username and password are empty.
+     * Functionality: Test whether the method returns true when both the username and password are empty.
      * Input: userName = "", password = ""
-     * Expected result: false
+     * Expected result: true
      */
     @Test
     public void Login_NotEnterUserAndNotPassword() throws IOException {
@@ -139,9 +141,9 @@ class LoginWindowControllerTest {
     }
 
     /**
-     * Functionality: Test whether the method returns true when both the username and password are entered.
+     * Functionality: Test whether the method returns false when both the username and password are entered.
      * Input: userName = "AbedTayer", password = "a"
-     * Expected result: true
+     * Expected result: false
      */
     @Test
     public void Login_EnterUserAndPassword() throws IOException {
@@ -163,27 +165,12 @@ class LoginWindowControllerTest {
         String password = null;
         assertThrows(Exception.class, () -> myCon.isEmptyDetails(userName, password));
     }
-/*
-// Functionality:
-The functionality being tested is a successful login with a student.
 
-//input:
-A LoginWindowController object (myCon) used for managing the login process.
-A stubServerClientCommunication object (iServerClientCommunication) representing the communication between the client and server.
-A username (userName) set as "Abed" for the student.
-A password (passWord) set as "a" for the student.
-A role (role) set as "Student" for the student.
-A User object (myStudent) representing the student with the provided username, password, and role.
-An ILoginGetUserInput object (iLoginGetUserInput) created using the provided username and password.
-The iLoginGetUserInput object and iServerClientCommunication object are set in the myCon object.
-The return message of the iServerClientCommunication object is set to a login response message containing the myStudent object.
-
-//expected result:
-The isEmptyDetails(userName, passWord) method of myCon should return false.
-The returned User object obtained from the iServerClientCommunication should have a username matching myStudent.getUserName().
-The returned User object obtained from the iServerClientCommunication should have a password matching myStudent.getPassword().
-The errorMsg field of iServerClientCommunication should be null.
- */
+    /**
+     * Functionality: Test successful login with a student.
+     * Input: userName = Abed, password = a,role = Student
+     * Expected result: isEmptyDetails = false, user.getUserName() = Abed,user.getPassword() = a, iServerClientCommunication.errorMsg = null
+     */
 
     @Test
     void Login_Successful_WithStudent() throws IOException {
@@ -210,26 +197,11 @@ The errorMsg field of iServerClientCommunication should be null.
 
     }
 
-    /*
-// Functionality:
-The functionality being tested is to check whether a student is already logged in.
-(To check that student cannot log in multiple times simultaneously).
 
-//input:
-A LoginWindowController object (myCon) used for managing the login process.
-A stubServerClientCommunication object (iServerClientCommunication) representing the communication between the client.
-A User object (myStudent) representing the student attempting to log in.
-A username (userName) set as "NoaKrisp" for the student.
-A password (passWord) set as "a" for the student.
-A role (role) set as "Student" for the student.
-An ILoginGetUserInput object (iLoginGetUserInput) created using the provided username and password.
-The iLoginGetUserInput object and iServerClientCommunication object are set in the myCon object.
-
-//expected result:
-The isAlreadyLoggedIn() method of myCon should return false.
-The return message obtained from iServerClientCommunication should be "logged in".
-The getUser() method of iServerClientCommunication should return null.
-The errorMsg field of iServerClientCommunication should be set to "This user is already logged in".
+    /**
+     * Functionality: Test whether a student is already logged in.
+     * Input: userName = NoaKrisp, password = a,role = Student
+     * Expected result: isEmptyDetails = true, iServerClientCommunication.getUser() = null, iServerClientCommunication.errorMsg = "This user is already logged in"
      */
     @Test
     public void Login_StudentAlreadyLoggedIn() throws IOException {
@@ -251,7 +223,6 @@ The errorMsg field of iServerClientCommunication should be set to "This user is 
         assertEquals(null, iServerClientCommunication.getUser());
         assertEquals(iServerClientCommunication.errorMsg, "This user is already logged in");
     }
-
 
 
 }

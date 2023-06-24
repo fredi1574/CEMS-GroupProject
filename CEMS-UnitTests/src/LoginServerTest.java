@@ -57,8 +57,7 @@ private MysqlConnection mysqlConnection = MysqlConnection.getInstance() ;
         Object actual = mysqlConnection.authenticateUser("UserName","a");
         assertEquals(actual,expected);
     }
-         // Abed Tayar is True
-         //   Abed Tayer Wrong
+
     /**
 
      Functionality: Test whether the method successfully authenticates a student user by providing the correct username and password.
