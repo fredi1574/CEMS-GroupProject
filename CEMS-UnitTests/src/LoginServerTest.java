@@ -52,7 +52,7 @@ private MysqlConnection mysqlConnection = MysqlConnection.getInstance() ;
      Expected result: null
      */
     @Test
-    public void studentNotFound(){
+    public void Login_studentNotFound(){
         Object expected = null;
         Object actual = mysqlConnection.authenticateUser("sergi","a");
         assertEquals(actual,expected);
@@ -70,7 +70,7 @@ private MysqlConnection mysqlConnection = MysqlConnection.getInstance() ;
      The actual user object should have the same login status (isLoggedIn) as the expected student user object.
      */
     @Test
-    public void studentsuccessToLogIn(){
+    public void Login_studentsuccessToLogin(){
 
         User actual = (User) mysqlConnection.authenticateUser("AbedTayer","a");
         assertEquals(actual.getId(),userStudent.getId());
@@ -89,7 +89,7 @@ private MysqlConnection mysqlConnection = MysqlConnection.getInstance() ;
      The actual user object should have the same login status (isLoggedIn) as the expected lecturer user object.
      */
     @Test
-    public void LecturerIsLogged(){
+    public void Login_LecturerIsLogged(){
 
         User actual = (User) mysqlConnection.authenticateUser("Darwin","a");
         assertEquals(actual.getId(),userLecturer.getId());
@@ -109,7 +109,7 @@ private MysqlConnection mysqlConnection = MysqlConnection.getInstance() ;
      The actual user object should have the same login status (isLoggedIn) as the expected lecturer user object with failed login attempts.
      */
     @Test
-    public void LecturerTryToLogIn(){
+    public void Login_LecturerTryToLogIn(){
 
         User actual = (User) mysqlConnection.authenticateUser("Tanya","a");
         assertEquals(actual.getId(),getUserLecturerTryLogIN.getId());
@@ -129,7 +129,7 @@ private MysqlConnection mysqlConnection = MysqlConnection.getInstance() ;
      The actual user object should have the same login status (isLoggedIn) as the expected head of department user object.
      */
     @Test
-    public void HeadOfDeprtmentTryToLogIn(){
+    public void Login_HeadOfDeprtmentTryToLogIn(){
 
         User actual = (User) mysqlConnection.authenticateUser("FrediBul","a");
         assertEquals(actual.getId(),userHeadOfDepartment.getId());
