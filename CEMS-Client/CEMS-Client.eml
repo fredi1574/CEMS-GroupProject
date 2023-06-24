@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inherit-compiler-output="true" jdk="liberica-11" jdk_type="JavaSDK">
+	<output-test url="file://$MODULE_DIR$/../classes/test/CEMS-Client"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="JUnit5.8.1" scope="TEST"/>
+</component>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="mockito-all-2.0.2-beta">
+    <archive path="C:/Users/roman/git/CEMS-GroupProject/CEMS-UnitTests/lib/mockito-all-2.0.2-beta.jar" />
+  </library>
+  <library name="mockito-all-2.0.2-beta3">
+    <archive path="C:/Users/roman/git/CEMS-GroupProject/CEMS-UnitTests/lib/mockito-all-2.0.2-beta.jar" />
+  </library>
+  <library name="mockito-all-2.0.2-beta2">
+    <archive path="C:/Users/roman/git/CEMS-GroupProject/CEMS-UnitTests/lib/mockito-all-2.0.2-beta.jar" />
+  </library>
+  <library name="mockito-all-2.0.2-beta1">
+    <archive path="C:/Users/roman/git/CEMS-GroupProject/CEMS-UnitTests/lib/mockito-all-2.0.2-beta.jar" />
+  </library>
+</eclipse-userlibraries>
+

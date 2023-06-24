@@ -5,7 +5,6 @@ import entity.*;
 import javafx.event.ActionEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import util.ChatIF;
 import util.MsgHandler;
 import util.StateManagement;
@@ -17,7 +16,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
 
 public class CreateTestServerTest {
 
